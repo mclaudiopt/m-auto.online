@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="description" content="Software Diagnóstico Profissional: Xentry 2025, DTS Monaco, Vediamo, JLR Online, Diagbox 9.193. Instalação remota.">
+    <meta name="description" content="Software Diagnóstico Profissional: Xentry 2025, DTS Monaco, Vediamo, JLR Online, Diagbox 9.193. Instalação Nativa.">
     <meta property="og:title" content="M-Auto | Diagnostic Software Solutions">
     <meta property="og:image" content="https://m-auto.online/m-auto.png">
     
@@ -26,7 +26,7 @@
             --cor-destaque-brilho: rgba(59, 130, 246, 0.5);
             --cor-verde: #10b981; 
             --cor-urgente: #ef4444;
-            --cor-gold: #fbbf24; /* Cor para o Full Pack */
+            --cor-gold: #fbbf24;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -76,7 +76,7 @@
         .hero {
             min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center;
             background: linear-gradient(rgba(2, 6, 23, 0.85), var(--cor-fundo)), 
-                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80');
+                        url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-position: center; padding: 140px 20px 40px;
         }
         .hero h1 { 
@@ -106,9 +106,17 @@
 
         /* --- ABAS E CONTEÚDO --- */
         .seccao { padding: 5rem 5%; }
-        .titulo-seccao { text-align: center; margin-bottom: 3rem; }
+        .titulo-seccao { text-align: center; margin-bottom: 1rem; }
         .titulo-seccao h2 { font-size: 2.2rem; margin-bottom: 0.5rem; font-weight: 800; }
         .titulo-seccao span { color: var(--cor-destaque); }
+        
+        /* AVISO DE VERSÕES */
+        .version-alert {
+            background: rgba(59, 130, 246, 0.1); border: 1px solid var(--cor-destaque);
+            color: #94a3b8; padding: 10px 20px; border-radius: 50px; display: inline-block;
+            margin-bottom: 3rem; font-size: 0.9rem;
+        }
+        .version-alert i { margin-right: 5px; color: var(--cor-destaque); font-style: normal; }
 
         .tabs-container {
             display: flex; gap: 2rem; 
@@ -173,16 +181,12 @@
         }
         .card-soft:hover { transform: translateY(-8px); border-color: var(--cor-destaque); box-shadow: 0 10px 40px -10px var(--cor-destaque-brilho); }
         
-        /* CARD FULL PACK (SPECIAL) */
         .card-fullpack {
-            grid-column: 1 / -1; /* Ocupa a largura toda */
+            grid-column: 1 / -1; 
             border: 2px solid var(--cor-gold);
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(30, 41, 59, 0.9));
         }
-        .card-fullpack:hover {
-            box-shadow: 0 0 50px rgba(251, 191, 36, 0.3);
-            border-color: #fff;
-        }
+        .card-fullpack:hover { box-shadow: 0 0 50px rgba(251, 191, 36, 0.3); border-color: #fff; }
         .badge-gold {
             background: var(--cor-gold); color: #000; padding: 5px 15px; border-radius: 4px;
             font-weight: bold; position: absolute; top: 15px; right: 15px; box-shadow: 0 0 15px var(--cor-gold);
@@ -210,7 +214,7 @@
         .btn-detalhe { color: var(--cor-destaque); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; cursor: pointer; }
         .btn-detalhe:hover { color: #fff; text-shadow: 0 0 10px var(--cor-destaque); }
 
-        /* --- WIZARD / CHATBOT ESTILOS --- */
+        /* --- WIZARD --- */
         .chatbot-trigger {
             position: fixed; bottom: 30px; right: 30px;
             background: var(--cor-destaque); color: white;
@@ -218,32 +222,25 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 30px; cursor: pointer; z-index: 2000;
             box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
-            transition: 0.3s;
-            animation: bounce 2s infinite;
+            transition: 0.3s; animation: bounce 2s infinite;
         }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         .chatbot-trigger:hover { transform: scale(1.1); }
 
-        /* Modal do Wizard */
         .wizard-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8); z-index: 3000;
-            align-items: center; justify-content: center;
-            backdrop-filter: blur(5px);
+            align-items: center; justify-content: center; backdrop-filter: blur(5px);
         }
         .wizard-content {
             background: #1e293b; width: 90%; max-width: 500px;
             border-radius: 20px; padding: 2rem;
             border: 1px solid var(--cor-destaque);
-            box-shadow: 0 0 50px rgba(59, 130, 246, 0.3);
-            text-align: center; position: relative;
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.3); text-align: center; position: relative;
         }
-        .close-wizard {
-            position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #94a3b8;
-        }
+        .close-wizard { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #94a3b8; }
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.5s; }
-        
         .wizard-btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
         .wizard-btn {
             background: rgba(255,255,255,0.05); border: 1px solid var(--cor-destaque);
@@ -251,7 +248,6 @@
             transition: 0.3s; font-size: 1rem; display: flex; justify-content: space-between;
         }
         .wizard-btn:hover { background: var(--cor-destaque); }
-        
         .result-box { padding: 20px; border-radius: 10px; margin-top: 20px; font-weight: bold; }
         .result-success { background: rgba(16, 185, 129, 0.2); border: 1px solid var(--cor-verde); color: var(--cor-verde); }
         .result-fail { background: rgba(239, 68, 68, 0.2); border: 1px solid var(--cor-urgente); color: var(--cor-urgente); }
@@ -272,10 +268,7 @@
             .btn-download { width: 100%; justify-content: center; font-size: 1rem; }
             .logo-img { height: 40px; }
             .tabs-container { flex-direction: column; background: transparent; border: none; padding: 0; }
-            .tabs-nav { 
-                border-right: none; padding-right: 0; padding-bottom: 1rem; flex-direction: row; 
-                overflow-x: auto; white-space: nowrap; border-bottom: 1px solid #334155;
-            }
+            .tabs-nav { border-right: none; padding-right: 0; padding-bottom: 1rem; flex-direction: row; overflow-x: auto; white-space: nowrap; border-bottom: 1px solid #334155; }
             .tab-label { padding: 10px 15px; font-size: 0.9rem; min-width: 140px; justify-content: center; }
             .tabs-content { padding-left: 0; padding-top: 1rem; }
             .chatbot-trigger { width: 50px; height: 50px; font-size: 24px; bottom: 20px; right: 20px; }
@@ -306,20 +299,16 @@
         <a href="#contacto" class="btn-cta" data-lang="btn_quote">Orçamento</a>
     </header>
 
-    <div class="chatbot-trigger" onclick="openWizard()">
-        🤖
-    </div>
+    <div class="chatbot-trigger" onclick="openWizard()">🤖</div>
 
     <div id="wizardModal" class="wizard-modal">
         <div class="wizard-content">
             <span class="close-wizard" onclick="closeWizard()">&times;</span>
-            
             <div id="step1" class="step active">
                 <h3>Verificador de Compatibilidade</h3>
                 <p style="color:#cbd5e1; margin-bottom:20px;">Responda a 3 perguntas rápidas para saber se o seu PC suporta o software.</p>
                 <button class="btn-cta" onclick="nextStep(2)">Começar ➡️</button>
             </div>
-
             <div id="step2" class="step">
                 <h3>Quanto tem de Memória RAM?</h3>
                 <div class="wizard-btn-group">
@@ -328,7 +317,6 @@
                     <button class="wizard-btn" onclick="setRam(16); nextStep(3)">16 GB ou mais <span>🚀</span></button>
                 </div>
             </div>
-
             <div id="step3" class="step">
                 <h3>Qual o tipo de Disco?</h3>
                 <div class="wizard-btn-group">
@@ -336,7 +324,6 @@
                     <button class="wizard-btn" onclick="setDisk('SSD'); nextStep(4)">SSD / NVMe <span>⚡</span></button>
                 </div>
             </div>
-
             <div id="step4" class="step">
                 <h3 id="resultTitle">Analisando...</h3>
                 <div id="resultBox" class="result-box"></div>
@@ -368,6 +355,7 @@
         <div class="titulo-seccao">
             <h2 data-lang="cat_title">Catálogo <span>Premium</span></h2>
             <p data-lang="cat_subtitle">Selecione a marca para ver as novidades.</p>
+            <div class="version-alert"><i data-lang="version_note">ℹ️ Nota: Podem existir versões mais recentes não listadas. Consulte-nos.</i></div>
         </div>
 
         <input type="radio" name="brand-tabs" id="radio-merc" class="brand-radio" checked>
@@ -398,10 +386,9 @@
                 <div class="tab-pane" id="content-merc">
                     <h3 class="brand-title-content">Mercedes-Benz</h3>
                     <div class="grid-soft">
-                        
                         <div class="card-soft">
                             <span class="tipo-instalacao">Xentry Cars</span>
-                            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80" alt="Mercedes Cars" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1550608523-a5f228dc6677?auto=format&fit=crop&w=800&q=80" alt="Mercedes Cars" class="img-soft">
                             <div class="info-soft">
                                 <h3>Xentry Cars (Ligeiros)</h3>
                                 <p class="desc-soft" data-lang="desc_merc_cars">Diagnóstico completo para ligeiros. Inclui DAS e HHT. V: 01/2025.</p>
@@ -415,10 +402,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-soft">
                             <span class="tipo-instalacao">Xentry Trucks</span>
-                            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Mercedes Trucks" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1596732433083-20701eb94365?auto=format&fit=crop&w=800&q=80" alt="Mercedes Trucks" class="img-soft">
                             <div class="info-soft">
                                 <h3>Xentry Trucks (Pesados)</h3>
                                 <p class="desc-soft" data-lang="desc_merc_trucks">Para Pesados, Autocarros e Motores Industriais. V: 01/2025.</p>
@@ -432,10 +418,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-soft">
                             <span class="tipo-instalacao">Engenharia</span>
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="DTS Monaco" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=800&q=80" alt="DTS Monaco" class="img-soft">
                             <div class="info-soft">
                                 <h3>DTS Monaco 8.16 / 9</h3>
                                 <p class="desc-soft" data-lang="desc_merc_dts">Software de desenvolvimento avançado. Flash e Coding SCN.</p>
@@ -449,10 +434,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-soft">
                             <span class="tipo-instalacao">Engenharia</span>
-                            <img src="https://images.unsplash.com/photo-1537462713160-7b4bf1a58797?auto=format&fit=crop&w=800&q=80" alt="Vediamo" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Vediamo" class="img-soft">
                             <div class="info-soft">
                                 <h3>Vediamo 05</h3>
                                 <p class="desc-soft" data-lang="desc_merc_vediamo">A ferramenta clássica de engenharia para coding offline.</p>
@@ -466,10 +450,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-soft">
                             <span class="tipo-instalacao">Manuais</span>
-                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="WIS EPC" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="WIS EPC" class="img-soft">
                             <div class="info-soft">
                                 <h3>WIS / EPC / Starfinder</h3>
                                 <p class="desc-soft" data-lang="desc_merc_manuals">Esquemas elétricos, manuais de reparação e catálogo de peças.</p>
@@ -483,10 +466,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-soft card-fullpack">
                             <span class="badge-gold">👑 BEST SELLER</span>
-                            <img src="https://images.unsplash.com/photo-1605218427306-633ba87c9759?auto=format&fit=crop&w=1200&q=80" alt="Full Pack" class="img-soft" style="height: 220px;">
+                            <img src="https://images.unsplash.com/photo-1621504450168-38f647319936?auto=format&fit=crop&w=1200&q=80" alt="Full Pack" class="img-soft" style="height: 220px;">
                             <div class="info-soft">
                                 <h3>MERCEDES FULL PACK 2025</h3>
                                 <p class="desc-soft" style="color: #fff;" data-lang="desc_merc_full">TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + Tutoriais de Coding.</p>
@@ -502,7 +484,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -535,9 +516,9 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Diagbox 9.193</span>
-                            <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80" alt="PSA Diag" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1626071477742-c8497fa327c9?auto=format&fit=crop&w=800&q=80" alt="PSA Diag" class="img-soft">
                             <div class="info-soft">
-                                <h3>Diagbox 9.193 (Nativo/VM)</h3>
+                                <h3>Diagbox 9.193 (Nativo)</h3>
                                 <p class="desc-soft" data-lang="desc_psa_new">Versão mais recente para veículos até 2024/25. Suporta Peugeot, Citroën, DS e Opel.</p>
                                 <div class="specs">
                                     <div class="spec-item" style="color: var(--cor-verde);">📅 Versão: 9.193</div>
@@ -553,14 +534,14 @@
                         </div>
                          <div class="card-soft">
                             <span class="tipo-instalacao">Diagbox 7.83</span>
-                            <img src="https://images.unsplash.com/photo-1530906358829-e84b2769270f?auto=format&fit=crop&w=800&q=80" alt="PSA Old" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80" alt="PSA Old" class="img-soft">
                             <div class="info-soft">
                                 <h3>Diagbox 7.83 (Offline)</h3>
-                                <p class="desc-soft" data-lang="desc_psa_old">Versão clássica estável para telecodificação offline em modelos mais antigos.</p>
+                                <p class="desc-soft" data-lang="desc_psa_old">Versão clássica estável para codificação offline em modelos mais antigos.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão: 7.83</div>
-                                    <div class="spec-item">🔧 Telecod. Offline</div>
-                                    <div class="spec-item">💻 Win 7 / VM</div>
+                                    <div class="spec-item">🔧 Coding Offline</div>
+                                    <div class="spec-item">💻 Win 7 / 10</div>
                                     <div class="spec-item">🚗 Até 2016</div>
                                 </div>
                                 <div class="preco-row">
@@ -577,7 +558,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Clip V240</span>
-                            <img src="https://images.unsplash.com/photo-1531297461136-82lw9z2.jpg?auto=format&fit=crop&w=800&q=80" alt="Renault Diag" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" alt="Renault Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Renault Can Clip V240</h3>
                                 <p class="desc-soft" data-lang="desc_renault">Software oficial. Leitura de falhas, codificação, reprogramação e Reprog Database.</p>
@@ -601,7 +582,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Pathfinder</span>
-                            <img src="https://images.unsplash.com/photo-1626668893632-6f3d446f4e65?auto=format&fit=crop&w=800&q=80" alt="JLR Pathfinder" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?auto=format&fit=crop&w=800&q=80" alt="JLR Pathfinder" class="img-soft">
                             <div class="info-soft">
                                 <h3>JLR Pathfinder</h3>
                                 <p class="desc-soft" data-lang="desc_pathfinder">Para veículos novos (DoIP) Jaguar e Land Rover (após 2017). Diagnóstico oficial.</p>
@@ -643,7 +624,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Techstream TIS</span>
-                            <img src="https://images.unsplash.com/photo-1583267746897-2a7675818229?auto=format&fit=crop&w=800&q=60" alt="Toyota Tech" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?auto=format&fit=crop&w=800&q=80" alt="Toyota Tech" class="img-soft">
                             <div class="info-soft">
                                 <h3>Toyota Techstream</h3>
                                 <p class="desc-soft" data-lang="desc_toyota">Cobertura total para veículos Asiáticos. Versão mais recente disponível.</p>
@@ -667,7 +648,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">MultiECUScan</span>
-                            <img src="https://images.unsplash.com/photo-1568762130828-90862f247223?auto=format&fit=crop&w=800&q=60" alt="Fiat Diag" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80" alt="Fiat Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>FCA Solutions</h3>
                                 <p class="desc-soft" data-lang="desc_fiat">Diagnóstico para Alfa, Fiat, Lancia e Jeep. Suporte para SGW Bypass.</p>
@@ -691,7 +672,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">FDRS / Forscan</span>
-                            <img src="https://images.unsplash.com/photo-1553444936-633330114a06?auto=format&fit=crop&w=800&q=60" alt="Ford Diag" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1517153295259-74eb0b416cee?auto=format&fit=crop&w=800&q=80" alt="Ford Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Ford FDRS & FJDS</h3>
                                 <p class="desc-soft" data-lang="desc_ford">Acesso aos servidores Ford para programação de módulos novos.</p>
@@ -715,7 +696,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">GDS2 / Tech2Win</span>
-                            <img src="https://images.unsplash.com/photo-1635769268667-5a73238907e9?auto=format&fit=crop&w=800&q=60" alt="GM Diag" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" alt="GM Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>GM GDS2</h3>
                                 <p class="desc-soft" data-lang="desc_gm">Para Chevrolet e Opel (antigos). Sistema Global de Diagnóstico.</p>
@@ -757,16 +738,10 @@
     </footer>
 
     <script>
-        // --- LÓGICA DO WIZARD DE HARDWARE ---
-        let userRam = 0;
-        let userDisk = '';
-
-        function openWizard() {
-            document.getElementById('wizardModal').style.display = 'flex';
-        }
-        function closeWizard() {
-            document.getElementById('wizardModal').style.display = 'none';
-        }
+        // --- WIZARD LOGIC ---
+        let userRam = 0; let userDisk = '';
+        function openWizard() { document.getElementById('wizardModal').style.display = 'flex'; }
+        function closeWizard() { document.getElementById('wizardModal').style.display = 'none'; }
         function nextStep(step) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + step).classList.add('active');
@@ -774,36 +749,25 @@
         }
         function setRam(val) { userRam = val; }
         function setDisk(val) { userDisk = val; }
-
         function calculateResult() {
             const resBox = document.getElementById('resultBox');
             const resTitle = document.getElementById('resultTitle');
-
             if (userRam >= 8 && userDisk === 'SSD') {
                 resTitle.textContent = "✅ Hardware Aprovado!";
                 resBox.className = "result-box result-success";
-                resBox.innerHTML = `
-                    <p>O seu PC está pronto para instalar Xentry 2025, ISTA e Diagbox.</p>
-                    <p style="margin-top:10px; font-size:0.9rem;">Performance: Excelente 🚀</p>
-                `;
+                resBox.innerHTML = `<p>O seu PC está pronto para instalar Xentry 2025, ISTA e Diagbox.</p><p style="margin-top:10px; font-size:0.9rem;">Performance: Excelente 🚀</p>`;
             } else if (userDisk === 'HDD') {
                 resTitle.textContent = "⚠️ Atenção ao Disco";
                 resBox.className = "result-box result-fail";
-                resBox.innerHTML = `
-                    <p>Discos mecânicos (HDD) são muito lentos para software moderno (Xentry/ISTA).</p>
-                    <p>Recomendamos trocar para um SSD antes de instalar.</p>
-                `;
+                resBox.innerHTML = `<p>Discos mecânicos (HDD) são muito lentos para software moderno (Xentry/ISTA).</p><p>Recomendamos trocar para um SSD antes de instalar.</p>`;
             } else if (userRam < 8) {
                 resTitle.textContent = "⚠️ Pouca Memória RAM";
                 resBox.className = "result-box result-fail";
-                resBox.innerHTML = `
-                    <p>4GB é pouco para máquinas virtuais e software pesado.</p>
-                    <p>Vai funcionar lento. Recomendamos upgrade para 8GB.</p>
-                `;
+                resBox.innerHTML = `<p>4GB é pouco para sistemas modernos.</p><p>Vai funcionar lento. Recomendamos upgrade para 8GB.</p>`;
             }
         }
 
-        // --- SISTEMA DE TRADUÇÃO ---
+        // --- TRANSLATIONS ---
         const translations = {
             pt: {
                 nav_home: "Início", nav_soft: "Software", nav_serv: "Serviços", btn_quote: "Orçamento",
@@ -811,10 +775,9 @@
                 hero_title: "Soluções de Diagnóstico <br>Profissional",
                 hero_desc: "Xentry 01/2025, DTS Monaco, Vediamo, JLR Online, Diagbox e mais. Bases de dados completas e tutoriais de coding incluídos.",
                 hero_help: "Precisa de suporte agora?", btn_download: "📥 Descarregar Cliente Remoto", safe_conn: "Ligação Segura (26MB)",
-                cat_title: "Catálogo", cat_subtitle: "Selecione a marca para ver as novidades.",
+                cat_title: "Catálogo", cat_subtitle: "Selecione a marca para ver as novidades.", version_note: "ℹ️ Nota: Podem existir versões mais recentes não listadas. Consulte-nos.",
                 price: "Sob Consulta", btn_order: "Encomendar →", footer_tag: "Especialistas em Software Automóvel",
                 
-                // MERCEDES NOVOS
                 desc_merc_cars: "Diagnóstico completo para ligeiros. Inclui DAS e HHT. V: 01/2025.",
                 desc_merc_trucks: "Para Pesados, Autocarros e Motores Industriais. V: 01/2025.",
                 desc_merc_dts: "Software de desenvolvimento avançado. Flash e Coding SCN.",
@@ -824,7 +787,7 @@
 
                 desc_bmw: "Diagnóstico (ISTA-D) e Programação (ISTA-P/ESYS). Inclui bases BLP/SDP e tutoriais.",
                 desc_psa_new: "Versão mais recente para veículos até 2024/25. Suporta Peugeot, Citroën, DS e Opel.",
-                desc_psa_old: "Versão clássica estável para telecodificação offline em modelos mais antigos.",
+                desc_psa_old: "Versão clássica estável para codificação offline em modelos mais antigos.",
                 desc_renault: "Software oficial. Leitura de falhas, codificação, reprogramação e Reprog Database.",
                 desc_pathfinder: "Para veículos novos (DoIP) Jaguar e Land Rover (após 2017). Diagnóstico oficial.",
                 desc_sdd: "Symptom Driven Diagnostics para modelos até 2017. Acesso Online completo.",
@@ -839,10 +802,9 @@
                 hero_title: "Professional Diagnostic <br>Solutions",
                 hero_desc: "Xentry 01/2025, DTS Monaco, Vediamo, JLR Online, Diagbox & more. Complete databases and coding tutorials included.",
                 hero_help: "Need support now?", btn_download: "📥 Download Remote Client", safe_conn: "Secure Connection (26MB)",
-                cat_title: "Premium Catalog", cat_subtitle: "Select a brand to view software.",
+                cat_title: "Premium Catalog", cat_subtitle: "Select a brand to view software.", version_note: "ℹ️ Note: Newer versions may exist not listed here. Contact us.",
                 price: "Price on Request", btn_order: "Order Now →", footer_tag: "Automotive Software Specialists",
                 
-                // MERCEDES NEW
                 desc_merc_cars: "Complete diagnostics for cars. Includes DAS and HHT. V: 01/2025.",
                 desc_merc_trucks: "For Trucks, Buses, and Industrial Engines. V: 01/2025.",
                 desc_merc_dts: "Advanced development software. Flash and SCN Coding.",
@@ -852,7 +814,7 @@
 
                 desc_bmw: "Diagnostics (ISTA-D) and Programming (ISTA-P/ESYS). Includes BLP/SDP databases and tutorials.",
                 desc_psa_new: "Latest version for vehicles up to 2024/25. Supports Peugeot, Citroën, DS, and Opel.",
-                desc_psa_old: "Classic stable version for offline telecoding on older models.",
+                desc_psa_old: "Classic stable version for offline coding on older models.",
                 desc_renault: "Official software. Fault reading, coding, reprogramming and Reprog Database.",
                 desc_pathfinder: "For new (DoIP) Jaguar and Land Rover vehicles (post-2017). Official diagnostics.",
                 desc_sdd: "Symptom Driven Diagnostics for models up to 2017. Full Online Access.",
@@ -867,10 +829,9 @@
                 hero_title: "Solutions de Diagnostic <br>Professionnel",
                 hero_desc: "Xentry 01/2025, DTS Monaco, Vediamo, JLR Online, Diagbox et plus. Bases de données complètes et tutoriels inclus.",
                 hero_help: "Besoin d'aide ?", btn_download: "📥 Télécharger Client", safe_conn: "Connexion Sécurisée (26MB)",
-                cat_title: "Catalogue", cat_subtitle: "Sélectionnez une marque.",
+                cat_title: "Catalogue", cat_subtitle: "Sélectionnez une marque.", version_note: "ℹ️ Note : Des versions plus récentes peuvent exister. Contactez-nous.",
                 price: "Sur Demande", btn_order: "Commander →", footer_tag: "Spécialistes Logiciels Auto",
                 
-                // MERCEDES NEW
                 desc_merc_cars: "Diagnostic complet pour VL. Inclut DAS et HHT. V: 01/2025.",
                 desc_merc_trucks: "Pour PL, Bus et Moteurs Industriels. V: 01/2025.",
                 desc_merc_dts: "Logiciel de développement avancé. Flash et Codage SCN.",
@@ -880,7 +841,7 @@
 
                 desc_bmw: "Diagnostic (ISTA-D) et Programmation (ISTA-P/ESYS). Bases BLP/SDP et tutoriels inclus.",
                 desc_psa_new: "Dernière version pour véhicules jusqu'à 2024/25. Supporte Peugeot, Citroën, DS et Opel.",
-                desc_psa_old: "Version classique stable pour télécodage hors ligne sur anciens modèles.",
+                desc_psa_old: "Version classique stable pour codage hors ligne sur anciens modèles.",
                 desc_renault: "Logiciel officiel. Lecture défauts, codage, reprogrammation et Base Reprog.",
                 desc_pathfinder: "Pour nouveaux véhicules (DoIP) Jaguar et Land Rover (après 2017).",
                 desc_sdd: "Symptom Driven Diagnostics pour modèles jusqu'à 2017. Accès en ligne complet.",
@@ -895,10 +856,9 @@
                 hero_title: "Soluciones de Diagnóstico <br>Profesional",
                 hero_desc: "Xentry 01/2025, DTS Monaco, Vediamo, JLR Online, Diagbox y más. Bases de datos completas y tutoriales incluidos.",
                 hero_help: "¿Necesita soporte?", btn_download: "📥 Descargar Cliente", safe_conn: "Conexión Segura (26MB)",
-                cat_title: "Catálogo", cat_subtitle: "Seleccione la marca.",
+                cat_title: "Catálogo", cat_subtitle: "Seleccione la marca.", version_note: "ℹ️ Nota: Pueden existir versiones más recientes. Consúltenos.",
                 price: "Consultar", btn_order: "Pedir →", footer_tag: "Especialistas en Software",
                 
-                // MERCEDES NEW
                 desc_merc_cars: "Diagnóstico completo para turismos. Incluye DAS y HHT. V: 01/2025.",
                 desc_merc_trucks: "Para Camiones, Autobuses y Motores Industriales. V: 01/2025.",
                 desc_merc_dts: "Software de desarrollo avanzado. Flash y SCN Coding.",
@@ -908,7 +868,7 @@
 
                 desc_bmw: "Diagnóstico (ISTA-D) y Programación (ISTA-P/ESYS). Incluye bases BLP/SDP.",
                 desc_psa_new: "Última versión para vehículos hasta 2024/25. Soporta Peugeot, Citroën, DS y Opel.",
-                desc_psa_old: "Versión clásica estable para telecodificación offline en modelos antiguos.",
+                desc_psa_old: "Versión clásica estable para codificación offline en modelos antiguos.",
                 desc_renault: "Software oficial. Lectura fallos, codificación, reprogramación y Base Reprog.",
                 desc_pathfinder: "Para vehículos nuevos (DoIP) Jaguar y Land Rover (post-2017).",
                 desc_sdd: "Symptom Driven Diagnostics para modelos hasta 2017. Acceso Online completo.",
@@ -924,11 +884,8 @@
             elements.forEach(el => {
                 const key = el.getAttribute('data-lang');
                 if (translations[lang][key]) {
-                    if(key === "hero_title") {
-                        el.innerHTML = translations[lang][key]; 
-                    } else {
-                        el.textContent = translations[lang][key];
-                    }
+                    if(key === "hero_title") { el.innerHTML = translations[lang][key]; }
+                    else { el.textContent = translations[lang][key]; }
                 }
             });
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
