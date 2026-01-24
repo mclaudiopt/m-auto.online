@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Software de diagnóstico automóvel multimarca: Xentry, ISTA, Diagbox e mais. Instalação remota e suporte técnico especializado para oficinas.">
+    <meta name="keywords" content="Xentry, ISTA, Diagnóstico Automóvel, OBD2, Oficina, Software Mecânica, M-Auto">
+    <meta property="og:title" content="M-Auto | Soluções de Diagnóstico Profissional">
+    <meta property="og:description" content="Instalação remota de Xentry, BMW ISTA, Diagbox e portáteis prontos a usar. Suporte 24/7.">
+    <meta property="og:image" content="https://m-auto.online/m-auto.png">
+    <meta property="og:url" content="https://m-auto.online">
+    <meta property="og:type" content="website">
+
     <link rel="icon" type="image/png" href="m-auto.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <title>M-Auto | Catálogo Profissional Multimarca</title>
+
     <style>
         /* --- ESTILOS GERAIS (Dark Mode) --- */
         :root {
@@ -16,8 +31,12 @@
             --cor-urgente: #ef4444;     /* Vermelho para o suporte */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        html { 
+            scroll-behavior: smooth; 
+            scroll-padding-top: 100px; /* Impede que o menu tape os títulos */
+        }
 
         body { background-color: var(--cor-fundo); color: var(--cor-texto); line-height: 1.6; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
@@ -58,54 +77,35 @@
         }
         .btn-download:hover { transform: scale(1.05); background-color: #dc2626; }
 
-        /* --- SECÇÃO DE SOFTWARE COM ABAS LATERAIS (O NOVO CÓDIGO) --- */
+        /* --- SECÇÃO DE SOFTWARE COM ABAS LATERAIS --- */
         .seccao { padding: 5rem 5%; }
         .titulo-seccao { text-align: center; margin-bottom: 3rem; }
         .titulo-seccao h2 { font-size: 2rem; margin-bottom: 0.5rem; color: #fff; }
         .titulo-seccao span { color: var(--cor-destaque); }
 
-        /* Container principal das abas */
         .tabs-container {
-            display: flex;
-            gap: 2rem;
-            background: var(--cor-card);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #1e293b;
-            min-height: 600px; /* Altura mínima para ficar bonito */
+            display: flex; gap: 2rem; background: var(--cor-card); padding: 2rem;
+            border-radius: 15px; border: 1px solid #1e293b; min-height: 600px;
         }
 
-        /* Esconder os "radio buttons" verdadeiros */
+        /* Esconder os "radio buttons" */
         .brand-radio { display: none; }
 
         /* Coluna da Esquerda (Navegação) */
         .tabs-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            min-width: 220px; /* Largura fixa para a coluna da esquerda */
-            border-right: 1px solid #334155;
-            padding-right: 2rem;
+            display: flex; flex-direction: column; gap: 10px; min-width: 220px;
+            border-right: 1px solid #334155; padding-right: 2rem;
         }
 
-        /* Estilo dos Botões das Marcas (Labels) */
         .tab-label {
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.05);
-            color: #94a3b8;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 15px 20px; background: rgba(255,255,255,0.05); color: #94a3b8;
+            border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s;
+            display: flex; justify-content: space-between; align-items: center;
         }
         .tab-label:hover { background: rgba(59, 130, 246, 0.1); color: var(--cor-destaque); }
-        /* Seta pequena no botão */
         .tab-label::after { content: '›'; font-size: 1.2rem; }
 
-        /* Lógica CSS: Quando o radio X está selecionado, muda a cor da label X */
+        /* Ativar aba selecionada */
         #radio-merc:checked ~ .tabs-container .tabs-nav label[for="radio-merc"],
         #radio-bmw:checked ~ .tabs-container .tabs-nav label[for="radio-bmw"],
         #radio-psa:checked ~ .tabs-container .tabs-nav label[for="radio-psa"],
@@ -114,17 +114,14 @@
         #radio-fiat:checked ~ .tabs-container .tabs-nav label[for="radio-fiat"],
         #radio-ford:checked ~ .tabs-container .tabs-nav label[for="radio-ford"],
         #radio-gm:checked ~ .tabs-container .tabs-nav label[for="radio-gm"] {
-            background: var(--cor-destaque);
-            color: white;
+            background: var(--cor-destaque); color: white;
         }
 
         /* Coluna da Direita (Conteúdo) */
         .tabs-content { flex-grow: 1; }
-
-        /* Esconde todos os conteúdos por defeito */
         .tab-pane { display: none; animation: fadeIn 0.5s ease; }
 
-        /* Lógica CSS: Mostra o conteúdo correspondente ao radio selecionado */
+        /* Mostrar conteúdo selecionado */
         #radio-merc:checked ~ .tabs-container .tabs-content #content-merc,
         #radio-bmw:checked ~ .tabs-container .tabs-content #content-bmw,
         #radio-psa:checked ~ .tabs-container .tabs-content #content-psa,
@@ -138,13 +135,12 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Título da Marca no topo do conteúdo */
         .brand-title-content { 
             font-size: 2rem; color: #fff; margin-bottom: 2rem; 
             border-bottom: 2px solid var(--cor-destaque); padding-bottom: 10px; display: inline-block;
         }
 
-        /* Grid de Produtos (igual ao anterior) */
+        /* Grid de Produtos */
         .grid-soft { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .card-soft { background-color: var(--cor-fundo); border-radius: 12px; overflow: hidden; border: 1px solid #334155; transition: 0.3s; position: relative; }
         .card-soft:hover { transform: translateY(-5px); border-color: var(--cor-destaque); }
@@ -176,7 +172,6 @@
             .box-download { width: 100%; }
             .btn-download { width: 100%; justify-content: center; font-size: 1rem; }
             .logo-img { height: 45px; }
-            /* No mobile, as abas ficam em cima do conteúdo em vez de ao lado */
             .tabs-container { flex-direction: column; }
             .tabs-nav { min-width: auto; border-right: none; border-bottom: 1px solid #334155; padding-right: 0; padding-bottom: 1rem; }
         }
@@ -267,7 +262,7 @@
                                 </div>
                             </div>
                         </div>
-                         </div>
+                    </div>
                 </div>
 
                 <div class="tab-pane" id="content-bmw">
@@ -471,7 +466,13 @@
             <p>Precisa de um software específico? Fale connosco.</p>
             <br>
             <p>📧 geral@m-auto.online</p>
-            <p>📞 WhatsApp: +351 910 000 000</p>
+            <p>
+                📞 WhatsApp: 
+                <a href="https://wa.me/351910000000?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20software%20de%20diagnóstico." 
+                   style="color: var(--cor-destaque-sec); font-weight: bold;">
+                   +351 910 000 000
+                </a>
+            </p>
         </div>
         <p style="margin-top: 3rem; font-size: 0.8rem; color: #475569;">&copy; 2025 M-Auto Solutions.</p>
     </footer>
