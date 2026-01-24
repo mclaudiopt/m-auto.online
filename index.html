@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V9.0</title>
+    <title>M-Auto Online | V9.1</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -149,22 +149,28 @@
         }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
         .card img { width: 100%; height: 190px; object-fit: cover; border-bottom: 1px solid var(--border); }
-        .card img[src=""] { background-color: #ccc; } /* Fallback visual */
         
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
         .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
         
-        .feature-list { list-style: none; margin-bottom: 15px; padding: 0; }
-        .feature-list li { 
-            font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; 
-            display: flex; align-items: center; gap: 8px;
+        /* SPEC BOXES (OS "QUADRADOS") */
+        .spec-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; 
         }
-        .feature-list li::before { content: "✓"; color: var(--accent); font-weight: bold; }
+        .spec-box {
+            background: var(--bg-body); border: 1px solid var(--border);
+            padding: 8px 5px; border-radius: 8px; text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+            transition: 0.2s;
+        }
+        .spec-box:hover { border-color: var(--accent); color: var(--accent); }
+        .spec-icon { font-size: 1.1rem; margin-bottom: 3px; }
 
         .card-footer { 
             margin-top: auto; display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; /* Garante separação */
+            border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; 
         }
         .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; }
@@ -230,7 +236,7 @@
 </head>
 <body>
 
-    <div class="version-tag">v9.0</div>
+    <div class="version-tag">v9.1</div>
 
     <header>
         <div class="header-left">
@@ -327,14 +333,12 @@
                                 <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80" style="height:220px;">
                                 <div class="card-body">
                                     <h3>Mercedes Full Pack 2025</h3>
-                                    <ul class="feature-list" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                                        <li>Cars & Heavy Duty (Ligeiros e Pesados)</li>
-                                        <li>WIS 2021 & EPC (Manual e Peças)</li>
-                                        <li>Starfinder 2023 (Esquemas)</li>
-                                        <li>Vediamo & DTS Monaco (Engenharia)</li>
-                                        <li>SDMedia (Vídeos e Tutoriais)</li>
-                                        <li>Certificados Vitalícios Incluídos</li>
-                                    </ul>
+                                    <div class="spec-grid">
+                                        <div class="spec-box"><span class="spec-icon">🚘</span><span>Cars & Trucks</span></div>
+                                        <div class="spec-box"><span class="spec-icon">📚</span><span>WIS / EPC</span></div>
+                                        <div class="spec-box"><span class="spec-icon">⚡</span><span>DTS / Vediamo</span></div>
+                                        <div class="spec-box"><span class="spec-icon">🎫</span><span>Certificados</span></div>
+                                    </div>
                                     <div class="card-actions"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)">Encomendar</button></div>
                                 </div>
                             </div>
@@ -343,8 +347,11 @@
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Xentry Cars (PassThru)</h3>
-                                    <p>Versão ligeira compatível com J2534 (Openport, Scanmatik).</p>
-                                    <ul class="feature-list"><li>DAS & HHT Incluídos</li><li>ZenZefi Certificates</li></ul>
+                                    <p class="desc">Diagnóstico para ligeiros. Compatível J2534.</p>
+                                    <div class="spec-grid">
+                                        <div class="spec-box"><span class="spec-icon">📅</span><span>01-2025</span></div>
+                                        <div class="spec-box"><span class="spec-icon">🔌</span><span>Openport</span></div>
+                                    </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
                             </div>
@@ -352,19 +359,25 @@
                             <div class="card">
                                 <img src="https://images.unsplash.com/photo-1598972884636-348404444338?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
-                                    <h3>Xentry Trucks (Pesados)</h3>
-                                    <p>Sistema dedicado para Pesados, Autocarros (Evobus) e Motores Industriais (24V).</p>
-                                    <ul class="feature-list"><li>Suporte 24V</li><li>Requer C4/C5 Multiplexer</li></ul>
+                                    <h3>Xentry Trucks</h3>
+                                    <p class="desc">Pesados, Autocarros e Industriais (24V).</p>
+                                    <div class="spec-grid">
+                                        <div class="spec-box"><span class="spec-icon">📅</span><span>01-2025</span></div>
+                                        <div class="spec-box"><span class="spec-icon">📟</span><span>C4 / C5</span></div>
+                                    </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
                             </div>
 
                             <div class="card">
-                                <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80">
+                                <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Engenharia (Dev)</h3>
-                                    <p>Ferramentas de fábrica para desenvolvimento e codificação.</p>
-                                    <ul class="feature-list"><li>DTS Monaco 8/9</li><li>Vediamo 4/5</li></ul>
+                                    <p class="desc">Desenvolvimento e Codificação Offline.</p>
+                                    <div class="spec-grid">
+                                        <div class="spec-box"><span class="spec-icon">🛠️</span><span>DTS 9</span></div>
+                                        <div class="spec-box"><span class="spec-icon">💻</span><span>Vediamo</span></div>
+                                    </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
                             </div>
@@ -373,8 +386,11 @@
                                 <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>WIS & EPC</h3>
-                                    <p>Workshop Information System e Electronic Parts Catalog.</p>
-                                    <ul class="feature-list"><li>Manuais de Reparação</li><li>Catálogo de Peças</li></ul>
+                                    <p class="desc">Manuais de Reparação e Catálogo de Peças.</p>
+                                    <div class="spec-grid">
+                                        <div class="spec-box"><span class="spec-icon">📖</span><span>Manual</span></div>
+                                        <div class="spec-box"><span class="spec-icon">🔩</span><span>Peças</span></div>
+                                    </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
                             </div>
@@ -383,8 +399,11 @@
                                 <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Starfinder 2016-2024</h3>
-                                    <p>Localizador de componentes elétricos e mecânicos.</p>
-                                    <ul class="feature-list"><li>Esquemas Elétricos a cores</li><li>Fotos reais</li></ul>
+                                    <p class="desc">Esquemas elétricos e localização.</p>
+                                    <div class="spec-grid">
+                                        <div class="spec-box"><span class="spec-icon">⚡</span><span>Esquemas</span></div>
+                                        <div class="spec-box"><span class="spec-icon">📍</span><span>Fotos</span></div>
+                                    </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
                             </div>
@@ -393,8 +412,11 @@
                                 <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>SDMedia</h3>
-                                    <p>Base de dados de multimédia para formação e reparação.</p>
-                                    <ul class="feature-list"><li>Vídeos Tutoriais</li><li>Guias de resolução</li></ul>
+                                    <p class="desc">Base de dados de vídeos e treino.</p>
+                                    <div class="spec-grid">
+                                        <div class="spec-box"><span class="spec-icon">🎥</span><span>Vídeos</span></div>
+                                        <div class="spec-box"><span class="spec-icon">🎓</span><span>Treino</span></div>
+                                    </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
                             </div>
@@ -402,21 +424,19 @@
                         </div>
                     </div>
 
-                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p data-lang="desc_bmw">Diagnóstico (ISTA-D) e Programação (ISTA-P).</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diagnóstico e Programação.</p><div class="spec-grid"><div class="spec-box"><span>4.39</span></div><div class="spec-box"><span>ICOM</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     
                     <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid">
-                        <div class="card"><img src="https://images.unsplash.com/photo-1621503373575-b040317da743?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p data-lang="desc_psa_new">Nativo até 2025.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
-                        <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p>Offline (Antigos).</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
+                        <div class="card"><img src="https://images.unsplash.com/photo-1621503373575-b040317da743?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Nativo até 2025.</p><div class="spec-grid"><div class="spec-box"><span>V 9</span></div><div class="spec-box"><span>Nativo</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
+                        <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline (Antigos).</p><div class="spec-grid"><div class="spec-box"><span>V 7</span></div><div class="spec-box"><span>VM</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
                     </div></div>
                     
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p data-lang="desc_renault">Oficial Renault/Dacia.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p class="desc">Oficial Renault.</p><div class="spec-grid"><div class="spec-box"><span>V240</span></div><div class="spec-box"><span>Reprog</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p data-lang="desc_pathfinder">Novos modelos DoIP.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p data-lang="desc_toyota">Diagnóstico Global.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    
-                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p data-lang="desc_ford">Sistema Online.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p data-lang="desc_gm">Chevrolet/Opel.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">DoIP Land Rover.</p><div class="spec-grid"><div class="spec-box"><span>DoIP</span></div><div class="spec-box"><span>Online</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p class="desc">Diagnóstico Global.</p><div class="spec-grid"><div class="spec-box"><span>V18</span></div><div class="spec-box"><span>J2534</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p class="desc">Sistema Online.</p><div class="spec-grid"><div class="spec-box"><span>Online</span></div><div class="spec-box"><span>PATS</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Opel/Chevrolet.</p><div class="spec-grid"><div class="spec-box"><span>GDS2</span></div><div class="spec-box"><span>Tech2</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
@@ -429,9 +449,9 @@
                     <button class="side-btn" onclick="switchBrand('pc', this)">Computadores</button>
                 </div>
                 <div class="content-wrapper">
-                    <div id="brand-univ" class="brand-panel active"><h2 class="panel-header">Universal</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Openport 2.0</h3><p>J2534 Económico.</p></div></div></div></div>
-                    <div id="brand-vci" class="brand-panel"><h2 class="panel-header">VCI Marca</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p>Mercedes DoIP.</p></div></div></div></div>
-                    <div id="brand-pc" class="brand-panel"><h2 class="panel-header">Computadores</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Toughbook</h3><p>Blindado.</p></div></div></div></div>
+                    <div id="brand-univ" class="brand-panel active"><h2 class="panel-header">Universal</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Openport 2.0</h3><p class="desc">J2534 Económico.</p></div></div></div></div>
+                    <div id="brand-vci" class="brand-panel"><h2 class="panel-header">VCI Marca</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p class="desc">Mercedes DoIP.</p></div></div></div></div>
+                    <div id="brand-pc" class="brand-panel"><h2 class="panel-header">Computadores</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Toughbook</h3><p class="desc">Blindado.</p></div></div></div></div>
                 </div>
             </div>
         </div>
