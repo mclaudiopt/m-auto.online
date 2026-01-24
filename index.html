@@ -202,8 +202,7 @@
         }
 
         .img-soft { width: 100%; height: 180px; object-fit: cover; opacity: 0.9; transition: opacity 0.3s; }
-        .img-soft:not([src]) { background-color: #334155; } /* Fallback */
-
+        
         .info-soft { padding: 1.5rem; }
         .info-soft h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #fff; font-weight: 700; }
         .desc-soft { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.2rem; min-height: 50px; line-height: 1.5; }
@@ -246,7 +245,6 @@
         .close-wizard { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #94a3b8; }
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.5s; }
-        
         .wizard-btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
         .wizard-btn {
             background: rgba(255,255,255,0.05); border: 1px solid var(--cor-destaque);
@@ -254,13 +252,10 @@
             transition: 0.3s; font-size: 1rem; display: flex; justify-content: space-between;
         }
         .wizard-btn:hover { background: var(--cor-destaque); }
-        
-        /* Resultados do Bot */
-        .result-box { 
-            padding: 20px; border-radius: 10px; margin-top: 20px; text-align: left;
-            max-height: 300px; overflow-y: auto; background: rgba(0,0,0,0.2);
-        }
-        .res-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; text-align: center; }
+        .result-box { padding: 20px; border-radius: 10px; margin-top: 20px; font-weight: bold; text-align: left; background: rgba(0,0,0,0.2); }
+        .result-success { background: rgba(16, 185, 129, 0.2); border: 1px solid var(--cor-verde); color: var(--cor-verde); }
+        .result-fail { background: rgba(239, 68, 68, 0.2); border: 1px solid var(--cor-urgente); color: var(--cor-urgente); }
+        .result-warn { background: rgba(251, 191, 36, 0.2); border: 1px solid var(--cor-gold); color: var(--cor-gold); }
         .res-list { list-style: none; padding: 0; }
         .res-item { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
         .res-icon { margin-right: 10px; font-size: 1.1rem; }
@@ -348,7 +343,7 @@
             
             <div id="step1" class="step active">
                 <h3>Verificador de Compatibilidade</h3>
-                <p style="color:#cbd5e1; margin-bottom:20px;">Responda a 3 perguntas rápidas para saber se o seu PC suporta o software.</p>
+                <p style="color:#cbd5e1; margin-bottom:20px;">Verifique se o seu PC suporta o software.</p>
                 <button class="btn-cta" onclick="nextStep(2)">Começar ➡️</button>
             </div>
 
@@ -387,6 +382,7 @@
             </div>
 
             <div id="step6" class="step">
+                <h3 id="resultTitle">Analisando...</h3>
                 <div id="resultBox" class="result-box"></div>
                 <div class="wizard-btn-group">
                     <button class="btn-cta" onclick="closeWizard()">Fechar e Ver Produtos</button>
@@ -532,7 +528,7 @@
                         </div>
                         <div class="card-soft card-fullpack">
                             <span class="badge-gold">👑 BEST SELLER</span>
-                            <img src="https://images.unsplash.com/photo-1605218427306-633ba87c9759?q=80&w=1200&auto=format&fit=crop" alt="Full Pack" class="img-soft" style="height: 220px;">
+                            <img src="https://placehold.co/1200x220/fbbf24/000?text=MERCEDES+FULL+PACK+2025" alt="Full Pack" class="img-soft" style="height: 220px;">
                             <div class="info-soft">
                                 <h3>MERCEDES FULL PACK 2025</h3>
                                 <p class="desc-soft" style="color: #fff;" data-lang="desc_merc_full">TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriais.</p>
@@ -554,7 +550,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Nativo + Expert</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=ISTA+D+AND+P" alt="BMW Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=BMW+ISTA+%2B+ESYS" alt="BMW Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>ISTA+ & ESYS</h3>
                                 <p class="desc-soft" data-lang="desc_bmw">Diagnóstico (ISTA-D) e Programação (ISTA-P/ESYS). Inclui bases de dados BLP/SDP e tutoriais.</p>
@@ -614,7 +610,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Clip V240</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=RENAULT+CLIP+2.40" alt="Renault Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=RENAULT+CLIP+V240" alt="Renault Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Renault Can Clip V240</h3>
                                 <p class="desc-soft" data-lang="desc_renault">Software oficial. Leitura de falhas, codificação, reprogramação e Reprog Database.</p>
@@ -668,7 +664,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Engineering</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=SEEDKEY+CCF+TOOLS" alt="JLR Tools" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=JLR+SEEDKEY+%2B+CCF" alt="JLR Tools" class="img-soft">
                             <div class="info-soft">
                                 <h3>JLR SeedKey & CCF Tools</h3>
                                 <p class="desc-soft" data-lang="desc_jlr_seed">Gerador de seedkeys e ferramentas para edição de ficheiros CCF (Car Configuration File).</p>
@@ -706,7 +702,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Toyota EPC</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=TOYOTA+EPC" alt="Toyota EPC" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=TOYOTA+EPC+PARTS" alt="Toyota EPC" class="img-soft">
                             <div class="info-soft">
                                 <h3>Toyota EPC (Parts)</h3>
                                 <p class="desc-soft" data-lang="desc_toyota_epc">Catálogo eletrónico de peças oficial. Identificação por VIN e esquemas de montagem.</p>
@@ -728,7 +724,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">MultiECUScan</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=MULTIECUSCAN" alt="Fiat Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=MULTIECUSCAN+FCA" alt="Fiat Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>FCA Solutions</h3>
                                 <p class="desc-soft" data-lang="desc_fiat">Diagnóstico para Alfa, Fiat, Lancia e Jeep. Suporte para SGW Bypass.</p>
@@ -750,7 +746,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">FDRS / Forscan</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=FORD+FDRS+FORSCAN" alt="Ford Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=FORD+FDRS+%2B+FORSCAN" alt="Ford Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Ford FDRS & FJDS</h3>
                                 <p class="desc-soft" data-lang="desc_ford">Acesso aos servidores Ford para programação de módulos novos.</p>
@@ -772,7 +768,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">GDS2 / Tech2Win</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=GM+GDS2" alt="GM Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=GM+GDS2+%2B+TECH2" alt="GM Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>GM GDS2</h3>
                                 <p class="desc-soft" data-lang="desc_gm">Para Chevrolet e Opel (antigos). Sistema Global de Diagnóstico.</p>
@@ -812,7 +808,7 @@
     </footer>
 
     <script>
-        // --- LÓGICA DO WIZARD INTELIGENTE ---
+        // --- WIZARD LOGIC ---
         let userRam = 0; let userDisk = ''; let userOS = ''; let userSpace = 0;
 
         function openWizard() { document.getElementById('wizardModal').style.display = 'flex'; }
@@ -830,9 +826,7 @@
         function setDisk(val) { userDisk = val; }
         
         function resetWizard() {
-            // Limpa variáveis
             userRam = 0; userDisk = ''; userOS = ''; userSpace = 0;
-            // Volta ao passo 1
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step1').classList.add('active');
         }
@@ -844,7 +838,6 @@
             let listItems = "";
             let title = "Resultados da Análise";
             
-            // 1. Verificação Crítica: SO e Disco
             if (userOS === 'Old') {
                 title = "❌ Sistema Incompatível";
                 listItems += `<li class="res-item color-bad"><span class="res-icon">❌</span>O seu Windows é antigo. Precisa de Windows 10 ou 11 (64 Bits) para correr Xentry, ISTA, JLR e softwares modernos.</li>`;
@@ -854,17 +847,14 @@
                 listItems += `<li class="res-item color-warn"><span class="res-icon">⚠️</span>Discos HDD mecânicos são muito lentos. O Xentry e o ISTA vão demorar muito a abrir.</li>`;
                 listItems += `<li class="res-item color-ok"><span class="res-icon">✅</span>Recomendamos fortemente instalar um SSD.</li>`;
             } else {
-                // 2. Análise de Hardware (RAM e Espaço)
                 title = "✅ Análise Concluída";
                 
-                // RAM
                 if (userRam >= 8) {
                     listItems += `<li class="res-item color-ok"><span class="res-icon">✅</span><b>Memória RAM (8GB+):</b> Excelente para todos os softwares pesados (Xentry, ISTA, JLR).</li>`;
                 } else {
                     listItems += `<li class="res-item color-warn"><span class="res-icon">⚠️</span><b>Memória RAM (4GB):</b> Suficiente para Toyota, Ford, Fiat e Diagbox. O Xentry/BMW funcionará mas pode ser lento.</li>`;
                 }
 
-                // Espaço
                 if (userSpace >= 250) {
                     listItems += `<li class="res-item color-ok"><span class="res-icon">✅</span><b>Espaço (>250GB):</b> Perfeito para instalar PACKS COMPLETOS (Mercedes Full + BMW + JLR).</li>`;
                 } else if (userSpace >= 100) {
@@ -878,7 +868,7 @@
             resBox.innerHTML = `<ul class="res-list">${listItems}</ul>`;
         }
 
-        // --- TRANSLATIONS (Mantém as traduções anteriores) ---
+        // --- TRANSLATIONS ---
         const translations = {
             pt: {
                 nav_home: "Início", nav_soft: "Software", nav_serv: "Serviços", btn_quote: "Orçamento",
