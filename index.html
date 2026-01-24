@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="description" content="Software Diagnóstico Profissional: Xentry 2025, DTS Monaco, Vediamo, JLR Online, Diagbox 9.193. Instalação Nativa.">
-    <meta property="og:title" content="M-Auto | Diagnostic Software Solutions">
+    <meta property="og:title" content="M-Auto | Professional Diagnostic Solutions">
     <meta property="og:image" content="https://m-auto.online/m-auto.png">
     
     <link rel="icon" type="image/png" href="m-auto.png">
@@ -110,7 +110,6 @@
         .titulo-seccao h2 { font-size: 2.2rem; margin-bottom: 0.5rem; font-weight: 800; }
         .titulo-seccao span { color: var(--cor-destaque); }
         
-        /* AVISO DE VERSÕES */
         .version-alert {
             background: rgba(59, 130, 246, 0.1); border: 1px solid var(--cor-destaque);
             color: #94a3b8; padding: 10px 20px; border-radius: 50px; display: inline-block;
@@ -156,7 +155,6 @@
         .tab-pane { display: none; animation: slideUp 0.4s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Mostrar conteúdo */
         #radio-merc:checked ~ .tabs-container .tabs-content #content-merc,
         #radio-bmw:checked ~ .tabs-container .tabs-content #content-bmw,
         #radio-psa:checked ~ .tabs-container .tabs-content #content-psa,
@@ -251,6 +249,7 @@
         .result-box { padding: 20px; border-radius: 10px; margin-top: 20px; font-weight: bold; }
         .result-success { background: rgba(16, 185, 129, 0.2); border: 1px solid var(--cor-verde); color: var(--cor-verde); }
         .result-fail { background: rgba(239, 68, 68, 0.2); border: 1px solid var(--cor-urgente); color: var(--cor-urgente); }
+        .result-warn { background: rgba(251, 191, 36, 0.2); border: 1px solid var(--cor-gold); color: var(--cor-gold); }
 
         /* --- FOOTER --- */
         footer { background: #020617; padding: 4rem 5%; text-align: center; border-top: 1px solid #1e293b; margin-top: auto; }
@@ -304,27 +303,48 @@
     <div id="wizardModal" class="wizard-modal">
         <div class="wizard-content">
             <span class="close-wizard" onclick="closeWizard()">&times;</span>
+            
             <div id="step1" class="step active">
                 <h3>Verificador de Compatibilidade</h3>
-                <p style="color:#cbd5e1; margin-bottom:20px;">Responda a 3 perguntas rápidas para saber se o seu PC suporta o software.</p>
+                <p style="color:#cbd5e1; margin-bottom:20px;">Verifique se o seu PC suporta o software.</p>
                 <button class="btn-cta" onclick="nextStep(2)">Começar ➡️</button>
             </div>
+
             <div id="step2" class="step">
+                <h3>Qual o seu Sistema Operativo?</h3>
+                <div class="wizard-btn-group">
+                    <button class="wizard-btn" onclick="setOS('Win10/11'); nextStep(3)">Windows 10 / 11 (x64) <span>✅</span></button>
+                    <button class="wizard-btn" onclick="setOS('Old'); nextStep(3)">Windows 7 / 8 / Outro <span>❌</span></button>
+                </div>
+            </div>
+
+            <div id="step3" class="step">
+                <h3>Quanto espaço livre em disco?</h3>
+                <div class="wizard-btn-group">
+                    <button class="wizard-btn" onclick="setSpace(50); nextStep(4)">Menos de 100 GB <span>📉</span></button>
+                    <button class="wizard-btn" onclick="setSpace(200); nextStep(4)">100 GB - 250 GB <span>👌</span></button>
+                    <button class="wizard-btn" onclick="setSpace(500); nextStep(4)">Mais de 250 GB <span>🚀</span></button>
+                </div>
+            </div>
+
+            <div id="step4" class="step">
                 <h3>Quanto tem de Memória RAM?</h3>
                 <div class="wizard-btn-group">
-                    <button class="wizard-btn" onclick="setRam(4); nextStep(3)">4 GB <span>🐌</span></button>
-                    <button class="wizard-btn" onclick="setRam(8); nextStep(3)">8 GB <span>👌</span></button>
-                    <button class="wizard-btn" onclick="setRam(16); nextStep(3)">16 GB ou mais <span>🚀</span></button>
+                    <button class="wizard-btn" onclick="setRam(4); nextStep(5)">4 GB <span>🐌</span></button>
+                    <button class="wizard-btn" onclick="setRam(8); nextStep(5)">8 GB <span>👌</span></button>
+                    <button class="wizard-btn" onclick="setRam(16); nextStep(5)">16 GB ou mais <span>🚀</span></button>
                 </div>
             </div>
-            <div id="step3" class="step">
+
+            <div id="step5" class="step">
                 <h3>Qual o tipo de Disco?</h3>
                 <div class="wizard-btn-group">
-                    <button class="wizard-btn" onclick="setDisk('HDD'); nextStep(4)">HDD (Mecânico) <span>🐢</span></button>
-                    <button class="wizard-btn" onclick="setDisk('SSD'); nextStep(4)">SSD / NVMe <span>⚡</span></button>
+                    <button class="wizard-btn" onclick="setDisk('HDD'); nextStep(6)">HDD (Mecânico) <span>🐢</span></button>
+                    <button class="wizard-btn" onclick="setDisk('SSD'); nextStep(6)">SSD / NVMe <span>⚡</span></button>
                 </div>
             </div>
-            <div id="step4" class="step">
+
+            <div id="step6" class="step">
                 <h3 id="resultTitle">Analisando...</h3>
                 <div id="resultBox" class="result-box"></div>
                 <button class="btn-cta" style="margin-top:20px;" onclick="closeWizard()">Fechar</button>
@@ -388,7 +408,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Xentry Cars</span>
-                            <img src="https://images.unsplash.com/photo-1550608523-a5f228dc6677?auto=format&fit=crop&w=800&q=80" alt="Mercedes Cars" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80" alt="Mercedes Cars" class="img-soft">
                             <div class="info-soft">
                                 <h3>Xentry Cars (Ligeiros)</h3>
                                 <p class="desc-soft" data-lang="desc_merc_cars">Diagnóstico completo para ligeiros. Inclui DAS e HHT. V: 01/2025.</p>
@@ -404,7 +424,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Xentry Trucks</span>
-                            <img src="https://images.unsplash.com/photo-1596732433083-20701eb94365?auto=format&fit=crop&w=800&q=80" alt="Mercedes Trucks" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Mercedes Trucks" class="img-soft">
                             <div class="info-soft">
                                 <h3>Xentry Trucks (Pesados)</h3>
                                 <p class="desc-soft" data-lang="desc_merc_trucks">Para Pesados, Autocarros e Motores Industriais. V: 01/2025.</p>
@@ -420,13 +440,13 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Engenharia</span>
-                            <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=800&q=80" alt="DTS Monaco" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="DTS Monaco" class="img-soft">
                             <div class="info-soft">
-                                <h3>DTS Monaco 8.16 / 9</h3>
+                                <h3>DTS & Vediamo</h3>
                                 <p class="desc-soft" data-lang="desc_merc_dts">Software de desenvolvimento avançado. Flash e Coding SCN.</p>
                                 <div class="specs">
-                                    <div class="spec-item">🛠️ DTS 8 / 9</div>
-                                    <div class="spec-item">💾 Projetos Full</div>
+                                    <div class="spec-item">🛠️ DTS 8.16/9.02</div>
+                                    <div class="spec-item">⚡ Vediamo 05</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -435,30 +455,30 @@
                             </div>
                         </div>
                         <div class="card-soft">
-                            <span class="tipo-instalacao">Engenharia</span>
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Vediamo" class="img-soft">
-                            <div class="info-soft">
-                                <h3>Vediamo 05</h3>
-                                <p class="desc-soft" data-lang="desc_merc_vediamo">A ferramenta clássica de engenharia para coding offline.</p>
-                                <div class="specs">
-                                    <div class="spec-item">⚡ Versão 05.01</div>
-                                    <div class="spec-item">📂 CBF/CFF Full</div>
-                                </div>
-                                <div class="preco-row">
-                                    <div class="preco" data-lang="price">Sob Consulta</div>
-                                    <a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-soft">
-                            <span class="tipo-instalacao">Manuais</span>
-                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="WIS EPC" class="img-soft">
+                            <span class="tipo-instalacao">Info & Parts</span>
+                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="WIS EPC" class="img-soft">
                             <div class="info-soft">
                                 <h3>WIS / EPC / Starfinder</h3>
-                                <p class="desc-soft" data-lang="desc_merc_manuals">Esquemas elétricos, manuais de reparação e catálogo de peças.</p>
+                                <p class="desc-soft" data-lang="desc_merc_manuals">Manual de reparação (WIS), Peças (EPC), Preços (PL73), Esquemas (Starfinder), SDMedia.</p>
                                 <div class="specs">
-                                    <div class="spec-item">📚 WIS / ASRA</div>
-                                    <div class="spec-item">🔍 Starfinder</div>
+                                    <div class="spec-item">📚 WIS/ASRA/EPC</div>
+                                    <div class="spec-item">💰 PL73 Price DB</div>
+                                </div>
+                                <div class="preco-row">
+                                    <div class="preco" data-lang="price">Sob Consulta</div>
+                                    <a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-soft">
+                            <span class="tipo-instalacao">Unlock Tools</span>
+                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=800&q=80" alt="MB Tools" class="img-soft">
+                            <div class="info-soft">
+                                <h3>MBTools & Unlockers</h3>
+                                <p class="desc-soft" data-lang="desc_merc_tools">Suite de ferramentas para desbloqueio de funções especiais, cálculo de seedkeys e FDOK.</p>
+                                <div class="specs">
+                                    <div class="spec-item">🔓 FDOK / VeDoc</div>
+                                    <div class="spec-item">🔑 SeedKey Calc</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -471,12 +491,10 @@
                             <img src="https://images.unsplash.com/photo-1621504450168-38f647319936?auto=format&fit=crop&w=1200&q=80" alt="Full Pack" class="img-soft" style="height: 220px;">
                             <div class="info-soft">
                                 <h3>MERCEDES FULL PACK 2025</h3>
-                                <p class="desc-soft" style="color: #fff;" data-lang="desc_merc_full">TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + Tutoriais de Coding.</p>
+                                <p class="desc-soft" style="color: #fff;" data-lang="desc_merc_full">TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriais.</p>
                                 <div class="specs">
                                     <div class="spec-item" style="background:var(--cor-gold); color:#000; font-weight:bold;">🚀 Pack Completo</div>
                                     <div class="spec-item">📀 Bases Dados Full</div>
-                                    <div class="spec-item">🎥 Tutoriais Vídeo</div>
-                                    <div class="spec-item">🔑 Keygens Incl.</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" style="color: var(--cor-gold);">MELHOR PREÇO</div>
@@ -498,9 +516,7 @@
                                 <p class="desc-soft" data-lang="desc_bmw">Diagnóstico (ISTA-D) e Programação (ISTA-P/ESYS). Inclui bases de dados BLP/SDP e tutoriais.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 ISTA: 4.39.20</div>
-                                    <div class="spec-item">🌍 Multi-lang</div>
                                     <div class="spec-item">💻 ICOM / K-DCAN</div>
-                                    <div class="spec-item">⚡ Modo Dev</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -521,10 +537,8 @@
                                 <h3>Diagbox 9.193 (Nativo)</h3>
                                 <p class="desc-soft" data-lang="desc_psa_new">Versão mais recente para veículos até 2024/25. Suporta Peugeot, Citroën, DS e Opel.</p>
                                 <div class="specs">
-                                    <div class="spec-item" style="color: var(--cor-verde);">📅 Versão: 9.193</div>
-                                    <div class="spec-item">🌍 Português</div>
+                                    <div class="spec-item">📅 Versão: 9.193</div>
                                     <div class="spec-item">💻 Lexia / J2534</div>
-                                    <div class="spec-item">🚗 Novos Modelos</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -541,8 +555,6 @@
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão: 7.83</div>
                                     <div class="spec-item">🔧 Coding Offline</div>
-                                    <div class="spec-item">💻 Win 7 / 10</div>
-                                    <div class="spec-item">🚗 Até 2016</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -563,9 +575,7 @@
                                 <h3>Renault Can Clip V240</h3>
                                 <p class="desc-soft" data-lang="desc_renault">Software oficial. Leitura de falhas, codificação, reprogramação e Reprog Database.</p>
                                 <div class="specs">
-                                    <div class="spec-item" style="color: var(--cor-verde);">📅 Versão: 2.40</div>
-                                    <div class="spec-item">🌍 Português</div>
-                                    <div class="spec-item">💻 RTL2002/Alliance</div>
+                                    <div class="spec-item">📅 Versão: 2.40</div>
                                     <div class="spec-item">🔧 + Reprog DB</div>
                                 </div>
                                 <div class="preco-row">
@@ -588,9 +598,7 @@
                                 <p class="desc-soft" data-lang="desc_pathfinder">Para veículos novos (DoIP) Jaguar e Land Rover (após 2017). Diagnóstico oficial.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão: 3.74</div>
-                                    <div class="spec-item">🌍 Multi-lang</div>
                                     <div class="spec-item">💻 DoIP VCI</div>
-                                    <div class="spec-item">🚗 Modelos Novos</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -607,8 +615,22 @@
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão: 1.64</div>
                                     <div class="spec-item">☁️ Acesso Online</div>
-                                    <div class="spec-item">💻 J2534 / Mangoose</div>
-                                    <div class="spec-item">🔧 Calibrações</div>
+                                </div>
+                                <div class="preco-row">
+                                    <div class="preco" data-lang="price">Sob Consulta</div>
+                                    <a href="#contacto" class="btn-detalhe" data-lang="btn_order">Encomendar →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-soft">
+                            <span class="tipo-instalacao">Engineering</span>
+                            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80" alt="JLR Tools" class="img-soft">
+                            <div class="info-soft">
+                                <h3>JLR SeedKey & CCF Tools</h3>
+                                <p class="desc-soft" data-lang="desc_jlr_seed">Gerador de seedkeys e ferramentas para edição de ficheiros CCF (Car Configuration File).</p>
+                                <div class="specs">
+                                    <div class="spec-item">🔑 SeedKey Gen</div>
+                                    <div class="spec-item">📝 CCF Editor</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -630,9 +652,23 @@
                                 <p class="desc-soft" data-lang="desc_toyota">Cobertura total para veículos Asiáticos. Versão mais recente disponível.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão: V18</div>
-                                    <div class="spec-item">🌍 Multi-lang</div>
                                     <div class="spec-item">💻 J2534 PassThru</div>
-                                    <div class="spec-item">🚗 Híbridos Incl.</div>
+                                </div>
+                                <div class="preco-row">
+                                    <div class="preco" data-lang="price">Sob Consulta</div>
+                                    <a href="#contacto" class="btn-detalhe" data-lang="btn_order">Encomendar →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-soft">
+                            <span class="tipo-instalacao">Toyota EPC</span>
+                            <img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=800&q=80" alt="Toyota EPC" class="img-soft">
+                            <div class="info-soft">
+                                <h3>Toyota EPC (Parts)</h3>
+                                <p class="desc-soft" data-lang="desc_toyota_epc">Catálogo eletrónico de peças oficial. Identificação por VIN e esquemas de montagem.</p>
+                                <div class="specs">
+                                    <div class="spec-item">🔍 Identificação VIN</div>
+                                    <div class="spec-item">🛠️ Esquemas Peças</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -654,8 +690,6 @@
                                 <p class="desc-soft" data-lang="desc_fiat">Diagnóstico para Alfa, Fiat, Lancia e Jeep. Suporte para SGW Bypass.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão 2024</div>
-                                    <div class="spec-item">🌍 Português</div>
-                                    <div class="spec-item">💻 ELM / OBDLink</div>
                                     <div class="spec-item">🔓 Suporte SGW</div>
                                 </div>
                                 <div class="preco-row">
@@ -678,8 +712,6 @@
                                 <p class="desc-soft" data-lang="desc_ford">Acesso aos servidores Ford para programação de módulos novos.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Online System</div>
-                                    <div class="spec-item">🌍 Multi-lang</div>
-                                    <div class="spec-item">💻 VCM II / III</div>
                                     <div class="spec-item">🔧 Pats Login</div>
                                 </div>
                                 <div class="preco-row">
@@ -702,9 +734,7 @@
                                 <p class="desc-soft" data-lang="desc_gm">Para Chevrolet e Opel (antigos). Sistema Global de Diagnóstico.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão 2024</div>
-                                    <div class="spec-item">🌍 Multi-lang</div>
                                     <div class="spec-item">💻 MDI / J2534</div>
-                                    <div class="spec-item">🚗 Tech2Win Incl.</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco" data-lang="price">Sob Consulta</div>
@@ -739,32 +769,54 @@
 
     <script>
         // --- WIZARD LOGIC ---
-        let userRam = 0; let userDisk = '';
+        let userRam = 0; let userDisk = ''; let userOS = ''; let userSpace = 0;
+
         function openWizard() { document.getElementById('wizardModal').style.display = 'flex'; }
         function closeWizard() { document.getElementById('wizardModal').style.display = 'none'; }
+        
         function nextStep(step) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + step).classList.add('active');
-            if(step === 4) calculateResult();
+            if(step === 6) calculateResult();
         }
+        
+        function setOS(val) { userOS = val; }
+        function setSpace(val) { userSpace = val; }
         function setRam(val) { userRam = val; }
         function setDisk(val) { userDisk = val; }
+
         function calculateResult() {
             const resBox = document.getElementById('resultBox');
             const resTitle = document.getElementById('resultTitle');
-            if (userRam >= 8 && userDisk === 'SSD') {
-                resTitle.textContent = "✅ Hardware Aprovado!";
-                resBox.className = "result-box result-success";
-                resBox.innerHTML = `<p>O seu PC está pronto para instalar Xentry 2025, ISTA e Diagbox.</p><p style="margin-top:10px; font-size:0.9rem;">Performance: Excelente 🚀</p>`;
+            
+            let message = "";
+            let status = "success";
+
+            // Lógica combinada
+            if (userOS === 'Old') {
+                status = "fail";
+                resTitle.textContent = "❌ Sistema Operativo";
+                message = "<p>O software atual requer Windows 10 ou 11 (64 bits).</p>";
             } else if (userDisk === 'HDD') {
-                resTitle.textContent = "⚠️ Atenção ao Disco";
-                resBox.className = "result-box result-fail";
-                resBox.innerHTML = `<p>Discos mecânicos (HDD) são muito lentos para software moderno (Xentry/ISTA).</p><p>Recomendamos trocar para um SSD antes de instalar.</p>`;
+                status = "fail";
+                resTitle.textContent = "⚠️ Disco Lento";
+                message = "<p>Discos HDD tornam o diagnóstico muito lento. Recomendamos SSD.</p>";
+            } else if (userSpace < 100) {
+                status = "warn";
+                resTitle.textContent = "⚠️ Pouco Espaço";
+                message = "<p>Espaço insuficiente para Full Packs (Mercedes/BMW). Instalação individual possível.</p>";
             } else if (userRam < 8) {
-                resTitle.textContent = "⚠️ Pouca Memória RAM";
-                resBox.className = "result-box result-fail";
-                resBox.innerHTML = `<p>4GB é pouco para sistemas modernos.</p><p>Vai funcionar lento. Recomendamos upgrade para 8GB.</p>`;
+                status = "warn";
+                resTitle.textContent = "⚠️ RAM Limitada";
+                message = "<p>4GB é pouco. O software vai funcionar, mas pode ser lento.</p>";
+            } else {
+                status = "success";
+                resTitle.textContent = "✅ Hardware Aprovado!";
+                message = "<p>O seu PC está pronto para instalar qualquer Full Pack (Xentry, ISTA, etc).</p>";
             }
+
+            resBox.className = "result-box result-" + status;
+            resBox.innerHTML = message;
         }
 
         // --- TRANSLATIONS ---
@@ -782,8 +834,9 @@
                 desc_merc_trucks: "Para Pesados, Autocarros e Motores Industriais. V: 01/2025.",
                 desc_merc_dts: "Software de desenvolvimento avançado. Flash e Coding SCN.",
                 desc_merc_vediamo: "A ferramenta clássica de engenharia para coding offline.",
-                desc_merc_manuals: "Esquemas elétricos, manuais de reparação e catálogo de peças.",
-                desc_merc_full: "TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + Tutoriais de Coding.",
+                desc_merc_manuals: "Esquemas (WIS/Starfinder), Peças (EPC), Preços (PL73) e SDMedia.",
+                desc_merc_tools: "Suite de ferramentas para desbloqueio, seedkeys e FDOK.",
+                desc_merc_full: "TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriais.",
 
                 desc_bmw: "Diagnóstico (ISTA-D) e Programação (ISTA-P/ESYS). Inclui bases BLP/SDP e tutoriais.",
                 desc_psa_new: "Versão mais recente para veículos até 2024/25. Suporta Peugeot, Citroën, DS e Opel.",
@@ -791,7 +844,9 @@
                 desc_renault: "Software oficial. Leitura de falhas, codificação, reprogramação e Reprog Database.",
                 desc_pathfinder: "Para veículos novos (DoIP) Jaguar e Land Rover (após 2017). Diagnóstico oficial.",
                 desc_sdd: "Symptom Driven Diagnostics para modelos até 2017. Acesso Online completo.",
+                desc_jlr_seed: "Gerador de seedkeys e ferramentas para edição de ficheiros CCF (Car Configuration File).",
                 desc_toyota: "Cobertura total para veículos Asiáticos. Versão mais recente disponível.",
+                desc_toyota_epc: "Catálogo eletrónico de peças oficial. Identificação por VIN e esquemas de montagem.",
                 desc_fiat: "Diagnóstico para Alfa, Fiat, Lancia e Jeep. Suporte para SGW Bypass.",
                 desc_ford: "Acesso aos servidores Ford para programação de módulos novos.",
                 desc_gm: "Para Chevrolet e Opel (antigos). Sistema Global de Diagnóstico."
@@ -809,8 +864,9 @@
                 desc_merc_trucks: "For Trucks, Buses, and Industrial Engines. V: 01/2025.",
                 desc_merc_dts: "Advanced development software. Flash and SCN Coding.",
                 desc_merc_vediamo: "The classic engineering tool for offline coding.",
-                desc_merc_manuals: "Wiring diagrams, repair manuals, and parts catalog.",
-                desc_merc_full: "ALL INCLUDED: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + Coding Tutorials.",
+                desc_merc_manuals: "Wiring (WIS/Starfinder), Parts (EPC), Prices (PL73) and SDMedia.",
+                desc_merc_tools: "Tool suite for unlocking, seedkey calculation and FDOK.",
+                desc_merc_full: "ALL INCLUDED: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutorials.",
 
                 desc_bmw: "Diagnostics (ISTA-D) and Programming (ISTA-P/ESYS). Includes BLP/SDP databases and tutorials.",
                 desc_psa_new: "Latest version for vehicles up to 2024/25. Supports Peugeot, Citroën, DS, and Opel.",
@@ -818,7 +874,9 @@
                 desc_renault: "Official software. Fault reading, coding, reprogramming and Reprog Database.",
                 desc_pathfinder: "For new (DoIP) Jaguar and Land Rover vehicles (post-2017). Official diagnostics.",
                 desc_sdd: "Symptom Driven Diagnostics for models up to 2017. Full Online Access.",
+                desc_jlr_seed: "Seedkey generator and CCF (Car Configuration File) editing tools.",
                 desc_toyota: "Full coverage for Asian vehicles. Latest version available.",
+                desc_toyota_epc: "Official Electronic Parts Catalog. VIN identification and assembly diagrams.",
                 desc_fiat: "Diagnostics for Alfa, Fiat, Lancia, and Jeep. SGW Bypass support.",
                 desc_ford: "Access to Ford servers for new module programming.",
                 desc_gm: "For Chevrolet and Opel (legacy). Global Diagnostic System."
@@ -836,8 +894,9 @@
                 desc_merc_trucks: "Pour PL, Bus et Moteurs Industriels. V: 01/2025.",
                 desc_merc_dts: "Logiciel de développement avancé. Flash et Codage SCN.",
                 desc_merc_vediamo: "L'outil d'ingénierie classique pour le codage hors ligne.",
-                desc_merc_manuals: "Schémas électriques, manuels de réparation et catalogue de pièces.",
-                desc_merc_full: "TOUT INCLUS: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + Tutoriels Codage.",
+                desc_merc_manuals: "Schémas (WIS/Starfinder), Pièces (EPC), Prix (PL73) et SDMedia.",
+                desc_merc_tools: "Suite d'outils pour déverrouillage, calcul seedkey et FDOK.",
+                desc_merc_full: "TOUT INCLUS: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriels.",
 
                 desc_bmw: "Diagnostic (ISTA-D) et Programmation (ISTA-P/ESYS). Bases BLP/SDP et tutoriels inclus.",
                 desc_psa_new: "Dernière version pour véhicules jusqu'à 2024/25. Supporte Peugeot, Citroën, DS et Opel.",
@@ -845,7 +904,9 @@
                 desc_renault: "Logiciel officiel. Lecture défauts, codage, reprogrammation et Base Reprog.",
                 desc_pathfinder: "Pour nouveaux véhicules (DoIP) Jaguar et Land Rover (après 2017).",
                 desc_sdd: "Symptom Driven Diagnostics pour modèles jusqu'à 2017. Accès en ligne complet.",
+                desc_jlr_seed: "Générateur de seedkeys et outils d'édition CCF.",
                 desc_toyota: "Couverture totale pour véhicules asiatiques. Dernière version disponible.",
+                desc_toyota_epc: "Catalogue électronique de pièces officiel. Identification VIN et schémas.",
                 desc_fiat: "Diagnostic pour Alfa, Fiat, Lancia et Jeep. Support SGW Bypass.",
                 desc_ford: "Accès aux serveurs Ford pour programmation de nouveaux modules.",
                 desc_gm: "Pour Chevrolet et Opel (anciens). Système de Diagnostic Global."
@@ -863,8 +924,9 @@
                 desc_merc_trucks: "Para Camiones, Autobuses y Motores Industriales. V: 01/2025.",
                 desc_merc_dts: "Software de desarrollo avanzado. Flash y SCN Coding.",
                 desc_merc_vediamo: "La herramienta clásica de ingeniería para coding offline.",
-                desc_merc_manuals: "Esquemas eléctricos, manuales de reparación y catálogo de piezas.",
-                desc_merc_full: "TODO INCLUIDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + Tutoriales Coding.",
+                desc_merc_manuals: "Esquemas (WIS/Starfinder), Piezas (EPC), Precios (PL73) y SDMedia.",
+                desc_merc_tools: "Suite de herramientas para desbloqueo, cálculo seedkey y FDOK.",
+                desc_merc_full: "TODO INCLUIDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriales.",
 
                 desc_bmw: "Diagnóstico (ISTA-D) y Programación (ISTA-P/ESYS). Incluye bases BLP/SDP.",
                 desc_psa_new: "Última versión para vehículos hasta 2024/25. Soporta Peugeot, Citroën, DS y Opel.",
@@ -872,7 +934,9 @@
                 desc_renault: "Software oficial. Lectura fallos, codificación, reprogramación y Base Reprog.",
                 desc_pathfinder: "Para vehículos nuevos (DoIP) Jaguar y Land Rover (post-2017).",
                 desc_sdd: "Symptom Driven Diagnostics para modelos hasta 2017. Acceso Online completo.",
+                desc_jlr_seed: "Generador de seedkeys y herramientas de edición CCF.",
                 desc_toyota: "Cobertura total para vehículos asiáticos. Última versión disponible.",
+                desc_toyota_epc: "Catálogo electrónico de piezas oficial. Identificación VIN y esquemas.",
                 desc_fiat: "Diagnóstico para Alfa, Fiat, Lancia y Jeep. Soporte SGW Bypass.",
                 desc_ford: "Acceso a servidores Ford para programación de nuevos módulos.",
                 desc_gm: "Para Chevrolet y Opel (antiguos). Sistema de Diagnóstico Global."
