@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="description" content="Software Diagnóstico Automóvel, Hardware J2534, VCI Mercedes/BMW, Reparação de Computadores e Instalação Remota.">
-    <meta property="og:title" content="M-Auto | Diagnostic Solutions & Hardware">
+    <meta name="description" content="Software Diagnóstico Profissional: Xentry 2025, DTS Monaco, Vediamo, JLR Online, Diagbox 9.193. Instalação Nativa.">
+    <meta property="og:title" content="M-Auto | Professional Diagnostic Solutions">
     <meta property="og:image" content="https://m-auto.online/m-auto.png">
     
     <link rel="icon" type="image/png" href="m-auto.png">
@@ -44,38 +44,54 @@
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- CABEÇALHO --- */
+        /* --- CABEÇALHO (ATUALIZADO) --- */
         header {
             background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
-            padding: 0.5rem 5%;
+            padding: 0.5rem 2%;
             position: fixed; width: 100%; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 2px solid var(--cor-destaque);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .logo-img { height: 50px; width: auto; display: block; }
         
-        .lang-switch { display: flex; gap: 15px; align-items: center; }
+        .header-left, .header-right { display: flex; align-items: center; gap: 15px; }
+
+        .logo-img { height: 45px; width: auto; display: block; }
+        
+        /* Bandeiras */
+        .lang-switch { display: flex; gap: 8px; align-items: center; margin-left: 10px; }
         .lang-btn { 
             cursor: pointer; transition: transform 0.2s; border: none; background: none; padding: 0;
             opacity: 0.6; filter: grayscale(80%);
         }
         .lang-btn img {
-            width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
+            width: 24px; height: 24px; border-radius: 50%; object-fit: cover;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2); border: 1px solid #ccc;
         }
         .lang-btn:hover, .lang-btn.active { transform: scale(1.15); opacity: 1; filter: grayscale(0%); }
 
-        nav ul { display: flex; gap: 2rem; }
-        nav a { color: #0f172a; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; } 
+        nav ul { display: flex; gap: 1.5rem; }
+        nav a { color: #0f172a; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; } 
         nav a:hover { color: var(--cor-destaque); }
         
+        /* Botões do Header */
         .btn-cta {
             background: linear-gradient(135deg, var(--cor-destaque), #1d4ed8); 
-            color: #fff; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            color: #fff; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4); white-space: nowrap;
         }
+        
+        /* Botão Suporte no Header */
+        .btn-support-header {
+            background-color: var(--cor-urgente);
+            color: #fff; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+            display: flex; align-items: center; gap: 5px; white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); animation: pulse 2s infinite;
+        }
+        .btn-support-header:hover { transform: translateY(-2px); background-color: #dc2626; }
+        
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 
         /* --- HERO --- */
         .hero {
@@ -142,8 +158,7 @@
         .tab-label:hover { background: rgba(255,255,255,0.05); color: #fff; }
         .tab-label i { margin-right: 10px; font-style: normal; }
 
-        /* LÓGICA DE ABAS (CSS HACK) - ADICIONADO HARDWARE */
-        /* Software */
+        /* Aba Ativa */
         #radio-merc:checked ~ .tabs-container .tabs-nav label[for="radio-merc"],
         #radio-bmw:checked ~ .tabs-container .tabs-nav label[for="radio-bmw"],
         #radio-psa:checked ~ .tabs-container .tabs-nav label[for="radio-psa"],
@@ -152,12 +167,7 @@
         #radio-toyota:checked ~ .tabs-container .tabs-nav label[for="radio-toyota"],
         #radio-fiat:checked ~ .tabs-container .tabs-nav label[for="radio-fiat"],
         #radio-ford:checked ~ .tabs-container .tabs-nav label[for="radio-ford"],
-        #radio-gm:checked ~ .tabs-container .tabs-nav label[for="radio-gm"],
-        /* Hardware */
-        #radio-univ:checked ~ .tabs-container .tabs-nav label[for="radio-univ"],
-        #radio-brand:checked ~ .tabs-container .tabs-nav label[for="radio-brand"],
-        #radio-pc:checked ~ .tabs-container .tabs-nav label[for="radio-pc"]
-        {
+        #radio-gm:checked ~ .tabs-container .tabs-nav label[for="radio-gm"] {
             background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
             border-left: 3px solid var(--cor-destaque); color: white; padding-left: 25px;
         }
@@ -166,7 +176,6 @@
         .tab-pane { display: none; animation: slideUp 0.4s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Mostrar Software */
         #radio-merc:checked ~ .tabs-container .tabs-content #content-merc,
         #radio-bmw:checked ~ .tabs-container .tabs-content #content-bmw,
         #radio-psa:checked ~ .tabs-container .tabs-content #content-psa,
@@ -175,12 +184,19 @@
         #radio-toyota:checked ~ .tabs-container .tabs-content #content-toyota,
         #radio-fiat:checked ~ .tabs-container .tabs-content #content-fiat,
         #radio-ford:checked ~ .tabs-container .tabs-content #content-ford,
-        #radio-gm:checked ~ .tabs-container .tabs-content #content-gm,
-        /* Mostrar Hardware */
+        #radio-gm:checked ~ .tabs-container .tabs-content #content-gm { display: block; }
+
+        /* Hardware Tabs Logic */
+        #radio-univ:checked ~ .tabs-container .tabs-nav label[for="radio-univ"],
+        #radio-brand:checked ~ .tabs-container .tabs-nav label[for="radio-brand"],
+        #radio-pc:checked ~ .tabs-container .tabs-nav label[for="radio-pc"] {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+            border-left: 3px solid var(--cor-destaque); color: white; padding-left: 25px;
+        }
         #radio-univ:checked ~ .tabs-container .tabs-content #content-univ,
         #radio-brand:checked ~ .tabs-container .tabs-content #content-brand,
-        #radio-pc:checked ~ .tabs-container .tabs-content #content-pc
-        { display: block; }
+        #radio-pc:checked ~ .tabs-container .tabs-content #content-pc { display: block; }
+
 
         .brand-title-content { 
             font-size: 2rem; color: #fff; margin-bottom: 2rem; border-bottom: 2px solid var(--cor-destaque); 
@@ -230,17 +246,6 @@
         .preco { font-size: 1.3rem; font-weight: 800; color: #fff; }
         .btn-detalhe { color: var(--cor-destaque); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; cursor: pointer; }
         .btn-detalhe:hover { color: #fff; text-shadow: 0 0 10px var(--cor-destaque); }
-
-        /* --- SERVIÇOS TÉCNICOS --- */
-        .grid-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
-        .card-serv { 
-            padding: 2rem; background: var(--cor-glass); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
-            text-align: center; transition: 0.3s;
-        }
-        .card-serv:hover { transform: translateY(-5px); border-color: var(--cor-verde); }
-        .icon-serv { font-size: 3rem; margin-bottom: 1rem; }
-        .card-serv h3 { margin-bottom: 10px; color: #fff; }
-        .card-serv p { color: #94a3b8; font-size: 0.9rem; }
 
         /* --- WIZARD E CHATBOT --- */
         .chatbot-trigger {
@@ -304,6 +309,18 @@
             padding: 5px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-top: 5px;
         }
 
+        /* SERVIÇOS */
+        .grid-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+        .card-serv { 
+            padding: 2rem; background: var(--cor-glass); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+            text-align: center; transition: 0.3s;
+        }
+        .card-serv:hover { transform: translateY(-5px); border-color: var(--cor-verde); }
+        .icon-serv { font-size: 3rem; margin-bottom: 1rem; }
+        .card-serv h3 { margin-bottom: 10px; color: #fff; }
+        .card-serv p { color: #94a3b8; font-size: 0.9rem; }
+
+        /* Botão WhatsApp Flutuante */
         .whatsapp-float {
             position: fixed; bottom: 30px; left: 30px;
             background: #25D366; color: white;
@@ -315,6 +332,7 @@
         }
         .whatsapp-float:hover { transform: scale(1.1); }
 
+        /* FOOTER */
         footer { background: #020617; padding: 4rem 5%; text-align: center; border-top: 1px solid #1e293b; margin-top: auto; }
         .footer-logo { 
             max-width: 250px; margin-bottom: 25px; background-color: white; 
@@ -325,14 +343,27 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             nav { display: none; }
-            .lang-switch { margin-right: 15px; }
+            .header-left { gap: 10px; }
+            .header-right { gap: 10px; }
+            
+            /* Ajuste Header Mobile */
+            header { padding: 0.5rem; }
+            .lang-switch { margin-left: 5px; gap: 5px; }
+            .lang-btn img { width: 20px; height: 20px; }
+            .logo-img { height: 35px; }
+            
+            /* Botão Suporte Mobile */
+            .btn-support-header span { display: none; } /* Esconde texto */
+            .btn-support-header::before { content: '📥'; margin-right: 0; }
+            
             .box-download { width: 100%; padding: 1.5rem; }
             .btn-download { width: 100%; justify-content: center; font-size: 1rem; }
-            .logo-img { height: 40px; }
+            
             .tabs-container { flex-direction: column; background: transparent; border: none; padding: 0; }
             .tabs-nav { border-right: none; padding-right: 0; padding-bottom: 1rem; flex-direction: row; overflow-x: auto; white-space: nowrap; border-bottom: 1px solid #334155; }
             .tab-label { padding: 10px 15px; font-size: 0.9rem; min-width: 140px; justify-content: center; }
             .tabs-content { padding-left: 0; padding-top: 1rem; }
+            
             .chatbot-trigger { width: 50px; height: 50px; font-size: 24px; bottom: 20px; right: 20px; }
             .whatsapp-float { bottom: 20px; left: 20px; width: 50px; height: 50px; font-size: 28px; }
             .wizard-content { width: 95%; padding: 1.5rem; }
@@ -342,15 +373,17 @@
 <body>
 
     <header>
-        <a href="#inicio">
-            <img src="m-auto.png" alt="M-Auto" class="logo-img">
-        </a>
-        
-        <div class="lang-switch">
-            <button onclick="changeLang('pt')" class="lang-btn active" title="Português"><img src="https://flagcdn.com/w40/pt.png" alt="PT"></button>
-            <button onclick="changeLang('en')" class="lang-btn" title="English"><img src="https://flagcdn.com/w40/gb.png" alt="EN"></button>
-            <button onclick="changeLang('fr')" class="lang-btn" title="Français"><img src="https://flagcdn.com/w40/fr.png" alt="FR"></button>
-            <button onclick="changeLang('es')" class="lang-btn" title="Español"><img src="https://flagcdn.com/w40/es.png" alt="ES"></button>
+        <div class="header-left">
+            <a href="#inicio">
+                <img src="m-auto.png" alt="M-Auto" class="logo-img">
+            </a>
+            
+            <div class="lang-switch">
+                <button onclick="changeLang('pt')" class="lang-btn active" title="Português"><img src="https://flagcdn.com/w40/pt.png" alt="PT"></button>
+                <button onclick="changeLang('en')" class="lang-btn" title="English"><img src="https://flagcdn.com/w40/gb.png" alt="EN"></button>
+                <button onclick="changeLang('fr')" class="lang-btn" title="Français"><img src="https://flagcdn.com/w40/fr.png" alt="FR"></button>
+                <button onclick="changeLang('es')" class="lang-btn" title="Español"><img src="https://flagcdn.com/w40/es.png" alt="ES"></button>
+            </div>
         </div>
 
         <nav>
@@ -361,10 +394,17 @@
                 <li><a href="#servicos" data-lang="nav_serv">Serviços</a></li>
             </ul>
         </nav>
-        <a href="#contacto" class="btn-cta" data-lang="btn_quote">Orçamento</a>
+
+        <div class="header-right">
+            <a href="https://github.com/mclaudiopt/m-auto.online/releases/download/Client/Mauto.exe" class="btn-support-header" data-lang="btn_support">
+                <span>📥 Suporte</span>
+            </a>
+            <a href="#contacto" class="btn-cta" data-lang="btn_quote">Orçamento</a>
+        </div>
     </header>
 
     <div class="chatbot-trigger" onclick="openWizard()">🤖</div>
+    
     <a href="https://wa.me/351910000000?text=Olá,%20tenho%20interesse." class="whatsapp-float" target="_blank" title="WhatsApp">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width: 35px; height: 35px;">
     </a>
@@ -823,7 +863,7 @@
         // --- TRANSLATIONS ---
         const translations = {
             pt: {
-                nav_home: "Início", nav_soft: "Software", nav_hard: "Hardware", nav_serv: "Serviços", btn_quote: "Orçamento",
+                nav_home: "Início", nav_soft: "Software", nav_hard: "Hardware", nav_serv: "Serviços", btn_quote: "Orçamento", btn_support: "📥 Suporte",
                 badge_new: "✨ Versões 2025", badge_native: "🚀 Instalação Nativa", badge_coding: "💻 Coding & Bases Dados",
                 hero_title: "Soluções de Diagnóstico <br>Profissional",
                 hero_desc: "Xentry 01/2025, DTS Monaco, Vediamo, JLR Online, Diagbox e mais. Bases de dados completas e tutoriais de coding incluídos.",
@@ -832,7 +872,6 @@
                 cat_hard_title: "Equipamento", cat_hard_subtitle: "Hardware de diagnóstico e PCs.",
                 price: "Sob Consulta", btn_order: "Encomendar →", footer_tag: "Especialistas em Software Automóvel",
                 
-                // Hardware Descs
                 desc_openport: "Ideal para Xentry Passthru, Techstream e tuning.",
                 desc_scanmatik: "O melhor J2534 do mercado. Alta velocidade e estabilidade.",
                 desc_c4: "Hardware oficial para Mercedes Ligeiros e Pesados.",
@@ -840,7 +879,6 @@
                 desc_tough: "Portáteis blindados recondicionados prontos para oficina.",
                 desc_lenovo: "Portáteis profissionais i5/i7 com SSD rápido.",
 
-                // Services Descs
                 serv_title: "Serviços", serv_subtitle: "Manutenção técnica especializada.",
                 serv_format: "Formatação", desc_format: "Instalação limpa de Windows 10/11.",
                 serv_virus: "Vírus", desc_virus: "Limpeza de malware e spyware.",
@@ -848,7 +886,6 @@
                 serv_disk: "Discos SSD", desc_disk: "Upgrade para SSD rápido.",
                 serv_ram: "Upgrade RAM", desc_ram: "Aumento de memória.",
 
-                // Software Descs (Existing)
                 desc_merc_cars: "Diagnóstico completo para ligeiros. Inclui DAS e HHT. V: 01/2025.",
                 desc_merc_trucks: "Para Pesados, Autocarros e Motores Industriais. V: 01/2025.",
                 desc_merc_dts: "Software de desenvolvimento avançado. Flash e Coding SCN.",
@@ -870,7 +907,7 @@
                 desc_gm: "Para Chevrolet e Opel (antigos). Sistema Global de Diagnóstico."
             },
             en: {
-                nav_home: "Home", nav_soft: "Software", nav_hard: "Hardware", nav_serv: "Services", btn_quote: "Get Quote",
+                nav_home: "Home", nav_soft: "Software", nav_hard: "Hardware", nav_serv: "Services", btn_quote: "Get Quote", btn_support: "📥 Support",
                 badge_new: "✨ 2025 Versions", badge_native: "🚀 Native Install", badge_coding: "💻 Coding & Databases",
                 hero_title: "Professional Diagnostic <br>Solutions",
                 hero_desc: "Xentry 01/2025, DTS Monaco, Vediamo, JLR Online, Diagbox & more. Complete databases and coding tutorials included.",
@@ -914,7 +951,7 @@
                 desc_gm: "For Chevrolet and Opel (legacy). Global Diagnostic System."
             },
             fr: {
-                nav_home: "Accueil", nav_soft: "Logiciels", nav_hard: "Matériel", nav_serv: "Services", btn_quote: "Devis",
+                nav_home: "Accueil", nav_soft: "Logiciels", nav_hard: "Matériel", nav_serv: "Services", btn_quote: "Devis", btn_support: "📥 Soutien",
                 badge_new: "✨ Versions 2025", badge_native: "🚀 Installation Native", badge_coding: "💻 Codage et Bases",
                 hero_title: "Solutions de Diagnostic <br>Professionnel",
                 hero_desc: "Xentry 01/2025, DTS Monaco, Vediamo, JLR Online, Diagbox et plus. Bases de données complètes et tutoriels inclus.",
@@ -944,6 +981,7 @@
                 desc_merc_manuals: "Schémas (WIS/Starfinder), Pièces (EPC), Prix (PL73) et SDMedia.",
                 desc_merc_tools: "Suite d'outils pour déverrouillage, calcul seedkey et FDOK.",
                 desc_merc_full: "TOUT INCLUS: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriels.",
+
                 desc_bmw: "Diagnostic (ISTA-D) et Programmation (ISTA-P/ESYS). Bases BLP/SDP et tutoriels inclus.",
                 desc_psa_new: "Dernière version pour véhicules jusqu'à 2024/25. Supporte Peugeot, Citroën, DS et Opel.",
                 desc_psa_old: "Version classique stable pour codage hors ligne sur anciens modèles.",
@@ -958,7 +996,7 @@
                 desc_gm: "Pour Chevrolet et Opel (anciens). Système de Diagnostic Global."
             },
             es: {
-                nav_home: "Inicio", nav_soft: "Software", nav_hard: "Hardware", nav_serv: "Servicios", btn_quote: "Presupuesto",
+                nav_home: "Inicio", nav_soft: "Software", nav_hard: "Hardware", nav_serv: "Servicios", btn_quote: "Presupuesto", btn_support: "📥 Soporte",
                 badge_new: "✨ Versiones 2025", badge_native: "🚀 Instalación Nativa", badge_coding: "💻 Coding y Datos",
                 hero_title: "Soluciones de Diagnóstico <br>Profesional",
                 hero_desc: "Xentry 01/2025, DTS Monaco, Vediamo, JLR Online, Diagbox y más. Bases de datos completas y tutoriales incluidos.",
@@ -988,6 +1026,7 @@
                 desc_merc_manuals: "Esquemas (WIS/Starfinder), Piezas (EPC), Precios (PL73) y SDMedia.",
                 desc_merc_tools: "Suite de herramientas para desbloqueo, cálculo seedkey y FDOK.",
                 desc_merc_full: "TODO INCLUIDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriales.",
+
                 desc_bmw: "Diagnóstico (ISTA-D) y Programación (ISTA-P/ESYS). Incluye bases BLP/SDP.",
                 desc_psa_new: "Última versión para vehículos hasta 2024/25. Soporta Peugeot, Citroën, DS y Opel.",
                 desc_psa_old: "Versión clásica estable para codificación offline en modelos antiguos.",
