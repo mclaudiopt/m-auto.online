@@ -6,25 +6,21 @@
     <link rel="icon" type="image/png" href="m-auto.png">
     <title>M-Auto | Software de Diagnóstico Profissional</title>
     <style>
-        /* --- CONFIGURAÇÕES GERAIS --- */
+        /* --- ESTILOS GERAIS --- */
         :root {
-            --cor-fundo: #0b0f19;       /* Preto azulado profundo */
-            --cor-card: #151e2e;        /* Cinzento tech */
-            --cor-texto: #e2e8f0;       
-            --cor-destaque: #3b82f6;    /* Azul elétrico */
-            --cor-destaque-sec: #10b981; /* Verde */
-            --cor-urgente: #ef4444;     /* Vermelho para o suporte */
+            --cor-fundo: #0b0f19;
+            --cor-card: #151e2e;
+            --cor-texto: #e2e8f0;
+            --cor-destaque: #3b82f6;
+            --cor-urgente: #ef4444;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--cor-fundo); color: var(--cor-texto); line-height: 1.6; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
-
-        /* --- CABEÇALHO --- */
+        
+        /* CABEÇALHO BRANCO */
         header {
-            background-color: #ffffff; /* Fundo branco puro para o logo se ver bem */
+            background-color: #ffffff;
             padding: 0.5rem 5%;
             position: fixed;
             width: 100%;
@@ -38,110 +34,97 @@
         }
 
         /* LOGO DO TOPO */
-        .logo-container img {
-            max-height: 60px; /* Garante que não fica gigante */
+        .logo-img {
+            height: 55px; /* Altura ajustada */
             width: auto;
             display: block;
         }
 
-        nav ul { display: flex; gap: 2rem; }
-        nav a { color: #0b0f19; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; } 
+        nav ul { display: flex; gap: 2rem; list-style: none; }
+        nav a { color: #0b0f19; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
         nav a:hover { color: var(--cor-destaque); }
 
         .btn-cta {
-            background: linear-gradient(135deg, var(--cor-destaque), #2563eb);
-            color: #fff;
-            padding: 0.5rem 1.2rem;
-            border-radius: 6px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            background: #2563eb; color: #fff; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600;
         }
-        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5); }
 
-        /* --- HERO --- */
+        /* HERO */
         .hero {
-            min-height: 95vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(rgba(11, 15, 25, 0.9), var(--cor-fundo)), 
-                        url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&q=80');
+            min-height: 90vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            padding: 120px 20px 40px;
+            /* Imagem de fundo */
+            background: linear-gradient(rgba(11, 15, 25, 0.9), var(--cor-fundo)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            padding: 140px 20px 40px; /* Mais espaço no topo por causa do menu */
         }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; color: #fff; }
+        .hero p { font-size: 1.2rem; color: #94a3b8; margin-bottom: 2rem; }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: -webkit-linear-gradient(#fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .hero p { font-size: 1.3rem; color: #94a3b8; max-width: 700px; margin: 0 auto 2.5rem; }
-
-        .badges { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
-        .badge { background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; border: 1px solid #334155; }
-
+        /* BOTÃO DOWNLOAD */
         .box-download {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #334155;
-            margin-top: 2rem;
-            display: inline-block;
+            background: rgba(255, 255, 255, 0.05); padding: 2rem;
+            border-radius: 15px; border: 1px solid #334155; margin-top: 1rem;
         }
         .btn-download {
-            background-color: var(--cor-urgente);
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 0 auto;
-            width: fit-content;
-            transition: 0.3s;
-        }
-        .btn-download:hover { transform: scale(1.05); background-color: #dc2626; }
-
-        /* --- GRID PRODUTOS --- */
-        .seccao { padding: 5rem 5%; }
-        .titulo-seccao { text-align: center; margin-bottom: 3rem; }
-        .titulo-seccao h2 { font-size: 2rem; margin-bottom: 0.5rem; color: #fff; }
-        .titulo-seccao span { color: var(--cor-destaque); }
-
-        .grid-soft {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            background-color: var(--cor-urgente); color: white; padding: 15px 30px;
+            font-size: 1.2rem; border-radius: 50px; font-weight: bold; display: inline-block;
         }
 
-        .card-soft {
-            background-color: var(--cor-card);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #1e293b;
-            transition: 0.3s;
-            position: relative;
-        }
-        .card-soft:hover { transform: translateY(-5px); border-color: var(--cor-destaque); }
-
-        .tipo-instalacao {
-            position: absolute; top: 15px; right: 15px;
-            background: rgba(0,0,0,0.8); color: var(--cor-destaque-sec);
-            padding: 4px 10px; border-radius: 4px;
-            font-size: 0.75rem; font-weight: bold; border: 1px solid var(--cor-destaque-sec);
+        /* RODAPÉ */
+        footer { background: #020617; padding: 4rem 5%; text-align: center; border-top: 1px solid #1e293b; }
+        
+        /* LOGO NO RODAPÉ COM FUNDO BRANCO */
+        .footer-logo { 
+            max-width: 250px; 
+            margin-bottom: 20px;
+            background-color: white; /* Fundo branco para se ver as letras */
+            padding: 10px 20px;
+            border-radius: 8px;
         }
 
-        .img-soft { width: 100%; height: 180px; object-fit: cover; opacity: 0.8; }
-        .info-soft { padding: 1.5rem; }
-        .info-soft h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: #fff; }
-        .desc-soft { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; min-height: 40px;}
+        /* MOBILE */
+        @media (max-width: 768px) { 
+            nav { display: none; } 
+            .hero h1 { font-size: 2rem; }
+            .logo-img { height: 40px; }
+        }
+    </style>
+</head>
+<body>
 
-        .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; font-size: 0.85rem; color: #cbd5e1; }
-        .spec-item { background: rgba(25
+    <header>
+        <a href="#">
+            <img src="m-auto.png" alt="M-Auto Logo" class="logo-img">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#software">Software</a></li>
+            </ul>
+        </nav>
+        <a href="#contacto" class="btn-cta">Orçamento</a>
+    </header>
+
+    <section id="inicio" class="hero">
+        <h1>Soluções de Diagnóstico</h1>
+        <p>Software pronto a usar para a sua oficina.</p>
+        
+        <div class="box-download">
+            <p style="color: #fff; margin-bottom: 10px;">Suporte Remoto Imediato</p>
+            <a href="COLE_O_SEU_LINK_AQUI" class="btn-download">
+                📥 Descarregar Cliente (26MB)
+            </a>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <img src="m-auto.png" alt="M-Auto Logo" class="footer-logo">
+        
+        <p>📧 geral@m-auto.online</p>
+        <p>&copy; 2025 M-Auto Solutions</p>
+    </footer>
+
+</body>
+</html>
