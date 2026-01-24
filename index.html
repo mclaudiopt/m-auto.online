@@ -3,53 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="M-Auto: Soluções de Diagnóstico Profissional.">
+    <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
     <link rel="icon" type="image/png" href="m-auto.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V6.0</title>
+    <title>M-Auto Online | V7.0</title>
 
     <style>
-        /* --- 1. PALETAS DE CORES INTELIGENTES --- */
+        /* --- 1. CONFIGURAÇÃO DE TEMAS --- */
         :root {
             /* LIGHT (Padrão) */
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --bg-nav: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --accent: #2563eb; /* Azul forte */
-            --accent-soft: #eff6ff; /* Azul muito claro para fundos */
-            --sidebar-active-bg: #eff6ff;
-            --sidebar-active-text: #1d4ed8;
-            --gold: #b45309;
+            --bg-body: #f8fafc; --bg-card: #ffffff; --bg-nav: #f1f5f9; 
+            --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0; 
+            --accent: #2563eb; --gold: #b45309; --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
             --header-h: 70px;
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
         }
 
         [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --bg-nav: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --accent: #3b82f6;
-            --accent-soft: rgba(59, 130, 246, 0.1);
-            --sidebar-active-bg: #0b1120; /* Fundo muito escuro para o botão ativo (estilo da foto) */
-            --sidebar-active-text: #60a5fa;
-            --gold: #fbbf24;
-            --shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
+            --bg-body: #020617; --bg-card: #1e293b; --bg-nav: #0f172a; 
+            --text-main: #f8fafc; --text-muted: #94a3b8; --border: #334155; 
+            --accent: #3b82f6; --gold: #fbbf24; --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
         }
 
-        /* --- 2. RESET & LAYOUT --- */
+        /* --- 2. RESET GERAL --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
-        html { overflow-y: scroll; scroll-behavior: smooth; }
-
         body { 
             background-color: var(--bg-body); color: var(--text-main); 
             line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column;
@@ -59,64 +39,53 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* --- 3. HEADER MODERNO --- */
+        /* TAG DE VERSÃO FIXA */
+        .version-tag {
+            position: fixed; bottom: 5px; right: 5px; 
+            background: var(--text-main); color: var(--bg-body); 
+            padding: 2px 6px; font-size: 10px; border-radius: 4px; 
+            z-index: 9999; font-weight: bold; opacity: 0.7;
+        }
+
+        /* --- 3. HEADER --- */
         header {
-            background: var(--bg-nav); border-bottom: 1px solid var(--border);
-            padding: 0 3%; height: var(--header-h); position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: var(--bg-card); border-bottom: 1px solid var(--border);
+            padding: 0 20px; height: var(--header-h); position: fixed; width: 100%; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: var(--shadow);
         }
 
         .header-left { display: flex; align-items: center; gap: 15px; }
-        .logo-link { display: flex; align-items: center; gap: 10px; }
-        .logo-img { height: 32px; width: auto; }
-        .brand-name { font-size: 1.2rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
+        .logo-img { height: 32px; }
+        .brand-name { font-size: 1.2rem; font-weight: 800; font-style: italic; color: var(--text-main); }
 
         .header-right { display: flex; align-items: center; gap: 15px; }
 
-        /* CONTROLO DE TEMA & LINGUA (NOVO UI) */
-        .settings-capsule {
-            display: flex; align-items: center; gap: 5px;
-            background: var(--bg-body); border: 1px solid var(--border);
-            padding: 4px; border-radius: 50px; height: 40px;
-        }
-
-        /* Botão Tema (Sol/Lua) */
-        .theme-toggle-btn {
-            width: 32px; height: 32px; border-radius: 50%; border: none;
-            background: transparent; font-size: 1.2rem; display: flex; 
-            align-items: center; justify-content: center; transition: 0.3s;
-        }
-        .theme-toggle-btn:hover { background: var(--bg-card); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-
-        .vertical-line { width: 1px; height: 20px; background: var(--border); margin: 0 5px; }
-
-        .lang-switch { display: flex; gap: 5px; padding-right: 5px; }
-        .lang-btn { background: none; border: none; padding: 0; opacity: 0.4; transition: 0.2s; }
+        .controls-group { display: flex; align-items: center; gap: 10px; border-right: 1px solid var(--border); padding-right: 15px; margin-right: 5px; }
+        .theme-select { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 4px; border-radius: 4px; font-size: 0.85rem; }
+        .theme-select option { background: var(--bg-card); }
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-btn { background: none; border: none; padding: 0; opacity: 0.5; transition: 0.2s; }
         .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
-        .lang-btn img { width: 22px; height: 22px; border-radius: 50%; display: block; border: 1px solid var(--border); }
+        .lang-btn img { width: 22px; border-radius: 50%; border: 1px solid #777; display: block; }
 
-        /* Botões de Ação (Suporte/Orçamento) */
-        .action-btn {
-            padding: 0 20px; height: 40px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+        .header-action-btn {
+            padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem;
             display: flex; align-items: center; justify-content: center; gap: 8px; border: none;
-            transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); white-space: nowrap; color: white;
+            transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap; height: 38px;
         }
-        .btn-red { background: #ef4444; animation: pulse 2s infinite; }
-        .btn-red:hover { background: #dc2626; transform: translateY(-1px); }
-        .btn-blue { background: var(--accent); }
-        .btn-blue:hover { filter: brightness(1.1); transform: translateY(-1px); }
+        .btn-red { background: #ef4444; color: white; animation: pulse 2s infinite; }
+        .btn-red:hover { background: #dc2626; transform: translateY(-2px); }
+        .btn-blue { background: var(--accent); color: white; }
+        .btn-blue:hover { filter: brightness(1.1); transform: translateY(-2px); }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
 
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
-
-        /* --- 4. HERO & NAV --- */
-        .hero { 
-            margin-top: var(--header-h); padding: 60px 20px 40px; text-align: center; 
-            border-bottom: 1px solid var(--border); background-color: var(--bg-body);
-        }
+        /* --- 4. HERO --- */
+        .hero { margin-top: var(--header-h); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border); }
         .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
-        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1rem; }
+        .hero p { color: var(--text-muted); }
 
+        /* --- 5. NAVEGAÇÃO PRINCIPAL --- */
         .main-nav {
             display: flex; justify-content: center; gap: 10px; padding: 15px;
             background: var(--bg-nav); border-bottom: 1px solid var(--border);
@@ -124,61 +93,65 @@
         }
         .nav-pill {
             background: transparent; border: 1px solid var(--border); color: var(--text-muted);
-            padding: 8px 24px; border-radius: 50px; font-weight: 600; transition: 0.3s;
+            padding: 8px 25px; border-radius: 50px; font-weight: 600; transition: 0.3s;
             display: flex; align-items: center; gap: 8px; font-size: 0.95rem; cursor: pointer;
         }
-        .nav-pill:hover { background: var(--bg-body); color: var(--text-main); }
-        .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .nav-pill:hover { background: var(--bg-card); color: var(--text-main); }
+        .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* --- 5. LAYOUT & SIDEBAR (ESTILO DA FOTO) --- */
-        .content-container { padding: 40px 5%; max-width: 1500px; margin: 0 auto; min-height: 600px; }
+        /* --- 6. LAYOUT FULL WIDTH (CORRIGIDO) --- */
+        .content-container { 
+            width: 100%; /* Ocupa tudo */
+            padding: 30px; /* Margem interna */
+            min-height: 600px; 
+            box-sizing: border-box;
+        }
         
-        .section-view { display: none; animation: fadeIn 0.4s; width: 100%; }
+        .section-view { display: none; width: 100%; animation: fadeIn 0.4s; }
         .section-view.active { display: block; }
-        
-        .sidebar-layout { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
-        
-        /* SIDEBAR (Fixa e Estilizada) */
-        .sidebar-menu { 
-            display: flex; flex-direction: column; gap: 5px; 
-            width: 260px; min-width: 260px; flex-shrink: 0;
-            /* Removemos padding excessivo para ficar mais clean */
-        }
-        
-        .side-btn {
-            background: transparent; border: none; text-align: left; padding: 12px 18px;
-            color: var(--text-muted); font-weight: 600; border-radius: 8px; transition: 0.2s;
-            border-left: 4px solid transparent; font-size: 0.95rem; 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer;
-            margin-bottom: 2px;
-        }
-
-        .side-btn:hover { 
-            background: var(--bg-card); color: var(--text-main); 
-        }
-
-        /* ESTADO ATIVO (Igual à FOTO: Fundo escuro/colorido, letra forte) */
-        .side-btn.active { 
-            background-color: var(--sidebar-active-bg); 
-            color: var(--sidebar-active-text);
-            border-left-color: var(--accent);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        /* --- 6. CONTEÚDO --- */
-        .content-area { flex: 1; min-width: 0; }
-        .brand-content { display: none; animation: fadeIn 0.3s; }
-        .brand-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .brand-header { 
+        .sidebar-layout { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
+        
+        /* BARRA LATERAL FIXA */
+        .sidebar-menu { 
+            display: flex; flex-direction: column; gap: 4px; 
+            width: 260px; min-width: 260px; flex-shrink: 0; /* Bloqueia tamanho */
+            background: var(--bg-card); padding: 10px; border-radius: 12px; border: 1px solid var(--border);
+        }
+        .side-link {
+            background: transparent; border: none; text-align: left; padding: 12px 15px;
+            color: var(--text-muted); font-weight: 500; border-radius: 6px; transition: 0.2s;
+            border-left: 3px solid transparent; font-size: 0.95rem; 
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer;
+        }
+        .side-link:hover { background: var(--bg-body); color: var(--text-main); }
+        .side-link.active { 
+            background: var(--bg-body); color: var(--accent); 
+            border-left: 3px solid var(--accent); font-weight: 700; 
+        }
+
+        /* ÁREA DE CONTEÚDO (ESTICA) */
+        .content-display { 
+            flex: 1; /* Ocupa o resto */
+            width: 100%; 
+        }
+        
+        .brand-panel { display: none; animation: fadeIn 0.3s; }
+        .brand-panel.active { display: block; }
+
+        .panel-header { 
             font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; 
             border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px;
             color: var(--text-main);
         }
 
-        /* Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        /* GRID (Fluido) */
+        .grid-stretch { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsivo */
+            gap: 25px; width: 100%;
+        }
         
         .card { 
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; 
@@ -188,70 +161,70 @@
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
         
-        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card .desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
         
-        .tags { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .card-tags { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
         .tag { background: var(--bg-body); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main); font-weight: 600; }
         
-        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
-        .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
-        .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; cursor: pointer; }
+        .card-actions { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
+        .price-label { font-weight: 800; font-size: 1rem; color: var(--text-main); }
+        .btn-link { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; cursor: pointer; background: none; border: none; }
 
         .card.gold { border: 2px solid var(--gold); }
-        .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
+        .card.gold h3, .card.gold .price-label, .card.gold .btn-link { color: var(--gold); }
         .badge-gold { position: absolute; top: 10px; right: 10px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
 
-        /* Downloads & Serviços */
-        .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; justify-content: center; }
-        .tool-box { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
-        .tool-box:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .icon-lg { font-size: 2.5rem; margin-bottom: 15px; display: block; }
-        .tool-box h4 { margin-bottom: 10px; color: var(--text-main); font-size: 1.1rem; }
-        .tool-link { color: var(--accent); font-weight: 700; margin-top: auto; text-decoration: none; }
+        /* SERVIÇOS E FERRAMENTAS */
+        .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; }
+        .tool-card { 
+            background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); 
+            text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; 
+        }
+        .tool-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .tool-icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .tool-card h4 { margin-bottom: 10px; color: var(--text-main); }
+        .tool-link { color: var(--accent); font-weight: bold; margin-top: auto; }
 
-        /* --- 7. BOTÕES FLUTUANTES --- */
+        /* --- FLUTUANTES --- */
         .whatsapp-float { position: fixed; bottom: 90px; right: 25px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; }
         .chatbot-btn { position: fixed; bottom: 20px; right: 25px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; border: none; transition: 0.3s; cursor: pointer; }
         .whatsapp-float:hover, .chatbot-btn:hover { transform: scale(1.1); }
 
-        /* --- 8. MODAIS --- */
+        /* --- MODAIS --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal-box { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); border: none; background: none; }
-        
-        .btn-download-big { background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; margin: 20px 0; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); }
-        .btn-download-big:hover { transform: scale(1.05); }
-
-        /* Wizard */
+        .btn-download-big { background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; margin: 20px 0; text-decoration: none; transition: 0.3s; }
         .btn-wizard-start { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; width: 100%; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); cursor: pointer; }
-        .btn-wizard-start:hover { transform: translateY(-2px); }
-        .wiz-opt { background: var(--bg-nav); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .wiz-opt:hover { border-color: var(--accent); color: var(--accent); }
+        
+        .step { display: none; } .step.active { display: block; animation: fadeIn 0.4s; }
+        .wizard-option { background: var(--bg-nav); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .wizard-option:hover { border-color: var(--accent); color: var(--accent); }
         .bot-mini { background: var(--bg-body); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; text-align: left; font-size: 0.8rem; }
         .bot-mini img { width: 100%; height: 60px; object-fit: cover; }
         .bot-mini div { padding: 8px; }
         .bot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
 
         footer { background: var(--bg-nav); padding: 3rem 5%; text-align: center; border-top: 1px solid var(--border); margin-top: auto; }
-        .footer-logo { width: 120px; opacity: 0.8; margin-bottom: 15px; }
 
         @media (max-width: 768px) {
             .sidebar-layout { flex-direction: column; }
             .sidebar-menu { flex-direction: row; overflow-x: auto; width: 100%; padding-bottom: 10px; margin-bottom: 20px; }
-            .side-btn { min-width: 140px; border-left: none; border-bottom: 3px solid transparent; text-align: center; justify-content: center; }
-            .side-btn.active { border-left: none; border-bottom-color: var(--accent); }
+            .side-link { min-width: 140px; justify-content: center; text-align: center; border-left: none; border-bottom: 3px solid transparent; }
+            .side-link.active { border-left: none; border-bottom: 3px solid var(--accent); }
             .main-nav { justify-content: flex-start; overflow-x: auto; padding: 10px; }
             .nav-pill { white-space: nowrap; }
             .brand-name { display: none; }
-            .action-btn span { display: none; } 
-            .vertical-sep { display: none; }
-            .hero { margin-top: 60px; padding: 40px 15px; }
+            .header-action-btn span { display: none; } 
+            .controls-group { border: none; padding-right: 0; margin-right: 0; }
         }
     </style>
 </head>
 <body>
+
+    <div class="version-tag">v7.0</div>
 
     <header>
         <div class="header-left">
@@ -261,9 +234,13 @@
             </a>
         </div>
         <div class="header-right">
-            <div class="settings-capsule">
-                <button class="theme-toggle-btn" onclick="toggleTheme()" title="Mudar Tema">☀️</button>
-                <div class="vertical-line"></div>
+            <div class="controls-group">
+                <select class="theme-select" onchange="setTheme(this.value)">
+                    <option value="light">☀️</option>
+                    <option value="dark">🌑</option>
+                    <option value="corporate">👔</option>
+                    <option value="soft">🍂</option>
+                </select>
                 <div class="lang-switch">
                     <button onclick="changeLang('pt')" class="lang-btn active"><img src="https://flagcdn.com/w40/pt.png"></button>
                     <button onclick="changeLang('en')" class="lang-btn"><img src="https://flagcdn.com/w40/gb.png"></button>
@@ -271,10 +248,10 @@
                 </div>
             </div>
             
-            <button onclick="toggleModal('supportModal')" class="action-btn btn-red">
+            <button onclick="toggleModal('supportModal')" class="header-action-btn btn-red">
                 📥 <span data-lang="btn_support">Suporte</span>
             </button>
-            <a href="#contacto" class="action-btn btn-blue">
+            <a href="#contacto" class="header-action-btn btn-blue">
                 📝 <span data-lang="btn_quote">Orçamento</span>
             </a>
         </div>
@@ -283,9 +260,10 @@
     <div id="supportModal" class="modal-overlay">
         <div class="modal-box">
             <button class="close-btn" onclick="toggleModal('supportModal')">&times;</button>
-            <h2 data-lang="modal_support_title">Suporte Remoto</h2>
-            <p style="margin:15px 0; color:var(--text-muted)" data-lang="modal_support_desc">Descarregue o cliente para assistência.</p>
-            <a href="https://github.com/mclaudiopt/m-auto.online/releases/download/Client/Mauto.exe" class="btn-download-big">📥 Download</a>
+            <h2 style="color:var(--text-main)" data-lang="modal_support_title">Suporte Remoto</h2>
+            <p style="color:var(--text-muted); margin:15px 0;" data-lang="modal_support_desc">Baixe o cliente seguro para assistência técnica.</p>
+            <a href="https://github.com/mclaudiopt/m-auto.online/releases/download/Client/Mauto.exe" class="btn-download-big">📥 Download Cliente</a>
+            <p style="font-size:0.8rem; color:var(--text-muted)">Ligação Encriptada (26MB)</p>
         </div>
     </div>
 
@@ -294,17 +272,18 @@
             <button class="close-btn" onclick="toggleModal('wizardModal')">&times;</button>
             <div id="step1" class="step active">
                 <h3 data-lang="wiz_title">Assistente Inteligente</h3>
-                <p style="margin-bottom:20px; color:var(--text-muted)" data-lang="wiz_desc">Vamos verificar a compatibilidade.</p>
+                <p style="margin-bottom:20px; color:var(--text-muted)" data-lang="wiz_desc">Vamos verificar a compatibilidade do seu PC.</p>
                 <button class="btn-wizard-start" onclick="nextStep(2)" data-lang="wiz_start">Começar ➡️</button>
             </div>
-            <div id="step2" class="step"><h3>Sistema?</h3><button class="wiz-opt" onclick="setOS('Win10'); nextStep(3)">Win 10/11 ✅</button><button class="wiz-opt" onclick="setOS('Old'); nextStep(3)">Outro ❌</button></div>
-            <div id="step3" class="step"><h3>Espaço?</h3><button class="wiz-opt" onclick="setSpace(50); nextStep(4)">- 100 GB</button><button class="wiz-opt" onclick="setSpace(500); nextStep(4)">+ 250 GB</button></div>
-            <div id="step4" class="step"><h3>RAM?</h3><button class="wiz-opt" onclick="setRam(4); nextStep(5)">4 GB</button><button class="wiz-opt" onclick="setRam(8); nextStep(5)">8 GB+</button></div>
-            <div id="step5" class="step"><h3>Disco?</h3><button class="wiz-opt" onclick="setDisk('HDD'); nextStep(6)">HDD</button><button class="wiz-opt" onclick="setDisk('SSD'); nextStep(6)">SSD</button></div>
+            <div id="step2" class="step"><h3>Sistema Operativo?</h3><button class="wizard-option" onclick="setOS('Win10'); nextStep(3)">Win 10/11 (x64) ✅</button><button class="wizard-option" onclick="setOS('Old'); nextStep(3)">Outro (Win 7/8) ❌</button></div>
+            <div id="step3" class="step"><h3>Espaço Livre?</h3><button class="wizard-option" onclick="setSpace(50); nextStep(4)">< 100 GB 💾</button><button class="wizard-option" onclick="setSpace(500); nextStep(4)">> 250 GB 🚀</button></div>
+            <div id="step4" class="step"><h3>Memória RAM?</h3><button class="wizard-option" onclick="setRam(4); nextStep(5)">4 GB (Lento) 🐌</button><button class="wizard-option" onclick="setRam(8); nextStep(5)">8 GB+ (Rápido) ⚡</button></div>
+            <div id="step5" class="step"><h3>Disco Principal?</h3><button class="wizard-option" onclick="setDisk('HDD'); nextStep(6)">HDD (Mecânico) 🐢</button><button class="wizard-option" onclick="setDisk('SSD'); nextStep(6)">SSD / NVMe 🏎️</button></div>
             <div id="step6" class="step">
                 <div id="resultBox" style="background:var(--bg-nav); padding:15px; border-radius:8px; margin:15px 0;"></div>
+                <h4 style="color:var(--accent)" data-lang="wiz_rec">Recomendado:</h4>
                 <div id="botGrid" class="bot-grid"></div>
-                <button class="wiz-opt" onclick="resetWizard()" style="justify-content:center">🔄 Reiniciar</button>
+                <button class="wizard-option" onclick="resetWizard()" style="justify-content:center; margin-top:20px;">🔄 Reiniciar Teste</button>
             </div>
         </div>
     </div>
@@ -331,17 +310,16 @@
         <div id="sec-software" class="section-view active">
             <div class="sidebar-layout">
                 <div class="sidebar-menu">
-                    <button class="side-btn active" onclick="switchBrand('merc', this)">Mercedes-Benz</button>
-                    <button class="side-btn" onclick="switchBrand('bmw', this)">BMW / Mini</button>
-                    <button class="side-btn" onclick="switchBrand('psa', this)">PSA Group</button>
-                    <button class="side-btn" onclick="switchBrand('renault', this)">Renault / Dacia</button>
-                    <button class="side-btn" onclick="switchBrand('jlr', this)">Jaguar Land Rover</button>
-                    <button class="side-btn" onclick="switchBrand('toyota', this)">Toyota / Lexus</button>
-                    <button class="side-btn" onclick="switchBrand('ford', this)">Ford</button>
-                    <button class="side-btn" onclick="switchBrand('gm', this)">General Motors</button>
+                    <button class="side-link active" onclick="switchBrand('merc', this)">Mercedes-Benz</button>
+                    <button class="side-link" onclick="switchBrand('bmw', this)">BMW / Mini</button>
+                    <button class="side-link" onclick="switchBrand('psa', this)">PSA Group</button>
+                    <button class="side-link" onclick="switchBrand('renault', this)">Renault / Dacia</button>
+                    <button class="side-link" onclick="switchBrand('jlr', this)">Jaguar Land Rover</button>
+                    <button class="side-link" onclick="switchBrand('toyota', this)">Toyota / Lexus</button>
+                    <button class="side-link" onclick="switchBrand('ford', this)">Ford / Mazda</button>
+                    <button class="side-link" onclick="switchBrand('gm', this)">General Motors</button>
                 </div>
                 <div class="content-display">
-                    
                     <div id="brand-merc" class="brand-panel active">
                         <h2 class="panel-header">Mercedes-Benz</h2>
                         <div class="grid-stretch">
@@ -359,19 +337,18 @@
                                 <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-content">
                                     <h3>Mercedes Full Pack</h3>
-                                    <p class="desc" data-lang="desc_merc_full" style="color:var(--text-main)">Suite Completa: Xentry + DTS + Vediamo + WIS.</p>
+                                    <p class="desc" data-lang="desc_merc_full" style="color:var(--text-main)">Suite completa: Xentry + DTS + Vediamo + WIS/EPC.</p>
                                     <div class="card-tags"><span class="tag" style="border-color:var(--gold)">Chave na Mão</span></div>
                                     <div class="card-actions"><span class="price-label" style="color:var(--gold)">Melhor Preço</span><button class="btn-link" style="color:var(--gold)">Encomendar</button></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>ISTA+</h3><p data-lang="desc_bmw">Diagnóstico e Programação.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
-                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>Diagbox 9</h3><p data-lang="desc_psa_new">Versão Nativa 2025.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
+                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>ISTA+ & ESYS</h3><p data-lang="desc_bmw">Diagnóstico e Programação.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
+                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA Group</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>Diagbox 9.193</h3><p data-lang="desc_psa_new">Versão Nativa.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
                     <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>Can Clip</h3><p data-lang="desc_renault">Oficial V240.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>Pathfinder</h3><p data-lang="desc_pathfinder">Modelos DoIP.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>Techstream</h3><p data-lang="desc_toyota">Diagnóstico Global.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>Pathfinder</h3><p data-lang="desc_pathfinder">Novos modelos DoIP.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
+                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>Techstream</h3><p data-lang="desc_toyota">Diagnóstico global.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
                     <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1553440962-295e7455b124?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>FDRS</h3><p data-lang="desc_ford">Sistema Online.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
                     <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid-stretch"><div class="card"><img src="https://images.unsplash.com/photo-1636768861747-64d80936143c?auto=format&fit=crop&w=600&q=80"><div class="card-content"><h3>GDS2</h3><p data-lang="desc_gm">Chevrolet/Opel.</p><div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div></div></div></div></div>
                 </div>
@@ -379,7 +356,7 @@
         </div>
 
         <div id="sec-hardware" class="section-view">
-            <div class="layout-wrapper">
+            <div class="sidebar-layout">
                 <div class="sidebar-menu">
                     <button class="side-link active" onclick="switchBrand('univ', this)">Universal</button>
                     <button class="side-link" onclick="switchBrand('vci', this)">VCI Marca</button>
@@ -412,17 +389,20 @@
         <div id="sec-tools" class="section-view" style="text-align:center">
             <h2 class="panel-header">Downloads</h2>
             <div class="grid-center">
-                <div class="tool-box"><span class="icon-lg">🗜️</span><h4>7-Zip</h4><a href="#" class="tool-link">Download</a></div>
-                <div class="tool-box"><span class="icon-lg">💾</span><h4>Rufus</h4><a href="#" class="tool-link">Download</a></div>
-                <div class="tool-box"><span class="icon-lg">🛡️</span><h4>DControl</h4><a href="#" class="tool-link">Download</a></div>
+                <div class="tool-card"><div class="icon-lg">🗜️</div><h4>7-Zip</h4><a href="#" class="tool-link">Download</a></div>
+                <div class="tool-card"><div class="icon-lg">💾</div><h4>Rufus</h4><a href="#" class="tool-link">Download</a></div>
+                <div class="tool-card"><div class="icon-lg">🛡️</div><h4>DControl</h4><a href="#" class="tool-link">Download</a></div>
             </div>
         </div>
 
         <div id="sec-services" class="section-view" style="text-align:center">
-            <h2 class="panel-header">Serviços</h2>
+            <h2 class="panel-header">Serviços Técnicos</h2>
             <div class="grid-center">
-                <div class="tool-box"><span class="icon-lg">💿</span><h4>Formatação</h4></div>
-                <div class="tool-box"><span class="icon-lg">🚀</span><h4>Otimização</h4></div>
+                <div class="tool-card"><div class="icon-lg">💿</div><h4>Formatação & Windows</h4><p>Instalação Limpa Win 10/11</p></div>
+                <div class="tool-card"><div class="icon-lg">🚀</div><h4>Otimização PC</h4><p>Melhoria Performance</p></div>
+                <div class="tool-card"><div class="icon-lg">🦠</div><h4>Remoção Vírus</h4><p>Limpeza Segurança</p></div>
+                <div class="tool-card"><div class="icon-lg">💾</div><h4>Upgrade Disco</h4><p>Clonagem para SSD</p></div>
+                <div class="tool-card"><div class="icon-lg">⚡</div><h4>Upgrade RAM</h4><p>Aumento Memória</p></div>
             </div>
         </div>
 
@@ -435,10 +415,10 @@
     </footer>
 
     <script>
-        // NAVEGAÇÃO PRINCIPAL
         function switchSection(id, btn) {
             document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
             document.getElementById('sec-' + id).classList.add('active');
+            
             document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             window.scrollTo({top: 150, behavior: 'smooth'});
@@ -448,96 +428,82 @@
             if(id === 'hardware') switchBrand('univ', document.querySelector('#sec-hardware .side-link'));
         }
 
-        // NAVEGAÇÃO LATERAL
         function switchBrand(id, btn) {
-            const container = btn.closest('.layout-grid') || btn.closest('.sidebar-layout');
+            const container = btn.closest('.sidebar-layout');
             container.querySelectorAll('.brand-panel').forEach(c => c.classList.remove('active'));
             container.querySelector('#brand-' + id).classList.add('active');
             container.querySelectorAll('.side-link').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        // TEMA
-        function toggleTheme() {
-            const html = document.documentElement;
-            const current = html.getAttribute('data-theme');
-            const btn = document.querySelector('.theme-toggle-btn');
-            
-            if (!current) {
-                html.setAttribute('data-theme', 'dark');
-                btn.textContent = '🌙';
-            } else {
-                html.removeAttribute('data-theme');
-                btn.textContent = '☀️';
-            }
-        }
-
-        // MODAIS
         function toggleModal(id) {
             const m = document.getElementById(id);
             m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
         }
         function closeSupportModal() { document.getElementById('supportModal').style.display = 'none'; }
         
-        // WIZARD
-        let uOS='', uDisk='';
+        function setTheme(theme) {
+            if (theme === 'light') document.documentElement.removeAttribute('data-theme');
+            else document.documentElement.setAttribute('data-theme', theme);
+        }
+
+        // Wizard Logic
+        let userOS='', userDisk='', userRam=0;
         function nextStep(n) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
             document.getElementById('step'+n).classList.add('active');
             if(n===6) showRes();
         }
-        function setOS(v){uOS=v} function setSpace(){} function setRam(){} function setDisk(v){uDisk=v}
+        function setOS(v){userOS=v} function setSpace(v){} function setRam(v){userRam=v} function setDisk(v){userDisk=v}
         function resetWizard(){
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
             document.getElementById('step1').classList.add('active');
-            document.getElementById('botGrid').innerHTML = '';
         }
         function showRes() {
-            const msg = (uOS==='Old'||uDisk==='HDD') ? "⚠️ Hardware Limitado" : "✅ Hardware Aprovado";
+            const msg = (userOS==='Old'||userDisk==='HDD') ? "⚠️ Limitado" : "✅ Aprovado";
             document.getElementById('resultBox').innerHTML = `<h3>${msg}</h3>`;
             document.getElementById('botGrid').innerHTML = `
-                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=100&q=60"><div>Full Pack</div></div>
-                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=100&q=60"><div>Xentry</div></div>`;
+                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=150&q=60"><div>Full Pack</div></div>
+                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=150&q=60"><div>Xentry Cars</div></div>`;
         }
 
-        // TRADUÇÃO COMPLETA
+        // Translations
         const dict = {
             pt: {
                 btn_support: "Suporte", btn_quote: "Orçamento",
-                hero_title: "Soluções de Diagnóstico", hero_desc: "Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.",
+                hero_title: "Soluções de Diagnóstico", hero_desc: "Profissional. Remoto. Garantido.",
                 nav_soft: "💾 Software", nav_hard: "🔌 Hardware", nav_tools: "🛠️ Ferramentas", nav_serv: "👨‍💻 Serviços",
-                desc_merc_cars: "Diagnóstico completo ligeiros. Inclui DAS e HHT.",
-                desc_merc_full: "Suite Completa: Xentry + DTS + Vediamo + WIS.",
+                desc_merc_cars: "Diagnóstico completo ligeiros.", desc_merc_full: "Pack completo tudo incluído.",
                 desc_bmw: "Diagnóstico e Programação.", desc_psa_new: "Versão Nativa 2025.",
                 desc_renault: "Oficial Renault/Dacia.", desc_pathfinder: "Novos DoIP.",
                 desc_toyota: "Diagnóstico Global.", desc_ford: "Sistema Online.", desc_gm: "Chevrolet/Opel Antigos.",
                 desc_openport: "Interface Económica.", desc_scanmatik: "Profissional.",
                 desc_c4: "Oficial Mercedes DoIP.", desc_tough: "Blindado.",
                 modal_support_title: "Suporte Remoto", modal_support_desc: "Baixe o cliente.",
-                wiz_title: "Assistente", wiz_desc: "Verificar compatibilidade.", wiz_start: "Começar ➡️"
+                wiz_title: "Assistente", wiz_desc: "Verificar compatibilidade.", wiz_start: "Começar ➡️", wiz_rec: "Recomendado:"
             },
             en: {
                 btn_support: "Support", btn_quote: "Quote",
                 hero_title: "Diagnostic Solutions", hero_desc: "Professional. Remote. Guaranteed.",
                 nav_soft: "💾 Software", nav_hard: "🔌 Hardware", nav_tools: "🛠️ Tools", nav_serv: "👨‍💻 Services",
-                desc_merc_cars: "Complete diagnostics.", desc_merc_full: "Full Suite.",
+                desc_merc_cars: "Complete cars diagnostic.", desc_merc_full: "Full Suite.",
                 desc_bmw: "Diagnostics & Programming.", desc_psa_new: "Native Version.",
                 desc_renault: "Official Renault.", desc_pathfinder: "New DoIP.",
                 desc_toyota: "Global Diagnostics.", desc_ford: "Online System.", desc_gm: "Legacy GM.",
                 desc_openport: "Economic Interface.", desc_scanmatik: "Professional.",
                 desc_c4: "Official Mercedes.", desc_tough: "Rugged.",
                 modal_support_title: "Remote Support", modal_support_desc: "Download client.",
-                wiz_title: "Wizard", wiz_desc: "Check compatibility.", wiz_start: "Start ➡️"
+                wiz_title: "Wizard", wiz_desc: "Check compatibility.", wiz_start: "Start ➡️", wiz_rec: "Recommended:"
             },
-            fr: { btn_support: "Soutien", btn_quote: "Devis", hero_title: "Solutions Diagnostic" }
+            fr: { btn_support: "Soutien", btn_quote: "Devis", hero_title: "Solutions Diagnostic", cat_title: "Catalogue Logiciels" }
         };
 
         function changeLang(l) {
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const k = el.getAttribute('data-lang');
-                if (dict[l] && dict[l][k]) el.textContent = dict[l][k];
+                if(dict[l] && dict[l][k]) el.textContent = dict[l][k];
             });
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             event.target.closest('.lang-btn').classList.add('active');
         }
     </script>
