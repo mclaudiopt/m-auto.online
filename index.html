@@ -56,7 +56,6 @@
         }
         .logo-img { height: 50px; width: auto; display: block; }
         
-        /* BANDEIRAS */
         .lang-switch { display: flex; gap: 15px; align-items: center; }
         .lang-btn { 
             cursor: pointer; transition: transform 0.2s; border: none; background: none; padding: 0;
@@ -203,7 +202,8 @@
         }
 
         .img-soft { width: 100%; height: 180px; object-fit: cover; opacity: 0.9; transition: opacity 0.3s; }
-        
+        .img-soft:not([src]) { background-color: #334155; } /* Fallback */
+
         .info-soft { padding: 1.5rem; }
         .info-soft h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #fff; font-weight: 700; }
         .desc-soft { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.2rem; min-height: 50px; line-height: 1.5; }
@@ -246,6 +246,7 @@
         .close-wizard { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #94a3b8; }
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.5s; }
+        
         .wizard-btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
         .wizard-btn {
             background: rgba(255,255,255,0.05); border: 1px solid var(--cor-destaque);
@@ -253,12 +254,33 @@
             transition: 0.3s; font-size: 1rem; display: flex; justify-content: space-between;
         }
         .wizard-btn:hover { background: var(--cor-destaque); }
-        .result-box { padding: 20px; border-radius: 10px; margin-top: 20px; font-weight: bold; }
-        .result-success { background: rgba(16, 185, 129, 0.2); border: 1px solid var(--cor-verde); color: var(--cor-verde); }
-        .result-fail { background: rgba(239, 68, 68, 0.2); border: 1px solid var(--cor-urgente); color: var(--cor-urgente); }
-        .result-warn { background: rgba(251, 191, 36, 0.2); border: 1px solid var(--cor-gold); color: var(--cor-gold); }
+        
+        /* Resultados do Bot */
+        .result-box { 
+            padding: 20px; border-radius: 10px; margin-top: 20px; text-align: left;
+            max-height: 300px; overflow-y: auto; background: rgba(0,0,0,0.2);
+        }
+        .res-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; text-align: center; }
+        .res-list { list-style: none; padding: 0; }
+        .res-item { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+        .res-icon { margin-right: 10px; font-size: 1.1rem; }
+        .color-ok { color: var(--cor-verde); }
+        .color-warn { color: var(--cor-gold); }
+        .color-bad { color: var(--cor-urgente); }
 
-        /* --- FOOTER --- */
+        /* Botão WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; left: 30px;
+            background: #25D366; color: white;
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 35px; z-index: 2000;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: 0.3s; text-decoration: none;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* FOOTER */
         footer { background: #020617; padding: 4rem 5%; text-align: center; border-top: 1px solid #1e293b; margin-top: auto; }
         .footer-logo { 
             max-width: 250px; margin-bottom: 25px; background-color: white; 
@@ -269,7 +291,6 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             nav { display: none; }
-            /* No mobile, vamos mostrar as bandeiras no topo */
             .lang-switch { margin-right: 15px; }
             .box-download { width: 100%; padding: 1.5rem; }
             .btn-download { width: 100%; justify-content: center; font-size: 1rem; }
@@ -279,6 +300,7 @@
             .tab-label { padding: 10px 15px; font-size: 0.9rem; min-width: 140px; justify-content: center; }
             .tabs-content { padding-left: 0; padding-top: 1rem; }
             .chatbot-trigger { width: 50px; height: 50px; font-size: 24px; bottom: 20px; right: 20px; }
+            .whatsapp-float { bottom: 20px; left: 20px; width: 50px; height: 50px; font-size: 28px; }
         }
     </style>
 </head>
@@ -315,15 +337,21 @@
     </header>
 
     <div class="chatbot-trigger" onclick="openWizard()">🤖</div>
+    
+    <a href="https://wa.me/351910000000?text=Olá,%20tenho%20interesse%20no%20software." class="whatsapp-float" target="_blank" title="WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width: 35px; height: 35px;">
+    </a>
 
     <div id="wizardModal" class="wizard-modal">
         <div class="wizard-content">
             <span class="close-wizard" onclick="closeWizard()">&times;</span>
+            
             <div id="step1" class="step active">
                 <h3>Verificador de Compatibilidade</h3>
-                <p style="color:#cbd5e1; margin-bottom:20px;">Verifique se o seu PC suporta o software.</p>
+                <p style="color:#cbd5e1; margin-bottom:20px;">Responda a 3 perguntas rápidas para saber se o seu PC suporta o software.</p>
                 <button class="btn-cta" onclick="nextStep(2)">Começar ➡️</button>
             </div>
+
             <div id="step2" class="step">
                 <h3>Qual o seu Sistema Operativo?</h3>
                 <div class="wizard-btn-group">
@@ -331,6 +359,7 @@
                     <button class="wizard-btn" onclick="setOS('Old'); nextStep(3)">Windows 7 / 8 / Outro <span>❌</span></button>
                 </div>
             </div>
+
             <div id="step3" class="step">
                 <h3>Quanto espaço livre em disco?</h3>
                 <div class="wizard-btn-group">
@@ -339,6 +368,7 @@
                     <button class="wizard-btn" onclick="setSpace(500); nextStep(4)">Mais de 250 GB <span>🚀</span></button>
                 </div>
             </div>
+
             <div id="step4" class="step">
                 <h3>Quanto tem de Memória RAM?</h3>
                 <div class="wizard-btn-group">
@@ -347,6 +377,7 @@
                     <button class="wizard-btn" onclick="setRam(16); nextStep(5)">16 GB ou mais <span>🚀</span></button>
                 </div>
             </div>
+
             <div id="step5" class="step">
                 <h3>Qual o tipo de Disco?</h3>
                 <div class="wizard-btn-group">
@@ -354,10 +385,13 @@
                     <button class="wizard-btn" onclick="setDisk('SSD'); nextStep(6)">SSD / NVMe <span>⚡</span></button>
                 </div>
             </div>
+
             <div id="step6" class="step">
-                <h3 id="resultTitle">Analisando...</h3>
                 <div id="resultBox" class="result-box"></div>
-                <button class="btn-cta" style="margin-top:20px;" onclick="closeWizard()">Fechar</button>
+                <div class="wizard-btn-group">
+                    <button class="btn-cta" onclick="closeWizard()">Fechar e Ver Produtos</button>
+                    <button class="wizard-btn" style="text-align: center; justify-content: center;" onclick="resetWizard()">🔄 Reiniciar Teste</button>
+                </div>
             </div>
         </div>
     </div>
@@ -498,7 +532,7 @@
                         </div>
                         <div class="card-soft card-fullpack">
                             <span class="badge-gold">👑 BEST SELLER</span>
-                            <img src="https://images.unsplash.com/photo-1605218427306-633ba87c9759?auto=format&fit=crop&w=1200&q=80" alt="Full Pack" class="img-soft" style="height: 220px;">
+                            <img src="https://images.unsplash.com/photo-1605218427306-633ba87c9759?q=80&w=1200&auto=format&fit=crop" alt="Full Pack" class="img-soft" style="height: 220px;">
                             <div class="info-soft">
                                 <h3>MERCEDES FULL PACK 2025</h3>
                                 <p class="desc-soft" style="color: #fff;" data-lang="desc_merc_full">TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriais.</p>
@@ -778,7 +812,7 @@
     </footer>
 
     <script>
-        // --- WIZARD LOGIC ---
+        // --- LÓGICA DO WIZARD INTELIGENTE ---
         let userRam = 0; let userDisk = ''; let userOS = ''; let userSpace = 0;
 
         function openWizard() { document.getElementById('wizardModal').style.display = 'flex'; }
@@ -794,42 +828,57 @@
         function setSpace(val) { userSpace = val; }
         function setRam(val) { userRam = val; }
         function setDisk(val) { userDisk = val; }
+        
+        function resetWizard() {
+            // Limpa variáveis
+            userRam = 0; userDisk = ''; userOS = ''; userSpace = 0;
+            // Volta ao passo 1
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step1').classList.add('active');
+        }
 
         function calculateResult() {
             const resBox = document.getElementById('resultBox');
             const resTitle = document.getElementById('resultTitle');
             
-            let message = "";
-            let status = "success";
-
-            // Lógica combinada
+            let listItems = "";
+            let title = "Resultados da Análise";
+            
+            // 1. Verificação Crítica: SO e Disco
             if (userOS === 'Old') {
-                status = "fail";
-                resTitle.textContent = "❌ Sistema Operativo";
-                message = "<p>O software atual requer Windows 10 ou 11 (64 bits).</p>";
+                title = "❌ Sistema Incompatível";
+                listItems += `<li class="res-item color-bad"><span class="res-icon">❌</span>O seu Windows é antigo. Precisa de Windows 10 ou 11 (64 Bits) para correr Xentry, ISTA, JLR e softwares modernos.</li>`;
+                listItems += `<li class="res-item color-ok"><span class="res-icon">✅</span>Apenas versões antigas (Diagbox 7, SDD Offline) podem funcionar.</li>`;
             } else if (userDisk === 'HDD') {
-                status = "fail";
-                resTitle.textContent = "⚠️ Disco Lento";
-                message = "<p>Discos HDD tornam o diagnóstico muito lento. Recomendamos SSD.</p>";
-            } else if (userSpace < 100) {
-                status = "warn";
-                resTitle.textContent = "⚠️ Pouco Espaço";
-                message = "<p>Espaço insuficiente para Full Packs (Mercedes/BMW). Instalação individual possível.</p>";
-            } else if (userRam < 8) {
-                status = "warn";
-                resTitle.textContent = "⚠️ RAM Limitada";
-                message = "<p>4GB é pouco. O software vai funcionar, mas pode ser lento.</p>";
+                title = "⚠️ Disco Lento Detetado";
+                listItems += `<li class="res-item color-warn"><span class="res-icon">⚠️</span>Discos HDD mecânicos são muito lentos. O Xentry e o ISTA vão demorar muito a abrir.</li>`;
+                listItems += `<li class="res-item color-ok"><span class="res-icon">✅</span>Recomendamos fortemente instalar um SSD.</li>`;
             } else {
-                status = "success";
-                resTitle.textContent = "✅ Hardware Aprovado!";
-                message = "<p>O seu PC está pronto para instalar qualquer Full Pack (Xentry, ISTA, etc).</p>";
+                // 2. Análise de Hardware (RAM e Espaço)
+                title = "✅ Análise Concluída";
+                
+                // RAM
+                if (userRam >= 8) {
+                    listItems += `<li class="res-item color-ok"><span class="res-icon">✅</span><b>Memória RAM (8GB+):</b> Excelente para todos os softwares pesados (Xentry, ISTA, JLR).</li>`;
+                } else {
+                    listItems += `<li class="res-item color-warn"><span class="res-icon">⚠️</span><b>Memória RAM (4GB):</b> Suficiente para Toyota, Ford, Fiat e Diagbox. O Xentry/BMW funcionará mas pode ser lento.</li>`;
+                }
+
+                // Espaço
+                if (userSpace >= 250) {
+                    listItems += `<li class="res-item color-ok"><span class="res-icon">✅</span><b>Espaço (>250GB):</b> Perfeito para instalar PACKS COMPLETOS (Mercedes Full + BMW + JLR).</li>`;
+                } else if (userSpace >= 100) {
+                    listItems += `<li class="res-item color-ok"><span class="res-icon">✅</span><b>Espaço (100-250GB):</b> Bom para instalar 1 ou 2 marcas pesadas (ex: Só Mercedes ou Só BMW).</li>`;
+                } else {
+                    listItems += `<li class="res-item color-bad"><span class="res-icon">❌</span><b>Espaço (<100GB):</b> Insuficiente para Xentry ou BMW. Recomendado apenas para Toyota, Fiat, Ford, Renaut.</li>`;
+                }
             }
 
-            resBox.className = "result-box result-" + status;
-            resBox.innerHTML = message;
+            resTitle.textContent = title;
+            resBox.innerHTML = `<ul class="res-list">${listItems}</ul>`;
         }
 
-        // --- TRANSLATIONS ---
+        // --- TRANSLATIONS (Mantém as traduções anteriores) ---
         const translations = {
             pt: {
                 nav_home: "Início", nav_soft: "Software", nav_serv: "Serviços", btn_quote: "Orçamento",
@@ -963,7 +1012,7 @@
                 }
             });
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.closest('.lang-btn').classList.add('active'); // Corrigido para apanhar o botão, não a imagem
+            event.target.closest('.lang-btn').classList.add('active');
         }
     </script>
 </body>
