@@ -20,7 +20,7 @@
         /* --- ESTILOS GERAIS --- */
         :root {
             --cor-fundo: #020617;
-            --cor-glass: rgba(30, 41, 59, 0.95); /* Mais opaco para leitura */
+            --cor-glass: rgba(30, 41, 59, 0.95);
             --cor-texto: #f8fafc;       
             --cor-destaque: #3b82f6;
             --cor-destaque-brilho: rgba(59, 130, 246, 0.5);
@@ -56,11 +56,17 @@
         }
         .logo-img { height: 50px; width: auto; display: block; }
         
-        .lang-switch { display: flex; gap: 10px; }
+        /* BANDEIRAS */
+        .lang-switch { display: flex; gap: 15px; align-items: center; }
         .lang-btn { 
-            font-size: 1.5rem; cursor: pointer; transition: transform 0.2s; filter: grayscale(0.5); border: none; background: none;
+            cursor: pointer; transition: transform 0.2s; border: none; background: none; padding: 0;
+            opacity: 0.6; filter: grayscale(80%);
         }
-        .lang-btn:hover, .lang-btn.active { transform: scale(1.2); filter: grayscale(0); }
+        .lang-btn img {
+            width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); border: 1px solid #ccc;
+        }
+        .lang-btn:hover, .lang-btn.active { transform: scale(1.15); opacity: 1; filter: grayscale(0%); }
 
         nav ul { display: flex; gap: 2rem; }
         nav a { color: #0f172a; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; } 
@@ -75,7 +81,6 @@
         /* --- HERO --- */
         .hero {
             min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center;
-            /* Imagem Hero Estável */
             background: linear-gradient(rgba(2, 6, 23, 0.85), var(--cor-fundo)), 
                         url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-position: center; padding: 140px 20px 40px;
@@ -199,9 +204,6 @@
 
         .img-soft { width: 100%; height: 180px; object-fit: cover; opacity: 0.9; transition: opacity 0.3s; }
         
-        /* Fallback de imagem: se falhar, fica cinzento escuro */
-        .img-soft:not([src]) { background-color: #334155; }
-
         .info-soft { padding: 1.5rem; }
         .info-soft h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #fff; font-weight: 700; }
         .desc-soft { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.2rem; min-height: 50px; line-height: 1.5; }
@@ -267,7 +269,8 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             nav { display: none; }
-            .lang-switch { display: none; }
+            /* No mobile, vamos mostrar as bandeiras no topo */
+            .lang-switch { margin-right: 15px; }
             .box-download { width: 100%; padding: 1.5rem; }
             .btn-download { width: 100%; justify-content: center; font-size: 1rem; }
             .logo-img { height: 40px; }
@@ -287,10 +290,18 @@
         </a>
         
         <div class="lang-switch">
-            <button onclick="changeLang('pt')" class="lang-btn" title="Português">🇵🇹</button>
-            <button onclick="changeLang('en')" class="lang-btn" title="English">🇬🇧</button>
-            <button onclick="changeLang('fr')" class="lang-btn" title="Français">🇫🇷</button>
-            <button onclick="changeLang('es')" class="lang-btn" title="Español">🇪🇸</button>
+            <button onclick="changeLang('pt')" class="lang-btn active" title="Português">
+                <img src="https://flagcdn.com/w40/pt.png" alt="PT">
+            </button>
+            <button onclick="changeLang('en')" class="lang-btn" title="English">
+                <img src="https://flagcdn.com/w40/gb.png" alt="EN">
+            </button>
+            <button onclick="changeLang('fr')" class="lang-btn" title="Français">
+                <img src="https://flagcdn.com/w40/fr.png" alt="FR">
+            </button>
+            <button onclick="changeLang('es')" class="lang-btn" title="Español">
+                <img src="https://flagcdn.com/w40/es.png" alt="ES">
+            </button>
         </div>
 
         <nav>
@@ -308,13 +319,11 @@
     <div id="wizardModal" class="wizard-modal">
         <div class="wizard-content">
             <span class="close-wizard" onclick="closeWizard()">&times;</span>
-            
             <div id="step1" class="step active">
                 <h3>Verificador de Compatibilidade</h3>
                 <p style="color:#cbd5e1; margin-bottom:20px;">Verifique se o seu PC suporta o software.</p>
                 <button class="btn-cta" onclick="nextStep(2)">Começar ➡️</button>
             </div>
-
             <div id="step2" class="step">
                 <h3>Qual o seu Sistema Operativo?</h3>
                 <div class="wizard-btn-group">
@@ -322,7 +331,6 @@
                     <button class="wizard-btn" onclick="setOS('Old'); nextStep(3)">Windows 7 / 8 / Outro <span>❌</span></button>
                 </div>
             </div>
-
             <div id="step3" class="step">
                 <h3>Quanto espaço livre em disco?</h3>
                 <div class="wizard-btn-group">
@@ -331,7 +339,6 @@
                     <button class="wizard-btn" onclick="setSpace(500); nextStep(4)">Mais de 250 GB <span>🚀</span></button>
                 </div>
             </div>
-
             <div id="step4" class="step">
                 <h3>Quanto tem de Memória RAM?</h3>
                 <div class="wizard-btn-group">
@@ -340,7 +347,6 @@
                     <button class="wizard-btn" onclick="setRam(16); nextStep(5)">16 GB ou mais <span>🚀</span></button>
                 </div>
             </div>
-
             <div id="step5" class="step">
                 <h3>Qual o tipo de Disco?</h3>
                 <div class="wizard-btn-group">
@@ -348,7 +354,6 @@
                     <button class="wizard-btn" onclick="setDisk('SSD'); nextStep(6)">SSD / NVMe <span>⚡</span></button>
                 </div>
             </div>
-
             <div id="step6" class="step">
                 <h3 id="resultTitle">Analisando...</h3>
                 <div id="resultBox" class="result-box"></div>
@@ -413,9 +418,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Xentry Cars</span>
-                            <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&auto=format&fit=crop" 
-                                 alt="Mercedes Cars" class="img-soft" 
-                                 onerror="this.onerror=null;this.src='https://placehold.co/800x600/333/999?text=Mercedes+Xentry';">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=XENTRY+CARS+01-2025" alt="Mercedes Cars" class="img-soft">
                             <div class="info-soft">
                                 <h3>Xentry Cars (Ligeiros)</h3>
                                 <p class="desc-soft" data-lang="desc_merc_cars">Diagnóstico completo para ligeiros. Inclui DAS e HHT. V: 01/2025.</p>
@@ -431,9 +434,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Xentry Trucks</span>
-                            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=800&auto=format&fit=crop" 
-                                 alt="Mercedes Trucks" class="img-soft"
-                                 onerror="this.onerror=null;this.src='https://placehold.co/800x600/333/999?text=Xentry+Trucks';">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=XENTRY+TRUCKS" alt="Mercedes Trucks" class="img-soft">
                             <div class="info-soft">
                                 <h3>Xentry Trucks (Pesados)</h3>
                                 <p class="desc-soft" data-lang="desc_merc_trucks">Para Pesados, Autocarros e Motores Industriais. V: 01/2025.</p>
@@ -449,7 +450,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Engenharia</span>
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="DTS Monaco" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=DTS+MONACO+8+E+9" alt="DTS Monaco" class="img-soft">
                             <div class="info-soft">
                                 <h3>DTS & Vediamo</h3>
                                 <p class="desc-soft" data-lang="desc_merc_dts">Software de desenvolvimento avançado. Flash e Coding SCN.</p>
@@ -465,7 +466,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Info & Parts</span>
-                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop" alt="WIS EPC" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=WIS+EPC+STARFINDER" alt="WIS EPC" class="img-soft">
                             <div class="info-soft">
                                 <h3>WIS / EPC / Starfinder</h3>
                                 <p class="desc-soft" data-lang="desc_merc_manuals">Esquemas (WIS/Starfinder), Peças (EPC), Preços (PL73) e SDMedia.</p>
@@ -481,7 +482,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Unlock Tools</span>
-                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=800&auto=format&fit=crop" alt="MB Tools" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=MB+TOOLS+UNLOCK" alt="MB Tools" class="img-soft">
                             <div class="info-soft">
                                 <h3>MBTools & Unlockers</h3>
                                 <p class="desc-soft" data-lang="desc_merc_tools">Suite de ferramentas para desbloqueio, seedkeys e FDOK.</p>
@@ -497,7 +498,7 @@
                         </div>
                         <div class="card-soft card-fullpack">
                             <span class="badge-gold">👑 BEST SELLER</span>
-                            <img src="https://images.unsplash.com/photo-1621504450168-38f647319936?q=80&w=1200&auto=format&fit=crop" alt="Full Pack" class="img-soft" style="height: 220px;">
+                            <img src="https://images.unsplash.com/photo-1605218427306-633ba87c9759?auto=format&fit=crop&w=1200&q=80" alt="Full Pack" class="img-soft" style="height: 220px;">
                             <div class="info-soft">
                                 <h3>MERCEDES FULL PACK 2025</h3>
                                 <p class="desc-soft" style="color: #fff;" data-lang="desc_merc_full">TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriais.</p>
@@ -519,7 +520,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Nativo + Expert</span>
-                            <img src="https://images.unsplash.com/photo-1555529733-0e670560f7e1?q=80&w=800&auto=format&fit=crop" alt="BMW Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=ISTA+D+AND+P" alt="BMW Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>ISTA+ & ESYS</h3>
                                 <p class="desc-soft" data-lang="desc_bmw">Diagnóstico (ISTA-D) e Programação (ISTA-P/ESYS). Inclui bases de dados BLP/SDP e tutoriais.</p>
@@ -541,7 +542,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Diagbox 9.193</span>
-                            <img src="https://images.unsplash.com/photo-1626071477742-c8497fa327c9?q=80&w=800&auto=format&fit=crop" alt="PSA Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=DIAGBOX+9.193" alt="PSA Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Diagbox 9.193 (Nativo)</h3>
                                 <p class="desc-soft" data-lang="desc_psa_new">Versão mais recente para veículos até 2024/25. Suporta Peugeot, Citroën, DS e Opel.</p>
@@ -557,7 +558,7 @@
                         </div>
                          <div class="card-soft">
                             <span class="tipo-instalacao">Diagbox 7.83</span>
-                            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" alt="PSA Old" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=DIAGBOX+7.83" alt="PSA Old" class="img-soft">
                             <div class="info-soft">
                                 <h3>Diagbox 7.83 (Offline)</h3>
                                 <p class="desc-soft" data-lang="desc_psa_old">Versão clássica estável para codificação offline em modelos mais antigos.</p>
@@ -579,7 +580,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Clip V240</span>
-                            <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=800&auto=format&fit=crop" alt="Renault Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=RENAULT+CLIP+2.40" alt="Renault Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Renault Can Clip V240</h3>
                                 <p class="desc-soft" data-lang="desc_renault">Software oficial. Leitura de falhas, codificação, reprogramação e Reprog Database.</p>
@@ -601,7 +602,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Pathfinder</span>
-                            <img src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?q=80&w=800&auto=format&fit=crop" alt="JLR Pathfinder" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=JLR+PATHFINDER" alt="JLR Pathfinder" class="img-soft">
                             <div class="info-soft">
                                 <h3>JLR Pathfinder</h3>
                                 <p class="desc-soft" data-lang="desc_pathfinder">Para veículos novos (DoIP) Jaguar e Land Rover (após 2017). Diagnóstico oficial.</p>
@@ -617,7 +618,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">SDD Online</span>
-                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop" alt="JLR SDD" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=JLR+SDD+ONLINE" alt="JLR SDD" class="img-soft">
                             <div class="info-soft">
                                 <h3>JLR SDD (Online)</h3>
                                 <p class="desc-soft" data-lang="desc_sdd">Symptom Driven Diagnostics para modelos até 2017. Acesso Online completo.</p>
@@ -633,7 +634,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Engineering</span>
-                            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=800&auto=format&fit=crop" alt="JLR Tools" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=SEEDKEY+CCF+TOOLS" alt="JLR Tools" class="img-soft">
                             <div class="info-soft">
                                 <h3>JLR SeedKey & CCF Tools</h3>
                                 <p class="desc-soft" data-lang="desc_jlr_seed">Gerador de seedkeys e ferramentas para edição de ficheiros CCF (Car Configuration File).</p>
@@ -655,7 +656,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Techstream TIS</span>
-                            <img src="https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?q=80&w=800&auto=format&fit=crop" alt="Toyota Tech" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=TOYOTA+TECHSTREAM" alt="Toyota Tech" class="img-soft">
                             <div class="info-soft">
                                 <h3>Toyota Techstream</h3>
                                 <p class="desc-soft" data-lang="desc_toyota">Cobertura total para veículos Asiáticos. Versão mais recente disponível.</p>
@@ -671,7 +672,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Toyota EPC</span>
-                            <img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?q=80&w=800&auto=format&fit=crop" alt="Toyota EPC" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=TOYOTA+EPC" alt="Toyota EPC" class="img-soft">
                             <div class="info-soft">
                                 <h3>Toyota EPC (Parts)</h3>
                                 <p class="desc-soft" data-lang="desc_toyota_epc">Catálogo eletrónico de peças oficial. Identificação por VIN e esquemas de montagem.</p>
@@ -693,7 +694,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">MultiECUScan</span>
-                            <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop" alt="Fiat Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=MULTIECUSCAN" alt="Fiat Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>FCA Solutions</h3>
                                 <p class="desc-soft" data-lang="desc_fiat">Diagnóstico para Alfa, Fiat, Lancia e Jeep. Suporte para SGW Bypass.</p>
@@ -715,7 +716,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">FDRS / Forscan</span>
-                            <img src="https://images.unsplash.com/photo-1517153295259-74eb0b416cee?q=80&w=800&auto=format&fit=crop" alt="Ford Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=FORD+FDRS+FORSCAN" alt="Ford Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Ford FDRS & FJDS</h3>
                                 <p class="desc-soft" data-lang="desc_ford">Acesso aos servidores Ford para programação de módulos novos.</p>
@@ -737,7 +738,7 @@
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">GDS2 / Tech2Win</span>
-                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop" alt="GM Diag" class="img-soft">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=GM+GDS2" alt="GM Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>GM GDS2</h3>
                                 <p class="desc-soft" data-lang="desc_gm">Para Chevrolet e Opel (antigos). Sistema Global de Diagnóstico.</p>
@@ -962,7 +963,7 @@
                 }
             });
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            event.target.closest('.lang-btn').classList.add('active'); // Corrigido para apanhar o botão, não a imagem
         }
     </script>
 </body>
