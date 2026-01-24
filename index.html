@@ -44,7 +44,7 @@
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- CABEÇALHO (ATUALIZADO) --- */
+        /* --- CABEÇALHO --- */
         header {
             background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -56,10 +56,8 @@
         }
         
         .header-left, .header-right { display: flex; align-items: center; gap: 15px; }
-
         .logo-img { height: 45px; width: auto; display: block; }
         
-        /* Bandeiras */
         .lang-switch { display: flex; gap: 8px; align-items: center; margin-left: 10px; }
         .lang-btn { 
             cursor: pointer; transition: transform 0.2s; border: none; background: none; padding: 0;
@@ -75,14 +73,12 @@
         nav a { color: #0f172a; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; } 
         nav a:hover { color: var(--cor-destaque); }
         
-        /* Botões do Header */
         .btn-cta {
             background: linear-gradient(135deg, var(--cor-destaque), #1d4ed8); 
             color: #fff; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
             box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4); white-space: nowrap;
         }
         
-        /* Botão Suporte no Header */
         .btn-support-header {
             background-color: var(--cor-urgente);
             color: #fff; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
@@ -90,7 +86,6 @@
             box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); animation: pulse 2s infinite;
         }
         .btn-support-header:hover { transform: translateY(-2px); background-color: #dc2626; }
-        
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 
         /* --- HERO --- */
@@ -167,7 +162,11 @@
         #radio-toyota:checked ~ .tabs-container .tabs-nav label[for="radio-toyota"],
         #radio-fiat:checked ~ .tabs-container .tabs-nav label[for="radio-fiat"],
         #radio-ford:checked ~ .tabs-container .tabs-nav label[for="radio-ford"],
-        #radio-gm:checked ~ .tabs-container .tabs-nav label[for="radio-gm"] {
+        #radio-gm:checked ~ .tabs-container .tabs-nav label[for="radio-gm"],
+        #radio-univ:checked ~ .tabs-container .tabs-nav label[for="radio-univ"],
+        #radio-brand:checked ~ .tabs-container .tabs-nav label[for="radio-brand"],
+        #radio-pc:checked ~ .tabs-container .tabs-nav label[for="radio-pc"]
+        {
             background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
             border-left: 3px solid var(--cor-destaque); color: white; padding-left: 25px;
         }
@@ -176,6 +175,7 @@
         .tab-pane { display: none; animation: slideUp 0.4s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Mostrar Conteúdo */
         #radio-merc:checked ~ .tabs-container .tabs-content #content-merc,
         #radio-bmw:checked ~ .tabs-container .tabs-content #content-bmw,
         #radio-psa:checked ~ .tabs-container .tabs-content #content-psa,
@@ -184,19 +184,11 @@
         #radio-toyota:checked ~ .tabs-container .tabs-content #content-toyota,
         #radio-fiat:checked ~ .tabs-container .tabs-content #content-fiat,
         #radio-ford:checked ~ .tabs-container .tabs-content #content-ford,
-        #radio-gm:checked ~ .tabs-container .tabs-content #content-gm { display: block; }
-
-        /* Hardware Tabs Logic */
-        #radio-univ:checked ~ .tabs-container .tabs-nav label[for="radio-univ"],
-        #radio-brand:checked ~ .tabs-container .tabs-nav label[for="radio-brand"],
-        #radio-pc:checked ~ .tabs-container .tabs-nav label[for="radio-pc"] {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
-            border-left: 3px solid var(--cor-destaque); color: white; padding-left: 25px;
-        }
+        #radio-gm:checked ~ .tabs-container .tabs-content #content-gm,
         #radio-univ:checked ~ .tabs-container .tabs-content #content-univ,
         #radio-brand:checked ~ .tabs-container .tabs-content #content-brand,
-        #radio-pc:checked ~ .tabs-container .tabs-content #content-pc { display: block; }
-
+        #radio-pc:checked ~ .tabs-container .tabs-content #content-pc
+        { display: block; }
 
         .brand-title-content { 
             font-size: 2rem; color: #fff; margin-bottom: 2rem; border-bottom: 2px solid var(--cor-destaque); 
@@ -213,8 +205,7 @@
         .card-soft:hover { transform: translateY(-8px); border-color: var(--cor-destaque); box-shadow: 0 10px 40px -10px var(--cor-destaque-brilho); }
         
         .card-fullpack {
-            grid-column: 1 / -1; 
-            border: 2px solid var(--cor-gold);
+            grid-column: 1 / -1; border: 2px solid var(--cor-gold);
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(30, 41, 59, 0.9));
         }
         .card-fullpack:hover { box-shadow: 0 0 50px rgba(251, 191, 36, 0.3); border-color: #fff; }
@@ -230,7 +221,7 @@
         }
 
         .img-soft { width: 100%; height: 180px; object-fit: cover; opacity: 0.9; transition: opacity 0.3s; }
-        .img-soft:not([src]) { background-color: #334155; } /* Fallback */
+        .img-soft:not([src]) { background-color: #334155; } 
 
         .info-soft { padding: 1.5rem; }
         .info-soft h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #fff; font-weight: 700; }
@@ -246,6 +237,29 @@
         .preco { font-size: 1.3rem; font-weight: 800; color: #fff; }
         .btn-detalhe { color: var(--cor-destaque); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; cursor: pointer; }
         .btn-detalhe:hover { color: #fff; text-shadow: 0 0 10px var(--cor-destaque); }
+
+        /* --- SERVIÇOS TÉCNICOS --- */
+        .grid-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+        .card-serv { 
+            padding: 2rem; background: var(--cor-glass); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+            text-align: center; transition: 0.3s;
+        }
+        .card-serv:hover { transform: translateY(-5px); border-color: var(--cor-verde); }
+        .icon-serv { font-size: 3rem; margin-bottom: 1rem; }
+        .card-serv h3 { margin-bottom: 10px; color: #fff; }
+        .card-serv p { color: #94a3b8; font-size: 0.9rem; }
+
+        /* --- FERRAMENTAS ÚTEIS --- */
+        .grid-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .card-tool { 
+            background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.1); 
+            padding: 1.5rem; border-radius: 10px; display: flex; align-items: center; gap: 15px; transition: 0.3s;
+        }
+        .card-tool:hover { border-color: var(--cor-destaque); background: rgba(59, 130, 246, 0.1); }
+        .tool-icon { font-size: 2.5rem; }
+        .tool-info h4 { color: #fff; margin-bottom: 5px; font-size: 1.1rem; }
+        .tool-info p { color: #94a3b8; font-size: 0.85rem; margin-bottom: 5px; }
+        .tool-link { color: var(--cor-destaque); font-weight: bold; font-size: 0.9rem; }
 
         /* --- WIZARD E CHATBOT --- */
         .chatbot-trigger {
@@ -309,18 +323,6 @@
             padding: 5px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-top: 5px;
         }
 
-        /* SERVIÇOS */
-        .grid-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
-        .card-serv { 
-            padding: 2rem; background: var(--cor-glass); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
-            text-align: center; transition: 0.3s;
-        }
-        .card-serv:hover { transform: translateY(-5px); border-color: var(--cor-verde); }
-        .icon-serv { font-size: 3rem; margin-bottom: 1rem; }
-        .card-serv h3 { margin-bottom: 10px; color: #fff; }
-        .card-serv p { color: #94a3b8; font-size: 0.9rem; }
-
-        /* Botão WhatsApp Flutuante */
         .whatsapp-float {
             position: fixed; bottom: 30px; left: 30px;
             background: #25D366; color: white;
@@ -332,7 +334,6 @@
         }
         .whatsapp-float:hover { transform: scale(1.1); }
 
-        /* FOOTER */
         footer { background: #020617; padding: 4rem 5%; text-align: center; border-top: 1px solid #1e293b; margin-top: auto; }
         .footer-logo { 
             max-width: 250px; margin-bottom: 25px; background-color: white; 
@@ -345,25 +346,18 @@
             nav { display: none; }
             .header-left { gap: 10px; }
             .header-right { gap: 10px; }
-            
-            /* Ajuste Header Mobile */
             header { padding: 0.5rem; }
             .lang-switch { margin-left: 5px; gap: 5px; }
             .lang-btn img { width: 20px; height: 20px; }
             .logo-img { height: 35px; }
-            
-            /* Botão Suporte Mobile */
-            .btn-support-header span { display: none; } /* Esconde texto */
+            .btn-support-header span { display: none; }
             .btn-support-header::before { content: '📥'; margin-right: 0; }
-            
             .box-download { width: 100%; padding: 1.5rem; }
             .btn-download { width: 100%; justify-content: center; font-size: 1rem; }
-            
             .tabs-container { flex-direction: column; background: transparent; border: none; padding: 0; }
             .tabs-nav { border-right: none; padding-right: 0; padding-bottom: 1rem; flex-direction: row; overflow-x: auto; white-space: nowrap; border-bottom: 1px solid #334155; }
             .tab-label { padding: 10px 15px; font-size: 0.9rem; min-width: 140px; justify-content: center; }
             .tabs-content { padding-left: 0; padding-top: 1rem; }
-            
             .chatbot-trigger { width: 50px; height: 50px; font-size: 24px; bottom: 20px; right: 20px; }
             .whatsapp-float { bottom: 20px; left: 20px; width: 50px; height: 50px; font-size: 28px; }
             .wizard-content { width: 95%; padding: 1.5rem; }
@@ -377,7 +371,6 @@
             <a href="#inicio">
                 <img src="m-auto.png" alt="M-Auto" class="logo-img">
             </a>
-            
             <div class="lang-switch">
                 <button onclick="changeLang('pt')" class="lang-btn active" title="Português"><img src="https://flagcdn.com/w40/pt.png" alt="PT"></button>
                 <button onclick="changeLang('en')" class="lang-btn" title="English"><img src="https://flagcdn.com/w40/gb.png" alt="EN"></button>
@@ -396,15 +389,12 @@
         </nav>
 
         <div class="header-right">
-            <a href="https://github.com/mclaudiopt/m-auto.online/releases/download/Client/Mauto.exe" class="btn-support-header" data-lang="btn_support">
-                <span>📥 Suporte</span>
-            </a>
+            <a href="https://github.com/mclaudiopt/m-auto.online/releases/download/Client/Mauto.exe" class="btn-support-header" data-lang="btn_support"><span>📥 Suporte</span></a>
             <a href="#contacto" class="btn-cta" data-lang="btn_quote">Orçamento</a>
         </div>
     </header>
 
     <div class="chatbot-trigger" onclick="openWizard()">🤖</div>
-    
     <a href="https://wa.me/351910000000?text=Olá,%20tenho%20interesse." class="whatsapp-float" target="_blank" title="WhatsApp">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width: 35px; height: 35px;">
     </a>
@@ -515,7 +505,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Xentry Cars</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=XENTRY+CARS+01-2025" alt="Mercedes Cars" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=600&q=80" alt="Mercedes" class="img-soft">
                             <div class="info-soft">
                                 <h3>Xentry Cars (Ligeiros)</h3>
                                 <p class="desc-soft" data-lang="desc_merc_cars">Diagnóstico completo para ligeiros. Inclui DAS e HHT. V: 01/2025.</p>
@@ -525,7 +515,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Xentry Trucks</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=XENTRY+TRUCKS" alt="Mercedes Trucks" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1519682577862-22b62b233c1c?auto=format&fit=crop&w=600&q=80" alt="Trucks" class="img-soft">
                             <div class="info-soft">
                                 <h3>Xentry Trucks (Pesados)</h3>
                                 <p class="desc-soft" data-lang="desc_merc_trucks">Para Pesados, Autocarros e Motores Industriais. V: 01/2025.</p>
@@ -535,7 +525,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Engenharia</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=DTS+MONACO+8+E+9" alt="DTS Monaco" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="Code" class="img-soft">
                             <div class="info-soft">
                                 <h3>DTS & Vediamo</h3>
                                 <p class="desc-soft" data-lang="desc_merc_dts">Software de desenvolvimento avançado. Flash e Coding SCN.</p>
@@ -545,7 +535,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Info & Parts</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=WIS+EPC+STARFINDER" alt="WIS EPC" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80" alt="Manuals" class="img-soft">
                             <div class="info-soft">
                                 <h3>WIS / EPC / Starfinder</h3>
                                 <p class="desc-soft" data-lang="desc_merc_manuals">Esquemas (WIS/Starfinder), Peças (EPC), Preços (PL73) e SDMedia.</p>
@@ -555,7 +545,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Unlock Tools</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=MB+TOOLS+UNLOCK" alt="MB Tools" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1604514378060-45c910173302?auto=format&fit=crop&w=600&q=80" alt="Tools" class="img-soft">
                             <div class="info-soft">
                                 <h3>MBTools & Unlockers</h3>
                                 <p class="desc-soft" data-lang="desc_merc_tools">Suite de ferramentas para desbloqueio, seedkeys e FDOK.</p>
@@ -565,14 +555,11 @@
                         </div>
                         <div class="card-soft card-fullpack">
                             <span class="badge-gold">👑 BEST SELLER</span>
-                            <img src="https://placehold.co/1200x220/fbbf24/000?text=MERCEDES+FULL+PACK+2025" alt="Full Pack" class="img-soft" style="height: 220px;">
+                            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80" alt="Full Pack" class="img-soft" style="height: 220px;">
                             <div class="info-soft">
                                 <h3>MERCEDES FULL PACK 2025</h3>
                                 <p class="desc-soft" style="color: #fff;" data-lang="desc_merc_full">TUDO INCLUÍDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriais.</p>
-                                <div class="specs">
-                                    <div class="spec-item" style="background:var(--cor-gold); color:#000; font-weight:bold;">🚀 Pack Completo</div>
-                                    <div class="spec-item">📀 Bases Dados Full</div>
-                                </div>
+                                <div class="specs"><div class="spec-item" style="background:var(--cor-gold); color:#000; font-weight:bold;">🚀 Pack Completo</div><div class="spec-item">📀 Bases Dados Full</div></div>
                                 <div class="preco-row"><div class="preco" style="color: var(--cor-gold);">MELHOR PREÇO</div><a href="#contacto" class="btn-detalhe" style="color:var(--cor-gold); border:1px solid var(--cor-gold); padding:5px 15px; border-radius:5px;" data-lang="btn_order">ENCOMENDAR AGORA →</a></div>
                             </div>
                         </div>
@@ -583,7 +570,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Nativo + Expert</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=BMW+ISTA+%2B+ESYS" alt="BMW Diag" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80" alt="BMW" class="img-soft">
                             <div class="info-soft">
                                 <h3>ISTA+ & ESYS</h3>
                                 <p class="desc-soft" data-lang="desc_bmw">Diagnóstico (ISTA-D) e Programação (ISTA-P/ESYS). Inclui bases de dados BLP/SDP e tutoriais.</p>
@@ -598,7 +585,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Diagbox 9.193</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=DIAGBOX+9.193" alt="PSA Diag" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Peugeot" class="img-soft">
                             <div class="info-soft">
                                 <h3>Diagbox 9.193 (Nativo)</h3>
                                 <p class="desc-soft" data-lang="desc_psa_new">Versão mais recente para veículos até 2024/25. Suporta Peugeot, Citroën, DS e Opel.</p>
@@ -608,7 +595,7 @@
                         </div>
                          <div class="card-soft">
                             <span class="tipo-instalacao">Diagbox 7.83</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=DIAGBOX+7.83" alt="PSA Old" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80" alt="PSA Old" class="img-soft">
                             <div class="info-soft">
                                 <h3>Diagbox 7.83 (Offline)</h3>
                                 <p class="desc-soft" data-lang="desc_psa_old">Versão clássica estável para codificação offline em modelos mais antigos.</p>
@@ -618,19 +605,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="content-renault"><h3 class="brand-title-content">Renault</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">Clip V240</span><img src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=600&q=80" alt="Renault" class="img-soft"><div class="info-soft"><h3>Renault Can Clip V240</h3><p class="desc-soft" data-lang="desc_renault">Software oficial Renault/Dacia. Reprog Database incl.</p><div class="specs"><div class="spec-item">📅 V 2.40</div><div class="spec-item">🔧 Reprog DB</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
                 <div class="tab-pane" id="content-jlr">
                     <h3 class="brand-title-content">Jaguar Land Rover</h3>
                     <div class="grid-soft">
-                        <div class="card-soft"><span class="tipo-instalacao">Pathfinder</span><img src="https://placehold.co/600x400/1e293b/FFF?text=JLR+PATHFINDER" class="img-soft"><div class="info-soft"><h3>JLR Pathfinder</h3><p class="desc-soft" data-lang="desc_pathfinder">Diagnóstico oficial (DoIP) Jaguar Land Rover pós-2017.</p><div class="specs"><div class="spec-item">📅 V 3.74</div><div class="spec-item">💻 DoIP VCI</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div>
-                        <div class="card-soft"><span class="tipo-instalacao">SDD Online</span><img src="https://placehold.co/600x400/1e293b/FFF?text=JLR+SDD+ONLINE" class="img-soft"><div class="info-soft"><h3>JLR SDD (Online)</h3><p class="desc-soft" data-lang="desc_sdd">Symptom Driven Diagnostics até 2017. Acesso Online.</p><div class="specs"><div class="spec-item">📅 V 1.64</div><div class="spec-item">☁️ Online</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div>
-                        <div class="card-soft"><span class="tipo-instalacao">Engineering</span><img src="https://placehold.co/600x400/1e293b/FFF?text=JLR+SEEDKEY+CCF" class="img-soft"><div class="info-soft"><h3>JLR SeedKey & CCF</h3><p class="desc-soft" data-lang="desc_jlr_seed">Gerador de seedkeys e editor de ficheiros CCF.</p><div class="specs"><div class="spec-item">🔑 SeedKey</div><div class="spec-item">📝 CCF Edit</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div>
+                        <div class="card-soft"><span class="tipo-instalacao">Pathfinder</span><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80" alt="JLR" class="img-soft"><div class="info-soft"><h3>JLR Pathfinder</h3><p class="desc-soft" data-lang="desc_pathfinder">Diagnóstico oficial (DoIP) Jaguar Land Rover pós-2017.</p><div class="specs"><div class="spec-item">📅 V 3.74</div><div class="spec-item">💻 DoIP VCI</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div>
+                        <div class="card-soft"><span class="tipo-instalacao">SDD Online</span><img src="https://images.unsplash.com/photo-1562920617-1fb2946ed82d?auto=format&fit=crop&w=600&q=80" alt="SDD" class="img-soft"><div class="info-soft"><h3>JLR SDD (Online)</h3><p class="desc-soft" data-lang="desc_sdd">Symptom Driven Diagnostics até 2017. Acesso Online.</p><div class="specs"><div class="spec-item">📅 V 1.64</div><div class="spec-item">☁️ Online</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div>
+                        <div class="card-soft"><span class="tipo-instalacao">Engineering</span><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="Seedkey" class="img-soft"><div class="info-soft"><h3>JLR SeedKey & CCF</h3><p class="desc-soft" data-lang="desc_jlr_seed">Gerador de seedkeys e editor de ficheiros CCF.</p><div class="specs"><div class="spec-item">🔑 SeedKey</div><div class="spec-item">📝 CCF Edit</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div>
                     </div>
                 </div>
-                <div class="tab-pane" id="content-renault"><h3 class="brand-title-content">Renault</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">Clip V240</span><img src="https://placehold.co/600x400/1e293b/FFF?text=RENAULT+CLIP+V240" class="img-soft"><div class="info-soft"><h3>Renault Can Clip V240</h3><p class="desc-soft" data-lang="desc_renault">Software oficial Renault/Dacia. Reprog Database incl.</p><div class="specs"><div class="spec-item">📅 V 2.40</div><div class="spec-item">🔧 Reprog DB</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
-                <div class="tab-pane" id="content-toyota"><h3 class="brand-title-content">Toyota</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">Techstream</span><img src="https://placehold.co/600x400/1e293b/FFF?text=TOYOTA+TECHSTREAM" class="img-soft"><div class="info-soft"><h3>Toyota Techstream</h3><p class="desc-soft" data-lang="desc_toyota">Diagnóstico global Toyota/Lexus.</p><div class="specs"><div class="spec-item">📅 V18</div><div class="spec-item">💻 PassThru</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div><div class="card-soft"><span class="tipo-instalacao">EPC Parts</span><img src="https://placehold.co/600x400/1e293b/FFF?text=TOYOTA+EPC" class="img-soft"><div class="info-soft"><h3>Toyota EPC</h3><p class="desc-soft" data-lang="desc_toyota_epc">Catálogo de peças oficial.</p><div class="specs"><div class="spec-item">🔍 VIN</div><div class="spec-item">🛠️ Peças</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
-                <div class="tab-pane" id="content-fiat"><h3 class="brand-title-content">FCA</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">MultiECUScan</span><img src="https://placehold.co/600x400/1e293b/FFF?text=MULTIECUSCAN" class="img-soft"><div class="info-soft"><h3>FCA Solutions</h3><p class="desc-soft" data-lang="desc_fiat">Fiat, Alfa, Lancia, Jeep. SGW Support.</p><div class="specs"><div class="spec-item">📅 2024</div><div class="spec-item">🔓 SGW</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
-                <div class="tab-pane" id="content-ford"><h3 class="brand-title-content">Ford</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">FDRS</span><img src="https://placehold.co/600x400/1e293b/FFF?text=FORD+FDRS" class="img-soft"><div class="info-soft"><h3>Ford FDRS & FJDS</h3><p class="desc-soft" data-lang="desc_ford">Sistema Online oficial Ford.</p><div class="specs"><div class="spec-item">📅 Online</div><div class="spec-item">🔧 Pats</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
-                <div class="tab-pane" id="content-gm"><h3 class="brand-title-content">GM</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">GDS2</span><img src="https://placehold.co/600x400/1e293b/FFF?text=GM+GDS2" class="img-soft"><div class="info-soft"><h3>GM GDS2</h3><p class="desc-soft" data-lang="desc_gm">Chevrolet e Opel antigos.</p><div class="specs"><div class="spec-item">📅 2024</div><div class="spec-item">💻 MDI</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
+                <div class="tab-pane" id="content-toyota"><h3 class="brand-title-content">Toyota</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">Techstream</span><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80" alt="Toyota" class="img-soft"><div class="info-soft"><h3>Toyota Techstream</h3><p class="desc-soft" data-lang="desc_toyota">Diagnóstico global Toyota/Lexus.</p><div class="specs"><div class="spec-item">📅 V18</div><div class="spec-item">💻 PassThru</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div><div class="card-soft"><span class="tipo-instalacao">EPC Parts</span><img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=600&q=80" alt="EPC" class="img-soft"><div class="info-soft"><h3>Toyota EPC</h3><p class="desc-soft" data-lang="desc_toyota_epc">Catálogo de peças oficial.</p><div class="specs"><div class="spec-item">🔍 VIN</div><div class="spec-item">🛠️ Peças</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
+                <div class="tab-pane" id="content-fiat"><h3 class="brand-title-content">FCA</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">MultiECUScan</span><img src="https://images.unsplash.com/photo-1622184773477-4c307b34fb33?auto=format&fit=crop&w=600&q=80" alt="Fiat" class="img-soft"><div class="info-soft"><h3>FCA Solutions</h3><p class="desc-soft" data-lang="desc_fiat">Fiat, Alfa, Lancia, Jeep. SGW Support.</p><div class="specs"><div class="spec-item">📅 2024</div><div class="spec-item">🔓 SGW</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
+                <div class="tab-pane" id="content-ford"><h3 class="brand-title-content">Ford</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">FDRS</span><img src="https://images.unsplash.com/photo-1553440962-295e7455b124?auto=format&fit=crop&w=600&q=80" alt="Ford" class="img-soft"><div class="info-soft"><h3>Ford FDRS & FJDS</h3><p class="desc-soft" data-lang="desc_ford">Sistema Online oficial Ford.</p><div class="specs"><div class="spec-item">📅 Online</div><div class="spec-item">🔧 Pats</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
+                <div class="tab-pane" id="content-gm"><h3 class="brand-title-content">GM</h3><div class="grid-soft"><div class="card-soft"><span class="tipo-instalacao">GDS2</span><img src="https://images.unsplash.com/photo-1636768861747-64d80936143c?auto=format&fit=crop&w=600&q=80" alt="GM" class="img-soft"><div class="info-soft"><h3>GM GDS2</h3><p class="desc-soft" data-lang="desc_gm">Chevrolet e Opel antigos.</p><div class="specs"><div class="spec-item">📅 2024</div><div class="spec-item">💻 MDI</div></div><div class="preco-row"><div class="preco" data-lang="price">Sob Consulta</div><a href="#contacto" class="btn-detalhe" data-lang="btn_order">Ver →</a></div></div></div></div></div>
             </div>
         </div>
     </section>
@@ -658,7 +645,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Openport</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=TACTRIX+OPENPORT" alt="Openport" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80" alt="Openport" class="img-soft">
                             <div class="info-soft">
                                 <h3>Tactrix Openport 2.0</h3>
                                 <p class="desc-soft" data-lang="desc_openport">Ideal para Xentry Passthru, Techstream e tuning.</p>
@@ -667,7 +654,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Scanmatik</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=SCANMATIK+2+PRO" alt="Scanmatik" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=600&q=80" alt="Scanmatik" class="img-soft">
                             <div class="info-soft">
                                 <h3>Scanmatik 2 Pro</h3>
                                 <p class="desc-soft" data-lang="desc_scanmatik">O melhor J2534 do mercado. Alta velocidade e estabilidade.</p>
@@ -681,7 +668,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Mercedes</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=MERCEDES+C4+DOIP" alt="C4 Multiplexer" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80" alt="C4 Multiplexer" class="img-soft">
                             <div class="info-soft">
                                 <h3>SD Connect C4 DoIP</h3>
                                 <p class="desc-soft" data-lang="desc_c4">Hardware oficial para Mercedes Ligeiros e Pesados.</p>
@@ -690,7 +677,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">BMW</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=BMW+ICOM+NEXT" alt="BMW ICOM" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1599321453267-33230be6286f?auto=format&fit=crop&w=600&q=80" alt="BMW ICOM" class="img-soft">
                             <div class="info-soft">
                                 <h3>BMW ICOM Next</h3>
                                 <p class="desc-soft" data-lang="desc_icom">Interface A+B+C para diagnóstico completo BMW/Mini.</p>
@@ -704,7 +691,7 @@
                     <div class="grid-soft">
                         <div class="card-soft">
                             <span class="tipo-instalacao">Rugged</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=PANASONIC+CF-54" alt="Toughbook" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80" alt="Toughbook" class="img-soft">
                             <div class="info-soft">
                                 <h3>Panasonic Toughbook</h3>
                                 <p class="desc-soft" data-lang="desc_tough">Portáteis blindados recondicionados prontos para oficina.</p>
@@ -713,7 +700,7 @@
                         </div>
                         <div class="card-soft">
                             <span class="tipo-instalacao">Office</span>
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=LENOVO+THINKPAD" alt="Thinkpad" class="img-soft">
+                            <img src="https://images.unsplash.com/photo-1531297461136-82lw9z2.jpg?auto=format&fit=crop&w=600&q=80" alt="Thinkpad" class="img-soft">
                             <div class="info-soft">
                                 <h3>Lenovo Thinkpad</h3>
                                 <p class="desc-soft" data-lang="desc_lenovo">Portáteis profissionais i5/i7 com SSD rápido.</p>
@@ -721,6 +708,39 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ferramentas" class="seccao">
+        <div class="titulo-seccao">
+            <h2 data-lang="tools_title">Ferramentas <span>Úteis</span></h2>
+            <p style="color:#94a3b8;">Downloads essenciais para suporte.</p>
+        </div>
+        <div class="grid-tools">
+            <div class="card-tool">
+                <div class="tool-icon">🗜️</div>
+                <div class="tool-info">
+                    <h4>7-Zip</h4>
+                    <p>Descompactar ficheiros.</p>
+                    <a href="https://www.7-zip.org/download.html" target="_blank" class="tool-link">Download Oficial →</a>
+                </div>
+            </div>
+            <div class="card-tool">
+                <div class="tool-icon">💾</div>
+                <div class="tool-info">
+                    <h4>Rufus</h4>
+                    <p>Criar PEN USB Boot.</p>
+                    <a href="https://rufus.ie/pt/" target="_blank" class="tool-link">Download Oficial →</a>
+                </div>
+            </div>
+            <div class="card-tool">
+                <div class="tool-icon">🛡️</div>
+                <div class="tool-info">
+                    <h4>Defender Control</h4>
+                    <p>Gerir Windows Defender.</p>
+                    <a href="https://www.sordum.org/9480/defender-control-v2-1/" target="_blank" class="tool-link">Sordum Page →</a>
                 </div>
             </div>
         </div>
@@ -831,13 +851,13 @@
 
             let productHTML = "";
             const products = {
-                mercFull: { name: "Mercedes Full Pack 2025", img: "https://placehold.co/300x200/fbbf24/000?text=MERCEDES+FULL" },
-                mercXentry: { name: "Xentry Cars 2025", img: "https://placehold.co/300x200/333/FFF?text=XENTRY" },
-                bmwIsta: { name: "BMW ISTA+ & ESYS", img: "https://placehold.co/300x200/333/FFF?text=ISTA" },
-                diagboxNew: { name: "Diagbox 9.193", img: "https://placehold.co/300x200/333/FFF?text=DIAGBOX+9" },
-                diagboxOld: { name: "Diagbox 7.83", img: "https://placehold.co/300x200/333/FFF?text=DIAGBOX+7" },
-                toyota: { name: "Toyota Techstream", img: "https://placehold.co/300x200/333/FFF?text=TOYOTA" },
-                ford: { name: "Ford FDRS", img: "https://placehold.co/300x200/333/FFF?text=FORD" }
+                mercFull: { name: "Mercedes Full Pack 2025", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=300&q=80" },
+                mercXentry: { name: "Xentry Cars 2025", img: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=300&q=80" },
+                bmwIsta: { name: "BMW ISTA+ & ESYS", img: "https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=300&q=80" },
+                diagboxNew: { name: "Diagbox 9.193", img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=300&q=80" },
+                diagboxOld: { name: "Diagbox 7.83", img: "https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=300&q=80" },
+                toyota: { name: "Toyota Techstream", img: "https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=300&q=80" },
+                ford: { name: "Ford FDRS", img: "https://images.unsplash.com/photo-1553440962-295e7455b124?auto=format&fit=crop&w=300&q=80" }
             };
 
             function createMiniCard(prod) {
@@ -871,6 +891,7 @@
                 cat_title: "Catálogo", cat_subtitle: "Selecione a marca para ver as novidades.", version_note: "ℹ️ Nota: Podem existir versões mais recentes não listadas. Consulte-nos.",
                 cat_hard_title: "Equipamento", cat_hard_subtitle: "Hardware de diagnóstico e PCs.",
                 price: "Sob Consulta", btn_order: "Encomendar →", footer_tag: "Especialistas em Software Automóvel",
+                tools_title: "Ferramentas <span>Úteis</span>",
                 
                 desc_openport: "Ideal para Xentry Passthru, Techstream e tuning.",
                 desc_scanmatik: "O melhor J2534 do mercado. Alta velocidade e estabilidade.",
@@ -915,6 +936,7 @@
                 cat_title: "Premium Catalog", cat_subtitle: "Select a brand to view software.", version_note: "ℹ️ Note: Newer versions may exist not listed here. Contact us.",
                 cat_hard_title: "Equipment", cat_hard_subtitle: "Diagnostic hardware and PCs.",
                 price: "Price on Request", btn_order: "Order Now →", footer_tag: "Automotive Software Specialists",
+                tools_title: "Useful <span>Tools</span>",
                 
                 desc_openport: "Ideal for Xentry Passthru, Techstream and tuning.",
                 desc_scanmatik: "Best J2534 on market. High speed/stability.",
@@ -959,6 +981,7 @@
                 cat_title: "Catalogue", cat_subtitle: "Sélectionnez une marque.", version_note: "ℹ️ Note : Des versions plus récentes peuvent exister. Contactez-nous.",
                 cat_hard_title: "Équipement", cat_hard_subtitle: "Matériel de diagnostic et PC.",
                 price: "Sur Demande", btn_order: "Commander →", footer_tag: "Spécialistes Logiciels Auto",
+                tools_title: "Outils <span>Utiles</span>",
                 
                 desc_openport: "Idéal pour Xentry Passthru, Techstream.",
                 desc_scanmatik: "Meilleur J2534. Rapide et stable.",
@@ -981,7 +1004,6 @@
                 desc_merc_manuals: "Schémas (WIS/Starfinder), Pièces (EPC), Prix (PL73) et SDMedia.",
                 desc_merc_tools: "Suite d'outils pour déverrouillage, calcul seedkey et FDOK.",
                 desc_merc_full: "TOUT INCLUS: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriels.",
-
                 desc_bmw: "Diagnostic (ISTA-D) et Programmation (ISTA-P/ESYS). Bases BLP/SDP et tutoriels inclus.",
                 desc_psa_new: "Dernière version pour véhicules jusqu'à 2024/25. Supporte Peugeot, Citroën, DS et Opel.",
                 desc_psa_old: "Version classique stable pour codage hors ligne sur anciens modèles.",
@@ -1004,6 +1026,7 @@
                 cat_title: "Catálogo", cat_subtitle: "Seleccione la marca.", version_note: "ℹ️ Nota: Pueden existir versiones más recientes. Consúltenos.",
                 cat_hard_title: "Equipamiento", cat_hard_subtitle: "Hardware de diagnóstico y PCs.",
                 price: "Consultar", btn_order: "Pedir →", footer_tag: "Especialistas en Software",
+                tools_title: "Herramientas <span>Útiles</span>",
                 
                 desc_openport: "Ideal para Xentry Passthru, Techstream.",
                 desc_scanmatik: "Mejor J2534. Rápido y estable.",
@@ -1026,7 +1049,6 @@
                 desc_merc_manuals: "Esquemas (WIS/Starfinder), Piezas (EPC), Precios (PL73) y SDMedia.",
                 desc_merc_tools: "Suite de herramientas para desbloqueo, cálculo seedkey y FDOK.",
                 desc_merc_full: "TODO INCLUIDO: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + MBTools + Tutoriales.",
-
                 desc_bmw: "Diagnóstico (ISTA-D) y Programación (ISTA-P/ESYS). Incluye bases BLP/SDP.",
                 desc_psa_new: "Última versión para vehículos hasta 2024/25. Soporta Peugeot, Citroën, DS y Opel.",
                 desc_psa_old: "Versión clásica estable para codificación offline en modelos antiguos.",
