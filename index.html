@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="M-Auto Online: Soluções de Diagnóstico Automóvel Profissional.">
+    <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
     <link rel="icon" type="image/png" href="m-auto.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>M-Auto Online | Diagnostic Solutions</title>
+    
+    <title>M-Auto Online | Soluções Profissionais</title>
 
     <style>
-        /* --- VARIAVEIS (TEMAS) --- */
+        /* --- 1. GESTÃO DE TEMAS (Variáveis) --- */
         :root {
             --bg-body: #020617;
             --bg-card: #1e293b;
@@ -18,85 +22,126 @@
             --text-muted: #94a3b8;
             --border: #334155;
             --accent: #3b82f6;
+            --accent-hover: #2563eb;
             --gold: #d97706;
             --shadow: rgba(0,0,0,0.3);
+            --header-h: 70px;
         }
 
         [data-theme="light"] {
-            --bg-body: #f1f5f9; --bg-card: #ffffff; --bg-nav: #e2e8f0; --text-main: #0f172a; --text-muted: #64748b; --border: #cbd5e1; --accent: #2563eb; --gold: #b45309; --shadow: rgba(0,0,0,0.1);
+            --bg-body: #f8fafc; --bg-card: #ffffff; --bg-nav: #e2e8f0; --text-main: #0f172a; --text-muted: #475569;
+            --border: #e2e8f0; --accent: #2563eb; --gold: #b45309; --shadow: rgba(0,0,0,0.1);
         }
         [data-theme="corporate"] {
-            --bg-body: #eff6ff; --bg-card: #ffffff; --bg-nav: #dbeafe; --text-main: #1e3a8a; --text-muted: #60a5fa; --border: #93c5fd; --accent: #1d4ed8; --gold: #ea580c; --shadow: rgba(30, 64, 175, 0.1);
+            --bg-body: #eff6ff; --bg-card: #ffffff; --bg-nav: #dbeafe; --text-main: #1e3a8a; --text-muted: #60a5fa;
+            --border: #93c5fd; --accent: #1d4ed8; --gold: #ea580c; --shadow: rgba(30, 64, 175, 0.1);
         }
         [data-theme="soft"] {
-            --bg-body: #fafaf9; --bg-card: #ffffff; --bg-nav: #e7e5e4; --text-main: #44403c; --text-muted: #78716c; --border: #d6d3d1; --accent: #ea580c; --gold: #a16207; --shadow: rgba(0,0,0,0.05);
+            --bg-body: #fafaf9; --bg-card: #ffffff; --bg-nav: #e7e5e4; --text-main: #44403c; --text-muted: #78716c;
+            --border: #d6d3d1; --accent: #ea580c; --gold: #a16207; --shadow: rgba(0,0,0,0.05);
         }
 
+        /* --- 2. RESET & ESTRUTURA --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
         body { 
             background-color: var(--bg-body); color: var(--text-main); 
             line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column;
+            overflow-x: hidden; /* Previne scroll horizontal */
             transition: background 0.3s, color 0.3s;
         }
 
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
+        ul { list-style: none; }
 
-        /* --- HEADER --- */
+        /* --- 3. CABEÇALHO FIXO --- */
         header {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
-            padding: 0 5%; height: 60px; position: fixed; width: 100%; top: 0; z-index: 1000;
+            padding: 0 5%; height: var(--header-h); position: fixed; width: 100%; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 4px 20px var(--shadow);
         }
-        .header-left, .header-right { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 32px; }
-        .brand-name { font-size: 1.1rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
-        
-        /* Botões Header */
-        .btn-cta { background: var(--accent); color: #fff; padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; }
-        .btn-support-header { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 5px; }
 
-        /* Theme Selector */
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .logo-link { display: flex; align-items: center; gap: 10px; }
+        .logo-img { height: 35px; width: auto; }
+        .brand-name { font-size: 1.2rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
+
+        .header-right { display: flex; align-items: center; gap: 15px; }
+
+        /* Botões do Header (Formatados) */
+        .btn-header-support {
+            background-color: #ef4444; color: white; border: none; 
+            padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+            display: flex; align-items: center; gap: 6px; transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+            animation: pulse 2s infinite;
+        }
+        .btn-header-support:hover { background-color: #dc2626; transform: translateY(-2px); }
+        
+        .btn-header-quote {
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: white; border: none; padding: 8px 16px; border-radius: 6px; 
+            font-weight: 600; font-size: 0.9rem; transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); display: flex; align-items: center; gap: 6px;
+        }
+        .btn-header-quote:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+
+        /* Seletor de Tema e Língua */
+        .controls-group { display: flex; align-items: center; gap: 10px; border-right: 1px solid var(--border); padding-right: 15px; margin-right: 5px; }
         .theme-select { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 4px; border-radius: 4px; font-size: 0.85rem; }
         .theme-select option { background: var(--bg-card); }
+        
+        .lang-btn { background: none; border: none; padding: 0; opacity: 0.6; transition: 0.2s; }
+        .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.1); }
+        .lang-btn img { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc; display: block; }
 
-        /* --- HERO --- */
-        .hero { margin-top: 60px; padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border); }
-        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
-        .hero p { color: var(--text-muted); }
+        /* --- 4. HERO --- */
+        .hero {
+            margin-top: var(--header-h); padding: 80px 20px 40px; text-align: center;
+            border-bottom: 1px solid var(--border);
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+        .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
 
-        /* --- MAIN NAV (Abas Principais) --- */
+        /* --- 5. NAVEGAÇÃO PRINCIPAL (Abas) --- */
         .main-nav {
             display: flex; justify-content: center; gap: 10px; padding: 15px;
             background: var(--bg-nav); border-bottom: 1px solid var(--border);
-            position: sticky; top: 60px; z-index: 900;
+            position: sticky; top: var(--header-h); z-index: 900;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         .nav-btn {
             background: transparent; border: 1px solid var(--border); color: var(--text-muted);
-            padding: 8px 20px; border-radius: 50px; font-weight: 600; transition: 0.3s;
+            padding: 10px 25px; border-radius: 50px; font-weight: 600; transition: 0.3s;
+            display: flex; align-items: center; gap: 8px; font-size: 0.95rem;
         }
         .nav-btn:hover { background: var(--bg-hover); color: var(--text-main); }
-        .nav-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .nav-btn.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 15px var(--shadow); }
 
-        /* --- LAYOUT CONTEÚDO --- */
-        .content-container { padding: 40px 5%; max-width: 1400px; margin: 0 auto; min-height: 600px; }
+        /* --- 6. LAYOUT DE CONTEÚDO --- */
+        .container { padding: 40px 5%; max-width: 1400px; margin: 0 auto; min-height: 600px; }
         
-        .section-view { display: none; animation: fadeIn 0.4s; }
-        .section-view.active { display: block; }
+        .section-panel { display: none; animation: fadeIn 0.4s; }
+        .section-panel.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Sidebar Layout (Esquerda: Menu, Direita: Grid) */
         .sidebar-layout { display: flex; gap: 30px; align-items: flex-start; }
         
-        /* MENU LATERAL (Marcas) - Estilo Limpo */
         .sidebar-menu { 
-            display: flex; flex-direction: column; gap: 2px; min-width: 220px; 
-            background: var(--bg-card); padding: 10px; border-radius: 10px; border: 1px solid var(--border);
+            display: flex; flex-direction: column; gap: 2px; min-width: 240px; flex-shrink: 0;
+            background: var(--bg-card); padding: 10px; border-radius: 12px; border: 1px solid var(--border);
         }
         .side-btn {
             background: transparent; border: none; text-align: left; padding: 12px 15px;
-            color: var(--text-muted); font-weight: 500; border-radius: 6px; transition: 0.2s;
-            border-left: 3px solid transparent; font-size: 0.95rem;
+            color: var(--text-muted); font-weight: 500; border-radius: 8px; transition: 0.2s;
+            border-left: 3px solid transparent; font-size: 0.95rem; display: flex; justify-content: space-between;
         }
         .side-btn:hover { background: var(--bg-hover); color: var(--text-main); }
         .side-btn.active { 
@@ -104,37 +149,39 @@
             border-left: 3px solid var(--accent); font-weight: 700; 
         }
 
-        /* ÁREA DIREITA (Conteúdo das Marcas) */
-        .content-area { flex-grow: 1; width: 100%; }
+        .content-area { flex-grow: 1; width: 100%; } /* Garante que ocupa o resto */
         .brand-content { display: none; animation: fadeIn 0.3s; }
         .brand-content.active { display: block; }
 
         .brand-header { 
-            font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; 
+            font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; 
             border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px;
             color: var(--text-main);
         }
 
-        /* --- GRID DE PRODUTOS --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        /* --- 7. GRID E CARTÕES --- */
+        .grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; width: 100%;
+        }
         
         .card { 
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; 
             overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
-            box-shadow: 0 4px 10px var(--shadow);
+            box-shadow: 0 4px 10px var(--shadow); position: relative;
         }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
         .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
-        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         
-        .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
         .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
         
         .specs { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
         .spec { 
             background: var(--bg-hover); padding: 4px 8px; border-radius: 4px; 
-            border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main);
+            border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main); font-weight: 600;
         }
         
         .card-footer { 
@@ -142,65 +189,94 @@
             border-top: 1px solid var(--border); padding-top: 15px;
         }
         .price { font-weight: 800; font-size: 1rem; color: var(--text-main); }
-        .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
+        .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; cursor: pointer; }
 
         /* Full Pack Destaque */
         .card.gold { border: 2px solid var(--gold); }
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
+        .badge-gold { position: absolute; top: 10px; right: 10px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
 
-        /* Outros Cards (Ferramentas/Serviços) */
+        /* --- 8. FERRAMENTAS E SERVIÇOS (Centrados) --- */
+        .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; justify-content: center; }
+        
         .tool-card {
             background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border);
             text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center;
         }
         .tool-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .tool-icon { font-size: 3rem; margin-bottom: 15px; }
-        .tool-btn { margin-top: auto; color: var(--accent); font-weight: 700; }
+        .tool-icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .tool-card h4 { margin-bottom: 10px; color: var(--text-main); }
+        .tool-link { color: var(--accent); font-weight: bold; margin-top: auto; }
 
-        /* --- BOT & MODAL --- */
-        .chatbot-btn {
-            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
-            background: var(--accent); color: white; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 20px var(--shadow);
-            z-index: 1500; border: none;
-        }
+        /* --- 9. BOTÕES FLUTUANTES E MODAIS --- */
         .whatsapp-float {
             position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px;
             background: #25D366; color: white; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 5px 20px var(--shadow);
-            z-index: 1500; transition: 0.3s;
+            align-items: center; justify-content: center; font-size: 35px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); z-index: 2000; transition: 0.3s;
         }
+        .whatsapp-float:hover { transform: scale(1.1); }
 
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .modal-box { background: var(--bg-card); padding: 2rem; border-radius: 15px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; color: var(--text-muted); border: none; background: none; }
+        .chatbot-btn {
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
+            background: var(--accent); color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 30px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); z-index: 2000; border: none; transition: 0.3s;
+        }
+        .chatbot-btn:hover { transform: scale(1.1); }
+
+        /* Modal Comum */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .modal-box {
+            background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px;
+            border: 1px solid var(--border); text-align: center; position: relative; max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); border: none; background: none; }
         
-        .btn-download-big { background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; font-weight: bold; display: inline-block; margin: 20px 0; text-decoration: none; }
+        .btn-download-big {
+            background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem;
+            border-radius: 50px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px;
+            margin: 20px 0; text-decoration: none; transition: 0.3s; box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+        }
+        .btn-download-big:hover { transform: scale(1.05); }
 
-        /* Wizard Styles */
-        .step { display: none; } .step.active { display: block; }
-        .wizard-btn { background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; }
+        /* Wizard */
+        .step { display: none; } .step.active { display: block; animation: fadeIn 0.4s; }
+        .wizard-btn { 
+            background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-main);
+            padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; 
+            display: flex; justify-content: space-between; align-items: center;
+        }
         .wizard-btn:hover { border-color: var(--accent); color: var(--accent); }
-        .result-box { background: var(--bg-hover); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; }
+
+        .result-box { background: var(--bg-hover); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; border: 1px solid var(--border); }
         .bot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .bot-card { background: var(--bg-body); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; text-align: left; }
-        .bot-card img { width: 100%; height: 80px; object-fit: cover; }
-        .bot-card div { padding: 8px; }
-        .bot-card h4 { font-size: 0.8rem; margin-bottom: 5px; }
-        .bot-card a { display: block; background: var(--accent); color: white; text-align: center; padding: 4px; border-radius: 4px; font-size: 0.75rem; }
+        .mini-card { background: var(--bg-body); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; font-size: 0.8rem; }
+        .mini-card img { width: 100%; height: 60px; object-fit: cover; }
+        .mini-card div { padding: 8px; }
 
+        /* --- FOOTER --- */
         footer { background: var(--bg-nav); padding: 3rem 5%; text-align: center; border-top: 1px solid var(--border); margin-top: auto; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .footer-logo { width: 120px; opacity: 0.8; margin-bottom: 15px; }
 
-        /* Mobile */
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
             .sidebar-layout { flex-direction: column; }
-            .sidebar-menu { flex-direction: row; overflow-x: auto; width: 100%; border-bottom: 1px solid var(--border); padding-bottom: 10px; border-right: none; margin-bottom: 20px; }
-            .side-btn { min-width: 140px; justify-content: center; border-left: none; border-bottom: 3px solid transparent; }
+            .sidebar-menu { flex-direction: row; overflow-x: auto; width: 100%; padding-bottom: 10px; border-right: none; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+            .side-btn { min-width: 140px; justify-content: center; text-align: center; border-left: none; border-bottom: 3px solid transparent; }
             .side-btn.active { border-left: none; border-bottom: 3px solid var(--accent); }
+            
             .main-nav { justify-content: flex-start; overflow-x: auto; }
             .nav-btn { white-space: nowrap; }
+            .brand-name { display: none; } /* Poupar espaço */
+            .btn-support-header span { display: none; }
+            .btn-support-header::before { content: '📥'; }
+            .lang-switch { border: none; padding-right: 0; }
         }
     </style>
 </head>
@@ -214,56 +290,75 @@
             </a>
         </div>
         <div class="header-right">
-            <select class="theme-select" onchange="setTheme(this.value)">
-                <option value="dark">🌑 Dark</option>
-                <option value="light">☀️ Light</option>
-                <option value="corporate">👔 Corporate</option>
-                <option value="soft">🍂 Soft</option>
-            </select>
-            <button onclick="toggleModal('supportModal')" class="btn-support-header">📥 <span style="display:none;">Suporte</span></button>
-            <a href="#contacto" class="btn-cta">Orçamento</a>
+            <div class="controls-group">
+                <select class="theme-select" onchange="setTheme(this.value)">
+                    <option value="dark">🌑 Dark</option>
+                    <option value="light">☀️ Light</option>
+                    <option value="corporate">👔 Corp</option>
+                    <option value="soft">🍂 Soft</option>
+                </select>
+                <div class="lang-switch">
+                    <button onclick="changeLang('pt')" class="lang-btn active"><img src="https://flagcdn.com/w40/pt.png"></button>
+                    <button onclick="changeLang('en')" class="lang-btn"><img src="https://flagcdn.com/w40/gb.png"></button>
+                    <button onclick="changeLang('fr')" class="lang-btn"><img src="https://flagcdn.com/w40/fr.png"></button>
+                </div>
+            </div>
+            <button onclick="toggleModal('supportModal')" class="btn-support-header">📥 <span>Suporte</span></button>
+            <a href="#contacto" class="btn-cta btn-header-quote">Orçamento</a>
         </div>
     </header>
+
+    <a href="https://wa.me/351910000000" class="whatsapp-float" target="_blank" title="WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:35px;">
+    </a>
+    <button class="chatbot-btn" onclick="toggleModal('wizardModal')">🤖</button>
 
     <div id="supportModal" class="modal-overlay">
         <div class="modal-box">
             <button class="close-btn" onclick="toggleModal('supportModal')">&times;</button>
-            <h2>Suporte Remoto</h2>
-            <p>Descarregue o cliente para assistência.</p>
-            <a href="https://github.com/mclaudiopt/m-auto.online/releases/download/Client/Mauto.exe" class="btn-download-big">📥 Download</a>
+            <h2 style="color:var(--text-main)">Suporte Remoto</h2>
+            <p style="color:var(--text-muted); margin:15px 0;">Baixe o cliente seguro para assistência técnica.</p>
+            <a href="https://github.com/mclaudiopt/m-auto.online/releases/download/Client/Mauto.exe" class="btn-download-big">📥 Download Cliente</a>
+            <p style="font-size:0.8rem; color:var(--text-muted)">Ligação Encriptada (26MB)</p>
         </div>
     </div>
 
     <div id="wizardModal" class="modal-overlay">
         <div class="modal-box">
             <button class="close-btn" onclick="toggleModal('wizardModal')">&times;</button>
-            <div id="step1" class="step active"><h3>Assistente</h3><p>Validar PC.</p><button class="btn-cta" onclick="nextStep(2)" style="margin-top:20px;">Iniciar ➡️</button></div>
-            <div id="step2" class="step"><h3>Sistema?</h3><button class="wizard-btn" onclick="setOS('Win10'); nextStep(3)">Win 10/11 ✅</button><button class="wizard-btn" onclick="setOS('Old'); nextStep(3)">Outro ❌</button></div>
-            <div id="step3" class="step"><h3>Espaço?</h3><button class="wizard-btn" onclick="setSpace(50); nextStep(4)">< 100 GB 💾</button><button class="wizard-btn" onclick="setSpace(500); nextStep(4)">> 250 GB 🚀</button></div>
-            <div id="step4" class="step"><h3>RAM?</h3><button class="wizard-btn" onclick="setRam(4); nextStep(5)">4 GB 🐌</button><button class="wizard-btn" onclick="setRam(8); nextStep(5)">8 GB+ ⚡</button></div>
-            <div id="step5" class="step"><h3>Disco?</h3><button class="wizard-btn" onclick="setDisk('HDD'); nextStep(6)">HDD 🐢</button><button class="wizard-btn" onclick="setDisk('SSD'); nextStep(6)">SSD 🏎️</button></div>
-            <div id="step6" class="step"><div id="resultBox" class="result-box"></div><h4>Recomendado:</h4><div id="botGrid" class="bot-grid"></div><button class="wizard-btn" onclick="resetWizard()" style="justify-content:center; margin-top:20px;">🔄 Reiniciar</button></div>
+            <div id="step1" class="step active">
+                <h3>Assistente Inteligente</h3>
+                <p style="margin-bottom:20px; color:var(--text-muted)">Vamos verificar a compatibilidade do seu PC.</p>
+                <button class="btn-cta" onclick="nextStep(2)">Começar ➡️</button>
+            </div>
+            <div id="step2" class="step"><h3>Sistema Operativo?</h3><button class="wizard-btn" onclick="setOS('Win10'); nextStep(3)">Win 10/11 (x64) ✅</button><button class="wizard-btn" onclick="setOS('Old'); nextStep(3)">Outro (Win 7/8) ❌</button></div>
+            <div id="step3" class="step"><h3>Espaço Livre?</h3><button class="wizard-btn" onclick="setSpace(50); nextStep(4)">< 100 GB 💾</button><button class="wizard-btn" onclick="setSpace(500); nextStep(4)">> 250 GB 🚀</button></div>
+            <div id="step4" class="step"><h3>Memória RAM?</h3><button class="wizard-btn" onclick="setRam(4); nextStep(5)">4 GB (Lento) 🐌</button><button class="wizard-btn" onclick="setRam(8); nextStep(5)">8 GB+ (Rápido) ⚡</button></div>
+            <div id="step5" class="step"><h3>Disco Principal?</h3><button class="wizard-btn" onclick="setDisk('HDD'); nextStep(6)">HDD (Mecânico) 🐢</button><button class="wizard-btn" onclick="setDisk('SSD'); nextStep(6)">SSD / NVMe 🏎️</button></div>
+            <div id="step6" class="step">
+                <div id="resultBox" class="result-box"></div>
+                <h4 style="color:var(--accent)">Recomendado:</h4>
+                <div id="botGrid" class="bot-grid"></div>
+                <button class="wizard-btn" onclick="resetWizard()" style="justify-content:center; margin-top:20px;">🔄 Reiniciar Teste</button>
+            </div>
         </div>
     </div>
 
-    <button class="chatbot-btn" onclick="toggleModal('wizardModal')">🤖</button>
-    <a href="https://wa.me/351910000000" class="whatsapp-float" target="_blank">📞</a>
-
-    <section class="hero">
+    <section id="inicio" class="hero">
         <h1>Soluções de Diagnóstico</h1>
-        <p>Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.</p>
+        <p>Especialistas em Mercedes, BMW, JLR e Multimarca. Instalação profissional remota com garantia.</p>
     </section>
 
     <div class="main-nav">
-        <button class="nav-btn active" onclick="switchMain('software', this)">💾 Software</button>
-        <button class="nav-btn" onclick="switchMain('hardware', this)">🔌 Hardware</button>
-        <button class="nav-btn" onclick="switchMain('tools', this)">🛠️ Ferramentas</button>
-        <button class="nav-btn" onclick="switchMain('services', this)">👨‍💻 Serviços</button>
+        <button class="nav-btn active" onclick="switchSection('software', this)">💾 Software</button>
+        <button class="nav-btn" onclick="switchSection('hardware', this)">🔌 Hardware</button>
+        <button class="nav-btn" onclick="switchSection('tools', this)">🛠️ Ferramentas</button>
+        <button class="nav-btn" onclick="switchSection('services', this)">👨‍💻 Serviços</button>
     </div>
 
-    <div class="content-container">
-
-        <div id="software" class="section-panel active">
+    <div class="container">
+        
+        <div id="sec-software" class="section-panel active">
             <div class="sidebar-layout">
                 <div class="sidebar-menu">
                     <button class="side-btn active" onclick="switchBrand('merc', this)">Mercedes-Benz</button>
@@ -275,144 +370,113 @@
                     <button class="side-btn" onclick="switchBrand('ford', this)">Ford / Mazda</button>
                     <button class="side-btn" onclick="switchBrand('gm', this)">General Motors</button>
                 </div>
-
                 <div class="content-area">
-                    <div id="merc" class="brand-content active">
+                    <div id="brand-merc" class="brand-content active">
                         <h2 class="brand-title">Mercedes-Benz</h2>
                         <div class="grid">
                             <div class="card">
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Xentry Cars 01/2025</h3>
-                                    <p>Diagnóstico completo para ligeiros. Leitura de falhas, valores reais, atuadores. Inclui DAS e HHT.</p>
+                                    <p>Software oficial para diagnóstico de veículos ligeiros. Inclui DAS (para carros antigos), HHT-Win (para clássicos) e ZenZefi certificates.</p>
                                     <div class="specs"><span class="spec">01/2025</span><span class="spec">PassThru/C4</span></div>
-                                    <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver Mais</span></div>
+                                    <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div>
                                 </div>
                             </div>
                             <div class="card">
                                 <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
-                                    <h3>DTS & Vediamo</h3>
-                                    <p>Software de engenharia. Permite SCN Coding, Flash de ECUs e desbloqueio de funções especiais.</p>
+                                    <h3>DTS Monaco & Vediamo</h3>
+                                    <p>Ferramentas de engenharia para desenvolvimento, SCN Coding offline, desbloqueio de funções (Vmax, AdBlue) e Flash de ECUs.</p>
                                     <div class="specs"><span class="spec">Dev</span><span class="spec">Coding</span></div>
-                                    <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver Mais</span></div>
+                                    <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div>
                                 </div>
                             </div>
                             <div class="card gold">
+                                <span class="badge-gold">👑 PREMIUM</span>
                                 <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Mercedes Full Pack</h3>
-                                    <p>Solução Chave-na-Mão: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC + Starfinder + Utilitários.</p>
-                                    <div class="specs"><span class="spec">Tudo Incluído</span></div>
-                                    <div class="card-footer"><span class="price">Premium</span><span class="btn-view">Encomendar</span></div>
+                                    <p>Suite completa: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC (Manuais e Peças) + Starfinder + SDMedia + Utilitários.</p>
+                                    <div class="specs"><span class="spec" style="border-color:var(--gold)">Chave na Mão</span></div>
+                                    <div class="card-footer"><span class="price" style="color:var(--gold)">Melhor Preço</span><span class="btn-view" style="color:var(--gold)">Encomendar</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div id="bmw" class="brand-content">
+                    <div id="brand-bmw" class="brand-content">
                         <h2 class="brand-title">BMW</h2>
                         <div class="grid">
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80">
-                                <div class="card-body">
-                                    <h3>ISTA+ & ESYS</h3>
-                                    <p>Diagnóstico oficial (ISTA-D) e Programação (ISTA-P). Inclui ESYS para codificação avançada.</p>
-                                    <div class="specs"><span class="spec">Nativo</span><span class="spec">ICOM/K-DCAN</span></div>
-                                    <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver Mais</span></div>
-                                </div>
-                            </div>
+                            <div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p>Diagnóstico (ISTA-D) e Programação (ISTA-P/ESYS). Inclui bases de dados completas BLP/SDP.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
                         </div>
                     </div>
-
-                    <div id="psa" class="brand-content">
+                    <div id="brand-psa" class="brand-content">
                         <h2 class="brand-title">PSA Group</h2>
                         <div class="grid">
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80">
-                                <div class="card-body">
-                                    <h3>Diagbox 9.193</h3>
-                                    <p>Versão Nativa. Suporta veículos até 2025. Peugeot, Citroën, DS e Opel.</p>
-                                    <div class="specs"><span class="spec">Nativo</span><span class="spec">J2534</span></div>
-                                    <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver Mais</span></div>
-                                </div>
-                            </div>
+                            <div class="card"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p>Versão Nativa (sem VM). Suporta carros até 2025. Peugeot, Citroën, DS e Opel.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
+                            <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p>Versão offline clássica para telecodificação em modelos antigos (até 2016).</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
                         </div>
                     </div>
-
-                    <div id="renault" class="brand-content">
-                        <h2 class="brand-title">Renault</h2>
-                        <div class="grid">
-                            <div class="card"><img src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p>Oficial Renault/Dacia. Diagnóstico e Reprog.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
-                        </div>
-                    </div>
-
-                    <div id="jlr" class="brand-content">
-                        <h2 class="brand-title">JLR</h2>
-                        <div class="grid">
-                            <div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p>Para novos modelos DoIP (Pós-2017).</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
-                            <div class="card"><img src="https://images.unsplash.com/photo-1562920617-1fb2946ed82d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>SDD Online</h3><p>Para modelos até 2017.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
-                        </div>
-                    </div>
-
-                    <div id="toyota" class="brand-content"><h2 class="brand-title">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p>Diagnóstico Global Toyota/Lexus.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div></div></div>
-                    <div id="ford" class="brand-content"><h2 class="brand-title">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1553440962-295e7455b124?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p>Sistema Online Ford.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div></div></div>
-                    <div id="gm" class="brand-content"><h2 class="brand-title">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1636768861747-64d80936143c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p>Chevrolet e Opel.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-content"><h2 class="brand-title">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p>Oficial Renault/Dacia. Diagnóstico e Reprog.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div></div></div>
+                    <div id="brand-jlr" class="brand-content"><h2 class="brand-title">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder & SDD</h3><p>Para novos (DoIP) e antigos modelos Jaguar Land Rover.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div></div></div>
+                    <div id="brand-toyota" class="brand-content"><h2 class="brand-title">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p>Diagnóstico global Toyota/Lexus.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div></div></div>
+                    <div id="brand-ford" class="brand-content"><h2 class="brand-title">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1553440962-295e7455b124?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p>Sistema Online Ford.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-content"><h2 class="brand-title">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1636768861747-64d80936143c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p>Chevrolet e Opel.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div></div></div>
                 </div>
             </div>
         </div>
 
-        <div id="hardware" class="section-panel">
+        <div id="sec-hardware" class="section-panel">
             <div class="sidebar-layout">
                 <div class="sidebar-menu">
                     <button class="side-btn active" onclick="switchBrand('univ', this)">Universal</button>
-                    <button class="side-btn" onclick="switchBrand('brand', this)">VCI Marca</button>
+                    <button class="side-btn" onclick="switchBrand('vci', this)">VCI Marca</button>
                     <button class="side-btn" onclick="switchBrand('pc', this)">Computadores</button>
                 </div>
                 <div class="content-area">
-                    <div id="univ" class="brand-content active">
+                    <div id="brand-univ" class="brand-content active">
                         <h2 class="brand-title">J2534 Universal</h2>
                         <div class="grid">
                             <div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Tactrix Openport</h3><p>Interface económica para Passthru.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
                             <div class="card"><img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Scanmatik 2 Pro</h3><p>A melhor J2534 do mercado.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
                         </div>
                     </div>
-                    <div id="brand" class="brand-content">
-                        <h2 class="brand-title">VCI Específico</h2>
+                    <div id="brand-vci" class="brand-content">
+                        <h2 class="brand-title">Interfaces Oficiais</h2>
                         <div class="grid">
-                            <div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p>Oficial Mercedes DoIP.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
+                            <div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p>Mercedes Oficial DoIP.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
                             <div class="card"><img src="https://images.unsplash.com/photo-1599321453267-33230be6286f?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>BMW ICOM</h3><p>Interface A+B+C.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
                         </div>
                     </div>
-                    <div id="pc" class="brand-content">
+                    <div id="brand-pc" class="brand-content">
                         <h2 class="brand-title">Computadores</h2>
                         <div class="grid">
-                            <div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Panasonic Toughbook</h3><p>Blindado. Pronto para oficina.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
+                            <div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Panasonic Toughbook</h3><p>Blindado para oficina.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
+                            <div class="card"><img src="https://images.unsplash.com/photo-1531297461136-82lw9z2.jpg?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Lenovo Thinkpad</h3><p>Profissional com SSD.</p><div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver</span></div></div></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="tools" class="section-panel">
-            <h2 class="brand-title" style="text-align:center; display:block;">Downloads Úteis</h2>
-            <div class="grid-tools">
-                <div class="tool-card"><div class="tool-icon">🗜️</div><h4>7-Zip</h4><a href="https://www.7-zip.org/" target="_blank" class="tool-link">Download</a></div>
-                <div class="tool-card"><div class="tool-icon">💾</div><h4>Rufus</h4><a href="https://rufus.ie/" target="_blank" class="tool-link">Download</a></div>
-                <div class="tool-card"><div class="tool-icon">🛡️</div><h4>DControl</h4><a href="https://www.sordum.org/" target="_blank" class="tool-link">Download</a></div>
+        <div id="sec-tools" class="section-panel" style="text-align:center">
+            <h2 class="brand-title">Downloads Úteis</h2>
+            <div class="grid-center">
+                <div class="tool-card"><div class="tool-icon">🗜️</div><h4>7-Zip</h4><a href="https://www.7-zip.org/" class="tool-link">Download</a></div>
+                <div class="tool-card"><div class="tool-icon">💾</div><h4>Rufus</h4><a href="https://rufus.ie/" class="tool-link">Download</a></div>
+                <div class="tool-card"><div class="tool-icon">🛡️</div><h4>DControl</h4><a href="https://www.sordum.org/" class="tool-link">Download</a></div>
             </div>
         </div>
 
-        <div id="services" class="section-panel">
-            <h2 class="brand-title" style="text-align:center; display:block;">Serviços Técnicos</h2>
-            <div class="grid-servicos">
-                <div class="card-serv"><div class="icon-serv">💿</div><h3>Formatação</h3><p>Instalação limpa Windows.</p></div>
-                <div class="card-serv"><div class="icon-serv">🦠</div><h3>Vírus</h3><p>Limpeza de malware.</p></div>
-                <div class="card-serv"><div class="icon-serv">🚀</div><h3>Otimização</h3><p>Melhoria de performance.</p></div>
-                <div class="card-serv"><div class="icon-serv">💾</div><h3>SSD</h3><p>Upgrade de disco.</p></div>
+        <div id="sec-services" class="section-panel" style="text-align:center">
+            <h2 class="brand-title">Serviços Técnicos</h2>
+            <div class="grid-center">
+                <div class="tool-card"><div class="tool-icon">💿</div><h4>Formatação</h4><p>Windows 10/11 Limpo</p></div>
+                <div class="tool-card"><div class="tool-icon">🦠</div><h4>Vírus</h4><p>Limpeza Malware</p></div>
+                <div class="tool-card"><div class="tool-icon">🚀</div><h4>Otimização</h4><p>Performance</p></div>
+                <div class="tool-card"><div class="tool-icon">💾</div><h4>SSD</h4><p>Upgrade Disco</p></div>
             </div>
         </div>
-
     </div>
 
     <footer id="contacto">
@@ -422,71 +486,63 @@
     </footer>
 
     <script>
-        // --- LÓGICA DE NAVEGAÇÃO 100% JS ---
-        
-        function switchMain(sectionId, btn) {
-            // Esconde todas as secções
-            document.querySelectorAll('.section-panel').forEach(el => el.classList.remove('active'));
-            // Mostra a selecionada
-            document.getElementById(sectionId).classList.add('active');
+        // --- NAVEGAÇÃO 100% JS ---
+        function switchSection(id, btn) {
+            document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('sec-' + id).classList.add('active');
             
-            // Atualiza botões
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Scroll suave
-            window.scrollTo({top: 150, behavior: 'smooth'});
+            // Reset tabs
+            if(id === 'software') switchBrand('merc', document.querySelector('#sec-software .side-btn'));
+            if(id === 'hardware') switchBrand('univ', document.querySelector('#sec-hardware .side-btn'));
         }
 
-        function switchBrand(brandId, btn) {
-            // Determina contexto (Software ou Hardware)
+        function switchBrand(id, btn) {
             const container = btn.closest('.sidebar-layout');
+            container.querySelectorAll('.brand-content').forEach(c => c.classList.remove('active'));
+            container.querySelector('#brand-' + id).classList.add('active');
             
-            // Esconde todos os conteúdos
-            container.querySelectorAll('.brand-content').forEach(el => el.classList.remove('active'));
-            // Mostra o selecionado
-            const target = container.querySelector('#' + brandId);
-            if(target) target.classList.add('active');
-            
-            // Atualiza botões laterais
             container.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        // --- FUNCIONALIDADES EXTRA ---
+        // --- FUNCIONALIDADES ---
+        function setTheme(theme) {
+            if(theme === 'dark') document.documentElement.removeAttribute('data-theme');
+            else document.documentElement.setAttribute('data-theme', theme);
+        }
+
         function toggleModal(id) {
             const el = document.getElementById(id);
             el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
         }
         function closeSupportModal() { document.getElementById('supportModal').style.display = 'none'; }
         
-        function setTheme(theme) {
-            if (theme === 'dark') document.documentElement.removeAttribute('data-theme');
-            else document.documentElement.setAttribute('data-theme', theme);
-        }
-
-        // Lógica do Wizard (Simplificada)
-        let userRam=0, userDisk='', userOS='', userSpace=0;
-        function nextStep(s){
-            document.querySelectorAll('.step').forEach(x=>x.classList.remove('active'));
+        // Wizard Logic
+        let userOS='', userDisk='', userRam=0;
+        function nextStep(s) {
+            document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
             document.getElementById('step'+s).classList.add('active');
             if(s===6) showRes();
         }
-        function setOS(v){userOS=v} function setSpace(v){userSpace=v} function setRam(v){userRam=v} function setDisk(v){userDisk=v}
+        function setOS(v){userOS=v} function setSpace(v){} function setRam(v){userRam=v} function setDisk(v){userDisk=v}
         function resetWizard(){
-            userRam=0;userDisk='';userOS='';userSpace=0;
-            document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+            document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
             document.getElementById('step1').classList.add('active');
-            document.getElementById('botGrid').innerHTML = '';
+            userOS=''; userDisk='';
         }
-        function showRes(){
-            let msg = (userOS==='Old'||userDisk==='HDD') ? "⚠️ Limitado" : "✅ Aprovado";
+        function showRes() {
+            let msg = (userOS==='Old' || userDisk==='HDD') ? "⚠️ Hardware Limitado" : "✅ Hardware Aprovado";
             document.getElementById('resultBox').innerHTML = `<h3>${msg}</h3>`;
-            const p={
-                full:{n:"Pack Mercedes",i:"https://placehold.co/100x70/fbbf24/000?text=FULL"},
-                xentry:{n:"Xentry Cars",i:"https://placehold.co/100x70/333/FFF?text=XENTRY"}
-            };
-            document.getElementById('botGrid').innerHTML = `<div class="bot-card"><img src="${p.full.i}"><div><h4>${p.full.n}</h4><a href="#contacto" onclick="toggleModal('wizardModal')">Ver</a></div></div>`;
+            document.getElementById('botGrid').innerHTML = `
+                <div class="mini-card"><img src="https://placehold.co/100/333/FFF?text=FULL"><div style="padding:5px">Full Pack</div></div>
+                <div class="mini-card"><img src="https://placehold.co/100/333/FFF?text=BASIC"><div style="padding:5px">Basic</div></div>`;
+        }
+
+        function changeLang(lang) {
+            alert("Idioma alterado para: " + lang); // Placeholder
         }
     </script>
 </body>
