@@ -36,35 +36,30 @@
             --bg-body: #fafaf9; --bg-card: #ffffff; --bg-nav: #e7e5e4; --text-main: #44403c; --text-muted: #78716c; --border: #d6d3d1; --accent: #ea580c; --gold: #a16207; --shadow: rgba(0,0,0,0.05);
         }
 
-        /* --- 2. RESET GERAL --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
         body { 
             background-color: var(--bg-body); color: var(--text-main); 
             line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column;
-            overflow-x: hidden; /* Impede scroll horizontal */
+            overflow-x: hidden; 
             transition: background 0.3s, color 0.3s;
         }
 
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* --- 3. CABEÇALHO --- */
+        /* --- HEADER --- */
         header {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             padding: 0 5%; height: var(--header-h); position: fixed; width: 100%; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 4px 20px var(--shadow);
         }
-
         .header-left { display: flex; align-items: center; gap: 15px; }
-        .logo-link { display: flex; align-items: center; gap: 10px; }
-        .logo-img { height: 32px; width: auto; }
+        .logo-img { height: 32px; }
         .brand-name { font-size: 1.2rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
-
         .header-right { display: flex; align-items: center; gap: 15px; }
 
-        /* Controles (Tema + Lingua) */
         .controls-group { display: flex; align-items: center; gap: 10px; border-right: 1px solid var(--border); padding-right: 15px; margin-right: 5px; }
         .theme-select { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 4px; border-radius: 4px; font-size: 0.85rem; }
         .theme-select option { background: var(--bg-card); }
@@ -73,7 +68,6 @@
         .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
         .lang-btn img { width: 22px; height: 22px; border-radius: 50%; border: 1px solid #777; display: block; }
 
-        /* Botões de Ação */
         .header-action-btn {
             padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem;
             display: flex; align-items: center; justify-content: center; gap: 8px; border: none;
@@ -83,15 +77,14 @@
         .btn-red:hover { background: #dc2626; transform: translateY(-2px); }
         .btn-blue { background: linear-gradient(135deg, var(--accent), #1d4ed8); color: white; }
         .btn-blue:hover { filter: brightness(1.1); transform: translateY(-2px); }
-
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 
-        /* --- 4. HERO --- */
+        /* --- HERO --- */
         .hero { margin-top: var(--header-h); padding: 80px 20px 40px; text-align: center; border-bottom: 1px solid var(--border); }
         .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; color: var(--text-main); }
         .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
 
-        /* --- 5. NAVEGAÇÃO PRINCIPAL (STICKY) --- */
+        /* --- MAIN NAV (ABAS) --- */
         .main-nav {
             display: flex; justify-content: center; gap: 10px; padding: 15px;
             background: var(--bg-nav); border-bottom: 1px solid var(--border);
@@ -105,20 +98,20 @@
         .nav-btn:hover { background: var(--bg-hover); color: var(--text-main); }
         .nav-btn.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 15px var(--shadow); }
 
-        /* --- 6. LAYOUT CONTEÚDO --- */
+        /* --- CONTEÚDO (Correção do CSS Display) --- */
         .content-container { padding: 40px 5%; max-width: 1400px; margin: 0 auto; min-height: 600px; }
         
-        .section-view { display: none; animation: fadeIn 0.4s; }
-        .section-view.active { display: block; }
+        /* CLASSE CRÍTICA CORRIGIDA */
+        .section-panel { display: none; animation: fadeIn 0.4s; }
+        .section-panel.active { display: block; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Sidebar Layout (Fixo na esquerda, fluido na direita) */
         .sidebar-layout { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
         
         .sidebar-menu { 
             display: flex; flex-direction: column; gap: 2px; 
-            width: 240px; flex: 0 0 240px; /* IMPORTANTE: Fixa a largura */
+            width: 260px; flex: 0 0 260px; 
             background: var(--bg-card); padding: 10px; border-radius: 10px; border: 1px solid var(--border);
         }
         .side-btn {
@@ -128,55 +121,32 @@
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         .side-btn:hover { background: var(--bg-hover); color: var(--text-main); }
-        .side-btn.active { 
-            background: var(--bg-hover); color: var(--accent); 
-            border-left: 3px solid var(--accent); font-weight: 700; 
-        }
+        .side-btn.active { background: var(--bg-hover); color: var(--accent); border-left: 3px solid var(--accent); font-weight: 700; }
 
-        .content-area { flex: 1; min-width: 0; /* Permite ao grid encolher se necessário */ }
+        .content-area { flex: 1; min-width: 0; }
         .brand-content { display: none; animation: fadeIn 0.3s; }
         .brand-content.active { display: block; }
 
-        .brand-header { 
-            font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; 
-            border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px;
-            color: var(--text-main);
-        }
+        .brand-header { font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; color: var(--text-main); }
 
-        /* --- 7. CARTÕES PRODUTO --- */
+        /* GRID */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        
-        .card { 
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; 
-            overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
-            box-shadow: 0 4px 10px var(--shadow);
-        }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; box-shadow: 0 4px 10px var(--shadow); }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        
         .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        
-        .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+        .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
-        
         .specs { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
-        .spec { 
-            background: var(--bg-hover); padding: 4px 8px; border-radius: 4px; 
-            border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main); font-weight: 600;
-        }
-        
-        .card-footer { 
-            margin-top: auto; display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid var(--border); padding-top: 15px;
-        }
+        .spec { background: var(--bg-hover); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main); font-weight: 600; }
+        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
         .price { font-weight: 800; font-size: 1rem; color: var(--text-main); }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
-
         .card.gold { border: 2px solid var(--gold); }
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge-gold { position: absolute; top: 10px; right: 10px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
 
-        /* Outros Cards */
+        /* OUTRAS SECÇÕES */
         .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; justify-content: center; }
         .tool-card { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
         .tool-card:hover { border-color: var(--accent); transform: translateY(-5px); }
@@ -184,29 +154,22 @@
         .tool-card h4 { margin-bottom: 10px; color: var(--text-main); }
         .tool-link { color: var(--accent); font-weight: bold; margin-top: auto; }
 
-        /* --- 8. BOTÕES FLUTUANTES & MODAIS --- */
-        .chatbot-trigger { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 20px var(--shadow); z-index: 2000; cursor: pointer; transition: 0.3s; }
-        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 5px 20px var(--shadow); z-index: 2000; transition: 0.3s; }
+        /* FLUTUANTES */
+        .chatbot-trigger { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 20px var(--shadow); z-index: 1500; transition: 0.3s; }
+        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 5px 20px var(--shadow); z-index: 1500; transition: 0.3s; }
         .chatbot-trigger:hover, .whatsapp-float:hover { transform: scale(1.1); }
 
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        /* MODAIS */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal-box { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); border: none; background: none; }
-        
         .btn-download-big { background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; margin: 20px 0; text-decoration: none; transition: 0.3s; }
         .btn-download-big:hover { transform: scale(1.05); }
 
-        /* Wizard */
-        .step { display: none; } .step.active { display: block; animation: fadeIn 0.4s; }
-        
-        /* BOTÃO COMEÇAR FORMATADO */
-        .btn-wizard-start {
-            background: var(--accent); color: white; border: none; 
-            padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; 
-            width: 100%; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
+        .btn-wizard-start { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; width: 100%; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
         .btn-wizard-start:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5); }
-
+        
+        .step { display: none; } .step.active { display: block; animation: fadeIn 0.4s; }
         .wizard-btn { background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
         .wizard-btn:hover { border-color: var(--accent); color: var(--accent); }
         .result-box { background: var(--bg-hover); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; }
@@ -218,17 +181,15 @@
         footer { background: var(--bg-nav); padding: 3rem 5%; text-align: center; border-top: 1px solid var(--border); margin-top: auto; }
         .footer-logo { width: 120px; opacity: 0.8; margin-bottom: 15px; }
 
-        /* Mobile */
         @media (max-width: 768px) {
             .sidebar-layout { flex-direction: column; }
             .sidebar-menu { flex-direction: row; overflow-x: auto; width: 100%; padding-bottom: 10px; border-right: none; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
             .side-btn { min-width: 140px; justify-content: center; text-align: center; border-left: none; border-bottom: 3px solid transparent; }
             .side-btn.active { border-left: none; border-bottom: 3px solid var(--accent); }
-            
             .main-nav { justify-content: flex-start; overflow-x: auto; padding: 10px; }
             .nav-btn { white-space: nowrap; }
             .brand-name { display: none; }
-            .btn-support-header span { display: none; } /* Esconde texto suporte mobile */
+            .btn-support-header span { display: none; } 
             .btn-support-header::before { content: '📥'; margin-right: 0; font-size: 1.2rem; }
             .lang-switch { padding-right: 8px; gap: 5px; }
         }
@@ -335,7 +296,7 @@
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Xentry Cars 01/2025</h3>
-                                    <p class="desc-soft" data-lang="desc_merc_cars">Diagnóstico completo para ligeiros. Leitura de falhas, valores reais, atuadores. Inclui DAS e HHT.</p>
+                                    <p class="desc-soft" data-lang="desc_merc_cars">Diagnóstico completo para ligeiros. Leitura de falhas, dados reais, atuadores. Inclui DAS e HHT.</p>
                                     <div class="specs"><span class="spec">01/2025</span><span class="spec">PassThru/C4</span></div>
                                     <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver Mais</span></div>
                                 </div>
@@ -344,7 +305,7 @@
                                 <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>DTS Monaco & Vediamo</h3>
-                                    <p class="desc-soft" data-lang="desc_merc_dts">Ferramentas de engenharia para desenvolvimento, SCN Coding offline, desbloqueio de funções (Vmax, AdBlue) e Flash de ECUs.</p>
+                                    <p class="desc-soft" data-lang="desc_merc_dts">Ferramentas de engenharia para desenvolvimento, SCN Coding offline, desbloqueio de funções.</p>
                                     <div class="specs"><span class="spec">Dev</span><span class="spec">Coding</span></div>
                                     <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver Mais</span></div>
                                 </div>
@@ -354,7 +315,7 @@
                                 <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Mercedes Full Pack</h3>
-                                    <p class="desc-soft" style="color:inherit" data-lang="desc_merc_full">Suite completa: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC (Manuais e Peças) + Starfinder + SDMedia + Utilitários.</p>
+                                    <p class="desc-soft" style="color:inherit" data-lang="desc_merc_full">Suite completa: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC (Manuais) + Utilitários.</p>
                                     <div class="specs"><span class="spec" style="border-color:var(--gold)">Chave na Mão</span></div>
                                     <div class="card-footer"><span class="price" style="color:var(--gold)">Melhor Preço</span><span class="btn-view" style="color:var(--gold)">Encomendar</span></div>
                                 </div>
