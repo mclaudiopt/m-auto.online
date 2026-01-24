@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V8.2</title>
+    <title>M-Auto Online | V8.3</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -149,11 +149,11 @@
         }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
         .card img { width: 100%; height: 190px; object-fit: cover; border-bottom: 1px solid var(--border); }
+        
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
         .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
         
-        /* Lista detalhada */
         .feature-list { list-style: none; margin-bottom: 15px; padding: 0; }
         .feature-list li { 
             font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; 
@@ -169,7 +169,7 @@
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* --- 6. FLUTUANTES --- */
+        /* --- 6. FLOATING BOTS --- */
         .whatsapp-float { 
             position: fixed; bottom: 90px; right: 25px; width: 60px; height: 60px; 
             background: #25D366; color: white; border-radius: 50%; display: flex; 
@@ -177,7 +177,6 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; 
         }
         
-        /* BOT WIZARD STYLE */
         .chatbot-btn { 
             position: fixed; bottom: 20px; right: 25px; width: 60px; height: 60px; 
             background: linear-gradient(135deg, #1e293b, #0f172a); 
@@ -185,7 +184,6 @@
             align-items: center; justify-content: center; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; border: none; transition: 0.3s; cursor: pointer;
         }
-        /* Icone Varinha Mágica */
         .chatbot-btn svg { width: 28px; height: 28px; fill: white; }
         .whatsapp-float:hover, .chatbot-btn:hover { transform: scale(1.1); }
 
@@ -203,7 +201,10 @@
 
         /* Serviços e Ferramentas */
         .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; justify-content: center; }
-        .tool-card { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
+        .tool-card { 
+            background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); 
+            text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; 
+        }
         .tool-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .tool-icon { font-size: 2.5rem; margin-bottom: 15px; }
         .tool-card h4 { margin-bottom: 10px; color: var(--text-main); font-size: 1.1rem; }
@@ -225,7 +226,7 @@
 </head>
 <body>
 
-    <div class="version-tag">v8.2</div>
+    <div class="version-tag">v8.3</div>
 
     <header>
         <div class="header-left">
@@ -345,17 +346,17 @@
                             </div>
 
                             <div class="card">
-                                <img src="https://images.unsplash.com/photo-1598972884636-348404444338?auto=format&fit=crop&w=600&q=80">
+                                <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Xentry Trucks (Pesados)</h3>
-                                    <p>Sistema para Camiões, Autocarros e Motores Industriais (24V).</p>
-                                    <ul class="feature-list"><li>Requer C4/C5 Multiplexer</li></ul>
+                                    <p>Sistema dedicado para Pesados, Autocarros (Evobus) e Motores Industriais (24V).</p>
+                                    <ul class="feature-list"><li>Suporte 24V</li><li>Requer C4/C5 Multiplexer</li></ul>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
                             </div>
 
                             <div class="card">
-                                <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80">
+                                <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Engenharia (Dev)</h3>
                                     <p>Ferramentas de fábrica para desenvolvimento e codificação.</p>
@@ -398,9 +399,14 @@
                     </div>
 
                     <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p data-lang="desc_bmw">Diagnóstico (ISTA-D) e Programação (ISTA-P).</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p data-lang="desc_psa_new">Nativo até 2025.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p>Oficial Renault.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p>DoIP Land Rover.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid">
+                        <div class="card"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p data-lang="desc_psa_new">Nativo até 2025.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
+                        <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p>Offline (Antigos).</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
+                    </div></div>
+                    
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p>Oficial Renault/Dacia.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p>Novos modelos DoIP.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p>Diagnóstico Global.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1553440962-295e7455b124?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p>Sistema Online.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1636768861747-64d80936143c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p>Opel/Chevrolet.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
@@ -416,9 +422,14 @@
                     <button class="side-btn" onclick="switchBrand('pc', this)">Computadores</button>
                 </div>
                 <div class="content-wrapper">
-                    <div id="brand-univ" class="brand-panel active"><h2 class="panel-header">Universal</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Openport 2.0</h3><p>Económico J2534.</p></div></div></div></div>
-                    <div id="brand-vci" class="brand-panel"><h2 class="panel-header">VCI Marca</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p>Mercedes DoIP.</p></div></div></div></div>
-                    <div id="brand-pc" class="brand-panel"><h2 class="panel-header">Computadores</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Toughbook</h3><p>Militar.</p></div></div></div></div>
+                    <div id="brand-univ" class="brand-panel active"><h2 class="panel-header">Universal</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Openport 2.0</h3><p>J2534 Económico.</p></div></div></div></div>
+                    
+                    <div id="brand-vci" class="brand-panel"><h2 class="panel-header">VCI Marca</h2><div class="grid">
+                        <div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p>Mercedes DoIP.</p></div></div>
+                        <div class="card"><img src="https://images.unsplash.com/photo-1599321453267-33230be6286f?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>BMW ICOM</h3><p>Interface A+B+C.</p></div></div>
+                    </div></div>
+                    
+                    <div id="brand-pc" class="brand-panel"><h2 class="panel-header">Computadores</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Toughbook</h3><p>Blindado.</p></div></div></div></div>
                 </div>
             </div>
         </div>
@@ -435,12 +446,12 @@
         <div id="sec-serv" class="section-view">
             <h2 class="panel-header" style="text-align:center">Serviços Técnicos</h2>
             <div class="grid-center">
-                <div class="tool-card"><div class="tool-icon">💿</div><h4>Formatação</h4><p>Limpeza Total</p></div>
-                <div class="tool-card"><div class="tool-icon">🪟</div><h4>Instalação Windows</h4><p>Win 10/11 Pro</p></div>
-                <div class="tool-card"><div class="tool-icon">🚀</div><h4>Otimização PC</h4><p>Performance Max</p></div>
-                <div class="tool-card"><div class="tool-icon">🦠</div><h4>Remoção Vírus</h4><p>Segurança</p></div>
-                <div class="tool-card"><div class="tool-icon">💾</div><h4>Upgrade Disco</h4><p>SSD Clonagem</p></div>
-                <div class="tool-card"><div class="tool-icon">⚡</div><h4>Upgrade RAM</h4><p>Memória</p></div>
+                <div class="tool-card"><div class="tool-icon">💿</div><h4>Formatação</h4><p>Instalação limpa.</p></div>
+                <div class="tool-card"><div class="tool-icon">🪟</div><h4>Instalação Windows</h4><p>Win 10 / 11 Pro.</p></div>
+                <div class="tool-card"><div class="tool-icon">🚀</div><h4>Otimização PC</h4><p>Melhoria de velocidade.</p></div>
+                <div class="tool-card"><div class="tool-icon">🦠</div><h4>Remoção Vírus</h4><p>Limpeza profunda.</p></div>
+                <div class="tool-card"><div class="tool-icon">💾</div><h4>Upgrade Disco</h4><p>Clonagem para SSD.</p></div>
+                <div class="tool-card"><div class="tool-icon">⚡</div><h4>Upgrade RAM</h4><p>Aumento de memória.</p></div>
             </div>
         </div>
 
@@ -448,7 +459,7 @@
 
     <footer id="contacto">
         <div style="text-align:center; opacity:0.7; font-size:0.9rem;">
-            <p>📧 geral@m-auto.online | 📞 +351 910 000 000</p>
+            <p>📧 geral@m-auto.online | 📞 +351 123 456 789</p>
             <p style="margin-top:10px">&copy; 2025 M-Auto Solutions</p>
         </div>
     </footer>
@@ -514,6 +525,7 @@
                 <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=100&q=60"><div>Xentry</div></div>`;
         }
 
+        // Translation
         const dict = {
             pt: { 
                 btn_support: "Suporte", btn_quote: "Orçamento",
@@ -535,19 +547,19 @@
                 btn_support: "Support", btn_quote: "Quote",
                 hero_title: "Diagnostic Solutions", hero_desc: "Professional. Remote. Guaranteed.",
                 nav_soft: "💾 Software", nav_hard: "🔌 Hardware", nav_tools: "🛠️ Tools", nav_serv: "👨‍💻 Services",
-                desc_merc_cars: "Complete diagnostics.", 
+                desc_merc_cars: "Complete cars diagnostic.", 
                 desc_merc_full: "Full Suite: Cars + Trucks + Eng.",
                 desc_merc_trucks: "Heavy Duty & Industrial.",
                 desc_merc_eng: "Dev & Coding.",
-                desc_bmw: "Diagnostics & Programming.", desc_psa_new: "Native Version 2025.",
+                desc_bmw: "Diagnostics & Programming.", desc_psa_new: "Native Version.",
                 desc_renault: "Official Renault.", desc_pathfinder: "New DoIP.",
                 desc_toyota: "Global Diagnostics.", desc_ford: "Online System.", desc_gm: "Legacy GM.",
                 desc_openport: "Economic interface.", desc_scanmatik: "Professional.",
                 desc_c4: "Official Mercedes.", desc_tough: "Rugged.",
                 modal_support_title: "Remote Support", modal_support_desc: "Download client.",
-                wiz_title: "Smart Wizard", wiz_desc: "Check compatibility.", wiz_start: "Start ➡️"
+                wiz_title: "Wizard", wiz_desc: "Check compatibility.", wiz_start: "Start ➡️"
             },
-            fr: { btn_support: "Soutien", btn_quote: "Devis" }
+            fr: { btn_support: "Soutien", btn_quote: "Devis", hero_title: "Solutions Diagnostic", cat_title: "Catalogue Logiciels" }
         };
 
         function changeLang(l) {
