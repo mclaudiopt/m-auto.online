@@ -9,11 +9,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | Diagnostic Solutions</title>
+    <title>M-Auto Online | Soluções de Diagnóstico</title>
 
     <style>
-        /* --- 1. CONFIGURAÇÃO DE TEMAS --- */
+        /* --- 1. CONFIGURAÇÃO DE TEMAS (Default = LIGHT) --- */
         :root {
+            /* LIGHT (Padrão) */
+            --bg-body: #f8fafc; 
+            --bg-card: #ffffff; 
+            --bg-nav: #f1f5f9; 
+            --text-main: #0f172a; 
+            --text-muted: #475569; 
+            --border: #e2e8f0; 
+            --accent: #2563eb; 
+            --accent-hover: #1d4ed8;
+            --gold: #b45309; 
+            --shadow: rgba(0,0,0,0.08);
+            --header-h: 70px;
+        }
+
+        [data-theme="dark"] {
             --bg-body: #020617;
             --bg-card: #1e293b;
             --bg-nav: #0f172a;
@@ -21,70 +36,94 @@
             --text-muted: #94a3b8;
             --border: #334155;
             --accent: #3b82f6;
-            --gold: #d97706;
+            --accent-hover: #60a5fa;
+            --gold: #fbbf24;
             --shadow: rgba(0,0,0,0.3);
-            --header-h: 70px;
         }
 
-        [data-theme="light"] {
-            --bg-body: #f8fafc; --bg-card: #ffffff; --bg-nav: #e2e8f0; --text-main: #0f172a; --text-muted: #475569; --border: #cbd5e1; --accent: #2563eb; --gold: #b45309; --shadow: rgba(0,0,0,0.1);
-        }
         [data-theme="corporate"] {
-            --bg-body: #eff6ff; --bg-card: #ffffff; --bg-nav: #dbeafe; --text-main: #1e3a8a; --text-muted: #60a5fa; --border: #93c5fd; --accent: #1d4ed8; --gold: #ea580c; --shadow: rgba(30, 64, 175, 0.1);
+            --bg-body: #eff6ff; --bg-card: #ffffff; --bg-nav: #dbeafe; --text-main: #1e3a8a; --text-muted: #60a5fa; --border: #93c5fd; --accent: #1d4ed8; --accent-hover: #1e40af; --gold: #ea580c; --shadow: rgba(30, 64, 175, 0.1);
         }
         [data-theme="soft"] {
-            --bg-body: #fafaf9; --bg-card: #ffffff; --bg-nav: #e7e5e4; --text-main: #44403c; --text-muted: #78716c; --border: #d6d3d1; --accent: #ea580c; --gold: #a16207; --shadow: rgba(0,0,0,0.05);
+            --bg-body: #fafaf9; --bg-card: #ffffff; --bg-nav: #e7e5e4; --text-main: #44403c; --text-muted: #78716c; --border: #d6d3d1; --accent: #ea580c; --accent-hover: #c2410c; --gold: #a16207; --shadow: rgba(0,0,0,0.05);
         }
 
+        /* --- 2. RESET GERAL & ESTABILIDADE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
+        html { 
+            overflow-y: scroll; /* FORÇA A BARRA DE SCROLL PARA EVITAR SALTOS HORIZONTAIS */
+            scroll-behavior: smooth;
+        }
+
         body { 
             background-color: var(--bg-body); color: var(--text-main); 
             line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column;
-            overflow-x: hidden; 
+            overflow-x: hidden;
             transition: background 0.3s, color 0.3s;
         }
 
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* --- HEADER --- */
+        /* --- 3. CABEÇALHO --- */
         header {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             padding: 0 5%; height: var(--header-h); position: fixed; width: 100%; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 4px 20px var(--shadow);
         }
+
         .header-left { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 32px; }
+        .logo-link { display: flex; align-items: center; gap: 10px; }
+        .logo-img { height: 32px; width: auto; }
         .brand-name { font-size: 1.2rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
-        .header-right { display: flex; align-items: center; gap: 15px; }
 
-        .controls-group { display: flex; align-items: center; gap: 10px; border-right: 1px solid var(--border); padding-right: 15px; margin-right: 5px; }
-        .theme-select { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 4px; border-radius: 4px; font-size: 0.85rem; }
-        .theme-select option { background: var(--bg-card); }
-        .lang-switch { display: flex; gap: 8px; }
-        .lang-btn { background: none; border: none; padding: 0; opacity: 0.5; transition: 0.2s; }
-        .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
-        .lang-btn img { width: 22px; height: 22px; border-radius: 50%; border: 1px solid #777; display: block; }
+        .header-right { display: flex; align-items: center; gap: 12px; }
 
+        /* Controles (Tema + Lingua) Melhorados */
+        .controls-wrapper {
+            display: flex; align-items: center; gap: 8px; 
+            background: var(--bg-body); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border);
+            margin-right: 10px;
+        }
+
+        .theme-select { 
+            background: transparent; border: none; color: var(--text-main); 
+            font-size: 0.85rem; font-weight: 600; outline: none; cursor: pointer;
+            padding: 4px;
+        }
+        .theme-select option { background: var(--bg-card); color: var(--text-main); }
+
+        .vertical-sep { width: 1px; height: 15px; background: var(--border); }
+
+        .lang-switch { display: flex; gap: 6px; }
+        .lang-btn { background: none; border: none; padding: 0; opacity: 0.4; transition: 0.2s; display: flex; }
+        .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.1); }
+        .lang-btn img { width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+
+        /* Botões de Ação Uniformes */
         .header-action-btn {
             padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem;
             display: flex; align-items: center; justify-content: center; gap: 8px; border: none;
-            transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap; height: 38px;
+            transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); white-space: nowrap; height: 38px;
         }
         .btn-red { background: #ef4444; color: white; animation: pulse 2s infinite; }
         .btn-red:hover { background: #dc2626; transform: translateY(-2px); }
-        .btn-blue { background: linear-gradient(135deg, var(--accent), #1d4ed8); color: white; }
-        .btn-blue:hover { filter: brightness(1.1); transform: translateY(-2px); }
+        .btn-blue { background: var(--accent); color: white; }
+        .btn-blue:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 
-        /* --- HERO --- */
-        .hero { margin-top: var(--header-h); padding: 80px 20px 40px; text-align: center; border-bottom: 1px solid var(--border); }
+        /* --- 4. HERO --- */
+        .hero { 
+            margin-top: var(--header-h); padding: 80px 20px 40px; text-align: center; 
+            border-bottom: 1px solid var(--border); background-color: var(--bg-body);
+        }
         .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; color: var(--text-main); }
         .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
 
-        /* --- MAIN NAV (ABAS) --- */
+        /* --- 5. NAVEGAÇÃO PRINCIPAL (STICKY) --- */
         .main-nav {
             display: flex; justify-content: center; gap: 10px; padding: 15px;
             background: var(--bg-nav); border-bottom: 1px solid var(--border);
@@ -95,13 +134,12 @@
             padding: 8px 25px; border-radius: 50px; font-weight: 600; transition: 0.3s;
             display: flex; align-items: center; gap: 8px; font-size: 0.95rem;
         }
-        .nav-btn:hover { background: var(--bg-hover); color: var(--text-main); }
+        .nav-btn:hover { background: var(--bg-card); color: var(--text-main); }
         .nav-btn.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 15px var(--shadow); }
 
-        /* --- CONTEÚDO (Correção do CSS Display) --- */
+        /* --- 6. LAYOUT CONTEÚDO --- */
         .content-container { padding: 40px 5%; max-width: 1400px; margin: 0 auto; min-height: 600px; }
         
-        /* CLASSE CRÍTICA CORRIGIDA */
         .section-panel { display: none; animation: fadeIn 0.4s; }
         .section-panel.active { display: block; }
         
@@ -109,9 +147,10 @@
 
         .sidebar-layout { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
         
+        /* BARRA LATERAL FIXA - IMPEDE "DANÇA" HORIZONTAL */
         .sidebar-menu { 
             display: flex; flex-direction: column; gap: 2px; 
-            width: 260px; flex: 0 0 260px; 
+            width: 260px; min-width: 260px; flex-shrink: 0; /* IMPORTANTE: Fixa a largura */
             background: var(--bg-card); padding: 10px; border-radius: 10px; border: 1px solid var(--border);
         }
         .side-btn {
@@ -120,33 +159,46 @@
             border-left: 3px solid transparent; font-size: 0.95rem; 
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .side-btn:hover { background: var(--bg-hover); color: var(--text-main); }
-        .side-btn.active { background: var(--bg-hover); color: var(--accent); border-left: 3px solid var(--accent); font-weight: 700; }
+        .side-btn:hover { background: var(--bg-body); color: var(--text-main); }
+        .side-btn.active { 
+            background: var(--bg-body); color: var(--accent); 
+            border-left: 3px solid var(--accent); font-weight: 700; 
+        }
 
         .content-area { flex: 1; min-width: 0; }
         .brand-content { display: none; animation: fadeIn 0.3s; }
         .brand-content.active { display: block; }
 
-        .brand-header { font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; color: var(--text-main); }
+        .brand-header { 
+            font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; 
+            border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px;
+            color: var(--text-main);
+        }
 
-        /* GRID */
+        /* GRID PRODUTOS */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; box-shadow: 0 4px 10px var(--shadow); }
+        
+        .card { 
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; 
+            overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
+            box-shadow: 0 4px 10px var(--shadow); position: relative;
+        }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
         .specs { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
-        .spec { background: var(--bg-hover); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main); font-weight: 600; }
+        .spec { background: var(--bg-body); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main); font-weight: 600; }
         .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
         .price { font-weight: 800; font-size: 1rem; color: var(--text-main); }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
+
         .card.gold { border: 2px solid var(--gold); }
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge-gold { position: absolute; top: 10px; right: 10px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
 
-        /* OUTRAS SECÇÕES */
+        /* OUTROS CARDS (Centrados) */
         .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; justify-content: center; }
         .tool-card { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
         .tool-card:hover { border-color: var(--accent); transform: translateY(-5px); }
@@ -154,25 +206,45 @@
         .tool-card h4 { margin-bottom: 10px; color: var(--text-main); }
         .tool-link { color: var(--accent); font-weight: bold; margin-top: auto; }
 
-        /* FLUTUANTES */
-        .chatbot-trigger { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 20px var(--shadow); z-index: 1500; transition: 0.3s; }
-        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 5px 20px var(--shadow); z-index: 1500; transition: 0.3s; }
+        /* --- BOTÕES FLUTUANTES --- */
+        /* WhatsApp (Em cima do bot) */
+        .whatsapp-float { 
+            position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px; 
+            background: #25D366; color: white; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 35px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; 
+        }
+        
+        /* Chatbot (Em baixo) */
+        .chatbot-trigger { 
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; 
+            background: var(--accent); color: white; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 30px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; cursor: pointer; transition: 0.3s; 
+        }
         .chatbot-trigger:hover, .whatsapp-float:hover { transform: scale(1.1); }
 
-        /* MODAIS */
+        /* --- MODAIS --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal-box { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); border: none; background: none; }
+        
         .btn-download-big { background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; margin: 20px 0; text-decoration: none; transition: 0.3s; }
         .btn-download-big:hover { transform: scale(1.05); }
 
-        .btn-wizard-start { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; width: 100%; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
-        .btn-wizard-start:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5); }
-        
+        /* WIZARD FORMATADO */
+        .btn-wizard-start { 
+            background: var(--accent); color: white; border: none; 
+            padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; 
+            width: 100%; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            cursor: pointer;
+        }
+        .btn-wizard-start:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
         .step { display: none; } .step.active { display: block; animation: fadeIn 0.4s; }
-        .wizard-btn { background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .wizard-btn { background: var(--bg-body); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
         .wizard-btn:hover { border-color: var(--accent); color: var(--accent); }
-        .result-box { background: var(--bg-hover); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; }
+        .result-box { background: var(--bg-body); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; }
         .bot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .mini-card { background: var(--bg-body); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; text-align: left; font-size: 0.8rem; }
         .mini-card img { width: 100%; height: 60px; object-fit: cover; }
@@ -181,17 +253,19 @@
         footer { background: var(--bg-nav); padding: 3rem 5%; text-align: center; border-top: 1px solid var(--border); margin-top: auto; }
         .footer-logo { width: 120px; opacity: 0.8; margin-bottom: 15px; }
 
+        /* MOBILE */
         @media (max-width: 768px) {
             .sidebar-layout { flex-direction: column; }
             .sidebar-menu { flex-direction: row; overflow-x: auto; width: 100%; padding-bottom: 10px; border-right: none; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
             .side-btn { min-width: 140px; justify-content: center; text-align: center; border-left: none; border-bottom: 3px solid transparent; }
             .side-btn.active { border-left: none; border-bottom: 3px solid var(--accent); }
+            
             .main-nav { justify-content: flex-start; overflow-x: auto; padding: 10px; }
             .nav-btn { white-space: nowrap; }
             .brand-name { display: none; }
-            .btn-support-header span { display: none; } 
-            .btn-support-header::before { content: '📥'; margin-right: 0; font-size: 1.2rem; }
-            .lang-switch { padding-right: 8px; gap: 5px; }
+            .header-action-btn span { display: none; } 
+            .header-action-btn::before { content: attr(data-icon); font-size: 1.2rem; }
+            .controls-group { border: none; padding-right: 0; }
         }
     </style>
 </head>
@@ -207,11 +281,12 @@
         <div class="header-right">
             <div class="controls-group">
                 <select class="theme-select" onchange="setTheme(this.value)">
-                    <option value="dark">🌑</option>
-                    <option value="light">☀️</option>
-                    <option value="corporate">👔</option>
-                    <option value="soft">🍂</option>
+                    <option value="light">☀️ Light</option>
+                    <option value="dark">🌑 Dark</option>
+                    <option value="corporate">👔 Corp</option>
+                    <option value="soft">🍂 Soft</option>
                 </select>
+                <div class="vertical-sep"></div>
                 <div class="lang-switch">
                     <button onclick="changeLang('pt')" class="lang-btn active"><img src="https://flagcdn.com/w40/pt.png"></button>
                     <button onclick="changeLang('en')" class="lang-btn"><img src="https://flagcdn.com/w40/gb.png"></button>
@@ -219,10 +294,10 @@
                 </div>
             </div>
             
-            <button onclick="toggleModal('supportModal')" class="header-action-btn btn-red">
+            <button onclick="toggleModal('supportModal')" class="header-action-btn btn-red" data-icon="📥">
                 <span data-lang="btn_support">📥 Suporte</span>
             </button>
-            <a href="#contacto" class="header-action-btn btn-blue">
+            <a href="#contacto" class="header-action-btn btn-blue" data-icon="📝">
                 <span data-lang="btn_quote">📝 Orçamento</span>
             </a>
         </div>
@@ -242,25 +317,27 @@
         <div class="modal-box">
             <button class="close-btn" onclick="toggleModal('wizardModal')">&times;</button>
             <div id="step1" class="step active">
-                <h3>Assistente Inteligente</h3>
-                <p style="margin-bottom:20px; color:var(--text-muted)">Vamos verificar a compatibilidade do seu PC.</p>
-                <button class="btn-wizard-start" onclick="nextStep(2)">Começar ➡️</button>
+                <h3 data-lang="wiz_title">Assistente Inteligente</h3>
+                <p style="margin-bottom:20px; color:var(--text-muted)" data-lang="wiz_desc">Vamos verificar a compatibilidade do seu PC.</p>
+                <button class="btn-wizard-start" onclick="nextStep(2)" data-lang="wiz_start">Começar ➡️</button>
             </div>
-            <div id="step2" class="step"><h3>Sistema Operativo?</h3><button class="wizard-btn" onclick="setOS('Win10'); nextStep(3)">Win 10/11 (x64) ✅</button><button class="wizard-btn" onclick="setOS('Old'); nextStep(3)">Outro (Win 7/8) ❌</button></div>
+            <div id="step2" class="step"><h3 data-lang="wiz_os">Sistema Operativo?</h3><button class="wizard-btn" onclick="setOS('Win10'); nextStep(3)">Win 10/11 (x64) ✅</button><button class="wizard-btn" onclick="setOS('Old'); nextStep(3)">Outro (Win 7/8) ❌</button></div>
             <div id="step3" class="step"><h3>Espaço Livre?</h3><button class="wizard-btn" onclick="setSpace(50); nextStep(4)">< 100 GB 💾</button><button class="wizard-btn" onclick="setSpace(500); nextStep(4)">> 250 GB 🚀</button></div>
             <div id="step4" class="step"><h3>Memória RAM?</h3><button class="wizard-btn" onclick="setRam(4); nextStep(5)">4 GB (Lento) 🐌</button><button class="wizard-btn" onclick="setRam(8); nextStep(5)">8 GB+ (Rápido) ⚡</button></div>
             <div id="step5" class="step"><h3>Disco Principal?</h3><button class="wizard-btn" onclick="setDisk('HDD'); nextStep(6)">HDD (Mecânico) 🐢</button><button class="wizard-btn" onclick="setDisk('SSD'); nextStep(6)">SSD / NVMe 🏎️</button></div>
             <div id="step6" class="step">
                 <div id="resultBox" class="result-box"></div>
-                <h4 style="color:var(--accent)">Recomendado:</h4>
+                <h4 style="color:var(--accent)" data-lang="wiz_rec">Recomendado:</h4>
                 <div id="botGrid" class="bot-grid"></div>
                 <button class="wizard-btn" onclick="resetWizard()" style="justify-content:center; margin-top:20px;">🔄 Reiniciar Teste</button>
             </div>
         </div>
     </div>
 
+    <a href="https://wa.me/351910000000" class="whatsapp-float" target="_blank" title="WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:35px;">
+    </a>
     <div class="chatbot-trigger" onclick="toggleModal('wizardModal')">🤖</div>
-    <a href="https://wa.me/351910000000" class="whatsapp-float" target="_blank">📞</a>
 
     <section id="inicio" class="hero">
         <h1 data-lang="hero_title">Soluções de Diagnóstico</h1>
@@ -454,7 +531,7 @@
                 <div class="mini-card"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=150&q=60"><div style="padding:5px">Xentry Cars</div></div>`;
         }
 
-        // Traduções
+        // Traduções (Bot incluído)
         const translations = {
             pt: {
                 btn_support: "📥 Suporte", btn_quote: "📝 Orçamento",
@@ -476,7 +553,8 @@
                 desc_openport: "Interface económica para Passthru.", desc_scanmatik: "A melhor J2534 do mercado.",
                 desc_c4: "Oficial Mercedes DoIP.", desc_icom: "Interface A+B+C.",
                 desc_tough: "Blindado. Pronto para oficina.", desc_lenovo: "Profissional, rápido com SSD.",
-                modal_support_title: "Suporte Remoto", modal_support_desc: "Baixe o cliente seguro para assistência técnica."
+                modal_support_title: "Suporte Remoto", modal_support_desc: "Baixe o cliente seguro para assistência técnica.",
+                wiz_title: "Assistente Inteligente", wiz_desc: "Vamos verificar a compatibilidade do seu PC.", wiz_start: "Começar ➡️", wiz_rec: "Recomendado:", wiz_os: "Sistema Operativo?"
             },
             en: {
                 btn_support: "📥 Support", btn_quote: "📝 Quote",
@@ -498,10 +576,11 @@
                 desc_openport: "Economic interface for Passthru.", desc_scanmatik: "Best J2534 on the market.",
                 desc_c4: "Official Mercedes DoIP.", desc_icom: "Interface A+B+C.",
                 desc_tough: "Rugged. Ready for workshop.", desc_lenovo: "Professional, fast with SSD.",
-                modal_support_title: "Remote Support", modal_support_desc: "Download secure client for technical assistance."
+                modal_support_title: "Remote Support", modal_support_desc: "Download secure client for technical assistance.",
+                wiz_title: "Smart Wizard", wiz_desc: "Let's check your PC compatibility.", wiz_start: "Start ➡️", wiz_rec: "Recommended:", wiz_os: "Operating System?"
             },
-            fr: { btn_support: "📥 Soutien", btn_quote: "📝 Devis", hero_title: "Solutions Diagnostic", cat_title: "Catalogue Logiciels" },
-            es: { btn_support: "📥 Soporte", btn_quote: "📝 Presupuesto", hero_title: "Soluciones Diagnóstico", cat_title: "Catálogo Software" }
+            fr: { btn_support: "📥 Soutien", btn_quote: "📝 Devis", hero_title: "Solutions Diagnostic", cat_title: "Catalogue Logiciels", wiz_title: "Assistant Intelligent", wiz_start: "Démarrer ➡️" },
+            es: { btn_support: "📥 Soporte", btn_quote: "📝 Presupuesto", hero_title: "Soluciones Diagnóstico", cat_title: "Catálogo Software", wiz_title: "Asistente Inteligente", wiz_start: "Comenzar ➡️" }
         };
 
         function changeLang(lang) {
