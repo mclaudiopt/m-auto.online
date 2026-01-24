@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V8.4</title>
+    <title>M-Auto Online | V9.0</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -149,6 +149,7 @@
         }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
         .card img { width: 100%; height: 190px; object-fit: cover; border-bottom: 1px solid var(--border); }
+        .card img[src=""] { background-color: #ccc; } /* Fallback visual */
         
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
@@ -161,11 +162,9 @@
         }
         .feature-list li::before { content: "✓"; color: var(--accent); font-weight: bold; }
 
-        /* Espaçamento entre Preço e Botão Corrigido */
-        .card-actions { 
+        .card-footer { 
             margin-top: auto; display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid var(--border); padding-top: 15px; 
-            gap: 15px; /* Adicionado GAP para separar texto do botão */
+            border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; /* Garante separação */
         }
         .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; }
@@ -231,7 +230,7 @@
 </head>
 <body>
 
-    <div class="version-tag">v8.4</div>
+    <div class="version-tag">v9.0</div>
 
     <header>
         <div class="header-left">
@@ -361,7 +360,7 @@
                             </div>
 
                             <div class="card">
-                                <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80">
+                                <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Engenharia (Dev)</h3>
                                     <p>Ferramentas de fábrica para desenvolvimento e codificação.</p>
@@ -410,14 +409,14 @@
                         <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p>Offline (Antigos).</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
                     </div></div>
                     
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p>Oficial Renault.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p data-lang="desc_renault">Oficial Renault/Dacia.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p>DoIP Land Rover.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p>Diagnóstico Global.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p data-lang="desc_pathfinder">Novos modelos DoIP.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p data-lang="desc_toyota">Diagnóstico Global.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p>Sistema Online.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p data-lang="desc_ford">Sistema Online.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p>Opel/Chevrolet.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p data-lang="desc_gm">Chevrolet/Opel.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
