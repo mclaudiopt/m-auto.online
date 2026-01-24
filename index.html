@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V9.1</title>
+    <title>M-Auto Online | V9.2</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -19,6 +19,7 @@
             --accent: #2563eb; --accent-hover: #1d4ed8;
             --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
             --gold: #b45309; --red: #ef4444; --header-h: 70px;
+            --tech-bg: #f1f5f9; /* Fundo da area tecnica */
             --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
 
@@ -27,20 +28,18 @@
             --text-main: #f8fafc; --text-muted: #94a3b8; --border: #334155;
             --accent: #3b82f6; --accent-hover: #60a5fa;
             --sidebar-active-bg: #172554; --sidebar-active-border: #3b82f6; --sidebar-active-text: #bfdbfe;
+            --tech-bg: #0f172a;
             --gold: #fbbf24; --shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
         }
 
-        /* --- 2. RESET & LAYOUT --- */
+        /* --- 2. RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        
         html { overflow-y: scroll; scroll-behavior: smooth; }
-
         body { 
             background: var(--bg-body); color: var(--text-main); 
             min-height: 100vh; display: flex; flex-direction: column;
             overflow-x: hidden; transition: background 0.2s, color 0.2s;
         }
-
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
@@ -59,7 +58,6 @@
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: var(--shadow);
         }
-
         .header-left { display: flex; align-items: baseline; gap: 10px; }
         .brand-name { font-size: 1.4rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
         .header-right { display: flex; align-items: center; gap: 20px; }
@@ -70,11 +68,9 @@
             color: var(--text-main); width: 32px; height: 32px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
         }
-        .theme-btn:hover { background: var(--bg-body); border-color: var(--accent); }
-
         .lang-group { display: flex; gap: 8px; }
         .lang-btn { background: none; border: none; padding: 0; opacity: 0.4; transition: 0.2s; display: flex; }
-        .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
+        .lang-btn.active { opacity: 1; transform: scale(1.15); }
         .lang-btn img { width: 24px; height: 24px; min-width: 24px; border-radius: 50%; border: 1px solid var(--border); object-fit: cover; }
 
         .action-group { display: flex; gap: 10px; }
@@ -84,9 +80,7 @@
             transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .btn-red { background: var(--red); }
-        .btn-red:hover { background: #dc2626; transform: translateY(-1px); }
         .btn-blue { background: var(--accent); }
-        .btn-blue:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
         /* --- 4. HERO & NAV --- */
         .hero { margin-top: 70px; padding: 50px 20px; text-align: center; border-bottom: 1px solid var(--border); background: var(--bg-body); }
@@ -103,7 +97,6 @@
             border: 1px solid var(--border); background: var(--bg-card); transition: 0.3s; cursor: pointer;
         }
         .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
-        .nav-pill:hover:not(.active) { color: var(--text-main); border-color: var(--accent); }
 
         /* --- 5. LAYOUT --- */
         .app-container { width: 100%; padding: 30px; box-sizing: border-box; min-height: 600px; display: flex; flex-direction: column; }
@@ -113,7 +106,6 @@
 
         .layout-flex { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
 
-        /* BARRA LATERAL FIXA */
         .sidebar {
             width: 260px; min-width: 260px; flex-shrink: 0;
             background: var(--bg-sidebar); padding: 15px; border-radius: 12px; border: 1px solid var(--border);
@@ -131,7 +123,6 @@
             border-left-color: var(--sidebar-active-border);
         }
 
-        /* CONTEÚDO */
         .content-wrapper { flex: 1; width: 100%; min-width: 0; }
         .brand-panel { display: none; animation: fade 0.3s; }
         .brand-panel.active { display: block; }
@@ -148,29 +139,26 @@
             box-shadow: var(--shadow); position: relative;
         }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
-        .card img { width: 100%; height: 190px; object-fit: cover; border-bottom: 1px solid var(--border); }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
         
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
-        .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
+        .card p.desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; }
         
-        /* SPEC BOXES (OS "QUADRADOS") */
-        .spec-grid { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; 
+        /* NOVO: DETALHES TÉCNICOS (Compacto, não clicável) */
+        .tech-details {
+            background: var(--tech-bg); border: 1px solid var(--border);
+            border-radius: 6px; padding: 10px; margin-top: auto; margin-bottom: 15px;
+            font-size: 0.8rem; color: var(--text-muted);
         }
-        .spec-box {
-            background: var(--bg-body); border: 1px solid var(--border);
-            padding: 8px 5px; border-radius: 8px; text-align: center;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
-            transition: 0.2s;
-        }
-        .spec-box:hover { border-color: var(--accent); color: var(--accent); }
-        .spec-icon { font-size: 1.1rem; margin-bottom: 3px; }
+        .tech-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .tech-row:last-child { border-bottom: none; }
+        .tech-label { font-weight: 600; color: var(--text-main); }
 
+        /* FOOTER DO CARD (Separado) */
         .card-footer { 
-            margin-top: auto; display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; 
+            margin-top: 0; display: flex; justify-content: space-between; align-items: center; 
+            border-top: 1px solid var(--border); padding-top: 15px; 
         }
         .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; }
@@ -179,42 +167,27 @@
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* --- 6. FLOATING BOTS --- */
-        .whatsapp-float { 
-            position: fixed; bottom: 90px; right: 25px; width: 60px; height: 60px; 
-            background: #25D366; color: white; border-radius: 50%; display: flex; 
-            align-items: center; justify-content: center; font-size: 32px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; 
-        }
-        
-        .chatbot-btn { 
-            position: fixed; bottom: 20px; right: 25px; width: 60px; height: 60px; 
-            background: linear-gradient(135deg, #1e293b, #0f172a); 
-            color: white; border-radius: 50%; display: flex; 
-            align-items: center; justify-content: center; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; border: none; transition: 0.3s; cursor: pointer;
-        }
+        /* --- 6. FLUTUANTES --- */
+        .whatsapp-float { position: fixed; bottom: 90px; right: 25px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; }
+        .chatbot-btn { position: fixed; bottom: 20px; right: 25px; width: 60px; height: 60px; background: linear-gradient(135deg, #1e293b, #0f172a); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; border: none; transition: 0.3s; cursor: pointer; }
         .chatbot-btn svg { width: 28px; height: 28px; fill: white; }
         .whatsapp-float:hover, .chatbot-btn:hover { transform: scale(1.1); }
 
-        /* --- 7. MODAL & WIZARD --- */
+        /* --- 7. MODAL --- */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); background: none; border: none; }
         .btn-dl { background: var(--red); color: white; padding: 15px 30px; border-radius: 50px; font-weight: bold; display: inline-flex; gap: 10px; margin: 20px 0; text-decoration: none; }
         
+        /* Wizard */
         .btn-wizard-start { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; width: 100%; margin-top: 20px; cursor: pointer; }
         .wiz-opt { background: var(--bg-body); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; }
         .wiz-opt:hover { border-color: var(--accent); color: var(--accent); }
         .step { display: none; } .step.active { display: block; animation: fade 0.4s; }
         .bot-result { background: var(--bg-body); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; border: 1px solid var(--border); }
 
-        /* Serviços e Ferramentas */
         .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; justify-content: center; }
-        .tool-card { 
-            background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); 
-            text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; 
-        }
+        .tool-card { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
         .tool-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .tool-icon { font-size: 2.5rem; margin-bottom: 15px; }
         .tool-card h4 { margin-bottom: 10px; color: var(--text-main); font-size: 1.1rem; }
@@ -236,7 +209,7 @@
 </head>
 <body>
 
-    <div class="version-tag">v9.1</div>
+    <div class="version-tag">v9.2</div>
 
     <header>
         <div class="header-left">
@@ -278,7 +251,7 @@
             <button class="close" onclick="toggleModal('wizardModal')">&times;</button>
             <div id="step1" class="step active">
                 <h3 data-lang="wiz_title">Assistente Inteligente</h3>
-                <p style="margin-bottom:20px; color:var(--text-muted)" data-lang="wiz_desc">Vamos verificar a compatibilidade do seu PC.</p>
+                <p style="margin-bottom:20px" data-lang="wiz_desc">Vamos verificar a compatibilidade.</p>
                 <button class="btn-wizard-start" onclick="nextStep(2)" data-lang="wiz_start">Começar ➡️</button>
             </div>
             <div id="step2" class="step"><h3>Sistema?</h3><button class="wiz-opt" onclick="setOS('Win10'); nextStep(3)">Win 10/11 ✅</button><button class="wiz-opt" onclick="setOS('Old'); nextStep(3)">Outro ❌</button></div>
@@ -333,11 +306,13 @@
                                 <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80" style="height:220px;">
                                 <div class="card-body">
                                     <h3>Mercedes Full Pack 2025</h3>
-                                    <div class="spec-grid">
-                                        <div class="spec-box"><span class="spec-icon">🚘</span><span>Cars & Trucks</span></div>
-                                        <div class="spec-box"><span class="spec-icon">📚</span><span>WIS / EPC</span></div>
-                                        <div class="spec-box"><span class="spec-icon">⚡</span><span>DTS / Vediamo</span></div>
-                                        <div class="spec-box"><span class="spec-icon">🎫</span><span>Certificados</span></div>
+                                    <p class="desc">A solução definitiva com tudo incluído.</p>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div>
+                                        <div class="tech-row"><span class="tech-label">Sistema:</span> <span>Win 10/11 x64</span></div>
+                                        <div class="tech-row"><span class="tech-label">Conteúdo:</span> <span>Xentry, WIS, DTS...</span></div>
+                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>350 GB</span></div>
+                                        <div class="tech-row"><span class="tech-label">Língua:</span> <span>Multi</span></div>
                                     </div>
                                     <div class="card-actions"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)">Encomendar</button></div>
                                 </div>
@@ -347,10 +322,11 @@
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Xentry Cars (PassThru)</h3>
-                                    <p class="desc">Diagnóstico para ligeiros. Compatível J2534.</p>
-                                    <div class="spec-grid">
-                                        <div class="spec-box"><span class="spec-icon">📅</span><span>01-2025</span></div>
-                                        <div class="spec-box"><span class="spec-icon">🔌</span><span>Openport</span></div>
+                                    <p class="desc">Diagnóstico de ligeiros.</p>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div>
+                                        <div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534 / Openport</span></div>
+                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>80 GB</span></div>
                                     </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
@@ -360,10 +336,11 @@
                                 <img src="https://images.unsplash.com/photo-1598972884636-348404444338?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Xentry Trucks</h3>
-                                    <p class="desc">Pesados, Autocarros e Industriais (24V).</p>
-                                    <div class="spec-grid">
-                                        <div class="spec-box"><span class="spec-icon">📅</span><span>01-2025</span></div>
-                                        <div class="spec-box"><span class="spec-icon">📟</span><span>C4 / C5</span></div>
+                                    <p class="desc">Pesados e Industriais (24V).</p>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div>
+                                        <div class="tech-row"><span class="tech-label">VCI:</span> <span>C4 / C5 Multiplexer</span></div>
+                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>60 GB</span></div>
                                     </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
@@ -373,10 +350,10 @@
                                 <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Engenharia (Dev)</h3>
-                                    <p class="desc">Desenvolvimento e Codificação Offline.</p>
-                                    <div class="spec-grid">
-                                        <div class="spec-box"><span class="spec-icon">🛠️</span><span>DTS 9</span></div>
-                                        <div class="spec-box"><span class="spec-icon">💻</span><span>Vediamo</span></div>
+                                    <p class="desc">Desenvolvimento e Codificação.</p>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Soft:</span> <span>DTS 9 + Vediamo 5</span></div>
+                                        <div class="tech-row"><span class="tech-label">Extra:</span> <span>Seed Calc</span></div>
                                     </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
@@ -386,10 +363,11 @@
                                 <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>WIS & EPC</h3>
-                                    <p class="desc">Manuais de Reparação e Catálogo de Peças.</p>
-                                    <div class="spec-grid">
-                                        <div class="spec-box"><span class="spec-icon">📖</span><span>Manual</span></div>
-                                        <div class="spec-box"><span class="spec-icon">🔩</span><span>Peças</span></div>
+                                    <p class="desc">Manuais e Peças.</p>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Dados:</span> <span>Até 2021 (Offline)</span></div>
+                                        <div class="tech-row"><span class="tech-label">Tipo:</span> <span>Base Dados</span></div>
+                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>100 GB</span></div>
                                     </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
@@ -399,10 +377,10 @@
                                 <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Starfinder 2016-2024</h3>
-                                    <p class="desc">Esquemas elétricos e localização.</p>
-                                    <div class="spec-grid">
-                                        <div class="spec-box"><span class="spec-icon">⚡</span><span>Esquemas</span></div>
-                                        <div class="spec-box"><span class="spec-icon">📍</span><span>Fotos</span></div>
+                                    <p class="desc">Esquemas elétricos Web.</p>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Anos:</span> <span>2016 a 2024</span></div>
+                                        <div class="tech-row"><span class="tech-label">Formato:</span> <span>HTML / Web</span></div>
                                     </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
@@ -412,10 +390,10 @@
                                 <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>SDMedia</h3>
-                                    <p class="desc">Base de dados de vídeos e treino.</p>
-                                    <div class="spec-grid">
-                                        <div class="spec-box"><span class="spec-icon">🎥</span><span>Vídeos</span></div>
-                                        <div class="spec-box"><span class="spec-icon">🎓</span><span>Treino</span></div>
+                                    <p class="desc">Vídeos e Treino.</p>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Conteúdo:</span> <span>Vídeo/PDF</span></div>
+                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>10 GB</span></div>
                                     </div>
                                     <div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div>
                                 </div>
@@ -424,19 +402,22 @@
                         </div>
                     </div>
 
-                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diagnóstico e Programação.</p><div class="spec-grid"><div class="spec-box"><span>4.39</span></div><div class="spec-box"><span>ICOM</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diag & Coding.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>4.39.20</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>ICOM / K-DCAN</span></div><div class="tech-row"><span class="tech-label">Espaço:</span> <span>150 GB</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     
                     <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid">
-                        <div class="card"><img src="https://images.unsplash.com/photo-1621503373575-b040317da743?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Nativo até 2025.</p><div class="spec-grid"><div class="spec-box"><span>V 9</span></div><div class="spec-box"><span>Nativo</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
-                        <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline (Antigos).</p><div class="spec-grid"><div class="spec-box"><span>V 7</span></div><div class="spec-box"><span>VM</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
+                        <div class="card"><img src="https://images.unsplash.com/photo-1621503373575-b040317da743?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Nativo 2025.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>9.193</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>Nativo</span></div><div class="tech-row"><span class="tech-label">Espaço:</span> <span>10 GB</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
+                        <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>7.83</span></div><div class="tech-row"><span class="tech-label">Modo:</span> <span>VM Ware</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div>
                     </div></div>
                     
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p class="desc">Oficial Renault.</p><div class="spec-grid"><div class="spec-box"><span>V240</span></div><div class="spec-box"><span>Reprog</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip</h3><p class="desc">Oficial V240.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>240</span></div><div class="tech-row"><span class="tech-label">Extra:</span> <span>Reprog</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">DoIP Land Rover.</p><div class="spec-grid"><div class="spec-box"><span>DoIP</span></div><div class="spec-box"><span>Online</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p class="desc">Diagnóstico Global.</p><div class="spec-grid"><div class="spec-box"><span>V18</span></div><div class="spec-box"><span>J2534</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p class="desc">Sistema Online.</p><div class="spec-grid"><div class="spec-box"><span>Online</span></div><div class="spec-box"><span>PATS</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Opel/Chevrolet.</p><div class="spec-grid"><div class="spec-box"><span>GDS2</span></div><div class="spec-box"><span>Tech2</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">DoIP Land Rover.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ano:</span> <span>2017+</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>DoIP VCI</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p class="desc">Global V18.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>18.00.008</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p class="desc">Online System.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Online</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>VCM II/III</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Chevrolet/Opel.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Soft:</span> <span>GDS2 + Tech2</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>MDI / J2534</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
@@ -449,9 +430,9 @@
                     <button class="side-btn" onclick="switchBrand('pc', this)">Computadores</button>
                 </div>
                 <div class="content-wrapper">
-                    <div id="brand-univ" class="brand-panel active"><h2 class="panel-header">Universal</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Openport 2.0</h3><p class="desc">J2534 Económico.</p></div></div></div></div>
-                    <div id="brand-vci" class="brand-panel"><h2 class="panel-header">VCI Marca</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p class="desc">Mercedes DoIP.</p></div></div></div></div>
-                    <div id="brand-pc" class="brand-panel"><h2 class="panel-header">Computadores</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Toughbook</h3><p class="desc">Blindado.</p></div></div></div></div>
+                    <div id="brand-univ" class="brand-panel active"><h2 class="panel-header">Universal</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Tactrix Openport</h3><p class="desc">Económico J2534.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-vci" class="brand-panel"><h2 class="panel-header">VCI Marca</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p class="desc">Mercedes DoIP.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-pc" class="brand-panel"><h2 class="panel-header">Computadores</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Toughbook</h3><p class="desc">Blindado.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
@@ -547,7 +528,6 @@
                 <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=100&q=60"><div>Xentry</div></div>`;
         }
 
-        // Translation
         const dict = {
             pt: { 
                 btn_support: "Suporte", btn_quote: "Orçamento",
