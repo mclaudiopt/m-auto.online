@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
     <link rel="icon" type="image/png" href="m-auto.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <title>M-Auto Online | Diagnostic Solutions</title>
 
     <style>
-        /* --- VARIAVEIS (TEMAS) --- */
+        /* --- 1. CONFIGURAÇÃO DE TEMAS --- */
         :root {
             --bg-body: #020617;
             --bg-card: #1e293b;
@@ -25,7 +27,7 @@
         }
 
         [data-theme="light"] {
-            --bg-body: #f1f5f9; --bg-card: #ffffff; --bg-nav: #e2e8f0; --text-main: #0f172a; --text-muted: #64748b; --border: #cbd5e1; --accent: #2563eb; --gold: #b45309; --shadow: rgba(0,0,0,0.1);
+            --bg-body: #f8fafc; --bg-card: #ffffff; --bg-nav: #e2e8f0; --text-main: #0f172a; --text-muted: #475569; --border: #cbd5e1; --accent: #2563eb; --gold: #b45309; --shadow: rgba(0,0,0,0.1);
         }
         [data-theme="corporate"] {
             --bg-body: #eff6ff; --bg-card: #ffffff; --bg-nav: #dbeafe; --text-main: #1e3a8a; --text-muted: #60a5fa; --border: #93c5fd; --accent: #1d4ed8; --gold: #ea580c; --shadow: rgba(30, 64, 175, 0.1);
@@ -34,34 +36,48 @@
             --bg-body: #fafaf9; --bg-card: #ffffff; --bg-nav: #e7e5e4; --text-main: #44403c; --text-muted: #78716c; --border: #d6d3d1; --accent: #ea580c; --gold: #a16207; --shadow: rgba(0,0,0,0.05);
         }
 
+        /* --- 2. RESET GERAL --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
         body { 
             background-color: var(--bg-body); color: var(--text-main); 
             line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column;
-            overflow-x: hidden; 
+            overflow-x: hidden; /* Impede scroll horizontal */
             transition: background 0.3s, color 0.3s;
         }
 
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* --- HEADER FIXO --- */
+        /* --- 3. CABEÇALHO --- */
         header {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             padding: 0 5%; height: var(--header-h); position: fixed; width: 100%; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 4px 20px var(--shadow);
         }
-        .header-left, .header-right { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 32px; }
-        .brand-name { font-size: 1.1rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
-        
-        /* Botões Header */
+
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .logo-link { display: flex; align-items: center; gap: 10px; }
+        .logo-img { height: 32px; width: auto; }
+        .brand-name { font-size: 1.2rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
+
+        .header-right { display: flex; align-items: center; gap: 15px; }
+
+        /* Controles (Tema + Lingua) */
+        .controls-group { display: flex; align-items: center; gap: 10px; border-right: 1px solid var(--border); padding-right: 15px; margin-right: 5px; }
+        .theme-select { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 4px; border-radius: 4px; font-size: 0.85rem; }
+        .theme-select option { background: var(--bg-card); }
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-btn { background: none; border: none; padding: 0; opacity: 0.5; transition: 0.2s; }
+        .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
+        .lang-btn img { width: 22px; height: 22px; border-radius: 50%; border: 1px solid #777; display: block; }
+
+        /* Botões de Ação */
         .header-action-btn {
-            padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem;
+            padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem;
             display: flex; align-items: center; justify-content: center; gap: 8px; border: none;
-            transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); white-space: nowrap; height: 40px;
+            transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap; height: 38px;
         }
         .btn-red { background: #ef4444; color: white; animation: pulse 2s infinite; }
         .btn-red:hover { background: #dc2626; transform: translateY(-2px); }
@@ -70,50 +86,46 @@
 
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 
-        .theme-select { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 4px; border-radius: 4px; font-size: 0.85rem; }
-        .theme-select option { background: var(--bg-card); }
-        .lang-switch { display: flex; gap: 8px; border-right: 1px solid var(--border); padding-right: 15px; }
-        .lang-btn { background: none; border: none; padding: 0; opacity: 0.5; transition: 0.2s; }
-        .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
-        .lang-btn img { width: 22px; height: 22px; border-radius: 50%; border: 1px solid #777; display: block; }
+        /* --- 4. HERO --- */
+        .hero { margin-top: var(--header-h); padding: 80px 20px 40px; text-align: center; border-bottom: 1px solid var(--border); }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; color: var(--text-main); }
+        .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
 
-        /* --- HERO --- */
-        .hero { margin-top: 60px; padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border); }
-        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
-        .hero p { color: var(--text-muted); }
-
-        /* --- MAIN NAV --- */
+        /* --- 5. NAVEGAÇÃO PRINCIPAL (STICKY) --- */
         .main-nav {
             display: flex; justify-content: center; gap: 10px; padding: 15px;
             background: var(--bg-nav); border-bottom: 1px solid var(--border);
-            position: sticky; top: 60px; z-index: 900;
+            position: sticky; top: var(--header-h); z-index: 900;
         }
         .nav-btn {
             background: transparent; border: 1px solid var(--border); color: var(--text-muted);
-            padding: 8px 20px; border-radius: 50px; font-weight: 600; transition: 0.3s;
+            padding: 8px 25px; border-radius: 50px; font-weight: 600; transition: 0.3s;
+            display: flex; align-items: center; gap: 8px; font-size: 0.95rem;
         }
         .nav-btn:hover { background: var(--bg-hover); color: var(--text-main); }
-        .nav-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .nav-btn.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 15px var(--shadow); }
 
-        /* --- LAYOUT FIXO (Correção do "salto") --- */
+        /* --- 6. LAYOUT CONTEÚDO --- */
         .content-container { padding: 40px 5%; max-width: 1400px; margin: 0 auto; min-height: 600px; }
         
         .section-view { display: none; animation: fadeIn 0.4s; }
         .section-view.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Sidebar Layout (Fixo na esquerda, fluido na direita) */
         .sidebar-layout { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
         
-        /* BARRA LATERAL FIXA */
         .sidebar-menu { 
             display: flex; flex-direction: column; gap: 2px; 
-            width: 260px; flex: 0 0 260px; /* LARGURA FIXA E IMUTÁVEL */
+            width: 240px; flex: 0 0 240px; /* IMPORTANTE: Fixa a largura */
             background: var(--bg-card); padding: 10px; border-radius: 10px; border: 1px solid var(--border);
         }
         .side-btn {
             background: transparent; border: none; text-align: left; padding: 12px 15px;
             color: var(--text-muted); font-weight: 500; border-radius: 6px; transition: 0.2s;
             border-left: 3px solid transparent; font-size: 0.95rem; 
-            overflow: hidden; white-space: nowrap; text-overflow: ellipsis; /* Previne quebra de linha */
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         .side-btn:hover { background: var(--bg-hover); color: var(--text-main); }
         .side-btn.active { 
@@ -121,17 +133,17 @@
             border-left: 3px solid var(--accent); font-weight: 700; 
         }
 
-        .content-area { flex: 1; min-width: 0; }
+        .content-area { flex: 1; min-width: 0; /* Permite ao grid encolher se necessário */ }
         .brand-content { display: none; animation: fadeIn 0.3s; }
         .brand-content.active { display: block; }
 
         .brand-header { 
-            font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; 
+            font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; 
             border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px;
             color: var(--text-main);
         }
 
-        /* GRID */
+        /* --- 7. CARTÕES PRODUTO --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         
         .card { 
@@ -140,40 +152,54 @@
             box-shadow: 0 4px 10px var(--shadow);
         }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        
         .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        
+        .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
         .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
+        
         .specs { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
-        .spec { background: var(--bg-hover); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main); }
-        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
+        .spec { 
+            background: var(--bg-hover); padding: 4px 8px; border-radius: 4px; 
+            border: 1px solid var(--border); font-size: 0.75rem; color: var(--text-main); font-weight: 600;
+        }
+        
+        .card-footer { 
+            margin-top: auto; display: flex; justify-content: space-between; align-items: center; 
+            border-top: 1px solid var(--border); padding-top: 15px;
+        }
         .price { font-weight: 800; font-size: 1rem; color: var(--text-main); }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
 
         .card.gold { border: 2px solid var(--gold); }
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
+        .badge-gold { position: absolute; top: 10px; right: 10px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
 
-        /* OUTRAS SECÇÕES */
+        /* Outros Cards */
         .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; justify-content: center; }
         .tool-card { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
         .tool-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .tool-icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .tool-card h4 { margin-bottom: 10px; color: var(--text-main); }
         .tool-link { color: var(--accent); font-weight: bold; margin-top: auto; }
 
-        /* FLUTUANTES */
-        .chatbot-trigger { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 20px var(--shadow); z-index: 1500; transition: 0.3s; }
-        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 5px 20px var(--shadow); z-index: 1500; transition: 0.3s; }
+        /* --- 8. BOTÕES FLUTUANTES & MODAIS --- */
+        .chatbot-trigger { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 20px var(--shadow); z-index: 2000; cursor: pointer; transition: 0.3s; }
+        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 5px 20px var(--shadow); z-index: 2000; transition: 0.3s; }
         .chatbot-trigger:hover, .whatsapp-float:hover { transform: scale(1.1); }
 
-        /* MODAIS */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .modal-box { background: var(--bg-card); padding: 2rem; border-radius: 15px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal-box { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); border: none; background: none; }
         
         .btn-download-big { background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; margin: 20px 0; text-decoration: none; transition: 0.3s; }
         .btn-download-big:hover { transform: scale(1.05); }
 
-        /* WIZARD COM BOTAO CORRIGIDO */
+        /* Wizard */
+        .step { display: none; } .step.active { display: block; animation: fadeIn 0.4s; }
+        
+        /* BOTÃO COMEÇAR FORMATADO */
         .btn-wizard-start {
             background: var(--accent); color: white; border: none; 
             padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; 
@@ -181,7 +207,6 @@
         }
         .btn-wizard-start:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5); }
 
-        .step { display: none; } .step.active { display: block; animation: fadeIn 0.4s; }
         .wizard-btn { background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
         .wizard-btn:hover { border-color: var(--accent); color: var(--accent); }
         .result-box { background: var(--bg-hover); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; }
@@ -191,21 +216,20 @@
         .mini-card div { padding: 8px; }
 
         footer { background: var(--bg-nav); padding: 3rem 5%; text-align: center; border-top: 1px solid var(--border); margin-top: auto; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .footer-logo { width: 120px; opacity: 0.8; margin-bottom: 15px; }
 
         /* Mobile */
         @media (max-width: 768px) {
             .sidebar-layout { flex-direction: column; }
-            .sidebar-menu { flex-direction: row; overflow-x: auto; width: 100%; padding-bottom: 10px; margin-bottom: 20px; }
+            .sidebar-menu { flex-direction: row; overflow-x: auto; width: 100%; padding-bottom: 10px; border-right: none; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
             .side-btn { min-width: 140px; justify-content: center; text-align: center; border-left: none; border-bottom: 3px solid transparent; }
             .side-btn.active { border-left: none; border-bottom: 3px solid var(--accent); }
             
-            .main-nav { justify-content: flex-start; overflow-x: auto; }
+            .main-nav { justify-content: flex-start; overflow-x: auto; padding: 10px; }
             .nav-btn { white-space: nowrap; }
             .brand-name { display: none; }
             .btn-support-header span { display: none; } /* Esconde texto suporte mobile */
-            .header-right { gap: 8px; }
+            .btn-support-header::before { content: '📥'; margin-right: 0; font-size: 1.2rem; }
             .lang-switch { padding-right: 8px; gap: 5px; }
         }
     </style>
@@ -220,7 +244,7 @@
             </a>
         </div>
         <div class="header-right">
-            <div class="controls-group" style="display:flex; align-items:center; gap:10px;">
+            <div class="controls-group">
                 <select class="theme-select" onchange="setTheme(this.value)">
                     <option value="dark">🌑</option>
                     <option value="light">☀️</option>
@@ -234,11 +258,11 @@
                 </div>
             </div>
             
-            <button onclick="toggleModal('supportModal')" class="header-action-btn btn-red" data-lang="btn_support">
-                📥 <span>Suporte</span>
+            <button onclick="toggleModal('supportModal')" class="header-action-btn btn-red">
+                <span data-lang="btn_support">📥 Suporte</span>
             </button>
-            <a href="#contacto" class="header-action-btn btn-blue" data-lang="btn_quote">
-                📝 <span>Orçamento</span>
+            <a href="#contacto" class="header-action-btn btn-blue">
+                <span data-lang="btn_quote">📝 Orçamento</span>
             </a>
         </div>
     </header>
@@ -320,7 +344,7 @@
                                 <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>DTS Monaco & Vediamo</h3>
-                                    <p class="desc-soft" data-lang="desc_merc_dts">Ferramentas de engenharia para desenvolvimento, SCN Coding offline, desbloqueio de funções.</p>
+                                    <p class="desc-soft" data-lang="desc_merc_dts">Ferramentas de engenharia para desenvolvimento, SCN Coding offline, desbloqueio de funções (Vmax, AdBlue) e Flash de ECUs.</p>
                                     <div class="specs"><span class="spec">Dev</span><span class="spec">Coding</span></div>
                                     <div class="card-footer"><span class="price">Consulta</span><span class="btn-view">Ver Mais</span></div>
                                 </div>
@@ -330,7 +354,7 @@
                                 <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Mercedes Full Pack</h3>
-                                    <p class="desc-soft" style="color:inherit" data-lang="desc_merc_full">Suite completa: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC (Manuais) + Utilitários.</p>
+                                    <p class="desc-soft" style="color:inherit" data-lang="desc_merc_full">Suite completa: Xentry Cars + Trucks + DTS + Vediamo + WIS/EPC (Manuais e Peças) + Starfinder + SDMedia + Utilitários.</p>
                                     <div class="specs"><span class="spec" style="border-color:var(--gold)">Chave na Mão</span></div>
                                     <div class="card-footer"><span class="price" style="color:var(--gold)">Melhor Preço</span><span class="btn-view" style="color:var(--gold)">Encomendar</span></div>
                                 </div>
@@ -419,6 +443,7 @@
         function switchSection(id, btn) {
             document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
             document.getElementById('sec-' + id).classList.add('active');
+            
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             window.scrollTo({top: 150, behavior: 'smooth'});
@@ -446,7 +471,7 @@
             else document.documentElement.setAttribute('data-theme', theme);
         }
 
-        // Lógica do Wizard
+        // Wizard Logic
         let userOS='', userDisk='', userRam=0;
         function nextStep(s) {
             document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
@@ -468,7 +493,7 @@
                 <div class="mini-card"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=150&q=60"><div style="padding:5px">Xentry Cars</div></div>`;
         }
 
-        // Traduções completas reintroduzidas
+        // Traduções
         const translations = {
             pt: {
                 btn_support: "📥 Suporte", btn_quote: "📝 Orçamento",
