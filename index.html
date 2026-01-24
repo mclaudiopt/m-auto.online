@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V9.2</title>
+    <title>M-Auto Online | V9.3</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -19,7 +19,7 @@
             --accent: #2563eb; --accent-hover: #1d4ed8;
             --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
             --gold: #b45309; --red: #ef4444; --header-h: 70px;
-            --tech-bg: #f1f5f9; /* Fundo da area tecnica */
+            --tech-bg: #f1f5f9;
             --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
 
@@ -131,7 +131,13 @@
             border-bottom: 2px solid var(--accent); color: var(--text-main); display: inline-block;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; width: 100%; }
+        /* GRID (Ajustado para permitir 2 blocos) */
+        .grid { 
+            display: grid; 
+            /* Reduzi para 280px para garantir que cabem 2 lado a lado */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; width: 100%;
+        }
 
         .card { 
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; 
@@ -145,7 +151,7 @@
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
         .card p.desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; }
         
-        /* NOVO: DETALHES TÉCNICOS (Compacto, não clicável) */
+        /* DETALHES TÉCNICOS */
         .tech-details {
             background: var(--tech-bg); border: 1px solid var(--border);
             border-radius: 6px; padding: 10px; margin-top: auto; margin-bottom: 15px;
@@ -155,10 +161,15 @@
         .tech-row:last-child { border-bottom: none; }
         .tech-label { font-weight: 600; color: var(--text-main); }
 
-        /* FOOTER DO CARD (Separado) */
-        .card-footer { 
-            margin-top: 0; display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid var(--border); padding-top: 15px; 
+        /* FOOTER DO CARD (CORRIGIDO) */
+        .card-actions { 
+            margin-top: 0; 
+            display: flex; 
+            justify-content: space-between; /* Garante separação */
+            align-items: center; 
+            border-top: 1px solid var(--border); 
+            padding-top: 15px; 
+            width: 100%;
         }
         .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; }
@@ -179,7 +190,6 @@
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); background: none; border: none; }
         .btn-dl { background: var(--red); color: white; padding: 15px 30px; border-radius: 50px; font-weight: bold; display: inline-flex; gap: 10px; margin: 20px 0; text-decoration: none; }
         
-        /* Wizard */
         .btn-wizard-start { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; width: 100%; margin-top: 20px; cursor: pointer; }
         .wiz-opt { background: var(--bg-body); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; }
         .wiz-opt:hover { border-color: var(--accent); color: var(--accent); }
@@ -209,7 +219,7 @@
 </head>
 <body>
 
-    <div class="version-tag">v9.2</div>
+    <div class="version-tag">v9.3</div>
 
     <header>
         <div class="header-left">
@@ -251,7 +261,7 @@
             <button class="close" onclick="toggleModal('wizardModal')">&times;</button>
             <div id="step1" class="step active">
                 <h3 data-lang="wiz_title">Assistente Inteligente</h3>
-                <p style="margin-bottom:20px" data-lang="wiz_desc">Vamos verificar a compatibilidade.</p>
+                <p style="margin-bottom:20px" data-lang="wiz_desc">Vamos verificar a compatibilidade do seu PC.</p>
                 <button class="btn-wizard-start" onclick="nextStep(2)" data-lang="wiz_start">Começar ➡️</button>
             </div>
             <div id="step2" class="step"><h3>Sistema?</h3><button class="wiz-opt" onclick="setOS('Win10'); nextStep(3)">Win 10/11 ✅</button><button class="wiz-opt" onclick="setOS('Old'); nextStep(3)">Outro ❌</button></div>
@@ -417,7 +427,7 @@
                     
                     <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p class="desc">Online System.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Online</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>VCM II/III</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Chevrolet/Opel.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Soft:</span> <span>GDS2 + Tech2</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>MDI / J2534</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Opel/Chevrolet.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Soft:</span> <span>GDS2 + Tech2</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>MDI / J2534</span></div></div><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
@@ -430,7 +440,7 @@
                     <button class="side-btn" onclick="switchBrand('pc', this)">Computadores</button>
                 </div>
                 <div class="content-wrapper">
-                    <div id="brand-univ" class="brand-panel active"><h2 class="panel-header">Universal</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Tactrix Openport</h3><p class="desc">Económico J2534.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
+                    <div id="brand-univ" class="brand-panel active"><h2 class="panel-header">Universal</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Openport 2.0</h3><p class="desc">J2534 Económico.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     <div id="brand-vci" class="brand-panel"><h2 class="panel-header">VCI Marca</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p class="desc">Mercedes DoIP.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                     <div id="brand-pc" class="brand-panel"><h2 class="panel-header">Computadores</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Toughbook</h3><p class="desc">Blindado.</p><div class="card-actions"><span class="price">Consulta</span><button class="btn-view">Ver</button></div></div></div></div></div>
                 </div>
@@ -528,6 +538,7 @@
                 <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=100&q=60"><div>Xentry</div></div>`;
         }
 
+        // Translation
         const dict = {
             pt: { 
                 btn_support: "Suporte", btn_quote: "Orçamento",
