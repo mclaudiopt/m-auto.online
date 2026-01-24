@@ -4,108 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="description" content="Software de diagnóstico automóvel multimarca: Xentry, ISTA, Diagbox e mais. Instalação remota e suporte técnico especializado para oficinas.">
-    <meta name="keywords" content="Xentry, ISTA, Diagnóstico Automóvel, OBD2, Oficina, Software Mecânica, M-Auto">
-    <meta property="og:title" content="M-Auto | Soluções de Diagnóstico Profissional">
-    <meta property="og:description" content="Instalação remota de Xentry, BMW ISTA, Diagbox e portáteis prontos a usar. Suporte 24/7.">
+    <meta name="description" content="Software de diagnóstico automóvel 2025: Xentry 01-2025, ISTA, Diagbox. Instalação remota e suporte especializado.">
+    <meta property="og:title" content="M-Auto | Diagnóstico Automóvel Profissional 2025">
     <meta property="og:image" content="https://m-auto.online/m-auto.png">
-    <meta property="og:url" content="https://m-auto.online">
-    <meta property="og:type" content="website">
-
+    
     <link rel="icon" type="image/png" href="m-auto.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto | Catálogo Profissional Multimarca</title>
+    <title>M-Auto | Software de Diagnóstico Profissional</title>
 
     <style>
-        /* --- ESTILOS GERAIS (Dark Mode) --- */
+        /* --- ESTILOS MODERNOS (Premium Dark) --- */
         :root {
-            --cor-fundo: #0b0f19;       /* Preto azulado profundo */
-            --cor-card: #151e2e;        /* Cinzento tech */
-            --cor-texto: #e2e8f0;       
+            --cor-fundo: #020617;       /* Preto quase total */
+            --cor-glass: rgba(30, 41, 59, 0.7); /* Vidro semi-transparente */
+            --cor-texto: #f8fafc;       
             --cor-destaque: #3b82f6;    /* Azul elétrico */
-            --cor-destaque-sec: #10b981; /* Verde */
-            --cor-urgente: #ef4444;     /* Vermelho para o suporte */
+            --cor-destaque-brilho: rgba(59, 130, 246, 0.5); /* Brilho do azul */
+            --cor-verde: #10b981; 
+            --cor-urgente: #ef4444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
-        html { 
-            scroll-behavior: smooth; 
-            scroll-padding-top: 100px; /* Impede que o menu tape os títulos */
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+
+        body { 
+            background-color: var(--cor-fundo); 
+            color: var(--cor-texto); 
+            line-height: 1.6;
+            /* Fundo com gradiente subtil para dar profundidade */
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 60%);
+            min-height: 100vh;
         }
 
-        body { background-color: var(--cor-fundo); color: var(--cor-texto); line-height: 1.6; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- CABEÇALHO (BRANCO) --- */
+        /* --- CABEÇALHO --- */
         header {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); /* Efeito vidro no menu */
             padding: 0.5rem 5%;
             position: fixed; width: 100%; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 2px solid var(--cor-destaque);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .logo-img { height: 55px; width: auto; display: block; }
+        .logo-img { height: 50px; width: auto; display: block; }
         nav ul { display: flex; gap: 2rem; }
-        nav a { color: #0b0f19; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; } 
+        nav a { color: #0f172a; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; } 
         nav a:hover { color: var(--cor-destaque); }
         .btn-cta {
-            background: linear-gradient(135deg, var(--cor-destaque), #2563eb); color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600;
+            background: linear-gradient(135deg, var(--cor-destaque), #1d4ed8); 
+            color: #fff; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
         }
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6); }
 
         /* --- HERO --- */
         .hero {
-            min-height: 95vh; display: flex; align-items: center; justify-content: center; text-align: center;
-            background: linear-gradient(rgba(11, 15, 25, 0.9), var(--cor-fundo)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&q=80');
+            min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            /* Imagem com overlay mais escuro para ler melhor o texto */
+            background: linear-gradient(rgba(2, 6, 23, 0.85), var(--cor-fundo)), 
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-position: center; padding: 140px 20px 40px;
         }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; background: -webkit-linear-gradient(#fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 1.3rem; color: #94a3b8; max-width: 700px; margin: 0 auto 2.5rem; }
-        .badges { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
-        .badge { background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; border: 1px solid #334155; }
-
-        /* CAIXA DE DOWNLOAD */
-        .box-download { background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 15px; border: 1px solid #334155; margin-top: 2rem; display: inline-block; }
-        .btn-download {
-            background-color: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.2rem; border-radius: 50px; font-weight: bold; display: flex; align-items: center; gap: 10px; margin: 0 auto; width: fit-content; transition: 0.3s;
+        .hero h1 { 
+            font-size: 3.5rem; margin-bottom: 1rem; font-weight: 900; letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
         }
-        .btn-download:hover { transform: scale(1.05); background-color: #dc2626; }
+        .hero p { font-size: 1.3rem; color: #cbd5e1; max-width: 700px; margin: 0 auto 2.5rem; }
+        
+        .badges { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+        .badge { 
+            background: rgba(255,255,255,0.05); padding: 6px 16px; border-radius: 50px; 
+            font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px);
+        }
 
-        /* --- SECÇÃO DE SOFTWARE COM ABAS LATERAIS --- */
+        .box-download { 
+            background: rgba(15, 23, 42, 0.6); padding: 2.5rem; border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            margin-top: 1rem; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .btn-download {
+            background-color: var(--cor-urgente); color: white; padding: 15px 35px; font-size: 1.1rem; 
+            border-radius: 50px; font-weight: bold; display: flex; align-items: center; gap: 10px; 
+            margin: 0 auto; width: fit-content; transition: 0.3s;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+        }
+        .btn-download:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(239, 68, 68, 0.6); }
+
+        /* --- ABAS E CONTEÚDO (GLASSMORPHISM) --- */
         .seccao { padding: 5rem 5%; }
         .titulo-seccao { text-align: center; margin-bottom: 3rem; }
-        .titulo-seccao h2 { font-size: 2rem; margin-bottom: 0.5rem; color: #fff; }
+        .titulo-seccao h2 { font-size: 2.2rem; margin-bottom: 0.5rem; font-weight: 800; }
         .titulo-seccao span { color: var(--cor-destaque); }
 
         .tabs-container {
-            display: flex; gap: 2rem; background: var(--cor-card); padding: 2rem;
-            border-radius: 15px; border: 1px solid #1e293b; min-height: 600px;
+            display: flex; gap: 2rem; 
+            background: rgba(30, 41, 59, 0.3); /* Fundo semi-transparente */
+            padding: 2rem; border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.05);
+            min-height: 600px;
         }
 
-        /* Esconder os "radio buttons" */
         .brand-radio { display: none; }
 
-        /* Coluna da Esquerda (Navegação) */
+        /* Navegação Lateral */
         .tabs-nav {
-            display: flex; flex-direction: column; gap: 10px; min-width: 220px;
-            border-right: 1px solid #334155; padding-right: 2rem;
+            display: flex; flex-direction: column; gap: 8px; min-width: 240px;
+            border-right: 1px solid rgba(255,255,255,0.1); padding-right: 2rem;
         }
 
         .tab-label {
-            padding: 15px 20px; background: rgba(255,255,255,0.05); color: #94a3b8;
-            border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s;
-            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.3s;
+            display: flex; justify-content: space-between; align-items: center; color: #94a3b8;
+            border: 1px solid transparent;
         }
-        .tab-label:hover { background: rgba(59, 130, 246, 0.1); color: var(--cor-destaque); }
-        .tab-label::after { content: '›'; font-size: 1.2rem; }
+        .tab-label:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .tab-label i { margin-right: 10px; font-style: normal; } /* Espaço para ícones */
 
-        /* Ativar aba selecionada */
+        /* Aba Ativa */
+        input:checked + .tabs-container .tabs-nav label[for="radio-merc"],
+        /* ... outros inputs seriam complexos de listar aqui, usamos a lógica abaixo */
+        .tab-label-active { /* Classe auxiliar não usada, o CSS trata disto via IDs */ }
+
         #radio-merc:checked ~ .tabs-container .tabs-nav label[for="radio-merc"],
         #radio-bmw:checked ~ .tabs-container .tabs-nav label[for="radio-bmw"],
         #radio-psa:checked ~ .tabs-container .tabs-nav label[for="radio-psa"],
@@ -114,14 +141,17 @@
         #radio-fiat:checked ~ .tabs-container .tabs-nav label[for="radio-fiat"],
         #radio-ford:checked ~ .tabs-container .tabs-nav label[for="radio-ford"],
         #radio-gm:checked ~ .tabs-container .tabs-nav label[for="radio-gm"] {
-            background: var(--cor-destaque); color: white;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+            border-left: 3px solid var(--cor-destaque);
+            color: white;
+            padding-left: 25px; /* Efeito de movimento */
         }
 
-        /* Coluna da Direita (Conteúdo) */
-        .tabs-content { flex-grow: 1; }
-        .tab-pane { display: none; animation: fadeIn 0.5s ease; }
+        .tabs-content { flex-grow: 1; padding-left: 1rem; }
+        .tab-pane { display: none; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Mostrar conteúdo selecionado */
+        /* Mostrar conteúdo */
         #radio-merc:checked ~ .tabs-container .tabs-content #content-merc,
         #radio-bmw:checked ~ .tabs-container .tabs-content #content-bmw,
         #radio-psa:checked ~ .tabs-container .tabs-content #content-psa,
@@ -129,51 +159,79 @@
         #radio-toyota:checked ~ .tabs-container .tabs-content #content-toyota,
         #radio-fiat:checked ~ .tabs-container .tabs-content #content-fiat,
         #radio-ford:checked ~ .tabs-container .tabs-content #content-ford,
-        #radio-gm:checked ~ .tabs-container .tabs-content #content-gm {
-            display: block;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        #radio-gm:checked ~ .tabs-container .tabs-content #content-gm { display: block; }
 
         .brand-title-content { 
-            font-size: 2rem; color: #fff; margin-bottom: 2rem; 
-            border-bottom: 2px solid var(--cor-destaque); padding-bottom: 10px; display: inline-block;
+            font-size: 2rem; color: #fff; margin-bottom: 2rem; border-bottom: 2px solid var(--cor-destaque); 
+            padding-bottom: 10px; display: inline-block; text-shadow: 0 0 20px var(--cor-destaque-brilho);
         }
 
-        /* Grid de Produtos */
-        .grid-soft { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card-soft { background-color: var(--cor-fundo); border-radius: 12px; overflow: hidden; border: 1px solid #334155; transition: 0.3s; position: relative; }
-        .card-soft:hover { transform: translateY(-5px); border-color: var(--cor-destaque); }
+        /* CARDS DE PRODUTO "GLASS" */
+        .grid-soft { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        
+        .card-soft { 
+            background: var(--cor-glass); /* Vidro */
+            backdrop-filter: blur(10px);
+            border-radius: 16px; overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.08); 
+            transition: 0.4s ease; position: relative;
+        }
+        
+        .card-soft:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--cor-destaque); 
+            box-shadow: 0 10px 40px -10px var(--cor-destaque-brilho); /* Brilho azul atrás */
+        }
+
         .tipo-instalacao {
-            position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: var(--cor-destaque-sec); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; border: 1px solid var(--cor-destaque-sec);
+            position: absolute; top: 15px; right: 15px; 
+            background: rgba(0,0,0,0.8); color: var(--cor-verde); 
+            padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; 
+            border: 1px solid var(--cor-verde); box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
         }
-        .img-soft { width: 100%; height: 180px; object-fit: cover; opacity: 0.8; }
-        .info-soft { padding: 1.5rem; }
-        .info-soft h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: #fff; }
-        .desc-soft { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; min-height: 40px;}
-        .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; font-size: 0.85rem; color: #cbd5e1; }
-        .spec-item { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .preco-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #334155; padding-top: 1rem; }
-        .preco { font-size: 1.4rem; font-weight: bold; color: #fff; }
-        .btn-detalhe { color: var(--cor-destaque); font-weight: 600; font-size: 0.9rem; }
 
-        /* --- SERVIÇOS & FOOTER --- */
-        .servicos { background-color: #0f1623; }
-        .grid-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .card-serv { padding: 2rem; background: var(--cor-card); border-radius: 10px; border: 1px solid #1e293b; }
-        .icon-serv { font-size: 2rem; color: var(--cor-destaque); margin-bottom: 1rem; }
+        .img-soft { width: 100%; height: 180px; object-fit: cover; opacity: 0.9; }
+        .info-soft { padding: 1.5rem; }
+        .info-soft h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #fff; font-weight: 700; }
+        .desc-soft { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.2rem; min-height: 40px; line-height: 1.5; }
+        
+        .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; font-size: 0.8rem; color: #cbd5e1; }
+        .spec-item { 
+            background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 6px; 
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .preco-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
+        .preco { font-size: 1.3rem; font-weight: 800; color: #fff; }
+        .btn-detalhe { 
+            color: var(--cor-destaque); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .btn-detalhe:hover { color: #fff; text-shadow: 0 0 10px var(--cor-destaque); }
+
+        /* --- FOOTER --- */
         footer { background: #020617; padding: 4rem 5%; text-align: center; border-top: 1px solid #1e293b; margin-top: auto; }
-        .footer-logo { max-width: 250px; margin-bottom: 20px; background-color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; }
+        .footer-logo { 
+            max-width: 250px; margin-bottom: 25px; background-color: white; 
+            padding: 12px 25px; border-radius: 12px; display: inline-block;
+            box-shadow: 0 0 30px rgba(255,255,255,0.1);
+        }
 
         /* MOBILE */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.2rem; }
             nav { display: none; }
-            .box-download { width: 100%; }
+            .box-download { width: 100%; padding: 1.5rem; }
             .btn-download { width: 100%; justify-content: center; font-size: 1rem; }
-            .logo-img { height: 45px; }
-            .tabs-container { flex-direction: column; }
-            .tabs-nav { min-width: auto; border-right: none; border-bottom: 1px solid #334155; padding-right: 0; padding-bottom: 1rem; }
+            .logo-img { height: 40px; }
+            .tabs-container { flex-direction: column; background: transparent; border: none; padding: 0; }
+            .tabs-nav { 
+                border-right: none; padding-right: 0; padding-bottom: 1rem; flex-direction: row; 
+                overflow-x: auto; white-space: nowrap; border-bottom: 1px solid #334155;
+            }
+            .tab-label { padding: 10px 15px; font-size: 0.9rem; min-width: 140px; justify-content: center; }
+            .tab-label::after { display: none; }
+            .tabs-content { padding-left: 0; padding-top: 1rem; }
         }
     </style>
 </head>
@@ -181,7 +239,7 @@
 
     <header>
         <a href="#inicio">
-            <img src="m-auto.png" alt="M-Auto Logo Principal" class="logo-img">
+            <img src="m-auto.png" alt="M-Auto" class="logo-img">
         </a>
         <nav>
             <ul>
@@ -190,32 +248,32 @@
                 <li><a href="#servicos">Serviços</a></li>
             </ul>
         </nav>
-        <a href="#contacto" class="btn-cta">Pedir Orçamento</a>
+        <a href="#contacto" class="btn-cta">Orçamento</a>
     </header>
 
     <section id="inicio" class="hero">
         <div class="hero-content">
             <div class="badges">
-                <span class="badge">✅ Instalação Remota</span>
-                <span class="badge">🚀 Suporte 24/7</span>
-                <span class="badge">💻 Configuração Nativa</span>
+                <span class="badge">✨ Novas Versões 2025</span>
+                <span class="badge">🚀 Instalação Nativa</span>
+                <span class="badge">🛡️ Garantia Total</span>
             </div>
-            <h1>Soluções de Diagnóstico <br>Multimarca</h1>
-            <p>Xentry, ISTA, Diagbox e muito mais. Software pronto a usar para a sua oficina.</p>
+            <h1>Diagnóstico Automóvel <br>Profissional</h1>
+            <p>A tecnologia mais avançada para a sua oficina. Xentry 2025, ISTA, Diagbox e mais.</p>
             <div class="box-download">
-                <p style="margin-bottom: 15px; color: #fff;">Precisa de ajuda agora?</p>
+                <p style="margin-bottom: 15px; color: #fff; font-weight: 500;">Precisa de suporte agora?</p>
                 <a href="https://github.com/mclaudiopt/m-auto.online/releases/download/Client/Mauto.exe" class="btn-download">
-                    📥 Descarregar Suporte Remoto
+                    📥 Descarregar Cliente Remoto
                 </a>
-                <p style="margin-top: 10px; font-size: 0.8rem; color: #94a3b8;">Cliente Seguro M-Auto (26MB)</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; color: #94a3b8;">Ligação Segura (26MB)</p>
             </div>
         </div>
     </section>
 
     <section id="software" class="seccao">
         <div class="titulo-seccao">
-            <h2>Catálogo por <span>Marca</span></h2>
-            <p>Selecione uma marca à esquerda para ver os softwares disponíveis.</p>
+            <h2>Catálogo <span>Premium</span></h2>
+            <p>Selecione a marca para ver as novidades.</p>
         </div>
 
         <input type="radio" name="brand-tabs" id="radio-merc" class="brand-radio" checked>
@@ -229,14 +287,14 @@
 
         <div class="tabs-container">
             <div class="tabs-nav">
-                <label for="radio-merc" class="tab-label">Mercedes-Benz</label>
-                <label for="radio-bmw" class="tab-label">BMW / Mini</label>
-                <label for="radio-psa" class="tab-label">Grupo PSA</label>
-                <label for="radio-renault" class="tab-label">Renault / Dacia</label>
-                <label for="radio-toyota" class="tab-label">Toyota / Lexus</label>
-                <label for="radio-fiat" class="tab-label">Grupo FIAT (FCA)</label>
-                <label for="radio-ford" class="tab-label">Ford / Mazda</label>
-                <label for="radio-gm" class="tab-label">General Motors</label>
+                <label for="radio-merc" class="tab-label"><i>⭐</i> Mercedes-Benz</label>
+                <label for="radio-bmw" class="tab-label"><i>🔵</i> BMW / Mini</label>
+                <label for="radio-psa" class="tab-label"><i>🦁</i> Grupo PSA</label>
+                <label for="radio-renault" class="tab-label"><i>🔶</i> Renault / Dacia</label>
+                <label for="radio-toyota" class="tab-label"><i>🔴</i> Toyota / Lexus</label>
+                <label for="radio-fiat" class="tab-label"><i>🇮🇹</i> Grupo FIAT (FCA)</label>
+                <label for="radio-ford" class="tab-label"><i>🚙</i> Ford / Mazda</label>
+                <label for="radio-gm" class="tab-label"><i>🇺🇸</i> General Motors</label>
             </div>
 
             <div class="tabs-content">
@@ -245,16 +303,35 @@
                     <h3 class="brand-title-content">Mercedes-Benz</h3>
                     <div class="grid-soft">
                         <div class="card-soft">
-                            <span class="tipo-instalacao">Xentry OpenShell</span>
-                            <img src="https://images.unsplash.com/photo-1632514173809-5c1410167c1e?auto=format&fit=crop&w=800&q=80" alt="Mercedes Diag" class="img-soft">
+                            <span class="tipo-instalacao">Xentry Cars</span>
+                            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80" alt="Mercedes Cars" class="img-soft">
                             <div class="info-soft">
-                                <h3>Xentry / DAS / Vediamo</h3>
-                                <p class="desc-soft">Diagnóstico completo para ligeiros e pesados. Suite completa.</p>
+                                <h3>Xentry Cars (Ligeiros)</h3>
+                                <p class="desc-soft">Diagnóstico completo para veículos ligeiros. Inclui DAS e HHT para antigos.</p>
                                 <div class="specs">
-                                    <div class="spec-item">📅 Versão: 2024.03</div>
+                                    <div class="spec-item" style="color: var(--cor-verde); font-weight:bold;">📅 Versão: 01-2025</div>
                                     <div class="spec-item">🌍 Multi-língua</div>
-                                    <div class="spec-item">💻 Win 10/11 x64</div>
-                                    <div class="spec-item">🔌 C4 / C5 / C6</div>
+                                    <div class="spec-item">💻 PassThru / C4 / C6</div>
+                                    <div class="spec-item">🔑 Certificado ZenZefi</div>
+                                </div>
+                                <div class="preco-row">
+                                    <div class="preco">Sob Consulta</div>
+                                    <a href="#contacto" class="btn-detalhe">Encomendar →</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-soft">
+                            <span class="tipo-instalacao">Xentry Trucks</span>
+                            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Mercedes Trucks" class="img-soft">
+                            <div class="info-soft">
+                                <h3>Xentry Trucks (Pesados)</h3>
+                                <p class="desc-soft">Sistema dedicado para Pesados, Autocarros e Motores Industriais.</p>
+                                <div class="specs">
+                                    <div class="spec-item" style="color: var(--cor-verde); font-weight:bold;">📅 Versão: 01-2025</div>
+                                    <div class="spec-item">🌍 Português</div>
+                                    <div class="spec-item">💻 C4 / C5 / C6</div>
+                                    <div class="spec-item">🚛 Veículos Industriais</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco">Sob Consulta</div>
@@ -272,8 +349,8 @@
                             <span class="tipo-instalacao">Nativo + Expert</span>
                             <img src="https://images.unsplash.com/photo-1555529733-0e670560f7e1?auto=format&fit=crop&w=800&q=80" alt="BMW Diag" class="img-soft">
                             <div class="info-soft">
-                                <h3>ISTA+ D/P & ESYS</h3>
-                                <p class="desc-soft">Diagnóstico (ISTA) e Programação/Codificação (ESYS) avançada.</p>
+                                <h3>ISTA+ & ESYS</h3>
+                                <p class="desc-soft">Diagnóstico (ISTA-D) e Programação (ISTA-P/ESYS) de nível concessionário.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 ISTA: 4.39.20</div>
                                     <div class="spec-item">🌍 PT / EN / DE</div>
@@ -293,11 +370,11 @@
                     <h3 class="brand-title-content">Grupo PSA</h3>
                     <div class="grid-soft">
                         <div class="card-soft">
-                            <span class="tipo-instalacao">Diagbox V9 (VM)</span>
-                            <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80" alt="PSA Diag" class="img-soft">
+                            <span class="tipo-instalacao">Diagbox V9</span>
+                            <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80" alt="PSA Diag" class="img-soft">
                             <div class="info-soft">
-                                <h3>Diagbox V9.x</h3>
-                                <p class="desc-soft">Compatível com os modelos mais recentes, incluindo a nova gama Opel.</p>
+                                <h3>Diagbox V9.x (VM)</h3>
+                                <p class="desc-soft">Para Peugeot, Citroën e a nova gama Opel. Codificação online e offline.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão: 9.150</div>
                                     <div class="spec-item">🌍 Português</div>
@@ -321,11 +398,11 @@
                             <img src="https://images.unsplash.com/photo-1531297461136-82lw9z2.jpg?auto=format&fit=crop&w=800&q=80" alt="Renault Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Renault Can Clip</h3>
-                                <p class="desc-soft">Diagnóstico oficial. Leitura de falhas, codificação e reprogramação.</p>
+                                <p class="desc-soft">Software oficial para diagnóstico, esquemas elétricos e reprogramação.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão: V232</div>
                                     <div class="spec-item">🌍 Português</div>
-                                    <div class="spec-item">💻 RTL2002 Probe</div>
+                                    <div class="spec-item">💻 RTL2002</div>
                                     <div class="spec-item">🔧 Repro Online</div>
                                 </div>
                                 <div class="preco-row">
@@ -341,16 +418,16 @@
                     <h3 class="brand-title-content">Toyota / Lexus</h3>
                     <div class="grid-soft">
                         <div class="card-soft">
-                            <span class="tipo-instalacao">Techstream Nativo</span>
+                            <span class="tipo-instalacao">Techstream TIS</span>
                             <img src="https://images.unsplash.com/photo-1583267746897-2a7675818229?auto=format&fit=crop&w=800&q=60" alt="Toyota Tech" class="img-soft">
                             <div class="info-soft">
-                                <h3>Toyota Techstream (TIS)</h3>
-                                <p class="desc-soft">Software de diagnóstico global para Toyota e Lexus.</p>
+                                <h3>Toyota Techstream</h3>
+                                <p class="desc-soft">Cobertura total para veículos Asiáticos do grupo Toyota.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão: V18</div>
                                     <div class="spec-item">🌍 Multi-língua</div>
                                     <div class="spec-item">💻 J2534 PassThru</div>
-                                    <div class="spec-item">🚗 Cobertura Total</div>
+                                    <div class="spec-item">🚗 Híbridos Incl.</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco">Sob Consulta</div>
@@ -365,13 +442,13 @@
                     <h3 class="brand-title-content">Grupo FIAT (FCA)</h3>
                     <div class="grid-soft">
                          <div class="card-soft">
-                            <span class="tipo-instalacao">MultiECUScan / wiTECH</span>
+                            <span class="tipo-instalacao">MultiECUScan</span>
                             <img src="https://images.unsplash.com/photo-1568762130828-90862f247223?auto=format&fit=crop&w=800&q=60" alt="Fiat Diag" class="img-soft">
                             <div class="info-soft">
-                                <h3>Soluções FCA</h3>
-                                <p class="desc-soft">Diagnóstico para Alfa Romeo, Fiat, Lancia, Jeep (inclui bypass SGW).</p>
+                                <h3>FCA Solutions</h3>
+                                <p class="desc-soft">Diagnóstico para Alfa, Fiat, Lancia e Jeep. Suporte para SGW Bypass.</p>
                                 <div class="specs">
-                                    <div class="spec-item">📅 Versão Recente</div>
+                                    <div class="spec-item">📅 Versão 2024</div>
                                     <div class="spec-item">🌍 Português</div>
                                     <div class="spec-item">💻 ELM / OBDLink</div>
                                     <div class="spec-item">🔓 Suporte SGW</div>
@@ -393,12 +470,12 @@
                             <img src="https://images.unsplash.com/photo-1553444936-633330114a06?auto=format&fit=crop&w=800&q=60" alt="Ford Diag" class="img-soft">
                             <div class="info-soft">
                                 <h3>Ford FDRS & FJDS</h3>
-                                <p class="desc-soft">Sistema de diagnóstico e reprogramação oficial da Ford.</p>
+                                <p class="desc-soft">Acesso aos servidores Ford para programação de módulos novos.</p>
                                 <div class="specs">
-                                    <div class="spec-item">📅 Online/Offline</div>
+                                    <div class="spec-item">📅 Online System</div>
                                     <div class="spec-item">🌍 Multi-língua</div>
                                     <div class="spec-item">💻 VCM II / III</div>
-                                    <div class="spec-item">🔧 Módulos Novos</div>
+                                    <div class="spec-item">🔧 Pats Login</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco">Sob Consulta</div>
@@ -410,19 +487,19 @@
                 </div>
 
                 <div class="tab-pane" id="content-gm">
-                    <h3 class="brand-title-content">General Motors (GM)</h3>
+                    <h3 class="brand-title-content">General Motors</h3>
                     <div class="grid-soft">
                          <div class="card-soft">
                             <span class="tipo-instalacao">GDS2 / Tech2Win</span>
                             <img src="https://images.unsplash.com/photo-1635769268667-5a73238907e9?auto=format&fit=crop&w=800&q=60" alt="GM Diag" class="img-soft">
                             <div class="info-soft">
-                                <h3>GM Global Diagnostic (GDS2)</h3>
-                                <p class="desc-soft">Para veículos GM mais recentes (Chevrolet, Opel antigos, etc.).</p>
+                                <h3>GM GDS2</h3>
+                                <p class="desc-soft">Para Chevrolet e Opel (antigos). Sistema Global de Diagnóstico.</p>
                                 <div class="specs">
                                     <div class="spec-item">📅 Versão 2024</div>
                                     <div class="spec-item">🌍 Multi-língua</div>
                                     <div class="spec-item">💻 MDI / J2534</div>
-                                    <div class="spec-item">🚗 Cobertura Global</div>
+                                    <div class="spec-item">🚗 Tech2Win Incl.</div>
                                 </div>
                                 <div class="preco-row">
                                     <div class="preco">Sob Consulta</div>
@@ -435,41 +512,17 @@
 
             </div> </div> </section>
 
-    <section id="servicos" class="seccao servicos">
-        <div class="titulo-seccao">
-            <h2>Como Trabalhamos</h2>
-        </div>
-        <div class="grid-servicos">
-            <div class="card-serv">
-                <div class="icon-serv">🖥️</div>
-                <h3>Instalação Remota</h3>
-                <p>Acedemos via AnyDesk e deixamos tudo pronto.</p>
-            </div>
-            <div class="card-serv">
-                <div class="icon-serv">📦</div>
-                <h3>Portáteis Prontos</h3>
-                <p>Vendemos portáteis já configurados.</p>
-            </div>
-            <div class="card-serv">
-                <div class="icon-serv">🛡️</div>
-                <h3>Garantia</h3>
-                <p>Suporte pós-venda garantido.</p>
-            </div>
-        </div>
-    </section>
-
     <footer id="contacto">
         <div class="footer-logo">
-            <img src="m-auto.png" alt="M-Auto Logo Industrial" style="width: 100%; height: auto;">
+            <img src="m-auto.png" alt="M-Auto" style="width: 100%; height: auto;">
         </div>
         <div class="contacts">
-            <p>Precisa de um software específico? Fale connosco.</p>
-            <br>
+            <p style="color: #cbd5e1; margin-bottom: 20px;">Especialistas em Software Automóvel</p>
             <p>📧 geral@m-auto.online</p>
-            <p>
+            <p style="margin-top: 10px;">
                 📞 WhatsApp: 
-                <a href="https://wa.me/351910000000?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20software%20de%20diagnóstico." 
-                   style="color: var(--cor-destaque-sec); font-weight: bold;">
+                <a href="https://wa.me/351910000000?text=Olá,%20tenho%20interesse%20no%20software%2001-2025." 
+                   style="color: var(--cor-destaque); font-weight: bold; border-bottom: 1px solid var(--cor-destaque);">
                    +351 910 000 000
                 </a>
             </p>
