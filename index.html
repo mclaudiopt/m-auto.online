@@ -24,7 +24,7 @@
 
         /* --- CABEÇALHO --- */
         header {
-            background-color: rgba(255, 255, 255, 0.95); /* Fundo claro para destacar o logo */
+            background-color: #ffffff; /* Fundo branco puro para o logo se ver bem */
             padding: 0.5rem 5%;
             position: fixed;
             width: 100%;
@@ -37,15 +37,15 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        /* Configuração do Logótipo */
-        .logo-img {
-            height: 60px; /* Tamanho controlado para não estragar o menu */
+        /* LOGO DO TOPO */
+        .logo-container img {
+            max-height: 60px; /* Garante que não fica gigante */
             width: auto;
             display: block;
         }
 
         nav ul { display: flex; gap: 2rem; }
-        nav a { color: #0b0f19; font-weight: 600; } /* Letras escuras porque o menu agora é branco */
+        nav a { color: #0b0f19; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; } 
         nav a:hover { color: var(--cor-destaque); }
 
         .btn-cta {
@@ -69,7 +69,7 @@
                         url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            padding: 120px 20px 40px;
+            padding: 140px 20px 40px; /* Mais espaço no topo por causa do menu */
         }
 
         .hero h1 {
@@ -85,7 +85,6 @@
         .badges { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
         .badge { background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; border: 1px solid #334155; }
 
-        /* Botão Download Gigante */
         .box-download {
             background: rgba(255, 255, 255, 0.05);
             padding: 2rem;
@@ -130,214 +129,19 @@
             transition: 0.3s;
             position: relative;
         }
-
         .card-soft:hover { transform: translateY(-5px); border-color: var(--cor-destaque); }
 
         .tipo-instalacao {
-            position: absolute;
-            top: 15px; right: 15px;
-            background: rgba(0,0,0,0.8);
-            color: var(--cor-destaque-sec);
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(0,0,0,0.8); color: var(--cor-destaque-sec);
             padding: 4px 10px; border-radius: 4px;
-            font-size: 0.75rem; font-weight: bold;
-            border: 1px solid var(--cor-destaque-sec);
+            font-size: 0.75rem; font-weight: bold; border: 1px solid var(--cor-destaque-sec);
         }
 
         .img-soft { width: 100%; height: 180px; object-fit: cover; opacity: 0.8; }
-        
         .info-soft { padding: 1.5rem; }
         .info-soft h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: #fff; }
         .desc-soft { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; min-height: 40px;}
 
-        .specs {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            margin-bottom: 1.5rem; font-size: 0.85rem; color: #cbd5e1;
-        }
-        .spec-item { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px; }
-
-        .preco-row {
-            display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid #334155; padding-top: 1rem;
-        }
-        .preco { font-size: 1.4rem; font-weight: bold; color: #fff; }
-        .btn-detalhe { color: var(--cor-destaque); font-weight: 600; font-size: 0.9rem; }
-
-        /* --- SERVIÇOS --- */
-        .servicos { background-color: #0f1623; }
-        .grid-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .card-serv { padding: 2rem; background: var(--cor-card); border-radius: 10px; border: 1px solid #1e293b; }
-        .icon-serv { font-size: 2rem; color: var(--cor-destaque); margin-bottom: 1rem; }
-
-        /* --- FOOTER --- */
-        footer { background: #020617; padding: 4rem 5%; text-align: center; border-top: 1px solid #1e293b; margin-top: auto; }
-        
-        /* MOBILE */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            nav { display: none; }
-            .box-download { width: 100%; }
-            .btn-download { width: 100%; justify-content: center; font-size: 1rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <img src="m-auto.png" alt="M-Auto Logo" class="logo-img">
-        
-        <nav>
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#software">Software</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-            </ul>
-        </nav>
-        <a href="#contacto" class="btn-cta">Pedir Orçamento</a>
-    </header>
-
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <div class="badges">
-                <span class="badge">✅ Instalação Remota</span>
-                <span class="badge">🚀 Suporte 24/7</span>
-                <span class="badge">💻 Configuração Nativa</span>
-            </div>
-            
-            <h1>Soluções de Diagnóstico <br>Profissional</h1>
-            <p>Xentry, ISTA, Diagbox e muito mais. Software pronto a usar para a sua oficina.</p>
-            
-            <div class="box-download">
-                <p style="margin-bottom: 15px; color: #fff;">Precisa de ajuda agora? Descarregue o nosso cliente:</p>
-                <a href="COLE_O_SEU_LINK_AQUI" class="btn-download">
-                    📥 Descarregar Suporte Remoto
-                </a>
-                <p style="margin-top: 10px; font-size: 0.8rem; color: #94a3b8;">Cliente Seguro M-Auto (26MB)</p>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="software" class="seccao">
-        <div class="titulo-seccao">
-            <h2>Catálogo <span>Premium</span></h2>
-            <p>Sistemas completos testados e atualizados.</p>
-        </div>
-
-        <div class="grid-soft">
-            
-            <div class="card-soft">
-                <span class="tipo-instalacao">Xentry Passthru / OpenShell</span>
-                <img src="https://images.unsplash.com/photo-1632514173809-5c1410167c1e?auto=format&fit=crop&w=800&q=80" alt="Mercedes Diag" class="img-soft">
-                <div class="info-soft">
-                    <h3>Mercedes-Benz Xentry</h3>
-                    <p class="desc-soft">Diagnóstico completo para ligeiros e pesados. Inclui DAS, HHT e Vediamo.</p>
-                    <div class="specs">
-                        <div class="spec-item">📅 Versão: 2024.03</div>
-                        <div class="spec-item">🌍 Multi-língua</div>
-                        <div class="spec-item">💻 Win 10/11 x64</div>
-                        <div class="spec-item">🔌 C4 / C5 / C6</div>
-                    </div>
-                    <div class="preco-row">
-                        <div class="preco">Sob Consulta</div>
-                        <a href="#contacto" class="btn-detalhe">Encomendar →</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-soft">
-                <span class="tipo-instalacao">Nativo ou VM</span>
-                <img src="https://images.unsplash.com/photo-1555529733-0e670560f7e1?auto=format&fit=crop&w=800&q=80" alt="BMW Diag" class="img-soft">
-                <div class="info-soft">
-                    <h3>BMW ISTA+ & ESYS</h3>
-                    <p class="desc-soft">O pacote definitivo para BMW e Mini. Diagnóstico (ISTA-D) e Programação (ISTA-P).</p>
-                    <div class="specs">
-                        <div class="spec-item">📅 Versão: 4.39.20</div>
-                        <div class="spec-item">🌍 PT / EN / DE</div>
-                        <div class="spec-item">💻 K+DCAN / ICOM</div>
-                        <div class="spec-item">⚡ Modo Expert</div>
-                    </div>
-                    <div class="preco-row">
-                        <div class="preco">Sob Consulta</div>
-                        <a href="#contacto" class="btn-detalhe">Encomendar →</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-soft">
-                <span class="tipo-instalacao">Diagbox V9</span>
-                <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80" alt="PSA Diag" class="img-soft">
-                <div class="info-soft">
-                    <h3>PSA Diagbox (VM)</h3>
-                    <p class="desc-soft">Compatível com os modelos mais recentes Peugeot, Citroën e Opel.</p>
-                    <div class="specs">
-                        <div class="spec-item">📅 Versão: 9.150</div>
-                        <div class="spec-item">🌍 Português</div>
-                        <div class="spec-item">💻 Interface Lexia</div>
-                        <div class="spec-item">🚗 Até 2024</div>
-                    </div>
-                    <div class="preco-row">
-                        <div class="preco">Sob Consulta</div>
-                        <a href="#contacto" class="btn-detalhe">Encomendar →</a>
-                    </div>
-                </div>
-            </div>
-            
-             <div class="card-soft">
-                <span class="tipo-instalacao">Can Clip</span>
-                <img src="https://images.unsplash.com/photo-1531297461136-82lw9z2.jpg?auto=format&fit=crop&w=800&q=80" alt="Renault Diag" class="img-soft">
-                <div class="info-soft">
-                    <h3>Renault Can Clip</h3>
-                    <p class="desc-soft">Diagnóstico oficial para Renault e Dacia. Leitura de falhas e codificação.</p>
-                    <div class="specs">
-                        <div class="spec-item">📅 Versão: V232</div>
-                        <div class="spec-item">🌍 Português</div>
-                        <div class="spec-item">💻 Interface RTL2002</div>
-                        <div class="spec-item">🔧 Reprogramação</div>
-                    </div>
-                    <div class="preco-row">
-                        <div class="preco">Sob Consulta</div>
-                        <a href="#contacto" class="btn-detalhe">Encomendar →</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="servicos" class="seccao servicos">
-        <div class="titulo-seccao">
-            <h2>Como Trabalhamos</h2>
-        </div>
-        <div class="grid-servicos">
-            <div class="card-serv">
-                <div class="icon-serv">🖥️</div>
-                <h3>Instalação Remota</h3>
-                <p>Não precisa de sair da oficina. Acedemos via AnyDesk ou TeamViewer e deixamos tudo pronto a usar.</p>
-            </div>
-            <div class="card-serv">
-                <div class="icon-serv">📦</div>
-                <h3>Portáteis Prontos</h3>
-                <p>Vendemos portáteis (Lenovo/Panasonic) já com todo o software instalado e configurado.</p>
-            </div>
-            <div class="card-serv">
-                <div class="icon-serv">🛡️</div>
-                <h3>Garantia de Suporte</h3>
-                <p>Se o software deixar de funcionar ou desconfigurar, damos suporte pós-venda.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contacto">
-        <img src="M-auto rustdek.png" alt="M-Auto Logo Industrial" style="max-width: 200px; margin-bottom: 20px;">
-        
-        <div class="contacts">
-            <p>Precisa de um software específico? Fale connosco.</p>
-            <br>
-            <p>📧 geral@m-auto.online</p>
-            <p>📞 WhatsApp: +351 910 000 000</p>
-        </div>
-        <p style="margin-top: 3rem; font-size: 0.8rem; color: #475569;">&copy; 2025 M-Auto Solutions.</p>
-    </footer>
-
-</body>
-</html>
+        .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; font-size: 0.85rem; color: #cbd5e1; }
+        .spec-item { background: rgba(25
