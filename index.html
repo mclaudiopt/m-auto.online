@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V7.0</title>
+    <title>M-Auto Online (Build v7.1)</title>
 
     <style>
         /* --- 1. CONFIGURAÇÃO DE TEMAS --- */
@@ -64,10 +64,18 @@
         .controls-group { display: flex; align-items: center; gap: 10px; border-right: 1px solid var(--border); padding-right: 15px; margin-right: 5px; }
         .theme-select { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 4px; border-radius: 4px; font-size: 0.85rem; }
         .theme-select option { background: var(--bg-card); }
+        
+        /* CORREÇÃO BANDEIRAS */
         .lang-switch { display: flex; gap: 8px; }
-        .lang-btn { background: none; border: none; padding: 0; opacity: 0.5; transition: 0.2s; }
+        .lang-btn { background: none; border: none; padding: 0; opacity: 0.5; transition: 0.2s; display: flex; }
         .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
-        .lang-btn img { width: 22px; border-radius: 50%; border: 1px solid #777; display: block; }
+        .lang-btn img { 
+            width: 24px; height: 24px; 
+            min-width: 24px; min-height: 24px; /* Garante tamanho fixo */
+            border-radius: 50%; border: 1px solid #777; 
+            object-fit: cover; /* Garante círculo perfeito */
+            display: block; 
+        }
 
         .header-action-btn {
             padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem;
@@ -99,12 +107,9 @@
         .nav-pill:hover { background: var(--bg-card); color: var(--text-main); }
         .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* --- 6. LAYOUT FULL WIDTH (CORRIGIDO) --- */
+        /* --- 6. LAYOUT FULL WIDTH --- */
         .content-container { 
-            width: 100%; /* Ocupa tudo */
-            padding: 30px; /* Margem interna */
-            min-height: 600px; 
-            box-sizing: border-box;
+            width: 100%; padding: 30px; min-height: 600px; box-sizing: border-box;
         }
         
         .section-view { display: none; width: 100%; animation: fadeIn 0.4s; }
@@ -116,7 +121,7 @@
         /* BARRA LATERAL FIXA */
         .sidebar-menu { 
             display: flex; flex-direction: column; gap: 4px; 
-            width: 260px; min-width: 260px; flex-shrink: 0; /* Bloqueia tamanho */
+            width: 260px; min-width: 260px; flex-shrink: 0; 
             background: var(--bg-card); padding: 10px; border-radius: 12px; border: 1px solid var(--border);
         }
         .side-link {
@@ -131,12 +136,8 @@
             border-left: 3px solid var(--accent); font-weight: 700; 
         }
 
-        /* ÁREA DE CONTEÚDO (ESTICA) */
-        .content-display { 
-            flex: 1; /* Ocupa o resto */
-            width: 100%; 
-        }
-        
+        /* ÁREA DE CONTEÚDO */
+        .content-display { flex: 1; width: 100%; }
         .brand-panel { display: none; animation: fadeIn 0.3s; }
         .brand-panel.active { display: block; }
 
@@ -146,10 +147,10 @@
             color: var(--text-main);
         }
 
-        /* GRID (Fluido) */
+        /* GRID */
         .grid-stretch { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsivo */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
             gap: 25px; width: 100%;
         }
         
@@ -177,7 +178,7 @@
         .badge-gold { position: absolute; top: 10px; right: 10px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
 
         /* SERVIÇOS E FERRAMENTAS */
-        .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; }
+        .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; justify-content: center; }
         .tool-card { 
             background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); 
             text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; 
@@ -187,18 +188,34 @@
         .tool-card h4 { margin-bottom: 10px; color: var(--text-main); }
         .tool-link { color: var(--accent); font-weight: bold; margin-top: auto; }
 
-        /* --- FLUTUANTES --- */
-        .whatsapp-float { position: fixed; bottom: 90px; right: 25px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; }
-        .chatbot-btn { position: fixed; bottom: 20px; right: 25px; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; border: none; transition: 0.3s; cursor: pointer; }
+        /* --- BOTÕES FLUTUANTES (Novo Bot Style) --- */
+        .whatsapp-float { 
+            position: fixed; bottom: 90px; right: 25px; width: 60px; height: 60px; 
+            background: #25D366; color: white; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 32px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; 
+        }
+        
+        /* BOT NOVO ICONE E COR */
+        .chatbot-btn { 
+            position: fixed; bottom: 20px; right: 25px; width: 60px; height: 60px; 
+            background: linear-gradient(135deg, #1e293b, #0f172a); /* Cor Sóbria */
+            color: white; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 28px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; border: none; transition: 0.3s; cursor: pointer;
+        }
         .whatsapp-float:hover, .chatbot-btn:hover { transform: scale(1.1); }
 
-        /* --- MODAIS --- */
+        /* --- MODAIS & WIZARD --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal-box { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); border: none; background: none; }
-        .btn-download-big { background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; margin: 20px 0; text-decoration: none; transition: 0.3s; }
+        .btn-download-big { background: var(--cor-urgente); color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; margin: 20px 0; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); }
+        .btn-download-big:hover { transform: scale(1.05); }
+
         .btn-wizard-start { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; width: 100%; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); cursor: pointer; }
-        
+        .btn-wizard-start:hover { transform: translateY(-2px); }
+
         .step { display: none; } .step.active { display: block; animation: fadeIn 0.4s; }
         .wizard-option { background: var(--bg-nav); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
         .wizard-option:hover { border-color: var(--accent); color: var(--accent); }
@@ -208,6 +225,7 @@
         .bot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
 
         footer { background: var(--bg-nav); padding: 3rem 5%; text-align: center; border-top: 1px solid var(--border); margin-top: auto; }
+        .footer-logo { width: 120px; opacity: 0.8; margin-bottom: 15px; }
 
         @media (max-width: 768px) {
             .sidebar-layout { flex-direction: column; }
@@ -224,7 +242,7 @@
 </head>
 <body>
 
-    <div class="version-tag">v7.0</div>
+    <div class="version-tag">v7.1</div>
 
     <header>
         <div class="header-left">
@@ -275,7 +293,7 @@
                 <p style="margin-bottom:20px; color:var(--text-muted)" data-lang="wiz_desc">Vamos verificar a compatibilidade do seu PC.</p>
                 <button class="btn-wizard-start" onclick="nextStep(2)" data-lang="wiz_start">Começar ➡️</button>
             </div>
-            <div id="step2" class="step"><h3>Sistema Operativo?</h3><button class="wizard-option" onclick="setOS('Win10'); nextStep(3)">Win 10/11 (x64) ✅</button><button class="wizard-option" onclick="setOS('Old'); nextStep(3)">Outro (Win 7/8) ❌</button></div>
+            <div id="step2" class="step"><h3>Sistema Operativo?</h3><button class="wizard-option" onclick="setOS('Win10'); nextStep(3)">Win 10/11 ✅</button><button class="wizard-option" onclick="setOS('Old'); nextStep(3)">Outro ❌</button></div>
             <div id="step3" class="step"><h3>Espaço Livre?</h3><button class="wizard-option" onclick="setSpace(50); nextStep(4)">< 100 GB 💾</button><button class="wizard-option" onclick="setSpace(500); nextStep(4)">> 250 GB 🚀</button></div>
             <div id="step4" class="step"><h3>Memória RAM?</h3><button class="wizard-option" onclick="setRam(4); nextStep(5)">4 GB (Lento) 🐌</button><button class="wizard-option" onclick="setRam(8); nextStep(5)">8 GB+ (Rápido) ⚡</button></div>
             <div id="step5" class="step"><h3>Disco Principal?</h3><button class="wizard-option" onclick="setDisk('HDD'); nextStep(6)">HDD (Mecânico) 🐢</button><button class="wizard-option" onclick="setDisk('SSD'); nextStep(6)">SSD / NVMe 🏎️</button></div>
@@ -288,10 +306,14 @@
         </div>
     </div>
 
-    <a href="https://wa.me/351910000000" class="whatsapp-float" target="_blank" title="WhatsApp">
+    <a href="https://wa.me/3511234" class="whatsapp-float" target="_blank" title="WhatsApp">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:35px;">
     </a>
-    <div class="chatbot-btn" onclick="toggleModal('wizardModal')">🤖</div>
+    <div class="chatbot-btn" onclick="toggleModal('wizardModal')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM7 9H9V15H7V9ZM11 9H13V15H11V9ZM15 9H17V15H15V9Z" fill="white"/>
+        </svg>
+    </div>
 
     <section id="inicio" class="hero">
         <h1 data-lang="hero_title">Soluções de Diagnóstico</h1>
@@ -327,7 +349,7 @@
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-content">
                                     <h3>Xentry Cars 01/2025</h3>
-                                    <p class="desc" data-lang="desc_merc_cars">Diagnóstico completo. Inclui DAS e HHT.</p>
+                                    <p class="desc" data-lang="desc_merc_cars">Diagnóstico completo para ligeiros. Inclui DAS e HHT.</p>
                                     <div class="card-tags"><span class="tag">01/2025</span><span class="tag">C4/PassThru</span></div>
                                     <div class="card-actions"><span class="price-label">Consulta</span><button class="btn-link">Ver</button></div>
                                 </div>
@@ -356,7 +378,7 @@
         </div>
 
         <div id="sec-hardware" class="section-view">
-            <div class="sidebar-layout">
+            <div class="layout-wrapper">
                 <div class="sidebar-menu">
                     <button class="side-link active" onclick="switchBrand('univ', this)">Universal</button>
                     <button class="side-link" onclick="switchBrand('vci', this)">VCI Marca</button>
@@ -389,20 +411,20 @@
         <div id="sec-tools" class="section-view" style="text-align:center">
             <h2 class="panel-header">Downloads</h2>
             <div class="grid-center">
-                <div class="tool-card"><div class="icon-lg">🗜️</div><h4>7-Zip</h4><a href="#" class="tool-link">Download</a></div>
-                <div class="tool-card"><div class="icon-lg">💾</div><h4>Rufus</h4><a href="#" class="tool-link">Download</a></div>
-                <div class="tool-card"><div class="icon-lg">🛡️</div><h4>DControl</h4><a href="#" class="tool-link">Download</a></div>
+                <div class="tool-card"><div class="icon-large">🗜️</div><h4>7-Zip</h4><a href="#" class="tool-link">Download</a></div>
+                <div class="tool-card"><div class="icon-large">💾</div><h4>Rufus</h4><a href="#" class="tool-link">Download</a></div>
+                <div class="tool-card"><div class="icon-large">🛡️</div><h4>DControl</h4><a href="#" class="tool-link">Download</a></div>
             </div>
         </div>
 
         <div id="sec-services" class="section-view" style="text-align:center">
-            <h2 class="panel-header">Serviços Técnicos</h2>
+            <h2 class="panel-header">Serviços</h2>
             <div class="grid-center">
-                <div class="tool-card"><div class="icon-lg">💿</div><h4>Formatação & Windows</h4><p>Instalação Limpa Win 10/11</p></div>
-                <div class="tool-card"><div class="icon-lg">🚀</div><h4>Otimização PC</h4><p>Melhoria Performance</p></div>
-                <div class="tool-card"><div class="icon-lg">🦠</div><h4>Remoção Vírus</h4><p>Limpeza Segurança</p></div>
-                <div class="tool-card"><div class="icon-lg">💾</div><h4>Upgrade Disco</h4><p>Clonagem para SSD</p></div>
-                <div class="tool-card"><div class="icon-lg">⚡</div><h4>Upgrade RAM</h4><p>Aumento Memória</p></div>
+                <div class="tool-card"><div class="icon-large">💿</div><h4>Formatação</h4><p>Windows Limpo</p></div>
+                <div class="tool-card"><div class="icon-large">🚀</div><h4>Otimização</h4><p>Performance</p></div>
+                <div class="tool-card"><div class="icon-large">🦠</div><h4>Vírus</h4><p>Remoção Malware</p></div>
+                <div class="tool-card"><div class="icon-large">💾</div><h4>Upgrade Disco</h4><p>SSD Rápido</p></div>
+                <div class="tool-card"><div class="icon-large">⚡</div><h4>Upgrade RAM</h4><p>Mais Memória</p></div>
             </div>
         </div>
 
@@ -410,7 +432,7 @@
 
     <footer id="contacto">
         <div class="footer-logo"><img src="m-auto.png" style="width:100px;"></div>
-        <p>📧 geral@m-auto.online | 📞 +351 910 000 000</p>
+        <p>📧 geral@m-auto.online | 📞 +351 123 456 789</p>
         <p style="margin-top:20px; font-size:0.8rem; opacity:0.6">&copy; 2025 M-Auto Solutions</p>
     </footer>
 
@@ -423,15 +445,15 @@
             btn.classList.add('active');
             window.scrollTo({top: 150, behavior: 'smooth'});
             
-            // Ativa a primeira marca/item por defeito ao mudar
-            if(id === 'software') switchBrand('merc', document.querySelector('#sec-software .side-link'));
-            if(id === 'hardware') switchBrand('univ', document.querySelector('#sec-hardware .side-link'));
+            if(id==='software') switchBrand('merc', document.querySelector('#sec-software .side-link'));
+            if(id==='hardware') switchBrand('univ', document.querySelector('#sec-hardware .side-link'));
         }
 
         function switchBrand(id, btn) {
-            const container = btn.closest('.sidebar-layout');
+            const container = btn.closest('.layout-grid') || btn.closest('.sidebar-layout');
             container.querySelectorAll('.brand-panel').forEach(c => c.classList.remove('active'));
             container.querySelector('#brand-' + id).classList.add('active');
+            
             container.querySelectorAll('.side-link').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
@@ -441,61 +463,59 @@
             m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
         }
         function closeSupportModal() { document.getElementById('supportModal').style.display = 'none'; }
+        function openWizard() { document.getElementById('wizardModal').style.display = 'flex'; }
+        function closeWizard() { document.getElementById('wizardModal').style.display = 'none'; }
         
         function setTheme(theme) {
             if (theme === 'light') document.documentElement.removeAttribute('data-theme');
             else document.documentElement.setAttribute('data-theme', theme);
         }
 
-        // Wizard Logic
-        let userOS='', userDisk='', userRam=0;
+        let uOS='', uDisk='';
         function nextStep(n) {
             document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
             document.getElementById('step'+n).classList.add('active');
             if(n===6) showRes();
         }
-        function setOS(v){userOS=v} function setSpace(v){} function setRam(v){userRam=v} function setDisk(v){userDisk=v}
+        function setOS(v){uOS=v} function setSpace(){} function setRam(){} function setDisk(v){uDisk=v}
         function resetWizard(){
             document.querySelectorAll('.step').forEach(e => e.classList.remove('active'));
             document.getElementById('step1').classList.add('active');
         }
         function showRes() {
-            const msg = (userOS==='Old'||userDisk==='HDD') ? "⚠️ Limitado" : "✅ Aprovado";
+            const msg = (uOS==='Old'||uDisk==='HDD') ? "⚠️ Limitado" : "✅ Aprovado";
             document.getElementById('resultBox').innerHTML = `<h3>${msg}</h3>`;
             document.getElementById('botGrid').innerHTML = `
                 <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=150&q=60"><div>Full Pack</div></div>
-                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=150&q=60"><div>Xentry Cars</div></div>`;
+                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=150&q=60"><div>Xentry</div></div>`;
         }
 
-        // Translations
+        // Traduções
         const dict = {
             pt: {
                 btn_support: "Suporte", btn_quote: "Orçamento",
-                hero_title: "Soluções de Diagnóstico", hero_desc: "Profissional. Remoto. Garantido.",
+                hero_title: "Soluções de Diagnóstico", hero_desc: "Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.",
                 nav_soft: "💾 Software", nav_hard: "🔌 Hardware", nav_tools: "🛠️ Ferramentas", nav_serv: "👨‍💻 Serviços",
-                desc_merc_cars: "Diagnóstico completo ligeiros.", desc_merc_full: "Pack completo tudo incluído.",
+                desc_merc_cars: "Diagnóstico completo ligeiros.", desc_merc_full: "Suite Completa.",
                 desc_bmw: "Diagnóstico e Programação.", desc_psa_new: "Versão Nativa 2025.",
-                desc_renault: "Oficial Renault/Dacia.", desc_pathfinder: "Novos DoIP.",
-                desc_toyota: "Diagnóstico Global.", desc_ford: "Sistema Online.", desc_gm: "Chevrolet/Opel Antigos.",
-                desc_openport: "Interface Económica.", desc_scanmatik: "Profissional.",
+                desc_openport: "Interface económica.", desc_scanmatik: "Profissional.",
                 desc_c4: "Oficial Mercedes DoIP.", desc_tough: "Blindado.",
                 modal_support_title: "Suporte Remoto", modal_support_desc: "Baixe o cliente.",
-                wiz_title: "Assistente", wiz_desc: "Verificar compatibilidade.", wiz_start: "Começar ➡️", wiz_rec: "Recomendado:"
+                wiz_title: "Assistente", wiz_desc: "Verificar compatibilidade.", wiz_start: "Começar ➡️"
             },
             en: {
                 btn_support: "Support", btn_quote: "Quote",
                 hero_title: "Diagnostic Solutions", hero_desc: "Professional. Remote. Guaranteed.",
                 nav_soft: "💾 Software", nav_hard: "🔌 Hardware", nav_tools: "🛠️ Tools", nav_serv: "👨‍💻 Services",
                 desc_merc_cars: "Complete cars diagnostic.", desc_merc_full: "Full Suite.",
-                desc_bmw: "Diagnostics & Programming.", desc_psa_new: "Native Version.",
-                desc_renault: "Official Renault.", desc_pathfinder: "New DoIP.",
-                desc_toyota: "Global Diagnostics.", desc_ford: "Online System.", desc_gm: "Legacy GM.",
-                desc_openport: "Economic Interface.", desc_scanmatik: "Professional.",
+                desc_bmw: "Diagnostics & Programming.", desc_psa_new: "Native Version 2025.",
+                desc_openport: "Economic interface.", desc_scanmatik: "Professional.",
                 desc_c4: "Official Mercedes.", desc_tough: "Rugged.",
                 modal_support_title: "Remote Support", modal_support_desc: "Download client.",
-                wiz_title: "Wizard", wiz_desc: "Check compatibility.", wiz_start: "Start ➡️", wiz_rec: "Recommended:"
+                wiz_title: "Wizard", wiz_desc: "Check compatibility.", wiz_start: "Start ➡️"
             },
-            fr: { btn_support: "Soutien", btn_quote: "Devis", hero_title: "Solutions Diagnostic", cat_title: "Catalogue Logiciels" }
+            fr: { btn_support: "Soutien", btn_quote: "Devis", hero_title: "Solutions Diagnostic", cat_title: "Catalogue Logiciels" },
+            es: { btn_support: "Soporte", btn_quote: "Presupuesto", hero_title: "Soluciones Diagnóstico", cat_title: "Catálogo Software" }
         };
 
         function changeLang(l) {
@@ -503,7 +523,7 @@
                 const k = el.getAttribute('data-lang');
                 if(dict[l] && dict[l][k]) el.textContent = dict[l][k];
             });
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             event.target.closest('.lang-btn').classList.add('active');
         }
     </script>
