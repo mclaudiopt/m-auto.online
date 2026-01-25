@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V13.0</title>
+    <title>M-Auto Online | V13.1</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -79,7 +79,7 @@
         @keyframes blink { 50% { border-color: transparent; } }
         .hero p { color: #cbd5e1; max-width: 700px; margin: 0 auto; font-size: 1rem; }
 
-        /* --- 5. BRAND SLIDER (NOVO) --- */
+        /* --- 5. BRAND SLIDER --- */
         .brand-slider {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             overflow: hidden; white-space: nowrap; padding: 15px 0;
@@ -151,13 +151,21 @@
 
         /* --- 8. FAB --- */
         .fab-container { position: fixed; bottom: 85px; right: 25px; z-index: 1500; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-        .fab-item { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer; }
+        .fab-item { 
+            width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer;
+        }
         .fab-container.open .fab-item { transform: scale(1); opacity: 1; }
         .fab-item svg { width: 28px; height: 28px; fill: white; }
-        .fab-main { width: 65px; height: 65px; border-radius: 50%; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1501; transition: 0.3s; border: none; cursor: pointer; }
+        .fab-main { 
+            width: 65px; height: 65px; border-radius: 50%; background: #0f172a; 
+            color: white; display: flex; align-items: center; justify-content: center; 
+            font-size: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1501; 
+            transition: 0.3s; border: none; cursor: pointer;
+        }
         .fab-main.active { transform: rotate(45deg); background: var(--red); }
 
-        /* --- 9. SCROLL TO TOP (NOVO) --- */
+        /* --- 9. SCROLL TO TOP --- */
         #scrollTopBtn {
             position: fixed; bottom: 25px; left: 25px; width: 45px; height: 45px;
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 50%;
@@ -175,7 +183,7 @@
         .tool-info { display: flex; align-items: center; gap: 15px; }
         .tool-icon-box { width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.1rem; }
         .tool-meta h4 { font-size: 1.05rem; margin: 0; color: var(--text-main); font-weight: 700; }
-        .tool-meta p { font-size: 0.9rem; color: var(--text-muted); margin: 3px 0 0 0; }
+        .tool-meta p { font-size: 0.85rem; color: var(--text-muted); margin: 3px 0 0 0; }
         .tool-btn { padding: 10px 20px; border-radius: 6px; background: var(--bg-body); border: 1px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.9rem; text-decoration: none; white-space: nowrap; }
         .tool-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
@@ -190,23 +198,12 @@
         .btn-schedule { width: 100%; padding: 12px; border-radius: 8px; background: var(--bg-body); border: 1px solid var(--border); color: var(--text-main); font-weight: 700; cursor: pointer; transition: 0.3s; }
         .btn-schedule:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* --- 10. FOOTER EXPANDIDO (NOVO) --- */
+        /* --- 10. FOOTER --- */
         footer { background: var(--bg-footer); border-top: 1px solid var(--border); padding-top: 60px; padding-bottom: 100px; margin-top: auto; }
-        .footer-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 25px;
-        }
-        .footer-col h4 { font-size: 1.2rem; margin-bottom: 20px; color: var(--text-main); }
-        .footer-col p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
-        .footer-links { list-style: none; padding: 0; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: var(--text-muted); font-size: 0.95rem; transition: 0.2s; }
-        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
-        
-        .footer-bottom { 
-            margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border); 
-            text-align: center; color: var(--text-muted); font-size: 0.85rem; 
-        }
+        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center; }
+        .footer-trust { display: flex; gap: 20px; margin-bottom: 10px; }
+        .footer-trust span { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+        .footer-copyright { font-size: 0.8rem; color: var(--text-muted); opacity: 0.7; }
 
         .mobile-nav { display: none; }
 
@@ -248,7 +245,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V13.0</span>
+                <span class="version-badge">V13.1</span>
             </a>
         </div>
         <div class="header-right">
@@ -277,6 +274,9 @@
     <div id="wizardModal" class="modal-bg">
         <div class="modal" id="wizContent">
             <button class="close" onclick="toggleModal('wizardModal')">&times;</button>
+            
+            <p style="color:var(--gold); font-weight:bold; margin-bottom:10px">⚠️ Módulo em Reestruturação</p>
+
             <div id="step1" class="step active">
                 <h3 class="wiz-title" data-lang="wiz_brand_title">Qual é a marca do seu carro?</h3>
                 <div class="wiz-grid">
@@ -310,7 +310,7 @@
             <svg viewBox="0 0 32 32" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.51.666 4.868 1.83 6.91L2.6 28.6l5.86-1.52C10.36 28.16 13.08 29 16 29c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 24.8c-2.3 0-4.48-.64-6.36-1.74l-.46-.26-3.8 1 1.02-3.7-.28-.44C5.04 20.02 4.2 18.1 4.2 16c0-6.5 5.3-11.8 11.8-11.8 6.5 0 11.8 5.3 11.8 11.8s-5.3 11.8-11.8 11.8zm6.52-8.84c-.36-.18-2.12-1.04-2.46-1.16-.32-.12-.56-.18-.8.18-.24.36-.96 1.18-1.16 1.42-.22.24-.42.26-.78.08-1.84-.92-3.06-1.92-4.28-4.02-.16-.26 0-.38.16-.54.14-.14.32-.36.48-.54.16-.18.22-.3.32-.5.1-.2.06-.38-.02-.54-.1-.16-.9-2.16-1.22-2.94-.32-.78-.66-.66-.9-.68-.22-.02-.48-.02-.74-.02-.26 0-.68.1-1.04.5-.36.4-1.38 1.34-1.38 3.28 0 1.94 1.42 3.82 1.62 4.08.2.28 2.78 4.24 6.74 5.94 2.62 1.12 3.16.9 3.72.84.92-.1 2.12-.86 2.42-1.7.3-.82.3-1.54.22-1.68-.1-.14-.34-.22-.7-.4z"/></svg>
         </button>
         <button class="fab-item" style="background:#3b82f6" onclick="toggleModal('wizardModal')" title="Assistente">
-            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5A2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5a2.5 2.5 0 0 0 2.5 2.5a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-2.5-2.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="white"><path d="M7.5,5.6L5,7L6.4,4.5L5,2L7.5,3.4L10,2L8.6,4.5L10,7L7.5,5.6M19,13L21.5,14.4L20.1,11.9L21.5,9.4L19,10.8L16.5,9.4L17.9,11.9L16.5,14.4L19,13M13.2,9.6L13.2,9.6L7.6,15.2L4.8,12.4L10.4,6.8L13.2,9.6M14.6,11L11.8,8.2L18.2,1.8C18.6,1.4 19.2,1.4 19.6,1.8L22.2,4.4C22.6,4.8 22.6,5.4 22.2,5.8L14.6,13.4L14.6,11M16,16.4L14.6,15L3.4,26.2L2,24.8L13.2,13.6L14.6,15L16,16.4Z" transform="translate(0 -2)"/></svg>
         </button>
         <button class="fab-main" onclick="toggleFab()">+</button>
     </div>
@@ -428,7 +428,7 @@
                         <h2 class="panel-header">PSA (Peugeot/Citroën)</h2>
                         <div class="grid">
                             <div class="card searchable-item" data-search="diagbox 9 nativo"><img src="https://images.unsplash.com/photo-1621503373575-b040317da743?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Versão Nativa (2025).</p><p class="sub-desc">Sem VM. Mais rápido e compatível.</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>Lexia 3</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')" data-lang="btn_view">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="diagbox 7 vm"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Para veículos antigos (Offline).</p><p class="sub-desc">Estável para carros anteriores a 2015.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Modo:</span> <span>Máquina Virtual</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="diagbox 7 vm"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><p class="sub-desc">Para carros anteriores a 2015.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Modo:</span> <span>Máquina Virtual</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="sedre service box"><img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Service Box (Sedre)</h3><p class="desc">Esquemas e Manuais.</p><p class="sub-desc">Base de dados offline até 2013. Essencial para esquemas elétricos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Offline</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('PSA Sedre')">Ver</button></div></div></div>
                         </div>
                     </div>
@@ -454,7 +454,7 @@
                     <div id="brand-toyota" class="brand-panel">
                         <h2 class="panel-header">Toyota / Lexus</h2>
                         <div class="grid">
-                            <div class="card searchable-item" data-search="toyota techstream"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream V18</h3><p class="desc">Diagnóstico Global.</p><p class="sub-desc">Inclui ERC Calculator e Passcode Calculator.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>Mini-VCI / Openport</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota Techstream')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="toyota techstream erc passcode"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream V18</h3><p class="desc">Diagnóstico Global.</p><p class="sub-desc">Inclui ERC Calculator e Passcode Calculator.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>Mini-VCI / Openport</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota Techstream')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="toyota epc 2025"><img src="https://images.unsplash.com/photo-1599908868846-938ce4ce2d28?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>EPC 2025</h3><p class="desc">Catálogo de Peças.</p><p class="sub-desc">Base de dados completa de peças Toyota/Lexus.</p><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota EPC 2025')">Ver</button></div></div></div>
                         </div>
                     </div>
@@ -507,12 +507,12 @@
         <div id="sec-serv" class="section-view">
             <h2 class="panel-header" style="text-align:center" data-lang="nav_serv">Serviços</h2>
             <div class="services-grid">
-                <div class="service-card searchable-item" data-search="formatacao windows"><div class="service-header"><div class="service-title"><h3 data-lang="serv_fmt">Formatação</h3></div></div><div class="service-body"><ul class="service-list"><li>Instalação Windows 10/11 Pro</li><li>Instalação de Drivers Oficiais</li><li>Otimização para Diagnóstico</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Formatação')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card searchable-item" data-search="otimizacao pc"><div class="service-header"><div class="service-title"><h3 data-lang="serv_opt">Otimização</h3></div></div><div class="service-body"><ul class="service-list"><li>Limpeza de ficheiros lixo</li><li>Ajuste de performance</li><li>Remoção de Bloatware</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Otimização')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card searchable-item" data-search="virus limpeza"><div class="service-header"><div class="service-title"><h3 data-lang="serv_vir">Vírus</h3></div></div><div class="service-body"><ul class="service-list"><li>Remoção de Malware/Spyware</li><li>Recuperação de ficheiros</li><li>Verificação de segurança</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Limpeza Vírus')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card searchable-item" data-search="clonagem disco ssd"><div class="service-header"><div class="service-title"><h3 data-lang="serv_clone">Clonagem</h3></div></div><div class="service-body"><ul class="service-list"><li>Migração de HDD para SSD</li><li>Cópia exata sem perder dados</li><li>Backup completo</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Clonagem')" data-lang="btn_consult">Consultar</button></div></div>
-                <div class="service-card searchable-item" data-search="upgrade ram"><div class="service-header"><div class="service-title"><h3 data-lang="serv_ram">Upgrade RAM</h3></div></div><div class="service-body"><ul class="service-list"><li>Aconselhamento técnico</li><li>Instalação física (se local)</li><li>Teste de estabilidade</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Upgrade RAM')" data-lang="btn_consult">Consultar</button></div></div>
-                <div class="service-card searchable-item" data-search="upgrade disco"><div class="service-header"><div class="service-title"><h3 data-lang="serv_disk">Upgrade Disco</h3></div></div><div class="service-body"><ul class="service-list"><li>Substituição por SSD Rápido</li><li>Migração de sistema</li><li>Recuperação de velocidade</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Upgrade Disco')" data-lang="btn_consult">Consultar</button></div></div>
+                <div class="service-card searchable-item" data-search="formatacao windows"><div class="service-header"><div class="service-title"><h3 data-lang="serv_fmt">Formatação</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Instalação Windows 10/11 Pro</li><li>Instalação de Drivers Oficiais</li><li>Otimização para Diagnóstico</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Formatação')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="otimizacao pc"><div class="service-header"><div class="service-title"><h3 data-lang="serv_opt">Otimização</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Limpeza de ficheiros lixo</li><li>Ajuste de performance</li><li>Remoção de Bloatware</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Otimização')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="virus limpeza"><div class="service-header"><div class="service-title"><h3 data-lang="serv_vir">Vírus</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Remoção de Malware/Spyware</li><li>Recuperação de ficheiros</li><li>Verificação de segurança</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Limpeza Vírus')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="clonagem disco ssd"><div class="service-header"><div class="service-title"><h3 data-lang="serv_clone">Clonagem</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Migração de HDD para SSD</li><li>Cópia exata sem perder dados</li><li>Backup completo</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Clonagem')" data-lang="btn_consult">Consultar</button></div></div>
+                <div class="service-card searchable-item" data-search="upgrade ram"><div class="service-header"><div class="service-title"><h3 data-lang="serv_ram">Upgrade RAM</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Aconselhamento técnico</li><li>Instalação física (se local)</li><li>Teste de estabilidade</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Upgrade RAM')" data-lang="btn_consult">Consultar</button></div></div>
+                <div class="service-card searchable-item" data-search="upgrade disco"><div class="service-header"><div class="service-title"><h3 data-lang="serv_disk">Upgrade Disco</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Substituição por SSD Rápido</li><li>Migração de sistema</li><li>Recuperação de velocidade</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Upgrade Disco')" data-lang="btn_consult">Consultar</button></div></div>
             </div>
         </div>
 
@@ -528,7 +528,7 @@
     <footer id="contacto">
         <div class="footer-content">
             <div class="footer-trust"><span>🚀 Suporte 24/7</span><span>🔒 Seguro</span></div>
-            <div class="footer-contacts"><p>📧 geral@m-auto.online</p></div>
+            <div class="footer-contacts"><p>📧 geral@m-auto.online | 📞 +351 911 157 459</p></div>
             <p class="footer-copyright">&copy; 2025 M-Auto Solutions</p>
         </div>
     </footer>
@@ -595,7 +595,13 @@
         // FAB & MODAL
         function toggleFab() { document.getElementById('fabMenu').classList.toggle('open'); document.querySelector('.fab-main').classList.toggle('active'); }
         function toggleModal(id) { document.getElementById(id).style.display = (document.getElementById(id).style.display === 'flex') ? 'none' : 'flex'; }
-        function orderProduct(name) { window.open(`https://wa.me/3511234?text=Tenho interesse em: ${name}`, '_blank'); }
+        
+        function orderProduct(name) { 
+            const phone = "351911157459";
+            const msg = encodeURIComponent(`[M-Auto Online] Olá, tenho interesse em: ${name}`);
+            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+        }
+        
         function toggleTheme() {
             const current = document.documentElement.getAttribute('data-theme');
             document.documentElement.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
@@ -666,6 +672,17 @@
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             event.target.closest('.lang-btn').classList.add('active');
         }
+        
+        // SCROLL TOP
+        const scrollToTopBtn = document.getElementById("scrollTopBtn");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.classList.add("visible");
+            } else {
+                scrollTopBtn.classList.remove("visible");
+            }
+        };
+        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
     </script>
 </body>
 </html>
