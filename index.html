@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V10.0</title>
+    <title>M-Auto Online | V10.1</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -98,22 +98,13 @@
         }
         .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
 
-        /* --- 5. LAYOUT & SEARCH --- */
+        /* --- 5. LAYOUT --- */
         .app-container { width: 100%; padding: 30px; box-sizing: border-box; min-height: 600px; display: flex; flex-direction: column; }
         .section-view { display: none; width: 100%; animation: fade 0.3s; }
         .section-view.active { display: block; }
         @keyframes fade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         .layout-flex { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
-
-        /* BARRA PESQUISA */
-        .search-container { margin-bottom: 20px; width: 100%; position: relative; }
-        .search-input {
-            width: 100%; padding: 12px 20px; border-radius: 10px; 
-            border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main);
-            font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s;
-        }
-        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
         .sidebar {
             width: 260px; min-width: 260px; flex-shrink: 0;
@@ -140,6 +131,15 @@
             border-bottom: 2px solid var(--accent); color: var(--text-main); display: inline-block;
         }
 
+        /* BARRA DE PESQUISA */
+        .search-container { margin-bottom: 20px; width: 100%; }
+        .search-input {
+            width: 100%; padding: 12px 20px; border-radius: 10px; 
+            border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main);
+            font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s;
+        }
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+
         /* GRID */
         .grid { 
             display: grid; 
@@ -159,6 +159,7 @@
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
         .card p.desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; }
         
+        /* DETALHES TÉCNICOS */
         .tech-details {
             background: var(--tech-bg); border: 1px solid var(--border);
             border-radius: 6px; padding: 10px; margin-top: auto; margin-bottom: 15px;
@@ -167,6 +168,14 @@
         .tech-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .tech-row:last-child { border-bottom: none; }
         .tech-label { font-weight: 600; color: var(--text-main); }
+
+        /* FEATURES LIST (Para o Full Pack) */
+        .feature-list { list-style: none; margin-bottom: 15px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .feature-list li { 
+            font-size: 0.85rem; color: var(--text-muted); 
+            display: flex; align-items: center; gap: 6px;
+        }
+        .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; }
 
         .card-footer { 
             margin-top: 0; display: flex; justify-content: space-between; align-items: center; 
@@ -220,7 +229,7 @@
 </head>
 <body>
 
-    <div class="version-tag">v10.0</div>
+    <div class="version-tag">v10.1</div>
 
     <header>
         <div class="header-left">
@@ -321,13 +330,16 @@
                                 <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80" style="height:220px;">
                                 <div class="card-body">
                                     <h3>Mercedes Full Pack 2025</h3>
-                                    <p class="desc">A solução definitiva com tudo incluído.</p>
-                                    <div class="tech-details">
-                                        <div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div>
-                                        <div class="tech-row"><span class="tech-label">Sistema:</span> <span>Win 10/11 x64</span></div>
-                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>350 GB</span></div>
-                                        <div class="tech-row"><span class="tech-label">Língua:</span> <span>Multi</span></div>
-                                    </div>
+                                    <ul class="feature-list">
+                                        <li>Xentry Cars & Trucks (Ligeiros e Pesados)</li>
+                                        <li>WIS 2021 & EPC (Manuais e Peças)</li>
+                                        <li>Starfinder 2023 (Esquemas)</li>
+                                        <li>Vediamo & DTS Monaco (Engenharia)</li>
+                                        <li>SDMedia (Tutoriais e Treino)</li>
+                                        <li>Mbtools & Coding Tutorials</li>
+                                        <li>Price List & Vin Decoder</li>
+                                        <li>Full Databases (Seed Keys/Flash)</li>
+                                    </ul>
                                     <div class="card-footer"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')">Encomendar</button></div>
                                 </div>
                             </div>
@@ -335,7 +347,7 @@
                             <div class="card">
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
-                                    <h3>Xentry Cars</h3>
+                                    <h3>Xentry Cars (PassThru)</h3>
                                     <p class="desc">Diagnóstico para ligeiros.</p>
                                     <div class="tech-details">
                                         <div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div>
@@ -390,12 +402,9 @@
                             <div class="card">
                                 <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
-                                    <h3>Starfinder</h3>
+                                    <h3>Starfinder 2023</h3>
                                     <p class="desc">Esquemas elétricos Web.</p>
-                                    <div class="tech-details">
-                                        <div class="tech-row"><span class="tech-label">Anos:</span> <span>2016-24</span></div>
-                                        <div class="tech-row"><span class="tech-label">Tipo:</span> <span>HTML</span></div>
-                                    </div>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>HTML</span></div></div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Starfinder')">Ver</button></div>
                                 </div>
                             </div>
@@ -405,11 +414,48 @@
                                 <div class="card-body">
                                     <h3>SDMedia</h3>
                                     <p class="desc">Vídeos e Treino.</p>
-                                    <div class="tech-details">
-                                        <div class="tech-row"><span class="tech-label">Cont:</span> <span>Vídeo</span></div>
-                                        <div class="tech-row"><span class="tech-label">Esp:</span> <span>10 GB</span></div>
-                                    </div>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Multimédia</span></div></div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDMedia')">Ver</button></div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80">
+                                <div class="card-body">
+                                    <h3>Mbtools</h3>
+                                    <p class="desc">Utilitários Mercedes.</p>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>Utils</span></div></div>
+                                    <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mbtools')">Ver</button></div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a7823?auto=format&fit=crop&w=600&q=80">
+                                <div class="card-body">
+                                    <h3>Coding Tutorials</h3>
+                                    <p class="desc">Aulas e Guias.</p>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Formato:</span> <span>PDF/Video</span></div></div>
+                                    <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Coding Tutorials')">Ver</button></div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <img src="https://images.unsplash.com/photo-1554224155-9727b5394033?auto=format&fit=crop&w=600&q=80">
+                                <div class="card-body">
+                                    <h3>Price List & Vin</h3>
+                                    <p class="desc">Preços e Decodificador.</p>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Dados:</span> <span>Peças</span></div></div>
+                                    <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Price List')">Ver</button></div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
+                                <div class="card-body">
+                                    <h3>Flash Databases</h3>
+                                    <p class="desc">Seed Keys & Flash Files.</p>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>DB</span></div></div>
+                                    <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Flash Databases')">Ver</button></div>
                                 </div>
                             </div>
 
@@ -424,9 +470,13 @@
                     </div></div>
                     
                     <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip</h3><p class="desc">Oficial V240.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>240</span></div><div class="tech-row"><span class="tech-label">Extra:</span> <span>Reprog</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div></div></div>
+                    
                     <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">DoIP Land Rover.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ano:</span> <span>2017+</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('JLR Pathfinder')">Ver</button></div></div></div></div></div>
+                    
                     <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p class="desc">Global V18.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota Techstream')">Ver</button></div></div></div></div></div>
+                    
                     <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p class="desc">Sistema Online.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Online</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Ford FDRS')">Ver</button></div></div></div></div></div>
+                    
                     <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Opel/Chevrolet.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>MDI</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('GM GDS2')">Ver</button></div></div></div></div></div>
                 </div>
             </div>
@@ -519,27 +569,6 @@
             }
         }
 
-        // WhatsApp Intelligent Order
-        function orderProduct(productName) {
-            const msg = encodeURIComponent(`Olá, tenho interesse em: ${productName}. Podem ajudar?`);
-            window.open(`https://wa.me/3511234?text=${msg}`, '_blank');
-        }
-
-        // Quick Search
-        function filterProducts() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.section-view.active .card');
-            cards.forEach(card => {
-                let title = card.querySelector('h3').innerText.toLowerCase();
-                let desc = card.querySelector('.desc').innerText.toLowerCase();
-                if (title.includes(input) || desc.includes(input)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
         let uOS='', uDisk='';
         function nextStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
@@ -559,6 +588,27 @@
                 <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=100&q=60"><div>Xentry</div></div>`;
         }
 
+        // WhatsApp Intelligent Order
+        function orderProduct(productName) {
+            const msg = encodeURIComponent(`Olá, tenho interesse em: ${productName}. Podem ajudar?`);
+            window.open(`https://wa.me/3511234?text=${msg}`, '_blank');
+        }
+
+        // Search Filter
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.section-view.active .card');
+            cards.forEach(card => {
+                let title = card.querySelector('h3').innerText.toLowerCase();
+                let desc = card.querySelector('.desc').innerText.toLowerCase();
+                if (title.includes(input) || desc.includes(input)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
         // Translation
         const dict = {
             pt: { 
@@ -575,7 +625,7 @@
                 modal_support_title: "Remote Support", modal_support_desc: "Download client.",
                 wiz_title: "Smart Wizard", wiz_desc: "Check compatibility."
             },
-            fr: { btn_support: "Soutien", btn_quote: "Devis", hero_title: "Solutions Diagnostic" }
+            fr: { btn_support: "Soutien", btn_quote: "Devis", hero_title: "Solutions Diagnostic", cat_title: "Catalogue Logiciels" }
         };
 
         function changeLang(l) {
