@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V13.6</title>
+    <title>M-Auto Online | V13.7</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -67,25 +67,21 @@
         .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
         .lang-btn img { width: 22px; height: 22px; min-width: 22px; border-radius: 50%; border: 1px solid var(--border); object-fit: cover; }
 
-        /* --- 4. HERO (COMPACTO) --- */
+        /* --- 4. HERO --- */
         .hero { 
-            margin-top: var(--header-h); 
-            /* Padding reduzido drasticamente para diminuir altura */
-            padding: 30px 20px 50px 20px; 
+            margin-top: var(--header-h); padding: 30px 20px 50px 20px; 
             text-align: center; border-bottom: 1px solid var(--border);
             background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a);
             background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff;
             position: relative; overflow: hidden;
         }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        
-        /* Fontes ajustadas para caber melhor */
         .hero h1 { font-size: 2.2rem; margin-bottom: 8px; font-weight: 800; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); position: relative; z-index: 2; }
         .typewriter { color: #60a5fa; border-right: 3px solid #60a5fa; padding-right: 5px; animation: blink 0.7s infinite; }
         @keyframes blink { 50% { border-color: transparent; } }
         .hero p { color: #cbd5e1; max-width: 700px; margin: 0 auto; font-size: 1rem; position: relative; z-index: 2; }
 
-        /* HERO SLIDER */
+        /* BRAND SLIDER */
         .hero-slider-container {
             position: absolute; bottom: 10px; left: 0; width: 100%; overflow: hidden; white-space: nowrap;
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -173,13 +169,39 @@
         #scrollTopBtn.visible { opacity: 1; pointer-events: auto; }
         #scrollTopBtn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
+        /* --- 9. POPUP DINÂMICO (NOVO) --- */
+        .sales-popup {
+            position: fixed; bottom: 85px; left: 25px; /* Above the scroll button */
+            background: linear-gradient(135deg, #fbbf24, #f59e0b); /* Amarelo Vibrante */
+            color: #000; padding: 12px 18px; border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            display: flex; align-items: center; gap: 12px;
+            z-index: 1450; opacity: 0; transform: translateY(20px);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none; max-width: 320px; font-family: 'Inter', sans-serif;
+        }
+        .sales-popup.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        
+        .popup-icon { 
+            font-size: 1.8rem; background: rgba(255,255,255,0.3); 
+            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .popup-text h4 { margin: 0; font-size: 0.95rem; font-weight: 800; color: #000; }
+        .popup-text p { margin: 2px 0 0; font-size: 0.8rem; font-weight: 600; color: #333; }
+        .popup-close { 
+            position: absolute; top: 2px; right: 6px; background: none; border: none; 
+            font-size: 1.2rem; cursor: pointer; opacity: 0.5; color: #000;
+        }
+        .popup-close:hover { opacity: 1; }
+
         /* TOOLS & SERVICES */
         .tool-list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 900px; margin: 0 auto; }
         .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 15px; border-radius: 10px; transition: 0.2s; box-shadow: var(--shadow); }
         .tool-info { display: flex; align-items: center; gap: 15px; }
         .tool-icon-box { width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.1rem; }
         .tool-meta h4 { font-size: 1.05rem; margin: 0; color: var(--text-main); font-weight: 700; }
-        .tool-meta p { font-size: 0.9rem; color: var(--text-muted); margin: 3px 0 0 0; }
+        .tool-meta p { font-size: 0.85rem; color: var(--text-muted); margin: 3px 0 0 0; }
         .tool-btn { padding: 10px 20px; border-radius: 6px; background: var(--bg-body); border: 1px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.9rem; text-decoration: none; white-space: nowrap; }
         .tool-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
@@ -241,7 +263,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V13.6</span>
+                <span class="version-badge">V13.7</span>
             </a>
         </div>
         <div class="header-right">
@@ -257,6 +279,15 @@
     </header>
 
     <button id="scrollTopBtn" onclick="scrollToTop()">⬆️</button>
+
+    <div id="salesPopup" class="sales-popup">
+        <button class="popup-close" onclick="closePopup()">×</button>
+        <div class="popup-icon">🔥</div>
+        <div class="popup-text">
+            <h4>Instalação Remota Ativa</h4>
+            <p><span id="viewerCount">12</span> pessoas a ver este produto agora.</p>
+        </div>
+    </div>
 
     <div id="supportModal" class="modal-bg">
         <div class="modal">
@@ -315,7 +346,7 @@
         <h1 data-lang="hero_title">Soluções de Diagnóstico <span class="typewriter" id="typewriter"></span></h1>
         <p data-lang="hero_desc">Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.</p>
         
-        <div class="brand-slider" style="background:transparent; border:none; margin-top:10px; padding:0;">
+        <div class="hero-slider-container">
             <div class="slider-track">
                 <span class="brand-item">MERCEDES-BENZ</span><span class="brand-item">BMW</span><span class="brand-item">AUDI</span><span class="brand-item">VOLKSWAGEN</span><span class="brand-item">PORSCHE</span><span class="brand-item">LAND ROVER</span><span class="brand-item">JAGUAR</span><span class="brand-item">TOYOTA</span><span class="brand-item">LEXUS</span><span class="brand-item">FORD</span><span class="brand-item">MAZDA</span><span class="brand-item">OPEL</span><span class="brand-item">GM</span>
                 <span class="brand-item">MERCEDES-BENZ</span><span class="brand-item">BMW</span><span class="brand-item">AUDI</span><span class="brand-item">VOLKSWAGEN</span><span class="brand-item">PORSCHE</span><span class="brand-item">LAND ROVER</span><span class="brand-item">JAGUAR</span><span class="brand-item">TOYOTA</span><span class="brand-item">LEXUS</span><span class="brand-item">FORD</span><span class="brand-item">MAZDA</span><span class="brand-item">OPEL</span><span class="brand-item">GM</span>
@@ -371,7 +402,8 @@
                             <div class="card searchable-item" data-search="engenharia dts vediamo"><img src="IMG/merc-engineering.jpg" alt="DTS"><div class="card-body"><h3>Engenharia</h3><p class="desc">DTS 9.02 & Vediamo.</p><p class="sub-desc">Programação e Codificação.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>Coding</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mercedes Engineering')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="wis epc manual"><img src="IMG/merc-wis-epc.jpg" alt="WIS"><div class="card-body"><h3>WIS 2021 & EPC</h3><p class="desc">Manuais e Peças.</p><p class="sub-desc">Base de dados offline.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span> <span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS EPC')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="starfinder"><img src="IMG/merc-starfinder.jpg" alt="Starfinder"><div class="card-body"><h3>Starfinder 2023</h3><p class="desc">Esquemas Elétricos.</p><p class="sub-desc">Localização de componentes.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Web</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Starfinder')" data-lang="btn_view">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="vgsnag2 manager 1.6"><img src="IMG/merc-vgsnag2.jpg" alt="VGSNAG2"><div class="card-body"><h3>VGSNAG2 Manager 1.6</h3><p class="desc">Transmission TCU Tool.</p><p class="sub-desc">Read, edit, correct coding & data for EGS 722.9 TCU without online access.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2 Manager 1.6')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="7g scn vgsnag2"><img src="IMG/merc-7g-tools.jpg" alt="7G"><div class="card-body"><h3>7G & VGSNag2</h3><p class="desc">Ferramentas de Caixa.</p><p class="sub-desc">Reset e SCN de caixas 7G.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('7G Tools')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="vgsnag2 manager 1.6"><img src="IMG/merc-vgsnag2.jpg" alt="VGSNAG2"><div class="card-body"><h3>VGSNAG2 Manager 1.6</h3><p class="desc">EGS 722.9 Coding & Repair Utility.</p><p class="sub-desc">Read, edit, correct coding and data in the gearbox module without online access. Ideal for renew/adaptation.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2 Manager 1.6')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="backend certificates"><img src="IMG/merc-certificates.jpg" alt="Certs"><div class="card-body"><h3>Certificados ZenZefi</h3><p class="desc">Fix Login.</p><p class="sub-desc">Correção de certificados backend.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Backend Certs')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="sdflash"><img src="IMG/merc-sdflash.jpg" alt="SDFlash"><div class="card-body"><h3>SDFlash & DBs</h3><p class="desc">Bases de Dados.</p><p class="sub-desc">Ficheiros Flash e Seed Keys.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDFlash')" data-lang="btn_view">Ver</button></div></div></div>
                              <div class="card searchable-item" data-search="mbtools"><img src="IMG/merc-mbtools.jpg" alt="Mbtools"><div class="card-body"><h3>Mbtools</h3><p class="desc">Utilitários Mercedes.</p><p class="sub-desc">Coleção de ferramentas.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mbtools')">Ver</button></div></div></div>
@@ -403,7 +435,7 @@
                         <h2 class="panel-header">PSA (Peugeot/Citroën)</h2>
                         <div class="grid">
                             <div class="card searchable-item" data-search="diagbox 9 nativo"><img src="IMG/psa-diagbox9.jpg" alt="Diagbox 9"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Versão Nativa (2025).</p><p class="sub-desc">Sem VM. Mais rápido e compatível.</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>Lexia 3</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')" data-lang="btn_view">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="diagbox 7 vm"><img src="IMG/psa-diagbox7.jpg" alt="Diagbox 7"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Para veículos antigos (Offline).</p><p class="sub-desc">Estável para carros anteriores a 2015.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Modo:</span> <span>Máquina Virtual</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="diagbox 7 vm"><img src="IMG/psa-diagbox7.jpg" alt="Diagbox 7"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><p class="sub-desc">Para carros anteriores a 2015.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Modo:</span> <span>Máquina Virtual</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="sedre service box"><img src="IMG/psa-sedre.jpg" alt="Sedre"><div class="card-body"><h3>Service Box (Sedre)</h3><p class="desc">Esquemas e Manuais.</p><p class="sub-desc">Base de dados offline até 2013. Essencial para esquemas elétricos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Offline</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('PSA Sedre')">Ver</button></div></div></div>
                         </div>
                     </div>
@@ -598,6 +630,31 @@
             }
             document.getElementById('wizResult').innerHTML = html;
         }
+
+        // POPUP DINÂMICO
+        const popup = document.getElementById('salesPopup');
+        const countSpan = document.getElementById('viewerCount');
+
+        function showPopup() {
+            // Número aleatório entre 1 e 30
+            const randomCount = Math.floor(Math.random() * 30) + 1;
+            countSpan.innerText = randomCount;
+            popup.classList.add('active');
+
+            // Esconde após 6 segundos
+            setTimeout(() => {
+                popup.classList.remove('active');
+            }, 6000);
+        }
+
+        function closePopup() {
+            popup.classList.remove('active');
+        }
+
+        // Loop: Mostra a cada 20 segundos
+        setInterval(showPopup, 20000);
+        // Primeiro show após 5 segundos
+        setTimeout(showPopup, 5000);
 
         // TRANSLATION SYSTEM
         const dict = {
