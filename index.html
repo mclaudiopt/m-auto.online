@@ -7,15 +7,15 @@
     <link rel="icon" type="image/png" href="m-auto.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V10.0</title>
+    <title>M-Auto Online | V10.2</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
         :root {
             --bg-body: #f8fafc; --bg-card: #ffffff; --bg-sidebar: #ffffff;
-            --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0;
+            --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0;
             --accent: #2563eb; --accent-hover: #1d4ed8;
             --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
             --gold: #b45309; --red: #ef4444; --header-h: 70px;
@@ -43,7 +43,14 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* --- 3. HEADER (Novo Estilo) --- */
+        .version-tag {
+            position: fixed; bottom: 5px; right: 5px; 
+            background: var(--text-main); color: var(--bg-body); 
+            padding: 2px 6px; font-size: 10px; border-radius: 4px; 
+            z-index: 9999; font-weight: bold; opacity: 0.7;
+        }
+
+        /* --- 3. HEADER --- */
         header {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             height: var(--header-h); padding: 0 25px; 
@@ -51,20 +58,10 @@
             display: flex; justify-content: space-between; align-items: center;
             box-shadow: var(--shadow);
         }
-
-        .header-left { display: flex; align-items: center; gap: 12px; }
-        
-        /* LOGO ESTILO IMAGEM */
-        .brand-container { display: flex; align-items: center; gap: 8px; }
-        .brand-m { font-size: 1.5rem; font-weight: 900; font-style: italic; color: var(--text-main); letter-spacing: -1px; }
-        .brand-online { font-size: 1.5rem; font-weight: 900; font-style: italic; color: var(--accent); letter-spacing: -0.5px; }
-        .version-badge { 
-            background: #f1f5f9; color: #475569; padding: 4px 8px; 
-            border-radius: 6px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.5px;
-        }
-        [data-theme="dark"] .version-badge { background: #334155; color: #cbd5e1; }
-
+        .header-left { display: flex; align-items: baseline; gap: 10px; }
+        .brand-name { font-size: 1.4rem; font-weight: 800; font-style: italic; color: var(--text-main); letter-spacing: -0.5px; }
         .header-right { display: flex; align-items: center; gap: 20px; }
+
         .controls-wrapper { display: flex; align-items: center; gap: 15px; }
         .theme-btn { 
             background: transparent; border: 1px solid var(--border); 
@@ -78,32 +75,41 @@
 
         .action-group { display: flex; gap: 10px; }
         .action-btn {
-            height: 40px; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+            height: 42px; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
             display: flex; align-items: center; gap: 8px; border: none; color: white;
             transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .btn-red { background: var(--red); }
         .btn-blue { background: var(--accent); }
 
-        /* --- 4. NAV (Estilo Imagem) --- */
+        /* --- 4. HERO & TYPEWRITER --- */
+        .hero { margin-top: 70px; padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border); background: var(--bg-body); }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; color: var(--text-main); }
+        
+        /* EFEITO DE MAQUINA DE ESCREVER */
+        .typewriter {
+            color: var(--accent);
+            border-right: 3px solid var(--accent); /* O Cursor */
+            padding-right: 5px;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+
+        /* --- 5. NAV --- */
         .main-nav {
-            display: flex; justify-content: center; gap: 15px; padding: 15px;
+            display: flex; justify-content: center; gap: 10px; padding: 15px;
             background: var(--bg-body); border-bottom: 1px solid var(--border);
             position: sticky; top: 70px; z-index: 900;
         }
         .nav-pill {
-            padding: 10px 25px; border-radius: 50px; font-weight: 600; 
-            color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border);
-            transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 8px;
+            padding: 10px 30px; border-radius: 50px; font-weight: 600; color: var(--text-muted);
+            border: 1px solid var(--border); background: var(--bg-card); transition: 0.3s; cursor: pointer;
         }
-        /* Botão Ativo (Azul) */
-        .nav-pill.active { 
-            background: var(--accent); color: white; border-color: var(--accent); 
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); 
-        }
-        .nav-pill:hover:not(.active) { background: #e2e8f0; color: var(--text-main); }
+        .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
 
-        /* --- 5. LAYOUT --- */
+        /* --- 6. LAYOUT --- */
         .app-container { width: 100%; padding: 30px; box-sizing: border-box; min-height: 600px; display: flex; flex-direction: column; }
         .section-view { display: none; width: 100%; animation: fade 0.3s; }
         .section-view.active { display: block; }
@@ -136,13 +142,8 @@
             border-bottom: 2px solid var(--accent); color: var(--text-main); display: inline-block;
         }
 
-        /* GRID (2 POR LINHA GARANTIDO) */
-        .grid { 
-            display: grid; 
-            /* Reduzi para 240px para garantir que cabem 2 lado a lado */
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
-            gap: 20px; width: 100%;
-        }
+        /* GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; width: 100%; }
 
         .card { 
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; 
@@ -150,50 +151,48 @@
             box-shadow: var(--shadow); position: relative;
         }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
-        .card img { width: 100%; height: 170px; object-fit: cover; border-bottom: 1px solid var(--border); }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
         
-        .card-body { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
-        .card p.desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4; }
+        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+        .card p.desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; }
         
-        /* NOVO: INFO TÉCNICA COMPACTA */
-        .tech-info {
-            font-size: 0.75rem; color: var(--text-muted);
-            background: var(--bg-body); border-radius: 6px; padding: 8px;
-            margin-top: auto; border: 1px solid var(--border);
-            display: flex; flex-wrap: wrap; gap: 8px; row-gap: 4px;
+        /* DETALHES TÉCNICOS */
+        .tech-details {
+            background: var(--tech-bg); border: 1px solid var(--border);
+            border-radius: 6px; padding: 10px; margin-top: auto; margin-bottom: 15px;
+            font-size: 0.8rem; color: var(--text-muted);
         }
-        .tech-item { display: inline-block; white-space: nowrap; }
-        .tech-item b { color: var(--text-main); margin-right: 3px; }
+        .tech-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .tech-row:last-child { border-bottom: none; }
+        .tech-label { font-weight: 600; color: var(--text-main); }
 
-        /* FEATURE LIST (Para o Full Pack) */
-        .feature-list { list-style: none; margin-bottom: 15px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+        /* FEATURES LIST (Full Pack) */
+        .feature-list { list-style: none; margin-bottom: 15px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .feature-list li { 
-            font-size: 0.75rem; color: var(--text-muted); 
-            display: flex; align-items: center; gap: 4px;
+            font-size: 0.85rem; color: var(--text-muted); 
+            display: flex; align-items: center; gap: 6px;
         }
         .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; }
 
-        /* FOOTER SEPARADO */
         .card-footer { 
-            display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid var(--border); padding: 15px; 
-            margin-top: 15px; gap: 10px;
+            margin-top: 0; display: flex; justify-content: space-between; align-items: center; 
+            border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; 
         }
-        .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); white-space: nowrap; }
-        .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; white-space: nowrap; }
+        .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
+        .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; }
 
         .card.gold { border: 2px solid var(--gold); }
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
-        .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* --- 6. FLUTUANTES --- */
+        /* --- 7. FLUTUANTES --- */
         .whatsapp-float { position: fixed; bottom: 90px; right: 25px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; }
         .chatbot-btn { position: fixed; bottom: 20px; right: 25px; width: 60px; height: 60px; background: linear-gradient(135deg, #1e293b, #0f172a); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; border: none; transition: 0.3s; cursor: pointer; }
         .chatbot-btn svg { width: 28px; height: 28px; fill: white; }
         .whatsapp-float:hover, .chatbot-btn:hover { transform: scale(1.1); }
 
-        /* --- 7. MODAL --- */
+        /* --- 8. MODAL --- */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); background: none; border: none; }
@@ -228,14 +227,12 @@
 </head>
 <body>
 
+    <div class="version-tag">v10.2</div>
+
     <header>
         <div class="header-left">
-            <a href="#inicio" class="logo-link" style="text-decoration:none;">
-                <div class="brand-container">
-                    <span class="brand-m">M-Auto</span>
-                    <span class="brand-online">Online</span>
-                    <span class="version-badge">V10.0</span>
-                </div>
+            <a href="#inicio" class="logo-link" style="display:flex; align-items:center; gap:8px;">
+                <span class="brand-name">M-Auto Online</span>
             </a>
         </div>
         <div class="header-right">
@@ -248,10 +245,10 @@
                 </div>
             </div>
             <div class="action-group">
-                <button onclick="toggleModal('supportModal')" class="action-btn btn-red">
+                <button onclick="orderProduct('Suporte Geral')" class="action-btn btn-red">
                     <span data-lang="btn_support">Suporte</span>
                 </button>
-                <a href="#contacto" class="action-btn btn-blue">
+                <a href="https://wa.me/3511234?text=Ola,%20gostaria%20de%20um%20orcamento." target="_blank" class="action-btn btn-blue">
                     <span data-lang="btn_quote">Orçamento</span>
                 </a>
             </div>
@@ -291,7 +288,7 @@
     </div>
 
     <section id="inicio" class="hero">
-        <h1 data-lang="hero_title">Soluções de Diagnóstico</h1>
+        <h1 data-lang="hero_title">Soluções de Diagnóstico <span class="typewriter" id="typewriter"></span></h1>
         <p data-lang="hero_desc">Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.</p>
     </section>
 
@@ -318,6 +315,10 @@
                 </div>
                 <div class="content-wrapper">
                     
+                    <div class="search-container">
+                        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Procurar software, versão ou interface..." onkeyup="filterProducts()">
+                    </div>
+
                     <div id="brand-merc" class="brand-panel active">
                         <h2 class="panel-header">Mercedes-Benz / Daimler</h2>
                         <div class="grid">
@@ -343,12 +344,12 @@
                             <div class="card">
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
-                                    <h3>Xentry Cars</h3>
+                                    <h3>Xentry Cars (PassThru)</h3>
                                     <p class="desc">Diagnóstico para ligeiros.</p>
-                                    <div class="tech-info">
-                                        <div class="tech-item"><b>Ver:</b> 01/2025</div>
-                                        <div class="tech-item"><b>VCI:</b> J2534/C4</div>
-                                        <div class="tech-item"><b>Esp:</b> 80GB</div>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div>
+                                        <div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534 / C4</span></div>
+                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>80 GB</span></div>
                                     </div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div>
                                 </div>
@@ -359,10 +360,10 @@
                                 <div class="card-body">
                                     <h3>Xentry Trucks</h3>
                                     <p class="desc">Pesados e Industriais (24V).</p>
-                                    <div class="tech-info">
-                                        <div class="tech-item"><b>Ver:</b> 01/2025</div>
-                                        <div class="tech-item"><b>VCI:</b> C4/C5</div>
-                                        <div class="tech-item"><b>Esp:</b> 60GB</div>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div>
+                                        <div class="tech-row"><span class="tech-label">VCI:</span> <span>C4 / C5</span></div>
+                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>60 GB</span></div>
                                     </div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div>
                                 </div>
@@ -373,9 +374,9 @@
                                 <div class="card-body">
                                     <h3>Engenharia (Dev)</h3>
                                     <p class="desc">DTS Monaco & Vediamo.</p>
-                                    <div class="tech-info">
-                                        <div class="tech-item"><b>Soft:</b> DTS9/Ved5</div>
-                                        <div class="tech-item"><b>Func:</b> Coding</div>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Soft:</span> <span>DTS 9 + Vediamo 5</span></div>
+                                        <div class="tech-row"><span class="tech-label">Func:</span> <span>Coding</span></div>
                                     </div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mercedes Engineering')">Ver</button></div>
                                 </div>
@@ -386,10 +387,10 @@
                                 <div class="card-body">
                                     <h3>WIS & EPC</h3>
                                     <p class="desc">Manuais e Peças.</p>
-                                    <div class="tech-info">
-                                        <div class="tech-item"><b>Data:</b> 2021</div>
-                                        <div class="tech-item"><b>Tipo:</b> Offline</div>
-                                        <div class="tech-item"><b>Esp:</b> 100GB</div>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Data:</span> <span>2021</span></div>
+                                        <div class="tech-row"><span class="tech-label">Tipo:</span> <span>Offline</span></div>
+                                        <div class="tech-row"><span class="tech-label">Espaço:</span> <span>100 GB</span></div>
                                     </div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS EPC')">Ver</button></div>
                                 </div>
@@ -400,7 +401,7 @@
                                 <div class="card-body">
                                     <h3>Mbtools</h3>
                                     <p class="desc">Utilitários para Mercedes.</p>
-                                    <div class="tech-info"><div class="tech-item"><b>Func:</b> Utils</div></div>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>Utils</span></div></div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mbtools')">Ver</button></div>
                                 </div>
                             </div>
@@ -410,9 +411,9 @@
                                 <div class="card-body">
                                     <h3>Starfinder 2023</h3>
                                     <p class="desc">Esquemas elétricos Web.</p>
-                                    <div class="tech-info">
-                                        <div class="tech-item"><b>Anos:</b> 2016-23</div>
-                                        <div class="tech-item"><b>Tipo:</b> HTML</div>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Anos:</span> <span>2016-23</span></div>
+                                        <div class="tech-row"><span class="tech-label">Tipo:</span> <span>HTML</span></div>
                                     </div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Starfinder')">Ver</button></div>
                                 </div>
@@ -423,7 +424,7 @@
                                 <div class="card-body">
                                     <h3>Coding Tutorials</h3>
                                     <p class="desc">Guias e Aulas.</p>
-                                    <div class="tech-info"><div class="tech-item"><b>Form:</b> PDF/Vid</div></div>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Formato:</span> <span>PDF/Video</span></div></div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Coding Tutorials')">Ver</button></div>
                                 </div>
                             </div>
@@ -433,7 +434,7 @@
                                 <div class="card-body">
                                     <h3>Price List</h3>
                                     <p class="desc">Lista de preços peças.</p>
-                                    <div class="tech-info"><div class="tech-item"><b>Dados:</b> Peças</div></div>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Dados:</span> <span>Peças</span></div></div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Price List')">Ver</button></div>
                                 </div>
                             </div>
@@ -443,7 +444,7 @@
                                 <div class="card-body">
                                     <h3>Vin Decoder</h3>
                                     <p class="desc">Identificação Chassis.</p>
-                                    <div class="tech-info"><div class="tech-item"><b>Func:</b> VIN</div></div>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>VIN</span></div></div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vin Decoder')">Ver</button></div>
                                 </div>
                             </div>
@@ -453,7 +454,7 @@
                                 <div class="card-body">
                                     <h3>Full Databases</h3>
                                     <p class="desc">Seed Keys & Flash Files.</p>
-                                    <div class="tech-info"><div class="tech-item"><b>Tipo:</b> DB</div></div>
+                                    <div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>DB</span></div></div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Full Databases')">Ver</button></div>
                                 </div>
                             </div>
@@ -463,9 +464,9 @@
                                 <div class="card-body">
                                     <h3>SDMedia</h3>
                                     <p class="desc">Vídeos e Treino.</p>
-                                    <div class="tech-info">
-                                        <div class="tech-item"><b>Cont:</b> Vídeo</div>
-                                        <div class="tech-item"><b>Esp:</b> 10GB</div>
+                                    <div class="tech-details">
+                                        <div class="tech-row"><span class="tech-label">Cont:</span> <span>Vídeo</span></div>
+                                        <div class="tech-row"><span class="tech-label">Esp:</span> <span>10 GB</span></div>
                                     </div>
                                     <div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDMedia')">Ver</button></div>
                                 </div>
@@ -474,18 +475,22 @@
                         </div>
                     </div>
 
-                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diag & Coding.</p><div class="tech-info"><div class="tech-item"><b>Ver:</b> 4.39</div><div class="tech-item"><b>VCI:</b> ICOM</div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div></div></div>
+                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diag & Coding.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>4.39</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>ICOM</span></div><div class="tech-row"><span class="tech-label">Espaço:</span> <span>150 GB</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div></div></div>
                     
                     <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid">
-                        <div class="card"><img src="https://images.unsplash.com/photo-1621503373575-b040317da743?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Nativo 2025.</p><div class="tech-info"><div class="tech-item"><b>VCI:</b> Lexia</div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div>
-                        <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><div class="tech-info"><div class="tech-item"><b>Modo:</b> VM</div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div>
+                        <div class="card"><img src="https://images.unsplash.com/photo-1621503373575-b040317da743?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Nativo 2025.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>9.193</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>Nativo</span></div><div class="tech-row"><span class="tech-label">Esp:</span> <span>10 GB</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div>
+                        <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>7.83</span></div><div class="tech-row"><span class="tech-label">Modo:</span> <span>VM</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div>
                     </div></div>
                     
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip</h3><p class="desc">Oficial V240.</p><div class="tech-info"><div class="tech-item"><b>VCI:</b> RTL2002</div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div></div></div>
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">DoIP Land Rover.</p><div class="tech-info"><div class="tech-item"><b>Ano:</b> 2017+</div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('JLR Pathfinder')">Ver</button></div></div></div></div></div>
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p class="desc">Global V18.</p><div class="tech-info"><div class="tech-item"><b>VCI:</b> J2534</div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota Techstream')">Ver</button></div></div></div></div></div>
-                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p class="desc">Sistema Online.</p><div class="tech-info"><div class="tech-item"><b>Tipo:</b> Online</div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Ford FDRS')">Ver</button></div></div></div></div></div>
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Opel/Chevrolet.</p><div class="tech-info"><div class="tech-item"><b>VCI:</b> MDI</div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('GM GDS2')">Ver</button></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p class="desc">Oficial V240.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>240</span></div><div class="tech-row"><span class="tech-label">Extra:</span> <span>Reprog</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">DoIP Land Rover.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ano:</span> <span>2017+</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('JLR Pathfinder')">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p class="desc">Global V18.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota Techstream')">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p class="desc">Sistema Online.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Online</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Ford FDRS')">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Opel/Chevrolet.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>MDI</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('GM GDS2')">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
@@ -536,6 +541,43 @@
     </footer>
 
     <script>
+        // TYPEWRITER (MAQUINA DE ESCREVER)
+        const words = ["Xentry", "ISTA", "Diagbox", "JLR", "FDRS", "GDS2", "Techstream"];
+        let i = 0;
+        let timer;
+
+        function typingEffect() {
+            const word = words[i].split("");
+            const loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typewriter').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 150);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            const word = words[i].split("");
+            const loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typewriter').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) { i++; } else { i = 0; }
+                    typingEffect();
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 100);
+            };
+            loopDeleting();
+        }
+        typingEffect();
+
+        // NAVEGAÇÃO
         function switchSection(id, btn) {
             document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
             document.getElementById('sec-' + id).classList.add('active');
@@ -577,6 +619,28 @@
             }
         }
 
+        // WhatsApp Order
+        function orderProduct(productName) {
+            const msg = encodeURIComponent(`Olá, tenho interesse em: ${productName}. Podem ajudar?`);
+            window.open(`https://wa.me/3511234?text=${msg}`, '_blank');
+        }
+
+        // Search
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.section-view.active .card');
+            cards.forEach(card => {
+                let title = card.querySelector('h3').innerText.toLowerCase();
+                let desc = card.querySelector('.desc').innerText.toLowerCase();
+                if (title.includes(input) || desc.includes(input)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Wizard Logic
         let uOS='', uDisk='';
         function nextStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
@@ -596,28 +660,7 @@
                 <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=100&q=60"><div>Xentry</div></div>`;
         }
 
-        // WhatsApp Intelligent Order
-        function orderProduct(productName) {
-            const msg = encodeURIComponent(`Olá, tenho interesse em: ${productName}. Podem ajudar?`);
-            window.open(`https://wa.me/3511234?text=${msg}`, '_blank');
-        }
-
-        // Quick Search
-        function filterProducts() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.section-view.active .card');
-            cards.forEach(card => {
-                let title = card.querySelector('h3').innerText.toLowerCase();
-                let desc = card.querySelector('.desc').innerText.toLowerCase();
-                if (title.includes(input) || desc.includes(input)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Translation
+        // Translations
         const dict = {
             pt: { 
                 btn_support: "Suporte", btn_quote: "Orçamento",
