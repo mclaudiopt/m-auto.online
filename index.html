@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V11.3</title>
+    <title>M-Auto Online | V11.4</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -99,12 +99,10 @@
         @keyframes fade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         .panel-header { font-size: 2rem; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid var(--accent); color: var(--text-main); display: inline-block; }
 
-        /* PESQUISA */
         .search-container { margin-bottom: 20px; width: 100%; }
         .search-input { width: 100%; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
-        /* GRID E CARDS */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; width: 100%; }
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); position: relative; }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
@@ -132,47 +130,25 @@
 
         /* --- 7. FAB --- */
         .fab-container { position: fixed; bottom: 85px; right: 25px; z-index: 1500; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-        .fab-item { 
-            width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer;
-        }
+        .fab-item { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer; }
         .fab-container.open .fab-item { transform: scale(1); opacity: 1; }
         .fab-item svg { width: 28px; height: 28px; fill: white; }
-        .fab-main { 
-            width: 65px; height: 65px; border-radius: 50%; background: #0f172a; 
-            color: white; display: flex; align-items: center; justify-content: center; 
-            font-size: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1501; 
-            transition: 0.3s; border: none; cursor: pointer;
-        }
+        .fab-main { width: 65px; height: 65px; border-radius: 50%; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1501; transition: 0.3s; border: none; cursor: pointer; }
         .fab-main.active { transform: rotate(45deg); background: var(--red); }
 
         /* TOOLS & SERVICES */
         .tool-list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 900px; margin: 0 auto; }
-        .tool-row { 
-            display: flex; align-items: center; justify-content: space-between; 
-            background: var(--bg-card); border: 1px solid var(--border); 
-            padding: 15px; border-radius: 10px; transition: 0.2s; box-shadow: var(--shadow); 
-        }
-        .tool-row:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 15px; border-radius: 10px; transition: 0.2s; box-shadow: var(--shadow); }
         .tool-info { display: flex; align-items: center; gap: 15px; }
-        .tool-icon-box { 
-            width: 50px; height: 50px; border-radius: 8px; display: flex; 
-            align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.1rem;
-        }
+        .tool-icon-box { width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.1rem; }
         .tool-meta h4 { font-size: 1.05rem; margin: 0; color: var(--text-main); font-weight: 700; }
         .tool-meta p { font-size: 0.9rem; color: var(--text-muted); margin: 3px 0 0 0; }
-        
-        .tool-btn { 
-            padding: 10px 20px; border-radius: 6px; background: var(--bg-body); 
-            border: 1px solid var(--border); color: var(--accent); font-weight: 700; 
-            font-size: 0.9rem; text-decoration: none; white-space: nowrap;
-        }
+        .tool-btn { padding: 10px 20px; border-radius: 6px; background: var(--bg-body); border: 1px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.9rem; text-decoration: none; white-space: nowrap; }
         .tool-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; justify-content: center; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; justify-content: center; }
         .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); }
-        .service-header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px; color: white; }
-        .service-header h3 { margin: 0; font-size: 1.2rem; }
+        .service-header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px; color: white; display: flex; justify-content: space-between; }
         .service-body { padding: 20px; flex-grow: 1; }
         .service-list { list-style: none; padding: 0; margin: 0; }
         .service-list li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
@@ -201,13 +177,31 @@
             .mob-item.active { color: var(--accent); font-weight: bold; }
             .fab-container { bottom: 80px; }
             .hero { margin-top: 60px; padding: 40px 15px; }
-            .tool-meta p { font-size: 0.8rem; white-space: normal; } /* Wrap text on mobile */
+            .tool-meta p { font-size: 0.8rem; white-space: normal; } 
         }
         
         /* MODAIS */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); background: none; border: none; }
+        
+        /* WIZARD NOVO DESIGN */
+        .wiz-title { margin-bottom: 20px; color: var(--text-main); }
+        .wiz-grid { display: grid; grid-template-columns: 1fr; gap: 15px; width: 100%; margin-top: 15px; }
+        .wiz-btn { 
+            padding: 15px; border: 1px solid var(--border); border-radius: 8px; 
+            background: var(--bg-body); color: var(--text-main); font-weight: 600; 
+            cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center;
+            transition: 0.2s;
+        }
+        .wiz-btn:hover { border-color: var(--accent); background: var(--sidebar-active-bg); color: var(--accent); }
+        
+        .res-card {
+            background: var(--sidebar-active-bg); border: 2px solid var(--accent);
+            padding: 20px; border-radius: 10px; margin-top: 15px; text-align: center;
+        }
+        .res-title { font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px; }
+        .res-desc { color: var(--text-muted); margin-bottom: 15px; font-size: 0.95rem; }
     </style>
 </head>
 <body>
@@ -217,7 +211,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V11.3</span>
+                <span class="version-badge">V11.4</span>
             </a>
         </div>
         <div class="header-right">
@@ -242,18 +236,35 @@
     </div>
 
     <div id="wizardModal" class="modal-bg">
-        <div class="modal">
+        <div class="modal" id="wizContent">
             <button class="close" onclick="toggleModal('wizardModal')">&times;</button>
             <div id="step1" class="step active">
-                <h3 data-lang="wiz_title">Assistente Inteligente</h3>
-                <p style="margin-bottom:20px" data-lang="wiz_desc">Vamos verificar a compatibilidade.</p>
-                <button class="btn-wizard-start" onclick="nextStep(2)" data-lang="wiz_start">Começar ➡️</button>
+                <h3 class="wiz-title">Qual é a marca do seu carro?</h3>
+                <div class="wiz-grid">
+                    <button class="wiz-btn" onclick="selectBrand('Mercedes')">Mercedes-Benz <span>➡️</span></button>
+                    <button class="wiz-btn" onclick="selectBrand('BMW')">BMW / Mini <span>➡️</span></button>
+                    <button class="wiz-btn" onclick="selectBrand('PSA')">Peugeot / Citroën <span>➡️</span></button>
+                    <button class="wiz-btn" onclick="selectBrand('Outra')">Outra Marca <span>➡️</span></button>
+                </div>
             </div>
-            <div id="step2" class="step"><h3>Sistema?</h3><button class="wiz-opt" onclick="setOS('Win10'); nextStep(3)">Win 10/11 ✅</button><button class="wiz-opt" onclick="setOS('Old'); nextStep(3)">Outro ❌</button></div>
-            <div id="step3" class="step"><h3>Espaço?</h3><button class="wiz-opt" onclick="setSpace(50); nextStep(4)">- 100 GB</button><button class="wiz-opt" onclick="setSpace(500); nextStep(4)">+ 250 GB</button></div>
-            <div id="step4" class="step"><h3>RAM?</h3><button class="wiz-opt" onclick="setRam(4); nextStep(5)">4 GB</button><button class="wiz-opt" onclick="setRam(8); nextStep(5)">8 GB+</button></div>
-            <div id="step5" class="step"><h3>Disco?</h3><button class="wiz-opt" onclick="setDisk('HDD'); nextStep(6)">HDD</button><button class="wiz-opt" onclick="setDisk('SSD'); nextStep(6)">SSD</button></div>
-            <div id="step6" class="step"><div id="resBox" class="bot-result"></div><button class="wiz-opt" onclick="resetWizard()" style="justify-content:center">🔄 Reiniciar</button></div>
+            <div id="step2" class="step">
+                <h3 class="wiz-title">Como é o seu computador?</h3>
+                <div class="wiz-grid">
+                    <button class="wiz-btn" onclick="selectHardware('weak')">
+                        <div>Fraco / Antigo<br><small style="font-weight:400;opacity:0.7">HDD, 4GB RAM</small></div>
+                        <span>⚠️</span>
+                    </button>
+                    <button class="wiz-btn" onclick="selectHardware('good')">
+                        <div>Rápido / Moderno<br><small style="font-weight:400;opacity:0.7">SSD, 8GB+ RAM</small></div>
+                        <span>🚀</span>
+                    </button>
+                </div>
+            </div>
+            <div id="step3" class="step">
+                <h3 class="wiz-title">Recomendação</h3>
+                <div id="wizResult"></div>
+                <button class="btn-wizard-start" onclick="resetWizard()" style="margin-top:15px">Recomeçar 🔄</button>
+            </div>
         </div>
     </div>
 
@@ -313,7 +324,7 @@
                                     <div class="card-footer"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')">Encomendar</button></div>
                                 </div>
                             </div>
-                            <div class="card searchable-item" data-search="xentry cars passthru"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros (PassThru).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="xentry cars"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="xentry trucks c4"><img src="https://images.unsplash.com/photo-1598972884636-348404444338?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc">Pesados (24V).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>C4/C5</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="engenharia dts vediamo"><img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Engenharia</h3><p class="desc">DTS & Vediamo.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>Coding</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mercedes Engineering')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="wis epc manual"><img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>WIS & EPC</h3><p class="desc">Manuais e Peças.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span> <span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS EPC')">Ver</button></div></div></div>
@@ -419,6 +430,8 @@
                 <div class="service-card searchable-item" data-search="otimizacao pc"><div class="service-header"><div class="service-title"><h3>Otimização</h3></div></div><div class="service-body"><ul class="service-list"><li>Limpeza</li><li>Performance</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Otimização')">Agendar</button></div></div>
                 <div class="service-card searchable-item" data-search="virus limpeza"><div class="service-header"><div class="service-title"><h3>Vírus</h3></div></div><div class="service-body"><ul class="service-list"><li>Remoção Malware</li><li>Segurança</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Limpeza Vírus')">Agendar</button></div></div>
                 <div class="service-card searchable-item" data-search="clonagem disco ssd"><div class="service-header"><div class="service-title"><h3>Clonagem</h3></div></div><div class="service-body"><ul class="service-list"><li>HDD para SSD</li><li>Backup</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Clonagem')">Consultar</button></div></div>
+                <div class="service-card searchable-item" data-search="upgrade ram"><div class="service-header"><div class="service-title"><h3>Upgrade RAM</h3></div></div><div class="service-body"><ul class="service-list"><li>Aumento Memória</li><li>Rapidez</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Upgrade RAM')">Consultar</button></div></div>
+                <div class="service-card searchable-item" data-search="upgrade disco"><div class="service-header"><div class="service-title"><h3>Upgrade Disco</h3></div></div><div class="service-body"><ul class="service-list"><li>Mais Espaço</li><li>Velocidade</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Upgrade Disco')">Consultar</button></div></div>
             </div>
         </div>
 
@@ -510,6 +523,26 @@
             document.documentElement.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
         }
 
+        // WIZARD
+        let uOS='', uDisk='';
+        function nextStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step'+n).classList.add('active');
+            if(n===6) showRes();
+        }
+        function setOS(v){uOS=v} function setSpace(){} function setRam(){} function setDisk(v){uDisk=v}
+        function resetWizard(){
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step1').classList.add('active');
+        }
+        function showRes() {
+            const msg = (uOS==='Old'||uDisk==='HDD') ? "⚠️ Limitado" : "✅ Aprovado";
+            document.getElementById('resBox').innerHTML = `<h3>${msg}</h3>`;
+            document.getElementById('wizResult').innerHTML = `
+                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=100&q=60"><div>Full Pack</div></div>
+                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=100&q=60"><div>Xentry</div></div>`;
+        }
+
         // TRANSLATION
         const dict = {
             pt: { 
@@ -548,25 +581,6 @@
             });
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             event.target.closest('.lang-btn').classList.add('active');
-        }
-        
-        let uOS='', uDisk='';
-        function nextStep(n) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step'+n).classList.add('active');
-            if(n===6) showRes();
-        }
-        function setOS(v){uOS=v} function setSpace(){} function setRam(){} function setDisk(v){uDisk=v}
-        function resetWizard(){
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step1').classList.add('active');
-        }
-        function showRes() {
-            const msg = (uOS==='Old'||uDisk==='HDD') ? "⚠️ Limitado" : "✅ Aprovado";
-            document.getElementById('resBox').innerHTML = `<h3>${msg}</h3>`;
-            document.getElementById('botGrid').innerHTML = `
-                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=100&q=60"><div>Full Pack</div></div>
-                <div class="bot-mini"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=100&q=60"><div>Xentry</div></div>`;
         }
     </script>
 </body>
