@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
+    <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel.">
     <link rel="icon" type="image/png" href="m-auto.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V11.2</title>
+    <title>M-Auto Online | V11.3</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -18,7 +18,7 @@
             --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0;
             --accent: #2563eb; --accent-hover: #1d4ed8;
             --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
-            --gold: #b45309; --red: #ef4444; --header-h: 65px;
+            --gold: #b45309; --red: #ef4444; --header-h: 60px;
             --tech-bg: #f1f5f9;
             --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
@@ -43,7 +43,7 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* --- 3. HEADER (LIMPO) --- */
+        /* --- 3. HEADER --- */
         header {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             height: var(--header-h); padding: 0 25px; 
@@ -61,7 +61,6 @@
         .header-right { display: flex; align-items: center; gap: 15px; }
         .controls-wrapper { display: flex; align-items: center; gap: 10px; }
         .theme-btn { background: transparent; border: 1px solid var(--border); color: var(--text-main); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-        
         .lang-group { display: flex; gap: 6px; }
         .lang-btn { background: none; border: none; padding: 0; opacity: 0.4; transition: 0.2s; display: flex; cursor: pointer; }
         .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
@@ -69,7 +68,7 @@
 
         /* --- 4. HERO --- */
         .hero { 
-            margin-top: var(--header-h); padding: 70px 20px; text-align: center; border-bottom: 1px solid var(--border);
+            margin-top: var(--header-h); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border);
             background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a);
             background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff;
         }
@@ -131,7 +130,7 @@
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* --- 7. FAB (SVG Icons) --- */
+        /* --- 7. FAB --- */
         .fab-container { position: fixed; bottom: 85px; right: 25px; z-index: 1500; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
         .fab-item { 
             width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -148,23 +147,39 @@
         .fab-main.active { transform: rotate(45deg); background: var(--red); }
 
         /* TOOLS & SERVICES */
-        .tool-list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 800px; margin: 0 auto; }
-        .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 15px; border-radius: 10px; transition: 0.2s; box-shadow: var(--shadow); }
+        .tool-list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 900px; margin: 0 auto; }
+        .tool-row { 
+            display: flex; align-items: center; justify-content: space-between; 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            padding: 15px; border-radius: 10px; transition: 0.2s; box-shadow: var(--shadow); 
+        }
+        .tool-row:hover { border-color: var(--accent); transform: translateY(-2px); }
         .tool-info { display: flex; align-items: center; gap: 15px; }
-        .tool-icon-box { width: 45px; height: 45px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; }
-        .tool-meta h4 { font-size: 1rem; margin: 0; color: var(--text-main); }
-        .tool-btn { padding: 8px 15px; border-radius: 6px; background: var(--bg-body); border: 1px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.85rem; text-decoration: none; }
-        .tool-btn:hover { background: var(--accent); color: white; }
+        .tool-icon-box { 
+            width: 50px; height: 50px; border-radius: 8px; display: flex; 
+            align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.1rem;
+        }
+        .tool-meta h4 { font-size: 1.05rem; margin: 0; color: var(--text-main); font-weight: 700; }
+        .tool-meta p { font-size: 0.9rem; color: var(--text-muted); margin: 3px 0 0 0; }
+        
+        .tool-btn { 
+            padding: 10px 20px; border-radius: 6px; background: var(--bg-body); 
+            border: 1px solid var(--border); color: var(--accent); font-weight: 700; 
+            font-size: 0.9rem; text-decoration: none; white-space: nowrap;
+        }
+        .tool-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; justify-content: center; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; justify-content: center; }
         .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); }
-        .service-header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px; color: white; display: flex; justify-content: space-between; }
+        .service-header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px; color: white; }
+        .service-header h3 { margin: 0; font-size: 1.2rem; }
         .service-body { padding: 20px; flex-grow: 1; }
         .service-list { list-style: none; padding: 0; margin: 0; }
         .service-list li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .service-list li::before { content: "•"; color: var(--accent); font-weight: bold; }
         .service-footer { padding: 15px 20px; border-top: 1px solid var(--border); }
-        .btn-schedule { width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-body); border: 1px solid var(--border); color: var(--text-main); font-weight: 600; cursor: pointer; }
+        .btn-schedule { width: 100%; padding: 12px; border-radius: 8px; background: var(--bg-body); border: 1px solid var(--border); color: var(--text-main); font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-schedule:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
         /* FOOTER & MOBILE */
         footer { background: var(--bg-card); padding: 2rem 5%; border-top: 1px solid var(--border); margin-top: auto; padding-bottom: 80px; }
@@ -186,6 +201,7 @@
             .mob-item.active { color: var(--accent); font-weight: bold; }
             .fab-container { bottom: 80px; }
             .hero { margin-top: 60px; padding: 40px 15px; }
+            .tool-meta p { font-size: 0.8rem; white-space: normal; } /* Wrap text on mobile */
         }
         
         /* MODAIS */
@@ -201,7 +217,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V11.2</span>
+                <span class="version-badge">V11.3</span>
             </a>
         </div>
         <div class="header-right">
@@ -268,14 +284,14 @@
         <div id="sec-soft" class="section-view active">
             <div class="layout-flex">
                 <div class="sidebar">
-                    <button class="side-btn active" onclick="switchBrand('merc', this)">Mercedes-Benz</button>
-                    <button class="side-btn" onclick="switchBrand('bmw', this)">BMW / Mini</button>
-                    <button class="side-btn" onclick="switchBrand('psa', this)">PSA Group</button>
-                    <button class="side-btn" onclick="switchBrand('renault', this)">Renault / Dacia</button>
-                    <button class="side-btn" onclick="switchBrand('jlr', this)">Jaguar Land Rover</button>
-                    <button class="side-btn" onclick="switchBrand('toyota', this)">Toyota / Lexus</button>
-                    <button class="side-btn" onclick="switchBrand('ford', this)">Ford / Mazda</button>
-                    <button class="side-btn" onclick="switchBrand('gm', this)">General Motors</button>
+                    <button class="side-btn active" onclick="switchBrand('merc', this)">Mercedes</button>
+                    <button class="side-btn" onclick="switchBrand('bmw', this)">BMW</button>
+                    <button class="side-btn" onclick="switchBrand('psa', this)">PSA</button>
+                    <button class="side-btn" onclick="switchBrand('renault', this)">Renault</button>
+                    <button class="side-btn" onclick="switchBrand('jlr', this)">JLR</button>
+                    <button class="side-btn" onclick="switchBrand('toyota', this)">Toyota</button>
+                    <button class="side-btn" onclick="switchBrand('ford', this)">Ford</button>
+                    <button class="side-btn" onclick="switchBrand('gm', this)">GM</button>
                 </div>
                 <div class="content-wrapper">
                     <div class="search-container">
@@ -388,18 +404,21 @@
         <div id="sec-tools" class="section-view">
             <h2 class="panel-header" style="text-align:center">Ferramentas</h2>
             <div class="tool-list">
-                <div class="tool-row searchable-item" data-search="7zip 7-zip"><div class="tool-info"><div class="tool-icon-box" style="background:#f59e0b">7Z</div><div class="tool-meta"><h4>7-Zip</h4><p>Compressor</p></div></div><a href="https://www.7-zip.org/download.html" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item" data-search="rufus"><div class="tool-info"><div class="tool-icon-box" style="background:#3b82f6">RU</div><div class="tool-meta"><h4>Rufus</h4><p>Boot USB</p></div></div><a href="https://rufus.ie/pt/" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item" data-search="anydesk"><div class="tool-info"><div class="tool-icon-box" style="background:#10b981">AD</div><div class="tool-meta"><h4>AnyDesk</h4><p>Remoto</p></div></div><a href="https://download.anydesk.com/AnyDesk.exe" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item" data-search="dcontrol"><div class="tool-info"><div class="tool-icon-box" style="background:#ef4444">DC</div><div class="tool-meta"><h4>Defender Control</h4><p>Disable AV</p></div></div><a href="https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item" data-search="deskin remoto"><div class="tool-info"><div class="tool-icon-box" style="background:#10b981">DK</div><div class="tool-meta"><h4>DeskIn</h4><p data-lang="tool_deskin_desc">Acesso remoto rápido e estável.</p></div></div><a href="https://www.deskin.com/download" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item" data-search="windows 11 media creation tool"><div class="tool-info"><div class="tool-icon-box" style="background:#0078d4">W11</div><div class="tool-meta"><h4>Win 11 Boot Maker</h4><p data-lang="tool_win11_desc">Ferramenta oficial Microsoft para criar USB Win11.</p></div></div><a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item" data-search="7zip 7-zip"><div class="tool-info"><div class="tool-icon-box" style="background:#f59e0b">7Z</div><div class="tool-meta"><h4>7-Zip</h4><p data-lang="tool_7zip_desc">Compressor de arquivos leve e gratuito.</p></div></div><a href="https://www.7-zip.org/download.html" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item" data-search="rufus"><div class="tool-info"><div class="tool-icon-box" style="background:#3b82f6">RU</div><div class="tool-meta"><h4>Rufus</h4><p data-lang="tool_rufus_desc">Cria drives USB bootáveis para Windows.</p></div></div><a href="https://rufus.ie/pt/" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item" data-search="dcontrol"><div class="tool-info"><div class="tool-icon-box" style="background:#ef4444">DC</div><div class="tool-meta"><h4>Defender Control</h4><p data-lang="tool_dcontrol_desc">Gerir Windows Defender (Desativar).</p></div></div><a href="https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0" class="tool-btn">Download</a></div>
             </div>
         </div>
 
         <div id="sec-serv" class="section-view">
             <h2 class="panel-header" style="text-align:center">Serviços</h2>
             <div class="services-grid">
-                <div class="service-card searchable-item" data-search="formatacao windows"><div class="service-header"><div class="service-title"><h3>Formatação</h3></div><div class="service-price">35€</div></div><div class="service-body"><ul class="service-list"><li>Instalação Windows</li><li>Drivers</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Formatação')">Agendar</button></div></div>
-                <div class="service-card searchable-item" data-search="virus limpeza"><div class="service-header"><div class="service-title"><h3>Vírus</h3></div><div class="service-price">30€</div></div><div class="service-body"><ul class="service-list"><li>Limpeza</li><li>Segurança</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Limpeza Vírus')">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="formatacao windows"><div class="service-header"><div class="service-title"><h3>Formatação</h3></div></div><div class="service-body"><ul class="service-list"><li>Instalação Windows</li><li>Drivers</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Formatação')">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="otimizacao pc"><div class="service-header"><div class="service-title"><h3>Otimização</h3></div></div><div class="service-body"><ul class="service-list"><li>Limpeza</li><li>Performance</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Otimização')">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="virus limpeza"><div class="service-header"><div class="service-title"><h3>Vírus</h3></div></div><div class="service-body"><ul class="service-list"><li>Remoção Malware</li><li>Segurança</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Limpeza Vírus')">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="clonagem disco ssd"><div class="service-header"><div class="service-title"><h3>Clonagem</h3></div></div><div class="service-body"><ul class="service-list"><li>HDD para SSD</li><li>Backup</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Clonagem')">Consultar</button></div></div>
             </div>
         </div>
 
@@ -442,16 +461,13 @@
         // UNIVERSAL SEARCH FIX
         function filterProducts() {
             let input = document.getElementById('searchInput').value.toLowerCase();
-            // Seleciona TUDO que tenha a classe searchable-item (Software, Hardware, Ferramentas, Serviços)
             let items = document.querySelectorAll('.searchable-item');
             
             if (input.length > 0) {
-                // Se houver pesquisa, mostra tudo o que corresponde e esconde o que não corresponde
                 items.forEach(item => {
                     let text = (item.innerText + " " + item.getAttribute('data-search')).toLowerCase();
                     if (text.includes(input)) {
                         item.style.display = 'flex';
-                        // Força a visibilidade dos pais (Section e Brand Panel)
                         let parentSection = item.closest('.section-view');
                         let parentBrand = item.closest('.brand-panel');
                         if (parentSection) { parentSection.style.display = 'block'; parentSection.classList.add('active'); }
@@ -460,15 +476,10 @@
                         item.style.display = 'none';
                     }
                 });
-                
-                // Esconde as sidebars e headers desnecessários quando pesquisa
                 document.querySelectorAll('.panel-header').forEach(h => h.style.display = 'none');
             } else {
-                // Reset (Limpa a pesquisa)
-                items.forEach(item => item.style.display = 'flex'); // Restaura itens
+                items.forEach(item => item.style.display = 'flex');
                 document.querySelectorAll('.panel-header').forEach(h => h.style.display = 'block');
-                
-                // Restaura a vista padrão (Software -> Mercedes)
                 document.querySelectorAll('.section-view').forEach(s => s.style.display = 'none');
                 document.getElementById('sec-soft').style.display = 'block';
                 document.querySelectorAll('.brand-panel').forEach(b => b.style.display = 'none');
@@ -501,9 +512,33 @@
 
         // TRANSLATION
         const dict = {
-            pt: { hero_title: "Soluções de Diagnóstico", hero_desc: "Instalação remota profissional.", nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", btn_support: "Suporte", btn_quote: "Orçamento", badge_best: "Melhor Escolha", lbl_ver: "Versão:", modal_support_title: "Suporte Remoto", modal_support_desc: "Baixe o cliente." },
-            en: { hero_title: "Diagnostic Solutions", hero_desc: "Professional remote installation.", nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", btn_support: "Support", btn_quote: "Quote", badge_best: "Best Choice", lbl_ver: "Version:", modal_support_title: "Remote Support", modal_support_desc: "Download client." },
-            fr: { hero_title: "Solutions Diagnostic", hero_desc: "Installation à distance pro.", nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", btn_support: "Soutien", btn_quote: "Devis", badge_best: "Meilleur Choix", lbl_ver: "Version:", modal_support_title: "Soutien à distance", modal_support_desc: "Télécharger client." }
+            pt: { 
+                hero_title: "Soluções de Diagnóstico", hero_desc: "Instalação remota profissional.", 
+                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", 
+                btn_support: "Suporte", btn_quote: "Orçamento", badge_best: "Melhor Escolha", lbl_ver: "Versão:", 
+                modal_support_title: "Suporte Remoto", modal_support_desc: "Baixe o cliente.",
+                tool_deskin_desc: "Acesso remoto rápido e estável.", tool_win11_desc: "Ferramenta oficial Microsoft para criar USB Win11.", 
+                tool_7zip_desc: "Compressor de arquivos leve e gratuito.", tool_rufus_desc: "Cria drives USB bootáveis para Windows.", 
+                tool_dcontrol_desc: "Gerir Windows Defender (Desativar)." 
+            },
+            en: { 
+                hero_title: "Diagnostic Solutions", hero_desc: "Professional remote installation.", 
+                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", 
+                btn_support: "Support", btn_quote: "Quote", badge_best: "Best Choice", lbl_ver: "Version:", 
+                modal_support_title: "Remote Support", modal_support_desc: "Download client.",
+                tool_deskin_desc: "Fast and stable remote access.", tool_win11_desc: "Official Microsoft tool to create Win11 USB.", 
+                tool_7zip_desc: "Lightweight and free file compressor.", tool_rufus_desc: "Create bootable USB drives for Windows.", 
+                tool_dcontrol_desc: "Manage Windows Defender (Disable)." 
+            },
+            fr: { 
+                hero_title: "Solutions Diagnostic", hero_desc: "Installation à distance pro.", 
+                nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", 
+                btn_support: "Soutien", btn_quote: "Devis", badge_best: "Meilleur Choix", lbl_ver: "Version:", 
+                modal_support_title: "Soutien à distance", modal_support_desc: "Télécharger client.",
+                tool_deskin_desc: "Accès à distance rapide et stable.", tool_win11_desc: "Outil officiel Microsoft pour créer USB Win11.", 
+                tool_7zip_desc: "Compresseur de fichiers léger et gratuit.", tool_rufus_desc: "Créer des clés USB bootables pour Windows.", 
+                tool_dcontrol_desc: "Gérer Windows Defender (Désactiver)." 
+            }
         };
 
         function changeLang(l) {
