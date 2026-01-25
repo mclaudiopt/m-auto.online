@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V10.5</title>
+    <title>M-Auto Online | V10.6</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -43,7 +43,7 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* --- 3. HEADER (DESIGN FIXO IGUAL À IMAGEM) --- */
+        /* --- 3. HEADER --- */
         header {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             height: var(--header-h); padding: 0 25px; 
@@ -53,36 +53,19 @@
         }
 
         .header-left { display: flex; align-items: center; }
-        
-        /* LOGO ESTILO IMAGEM (M-Auto Italic Black | Online Italic Blue) */
         .logo-link { display: flex; align-items: center; gap: 8px; text-decoration: none; }
         
         .brand-m { 
-            font-family: 'Inter', sans-serif;
-            font-size: 1.6rem; 
-            font-weight: 900; 
-            font-style: italic; 
-            color: var(--text-main); 
-            letter-spacing: -1px;
+            font-family: 'Inter', sans-serif; font-size: 1.6rem; font-weight: 900; font-style: italic; 
+            color: var(--text-main); letter-spacing: -1px;
         }
-        
         .brand-online { 
-            font-family: 'Inter', sans-serif;
-            font-size: 1.6rem; 
-            font-weight: 900; 
-            font-style: italic; 
-            color: var(--accent); 
-            letter-spacing: -0.5px;
+            font-family: 'Inter', sans-serif; font-size: 1.6rem; font-weight: 900; font-style: italic; 
+            color: var(--accent); letter-spacing: -0.5px;
         }
-        
         .version-badge { 
-            background: #f1f5f9; 
-            color: #64748b; 
-            padding: 4px 8px; 
-            border-radius: 6px; 
-            font-weight: 700; 
-            font-size: 0.85rem; 
-            margin-left: 5px;
+            background: #f1f5f9; color: #64748b; padding: 4px 8px; 
+            border-radius: 6px; font-weight: 700; font-size: 0.85rem; margin-left: 5px;
         }
         [data-theme="dark"] .version-badge { background: #334155; color: #cbd5e1; }
 
@@ -108,22 +91,12 @@
         .btn-blue { background: var(--accent); }
 
         /* --- 4. HERO & NAV --- */
-        .hero { margin-top: 70px; padding: 50px 20px; text-align: center; border-bottom: 1px solid var(--border); background: var(--bg-body); }
+        .hero { margin-top: 70px; padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border); background: var(--bg-body); }
         .hero h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; color: var(--text-main); }
         .typewriter { color: var(--accent); border-right: 3px solid var(--accent); padding-right: 5px; animation: blink 0.7s infinite; }
         @keyframes blink { 50% { border-color: transparent; } }
         .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto; }
 
-        /* TRUST BADGES */
-        .trust-badges { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
-        .trust-item {
-            background: var(--bg-card); border: 1px solid var(--border);
-            padding: 8px 16px; border-radius: 50px; font-size: 0.85rem;
-            color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); cursor: default;
-        }
-
-        /* NAVIGATION (ESTILO PILL IMAGEM) */
         .main-nav {
             display: flex; justify-content: center; gap: 12px; padding: 15px;
             background: var(--bg-body); border-bottom: 1px solid var(--border);
@@ -135,10 +108,7 @@
             display: flex; align-items: center; gap: 8px;
         }
         .nav-pill:hover { background: #e2e8f0; color: var(--text-main); }
-        .nav-pill.active { 
-            background: var(--accent); color: white; border-color: var(--accent); 
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); 
-        }
+        .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
 
         /* --- 5. LAYOUT --- */
         .app-container { width: 100%; padding: 30px; box-sizing: border-box; min-height: 600px; display: flex; flex-direction: column; }
@@ -160,25 +130,18 @@
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         .side-btn:hover { background: var(--bg-body); color: var(--text-main); }
-        .side-btn.active { 
-            background: var(--sidebar-active-bg); color: var(--sidebar-active-text);
-            border-left-color: var(--sidebar-active-border);
-        }
+        .side-btn.active { background: var(--sidebar-active-bg); color: var(--sidebar-active-text); border-left-color: var(--sidebar-active-border); }
 
         .content-wrapper { flex: 1; width: 100%; min-width: 0; }
         .brand-panel { display: none; animation: fade 0.3s; }
         .brand-panel.active { display: block; }
-        .panel-header { 
-            font-size: 2rem; margin-bottom: 25px; padding-bottom: 10px; 
-            border-bottom: 2px solid var(--accent); color: var(--text-main); display: inline-block;
-        }
+        .panel-header { font-size: 2rem; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid var(--accent); color: var(--text-main); display: inline-block; }
 
-        /* GRID (2 COLUNAS MINIMO) */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
-            gap: 20px; width: 100%;
-        }
+        .search-container { margin-bottom: 20px; width: 100%; }
+        .search-input { width: 100%; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; width: 100%; }
 
         .card { 
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; 
@@ -192,7 +155,6 @@
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
         .card p.desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; }
         
-        /* DETALHES TÉCNICOS */
         .tech-details {
             background: var(--tech-bg); border: 1px solid var(--border);
             border-radius: 6px; padding: 10px; margin-top: auto; margin-bottom: 15px;
@@ -202,18 +164,11 @@
         .tech-row:last-child { border-bottom: none; }
         .tech-label { font-weight: 600; color: var(--text-main); }
 
-        /* FEATURES LIST (Mercedes Pack) */
         .feature-list { list-style: none; margin-bottom: 15px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .feature-list li { 
-            font-size: 0.8rem; color: var(--text-muted); 
-            display: flex; align-items: center; gap: 6px;
-        }
+        .feature-list li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
         .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; }
 
-        .card-footer { 
-            margin-top: 0; display: flex; justify-content: space-between; align-items: center; 
-            border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; 
-        }
+        .card-footer { margin-top: 0; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; }
         .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); white-space: nowrap; }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; white-space: nowrap; }
 
@@ -221,27 +176,29 @@
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* --- 6. FLUTUANTES --- */
+        /* --- FOOTER REESTRUTURADO --- */
+        footer { background: var(--bg-card); padding: 2rem 5%; border-top: 1px solid var(--border); margin-top: auto; }
+        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center; }
+        .footer-trust { display: flex; gap: 20px; margin-bottom: 10px; }
+        .footer-trust span { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+        .footer-contacts p { font-size: 0.95rem; color: var(--text-main); margin-bottom: 5px; }
+        .footer-copyright { font-size: 0.8rem; color: var(--text-muted); opacity: 0.7; }
+
+        /* FLUTUANTES, MODAL, GRID-CENTER */
         .whatsapp-float { position: fixed; bottom: 90px; right: 25px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; transition: 0.3s; }
         .chatbot-btn { position: fixed; bottom: 20px; right: 25px; width: 60px; height: 60px; background: linear-gradient(135deg, #1e293b, #0f172a); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1500; border: none; transition: 0.3s; cursor: pointer; }
         .chatbot-btn svg { width: 28px; height: 28px; fill: white; }
         .whatsapp-float:hover, .chatbot-btn:hover { transform: scale(1.1); }
 
-        /* --- 7. MODAL --- */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); background: none; border: none; }
         .btn-dl { background: var(--red); color: white; padding: 15px 30px; border-radius: 50px; font-weight: bold; display: inline-flex; gap: 10px; margin: 20px 0; text-decoration: none; }
-        
         .btn-wizard-start { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; width: 100%; margin-top: 20px; cursor: pointer; }
         .wiz-opt { background: var(--bg-body); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: flex; justify-content: space-between; }
         .wiz-opt:hover { border-color: var(--accent); color: var(--accent); }
         .step { display: none; } .step.active { display: block; animation: fade 0.4s; }
         .bot-result { background: var(--bg-body); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; border: 1px solid var(--border); }
-
-        .search-container { margin-bottom: 20px; width: 100%; }
-        .search-input { width: 100%; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
-        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
         .grid-center { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; justify-content: center; }
         .tool-card { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
@@ -249,8 +206,6 @@
         .tool-icon { font-size: 2.5rem; margin-bottom: 15px; }
         .tool-card h4 { margin-bottom: 10px; color: var(--text-main); font-size: 1.1rem; }
         .tool-link { color: var(--accent); font-weight: bold; margin-top: auto; }
-
-        footer { background: var(--bg-card); padding: 3rem 5%; text-align: center; border-top: 1px solid var(--border); margin-top: auto; }
 
         @media (max-width: 768px) {
             .layout-flex { flex-direction: column; }
@@ -271,7 +226,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V10.5</span>
+                <span class="version-badge">V10.6</span>
             </a>
         </div>
         <div class="header-right">
@@ -329,13 +284,6 @@
     <section id="inicio" class="hero">
         <h1 data-lang="hero_title">Soluções de Diagnóstico <span class="typewriter" id="typewriter"></span></h1>
         <p data-lang="hero_desc">Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.</p>
-        
-        <div class="trust-badges">
-            <span class="trust-item">🛡️ Garantia Vitalícia</span>
-            <span class="trust-item">🚀 Suporte 24/7</span>
-            <span class="trust-item">🔒 Ligação Segura</span>
-            <span class="trust-item">⭐ 2000+ Clientes</span>
-        </div>
     </section>
 
     <div class="main-nav">
@@ -369,7 +317,7 @@
                         <h2 class="panel-header">Mercedes-Benz / Daimler</h2>
                         <div class="grid">
                             
-                            <div class="card gold" style="grid-column: 1 / -1;">
+                            <div class="card gold" style="grid-column: 1 / -1;" data-search="mercedes full pack completo wis dts">
                                 <span class="badge">Melhor Escolha</span>
                                 <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80" style="height:220px;">
                                 <div class="card-body">
@@ -387,7 +335,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="xentry cars passthru ligeiros">
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Xentry Cars (PassThru)</h3>
@@ -401,7 +349,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="xentry trucks pesados c4 c5">
                                 <img src="https://images.unsplash.com/photo-1598972884636-348404444338?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Xentry Trucks</h3>
@@ -415,7 +363,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="dts monaco vediamo engenharia dev coding">
                                 <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Engenharia (Dev)</h3>
@@ -428,7 +376,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="wis epc manual parts">
                                 <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>WIS & EPC</h3>
@@ -442,7 +390,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="mbtools utilitarios">
                                 <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Mbtools</h3>
@@ -452,7 +400,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="starfinder esquemas eletricos">
                                 <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Starfinder 2023</h3>
@@ -465,7 +413,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="coding tutorials aulas">
                                 <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a7823?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Coding Tutorials</h3>
@@ -475,7 +423,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="price list lista preços">
                                 <img src="https://images.unsplash.com/photo-1554224155-9727b5394033?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Price List</h3>
@@ -485,7 +433,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="vin decoder chassis">
                                 <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Vin Decoder</h3>
@@ -495,7 +443,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="full databases seed keys flash">
                                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>Full Databases</h3>
@@ -505,7 +453,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card" data-search="sdmedia videos treino">
                                 <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80">
                                 <div class="card-body">
                                     <h3>SDMedia</h3>
@@ -528,7 +476,7 @@
                         <div class="card"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>7.83</span></div><div class="tech-row"><span class="tech-label">Modo:</span> <span>VM</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div>
                     </div></div>
                     
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip</h3><p class="desc">Oficial V240.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>240</span></div><div class="tech-row"><span class="tech-label">Extra:</span> <span>Reprog</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p class="desc">Oficial V240.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>240</span></div><div class="tech-row"><span class="tech-label">Extra:</span> <span>Reprog</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div></div></div>
                     
                     <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">DoIP Land Rover.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ano:</span> <span>2017+</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('JLR Pathfinder')">Ver</button></div></div></div></div></div>
                     
@@ -580,14 +528,20 @@
     </div>
 
     <footer id="contacto">
-        <div style="text-align:center; opacity:0.7; font-size:0.9rem;">
-            <p>📧 geral@m-auto.online | 📞 +351 123 456 789</p>
-            <p style="margin-top:10px">&copy; 2025 M-Auto Solutions</p>
+        <div class="footer-content">
+            <div class="footer-trust">
+                <span>🚀 Suporte 24/7</span>
+                <span>🔒 Ligação Segura</span>
+            </div>
+            <div class="footer-contacts">
+                <p>📧 geral@m-auto.online | 📞 +351 123 456 789</p>
+            </div>
+            <p class="footer-copyright">&copy; 2025 M-Auto Solutions</p>
         </div>
     </footer>
 
     <script>
-        // TYPEWRITER (MAQUINA DE ESCREVER)
+        // TYPEWRITER
         const words = ["Xentry", "ISTA", "Diagbox", "JLR", "FDRS", "GDS2", "Techstream"];
         let i = 0;
         let timer;
@@ -623,7 +577,23 @@
         }
         typingEffect();
 
-        // NAVEGAÇÃO
+        // SEARCH FIX
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.section-view.active .card');
+            cards.forEach(card => {
+                let title = card.querySelector('h3') ? card.querySelector('h3').innerText.toLowerCase() : "";
+                let desc = card.querySelector('.desc') ? card.querySelector('.desc').innerText.toLowerCase() : "";
+                let dataTags = card.getAttribute('data-search') ? card.getAttribute('data-search').toLowerCase() : "";
+
+                if (title.includes(input) || desc.includes(input) || dataTags.includes(input)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
         function switchSection(id, btn) {
             document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
             document.getElementById('sec-' + id).classList.add('active');
@@ -665,28 +635,11 @@
             }
         }
 
-        // WhatsApp Order
         function orderProduct(productName) {
             const msg = encodeURIComponent(`Olá, tenho interesse em: ${productName}. Podem ajudar?`);
             window.open(`https://wa.me/3511234?text=${msg}`, '_blank');
         }
 
-        // Search
-        function filterProducts() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.section-view.active .card');
-            cards.forEach(card => {
-                let title = card.querySelector('h3').innerText.toLowerCase();
-                let desc = card.querySelector('.desc').innerText.toLowerCase();
-                if (title.includes(input) || desc.includes(input)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Wizard Logic
         let uOS='', uDisk='';
         function nextStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
