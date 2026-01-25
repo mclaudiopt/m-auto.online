@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V13.9</title>
+    <title>M-Auto Online | V14.0</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -125,15 +125,7 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; width: 100%; }
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); position: relative; }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
-        
-        /* CORREÇÃO IMAGEM: Contain + Fundo Escuro */
-        .card img { 
-            width: 100%; 
-            height: 210px; 
-            object-fit: contain; 
-            background-color: #0f172a; 
-            border-bottom: 1px solid var(--border); 
-        }
+        .card img { width: 100%; height: 210px; object-fit: contain; background-color: #0f172a; border-bottom: 1px solid var(--border); }
         
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
@@ -353,6 +345,7 @@
     <section id="inicio" class="hero">
         <h1 data-lang="hero_title">Soluções de Diagnóstico <span class="typewriter" id="typewriter"></span></h1>
         <p data-lang="hero_desc">Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.</p>
+        
         <div class="hero-slider-container">
             <div class="slider-track">
                 <span class="brand-item">MERCEDES-BENZ</span><span class="brand-item">BMW</span><span class="brand-item">AUDI</span><span class="brand-item">VOLKSWAGEN</span><span class="brand-item">PORSCHE</span><span class="brand-item">LAND ROVER</span><span class="brand-item">JAGUAR</span><span class="brand-item">TOYOTA</span><span class="brand-item">LEXUS</span><span class="brand-item">FORD</span><span class="brand-item">MAZDA</span><span class="brand-item">OPEL</span><span class="brand-item">GM</span>
@@ -406,6 +399,7 @@
                                 </div>
                             </div>
                             <div class="card searchable-item" data-search="vgsnag2 manager 1.6"><img src="IMG/merc-vgsnag2.jpg" alt="VGSNAG2"><div class="card-body"><h3>VGSNAG2 Manager 1.6</h3><p class="desc">EGS 722.9 Coding & Repair Utility.</p><p class="sub-desc">Read, edit, correct coding and data in the gearbox module without online access.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2 Manager 1.6')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="hhtwin"><img src="IMG/merc-hhtwin.jpg" alt="HHTWIN"><div class="card-body"><h3>HHTWIN</h3><p class="desc">Diagnóstico Antigos.</p><p class="sub-desc">Emulador HHT para diagnóstico de Mercedes pré-2000 (Série 124, 140, etc).</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('HHTWIN')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="xentry cars passthru"><img src="IMG/merc-xentry-cars.jpg" alt="Xentry Cars"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><p class="sub-desc">Versão PassThru ou OpenShell.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="xentry trucks c4"><img src="IMG/merc-xentry-trucks.jpg" alt="Xentry Trucks"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc">Pesados (24V).</p><p class="sub-desc">Para camiões e industriais.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>C4/C5</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="engenharia dts vediamo"><img src="IMG/merc-engineering.jpg" alt="DTS"><div class="card-body"><h3>Engenharia</h3><p class="desc">DTS 9.02 & Vediamo.</p><p class="sub-desc">Programação e Codificação.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>Coding</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mercedes Engineering')">Ver</button></div></div></div>
@@ -469,15 +463,16 @@
                     <div id="brand-toyota" class="brand-panel">
                         <h2 class="panel-header">Toyota</h2>
                         <div class="grid">
-                            <div class="card searchable-item" data-search="techstream"><img src="IMG/toyota-techstream.jpg" alt="Techstream"><div class="card-body"><h3>Techstream V18</h3><p class="desc">Diagnóstico Global.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota Techstream')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="techstream"><img src="IMG/toyota-techstream.jpg" alt="Techstream"><div class="card-body"><h3>Techstream</h3><p class="desc">Global Tech.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota Techstream')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="epc 2025"><img src="IMG/toyota-epc.jpg" alt="EPC"><div class="card-body"><h3>EPC 2025</h3><p class="desc">Catálogo.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota EPC')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="toylex 4"><img src="IMG/toyota-toylex4.jpg" alt="Toylex"><div class="card-body"><h3>Toylex 4</h3><p class="desc">EGR/DPF Remover.</p><p class="sub-desc">Desativação de sistemas para Toyota/Lexus.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toylex 4')">Ver</button></div></div></div>
                         </div>
                     </div>
 
                     <div id="brand-ford" class="brand-panel">
                         <h2 class="panel-header">Ford</h2>
                         <div class="grid">
-                            <div class="card searchable-item" data-search="ford fdrs"><img src="IMG/ford-fdrs.jpg" alt="FDRS"><div class="card-body"><h3>FDRS & FJDS</h3><p class="desc">Online System.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Ford FDRS')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="ford fdrs"><img src="IMG/ford-fdrs.jpg" alt="FDRS"><div class="card-body"><h3>FDRS</h3><p class="desc">Online System.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Ford FDRS')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="ford ids"><img src="IMG/ford-ids.jpg" alt="IDS"><div class="card-body"><h3>Ford IDS</h3><p class="desc">Diagnóstico Offline.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Ford IDS')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="ford all in one"><img src="IMG/ford-aio.jpg" alt="AIO"><div class="card-body"><h3>All in One 3.2</h3><p class="desc">Ferramenta Ativação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Ford All in One')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="forscan"><img src="IMG/ford-forscan.jpg" alt="FORScan"><div class="card-body"><h3>FORScan</h3><p class="desc">Codificação e Ativação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('FORScan')">Ver</button></div></div></div>
@@ -666,7 +661,7 @@
             document.getElementById('wizResult').innerHTML = html;
         }
 
-        // POPUP DINÂMICO
+        // POPUP DINÂMICO (CORRIGIDO PARA 1-10)
         const popup = document.getElementById('salesPopup');
         const countSpan = document.getElementById('viewerCount');
         function showPopup() {
