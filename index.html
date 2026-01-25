@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V13.4</title>
+    <title>M-Auto Online | V13.6</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -19,7 +19,7 @@
             --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0;
             --accent: #2563eb; --accent-hover: #1d4ed8;
             --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
-            --gold: #b45309; --red: #ef4444; --header-h: 65px;
+            --gold: #b45309; --red: #ef4444; --header-h: 60px;
             --tech-bg: #f1f5f9;
             --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
@@ -67,48 +67,51 @@
         .lang-btn:hover, .lang-btn.active { opacity: 1; transform: scale(1.15); }
         .lang-btn img { width: 22px; height: 22px; min-width: 22px; border-radius: 50%; border: 1px solid var(--border); object-fit: cover; }
 
-        /* --- 4. HERO --- */
+        /* --- 4. HERO (COMPACTO) --- */
         .hero { 
-            margin-top: var(--header-h); padding: 70px 20px; text-align: center; border-bottom: 1px solid var(--border);
+            margin-top: var(--header-h); 
+            /* Padding reduzido drasticamente para diminuir altura */
+            padding: 30px 20px 50px 20px; 
+            text-align: center; border-bottom: 1px solid var(--border);
             background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a);
             background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff;
+            position: relative; overflow: hidden;
         }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        
+        /* Fontes ajustadas para caber melhor */
+        .hero h1 { font-size: 2.2rem; margin-bottom: 8px; font-weight: 800; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); position: relative; z-index: 2; }
         .typewriter { color: #60a5fa; border-right: 3px solid #60a5fa; padding-right: 5px; animation: blink 0.7s infinite; }
         @keyframes blink { 50% { border-color: transparent; } }
-        .hero p { color: #cbd5e1; max-width: 700px; margin: 0 auto; font-size: 1rem; }
+        .hero p { color: #cbd5e1; max-width: 700px; margin: 0 auto; font-size: 1rem; position: relative; z-index: 2; }
 
-        /* --- 5. BRAND SLIDER --- */
-        .brand-slider {
-            background: var(--bg-card); border-bottom: 1px solid var(--border);
-            overflow: hidden; white-space: nowrap; padding: 15px 0;
+        /* HERO SLIDER */
+        .hero-slider-container {
+            position: absolute; bottom: 10px; left: 0; width: 100%; overflow: hidden; white-space: nowrap;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            z-index: 1;
         }
-        .slider-track {
-            display: inline-block; animation: slide 30s linear infinite;
-        }
+        .slider-track { display: inline-block; animation: slide 35s linear infinite; }
         .brand-item {
-            display: inline-block; font-size: 1.2rem; font-weight: 800; color: var(--text-muted);
-            margin: 0 30px; opacity: 0.5; transition: 0.3s;
+            display: inline-block; font-size: 0.9rem; font-weight: 800;
+            color: rgba(255, 255, 255, 0.25); margin: 0 40px; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
         }
-        .brand-item:hover { color: var(--accent); opacity: 1; }
-        
-        @keyframes slide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        .brand-item:hover { color: rgba(255, 255, 255, 0.8); cursor: default; }
+        @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- 6. NAV --- */
-        .main-nav { display: flex; justify-content: center; gap: 10px; padding: 15px; background: var(--bg-body); border-bottom: 1px solid var(--border); position: sticky; top: var(--header-h); z-index: 900; }
+        /* --- 5. NAV --- */
+        .main-nav { display: flex; justify-content: center; gap: 10px; padding: 10px; background: var(--bg-body); border-bottom: 1px solid var(--border); position: sticky; top: var(--header-h); z-index: 900; }
         .nav-pill { padding: 8px 20px; border-radius: 50px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border); background: var(--bg-card); transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
         .nav-pill:hover { background: #e2e8f0; color: var(--text-main); }
         .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
 
-        /* --- 7. LAYOUT --- */
+        /* --- 6. LAYOUT --- */
         .app-container { width: 100%; padding: 30px; box-sizing: border-box; min-height: 600px; display: flex; flex-direction: column; }
         .layout-flex { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
 
-        .sidebar { width: 260px; min-width: 260px; flex-shrink: 0; background: var(--bg-sidebar); padding: 15px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; position: sticky; top: 160px; }
+        .sidebar { width: 260px; min-width: 260px; flex-shrink: 0; background: var(--bg-sidebar); padding: 15px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; position: sticky; top: 150px; }
         .side-btn { text-align: left; padding: 12px 15px; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 8px; transition: 0.2s; border: none; border-left: 4px solid transparent; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .side-btn:hover { background: var(--bg-body); color: var(--text-main); }
         .side-btn.active { background: var(--sidebar-active-bg); color: var(--sidebar-active-text); border-left-color: var(--sidebar-active-border); }
@@ -126,7 +129,8 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; width: 100%; }
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); position: relative; }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border); }
+        .card img { width: 100%; height: 210px; object-fit: contain; background-color: #0f172a; border-bottom: 1px solid var(--border); }
+        
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card p.desc { font-size: 0.95rem; font-weight: 500; color: var(--text-main); margin-bottom: 5px; }
@@ -149,23 +153,15 @@
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* --- 8. FAB --- */
+        /* --- 7. FAB --- */
         .fab-container { position: fixed; bottom: 85px; right: 25px; z-index: 1500; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-        .fab-item { 
-            width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer;
-        }
+        .fab-item { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer; }
         .fab-container.open .fab-item { transform: scale(1); opacity: 1; }
         .fab-item svg { width: 28px; height: 28px; fill: white; }
-        .fab-main { 
-            width: 65px; height: 65px; border-radius: 50%; background: #0f172a; 
-            color: white; display: flex; align-items: center; justify-content: center; 
-            font-size: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1501; 
-            transition: 0.3s; border: none; cursor: pointer;
-        }
+        .fab-main { width: 65px; height: 65px; border-radius: 50%; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1501; transition: 0.3s; border: none; cursor: pointer; }
         .fab-main.active { transform: rotate(45deg); background: var(--red); }
 
-        /* --- 9. SCROLL TO TOP --- */
+        /* --- 8. SCROLL TO TOP --- */
         #scrollTopBtn {
             position: fixed; bottom: 25px; left: 25px; width: 45px; height: 45px;
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 50%;
@@ -183,7 +179,7 @@
         .tool-info { display: flex; align-items: center; gap: 15px; }
         .tool-icon-box { width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.1rem; }
         .tool-meta h4 { font-size: 1.05rem; margin: 0; color: var(--text-main); font-weight: 700; }
-        .tool-meta p { font-size: 0.85rem; color: var(--text-muted); margin: 3px 0 0 0; }
+        .tool-meta p { font-size: 0.9rem; color: var(--text-muted); margin: 3px 0 0 0; }
         .tool-btn { padding: 10px 20px; border-radius: 6px; background: var(--bg-body); border: 1px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.9rem; text-decoration: none; white-space: nowrap; }
         .tool-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
@@ -217,7 +213,7 @@
             .mob-item { flex: 1; text-align: center; font-size: 0.7rem; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 5px; }
             .mob-item.active { color: var(--accent); font-weight: bold; }
             .fab-container { bottom: 80px; }
-            .hero { margin-top: 60px; padding: 40px 15px 50px 15px; }
+            .hero { margin-top: 60px; } /* Padding já ajustado no main */
             .tool-meta p { font-size: 0.8rem; white-space: normal; } 
             footer { padding-bottom: 80px; }
         }
@@ -245,7 +241,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V13.4</span>
+                <span class="version-badge">V13.6</span>
             </a>
         </div>
         <div class="header-right">
@@ -319,7 +315,7 @@
         <h1 data-lang="hero_title">Soluções de Diagnóstico <span class="typewriter" id="typewriter"></span></h1>
         <p data-lang="hero_desc">Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.</p>
         
-        <div class="hero-slider-container">
+        <div class="brand-slider" style="background:transparent; border:none; margin-top:10px; padding:0;">
             <div class="slider-track">
                 <span class="brand-item">MERCEDES-BENZ</span><span class="brand-item">BMW</span><span class="brand-item">AUDI</span><span class="brand-item">VOLKSWAGEN</span><span class="brand-item">PORSCHE</span><span class="brand-item">LAND ROVER</span><span class="brand-item">JAGUAR</span><span class="brand-item">TOYOTA</span><span class="brand-item">LEXUS</span><span class="brand-item">FORD</span><span class="brand-item">MAZDA</span><span class="brand-item">OPEL</span><span class="brand-item">GM</span>
                 <span class="brand-item">MERCEDES-BENZ</span><span class="brand-item">BMW</span><span class="brand-item">AUDI</span><span class="brand-item">VOLKSWAGEN</span><span class="brand-item">PORSCHE</span><span class="brand-item">LAND ROVER</span><span class="brand-item">JAGUAR</span><span class="brand-item">TOYOTA</span><span class="brand-item">LEXUS</span><span class="brand-item">FORD</span><span class="brand-item">MAZDA</span><span class="brand-item">OPEL</span><span class="brand-item">GM</span>
@@ -375,7 +371,7 @@
                             <div class="card searchable-item" data-search="engenharia dts vediamo"><img src="IMG/merc-engineering.jpg" alt="DTS"><div class="card-body"><h3>Engenharia</h3><p class="desc">DTS 9.02 & Vediamo.</p><p class="sub-desc">Programação e Codificação.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>Coding</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mercedes Engineering')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="wis epc manual"><img src="IMG/merc-wis-epc.jpg" alt="WIS"><div class="card-body"><h3>WIS 2021 & EPC</h3><p class="desc">Manuais e Peças.</p><p class="sub-desc">Base de dados offline.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span> <span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS EPC')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="starfinder"><img src="IMG/merc-starfinder.jpg" alt="Starfinder"><div class="card-body"><h3>Starfinder 2023</h3><p class="desc">Esquemas Elétricos.</p><p class="sub-desc">Localização de componentes.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Web</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Starfinder')" data-lang="btn_view">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="7g scn vgsnag2"><img src="IMG/merc-7g-tools.jpg" alt="7G"><div class="card-body"><h3>7G & VGSNag2</h3><p class="desc">Ferramentas de Caixa.</p><p class="sub-desc">Reset e SCN de caixas 7G.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('7G Tools')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="vgsnag2 manager 1.6"><img src="IMG/merc-vgsnag2.jpg" alt="VGSNAG2"><div class="card-body"><h3>VGSNAG2 Manager 1.6</h3><p class="desc">Transmission TCU Tool.</p><p class="sub-desc">Read, edit, correct coding & data for EGS 722.9 TCU without online access.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2 Manager 1.6')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="backend certificates"><img src="IMG/merc-certificates.jpg" alt="Certs"><div class="card-body"><h3>Certificados ZenZefi</h3><p class="desc">Fix Login.</p><p class="sub-desc">Correção de certificados backend.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Backend Certs')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="sdflash"><img src="IMG/merc-sdflash.jpg" alt="SDFlash"><div class="card-body"><h3>SDFlash & DBs</h3><p class="desc">Bases de Dados.</p><p class="sub-desc">Ficheiros Flash e Seed Keys.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDFlash')" data-lang="btn_view">Ver</button></div></div></div>
                              <div class="card searchable-item" data-search="mbtools"><img src="IMG/merc-mbtools.jpg" alt="Mbtools"><div class="card-body"><h3>Mbtools</h3><p class="desc">Utilitários Mercedes.</p><p class="sub-desc">Coleção de ferramentas.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mbtools')">Ver</button></div></div></div>
@@ -407,7 +403,7 @@
                         <h2 class="panel-header">PSA (Peugeot/Citroën)</h2>
                         <div class="grid">
                             <div class="card searchable-item" data-search="diagbox 9 nativo"><img src="IMG/psa-diagbox9.jpg" alt="Diagbox 9"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Versão Nativa (2025).</p><p class="sub-desc">Sem VM. Mais rápido e compatível.</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>Lexia 3</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')" data-lang="btn_view">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="diagbox 7 vm"><img src="IMG/psa-diagbox7.jpg" alt="Diagbox 7"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><p class="sub-desc">Para carros anteriores a 2015.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Modo:</span> <span>Máquina Virtual</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="diagbox 7 vm"><img src="IMG/psa-diagbox7.jpg" alt="Diagbox 7"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Para veículos antigos (Offline).</p><p class="sub-desc">Estável para carros anteriores a 2015.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Modo:</span> <span>Máquina Virtual</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="sedre service box"><img src="IMG/psa-sedre.jpg" alt="Sedre"><div class="card-body"><h3>Service Box (Sedre)</h3><p class="desc">Esquemas e Manuais.</p><p class="sub-desc">Base de dados offline até 2013. Essencial para esquemas elétricos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Offline</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('PSA Sedre')">Ver</button></div></div></div>
                         </div>
                     </div>
