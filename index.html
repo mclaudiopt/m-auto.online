@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel.">
+    <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
     <link rel="icon" type="image/png" href="m-auto.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V11.5</title>
+    <title>M-Auto Online | V11.6</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -18,7 +18,7 @@
             --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0;
             --accent: #2563eb; --accent-hover: #1d4ed8;
             --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
-            --gold: #b45309; --red: #ef4444; --header-h: 60px;
+            --gold: #b45309; --red: #ef4444; --header-h: 65px;
             --tech-bg: #f1f5f9;
             --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
@@ -68,7 +68,7 @@
 
         /* --- 4. HERO --- */
         .hero { 
-            margin-top: var(--header-h); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border);
+            margin-top: var(--header-h); padding: 70px 20px; text-align: center; border-bottom: 1px solid var(--border);
             background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a);
             background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff;
         }
@@ -198,6 +198,10 @@
         .wiz-grid { display: grid; grid-template-columns: 1fr; gap: 15px; width: 100%; margin-top: 15px; }
         .wiz-btn { padding: 15px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-body); color: var(--text-main); font-weight: 600; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
         .wiz-btn:hover { border-color: var(--accent); background: var(--sidebar-active-bg); color: var(--accent); }
+        
+        .res-card { background: var(--sidebar-active-bg); border: 2px solid var(--accent); padding: 20px; border-radius: 10px; margin-top: 15px; text-align: center; }
+        .res-title { font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px; }
+        .res-desc { color: var(--text-muted); margin-bottom: 15px; font-size: 0.95rem; }
     </style>
 </head>
 <body>
@@ -207,7 +211,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V11.5</span>
+                <span class="version-badge">V11.6</span>
             </a>
         </div>
         <div class="header-right">
@@ -318,15 +322,25 @@
                                     <div class="card-footer"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')" data-lang="btn_order">Encomendar</button></div>
                                 </div>
                             </div>
-                            <div class="card searchable-item" data-search="xentry cars passthru"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_ver">Versão:</span> <span>01/2025</span></div><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>J2534</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="xentry cars"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_ver">Versão:</span> <span>01/2025</span></div><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>J2534</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="xentry trucks c4"><img src="https://images.unsplash.com/photo-1598972884636-348404444338?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc">Pesados (24V).</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>C4/C5</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')" data-lang="btn_view">Ver</button></div></div></div>
-                            </div>
+                            <div class="card searchable-item" data-search="engenharia dts vediamo"><img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Engenharia</h3><p class="desc">DTS & Vediamo.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>Coding</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mercedes Engineering')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="wis epc manual"><img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>WIS & EPC</h3><p class="desc">Manuais e Peças.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span> <span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS EPC')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="starfinder"><img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Starfinder</h3><p class="desc">Esquemas Elétricos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Web</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Starfinder')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="mbtools"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Mbtools</h3><p class="desc">Utilitários Mercedes.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Mbtools')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="coding tutorials"><img src="https://images.unsplash.com/photo-1581092921461-eab62e97a7823?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Coding Tutorials</h3><p class="desc">Aulas e Guias.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Coding Tutorials')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="price list"><img src="https://images.unsplash.com/photo-1554224155-9727b5394033?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Price List</h3><p class="desc">Tabela Preços.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Price List')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="vin decoder"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Vin Decoder</h3><p class="desc">Identificação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vin Decoder')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="full databases"><img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Full Databases</h3><p class="desc">Flash & Seeds.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Full Databases')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="sdmedia"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>SDMedia</h3><p class="desc">Vídeos Treino.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDMedia')">Ver</button></div></div></div>
+                        </div>
                     </div>
 
                     <div id="brand-bmw" class="brand-panel">
                         <h2 class="panel-header">BMW / Mini</h2>
                         <div class="grid">
-                            <div class="card searchable-item" data-search="ista bmw esys"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diagnóstico (D) e Programação (P).</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_ver">Versão:</span> <span>4.39.20</span></div><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>ICOM / K-DCAN</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="ista bmw esys"><img src="https://images.unsplash.com/photo-1555215696-99ac45e43d34?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diagnóstico (D) e Programação (P).</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_ver">Versão:</span> <span>4.39.20</span></div><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>ICOM / K-DCAN</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="ista p antigo"><img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>ISTA-P</h3><p class="desc">Programação Séries E (Antigos).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>3.70</span></div><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Loader</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA-P')">Ver</button></div></div></div>
                         </div>
                     </div>
 
@@ -335,14 +349,50 @@
                         <div class="grid">
                             <div class="card searchable-item" data-search="diagbox 9 nativo"><img src="https://images.unsplash.com/photo-1621503373575-b040317da743?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 9.193</h3><p class="desc">Versão Nativa (Sem VM). Veículos até 2025.</p><div class="tech-details"><div class="tech-row"><span class="tech-label" data-lang="lbl_vci">VCI:</span> <span>Lexia 3</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')" data-lang="btn_view">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="diagbox 7 vm"><img src="https://images.unsplash.com/photo-1600293353235-44d704531d7c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Para veículos antigos (Offline).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Modo:</span> <span>Máquina Virtual</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')" data-lang="btn_view">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="sedre service box"><img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Service Box (Sedre)</h3><p class="desc">Esquemas elétricos e manuais (Até 2013).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Offline</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('PSA Sedre')">Ver</button></div></div></div>
                         </div>
                     </div>
 
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault / Dacia</h2><div class="grid"><div class="card searchable-item" data-search="can clip v240"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p class="desc">Software Oficial.</p><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')" data-lang="btn_view">Ver</button></div></div></div></div></div>
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card searchable-item" data-search="jlr pathfinder"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">Veículos 2017+ (DoIP).</p><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('JLR Pathfinder')" data-lang="btn_view">Ver</button></div></div></div></div></div>
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card searchable-item" data-search="toyota techstream"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p class="desc">Global V18.</p><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Techstream')" data-lang="btn_view">Ver</button></div></div></div></div></div>
-                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item" data-search="ford fdrs"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS</h3><p class="desc">Sistema Online.</p><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Ford FDRS')" data-lang="btn_view">Ver</button></div></div></div></div></div>
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item" data-search="gm gds2"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2</h3><p class="desc">Opel/Chevy.</p><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('GM GDS2')" data-lang="btn_view">Ver</button></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-panel">
+                        <h2 class="panel-header">Renault / Dacia</h2>
+                        <div class="grid">
+                            <div class="card searchable-item" data-search="can clip v240"><img src="https://images.unsplash.com/photo-1627454820574-fb4d87da7a3c?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Can Clip V240</h3><p class="desc">Software Oficial de Diagnóstico.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>V240 (2025)</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>RTL2002 / J2534</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="renault dialogys"><img src="https://images.unsplash.com/photo-1552865922-870370776b92?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Dialogys</h3><p class="desc">Manuais de Reparação e Catálogo de Peças.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>4.72</span></div><div class="tech-row"><span class="tech-label">Espaço:</span> <span>60 GB</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="renolink"><img src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Renolink 1.99</h3><p class="desc">Programação de chaves e UCH.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Foco:</span> <span>IMMO / Airbag</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Renolink')">Ver</button></div></div></div>
+                        </div>
+                    </div>
+
+                    <div id="brand-jlr" class="brand-panel">
+                        <h2 class="panel-header">Jaguar Land Rover</h2>
+                        <div class="grid">
+                            <div class="card searchable-item" data-search="jlr pathfinder"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pathfinder</h3><p class="desc">Para veículos 2017+ (DoIP).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Protocolo:</span> <span>DoIP</span></div><div class="tech-row"><span class="tech-label">Ativação:</span> <span>Offline</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('JLR Pathfinder')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="jlr sdd"><img src="https://images.unsplash.com/photo-1453491945771-a1e904948959?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>JLR SDD</h3><p class="desc">Para veículos 2005 - 2016.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>164</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>Mongoose/J2534</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('JLR SDD')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="jlr ccf editor"><img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>CCF Editor</h3><p class="desc">Editor de ficheiros de configuração (Engenharia).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Func:</span> <span>Coding</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('JLR CCF')">Ver</button></div></div></div>
+                        </div>
+                    </div>
+
+                    <div id="brand-toyota" class="brand-panel">
+                        <h2 class="panel-header">Toyota / Lexus</h2>
+                        <div class="grid">
+                            <div class="card searchable-item" data-search="toyota techstream"><img src="https://images.unsplash.com/photo-1629897319148-014329bf348a?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Techstream</h3><p class="desc">Diagnóstico Global Toyota.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>V18 (2024)</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>Mini-VCI / Openport</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota Techstream')">Ver</button></div></div></div>
+                        </div>
+                    </div>
+
+                    <div id="brand-ford" class="brand-panel">
+                        <h2 class="panel-header">Ford / Mazda</h2>
+                        <div class="grid">
+                            <div class="card searchable-item" data-search="ford fdrs fjds"><img src="https://images.unsplash.com/photo-1552656967-7a0990a12002?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FDRS & FJDS</h3><p class="desc">Sistema Online para veículos recentes.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Online (Login req)</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>VCM II / J2534</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Ford FDRS')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="forscan"><img src="https://images.unsplash.com/photo-1553440962-295e7455b124?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>FORScan</h3><p class="desc">Codificação e Ativação de funções escondidas.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Licença:</span> <span>Extended</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('FORScan')">Ver</button></div></div></div>
+                        </div>
+                    </div>
+
+                    <div id="brand-gm" class="brand-panel">
+                        <h2 class="panel-header">General Motors</h2>
+                        <div class="grid">
+                            <div class="card searchable-item" data-search="gm gds2 tech2win"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>GDS2 & Tech2Win</h3><p class="desc">Pack Completo para veículos recentes e antigos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">GDS2:</span> <span>2010+</span></div><div class="tech-row"><span class="tech-label">Tech2Win:</span> <span>-2010</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>MDI / J2534</span></div></div><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('GM GDS2')">Ver</button></div></div></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -354,6 +404,7 @@
                     <div class="grid">
                         <div class="card searchable-item" data-search="openport j2534"><img src="https://images.unsplash.com/photo-1623944890632-4e0cc7302456?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Openport 2.0</h3><p>J2534 Económico.</p><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('Openport')" data-lang="btn_view">Ver</button></div></div></div>
                         <div class="card searchable-item" data-search="c4 connect doip"><img src="https://images.unsplash.com/photo-1579737970899-73c880a42426?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>C4 Connect</h3><p>Mercedes DoIP.</p><div class="card-footer"><span class="price" data-lang="btn_consult">Consulta</span><button class="btn-view" onclick="orderProduct('C4 Connect')" data-lang="btn_view">Ver</button></div></div></div>
+                        <div class="card searchable-item" data-search="toughbook pc"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Panasonic Toughbook</h3><p>PC Blindado.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toughbook')">Ver</button></div></div></div>
                     </div>
                 </div>
             </div>
@@ -373,10 +424,12 @@
         <div id="sec-serv" class="section-view">
             <h2 class="panel-header" style="text-align:center" data-lang="nav_serv">Serviços</h2>
             <div class="services-grid">
-                <div class="service-card searchable-item" data-search="formatacao windows"><div class="service-header"><div class="service-title"><h3 data-lang="serv_fmt">Formatação</h3></div></div><div class="service-body"><ul class="service-list"><li>Instalação Windows</li><li>Drivers</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Formatação')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card searchable-item" data-search="otimizacao pc"><div class="service-header"><div class="service-title"><h3 data-lang="serv_opt">Otimização</h3></div></div><div class="service-body"><ul class="service-list"><li>Limpeza</li><li>Performance</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Otimização')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card searchable-item" data-search="virus limpeza"><div class="service-header"><div class="service-title"><h3 data-lang="serv_vir">Vírus</h3></div></div><div class="service-body"><ul class="service-list"><li>Remoção Malware</li><li>Segurança</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Limpeza Vírus')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card searchable-item" data-search="clonagem disco ssd"><div class="service-header"><div class="service-title"><h3 data-lang="serv_clone">Clonagem</h3></div></div><div class="service-body"><ul class="service-list"><li>HDD para SSD</li><li>Backup</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Clonagem')" data-lang="btn_consult">Consultar</button></div></div>
+                <div class="service-card searchable-item" data-search="formatacao windows"><div class="service-header"><div class="service-title"><h3 data-lang="serv_fmt">Formatação</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Instalação Windows</li><li>Drivers</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Formatação')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="otimizacao pc"><div class="service-header"><div class="service-title"><h3 data-lang="serv_opt">Otimização</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Limpeza</li><li>Performance</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Otimização')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="virus limpeza"><div class="service-header"><div class="service-title"><h3 data-lang="serv_vir">Vírus</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Remoção Malware</li><li>Segurança</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Limpeza Vírus')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card searchable-item" data-search="clonagem disco ssd"><div class="service-header"><div class="service-title"><h3 data-lang="serv_clone">Clonagem</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>HDD para SSD</li><li>Backup</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Clonagem')" data-lang="btn_consult">Consultar</button></div></div>
+                <div class="service-card searchable-item" data-search="upgrade ram"><div class="service-header"><div class="service-title"><h3 data-lang="serv_ram">Upgrade RAM</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Aumento Memória</li><li>Rapidez</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Upgrade RAM')" data-lang="btn_consult">Consultar</button></div></div>
+                <div class="service-card searchable-item" data-search="upgrade disco"><div class="service-header"><div class="service-title"><h3 data-lang="serv_disk">Upgrade Disco</h3></div><div class="service-price" data-lang="price_consult">Orçamento</div></div><div class="service-body"><ul class="service-list"><li>Mais Espaço</li><li>Velocidade</li></ul></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Agendar Upgrade Disco')" data-lang="btn_consult">Consultar</button></div></div>
             </div>
         </div>
 
@@ -475,9 +528,9 @@
         function showWizResult() {
             let html = "";
             if (uHW === 'weak') {
-                html = `<div class="res-card"><div class="res-title">⚠️ PC Limitado</div><p class="res-desc">Para ${uBrand}, recomendamos apenas o software básico ou um upgrade.</p><button class="wiz-btn" onclick="orderProduct('Xentry Basic')">Ver Opção Leve</button></div>`;
+                html = `<div class="res-card"><div class="res-title">⚠️ PC Limitado</div><p class="res-desc">Recomendamos software básico ou upgrade.</p><button class="wiz-btn" onclick="orderProduct('Xentry Basic')">Opção Leve</button><button class="wiz-btn" onclick="orderProduct('Serviço Upgrade')">Serviço Upgrade</button></div>`;
             } else {
-                html = `<div class="res-card"><div class="res-title">✅ PC Compatível</div><p class="res-desc">O seu PC suporta o Pack Completo ${uBrand}!</p><button class="wiz-btn" onclick="orderProduct('${uBrand} Full Pack')">Ver Pack Completo</button></div>`;
+                html = `<div class="res-card"><div class="res-title">✅ PC Compatível</div><p class="res-desc">Suporta Pack Completo!</p><button class="wiz-btn" onclick="orderProduct('${uBrand} Full Pack')">Ver Pack</button></div>`;
             }
             document.getElementById('wizResult').innerHTML = html;
         }
@@ -492,7 +545,8 @@
                 modal_support_title: "Suporte Remoto", modal_support_desc: "Baixe o cliente.",
                 tool_deskin_desc: "Acesso remoto rápido e estável.", tool_win11_desc: "Ferramenta oficial Microsoft.", 
                 tool_7zip_desc: "Compressor de arquivos.", tool_rufus_desc: "Cria drives USB bootáveis.", tool_dcontrol_desc: "Gerir Windows Defender.",
-                serv_fmt: "Formatação", serv_opt: "Otimização", serv_vir: "Vírus", serv_clone: "Clonagem", side_univ: "Universal",
+                serv_fmt: "Formatação", serv_opt: "Otimização", serv_vir: "Vírus", serv_clone: "Clonagem", serv_ram: "Upgrade RAM", serv_disk: "Upgrade Disco",
+                side_univ: "Universal", price_consult: "Orçamento",
                 wiz_brand_title: "Qual é a marca do seu carro?", wiz_pc_title: "Como é o seu computador?", wiz_pc_weak: "Fraco / Antigo", wiz_pc_good: "Rápido / Moderno", wiz_rec_title: "Recomendação", wiz_restart: "Recomeçar 🔄", wiz_other: "Outra Marca"
             },
             en: { 
@@ -503,7 +557,8 @@
                 modal_support_title: "Remote Support", modal_support_desc: "Download client.",
                 tool_deskin_desc: "Fast remote access.", tool_win11_desc: "Official Microsoft tool.", 
                 tool_7zip_desc: "File compressor.", tool_rufus_desc: "Create bootable USB.", tool_dcontrol_desc: "Manage Defender.",
-                serv_fmt: "Formatting", serv_opt: "Optimization", serv_vir: "Virus", serv_clone: "Cloning", side_univ: "Universal",
+                serv_fmt: "Formatting", serv_opt: "Optimization", serv_vir: "Virus", serv_clone: "Cloning", serv_ram: "RAM Upgrade", serv_disk: "Disk Upgrade",
+                side_univ: "Universal", price_consult: "Quote",
                 wiz_brand_title: "What is your car brand?", wiz_pc_title: "How is your computer?", wiz_pc_weak: "Weak / Old", wiz_pc_good: "Fast / Modern", wiz_rec_title: "Recommendation", wiz_restart: "Restart 🔄", wiz_other: "Other Brand"
             },
             fr: { 
@@ -514,7 +569,8 @@
                 modal_support_title: "Soutien à distance", modal_support_desc: "Télécharger client.",
                 tool_deskin_desc: "Accès à distance rapide.", tool_win11_desc: "Outil officiel Microsoft.", 
                 tool_7zip_desc: "Compresseur de fichiers.", tool_rufus_desc: "Créer USB bootable.", tool_dcontrol_desc: "Gérer Defender.",
-                serv_fmt: "Formatage", serv_opt: "Optimisation", serv_vir: "Virus", serv_clone: "Clonage", side_univ: "Universel",
+                serv_fmt: "Formatage", serv_opt: "Optimisation", serv_vir: "Virus", serv_clone: "Clonage", serv_ram: "Mise à niveau RAM", serv_disk: "Mise à niveau Disque",
+                side_univ: "Universel", price_consult: "Devis",
                 wiz_brand_title: "Quelle est la marque de votre voiture?", wiz_pc_title: "Comment est votre ordinateur?", wiz_pc_weak: "Faible / Vieux", wiz_pc_good: "Rapide / Moderne", wiz_rec_title: "Recommandation", wiz_restart: "Recommencer 🔄", wiz_other: "Autre Marque"
             }
         };
