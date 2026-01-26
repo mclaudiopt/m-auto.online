@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
     <meta name="theme-color" content="#2563eb">
-    
     <link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <title>M-Auto Online | V16.2</title>
+    <title>M-Auto Online | V16.3</title>
 
     <style>
         :root { --bg-body: #f8fafc; --bg-card: #ffffff; --bg-sidebar: #ffffff; --bg-footer: #ffffff; --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0; --accent: #2563eb; --accent-hover: #1d4ed8; --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af; --gold: #b45309; --red: #ef4444; --header-h: 70px; --tech-bg: #f1f5f9; --shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
@@ -22,7 +21,6 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* HEADER */
         header { background: var(--bg-card); border-bottom: 1px solid var(--border); height: var(--header-h); padding: 0 25px; position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
         .logo-link { display: flex; align-items: center; gap: 8px; }
         .brand-m { font-size: 1.5rem; font-weight: 900; font-style: italic; color: var(--text-main); letter-spacing: -1px; }
@@ -31,8 +29,6 @@
 
         .header-right { display: flex; align-items: center; gap: 15px; height: 100%; }
         .controls-wrapper { display: flex; align-items: center; gap: 15px; }
-        
-        /* BOTÕES DE LÍNGUA E TEMA ALINHADOS */
         .theme-btn { background: transparent; border: 1px solid var(--border); color: var(--text-main); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
         .lang-group { display: flex; gap: 8px; align-items: center; }
         .lang-btn { background: none; border: 2px solid transparent; padding: 0; opacity: 0.5; transition: 0.2s; cursor: pointer; border-radius: 50%; width: 28px; height: 28px; }
@@ -40,7 +36,6 @@
         .lang-btn.active { opacity: 1; border-color: var(--accent); transform: scale(1.1); }
         .lang-btn img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-        /* HERO */
         .hero { margin-top: var(--header-h); padding: 50px 20px 70px 20px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff; position: relative; overflow: hidden; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; position: relative; z-index: 2; }
@@ -52,19 +47,20 @@
         .brand-item { display: inline-block; font-size: 0.9rem; font-weight: 800; color: rgba(255, 255, 255, 0.25); margin: 0 40px; text-transform: uppercase; letter-spacing: 1px; }
         @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* NAV */
         .main-nav { display: flex; justify-content: center; gap: 12px; padding: 15px; background: var(--bg-body); border-bottom: 1px solid var(--border); position: sticky; top: var(--header-h); z-index: 900; overflow-x: auto; }
         .nav-pill { padding: 8px 24px; border-radius: 50px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border); background: var(--bg-card); transition: 0.3s; white-space: nowrap; font-size: 0.95rem; }
         .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
 
-        /* LAYOUT */
         .app-container { width: 100%; padding: 30px; box-sizing: border-box; min-height: 600px; max-width: 1600px; margin: 0 auto; }
         .layout-flex { display: flex; gap: 30px; align-items: flex-start; }
         .sidebar { width: 250px; min-width: 250px; background: var(--bg-sidebar); padding: 15px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; position: sticky; top: 160px; height: fit-content; }
         .side-btn { text-align: left; padding: 12px 15px; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 8px; border: none; border-left: 4px solid transparent; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
         .side-btn:hover { background: var(--bg-body); color: var(--text-main); }
         .side-btn.active { background: var(--sidebar-active-bg); color: var(--sidebar-active-text); border-left-color: var(--sidebar-active-border); }
-        .content-wrapper { flex: 1; min-width: 0; }
+        
+        /* CORREÇÃO DO SALTO DO SCROLL: min-height no content-wrapper */
+        .content-wrapper { flex: 1; min-width: 0; min-height: 800px; } 
+        
         .section-view, .brand-panel { display: none; animation: fade 0.4s; }
         .section-view.active, .brand-panel.active { display: block; }
         @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -73,19 +69,23 @@
         .search-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
-        /* GRID & CARDS */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); height: 100%; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        /* CORREÇÃO IMAGEM: COVER PARA NÃO DEFORMAR */
-        .card img { width: 100%; height: 210px; object-fit: cover; object-position: center top; border-bottom: 1px solid var(--border); }
+        /* CORREÇÃO DE IMAGENS: CONTAIN + FUNDO BRANCO PARA NÃO CORTAR */
+        .card img { 
+            width: 100%; 
+            height: 210px; 
+            object-fit: contain; /* Garante que a imagem inteira é mostrada */
+            background-color: #ffffff; /* Fundo branco para preencher o resto */
+            border-bottom: 1px solid var(--border); 
+        }
         
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card p.desc { font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
         .card p.sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
-        
         .tech-details { background: var(--tech-bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; margin-top: auto; margin-bottom: 15px; font-size: 0.75rem; color: var(--text-muted); }
         .tech-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 3px 0; }
         .tech-row:last-child { border-bottom: none; }
@@ -93,7 +93,6 @@
         .feature-list { list-style: none; margin-bottom: 15px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 0.8rem; color: var(--text-muted); }
         .feature-list li { display: flex; align-items: center; }
         .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; margin-right: 6px; }
-
         .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
         .price { font-weight: 800; font-size: 1rem; color: var(--text-main); white-space: nowrap; }
         .btn-view { color: var(--accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; cursor: pointer; }
@@ -101,7 +100,6 @@
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* FAB */
         .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1500; display: flex; flex-direction: column; gap: 15px; align-items: flex-end; }
         .fab-item { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer; }
         .fab-container.open .fab-item { transform: scale(1); opacity: 1; }
@@ -122,7 +120,6 @@
         .about-container { max-width: 900px; margin: 0 auto; }
         .about-card { background: var(--bg-body); border: 1px solid var(--border); padding: 30px; border-radius: 16px; margin-top: 30px; }
 
-        /* DOWNLOADS FORMATADOS */
         .tool-list { display: flex; flex-direction: column; gap: 15px; max-width: 900px; margin: 0 auto; }
         .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); }
         .tool-info { display: flex; align-items: center; gap: 20px; }
@@ -145,7 +142,6 @@
         footer { background: var(--bg-footer); border-top: 1px solid var(--border); padding: 80px 20px 120px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
         .mobile-nav { display: none; }
 
-        /* WIZARD */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 500px; border: 1px solid var(--border); text-align: center; position: relative; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; background: none; border: none; cursor: pointer; color: var(--text-muted); }
@@ -287,7 +283,7 @@
                     
                     <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card searchable-item"><img src="IMG/BMW/BMW-Ista.jpg"><div class="card-body"><h3>ISTA+</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/BMW/bmw-istap.jpg"><div class="card-body"><h3>ISTA-P</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ISTA-P')">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox9.jpg"><div class="card-body"><h3>Diagbox 9</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div></div></div>
+                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox9.JPG"><div class="card-body"><h3>Diagbox 9</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div></div></div>
                     
                     <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Renault/renault-clip.jpg"><div class="card-body"><h3>Can Clip</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-dialogys.jpg"><div class="card-body"><h3>Dialogys</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div></div></div>
                     
@@ -324,10 +320,10 @@
         <div id="sec-serv" class="section-view">
             <h2 class="panel-header" style="text-align:center" data-lang="nav_serv">Serviços</h2>
             <div class="services-grid">
-                <div class="service-card"><div class="service-header"><h3 data-lang="serv_fmt">Formatação</h3></div><div class="service-body"><p data-lang="desc_fmt">Instalação limpa de Windows 10/11 Pro com drivers e otimização para diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Formatação')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-lang="serv_cod">Codificação</h3></div><div class="service-body"><p data-lang="desc_cod">Codificação online SCN (Mercedes), Component Protection (VAG) e adaptações.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Codificação')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-lang="serv_inst">Instalação</h3></div><div class="service-body"><p data-lang="desc_inst">Instalação remota completa de qualquer software de diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Instalação')" data-lang="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-lang="serv_rep">Reparação</h3></div><div class="service-body"><p data-lang="desc_rep">Correção de erros de licença, drivers ou ficheiros corrompidos.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Reparação')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-lang="serv_fmt">Formatação</h3></div><div class="service-body"><p data-lang="desc_fmt">Instalação limpa de Windows 10/11 Pro com drivers e otimização para diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Formatação')">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-lang="serv_cod">Codificação</h3></div><div class="service-body"><p data-lang="desc_cod">Codificação online SCN (Mercedes), Component Protection (VAG) e adaptações.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Codificação')">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-lang="serv_inst">Instalação</h3></div><div class="service-body"><p data-lang="desc_inst">Instalação remota completa de qualquer software de diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Instalação')">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-lang="serv_rep">Reparação</h3></div><div class="service-body"><p data-lang="desc_rep">Correção de erros de licença, drivers ou ficheiros corrompidos.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Reparação')">Agendar</button></div></div>
             </div>
         </div>
     </div>
@@ -335,7 +331,7 @@
     <section id="sobre" class="about-section">
         <div class="about-container">
             <h2 data-lang="nav_about">Sobre</h2>
-            <p data-lang="about_text">Especialistas em software de diagnóstico automóvel.</p>
+            <p data-lang="about_text">Especialistas em software de diagnóstico automóvel. Fornecemos soluções completas de instalação remota e suporte técnico para oficinas e entusiastas.</p>
         </div>
     </section>
 
@@ -343,7 +339,7 @@
         <div class="mob-item active" onclick="switchSection('soft', this)" data-lang="nav_soft">Soft</div>
         <div class="mob-item" onclick="switchSection('hard', this)" data-lang="nav_hard">Hard</div>
         <div class="mob-item" onclick="switchSection('tools', this)" data-lang="nav_tools">Tools</div>
-        <div class="mob-item" onclick="switchSection('serv', this)" data-lang="nav_serv">Serv</div>
+        <div class="mob-item" onclick="switchSection('serv', this)">Serv</div>
     </div>
 
     <footer id="contacto">
@@ -351,7 +347,7 @@
     </footer>
 
     <script>
-        // TYPEWRITER - SIMPLIFICADO E ROBUSTO
+        // TYPEWRITER (CORRIGIDO)
         const typewriter = document.querySelector(".typewriter");
         const texts = ["Xentry", "ISTA", "Diagbox"];
         let textIdx = 0;
@@ -398,31 +394,31 @@
         // LANG SYSTEM (CORRIGIDO)
         const dict = {
             pt: { 
-                hero_title: "Soluções de Diagnóstico", hero_desc: "Instalação remota profissional.", 
+                hero_title: "Instalação Remota Profissional", hero_desc: "Instalação remota profissional.", 
                 nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", nav_about: "Sobre", badge_best: "Melhor Escolha",
                 serv_fmt: "Formatação", desc_fmt: "Instalação limpa de Windows 10/11 Pro com drivers e otimização.",
                 serv_cod: "Codificação", desc_cod: "Codificação online SCN e Component Protection.",
                 serv_inst: "Instalação", desc_inst: "Instalação remota completa de software.",
                 serv_rep: "Reparação", desc_rep: "Correção de erros de licença e drivers.",
-                about_text: "Especialistas em software de diagnóstico automóvel.", btn_schedule: "Agendar"
+                about_text: "Especialistas em software de diagnóstico automóvel. Fornecemos soluções completas de instalação remota e suporte técnico para oficinas e entusiastas."
             },
             en: { 
-                hero_title: "Diagnostic Solutions", hero_desc: "Professional remote installation.", 
+                hero_title: "Professional Remote Installation", hero_desc: "Professional remote installation.", 
                 nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", nav_about: "About", badge_best: "Best Choice",
                 serv_fmt: "Formatting", desc_fmt: "Clean Windows 10/11 Pro install with drivers and optimization.",
                 serv_cod: "Coding", desc_cod: "Online SCN Coding and Component Protection.",
                 serv_inst: "Installation", desc_inst: "Full remote software installation.",
                 serv_rep: "Repair", desc_rep: "Fix license errors and driver issues.",
-                about_text: "Automotive diagnostic software specialists.", btn_schedule: "Schedule"
+                about_text: "Automotive diagnostic software specialists. We provide complete remote installation solutions and technical support for workshops and enthusiasts."
             },
             fr: { 
-                hero_title: "Solutions Diagnostic", hero_desc: "Installation à distance pro.", 
+                hero_title: "Installation à Distance Pro", hero_desc: "Installation à distance pro.", 
                 nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", nav_about: "À propos", badge_best: "Meilleur Choix",
                 serv_fmt: "Formatage", desc_fmt: "Installation propre de Windows 10/11 Pro avec pilotes.",
                 serv_cod: "Codage", desc_cod: "Codage en ligne SCN et Protection des Composants.",
                 serv_inst: "Installation", desc_inst: "Installation complète de logiciels à distance.",
                 serv_rep: "Réparation", desc_rep: "Correction des erreurs de licence et pilotes.",
-                about_text: "Spécialistes en logiciels de diagnostic automobile.", btn_schedule: "Planifier"
+                about_text: "Spécialistes en logiciels de diagnostic automobile. Nous fournissons des solutions complètes d'installation à distance et un support technique pour les ateliers et les passionnés."
             }
         };
 
