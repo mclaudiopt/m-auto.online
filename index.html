@@ -5,15 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
     <meta name="theme-color" content="#2563eb">
+    
     <link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <title>M-Auto Online | V16.3</title>
+    
+    <title>M-Auto Online | V17.0</title>
 
     <style>
-        :root { --bg-body: #f8fafc; --bg-card: #ffffff; --bg-sidebar: #ffffff; --bg-footer: #ffffff; --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0; --accent: #2563eb; --accent-hover: #1d4ed8; --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af; --gold: #b45309; --red: #ef4444; --header-h: 70px; --tech-bg: #f1f5f9; --shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        [data-theme="dark"] { --bg-body: #020617; --bg-card: #1e293b; --bg-sidebar: #111827; --bg-footer: #0f172a; --text-main: #f8fafc; --text-muted: #94a3b8; --border: #334155; --accent: #3b82f6; --accent-hover: #60a5fa; --sidebar-active-bg: #172554; --sidebar-active-border: #3b82f6; --sidebar-active-text: #bfdbfe; --tech-bg: #0f172a; --gold: #fbbf24; }
+        /* --- CSS LIMPO E ESTÁVEL --- */
+        :root {
+            --bg-body: #f8fafc; --bg-card: #ffffff; --bg-sidebar: #ffffff; --bg-footer: #ffffff;
+            --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0;
+            --accent: #2563eb; --accent-hover: #1d4ed8;
+            --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
+            --gold: #b45309; --red: #ef4444; --header-h: 70px; --tech-bg: #f1f5f9;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #020617; --bg-card: #1e293b; --bg-sidebar: #111827; --bg-footer: #0f172a;
+            --text-main: #f8fafc; --text-muted: #94a3b8; --border: #334155;
+            --accent: #3b82f6; --accent-hover: #60a5fa;
+            --sidebar-active-bg: #172554; --sidebar-active-border: #3b82f6; --sidebar-active-text: #bfdbfe;
+            --tech-bg: #0f172a; --gold: #fbbf24;
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         html { scroll-behavior: smooth; }
@@ -21,36 +38,45 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
+        /* HEADER */
         header { background: var(--bg-card); border-bottom: 1px solid var(--border); height: var(--header-h); padding: 0 25px; position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
         .logo-link { display: flex; align-items: center; gap: 8px; }
         .brand-m { font-size: 1.5rem; font-weight: 900; font-style: italic; color: var(--text-main); letter-spacing: -1px; }
         .brand-online { font-size: 1.5rem; font-weight: 900; font-style: italic; color: var(--accent); letter-spacing: -0.5px; }
         .version-badge { background: #f1f5f9; color: #64748b; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; margin-left: 5px; }
 
-        .header-right { display: flex; align-items: center; gap: 15px; height: 100%; }
+        .header-right { display: flex; align-items: center; gap: 15px; }
         .controls-wrapper { display: flex; align-items: center; gap: 15px; }
+        
         .theme-btn { background: transparent; border: 1px solid var(--border); color: var(--text-main); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+        
         .lang-group { display: flex; gap: 8px; align-items: center; }
         .lang-btn { background: none; border: 2px solid transparent; padding: 0; opacity: 0.5; transition: 0.2s; cursor: pointer; border-radius: 50%; width: 28px; height: 28px; }
         .lang-btn:hover { opacity: 1; transform: scale(1.1); }
         .lang-btn.active { opacity: 1; border-color: var(--accent); transform: scale(1.1); }
         .lang-btn img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
+        /* HERO */
         .hero { margin-top: var(--header-h); padding: 50px 20px 70px 20px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff; position: relative; overflow: hidden; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
         .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; position: relative; z-index: 2; }
         .typewriter { color: #60a5fa; border-right: 3px solid #60a5fa; padding-right: 5px; animation: blink 0.7s infinite; }
         @keyframes blink { 50% { border-color: transparent; } }
         .hero p { color: #cbd5e1; max-width: 700px; margin: 0 auto; font-size: 1.1rem; position: relative; z-index: 2; }
+        
         .hero-slider-container { position: absolute; bottom: 15px; left: 0; width: 100%; overflow: hidden; white-space: nowrap; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); z-index: 1; }
         .slider-track { display: inline-block; animation: slide 40s linear infinite; }
         .brand-item { display: inline-block; font-size: 0.9rem; font-weight: 800; color: rgba(255, 255, 255, 0.25); margin: 0 40px; text-transform: uppercase; letter-spacing: 1px; }
         @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
+        /* NAV LIMPA (SEM ICONS) */
         .main-nav { display: flex; justify-content: center; gap: 12px; padding: 15px; background: var(--bg-body); border-bottom: 1px solid var(--border); position: sticky; top: var(--header-h); z-index: 900; overflow-x: auto; }
         .nav-pill { padding: 8px 24px; border-radius: 50px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border); background: var(--bg-card); transition: 0.3s; white-space: nowrap; font-size: 0.95rem; }
+        .nav-pill:hover { background: #e2e8f0; color: var(--text-main); }
         .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
 
+        /* LAYOUT */
         .app-container { width: 100%; padding: 30px; box-sizing: border-box; min-height: 600px; max-width: 1600px; margin: 0 auto; }
         .layout-flex { display: flex; gap: 30px; align-items: flex-start; }
         .sidebar { width: 250px; min-width: 250px; background: var(--bg-sidebar); padding: 15px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; position: sticky; top: 160px; height: fit-content; }
@@ -58,9 +84,7 @@
         .side-btn:hover { background: var(--bg-body); color: var(--text-main); }
         .side-btn.active { background: var(--sidebar-active-bg); color: var(--sidebar-active-text); border-left-color: var(--sidebar-active-border); }
         
-        /* CORREÇÃO DO SALTO DO SCROLL: min-height no content-wrapper */
-        .content-wrapper { flex: 1; min-width: 0; min-height: 800px; } 
-        
+        .content-wrapper { flex: 1; min-width: 0; min-height: 800px; /* Evita saltos */ }
         .section-view, .brand-panel { display: none; animation: fade 0.4s; }
         .section-view.active, .brand-panel.active { display: block; }
         @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -69,18 +93,13 @@
         .search-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
+        /* CARDS */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); height: 100%; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        /* CORREÇÃO DE IMAGENS: CONTAIN + FUNDO BRANCO PARA NÃO CORTAR */
-        .card img { 
-            width: 100%; 
-            height: 210px; 
-            object-fit: contain; /* Garante que a imagem inteira é mostrada */
-            background-color: #ffffff; /* Fundo branco para preencher o resto */
-            border-bottom: 1px solid var(--border); 
-        }
+        /* IMAGEM CONTAIN + BG BRANCO */
+        .card img { width: 100%; height: 210px; object-fit: contain; background-color: #fff; border-bottom: 1px solid var(--border); }
         
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
@@ -93,6 +112,7 @@
         .feature-list { list-style: none; margin-bottom: 15px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 0.8rem; color: var(--text-muted); }
         .feature-list li { display: flex; align-items: center; }
         .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; margin-right: 6px; }
+
         .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
         .price { font-weight: 800; font-size: 1rem; color: var(--text-main); white-space: nowrap; }
         .btn-view { color: var(--accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; cursor: pointer; }
@@ -100,6 +120,7 @@
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
+        /* FAB */
         .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1500; display: flex; flex-direction: column; gap: 15px; align-items: flex-end; }
         .fab-item { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer; }
         .fab-container.open .fab-item { transform: scale(1); opacity: 1; }
@@ -107,9 +128,11 @@
         .fab-main { width: 60px; height: 60px; border-radius: 50%; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 25px rgba(0,0,0,0.3); z-index: 1501; transition: 0.3s; border: none; cursor: pointer; }
         .fab-main.active { transform: rotate(45deg); background: var(--red); }
 
+        /* SCROLL TOP */
         #scrollTopBtn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 50%; color: var(--text-main); font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; }
         #scrollTopBtn.visible { opacity: 1; pointer-events: auto; }
 
+        /* POPUP */
         .sales-popup { position: fixed; bottom: 100px; left: 30px; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; padding: 10px 15px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; z-index: 1450; opacity: 0; transform: translateY(20px); transition: 0.5s; pointer-events: none; max-width: 250px; }
         .sales-popup.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
         .popup-icon { font-size: 1.5rem; }
@@ -118,7 +141,6 @@
 
         .about-section { background: var(--bg-card); border-top: 1px solid var(--border); padding: 80px 20px; text-align: center; }
         .about-container { max-width: 900px; margin: 0 auto; }
-        .about-card { background: var(--bg-body); border: 1px solid var(--border); padding: 30px; border-radius: 16px; margin-top: 30px; }
 
         .tool-list { display: flex; flex-direction: column; gap: 15px; max-width: 900px; margin: 0 auto; }
         .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); }
@@ -142,6 +164,7 @@
         footer { background: var(--bg-footer); border-top: 1px solid var(--border); padding: 80px 20px 120px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
         .mobile-nav { display: none; }
 
+        /* WIZARD */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 500px; border: 1px solid var(--border); text-align: center; position: relative; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; background: none; border: none; cursor: pointer; color: var(--text-muted); }
@@ -175,7 +198,7 @@
     <header>
         <div class="header-left">
             <a href="#inicio" class="logo-link">
-                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V16.2</span>
+                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.0</span>
             </a>
         </div>
         <div class="header-right">
@@ -227,11 +250,11 @@
     </section>
 
     <div class="main-nav">
-        <button class="nav-pill active" onclick="switchSection('soft', this)" data-lang="nav_soft">💾 Software</button>
-        <button class="nav-pill" onclick="switchSection('hard', this)" data-lang="nav_hard">🔌 Hardware</button>
-        <button class="nav-pill" onclick="switchSection('tools', this)" data-lang="nav_tools">🛠️ Ferramentas</button>
-        <button class="nav-pill" onclick="switchSection('serv', this)" data-lang="nav_serv">👨‍💻 Serviços</button>
-        <button class="nav-pill" onclick="document.getElementById('sobre').scrollIntoView({behavior: 'smooth'})" data-lang="nav_about">🏢 Sobre</button>
+        <button class="nav-pill active" onclick="switchSection('soft', this)" data-lang="nav_soft">Software</button>
+        <button class="nav-pill" onclick="switchSection('hard', this)" data-lang="nav_hard">Hardware</button>
+        <button class="nav-pill" onclick="switchSection('tools', this)" data-lang="nav_tools">Ferramentas</button>
+        <button class="nav-pill" onclick="switchSection('serv', this)" data-lang="nav_serv">Serviços</button>
+        <button class="nav-pill" onclick="document.getElementById('sobre').scrollIntoView({behavior: 'smooth'})" data-lang="nav_about">Sobre</button>
     </div>
 
     <div class="app-container">
@@ -258,7 +281,6 @@
                         <div class="grid">
                             <div class="card gold searchable-item" style="grid-column: 1/-1;">
                                 <span class="badge" data-lang="badge_best">Melhor Escolha</span>
-                                <img src="IMG/Daimler/merc-fullpack.jpg" alt="Full Pack">
                                 <div class="card-body"><h3>Mercedes Full Pack 2025</h3><p class="desc">A Solução Completa.</p><p class="sub-desc">Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.</p><ul class="feature-list"><li>Xentry, WIS, EPC 2023</li><li>DTS 9.02, Vediamo 5</li><li>Price List 2025</li><li>Full Databases</li></ul><div class="card-footer"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')">Encomendar</button></div></div>
                             </div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-cars.jpg"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
@@ -331,7 +353,7 @@
     <section id="sobre" class="about-section">
         <div class="about-container">
             <h2 data-lang="nav_about">Sobre</h2>
-            <p data-lang="about_text">Especialistas em software de diagnóstico automóvel. Fornecemos soluções completas de instalação remota e suporte técnico para oficinas e entusiastas.</p>
+            <p data-lang="about_text">Especialistas em software de diagnóstico automóvel.</p>
         </div>
     </section>
 
@@ -347,42 +369,41 @@
     </footer>
 
     <script>
-        // TYPEWRITER (CORRIGIDO)
+        // TYPEWRITER (REESCRITO SIMPLES)
         const typewriter = document.querySelector(".typewriter");
         const texts = ["Xentry", "ISTA", "Diagbox"];
-        let textIdx = 0;
-        let charIdx = 0;
-        let isDeleting = false;
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
 
-        function type() {
-            const current = texts[textIdx];
-            if (isDeleting) {
-                typewriter.textContent = current.substring(0, charIdx - 1);
-                charIdx--;
-            } else {
-                typewriter.textContent = current.substring(0, charIdx + 1);
-                charIdx++;
+        (function type() {
+            if (count === texts.length) { count = 0; }
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+            if(typewriter) {
+                typewriter.textContent = letter;
+                if (letter.length === currentText.length) {
+                    count++;
+                    index = 0;
+                    setTimeout(type, 2000);
+                } else {
+                    setTimeout(type, 150);
+                }
             }
-
-            if (!isDeleting && charIdx === current.length) {
-                isDeleting = true;
-                setTimeout(type, 2000);
-            } else if (isDeleting && charIdx === 0) {
-                isDeleting = false;
-                textIdx = (textIdx + 1) % texts.length;
-                setTimeout(type, 500);
-            } else {
-                setTimeout(type, isDeleting ? 100 : 150);
-            }
-        }
-        document.addEventListener("DOMContentLoaded", type);
+        })();
 
         // NAV
         function switchSection(id, btn) {
             document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
             document.getElementById('sec-' + id).classList.add('active');
             window.scrollTo({top: 150, behavior: 'smooth'});
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-pill, .mob-item').forEach(b => b.classList.remove('active'));
+            // Add active to clicked button (desktop & mobile)
+            if(btn) btn.classList.add('active');
         }
+
         function switchBrand(id, btn) {
             const container = btn.closest('.layout-flex');
             container.querySelectorAll('.brand-panel').forEach(c => c.classList.remove('active'));
@@ -391,7 +412,7 @@
             btn.classList.add('active');
         }
 
-        // LANG SYSTEM (CORRIGIDO)
+        // LANG SYSTEM (SIMPLIFICADO)
         const dict = {
             pt: { 
                 hero_title: "Instalação Remota Profissional", hero_desc: "Instalação remota profissional.", 
@@ -400,7 +421,7 @@
                 serv_cod: "Codificação", desc_cod: "Codificação online SCN e Component Protection.",
                 serv_inst: "Instalação", desc_inst: "Instalação remota completa de software.",
                 serv_rep: "Reparação", desc_rep: "Correção de erros de licença e drivers.",
-                about_text: "Especialistas em software de diagnóstico automóvel. Fornecemos soluções completas de instalação remota e suporte técnico para oficinas e entusiastas."
+                about_text: "Especialistas em software de diagnóstico automóvel.", btn_schedule: "Agendar"
             },
             en: { 
                 hero_title: "Professional Remote Installation", hero_desc: "Professional remote installation.", 
@@ -409,7 +430,7 @@
                 serv_cod: "Coding", desc_cod: "Online SCN Coding and Component Protection.",
                 serv_inst: "Installation", desc_inst: "Full remote software installation.",
                 serv_rep: "Repair", desc_rep: "Fix license errors and driver issues.",
-                about_text: "Automotive diagnostic software specialists. We provide complete remote installation solutions and technical support for workshops and enthusiasts."
+                about_text: "Automotive diagnostic software specialists.", btn_schedule: "Schedule"
             },
             fr: { 
                 hero_title: "Installation à Distance Pro", hero_desc: "Installation à distance pro.", 
@@ -418,7 +439,7 @@
                 serv_cod: "Codage", desc_cod: "Codage en ligne SCN et Protection des Composants.",
                 serv_inst: "Installation", desc_inst: "Installation complète de logiciels à distance.",
                 serv_rep: "Réparation", desc_rep: "Correction des erreurs de licence et pilotes.",
-                about_text: "Spécialistes en logiciels de diagnostic automobile. Nous fournissons des solutions complètes d'installation à distance et un support technique pour les ateliers et les passionnés."
+                about_text: "Spécialistes en logiciels de diagnostic automobile.", btn_schedule: "Planifier"
             }
         };
 
