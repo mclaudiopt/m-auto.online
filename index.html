@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V17.0</title>
+    <title>M-Auto Online | V17.1</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -57,7 +57,8 @@
         .lang-btn img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
         /* HERO TYPEWRITER */
-        .hero { margin-top: var(--header-h); padding: 50px 20px 70px 20px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff; position: relative; overflow: hidden; }
+        /* Padding reduzido conforme pedido na imagem 2 */
+        .hero { margin-top: var(--header-h); padding: 30px 20px 60px 20px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff; position: relative; overflow: hidden; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
         .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; position: relative; z-index: 2; line-height: 1.2; }
@@ -108,11 +109,11 @@
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); height: 100%; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        /* CORREÇÃO IMAGENS: FILL PARA OCUPAR TUDO (ESTICADO) */
+        /* CORREÇÃO IMAGENS: ALTURA REDUZIDA (150px) conforme pedido na imagem 1 */
         .card img { 
             width: 100%; 
-            height: 200px; 
-            object-fit: fill; /* Força a imagem a encher o espaço, deformando se necessário */
+            height: 150px; /* Reduzido de 200px para 150px */
+            object-fit: fill; 
             padding: 0;
             border-bottom: 1px solid var(--border);
             background-color: #f1f5f9;
@@ -145,8 +146,10 @@
         .fab-item { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer; }
         .fab-container.open .fab-item { transform: scale(1); opacity: 1; }
         .fab-item svg { width: 24px; height: 24px; fill: white; }
-        .fab-main { width: 60px; height: 60px; border-radius: 50%; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 25px rgba(0,0,0,0.3); z-index: 1501; transition: 0.3s; border: none; cursor: pointer; }
-        .fab-main.active { transform: rotate(45deg); background: var(--red); }
+        /* FAB MAIN COM AVATAR */
+        .fab-main { width: 60px; height: 60px; border-radius: 50%; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 25px rgba(0,0,0,0.3); z-index: 1501; transition: 0.3s; border: none; cursor: pointer; overflow: hidden; }
+        .fab-main.active { transform: rotate(360deg); box-shadow: 0 0 0 4px var(--accent); }
+        .fab-main svg { width: 35px; height: 35px; fill: white; }
 
         /* SCROLL TOP */
         #scrollTopBtn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 50%; color: var(--text-main); font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; }
@@ -218,7 +221,7 @@
     <header>
         <div class="header-left">
             <a href="#inicio" class="logo-link">
-                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.0</span>
+                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.1</span>
             </a>
         </div>
         <div class="header-right">
@@ -258,7 +261,9 @@
     <div class="fab-container" id="fabMenu">
         <button class="fab-item" style="background:#25D366" onclick="orderProduct('Geral')"><svg viewBox="0 0 32 32" fill="white"><path d="M16 2C8.2 2 2 8.2 2 16c0 2.5.6 4.8 1.8 6.9L2.6 28.6l5.8-1.5c1.5.8 3.3 1.3 5.1 1.3 7.7 0 14-6.2 14-14S23.7 2 16 2z"/></svg></button>
         <button class="fab-item" style="background:#3b82f6" onclick="document.getElementById('wizardModal').style.display='flex'"><svg viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/></svg></button>
-        <button class="fab-main" onclick="this.parentElement.classList.toggle('open');this.classList.toggle('active')">+</button>
+        <button class="fab-main" onclick="this.parentElement.classList.toggle('open');this.classList.toggle('active')">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </button>
     </div>
 
     <section id="inicio" class="hero">
@@ -306,7 +311,7 @@
                                 <div class="card-body">
                                     <h3 data-translate="prod_merc_full">Mercedes Full Pack 2025</h3>
                                     <p class="desc" data-translate="desc_merc_full">A Solução Completa.</p>
-                                    <p class="sub-desc">Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.</p>
+                                    <p class="sub-desc" data-translate="desc_merc_full_detail">Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.</p>
                                     <ul class="feature-list"><li>Xentry, WIS, EPC 2023</li><li>DTS 9.02, Vediamo 5</li><li>Price List 2025</li><li>Full Databases</li></ul>
                                     <div class="card-footer"><span class="price" style="color:var(--gold)" data-translate="price_pack">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')">Encomendar</button></div>
                                 </div>
@@ -324,7 +329,7 @@
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-mbtools.jpg"><div class="card-body"><h3>MbTools</h3><p class="desc" data-translate="desc_util">Utilitário.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('MbTools')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-pricelist.jpg"><div class="card-body"><h3>Price List 2025</h3><p class="desc">Excel.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Price List')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-tutorials.jpg"><div class="card-body"><h3>Coding Tutorials</h3><p class="desc" data-translate="desc_guides">Guias.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Tutorials')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vindecoder.jpg"><div class="card-body"><h3>Vin Decoder</h3><p class="desc" data-translate="desc_ident">Identificação.</p><p class="sub-desc">Full FBS database and VIN-based inferences<br>Complete body type detection system<br>Fixed display of platform and transmission<br>Restored torque and noticeable engine features<br>Improved formatting for detailed reports<br>The exact logic of the "full model" (E220D, C200, etc.)<br>Identical behavior of images in both versions of the application<br>No console windows during scanning<br>Manual VIN decoding completely offline</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vin Decoder')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vindecoder.jpg"><div class="card-body"><h3>Vin Decoder</h3><p class="desc" data-translate="desc_ident">Identificação.</p><p class="sub-desc" data-translate="desc_vin_detail">Full FBS database...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vin Decoder')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-sdmedia.jpg"><div class="card-body"><h3>SDMedia</h3><p class="desc" data-translate="desc_media">Multimédia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDMedia')">Ver</button></div></div></div>
                         </div>
                     </div>
@@ -333,7 +338,7 @@
                     
                     <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card searchable-item"><img src="IMG/BMW/BMW-Ista.jpg"><div class="card-body"><h3>ISTA+</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/BMW/bmw-istap.jpg"><div class="card-body"><h3>ISTA-P</h3><p class="desc" data-translate="desc_prog">Programação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ISTA-P')">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox9.jpg"><div class="card-body"><h3>Diagbox 9</h3><p class="desc" data-translate="desc_new">Recentes.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><p class="desc" data-translate="desc_old">Antigos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div></div></div>
+                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox9.JPG"><div class="card-body"><h3>Diagbox 9</h3><p class="desc" data-translate="desc_new">Recentes.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><p class="desc" data-translate="desc_old">Antigos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div></div></div>
                     
                     <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Renault/renault-clip.jpg"><div class="card-body"><h3>Can Clip</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-dialogys.jpg"><div class="card-body"><h3>Dialogys</h3><p class="desc" data-translate="desc_manuals">Manuais.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div></div></div>
                     
@@ -352,18 +357,18 @@
 
         <div id="sec-hard" class="section-view">
             <div class="grid">
-                <div class="card searchable-item"><img src="IMG/hardware/hw-openport.jpg"><div class="card-body"><h3>Openport 2.0</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Openport')">Ver</button></div></div></div>
-                <div class="card searchable-item"><img src="IMG/hardware/hw-c4.jpg"><div class="card-body"><h3>C4 Connect</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('C4 Connect')">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/hw-openport.jpg"><div class="card-body"><h3>Openport 2.0</h3><p class="desc" data-translate="desc_interface">Interface J2534</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Openport')">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/hw-c4.jpg"><div class="card-body"><h3>C4 Connect</h3><p class="desc" data-translate="desc_mux">Multiplexer MB</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('C4 Connect')">Ver</button></div></div></div>
             </div>
         </div>
 
         <div id="sec-tools" class="section-view">
             <h2 class="panel-header" style="text-align:center" data-translate="nav_tools">Ferramentas</h2>
             <div class="tool-list">
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#10b981">DK</div><div class="tool-meta"><h4>DeskIn</h4></div></div><a href="https://www.deskin.com/download" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#0078d4">W11</div><div class="tool-meta"><h4>Win 11 Boot</h4></div></div><a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#f59e0b">7Z</div><div class="tool-meta"><h4>7-Zip</h4></div></div><a href="https://www.7-zip.org/download.html" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#ef4444">DC</div><div class="tool-meta"><h4>DControl</h4></div></div><a href="https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#10b981">DK</div><div class="tool-meta"><h4>DeskIn</h4><p data-translate="desc_remote">Acesso Remoto</p></div></div><a href="https://www.deskin.com/download" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#0078d4">W11</div><div class="tool-meta"><h4>Win 11 Boot</h4><p data-translate="desc_iso">Imagem ISO</p></div></div><a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#f59e0b">7Z</div><div class="tool-meta"><h4>7-Zip</h4><p data-translate="desc_extract">Compressão</p></div></div><a href="https://www.7-zip.org/download.html" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#ef4444">DC</div><div class="tool-meta"><h4>DControl</h4><p data-translate="desc_defender">Desativar Defender</p></div></div><a href="https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0" class="tool-btn">Download</a></div>
             </div>
         </div>
 
@@ -371,9 +376,10 @@
             <h2 class="panel-header" style="text-align:center" data-translate="nav_serv">Serviços</h2>
             <div class="services-grid">
                 <div class="service-card"><div class="service-header"><h3 data-translate="serv_fmt">Formatação</h3></div><div class="service-body"><p data-translate="desc_fmt">Instalação limpa de Windows 10/11 Pro com drivers e otimização para diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Formatação')" data-translate="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-translate="serv_cod">Codificação</h3></div><div class="service-body"><p data-translate="desc_cod">Codificação online SCN (Mercedes), Component Protection (VAG) e adaptações.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Codificação')" data-translate="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-translate="serv_av">Anti-vírus</h3></div><div class="service-body"><p data-translate="desc_av">Instalação e configuração de proteção leve e eficaz.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Anti-vírus')" data-translate="btn_schedule">Agendar</button></div></div>
                 <div class="service-card"><div class="service-header"><h3 data-translate="serv_inst">Instalação</h3></div><div class="service-body"><p data-translate="desc_inst">Instalação remota completa de qualquer software de diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Instalação')" data-translate="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-translate="serv_rep">Reparação</h3></div><div class="service-body"><p data-translate="desc_rep">Correção de erros de licença, drivers ou ficheiros corrompidos.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Reparação')" data-translate="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-translate="serv_opt">Otimização</h3></div><div class="service-body"><p data-translate="desc_opt">Limpeza de sistema, registo e aceleração do arranque.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Otimização')" data-translate="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-translate="serv_upg">Upgrade HW</h3></div><div class="service-body"><p data-translate="desc_upg">Consultoria para upgrade de memória RAM e disco SSD.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Upgrade')" data-translate="btn_schedule">Agendar</button></div></div>
             </div>
         </div>
     </div>
@@ -381,7 +387,7 @@
     <section id="sobre" class="about-section">
         <div class="about-container">
             <h2 data-translate="nav_about">Sobre</h2>
-            <p data-translate="about_text">Especialistas em software de diagnóstico automóvel.</p>
+            <p data-translate="about_text">Especialistas em software de diagnóstico automóvel. Profissional, resposta rápida, instalações limpas e suporte assegurado.</p>
         </div>
     </section>
 
@@ -397,10 +403,10 @@
     </footer>
 
     <script>
-        // TYPEWRITER CORRIGIDO E ATUALIZADO
+        // TYPEWRITER (PSA Corrigido)
         const typewriter = document.querySelector(".typewriter-text");
         const texts = [
-            "Mercedes-Benz", "Volkswagen", "BMW", "Audi", "PSA Group", 
+            "Mercedes-Benz", "Volkswagen", "BMW", "Audi", "PSA", 
             "Renault", "JLR", "Toyota", "Nissan", "Ford", "GM"
         ];
         let count = 0;
@@ -417,9 +423,9 @@
                 if (letter.length === currentText.length) {
                     count++;
                     index = 0;
-                    setTimeout(type, 2000); // Espera antes de apagar/mudar
+                    setTimeout(type, 2000); 
                 } else {
-                    setTimeout(type, 100); // Velocidade de escrita
+                    setTimeout(type, 100); 
                 }
             }
         })();
@@ -445,7 +451,7 @@
             window.scrollTo({top: contentTop, behavior: 'smooth'});
         }
 
-        /* --- TRADUÇÃO COMPLETA (UI + PRODUTOS) --- */
+        /* --- TRADUÇÃO COMPLETA ATUALIZADA (V17.1) --- */
         const translations = {
             pt: { 
                 hero_sol: "Soluções Online", hero_desc: "Instalação remota profissional.", 
@@ -454,19 +460,29 @@
                 
                 // Produtos
                 prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "A Solução Completa.", price_pack: "Pack Completo",
+                desc_merc_full_detail: "Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.",
                 desc_cars: "Ligeiros", desc_trucks: "Pesados", desc_manuals: "Manuais", desc_parts: "Peças",
                 desc_gearbox: "Caixa 722.9", desc_eng: "Engenharia", desc_classic: "Clássicos", desc_offline: "Acesso Offline",
                 desc_util: "Utilitário", desc_guides: "Guias", desc_ident: "Identificação", desc_media: "Multimédia",
                 desc_diag: "Diagnóstico", desc_prog: "Programação", desc_new: "Recentes", desc_old: "Antigos",
+                
+                // Descrições Hardware/Tools
+                desc_interface: "Interface J2534", desc_mux: "Multiplexer MB",
+                desc_remote: "Acesso Remoto", desc_iso: "Imagem ISO", desc_extract: "Compressão", desc_defender: "Desativar Defender",
 
-                // Serviços
+                // Vin Decoder Longo
+                desc_vin_detail: "Base de dados FBS completa e inferências baseadas no VIN<br>Sistema completo de deteção de tipo de carroçaria<br>Visualização fixa de plataforma e transmissão<br>Binário restaurado e características notáveis do motor<br>Formatação melhorada para relatórios detalhados<br>A lógica exata do 'modelo completo' (E220D, C200, etc.)<br>Comportamento idêntico das imagens em ambas as versões<br>Sem janelas de consola durante a verificação<br>Descodificação manual de VIN completamente offline",
+
+                // Serviços Novos
                 serv_fmt: "Formatação", desc_fmt: "Instalação limpa de Windows 10/11 Pro com drivers e otimização.",
-                serv_cod: "Codificação", desc_cod: "Codificação online SCN e Component Protection.",
-                serv_inst: "Instalação", desc_inst: "Instalação remota completa de software.",
-                serv_rep: "Reparação", desc_rep: "Correção de erros de licença e drivers.",
+                serv_av: "Anti-vírus", desc_av: "Instalação e configuração de proteção leve e eficaz.",
+                serv_inst: "Instalação", desc_inst: "Instalação remota completa de qualquer software de diagnóstico.",
+                serv_opt: "Otimização", desc_opt: "Limpeza de sistema, registo e aceleração do arranque.",
+                serv_upg: "Upgrade HW", desc_upg: "Consultoria para upgrade de memória RAM e disco SSD.",
+                
                 btn_schedule: "Agendar",
                 
-                about_text: "Especialistas em software de diagnóstico automóvel.", 
+                about_text: "Especialistas em software de diagnóstico automóvel. Profissional, resposta rápida, instalações limpas e suporte assegurado.", 
                 wiz_os: "Qual é o seu Windows?", wiz_ram: "Memória RAM?", wiz_result: "Resultado"
             },
             en: { 
@@ -476,19 +492,28 @@
 
                 // Products
                 prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "The Complete Solution.", price_pack: "Full Pack",
+                desc_merc_full_detail: "Includes Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools and Certificates.",
                 desc_cars: "Cars", desc_trucks: "Trucks", desc_manuals: "Manuals", desc_parts: "Parts",
                 desc_gearbox: "Gearbox 722.9", desc_eng: "Engineering", desc_classic: "Classics", desc_offline: "Offline Access",
                 desc_util: "Utility", desc_guides: "Guides", desc_ident: "Identification", desc_media: "Multimedia",
                 desc_diag: "Diagnostic", desc_prog: "Programming", desc_new: "Recent", desc_old: "Legacy",
 
+                // Hard/Tools
+                desc_interface: "J2534 Interface", desc_mux: "MB Multiplexer",
+                desc_remote: "Remote Access", desc_iso: "ISO Image", desc_extract: "Compression", desc_defender: "Disable Defender",
+
+                // Vin Decoder
+                desc_vin_detail: "Full FBS database and VIN-based inferences<br>Complete body type detection system<br>Fixed display of platform and transmission<br>Restored torque and noticeable engine features<br>Improved formatting for detailed reports<br>The exact logic of the 'full model' (E220D, C200, etc.)<br>Identical behavior of images in both versions<br>No console windows during scanning<br>Manual VIN decoding completely offline",
+
                 // Services
                 serv_fmt: "Formatting", desc_fmt: "Clean Windows 10/11 Pro install with drivers and optimization.",
-                serv_cod: "Coding", desc_cod: "Online SCN Coding and Component Protection.",
+                serv_av: "Anti-virus", desc_av: "Installation and configuration of light and effective protection.",
                 serv_inst: "Installation", desc_inst: "Full remote software installation.",
-                serv_rep: "Repair", desc_rep: "Fix license errors and driver issues.",
+                serv_opt: "Optimization", desc_opt: "System cleaning, registry fix and boot acceleration.",
+                serv_upg: "HW Upgrade", desc_upg: "Consulting for RAM memory and SSD upgrade.",
+
                 btn_schedule: "Schedule",
-                
-                about_text: "Automotive diagnostic software specialists.", 
+                about_text: "Automotive diagnostic software specialists. Professional, fast response, clean installations and guaranteed support.", 
                 wiz_os: "Which Windows?", wiz_ram: "RAM Memory?", wiz_result: "Result"
             },
             fr: { 
@@ -498,19 +523,28 @@
 
                 // Produits
                 prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "La Solution Complète.", price_pack: "Pack Complet",
+                desc_merc_full_detail: "Comprend Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools et Certificats.",
                 desc_cars: "Voitures", desc_trucks: "Camions", desc_manuals: "Manuels", desc_parts: "Pièces",
                 desc_gearbox: "Boîte 722.9", desc_eng: "Ingénierie", desc_classic: "Classiques", desc_offline: "Accès Hors Ligne",
                 desc_util: "Utilitaire", desc_guides: "Guides", desc_ident: "Identification", desc_media: "Multimédia",
                 desc_diag: "Diagnostic", desc_prog: "Programmation", desc_new: "Récents", desc_old: "Anciens",
 
+                // Hard/Tools
+                desc_interface: "Interface J2534", desc_mux: "Multiplexeur MB",
+                desc_remote: "Accès à Distance", desc_iso: "Image ISO", desc_extract: "Compression", desc_defender: "Désactiver Defender",
+
+                // Vin Decoder
+                desc_vin_detail: "Base de données FBS complète et inférences basées sur VIN<br>Système complet de détection de type de carrosserie<br>Affichage fixe de la plateforme et de la transmission<br>Couple restauré et caractéristiques moteur notables<br>Formatage amélioré pour les rapports détaillés<br>La logique exacte du 'modèle complet' (E220D, C200, etc.)<br>Comportement identique des images<br>Pas de fenêtres de console pendant le scan<br>Décodage manuel VIN complètement hors ligne",
+
                 // Services
                 serv_fmt: "Formatage", desc_fmt: "Installation propre de Windows 10/11 Pro avec pilotes.",
-                serv_cod: "Codage", desc_cod: "Codage en ligne SCN et Protection des Composants.",
+                serv_av: "Anti-virus", desc_av: "Installation et configuration d'une protection légère et efficace.",
                 serv_inst: "Installation", desc_inst: "Installation complète de logiciels à distance.",
-                serv_rep: "Réparation", desc_rep: "Correction des erreurs de licence et pilotes.",
+                serv_opt: "Optimisation", desc_opt: "Nettoyage du système, registre et accélération du démarrage.",
+                serv_upg: "Mise à niveau", desc_upg: "Conseil pour la mise à niveau de la RAM et du SSD.",
+
                 btn_schedule: "Planifier",
-                
-                about_text: "Spécialistes en logiciels de diagnostic automobile.", 
+                about_text: "Spécialistes en logiciels de diagnostic automobile. Professionnel, réponse rapide, installations propres et support garanti.", 
                 wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", wiz_result: "Résultat"
             }
         };
@@ -519,7 +553,8 @@
             document.querySelectorAll('[data-translate]').forEach(el => {
                 const key = el.getAttribute('data-translate');
                 if(translations[lang][key]) {
-                    el.textContent = translations[lang][key];
+                    // USA innerHTML para permitir quebras de linha <br>
+                    el.innerHTML = translations[lang][key];
                 }
             });
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -575,4 +610,3 @@
     </script>
 </body>
 </html>
-
