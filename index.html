@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
     <meta name="theme-color" content="#2563eb">
+    
     <link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
-    
-    <title>M-Auto Online | V16.1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>M-Auto Online | V16.2</title>
 
     <style>
-        /* --- CSS OTIMIZADO V16.1 --- */
         :root { --bg-body: #f8fafc; --bg-card: #ffffff; --bg-sidebar: #ffffff; --bg-footer: #ffffff; --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0; --accent: #2563eb; --accent-hover: #1d4ed8; --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af; --gold: #b45309; --red: #ef4444; --header-h: 70px; --tech-bg: #f1f5f9; --shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
         [data-theme="dark"] { --bg-body: #020617; --bg-card: #1e293b; --bg-sidebar: #111827; --bg-footer: #0f172a; --text-main: #f8fafc; --text-muted: #94a3b8; --border: #334155; --accent: #3b82f6; --accent-hover: #60a5fa; --sidebar-active-bg: #172554; --sidebar-active-border: #3b82f6; --sidebar-active-text: #bfdbfe; --tech-bg: #0f172a; --gold: #fbbf24; }
 
@@ -23,49 +22,45 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* HEADER CORRIGIDO */
+        /* HEADER */
         header { background: var(--bg-card); border-bottom: 1px solid var(--border); height: var(--header-h); padding: 0 25px; position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
-        .logo-link { display: flex; align-items: center; gap: 10px; }
+        .logo-link { display: flex; align-items: center; gap: 8px; }
         .brand-m { font-size: 1.5rem; font-weight: 900; font-style: italic; color: var(--text-main); letter-spacing: -1px; }
         .brand-online { font-size: 1.5rem; font-weight: 900; font-style: italic; color: var(--accent); letter-spacing: -0.5px; }
-        .version-badge { background: #f1f5f9; color: #64748b; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; }
+        .version-badge { background: #f1f5f9; color: #64748b; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; margin-left: 5px; }
 
-        /* ALINHAMENTO DIREITA (LINGUAS E TEMA) */
-        .header-right { display: flex; align-items: center; height: 100%; }
+        .header-right { display: flex; align-items: center; gap: 15px; height: 100%; }
         .controls-wrapper { display: flex; align-items: center; gap: 15px; }
         
-        .theme-btn { background: transparent; border: 1px solid var(--border); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.3s; }
-        .theme-btn:hover { background: var(--bg-body); border-color: var(--accent); }
-
-        .lang-group { display: flex; gap: 8px; align-items: center; background: var(--bg-body); padding: 5px; border-radius: 20px; border: 1px solid var(--border); }
-        .lang-btn { background: none; border: 2px solid transparent; padding: 0; opacity: 0.5; transition: 0.2s; cursor: pointer; border-radius: 50%; width: 28px; height: 28px; display: block; }
+        /* BOTÕES DE LÍNGUA E TEMA ALINHADOS */
+        .theme-btn { background: transparent; border: 1px solid var(--border); color: var(--text-main); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+        .lang-group { display: flex; gap: 8px; align-items: center; }
+        .lang-btn { background: none; border: 2px solid transparent; padding: 0; opacity: 0.5; transition: 0.2s; cursor: pointer; border-radius: 50%; width: 28px; height: 28px; }
         .lang-btn:hover { opacity: 1; transform: scale(1.1); }
-        .lang-btn.active { opacity: 1; border-color: var(--accent); transform: scale(1.1); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .lang-btn img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+        .lang-btn.active { opacity: 1; border-color: var(--accent); transform: scale(1.1); }
+        .lang-btn img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-        /* HERO & TYPEWRITER */
+        /* HERO */
         .hero { margin-top: var(--header-h); padding: 50px 20px 70px 20px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff; position: relative; overflow: hidden; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; position: relative; z-index: 2; }
         .typewriter { color: #60a5fa; border-right: 3px solid #60a5fa; padding-right: 5px; animation: blink 0.7s infinite; }
         @keyframes blink { 50% { border-color: transparent; } }
         .hero p { color: #cbd5e1; max-width: 700px; margin: 0 auto; font-size: 1.1rem; position: relative; z-index: 2; }
-        
         .hero-slider-container { position: absolute; bottom: 15px; left: 0; width: 100%; overflow: hidden; white-space: nowrap; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); z-index: 1; }
         .slider-track { display: inline-block; animation: slide 40s linear infinite; }
-        .brand-item { display: inline-block; font-size: 0.9rem; font-weight: 800; color: rgba(255, 255, 255, 0.25); margin: 0 40px; text-transform: uppercase; letter-spacing: 2px; }
+        .brand-item { display: inline-block; font-size: 0.9rem; font-weight: 800; color: rgba(255, 255, 255, 0.25); margin: 0 40px; text-transform: uppercase; letter-spacing: 1px; }
         @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* NAV */
         .main-nav { display: flex; justify-content: center; gap: 12px; padding: 15px; background: var(--bg-body); border-bottom: 1px solid var(--border); position: sticky; top: var(--header-h); z-index: 900; overflow-x: auto; }
-        .nav-pill { padding: 8px 24px; border-radius: 50px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border); background: var(--bg-card); transition: 0.3s; cursor: pointer; white-space: nowrap; font-size: 0.95rem; }
-        .nav-pill:hover { background: #e2e8f0; color: var(--text-main); }
+        .nav-pill { padding: 8px 24px; border-radius: 50px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border); background: var(--bg-card); transition: 0.3s; white-space: nowrap; font-size: 0.95rem; }
         .nav-pill.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
 
         /* LAYOUT */
         .app-container { width: 100%; padding: 30px; box-sizing: border-box; min-height: 600px; max-width: 1600px; margin: 0 auto; }
         .layout-flex { display: flex; gap: 30px; align-items: flex-start; }
-        .sidebar { width: 240px; min-width: 240px; background: var(--bg-sidebar); padding: 15px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 5px; position: sticky; top: 160px; height: fit-content; }
+        .sidebar { width: 250px; min-width: 250px; background: var(--bg-sidebar); padding: 15px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; position: sticky; top: 160px; height: fit-content; }
         .side-btn { text-align: left; padding: 12px 15px; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 8px; border: none; border-left: 4px solid transparent; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
         .side-btn:hover { background: var(--bg-body); color: var(--text-main); }
         .side-btn.active { background: var(--sidebar-active-bg); color: var(--sidebar-active-text); border-left-color: var(--sidebar-active-border); }
@@ -81,8 +76,10 @@
         /* GRID & CARDS */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); height: 100%; }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid var(--border); } /* Mantém fill se preferir esticar */
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        
+        /* CORREÇÃO IMAGEM: COVER PARA NÃO DEFORMAR */
+        .card img { width: 100%; height: 210px; object-fit: cover; object-position: center top; border-bottom: 1px solid var(--border); }
         
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
@@ -99,54 +96,44 @@
 
         .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
         .price { font-weight: 800; font-size: 1rem; color: var(--text-main); white-space: nowrap; }
-        .btn-view { color: var(--accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; cursor: pointer; letter-spacing: 0.5px; }
+        .btn-view { color: var(--accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; cursor: pointer; }
         .card.gold { border: 2px solid var(--gold); }
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
         /* FAB */
-        .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1500; display: flex; flex-direction: column; gap: 15px; align-items: flex-end; pointer-events: none; }
-        .fab-container button { pointer-events: auto; }
+        .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1500; display: flex; flex-direction: column; gap: 15px; align-items: flex-end; }
         .fab-item { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer; }
         .fab-container.open .fab-item { transform: scale(1); opacity: 1; }
         .fab-item svg { width: 24px; height: 24px; fill: white; }
         .fab-main { width: 60px; height: 60px; border-radius: 50%; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 25px rgba(0,0,0,0.3); z-index: 1501; transition: 0.3s; border: none; cursor: pointer; }
         .fab-main.active { transform: rotate(45deg); background: var(--red); }
 
-        /* SCROLL TOP */
         #scrollTopBtn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 50%; color: var(--text-main); font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; }
         #scrollTopBtn.visible { opacity: 1; pointer-events: auto; }
-        #scrollTopBtn:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-3px); }
 
-        /* POPUP */
-        .sales-popup { position: fixed; bottom: 100px; left: 30px; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; padding: 10px 15px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; z-index: 1450; opacity: 0; transform: translateY(20px); transition: 0.5s; pointer-events: none; max-width: 250px; font-family: 'Inter', sans-serif; }
+        .sales-popup { position: fixed; bottom: 100px; left: 30px; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; padding: 10px 15px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; z-index: 1450; opacity: 0; transform: translateY(20px); transition: 0.5s; pointer-events: none; max-width: 250px; }
         .sales-popup.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
         .popup-icon { font-size: 1.5rem; }
         .popup-text p { margin: 0; font-size: 0.85rem; font-weight: 700; color: #000; }
         .popup-close { position: absolute; top: 2px; right: 5px; background: none; border: none; font-size: 1.2rem; cursor: pointer; opacity: 0.5; color: #000; }
 
-        /* ABOUT */
         .about-section { background: var(--bg-card); border-top: 1px solid var(--border); padding: 80px 20px; text-align: center; }
         .about-container { max-width: 900px; margin: 0 auto; }
-        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-        .about-card { background: var(--bg-body); border: 1px solid var(--border); padding: 30px; border-radius: 16px; transition: 0.3s; }
-        .about-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .about-card { background: var(--bg-body); border: 1px solid var(--border); padding: 30px; border-radius: 16px; margin-top: 30px; }
 
-        /* TOOLS (DOWNLOADS FORMATADOS) */
+        /* DOWNLOADS FORMATADOS */
         .tool-list { display: flex; flex-direction: column; gap: 15px; max-width: 900px; margin: 0 auto; }
-        .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); transition: 0.2s; }
-        .tool-row:hover { border-color: var(--accent); transform: translateX(5px); }
+        .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); }
         .tool-info { display: flex; align-items: center; gap: 20px; }
         .tool-icon-box { width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.2rem; }
         .tool-meta h4 { margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700; }
         .tool-meta p { margin: 5px 0 0; font-size: 0.9rem; color: var(--text-muted); }
-        .tool-btn { padding: 10px 20px; border-radius: 8px; background: var(--bg-body); border: 2px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: 0.2s; }
+        .tool-btn { padding: 10px 20px; border-radius: 8px; background: var(--bg-body); border: 2px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.9rem; text-decoration: none; }
         .tool-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* SERVICES */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; justify-content: center; }
-        .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); transition: 0.3s; }
-        .service-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); }
         .service-header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 25px; color: white; }
         .service-header h3 { margin: 0; font-size: 1.3rem; }
         .service-body { padding: 25px; flex-grow: 1; }
@@ -160,7 +147,7 @@
 
         /* WIZARD */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 500px; border: 1px solid var(--border); text-align: center; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 500px; border: 1px solid var(--border); text-align: center; position: relative; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; background: none; border: none; cursor: pointer; color: var(--text-muted); }
         .step { display: none; animation: fade 0.3s; }
         .step.active { display: block; }
@@ -173,9 +160,9 @@
 
         @media (max-width: 768px) {
             .layout-flex { flex-direction: column; }
-            .sidebar { width: 100%; min-width: 100%; flex-direction: row; overflow-x: auto; position: static; padding-bottom: 10px; margin-bottom: 10px; }
-            .side-btn { min-width: 140px; text-align: center; border-left: none; border-bottom: 3px solid transparent; background: var(--bg-card); margin-right: 5px; box-shadow: var(--shadow); }
-            .side-btn.active { border-bottom-color: var(--accent); background: var(--sidebar-active-bg); }
+            .sidebar { width: 100%; min-width: 100%; flex-direction: row; overflow-x: auto; position: static; }
+            .side-btn { min-width: 130px; text-align: center; border-left: none; border-bottom: 3px solid transparent; }
+            .side-btn.active { border-bottom-color: var(--accent); }
             .main-nav { display: none; }
             .mobile-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; background: var(--bg-card); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 2000; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
             .mob-item { flex: 1; text-align: center; font-size: 0.75rem; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; font-weight: 600; padding: 5px; }
@@ -192,16 +179,16 @@
     <header>
         <div class="header-left">
             <a href="#inicio" class="logo-link">
-                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V16.1</span>
+                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V16.2</span>
             </a>
         </div>
         <div class="header-right">
             <div class="controls-wrapper">
                 <button class="theme-btn" onclick="toggleTheme()" title="Tema">☀️</button>
                 <div class="lang-group">
-                    <button id="btn-pt" onclick="changeLang('pt')" class="lang-btn active" title="Português"><img src="https://flagcdn.com/w40/pt.png" alt="PT"></button>
-                    <button id="btn-en" onclick="changeLang('en')" class="lang-btn" title="English"><img src="https://flagcdn.com/w40/gb.png" alt="EN"></button>
-                    <button id="btn-fr" onclick="changeLang('fr')" class="lang-btn" title="Français"><img src="https://flagcdn.com/w40/fr.png" alt="FR"></button>
+                    <button id="btn-pt" onclick="changeLang('pt')" class="lang-btn active"><img src="https://flagcdn.com/w40/pt.png"></button>
+                    <button id="btn-en" onclick="changeLang('en')" class="lang-btn"><img src="https://flagcdn.com/w40/gb.png"></button>
+                    <button id="btn-fr" onclick="changeLang('fr')" class="lang-btn"><img src="https://flagcdn.com/w40/fr.png"></button>
                 </div>
             </div>
         </div>
@@ -223,9 +210,8 @@
                 <div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('win', 'old')">Windows 7 / 8</button><button class="wiz-btn" onclick="setSpec('win', 'new')">Windows 10 / 11</button></div>
             </div>
             <div id="wiz-step-2" class="step"><h3 class="wiz-title" data-lang="wiz_ram">Memória RAM?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('ram', 'low')">4GB ou menos</button><button class="wiz-btn" onclick="setSpec('ram', 'high')">8GB ou mais</button></div></div>
-            <div id="wiz-step-3" class="step"><h3 class="wiz-title">Disco?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('disk','hdd')">HDD (Antigo)</button><button class="wiz-btn" onclick="setSpec('disk','ssd')">SSD (Rápido)</button></div></div>
-            <div id="wiz-step-4" class="step"><h3 class="wiz-title">Processador?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('cpu','old')">Antigo (Dual Core)</button><button class="wiz-btn" onclick="setSpec('cpu','new')">Recente (i3/i5/i7)</button></div></div>
-            <div id="wiz-step-5" class="step"><h3 class="wiz-title">Marca?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('brand','Mercedes')">Mercedes</button><button class="wiz-btn" onclick="setSpec('brand','BMW')">BMW</button></div></div>
+            <div id="wiz-step-3" class="step"><h3 class="wiz-title">Disco?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('disk','hdd')">HDD</button><button class="wiz-btn" onclick="setSpec('disk','ssd')">SSD</button></div></div>
+            <div id="wiz-step-4" class="step"><h3 class="wiz-title">Marca?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('brand','Mercedes')">Mercedes</button><button class="wiz-btn" onclick="setSpec('brand','BMW')">BMW</button></div></div>
             <div id="wiz-result" class="step"><h3 class="wiz-title" data-lang="wiz_result">Resultado</h3><div id="finalResultContent" class="wiz-result-box"></div><button class="wiz-btn-action" onclick="location.reload()">Recomeçar 🔄</button></div>
         </div>
     </div>
@@ -279,10 +265,10 @@
                                 <img src="IMG/Daimler/merc-fullpack.jpg" alt="Full Pack">
                                 <div class="card-body"><h3>Mercedes Full Pack 2025</h3><p class="desc">A Solução Completa.</p><p class="sub-desc">Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.</p><ul class="feature-list"><li>Xentry, WIS, EPC 2023</li><li>DTS 9.02, Vediamo 5</li><li>Price List 2025</li><li>Full Databases</li></ul><div class="card-footer"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')">Encomendar</button></div></div>
                             </div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-cars.jpg"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><p class="sub-desc">Software de concessionário para diagnóstico e programação de veículos ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-trucks.jpg"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc">Pesados.</p><p class="sub-desc">Diagnóstico para camiões, autocarros e industriais (sistema 24V).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/wis.jpg"><div class="card-body"><h3>WIS 2021</h3><p class="desc">Manuais.</p><p class="sub-desc">Esquemas técnicos, manuais de reparação e binários de aperto.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS 2021')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/epc.jpg"><div class="card-body"><h3>EPC</h3><p class="desc">Peças.</p><p class="sub-desc">Catálogo eletrónico de peças. Identificação por VIN.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2018</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('EPC')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-cars.jpg"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-trucks.jpg"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc">Pesados.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/wis.jpg"><div class="card-body"><h3>WIS 2021</h3><p class="desc">Manuais.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS 2021')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/epc.jpg"><div class="card-body"><h3>EPC</h3><p class="desc">Peças.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2018</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('EPC')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-vgsnag2.jpg"><div class="card-body"><h3>VGSNAG2 Manager</h3><p class="desc">Caixa 722.9.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/Merc-DTS9.jpg"><div class="card-body"><h3>DTS Monaco 9.02</h3><p class="desc">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('DTS Monaco')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/Merc-Vediamo.jpg"><div class="card-body"><h3>Vediamo 4/5</h3><p class="desc">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vediamo')">Ver</button></div></div></div>
@@ -297,88 +283,67 @@
                         </div>
                     </div>
                     
-                    <div id="brand-vag" class="brand-panel">
-                        <h2 class="panel-header">VAG Group</h2>
-                        <div class="grid">
-                            <div class="card searchable-item"><img src="IMG/VAG/vag-odis-service.jpg"><div class="card-body"><h3>ODIS Service</h3><p class="desc">Diagnóstico Oficial.</p><p class="sub-desc">Diagnóstico guiado para VW, Audi, Seat, Skoda, Bentley e Lamborghini.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>v25.x.x</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ODIS Service')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/VAG/vag-odis-eng.jpg"><div class="card-body"><h3>ODIS Engineering</h3><p class="desc">Programação Offline.</p><p class="sub-desc">Software de engenharia para flash de ECUs e codificação offline.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ODIS Eng')">Ver</button></div></div></div>
-                        </div>
-                    </div>
-
-                    <div id="brand-bmw" class="brand-panel">
-                        <h2 class="panel-header">BMW</h2>
-                        <div class="grid">
-                            <div class="card searchable-item"><img src="IMG/BMW/BMW-Ista.jpg"><div class="card-body"><h3>ISTA+</h3><p class="desc">Diagnóstico.</p><p class="sub-desc">Sistema oficial de diagnóstico e programação para BMW e Mini (Chassis E, F, G, I).</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/BMW/bmw-istap.jpg"><div class="card-body"><h3>ISTA-P</h3><p class="desc">Antigos.</p><p class="sub-desc">Programação/Codificação exclusiva para Chassis E.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ISTA-P')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/BMW/bmw-history.jpg"><div class="card-body"><h3>Service History</h3><p class="desc">Histórico.</p><p class="sub-desc">Ferramenta para escrever histórico de revisões no iDrive.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('History')">Ver</button></div></div></div>
-                        </div>
-                    </div>
-
-                    <div id="brand-psa" class="brand-panel">
-                        <h2 class="panel-header">PSA</h2>
-                        <div class="grid">
-                            <div class="card searchable-item"><img src="IMG/PSA/psa-diagbox9.JPG"><div class="card-body"><h3>Diagbox 9</h3><p class="desc">Nativo 2025.</p><p class="sub-desc">Diagnóstico para Peugeot, Citroën, DS e Opel até 2025. Instalação nativa (sem VM).</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><p class="desc">Antigos.</p><p class="sub-desc">Melhor opção para telecodificação offline em carros pré-2015.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/PSA/psa-sedre.jpg"><div class="card-body"><h3>Service Box (Sedre)</h3><p class="desc">Esquemas.</p><p class="sub-desc">Base de dados offline de esquemas elétricos e manuais.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('PSA Sedre')">Ver</button></div></div></div>
-                        </div>
-                    </div>
+                    <div id="brand-vag" class="brand-panel"><h2 class="panel-header">VAG</h2><div class="grid"><div class="card searchable-item"><img src="IMG/VAG/vag-odis-service.jpg"><div class="card-body"><h3>ODIS Service</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ODIS Service')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/VAG/vag-odis-eng.jpg"><div class="card-body"><h3>ODIS Engineering</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ODIS Eng')">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Renault/renault-clip.jpg"><div class="card-body"><h3>Can Clip</h3><p class="desc">Diagnóstico.</p><p class="sub-desc">Software oficial para diagnóstico e programação Renault/Dacia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-dialogys.jpg"><div class="card-body"><h3>Dialogys</h3><p class="desc">Manuais.</p><p class="sub-desc">Catálogo de peças e manuais de reparação offline.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-renolink.jpg"><div class="card-body"><h3>Renolink</h3><p class="desc">Engenharia.</p><p class="sub-desc">Programação de chaves, UCH, Airbag e Dash.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Renolink')">Ver</button></div></div></div></div></div>
+                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card searchable-item"><img src="IMG/BMW/BMW-Ista.jpg"><div class="card-body"><h3>ISTA+</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/BMW/bmw-istap.jpg"><div class="card-body"><h3>ISTA-P</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ISTA-P')">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card searchable-item"><img src="IMG/JLR/jlr-pathfinder.jpg"><div class="card-body"><h3>Pathfinder</h3><p class="desc">Modelos 2017+.</p><p class="sub-desc">Diagnóstico DoIP para novos Range Rover e Jaguar.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Pathfinder')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/JLR/JLR-sdd.jpg"><div class="card-body"><h3>SDD</h3><p class="desc">2005-2016.</p><p class="sub-desc">Software legacy para modelos anteriores a 2017.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDD')">Ver</button></div></div></div></div></div>
+                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox9.jpg"><div class="card-body"><h3>Diagbox 9</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Renault/renault-clip.jpg"><div class="card-body"><h3>Can Clip</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-dialogys.jpg"><div class="card-body"><h3>Dialogys</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div></div></div>
+                    
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card searchable-item"><img src="IMG/JLR/jlr-pathfinder.jpg"><div class="card-body"><h3>Pathfinder</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Pathfinder')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/JLR/JLR-sdd.jpg"><div class="card-body"><h3>SDD</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDD')">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Toyota/toyota-techstream.jpg"><div class="card-body"><h3>Techstream</h3><p class="desc">Diagnóstico.</p><p class="sub-desc">Diagnóstico global para Toyota e Lexus.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Techstream')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/epc.jpg"><div class="card-body"><h3>EPC</h3><p class="desc">Catálogo.</p><p class="sub-desc">Base de dados de peças.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota EPC')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/Toylex.jpg"><div class="card-body"><h3>Toylex 4</h3><p class="desc">EGR/DPF.</p><p class="sub-desc">Removedor de sistemas EGR/DPF/AdBlue.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toylex')">Ver</button></div></div></div></div></div>
+                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Toyota/toyota-techstream.jpg"><div class="card-body"><h3>Techstream</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Techstream')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/epc.jpg"><div class="card-body"><h3>EPC</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota EPC')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/Toylex.jpg"><div class="card-body"><h3>Toylex 4</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toylex')">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-nissan" class="brand-panel"><h2 class="panel-header">Nissan</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Nissan/nissan-consult.jpg"><div class="card-body"><h3>Consult III+</h3><p class="desc">Oficial.</p><p class="sub-desc">Diagnóstico e programação para Nissan e GTR.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Consult 3')">Ver</button></div></div></div></div></div>
+                    <div id="brand-nissan" class="brand-panel"><h2 class="panel-header">Nissan</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Nissan/nissan-consult.jpg"><div class="card-body"><h3>Consult III+</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Consult 3')">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Ford/ford-fdrs.jpg"><div class="card-body"><h3>FDRS</h3><p class="desc">Online.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('FDRS')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-ids.jpg"><div class="card-body"><h3>IDS</h3><p class="desc">Offline.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('IDS')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-forscan.jpg"><div class="card-body"><h3>FORScan</h3><p class="desc">Codificação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('FORScan')">Ver</button></div></div></div></div></div>
+                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Ford/ford-fdrs.jpg"><div class="card-body"><h3>FDRS</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('FDRS')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-ids.jpg"><div class="card-body"><h3>IDS</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('IDS')">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg"><div class="card-body"><h3>GDS2</h3><p class="desc">Opel/Chevy.</p><p class="sub-desc">Diagnóstico para grupo GM (inclui Tech2Win).</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('GDS2')">Ver</button></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg"><div class="card-body"><h3>GDS2</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('GDS2')">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
 
         <div id="sec-hard" class="section-view">
             <div class="grid">
-                <div class="card searchable-item"><img src="IMG/hardware/hw-openport.jpg"><div class="card-body"><h3>Openport 2.0</h3><p class="desc">PassThru.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Openport')">Ver</button></div></div></div>
-                <div class="card searchable-item"><img src="IMG/hardware/hw-c4.jpg"><div class="card-body"><h3>C4 Connect</h3><p class="desc">Mercedes.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('C4 Connect')">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/hw-openport.jpg"><div class="card-body"><h3>Openport 2.0</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Openport')">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/hw-c4.jpg"><div class="card-body"><h3>C4 Connect</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('C4 Connect')">Ver</button></div></div></div>
             </div>
         </div>
 
         <div id="sec-tools" class="section-view">
-            <h2 class="panel-header" style="text-align:center">Ferramentas</h2>
+            <h2 class="panel-header" style="text-align:center" data-lang="nav_tools">Ferramentas</h2>
             <div class="tool-list">
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#10b981">DK</div><div class="tool-meta"><h4>DeskIn</h4><p>Acesso remoto rápido para suporte.</p></div></div><a href="https://www.deskin.com/download" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#0078d4">W11</div><div class="tool-meta"><h4>Win 11 Boot</h4><p>Criar pen bootável Windows 11.</p></div></div><a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#f59e0b">7Z</div><div class="tool-meta"><h4>7-Zip</h4><p>Extrair ficheiros RAR/001.</p></div></div><a href="https://www.7-zip.org/download.html" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#3b82f6">RU</div><div class="tool-meta"><h4>Rufus</h4><p>Criar USB de arranque.</p></div></div><a href="https://rufus.ie/pt/" target="_blank" class="tool-btn">Download</a></div>
-                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#ef4444">DC</div><div class="tool-meta"><h4>DControl</h4><p>Desativar antivírus temporariamente.</p></div></div><a href="https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#10b981">DK</div><div class="tool-meta"><h4>DeskIn</h4></div></div><a href="https://www.deskin.com/download" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#0078d4">W11</div><div class="tool-meta"><h4>Win 11 Boot</h4></div></div><a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#f59e0b">7Z</div><div class="tool-meta"><h4>7-Zip</h4></div></div><a href="https://www.7-zip.org/download.html" target="_blank" class="tool-btn">Download</a></div>
+                <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#ef4444">DC</div><div class="tool-meta"><h4>DControl</h4></div></div><a href="https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0" class="tool-btn">Download</a></div>
             </div>
         </div>
 
         <div id="sec-serv" class="section-view">
-            <h2 class="panel-header" style="text-align:center">Serviços</h2>
+            <h2 class="panel-header" style="text-align:center" data-lang="nav_serv">Serviços</h2>
             <div class="services-grid">
-                <div class="service-card"><div class="service-header"><h3>Instalação Remota</h3></div><div class="service-body"><p>Instalação completa de softwares de diagnóstico (Xentry, ODIS, ISTA) via acesso remoto. Configuração de drivers e interfaces.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Instalação')">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3>Codificação Online</h3></div><div class="service-body"><p>Serviço de codificação e programação de módulos SCN (Mercedes) ou Component Protection (VAG) com acesso aos servidores oficiais.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Codificação')">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3>Reparação Software</h3></div><div class="service-body"><p>Correção de erros de licença, ficheiros corrompidos ou atualizações que falharam. Limpeza de vírus e otimização de sistema.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Reparação')">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3>Formatação PC</h3></div><div class="service-body"><p>Preparação de portáteis para oficina. Instalação limpa de Windows 10/11 Pro, drivers e otimização para diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Formatação')">Consultar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-lang="serv_fmt">Formatação</h3></div><div class="service-body"><p data-lang="desc_fmt">Instalação limpa de Windows 10/11 Pro com drivers e otimização para diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Formatação')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-lang="serv_cod">Codificação</h3></div><div class="service-body"><p data-lang="desc_cod">Codificação online SCN (Mercedes), Component Protection (VAG) e adaptações.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Codificação')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-lang="serv_inst">Instalação</h3></div><div class="service-body"><p data-lang="desc_inst">Instalação remota completa de qualquer software de diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Instalação')" data-lang="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-lang="serv_rep">Reparação</h3></div><div class="service-body"><p data-lang="desc_rep">Correção de erros de licença, drivers ou ficheiros corrompidos.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Reparação')" data-lang="btn_schedule">Agendar</button></div></div>
             </div>
         </div>
     </div>
 
     <section id="sobre" class="about-section">
         <div class="about-container">
-            <h2>Sobre a M-Auto Online</h2>
-            <p>Bem-vindo à M-Auto Online. Especializamo-nos em fornecer soluções de software de diagnóstico automóvel de nível profissional. Desde instalações remotas completas a ficheiros de engenharia, garantimos que a sua oficina está equipada com as melhores ferramentas do mercado (Xentry, ISTA, ODIS, etc.). Suporte técnico dedicado e qualidade garantida.</p>
+            <h2 data-lang="nav_about">Sobre</h2>
+            <p data-lang="about_text">Especialistas em software de diagnóstico automóvel.</p>
         </div>
     </section>
 
     <div class="mobile-nav">
-        <div class="mob-item active" onclick="switchSection('soft', this)">Soft</div>
-        <div class="mob-item" onclick="switchSection('hard', this)">Hard</div>
-        <div class="mob-item" onclick="switchSection('tools', this)">Tools</div>
-        <div class="mob-item" onclick="switchSection('serv', this)">Serv</div>
+        <div class="mob-item active" onclick="switchSection('soft', this)" data-lang="nav_soft">Soft</div>
+        <div class="mob-item" onclick="switchSection('hard', this)" data-lang="nav_hard">Hard</div>
+        <div class="mob-item" onclick="switchSection('tools', this)" data-lang="nav_tools">Tools</div>
+        <div class="mob-item" onclick="switchSection('serv', this)" data-lang="nav_serv">Serv</div>
     </div>
 
     <footer id="contacto">
@@ -386,29 +351,35 @@
     </footer>
 
     <script>
-        // TYPEWRITER FIX (SIMPLIFICADO)
-        const textElement = document.getElementById("typewriter");
+        // TYPEWRITER - SIMPLIFICADO E ROBUSTO
+        const typewriter = document.querySelector(".typewriter");
         const texts = ["Xentry", "ISTA", "Diagbox"];
-        let count = 0;
-        let index = 0;
-        let currentText = "";
-        let letter = "";
+        let textIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
 
-        (function type() {
-            if (count === texts.length) { count = 0; }
-            currentText = texts[count];
-            letter = currentText.slice(0, ++index);
-            if(textElement){
-                textElement.textContent = letter;
-                if (letter.length === currentText.length) {
-                    count++;
-                    index = 0;
-                    setTimeout(type, 2000);
-                } else {
-                    setTimeout(type, 150);
-                }
+        function type() {
+            const current = texts[textIdx];
+            if (isDeleting) {
+                typewriter.textContent = current.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                typewriter.textContent = current.substring(0, charIdx + 1);
+                charIdx++;
             }
-        })();
+
+            if (!isDeleting && charIdx === current.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                textIdx = (textIdx + 1) % texts.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 100 : 150);
+            }
+        }
+        document.addEventListener("DOMContentLoaded", type);
 
         // NAV
         function switchSection(id, btn) {
@@ -426,9 +397,33 @@
 
         // LANG SYSTEM (CORRIGIDO)
         const dict = {
-            pt: { hero_title: "Instalação Remota Profissional", hero_desc: "Instalação remota profissional.", nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", nav_about: "Sobre", badge_best: "Melhor Escolha" },
-            en: { hero_title: "Professional Remote Installation", hero_desc: "Professional remote installation.", nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", nav_about: "About", badge_best: "Best Choice" },
-            fr: { hero_title: "Installation à Distance Pro", hero_desc: "Installation à distance pro.", nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", nav_about: "À propos", badge_best: "Meilleur Choix" }
+            pt: { 
+                hero_title: "Soluções de Diagnóstico", hero_desc: "Instalação remota profissional.", 
+                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", nav_about: "Sobre", badge_best: "Melhor Escolha",
+                serv_fmt: "Formatação", desc_fmt: "Instalação limpa de Windows 10/11 Pro com drivers e otimização.",
+                serv_cod: "Codificação", desc_cod: "Codificação online SCN e Component Protection.",
+                serv_inst: "Instalação", desc_inst: "Instalação remota completa de software.",
+                serv_rep: "Reparação", desc_rep: "Correção de erros de licença e drivers.",
+                about_text: "Especialistas em software de diagnóstico automóvel.", btn_schedule: "Agendar"
+            },
+            en: { 
+                hero_title: "Diagnostic Solutions", hero_desc: "Professional remote installation.", 
+                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", nav_about: "About", badge_best: "Best Choice",
+                serv_fmt: "Formatting", desc_fmt: "Clean Windows 10/11 Pro install with drivers and optimization.",
+                serv_cod: "Coding", desc_cod: "Online SCN Coding and Component Protection.",
+                serv_inst: "Installation", desc_inst: "Full remote software installation.",
+                serv_rep: "Repair", desc_rep: "Fix license errors and driver issues.",
+                about_text: "Automotive diagnostic software specialists.", btn_schedule: "Schedule"
+            },
+            fr: { 
+                hero_title: "Solutions Diagnostic", hero_desc: "Installation à distance pro.", 
+                nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", nav_about: "À propos", badge_best: "Meilleur Choix",
+                serv_fmt: "Formatage", desc_fmt: "Installation propre de Windows 10/11 Pro avec pilotes.",
+                serv_cod: "Codage", desc_cod: "Codage en ligne SCN et Protection des Composants.",
+                serv_inst: "Installation", desc_inst: "Installation complète de logiciels à distance.",
+                serv_rep: "Réparation", desc_rep: "Correction des erreurs de licence et pilotes.",
+                about_text: "Spécialistes en logiciels de diagnostic automobile.", btn_schedule: "Planifier"
+            }
         };
 
         function changeLang(l) {
