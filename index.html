@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V15.1</title>
+    <title>M-Auto Online | V15.2</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -134,13 +134,22 @@
             border-bottom: 1px solid var(--border); 
         }
         
-        /* CORREÇÃO DE ALINHAMENTO: margin-top: auto no .sub-desc ou flex-grow no body */
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card p.desc { font-size: 0.95rem; font-weight: 500; color: var(--text-main); margin-bottom: 5px; }
-        .card p.sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; flex-grow: 1; /* Isto empurra o footer para baixo */ }
+        .card p.sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; flex-grow: 1; }
         
-        .tech-details { background: var(--tech-bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-top: auto; margin-bottom: 15px; font-size: 0.8rem; color: var(--text-muted); }
+        /* INFO TÉCNICA (Caixas de Versão) - REINTRODUZIDO */
+        .tech-details { 
+            background: var(--tech-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 6px; 
+            padding: 8px 10px; 
+            margin-top: auto; 
+            margin-bottom: 15px; 
+            font-size: 0.75rem; 
+            color: var(--text-muted); 
+        }
         .tech-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .tech-row:last-child { border-bottom: none; }
         .tech-label { font-weight: 600; color: var(--text-main); }
@@ -150,7 +159,7 @@
         .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; }
 
         /* FOOTER SEMPRE NO FUNDO DO CARD */
-        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; }
+        .card-footer { margin-top: 0; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; }
         .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); white-space: nowrap; }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; white-space: nowrap; }
 
@@ -166,12 +175,12 @@
         .fab-main { width: 65px; height: 65px; border-radius: 50%; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1501; transition: 0.3s; border: none; cursor: pointer; }
         .fab-main.active { transform: rotate(45deg); background: var(--red); }
 
-        /* --- 8. SCROLL TO TOP --- */
+        /* --- 8. SCROLL TO TOP (CORRIGIDO) --- */
         #scrollTopBtn {
             position: fixed; bottom: 25px; left: 25px; width: 45px; height: 45px;
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 50%;
             color: var(--text-main); font-size: 1.2rem; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1400;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 2000;
             display: flex; align-items: center; justify-content: center;
             opacity: 0; pointer-events: none; transition: 0.3s;
         }
@@ -249,7 +258,7 @@
             footer { padding-bottom: 80px; }
         }
         
-        /* MODAIS WIZARD RENOVADO */
+        /* MODAIS WIZARD */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal { background: var(--bg-card); padding: 2rem; border-radius: 16px; width: 90%; max-width: 450px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); background: none; border: none; cursor: pointer; }
@@ -272,7 +281,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V15.1</span>
+                <span class="version-badge">V15.2</span>
             </a>
         </div>
         <div class="header-right">
@@ -373,7 +382,7 @@
 
     <section id="inicio" class="hero">
         <h1 data-lang="hero_title">Instalação Remota Profissional</h1>
-        <p data-lang="hero_desc">Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.</p>
+        <p data-lang="hero_desc">Instalação remota profissional.</p>
         <div class="hero-slider-container">
             <div class="slider-track">
                 <span class="brand-item">MERCEDES-BENZ</span><span class="brand-item">BMW</span><span class="brand-item">AUDI</span><span class="brand-item">VOLKSWAGEN</span><span class="brand-item">PORSCHE</span><span class="brand-item">LAND ROVER</span><span class="brand-item">JAGUAR</span><span class="brand-item">TOYOTA</span><span class="brand-item">LEXUS</span><span class="brand-item">FORD</span><span class="brand-item">MAZDA</span><span class="brand-item">OPEL</span><span class="brand-item">GM</span>
@@ -428,13 +437,13 @@
                                 </div>
                             </div>
                             <div class="card searchable-item" data-search="xentry cars passthru"><img src="IMG/Daimler/merc-xentry-cars.jpg" alt="Xentry Cars"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><p class="sub-desc">Versão PassThru ou OpenShell.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>J2534</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="xentry trucks c4"><img src="IMG/Daimler/merc-xentry-trucks.jpg" alt="Xentry Trucks"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc">Pesados (24V).</p><p class="sub-desc">Para camiões e industriais.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">VCI:</span> <span>C4/C5</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="wis manual"><img src="IMG/Daimler/WIS.JPG" alt="WIS"><div class="card-body"><h3>WIS 2021</h3><p class="desc">Workshop Information System.</p><p class="sub-desc">Repair manuals, wiring diagrams, torque specs.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS 2021')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="epc catalog"><img src="IMG/Daimler/EPC.JPG" alt="EPC"><div class="card-body"><h3>EPC</h3><p class="desc">Electronic Parts Catalogue.</p><p class="sub-desc">Identify parts numbers via VIN.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('EPC')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="vgsnag2 manager"><img src="IMG/Daimler/merc-vgsnag2.jpg" alt="VGSNAG2"><div class="card-body"><h3>VGSNAG2 Manager</h3><p class="desc">EGS 722.9 Coding & Repair Utility.</p><p class="sub-desc">Read, edit, correct coding and data in the gearbox module without online access. (English Only)</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2 Manager')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="dts monaco 9"><img src="IMG/Daimler/Merc-DTS9.jpg" alt="DTS 9"><div class="card-body"><h3>DTS Monaco 8.16 / 9.x</h3><p class="desc">Engenharia Avançada.</p><p class="sub-desc">Programação e Codificação de última geração.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('DTS Monaco')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="vediamo 4 5"><img src="IMG/Daimler/Merc-Vediamo.jpg" alt="Vediamo"><div class="card-body"><h3>Vediamo 4 / 5</h3><p class="desc">Engenharia Clássica.</p><p class="sub-desc">Programação offline estável.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vediamo 4 e 5')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="hhtwin"><img src="IMG/Daimler/merc-htt.jpg" alt="HHTWIN"><div class="card-body"><h3>HHTWIN</h3><p class="desc">Clássicos.</p><p class="sub-desc">Diagnóstico para modelos pré-2000.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('HHTWIN')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="xentry trucks c4"><img src="IMG/Daimler/merc-xentry-trucks.jpg" alt="Xentry Trucks"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc">Pesados (24V).</p><p class="sub-desc">Para camiões e industriais.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>01/2025</span></div><div class="tech-row"><span class="tech-label">VCI:</span> <span>C4/C5</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="wis manual"><img src="IMG/Daimler/WIS.JPG" alt="WIS"><div class="card-body"><h3>WIS 2021</h3><p class="desc">Workshop Information System.</p><p class="sub-desc">Repair manuals, wiring diagrams, torque specs.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span> <span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS 2021')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="epc catalog"><img src="IMG/Daimler/EPC.JPG" alt="EPC"><div class="card-body"><h3>EPC</h3><p class="desc">Electronic Parts Catalogue.</p><p class="sub-desc">Identify parts numbers via VIN.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span> <span>2018</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('EPC')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="vgsnag2 manager"><img src="IMG/Daimler/merc-vgsnag2.jpg" alt="VGSNAG2"><div class="card-body"><h3>VGSNAG2 Manager</h3><p class="desc">EGS 722.9 Coding & Repair Utility.</p><p class="sub-desc">Read, edit, correct coding and data in the gearbox module without online access. (English Only)</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>1.6</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2 Manager')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="dts monaco 9"><img src="IMG/Daimler/Merc-DTS9.jpg" alt="DTS 9"><div class="card-body"><h3>DTS Monaco 8.16 / 9.x</h3><p class="desc">Engenharia Avançada.</p><p class="sub-desc">Programação e Codificação de última geração.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>9.02</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('DTS Monaco')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="vediamo 4 5"><img src="IMG/Daimler/Merc-Vediamo.jpg" alt="Vediamo"><div class="card-body"><h3>Vediamo 4 / 5</h3><p class="desc">Engenharia Clássica.</p><p class="sub-desc">Programação offline estável.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>5.01.01</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vediamo 4 e 5')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="hhtwin"><img src="IMG/Daimler/merc-htt.jpg" alt="HHTWIN"><div class="card-body"><h3>HHTWIN</h3><p class="desc">Clássicos.</p><p class="sub-desc">Diagnóstico para modelos pré-2000.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Emulador</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('HHTWIN')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="7g tronic"><img src="IMG/Daimler/merc-7g-tools.jpg" alt="7G"><div class="card-body"><h3>7G Tronic</h3><p class="desc">Ferramentas de Caixa.</p><p class="sub-desc">Reset e SCN de caixas 7G.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('7G Tools')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="backend certificates"><img src="IMG/Daimler/merc-certificates.jpg" alt="Certs"><div class="card-body"><h3>Certificados ZenZefi</h3><p class="desc">Offline Diagnosis.</p><p class="sub-desc">Instalação de certificados para acesso offline a modelos recentes (W206, W223, etc.).</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ZenZefi Certificates')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="starfinder"><img src="IMG/Daimler/merc-Starfinder2023.jpg" alt="Starfinder"><div class="card-body"><h3>Starfinder 2023</h3><p class="desc">Esquemas Elétricos.</p><p class="sub-desc">Localização de componentes.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Tipo:</span> <span>Web</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Starfinder')">Ver</button></div></div></div>
@@ -458,7 +467,7 @@
                     <div id="brand-bmw" class="brand-panel">
                         <h2 class="panel-header">BMW / Mini</h2>
                         <div class="grid">
-                            <div class="card searchable-item" data-search="ista bmw"><img src="IMG/BMW/BMW-Ista.jpg" alt="ISTA"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diagnóstico & Programação.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>4.39.20</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="ista bmw"><img src="IMG/BMW/BMW-Ista.jpg" alt="ISTA"><div class="card-body"><h3>ISTA+ & ESYS</h3><p class="desc">Diagnóstico & Programação.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>4.39.20</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="ista p antigo"><img src="IMG/BMW/bmw-istap.jpg" alt="ISTA-P"><div class="card-body"><h3>ISTA-P</h3><p class="desc">Programação Antigos.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Ver:</span> <span>3.70</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA-P')">Ver</button></div></div></div>
                             <div class="card searchable-item" data-search="service history manager"><img src="IMG/BMW/bmw-history.jpg" alt="History"><div class="card-body"><h3>Service History</h3><p class="desc">Gestor de Histórico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW Service History')">Ver</button></div></div></div>
                         </div>
@@ -467,18 +476,18 @@
                     <div id="brand-psa" class="brand-panel">
                         <h2 class="panel-header">PSA</h2>
                         <div class="grid">
-                            <div class="card searchable-item" data-search="diagbox 9"><img src="IMG/PSA/psa-diagbox9.jpg" alt="Diagbox"><div class="card-body"><h3>Diagbox 9</h3><p class="desc">Nativo 2025.</p><p class="sub-desc">Native version. Diagnoses all Peugeot, Citroën, DS, Opel (PSA) up to 2025. No VM required.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="diagbox 7"><img src="IMG/PSA/psa-diagbox7.jpg" alt="Diagbox 7"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><p class="sub-desc">Virtual Machine version. Best for older models (pre-2015) requiring telecoding.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="sedre service box"><img src="IMG/PSA/psa-sedre.jpg" alt="Sedre"><div class="card-body"><h3>Service Box (Sedre)</h3><p class="desc">Esquemas e Manuais.</p><p class="sub-desc">Service Box. Offline wiring diagrams and repair manuals (up to 2013).</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('PSA Sedre')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="diagbox 9"><img src="IMG/PSA/psa-diagbox9.jpg" alt="Diagbox"><div class="card-body"><h3>Diagbox 9</h3><p class="desc">Nativo 2025.</p><p class="sub-desc">Native version. Diagnoses all Peugeot, Citroën, DS, Opel (PSA) up to 2025. No VM required.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>9.193</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="diagbox 7"><img src="IMG/PSA/psa-diagbox7.jpg" alt="Diagbox 7"><div class="card-body"><h3>Diagbox 7.83</h3><p class="desc">Offline Antigos.</p><p class="sub-desc">Virtual Machine version. Best for older models (pre-2015) requiring telecoding.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>7.83</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="sedre service box"><img src="IMG/PSA/psa-sedre.jpg" alt="Sedre"><div class="card-body"><h3>Service Box (Sedre)</h3><p class="desc">Esquemas e Manuais.</p><p class="sub-desc">Service Box. Offline wiring diagrams and repair manuals (up to 2013).</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span> <span>2013</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('PSA Sedre')">Ver</button></div></div></div>
                         </div>
                     </div>
 
                     <div id="brand-renault" class="brand-panel">
                         <h2 class="panel-header">Renault</h2>
                         <div class="grid">
-                            <div class="card searchable-item" data-search="can clip"><img src="IMG/Renault/renault-clip.jpg" alt="Clip"><div class="card-body"><h3>Can Clip V240</h3><p class="desc">Diagnóstico.</p><p class="sub-desc">Official Dealer Software. Diagnostics, reprogramming, and maintenance for Renault/Dacia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="renault dialogys"><img src="IMG/Renault/renault-dialogys.jpg" alt="Dialogys"><div class="card-body"><h3>Dialogys</h3><p class="desc">Manuais e Peças.</p><p class="sub-desc">Factory service manuals and parts catalog. Offline database.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div>
-                            <div class="card searchable-item" data-search="renolink"><img src="IMG/Renault/renault-renolink.jpg" alt="Renolink"><div class="card-body"><h3>Renolink 1.99</h3><p class="desc">Programação Especial.</p><p class="sub-desc">Engineering tool. Key programming, UCH matching, airbag reset, dashboard coding.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Renolink')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="can clip"><img src="IMG/Renault/renault-clip.jpg" alt="Clip"><div class="card-body"><h3>Can Clip V240</h3><p class="desc">Diagnóstico.</p><p class="sub-desc">Official Dealer Software. Diagnostics, reprogramming, and maintenance for Renault/Dacia.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>240</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="renault dialogys"><img src="IMG/Renault/renault-dialogys.jpg" alt="Dialogys"><div class="card-body"><h3>Dialogys</h3><p class="desc">Manuais e Peças.</p><p class="sub-desc">Factory service manuals and parts catalog. Offline database.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>4.72</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div>
+                            <div class="card searchable-item" data-search="renolink"><img src="IMG/Renault/renault-renolink.jpg" alt="Renolink"><div class="card-body"><h3>Renolink 1.99</h3><p class="desc">Programação Especial.</p><p class="sub-desc">Engineering tool. Key programming, UCH matching, airbag reset, dashboard coding.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span> <span>1.99</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Renolink')">Ver</button></div></div></div>
                         </div>
                     </div>
 
@@ -759,10 +768,11 @@
             if (btn) btn.classList.add('active');
         }
         
-        // SCROLL TOP
+        // SCROLL TOP (SENSIBILIDADE MELHORADA)
         const scrollToTopBtn = document.getElementById("scrollTopBtn");
         window.onscroll = function() {
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            // Se descer mais de 100px (antes era 300), mostra o botão
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 scrollTopBtn.classList.add("visible");
             } else {
                 scrollTopBtn.classList.remove("visible");
