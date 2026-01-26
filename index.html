@@ -93,29 +93,40 @@
         .search-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
-        /* CARDS */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        /* GRID ATUALIZADO PARA 3 COLUNAS */
+        /* Reduzi o minmax de 260px para 220px para caberem 3 cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); height: 100%; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        /* IMAGEM CONTAIN + BG BRANCO */
-        .card img { width: 100%; height: 210px; object-fit: contain; background-color: #fff; border-bottom: 1px solid var(--border); }
+        /* IMAGEM ATUALIZADA (PREENCHE O ESPAÇO) */
+        .card img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; /* Faz a imagem encher o espaço sem barras brancas */
+            border-bottom: 1px solid var(--border);
+            background-color: #f1f5f9; /* Cor de fundo caso a imagem falhe */
+        }
         
-        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
-        .card p.desc { font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
-        .card p.sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
-        .tech-details { background: var(--tech-bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; margin-top: auto; margin-bottom: 15px; font-size: 0.75rem; color: var(--text-muted); }
+        .card-body { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        .card p.desc { font-size: 0.9rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
+        .card p.sub-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
+        
+        .tech-details { background: var(--tech-bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; margin-top: auto; margin-bottom: 15px; font-size: 0.75rem; color: var(--text-muted); }
         .tech-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 3px 0; }
         .tech-row:last-child { border-bottom: none; }
         .tech-label { font-weight: 600; color: var(--text-main); }
+        
         .feature-list { list-style: none; margin-bottom: 15px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 0.8rem; color: var(--text-muted); }
         .feature-list li { display: flex; align-items: center; }
         .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; margin-right: 6px; }
 
         .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; }
-        .price { font-weight: 800; font-size: 1rem; color: var(--text-main); white-space: nowrap; }
-        .btn-view { color: var(--accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; cursor: pointer; }
+        .price { font-weight: 800; font-size: 0.95rem; color: var(--text-main); white-space: nowrap; }
+        .btn-view { color: var(--accent); font-weight: 800; font-size: 0.85rem; text-transform: uppercase; background: none; border: none; cursor: pointer; }
+        
         .card.gold { border: 2px solid var(--gold); }
         .card.gold h3, .card.gold .price, .card.gold .btn-view { color: var(--gold); }
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
@@ -205,9 +216,9 @@
             <div class="controls-wrapper">
                 <button class="theme-btn" onclick="toggleTheme()" title="Tema">☀️</button>
                 <div class="lang-group">
-                    <button id="btn-pt" onclick="changeLang('pt')" class="lang-btn active"><img src="https://flagcdn.com/w40/pt.png"></button>
-                    <button id="btn-en" onclick="changeLang('en')" class="lang-btn"><img src="https://flagcdn.com/w40/gb.png"></button>
-                    <button id="btn-fr" onclick="changeLang('fr')" class="lang-btn"><img src="https://flagcdn.com/w40/fr.png"></button>
+                    <button id="btn-pt" onclick="setLanguage('pt')" class="lang-btn active"><img src="https://flagcdn.com/w40/pt.png"></button>
+                    <button id="btn-en" onclick="setLanguage('en')" class="lang-btn"><img src="https://flagcdn.com/w40/gb.png"></button>
+                    <button id="btn-fr" onclick="setLanguage('fr')" class="lang-btn"><img src="https://flagcdn.com/w40/fr.png"></button>
                 </div>
             </div>
         </div>
@@ -225,13 +236,13 @@
         <div class="modal" id="wizContent">
             <button class="close" onclick="document.getElementById('wizardModal').style.display='none'">&times;</button>
             <div id="wiz-step-1" class="step active">
-                <h3 class="wiz-title" data-lang="wiz_os">Qual é o seu Windows?</h3>
+                <h3 class="wiz-title" data-translate="wiz_os">Qual é o seu Windows?</h3>
                 <div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('win', 'old')">Windows 7 / 8</button><button class="wiz-btn" onclick="setSpec('win', 'new')">Windows 10 / 11</button></div>
             </div>
-            <div id="wiz-step-2" class="step"><h3 class="wiz-title" data-lang="wiz_ram">Memória RAM?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('ram', 'low')">4GB ou menos</button><button class="wiz-btn" onclick="setSpec('ram', 'high')">8GB ou mais</button></div></div>
+            <div id="wiz-step-2" class="step"><h3 class="wiz-title" data-translate="wiz_ram">Memória RAM?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('ram', 'low')">4GB ou menos</button><button class="wiz-btn" onclick="setSpec('ram', 'high')">8GB ou mais</button></div></div>
             <div id="wiz-step-3" class="step"><h3 class="wiz-title">Disco?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('disk','hdd')">HDD</button><button class="wiz-btn" onclick="setSpec('disk','ssd')">SSD</button></div></div>
             <div id="wiz-step-4" class="step"><h3 class="wiz-title">Marca?</h3><div class="wiz-grid"><button class="wiz-btn" onclick="setSpec('brand','Mercedes')">Mercedes</button><button class="wiz-btn" onclick="setSpec('brand','BMW')">BMW</button></div></div>
-            <div id="wiz-result" class="step"><h3 class="wiz-title" data-lang="wiz_result">Resultado</h3><div id="finalResultContent" class="wiz-result-box"></div><button class="wiz-btn-action" onclick="location.reload()">Recomeçar 🔄</button></div>
+            <div id="wiz-result" class="step"><h3 class="wiz-title" data-translate="wiz_result">Resultado</h3><div id="finalResultContent" class="wiz-result-box"></div><button class="wiz-btn-action" onclick="location.reload()">Recomeçar 🔄</button></div>
         </div>
     </div>
 
@@ -242,19 +253,19 @@
     </div>
 
     <section id="inicio" class="hero">
-        <h1 data-lang="hero_title">Instalação Remota Profissional</h1>
-        <p data-lang="hero_desc">Instalação remota profissional.</p>
+        <h1 data-translate="hero_title">Instalação Remota Profissional</h1>
+        <p data-translate="hero_desc">Instalação remota profissional.</p>
         <div class="hero-slider-container">
             <div class="slider-track"><span class="brand-item">Mercedes</span><span class="brand-item">BMW</span><span class="brand-item">Audi</span><span class="brand-item">VW</span><span class="brand-item">Porsche</span><span class="brand-item">JLR</span><span class="brand-item">Toyota</span><span class="brand-item">Ford</span><span class="brand-item">GM</span><span class="brand-item">Mercedes</span><span class="brand-item">BMW</span><span class="brand-item">Audi</span><span class="brand-item">VW</span></div>
         </div>
     </section>
 
     <div class="main-nav">
-        <button class="nav-pill active" onclick="switchSection('soft', this)" data-lang="nav_soft">Software</button>
-        <button class="nav-pill" onclick="switchSection('hard', this)" data-lang="nav_hard">Hardware</button>
-        <button class="nav-pill" onclick="switchSection('tools', this)" data-lang="nav_tools">Ferramentas</button>
-        <button class="nav-pill" onclick="switchSection('serv', this)" data-lang="nav_serv">Serviços</button>
-        <button class="nav-pill" onclick="document.getElementById('sobre').scrollIntoView({behavior: 'smooth'})" data-lang="nav_about">Sobre</button>
+        <button class="nav-pill active" onclick="switchSection('soft', this)" data-translate="nav_soft">Software</button>
+        <button class="nav-pill" onclick="switchSection('hard', this)" data-translate="nav_hard">Hardware</button>
+        <button class="nav-pill" onclick="switchSection('tools', this)" data-translate="nav_tools">Ferramentas</button>
+        <button class="nav-pill" onclick="switchSection('serv', this)" data-translate="nav_serv">Serviços</button>
+        <button class="nav-pill" onclick="document.getElementById('sobre').scrollIntoView({behavior: 'smooth'})" data-translate="nav_about">Sobre</button>
     </div>
 
     <div class="app-container">
@@ -280,7 +291,7 @@
                         <h2 class="panel-header">Mercedes-Benz</h2>
                         <div class="grid">
                             <div class="card gold searchable-item" style="grid-column: 1/-1;">
-                                <span class="badge" data-lang="badge_best">Melhor Escolha</span>
+                                <span class="badge" data-translate="badge_best">Melhor Escolha</span>
                                 <div class="card-body"><h3>Mercedes Full Pack 2025</h3><p class="desc">A Solução Completa.</p><p class="sub-desc">Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.</p><ul class="feature-list"><li>Xentry, WIS, EPC 2023</li><li>DTS 9.02, Vediamo 5</li><li>Price List 2025</li><li>Full Databases</li></ul><div class="card-footer"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')">Encomendar</button></div></div>
                             </div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-cars.jpg"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
@@ -330,7 +341,7 @@
         </div>
 
         <div id="sec-tools" class="section-view">
-            <h2 class="panel-header" style="text-align:center" data-lang="nav_tools">Ferramentas</h2>
+            <h2 class="panel-header" style="text-align:center" data-translate="nav_tools">Ferramentas</h2>
             <div class="tool-list">
                 <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#10b981">DK</div><div class="tool-meta"><h4>DeskIn</h4></div></div><a href="https://www.deskin.com/download" target="_blank" class="tool-btn">Download</a></div>
                 <div class="tool-row searchable-item"><div class="tool-info"><div class="tool-icon-box" style="background:#0078d4">W11</div><div class="tool-meta"><h4>Win 11 Boot</h4></div></div><a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="tool-btn">Download</a></div>
@@ -340,28 +351,28 @@
         </div>
 
         <div id="sec-serv" class="section-view">
-            <h2 class="panel-header" style="text-align:center" data-lang="nav_serv">Serviços</h2>
+            <h2 class="panel-header" style="text-align:center" data-translate="nav_serv">Serviços</h2>
             <div class="services-grid">
-                <div class="service-card"><div class="service-header"><h3 data-lang="serv_fmt">Formatação</h3></div><div class="service-body"><p data-lang="desc_fmt">Instalação limpa de Windows 10/11 Pro com drivers e otimização para diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Formatação')">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-lang="serv_cod">Codificação</h3></div><div class="service-body"><p data-lang="desc_cod">Codificação online SCN (Mercedes), Component Protection (VAG) e adaptações.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Codificação')">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-lang="serv_inst">Instalação</h3></div><div class="service-body"><p data-lang="desc_inst">Instalação remota completa de qualquer software de diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Instalação')">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-lang="serv_rep">Reparação</h3></div><div class="service-body"><p data-lang="desc_rep">Correção de erros de licença, drivers ou ficheiros corrompidos.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Reparação')">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-translate="serv_fmt">Formatação</h3></div><div class="service-body"><p data-translate="desc_fmt">Instalação limpa de Windows 10/11 Pro com drivers e otimização para diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Formatação')" data-translate="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-translate="serv_cod">Codificação</h3></div><div class="service-body"><p data-translate="desc_cod">Codificação online SCN (Mercedes), Component Protection (VAG) e adaptações.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Codificação')" data-translate="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-translate="serv_inst">Instalação</h3></div><div class="service-body"><p data-translate="desc_inst">Instalação remota completa de qualquer software de diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Instalação')" data-translate="btn_schedule">Agendar</button></div></div>
+                <div class="service-card"><div class="service-header"><h3 data-translate="serv_rep">Reparação</h3></div><div class="service-body"><p data-translate="desc_rep">Correção de erros de licença, drivers ou ficheiros corrompidos.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Reparação')" data-translate="btn_schedule">Agendar</button></div></div>
             </div>
         </div>
     </div>
 
     <section id="sobre" class="about-section">
         <div class="about-container">
-            <h2 data-lang="nav_about">Sobre</h2>
-            <p data-lang="about_text">Especialistas em software de diagnóstico automóvel.</p>
+            <h2 data-translate="nav_about">Sobre</h2>
+            <p data-translate="about_text">Especialistas em software de diagnóstico automóvel.</p>
         </div>
     </section>
 
     <div class="mobile-nav">
-        <div class="mob-item active" onclick="switchSection('soft', this)" data-lang="nav_soft">Soft</div>
-        <div class="mob-item" onclick="switchSection('hard', this)" data-lang="nav_hard">Hard</div>
-        <div class="mob-item" onclick="switchSection('tools', this)" data-lang="nav_tools">Tools</div>
-        <div class="mob-item" onclick="switchSection('serv', this)">Serv</div>
+        <div class="mob-item active" onclick="switchSection('soft', this)" data-translate="nav_soft">Soft</div>
+        <div class="mob-item" onclick="switchSection('hard', this)" data-translate="nav_hard">Hard</div>
+        <div class="mob-item" onclick="switchSection('tools', this)" data-translate="nav_tools">Tools</div>
+        <div class="mob-item" onclick="switchSection('serv', this)" data-translate="nav_serv">Serv</div>
     </div>
 
     <footer id="contacto">
@@ -369,7 +380,7 @@
     </footer>
 
     <script>
-        // TYPEWRITER (REESCRITO SIMPLES)
+        // TYPEWRITER (SIMPLES)
         const typewriter = document.querySelector(".typewriter");
         const texts = ["Xentry", "ISTA", "Diagbox"];
         let count = 0;
@@ -393,14 +404,12 @@
             }
         })();
 
-        // NAV
+        // NAVEGAÇÃO
         function switchSection(id, btn) {
             document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
             document.getElementById('sec-' + id).classList.add('active');
             window.scrollTo({top: 150, behavior: 'smooth'});
-            // Remove active class from all buttons
             document.querySelectorAll('.nav-pill, .mob-item').forEach(b => b.classList.remove('active'));
-            // Add active to clicked button (desktop & mobile)
             if(btn) btn.classList.add('active');
         }
 
@@ -412,8 +421,8 @@
             btn.classList.add('active');
         }
 
-        // LANG SYSTEM (SIMPLIFICADO)
-        const dict = {
+        /* --- NOVA LÓGICA DE TRADUÇÃO --- */
+        const translations = {
             pt: { 
                 hero_title: "Instalação Remota Profissional", hero_desc: "Instalação remota profissional.", 
                 nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", nav_about: "Sobre", badge_best: "Melhor Escolha",
@@ -421,7 +430,8 @@
                 serv_cod: "Codificação", desc_cod: "Codificação online SCN e Component Protection.",
                 serv_inst: "Instalação", desc_inst: "Instalação remota completa de software.",
                 serv_rep: "Reparação", desc_rep: "Correção de erros de licença e drivers.",
-                about_text: "Especialistas em software de diagnóstico automóvel.", btn_schedule: "Agendar"
+                about_text: "Especialistas em software de diagnóstico automóvel.", btn_schedule: "Agendar",
+                wiz_os: "Qual é o seu Windows?", wiz_ram: "Memória RAM?", wiz_result: "Resultado"
             },
             en: { 
                 hero_title: "Professional Remote Installation", hero_desc: "Professional remote installation.", 
@@ -430,7 +440,8 @@
                 serv_cod: "Coding", desc_cod: "Online SCN Coding and Component Protection.",
                 serv_inst: "Installation", desc_inst: "Full remote software installation.",
                 serv_rep: "Repair", desc_rep: "Fix license errors and driver issues.",
-                about_text: "Automotive diagnostic software specialists.", btn_schedule: "Schedule"
+                about_text: "Automotive diagnostic software specialists.", btn_schedule: "Schedule",
+                wiz_os: "Which Windows?", wiz_ram: "RAM Memory?", wiz_result: "Result"
             },
             fr: { 
                 hero_title: "Installation à Distance Pro", hero_desc: "Installation à distance pro.", 
@@ -439,17 +450,22 @@
                 serv_cod: "Codage", desc_cod: "Codage en ligne SCN et Protection des Composants.",
                 serv_inst: "Installation", desc_inst: "Installation complète de logiciels à distance.",
                 serv_rep: "Réparation", desc_rep: "Correction des erreurs de licence et pilotes.",
-                about_text: "Spécialistes en logiciels de diagnostic automobile.", btn_schedule: "Planifier"
+                about_text: "Spécialistes en logiciels de diagnostic automobile.", btn_schedule: "Planifier",
+                wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", wiz_result: "Résultat"
             }
         };
 
-        function changeLang(l) {
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                const k = el.getAttribute('data-lang');
-                if(dict[l] && dict[l][k]) el.innerText = dict[l][k];
+        function setLanguage(lang) {
+            // Atualiza todos os elementos com o atributo data-translate
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if(translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
             });
+            // Atualiza o estado visual dos botões
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + l).classList.add('active');
+            document.getElementById('btn-' + lang).classList.add('active');
         }
 
         // SCROLL
@@ -477,7 +493,7 @@
             });
         }
         
-        // WIZARD LOGIC
+        // WIZARD
         let userSpecs = {};
         function setSpec(key, val) {
             userSpecs[key] = val;
@@ -497,10 +513,6 @@
                 html = `<div class="wiz-result-box" style="border-color:green"><h4 style="color:green">✅ PC Compatível!</h4><p>Pode instalar o Pack Completo.</p></div>`;
             }
             document.getElementById('finalResultContent').innerHTML = html;
-        }
-        function resetWizard() {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('wiz-step-1').classList.add('active');
         }
     </script>
 </body>
