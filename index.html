@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V17.6</title>
+    <title>M-Auto Online | V17.7</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -113,7 +113,6 @@
         .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card p.desc { font-size: 0.9rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
         
-        /* CORTE DE TEXTO (3 Linhas) */
         .card p.sub-desc { 
             font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1;
             display: -webkit-box;
@@ -233,7 +232,7 @@
     <header>
         <div class="header-left">
             <a href="#inicio" class="logo-link">
-                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.6</span>
+                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.7</span>
             </a>
         </div>
         <div class="header-right">
@@ -255,7 +254,7 @@
     <div id="salesPopup" class="sales-popup">
         <button class="popup-close" onclick="document.getElementById('salesPopup').classList.remove('active')">×</button>
         <div class="popup-icon">👀</div>
-        <div class="popup-text"><p><span id="viewerCount">5</span> pessoas a ver este site.</p></div>
+        <div class="popup-text"><p id="viewerText"></p></div>
     </div>
 
     <div id="productModal" class="prod-modal">
@@ -539,7 +538,10 @@
                 btn_schedule: "Agendar",
                 
                 about_text_full: "Somos especialistas em software de diagnóstico automóvel com anos de experiência. Oferecemos um serviço profissional, com resposta rápida e suporte assegurado. As nossas instalações são limpas, otimizadas e garantidas. Trabalhamos com as melhores ferramentas do mercado para garantir que a sua oficina nunca para.", 
-                wiz_os: "Qual é o seu Windows?", wiz_ram: "Memória RAM?", wiz_result: "Resultado"
+                wiz_os: "Qual é o seu Windows?", wiz_ram: "Memória RAM?", wiz_result: "Resultado",
+                
+                // Popup Text
+                popup_text: "pessoas a ver este site."
             },
             en: { 
                 hero_sol: "Online Solutions", hero_desc: "Professional remote installation.", 
@@ -591,7 +593,10 @@
 
                 btn_schedule: "Schedule",
                 about_text_full: "We are automotive diagnostic software specialists with years of experience. We offer professional service, fast response and guaranteed support. Our installations are clean, optimized and guaranteed. We work with the best tools on the market to ensure your workshop never stops.", 
-                wiz_os: "Which Windows?", wiz_ram: "RAM Memory?", wiz_result: "Result"
+                wiz_os: "Which Windows?", wiz_ram: "RAM Memory?", wiz_result: "Result",
+                
+                // Popup Text
+                popup_text: "people viewing this site."
             },
             fr: { 
                 hero_sol: "Solutions En Ligne", hero_desc: "Installation à distance pro.", 
@@ -643,39 +648,41 @@
 
                 btn_schedule: "Planifier",
                 about_text_full: "Spécialistes en logiciels de diagnostic automobile avec des années d'expérience. Service professionnel, réponse rapide, installations propres et support garanti. Nous travaillons avec les meilleurs outils pour que votre atelier ne s'arrête jamais.", 
-                wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", wiz_result: "Résultat"
+                wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", wiz_result: "Résultat",
+                
+                // Popup Text
+                popup_text: "personnes consultent ce site."
             }
         };
 
         // --- LÓGICA DE DETEÇÃO AUTOMÁTICA DE LÍNGUA (NOVO) ---
         window.addEventListener('DOMContentLoaded', () => {
-            // 1. Tenta obter a língua do browser
             let userLang = navigator.language || navigator.userLanguage; 
-            
-            // 2. Extrai apenas as 2 primeiras letras (ex: 'fr-CA' -> 'fr')
             userLang = userLang.split('-')[0].toLowerCase();
 
-            // 3. Se a língua do user existir nas nossas traduções, usa-a.
-            //    Caso contrário, mantém o padrão que está no HTML (pt) ou muda para 'en'.
             if (translations[userLang]) {
                 setLanguage(userLang);
             } else {
-                // Opcional: Se for alemão ou espanhol, podes forçar inglês
                 setLanguage('en'); 
             }
         });
 
         // --- FUNÇÕES EXISTENTES ---
+        let currentLang = 'pt'; // Variável global para saber a língua atual
+
         function setLanguage(lang) {
+            currentLang = lang; // Atualiza a variável global
             document.querySelectorAll('[data-translate]').forEach(el => {
                 const key = el.getAttribute('data-translate');
                 if(translations[lang][key]) {
-                    // USA innerHTML para permitir quebras de linha <br>
                     el.innerHTML = translations[lang][key];
                 }
             });
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
+            
+            // Atualiza o popup se estiver aberto ou no próximo ciclo
+            updateViewers(true); // Força atualização do texto
         }
 
         // SCROLL
@@ -684,12 +691,42 @@
             if (window.scrollY > 200) { btnScroll.classList.add("visible"); } else { btnScroll.classList.remove("visible"); }
         });
 
-        // POPUP
-        setInterval(() => {
-            document.getElementById('viewerCount').innerText = Math.floor(Math.random() * 10) + 1;
-            document.getElementById('salesPopup').classList.add('active');
-            setTimeout(() => { document.getElementById('salesPopup').classList.remove('active'); }, 6000);
-        }, 20000);
+        // POPUP INTELIGENTE (Atualizado)
+        let currentViewers = 5; // Começa com 5
+
+        function updateViewers(onlyTextUpdate = false) {
+            // Se não for apenas atualização de texto, muda o número
+            if (!onlyTextUpdate) {
+                let change = Math.floor(Math.random() * 5) - 2; // -2, -1, 0, 1, 2
+                currentViewers += change;
+                if (currentViewers < 2) currentViewers = 2;
+                if (currentViewers > 15) currentViewers = 15;
+            }
+
+            // Atualiza o texto com a língua atual
+            const textEl = document.getElementById('viewerText');
+            if(translations[currentLang] && translations[currentLang].popup_text) {
+                textEl.innerHTML = `<strong>${currentViewers}</strong> ${translations[currentLang].popup_text}`;
+            }
+
+            // Se for a atualização automática do timer
+            if (!onlyTextUpdate) {
+                const popup = document.getElementById('salesPopup');
+                popup.classList.add('active');
+                
+                // Esconde após 5 segundos
+                setTimeout(() => {
+                    popup.classList.remove('active');
+                }, 5000);
+
+                // Agenda o próximo para 20 a 45 segundos
+                let nextRun = Math.floor(Math.random() * (45000 - 20000) + 20000);
+                setTimeout(() => updateViewers(false), nextRun);
+            }
+        }
+
+        // Inicia o ciclo do popup
+        setTimeout(() => updateViewers(false), 5000); // Primeiro pop após 5s
 
         // FUNÇÕES MODAL PRODUTO
         function openDetails(btn) {
@@ -702,30 +739,30 @@
             const titleDirect = btn.getAttribute('data-title');
             
             // Determinar língua atual (vendo qual botão está ativo)
-            let currentLang = 'pt';
-            if(document.getElementById('btn-en').classList.contains('active')) currentLang = 'en';
-            if(document.getElementById('btn-fr').classList.contains('active')) currentLang = 'fr';
+            let lang = 'pt';
+            if(document.getElementById('btn-en').classList.contains('active')) lang = 'en';
+            if(document.getElementById('btn-fr').classList.contains('active')) lang = 'fr';
 
             // Popular Modal
             document.getElementById('modalImg').src = img;
             
             // Título
-            if(titleKey && translations[currentLang][titleKey]) {
-                document.getElementById('modalTitle').innerText = translations[currentLang][titleKey];
+            if(titleKey && translations[lang][titleKey]) {
+                document.getElementById('modalTitle').innerText = translations[lang][titleKey];
             } else {
                 document.getElementById('modalTitle').innerText = titleDirect || 'Produto';
             }
 
             // Descrição
-            if(descKey && translations[currentLang][descKey]) {
-                document.getElementById('modalDesc').innerHTML = translations[currentLang][descKey];
+            if(descKey && translations[lang][descKey]) {
+                document.getElementById('modalDesc').innerHTML = translations[lang][descKey];
             } else {
                 document.getElementById('modalDesc').innerText = "Detalhes não disponíveis.";
             }
 
             // Preço
-            if(priceKey && translations[currentLang][priceKey]) {
-                document.getElementById('modalPrice').innerText = translations[currentLang][priceKey];
+            if(priceKey && translations[lang][priceKey]) {
+                document.getElementById('modalPrice').innerText = translations[lang][priceKey];
             } else {
                 document.getElementById('modalPrice').innerText = "Consulta";
             }
