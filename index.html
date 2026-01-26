@@ -56,11 +56,10 @@
         .lang-btn.active { opacity: 1; border-color: var(--accent); transform: scale(1.1); }
         .lang-btn img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-        /* HERO TYPEWRITER CORRIGIDO */
+        /* HERO TYPEWRITER */
         .hero { margin-top: var(--header-h); padding: 50px 20px 70px 20px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff; position: relative; overflow: hidden; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        /* Layout H1 Ajustado para ficar na mesma linha */
         .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; position: relative; z-index: 2; line-height: 1.2; }
         
         .typewriter-text { 
@@ -69,7 +68,7 @@
             padding-right: 5px; 
             animation: blink 0.7s infinite; 
             display: inline-block;
-            font-style: italic; /* Adicionado Italico */
+            font-style: italic; 
         }
         @keyframes blink { 50% { border-color: transparent; } }
         
@@ -109,12 +108,12 @@
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); height: 100%; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        /* CORREÇÃO DAS IMAGENS: PREENCHER TUDO (COVER) SEM PADDING */
+        /* CORREÇÃO IMAGENS: FILL PARA OCUPAR TUDO (ESTICADO) */
         .card img { 
             width: 100%; 
             height: 200px; 
-            object-fit: cover; /* Preenche a área vermelha, cortando o excesso */
-            padding: 0; /* Remove padding para encostar nas bordas */
+            object-fit: fill; /* Força a imagem a encher o espaço, deformando se necessário */
+            padding: 0;
             border-bottom: 1px solid var(--border);
             background-color: #f1f5f9;
         }
@@ -394,7 +393,7 @@
     </div>
 
     <footer id="contacto">
-        <p class="footer-copyright">&copy; 2025 M-Auto Solutions</p>
+        <p class="footer-copyright">&copy; 2025 M-Auto Online - Simply Digital</p>
     </footer>
 
     <script>
@@ -441,8 +440,7 @@
             container.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
-            // CORREÇÃO: SCROLL AUTOMÁTICO PARA O TOPO DA SECÇÃO
-            // Ajusta o scroll da janela para ver o topo da lista de produtos
+            // SCROLL AUTOMÁTICO
             const contentTop = document.querySelector('.app-container').offsetTop - 100;
             window.scrollTo({top: contentTop, behavior: 'smooth'});
         }
