@@ -60,15 +60,16 @@
         .hero { margin-top: var(--header-h); padding: 50px 20px 70px 20px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff; position: relative; overflow: hidden; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
+        /* Layout H1 Ajustado para ficar na mesma linha */
         .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; position: relative; z-index: 2; line-height: 1.2; }
         
-        /* Classe específica para a parte que escreve */
         .typewriter-text { 
-            color: #60a5fa; /* Azul claro para destaque */
+            color: #60a5fa; 
             border-right: 3px solid #60a5fa; 
             padding-right: 5px; 
             animation: blink 0.7s infinite; 
             display: inline-block;
+            font-style: italic; /* Adicionado Italico */
         }
         @keyframes blink { 50% { border-color: transparent; } }
         
@@ -102,20 +103,20 @@
         .search-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
-        /* GRID E IMAGENS CORRIGIDOS */
+        /* GRID E IMAGENS */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
         
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); height: 100%; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        /* CORREÇÃO DAS IMAGENS: CONTAIN + PADDING */
+        /* CORREÇÃO DAS IMAGENS: PREENCHER TUDO (COVER) SEM PADDING */
         .card img { 
             width: 100%; 
             height: 200px; 
-            object-fit: contain; /* Garante que a imagem inteira aparece (não corta) */
-            padding: 10px; /* Espaço para respirar */
+            object-fit: cover; /* Preenche a área vermelha, cortando o excesso */
+            padding: 0; /* Remove padding para encostar nas bordas */
             border-bottom: 1px solid var(--border);
-            background-color: #ffffff; /* Fundo branco limpo */
+            background-color: #f1f5f9;
         }
         
         .card-body { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
@@ -263,8 +264,7 @@
 
     <section id="inicio" class="hero">
         <h1>
-            <span data-translate="hero_sol">Soluções Online</span><br>
-            <span class="typewriter-text"></span>
+            <span data-translate="hero_sol">Soluções Online</span>&nbsp;<span class="typewriter-text"></span>
         </h1>
         <p data-translate="hero_desc">Instalação remota profissional.</p>
         <div class="hero-slider-container">
@@ -325,7 +325,7 @@
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-mbtools.jpg"><div class="card-body"><h3>MbTools</h3><p class="desc" data-translate="desc_util">Utilitário.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('MbTools')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-pricelist.jpg"><div class="card-body"><h3>Price List 2025</h3><p class="desc">Excel.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Price List')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-tutorials.jpg"><div class="card-body"><h3>Coding Tutorials</h3><p class="desc" data-translate="desc_guides">Guias.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Tutorials')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vindecoder.jpg"><div class="card-body"><h3>Vin Decoder</h3><p class="desc" data-translate="desc_ident">Identificação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vin Decoder')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vindecoder.jpg"><div class="card-body"><h3>Vin Decoder</h3><p class="desc" data-translate="desc_ident">Identificação.</p><p class="sub-desc">Full FBS database and VIN-based inferences<br>Complete body type detection system<br>Fixed display of platform and transmission<br>Restored torque and noticeable engine features<br>Improved formatting for detailed reports<br>The exact logic of the "full model" (E220D, C200, etc.)<br>Identical behavior of images in both versions of the application<br>No console windows during scanning<br>Manual VIN decoding completely offline</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vin Decoder')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-sdmedia.jpg"><div class="card-body"><h3>SDMedia</h3><p class="desc" data-translate="desc_media">Multimédia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDMedia')">Ver</button></div></div></div>
                         </div>
                     </div>
@@ -440,6 +440,11 @@
             container.querySelector('#brand-' + id).classList.add('active');
             container.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            
+            // CORREÇÃO: SCROLL AUTOMÁTICO PARA O TOPO DA SECÇÃO
+            // Ajusta o scroll da janela para ver o topo da lista de produtos
+            const contentTop = document.querySelector('.app-container').offsetTop - 100;
+            window.scrollTo({top: contentTop, behavior: 'smooth'});
         }
 
         /* --- TRADUÇÃO COMPLETA (UI + PRODUTOS) --- */
