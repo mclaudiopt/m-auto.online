@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V17.7</title>
+    <title>M-Auto Online | V17.8</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -115,11 +115,7 @@
         
         .card p.sub-desc { 
             font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; flex-grow: 1;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
         }
         
         .tech-details { background: var(--tech-bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; margin-top: auto; margin-bottom: 15px; font-size: 0.75rem; color: var(--text-muted); }
@@ -150,6 +146,27 @@
         .prod-btn { background: #25D366; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 1rem; transition: 0.2s; }
         .prod-btn:hover { background: #1ebc57; transform: scale(1.05); }
 
+        /* LISTA DE TOOLS E SERVIÇOS */
+        /* Estilização melhorada para listas */
+        .tool-list { display: flex; flex-direction: column; gap: 15px; max-width: 900px; margin: 0 auto; }
+        .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); transition: 0.3s; }
+        .tool-row:hover { transform: translateY(-3px); border-color: var(--accent); }
+        .tool-info { display: flex; align-items: center; gap: 20px; }
+        .tool-icon-box { width: 55px; height: 55px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .tool-meta h4 { margin: 0; font-size: 1.15rem; color: var(--text-main); font-weight: 700; }
+        .tool-meta p { margin: 5px 0 0; font-size: 0.95rem; color: var(--text-muted); }
+        .tool-btn { padding: 10px 24px; border-radius: 8px; background: var(--bg-body); border: 2px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.9rem; text-decoration: none; white-space: nowrap; transition: 0.3s; cursor: pointer; }
+        .tool-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+        /* HEADERS DE SECÇÃO MAIS ESPAÇADOS */
+        .panel-header { text-align: center; margin-bottom: 40px; margin-top: 10px; font-size: 1.8rem; font-weight: 800; color: var(--text-main); }
+
+        /* SOBRE (MELHORADO) */
+        .about-section { background: var(--bg-card); border-top: 1px solid var(--border); padding: 100px 20px; text-align: center; margin-top: 60px; }
+        .about-container { max-width: 800px; margin: 0 auto; }
+        .about-container h2 { margin-bottom: 30px; font-size: 2rem; color: var(--accent); }
+        .about-container p { font-size: 1.15rem; line-height: 1.8; color: var(--text-muted); }
+
         /* FAB & WIDGET */
         .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1500; display: flex; flex-direction: column; gap: 15px; align-items: flex-end; }
         .fab-item { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; transform: scale(0); opacity: 0; border: none; cursor: pointer; }
@@ -172,28 +189,6 @@
         .popup-icon { font-size: 1.5rem; }
         .popup-text p { margin: 0; font-size: 0.85rem; font-weight: 700; color: #000; }
         .popup-close { position: absolute; top: 2px; right: 5px; background: none; border: none; font-size: 1.2rem; cursor: pointer; opacity: 0.5; color: #000; }
-
-        .about-section { background: var(--bg-card); border-top: 1px solid var(--border); padding: 80px 20px; text-align: center; }
-        .about-container { max-width: 900px; margin: 0 auto; }
-
-        .tool-list { display: flex; flex-direction: column; gap: 15px; max-width: 900px; margin: 0 auto; }
-        .tool-row { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); }
-        .tool-info { display: flex; align-items: center; gap: 20px; }
-        .tool-icon-box { width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.2rem; }
-        .tool-meta h4 { margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700; }
-        .tool-meta p { margin: 5px 0 0; font-size: 0.9rem; color: var(--text-muted); }
-        .tool-btn { padding: 10px 20px; border-radius: 8px; background: var(--bg-body); border: 2px solid var(--border); color: var(--accent); font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-        .tool-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
-
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; justify-content: center; }
-        .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); }
-        .service-header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 25px; color: white; }
-        .service-header h3 { margin: 0; font-size: 1.3rem; }
-        .service-body { padding: 25px; flex-grow: 1; }
-        .service-body p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
-        .service-footer { padding: 20px; border-top: 1px solid var(--border); background: var(--bg-body); }
-        .btn-schedule { width: 100%; padding: 12px; border-radius: 8px; background: var(--accent); border: none; color: white; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; }
-        .btn-schedule:hover { background: var(--accent-hover); }
 
         footer { background: var(--bg-footer); border-top: 1px solid var(--border); padding: 80px 20px 120px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
         .mobile-nav { display: none; }
@@ -232,7 +227,7 @@
     <header>
         <div class="header-left">
             <a href="#inicio" class="logo-link">
-                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.7</span>
+                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.8</span>
             </a>
         </div>
         <div class="header-right">
@@ -254,7 +249,7 @@
     <div id="salesPopup" class="sales-popup">
         <button class="popup-close" onclick="document.getElementById('salesPopup').classList.remove('active')">×</button>
         <div class="popup-icon">👀</div>
-        <div class="popup-text"><p id="viewerText"></p></div>
+        <div class="popup-text"><p><span id="viewerCount">5</span> pessoas a ver este site.</p></div>
     </div>
 
     <div id="productModal" class="prod-modal">
@@ -349,49 +344,50 @@
                                     <div class="card-footer"><span class="price" style="color:var(--gold)" data-translate="price_pack">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="openDetails(this)" data-full-desc-key="desc_merc_full_detail" data-title-key="prod_merc_full" data-price-key="price_pack" data-img="IMG/mauto/m-auto.png">VER</button></div>
                                 </div>
                             </div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-cars.jpg"><div class="card-body"><h3>Xentry Cars</h3><p class="desc" data-translate="desc_cars">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_xentry_detail" data-title="Xentry Cars" data-img="IMG/Daimler/merc-xentry-cars.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-trucks.jpg"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc" data-translate="desc_trucks">Pesados.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_xentry_detail" data-title="Xentry Trucks" data-img="IMG/Daimler/merc-xentry-trucks.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/wis.jpg"><div class="card-body"><h3>WIS 2021</h3><p class="desc" data-translate="desc_manuals">Manuais.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_wis_detail" data-title="WIS 2021" data-img="IMG/Daimler/wis.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/epc.jpg"><div class="card-body"><h3>EPC</h3><p class="desc" data-translate="desc_parts">Peças.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2018</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_epc_detail" data-title="EPC" data-img="IMG/Daimler/epc.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vgsnag2.jpg"><div class="card-body"><h3>VGSNAG2 Manager</h3><p class="desc" data-translate="desc_gearbox">Caixa 722.9.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vgs_detail" data-title="VGSNAG2 Manager" data-img="IMG/Daimler/merc-vgsnag2.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/Merc-DTS9.jpg"><div class="card-body"><h3>DTS Monaco 9.02</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_dts_detail" data-title="DTS Monaco 9.02" data-img="IMG/Daimler/Merc-DTS9.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/Merc-Vediamo.jpg"><div class="card-body"><h3>Vediamo 4/5</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vediamo_detail" data-title="Vediamo 4/5" data-img="IMG/Daimler/Merc-Vediamo.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-htt.jpg"><div class="card-body"><h3>HHTWIN</h3><p class="desc" data-translate="desc_classic">Clássicos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_hht_detail" data-title="HHTWIN" data-img="IMG/Daimler/merc-htt.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-7g-tools.jpg"><div class="card-body"><h3>7G Tronic</h3><p class="desc">Reset.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_7g_detail" data-title="7G Tronic" data-img="IMG/Daimler/merc-7g-tools.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-certificates.jpg"><div class="card-body"><h3>Certificados ZenZefi</h3><p class="desc" data-translate="desc_offline">Acesso Offline.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_zenzefi_detail" data-title="ZenZefi" data-img="IMG/Daimler/merc-certificates.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-mbtools.jpg"><div class="card-body"><h3>MbTools</h3><p class="desc" data-translate="desc_util">Utilitário.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_mbtools_detail" data-title="MbTools" data-img="IMG/Daimler/merc-mbtools.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-pricelist.jpg"><div class="card-body"><h3>Price List 2025</h3><p class="desc">Excel.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_pl_detail" data-title="Price List 2025" data-img="IMG/Daimler/merc-pricelist.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-tutorials.jpg"><div class="card-body"><h3>Coding Tutorials</h3><p class="desc" data-translate="desc_guides">Guias.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_tut_detail" data-title="Tutorials" data-img="IMG/Daimler/merc-tutorials.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vindecoder.jpg"><div class="card-body"><h3>Vin Decoder</h3><p class="desc" data-translate="desc_ident">Identificação.</p><p class="sub-desc" data-translate="desc_vin_detail">Full FBS database...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vin_detail" data-title="Vin Decoder" data-img="IMG/Daimler/merc-vindecoder.jpg">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-sdmedia.jpg"><div class="card-body"><h3>SDMedia</h3><p class="desc" data-translate="desc_media">Multimédia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_sdm_detail" data-title="SDMedia" data-img="IMG/Daimler/merc-sdmedia.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-cars.jpg" loading="lazy"><div class="card-body"><h3>Xentry Cars</h3><p class="desc" data-translate="desc_cars">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_xentry_detail" data-title="Xentry Cars" data-img="IMG/Daimler/merc-xentry-cars.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-trucks.jpg" loading="lazy"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc" data-translate="desc_trucks">Pesados.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_xentry_detail" data-title="Xentry Trucks" data-img="IMG/Daimler/merc-xentry-trucks.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/wis.jpg" loading="lazy"><div class="card-body"><h3>WIS 2021</h3><p class="desc" data-translate="desc_manuals">Manuais.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_wis_detail" data-title="WIS 2021" data-img="IMG/Daimler/wis.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/epc.jpg" loading="lazy"><div class="card-body"><h3>EPC</h3><p class="desc" data-translate="desc_parts">Peças.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2018</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_epc_detail" data-title="EPC" data-img="IMG/Daimler/epc.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vgsnag2.jpg" loading="lazy"><div class="card-body"><h3>VGSNAG2 Manager</h3><p class="desc" data-translate="desc_gearbox">Caixa 722.9.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vgs_detail" data-title="VGSNAG2 Manager" data-img="IMG/Daimler/merc-vgsnag2.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/Merc-DTS9.jpg" loading="lazy"><div class="card-body"><h3>DTS Monaco 9.02</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_dts_detail" data-title="DTS Monaco 9.02" data-img="IMG/Daimler/Merc-DTS9.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/Merc-Vediamo.jpg" loading="lazy"><div class="card-body"><h3>Vediamo 4/5</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vediamo_detail" data-title="Vediamo 4/5" data-img="IMG/Daimler/Merc-Vediamo.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-htt.jpg" loading="lazy"><div class="card-body"><h3>HHTWIN</h3><p class="desc" data-translate="desc_classic">Clássicos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_hht_detail" data-title="HHTWIN" data-img="IMG/Daimler/merc-htt.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-7g-tools.jpg" loading="lazy"><div class="card-body"><h3>7G Tronic</h3><p class="desc">Reset.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_7g_detail" data-title="7G Tronic" data-img="IMG/Daimler/merc-7g-tools.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-certificates.jpg" loading="lazy"><div class="card-body"><h3>Certificados ZenZefi</h3><p class="desc" data-translate="desc_offline">Acesso Offline.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_zenzefi_detail" data-title="ZenZefi" data-img="IMG/Daimler/merc-certificates.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-mbtools.jpg" loading="lazy"><div class="card-body"><h3>MbTools</h3><p class="desc" data-translate="desc_util">Utilitário.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_mbtools_detail" data-title="MbTools" data-img="IMG/Daimler/merc-mbtools.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-pricelist.jpg" loading="lazy"><div class="card-body"><h3>Price List 2025</h3><p class="desc">Excel.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_pl_detail" data-title="Price List 2025" data-img="IMG/Daimler/merc-pricelist.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-tutorials.jpg" loading="lazy"><div class="card-body"><h3>Coding Tutorials</h3><p class="desc" data-translate="desc_guides">Guias.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_tut_detail" data-title="Tutorials" data-img="IMG/Daimler/merc-tutorials.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vindecoder.jpg" loading="lazy"><div class="card-body"><h3>Vin Decoder</h3><p class="desc" data-translate="desc_ident">Identificação.</p><p class="sub-desc" data-translate="desc_vin_detail">Full FBS database...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vin_detail" data-title="Vin Decoder" data-img="IMG/Daimler/merc-vindecoder.jpg">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-sdmedia.jpg" loading="lazy"><div class="card-body"><h3>SDMedia</h3><p class="desc" data-translate="desc_media">Multimédia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_sdm_detail" data-title="SDMedia" data-img="IMG/Daimler/merc-sdmedia.jpg">Ver</button></div></div></div>
                         </div>
                     </div>
                     
-                    <div id="brand-vag" class="brand-panel"><h2 class="panel-header">VAG</h2><div class="grid"><div class="card searchable-item"><img src="IMG/VAG/vag-odis-service.jpg"><div class="card-body"><h3>ODIS Service</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_odis_s">Sistema oficial...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_odis_s" data-title="ODIS Service" data-img="IMG/VAG/vag-odis-service.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/VAG/vag-odis-eng.jpg"><div class="card-body"><h3>ODIS Engineering</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><p class="sub-desc" data-translate="desc_odis_e">Software de engenharia...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_odis_e" data-title="ODIS Engineering" data-img="IMG/VAG/vag-odis-eng.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-vag" class="brand-panel"><h2 class="panel-header">VAG</h2><div class="grid"><div class="card searchable-item"><img src="IMG/VAG/vag-odis-service.jpg" loading="lazy"><div class="card-body"><h3>ODIS Service</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_odis_s">Sistema oficial...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_odis_s" data-title="ODIS Service" data-img="IMG/VAG/vag-odis-service.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/VAG/vag-odis-eng.jpg" loading="lazy"><div class="card-body"><h3>ODIS Engineering</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><p class="sub-desc" data-translate="desc_odis_e">Software de engenharia...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_odis_e" data-title="ODIS Engineering" data-img="IMG/VAG/vag-odis-eng.jpg">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card searchable-item"><img src="IMG/BMW/BMW-Ista.jpg"><div class="card-body"><h3>ISTA+</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_ista_d">Diagnóstico...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ista_d" data-title="ISTA+" data-img="IMG/BMW/BMW-Ista.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/BMW/bmw-istap.jpg"><div class="card-body"><h3>ISTA-P</h3><p class="desc" data-translate="desc_prog">Programação.</p><p class="sub-desc" data-translate="desc_ista_p">Programação...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ista_p" data-title="ISTA-P" data-img="IMG/BMW/bmw-istap.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card searchable-item"><img src="IMG/BMW/BMW-Ista.jpg" loading="lazy"><div class="card-body"><h3>ISTA+</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_ista_d">Diagnóstico...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ista_d" data-title="ISTA+" data-img="IMG/BMW/BMW-Ista.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/BMW/bmw-istap.jpg" loading="lazy"><div class="card-body"><h3>ISTA-P</h3><p class="desc" data-translate="desc_prog">Programação.</p><p class="sub-desc" data-translate="desc_ista_p">Programação...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ista_p" data-title="ISTA-P" data-img="IMG/BMW/bmw-istap.jpg">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="https://m-auto.online/IMG/PSA/psa-diagbox9.jpg"><div class="card-body"><h3>Diagbox 9</h3><p class="desc" data-translate="desc_new">Recentes.</p><p class="sub-desc" data-translate="desc_diagbox9">Diagnóstico...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_diagbox9" data-title="Diagbox 9" data-img="https://m-auto.online/IMG/PSA/psa-diagbox9.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><p class="desc" data-translate="desc_old">Antigos.</p><p class="sub-desc" data-translate="desc_diagbox7">Versão clássica...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_diagbox7" data-title="Diagbox 7" data-img="IMG/PSA/psa-diagbox7.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="https://m-auto.online/IMG/PSA/psa-diagbox9.jpg" loading="lazy"><div class="card-body"><h3>Diagbox 9</h3><p class="desc" data-translate="desc_new">Recentes.</p><p class="sub-desc" data-translate="desc_diagbox9">Diagnóstico...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_diagbox9" data-title="Diagbox 9" data-img="https://m-auto.online/IMG/PSA/psa-diagbox9.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg" loading="lazy"><div class="card-body"><h3>Diagbox 7</h3><p class="desc" data-translate="desc_old">Antigos.</p><p class="sub-desc" data-translate="desc_diagbox7">Versão clássica...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_diagbox7" data-title="Diagbox 7" data-img="IMG/PSA/psa-diagbox7.jpg">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Renault/renault-clip.jpg"><div class="card-body"><h3>Can Clip</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_clip">Ferramenta oficial...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_clip" data-title="Can Clip" data-img="IMG/Renault/renault-clip.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-dialogys.jpg"><div class="card-body"><h3>Dialogys</h3><p class="desc" data-translate="desc_manuals">Manuais.</p><p class="sub-desc" data-translate="desc_dialogys">Documentação...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_dialogys" data-title="Dialogys" data-img="IMG/Renault/renault-dialogys.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Renault/renault-clip.jpg" loading="lazy"><div class="card-body"><h3>Can Clip</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_clip">Ferramenta oficial...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_clip" data-title="Can Clip" data-img="IMG/Renault/renault-clip.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-dialogys.jpg" loading="lazy"><div class="card-body"><h3>Dialogys</h3><p class="desc" data-translate="desc_manuals">Manuais.</p><p class="sub-desc" data-translate="desc_dialogys">Documentação...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_dialogys" data-title="Dialogys" data-img="IMG/Renault/renault-dialogys.jpg">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card searchable-item"><img src="IMG/JLR/jlr-pathfinder.jpg"><div class="card-body"><h3>Pathfinder</h3><p class="desc" data-translate="desc_new">Recentes.</p><p class="sub-desc" data-translate="desc_pathfinder">Nova arquitetura...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_pathfinder" data-title="Pathfinder" data-img="IMG/JLR/jlr-pathfinder.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/JLR/JLR-sdd.jpg"><div class="card-body"><h3>SDD</h3><p class="desc" data-translate="desc_old">Antigos.</p><p class="sub-desc" data-translate="desc_sdd">Symptom Driven...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_sdd" data-title="SDD" data-img="IMG/JLR/JLR-sdd.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card searchable-item"><img src="IMG/JLR/jlr-pathfinder.jpg" loading="lazy"><div class="card-body"><h3>Pathfinder</h3><p class="desc" data-translate="desc_new">Recentes.</p><p class="sub-desc" data-translate="desc_pathfinder">Nova arquitetura...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_pathfinder" data-title="Pathfinder" data-img="IMG/JLR/jlr-pathfinder.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/JLR/JLR-sdd.jpg" loading="lazy"><div class="card-body"><h3>SDD</h3><p class="desc" data-translate="desc_old">Antigos.</p><p class="sub-desc" data-translate="desc_sdd">Symptom Driven...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_sdd" data-title="SDD" data-img="IMG/JLR/JLR-sdd.jpg">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Toyota/toyota-techstream.jpg"><div class="card-body"><h3>Techstream</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_techstream">Software de fábrica...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_techstream" data-title="Techstream" data-img="IMG/Toyota/toyota-techstream.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/epc.jpg"><div class="card-body"><h3>EPC</h3><p class="desc" data-translate="desc_parts">Peças.</p><p class="sub-desc" data-translate="desc_toyota_epc">Catálogo de peças...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_toyota_epc" data-title="Toyota EPC" data-img="IMG/Toyota/epc.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/Toylex.jpg"><div class="card-body"><h3>Toylex 4</h3><p class="desc" data-translate="desc_util">Utilitário.</p><p class="sub-desc" data-translate="desc_toylex">Desativador...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_toylex" data-title="Toylex 4" data-img="IMG/Toyota/Toylex.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Toyota/toyota-techstream.jpg" loading="lazy"><div class="card-body"><h3>Techstream</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_techstream">Software de fábrica...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_techstream" data-title="Techstream" data-img="IMG/Toyota/toyota-techstream.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/epc.jpg" loading="lazy"><div class="card-body"><h3>EPC</h3><p class="desc" data-translate="desc_parts">Peças.</p><p class="sub-desc" data-translate="desc_toyota_epc">Catálogo de peças...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_toyota_epc" data-title="Toyota EPC" data-img="IMG/Toyota/epc.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/Toylex.jpg" loading="lazy"><div class="card-body"><h3>Toylex 4</h3><p class="desc" data-translate="desc_util">Utilitário.</p><p class="sub-desc" data-translate="desc_toylex">Desativador...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_toylex" data-title="Toylex 4" data-img="IMG/Toyota/Toylex.jpg">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-nissan" class="brand-panel"><h2 class="panel-header">Nissan</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Nissan/nissan-consult.jpg"><div class="card-body"><h3>Consult III+</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_consult">Sistema avançado...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_consult" data-title="Consult III+" data-img="IMG/Nissan/nissan-consult.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-nissan" class="brand-panel"><h2 class="panel-header">Nissan</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Nissan/nissan-consult.jpg" loading="lazy"><div class="card-body"><h3>Consult III+</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_consult">Sistema avançado...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_consult" data-title="Consult III+" data-img="IMG/Nissan/nissan-consult.jpg">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Ford/ford-fdrs.jpg"><div class="card-body"><h3>FDRS</h3><p class="desc" data-translate="desc_new">Recentes.</p><p class="sub-desc" data-translate="desc_fdrs">Ford Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_fdrs" data-title="FDRS" data-img="IMG/Ford/ford-fdrs.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-ids.jpg"><div class="card-body"><h3>IDS</h3><p class="desc" data-translate="desc_old">Antigos.</p><p class="sub-desc" data-translate="desc_ids">Integrated Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ids" data-title="IDS" data-img="IMG/Ford/ford-ids.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Ford/ford-fdrs.jpg" loading="lazy"><div class="card-body"><h3>FDRS</h3><p class="desc" data-translate="desc_new">Recentes.</p><p class="sub-desc" data-translate="desc_fdrs">Ford Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_fdrs" data-title="FDRS" data-img="IMG/Ford/ford-fdrs.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-ids.jpg" loading="lazy"><div class="card-body"><h3>IDS</h3><p class="desc" data-translate="desc_old">Antigos.</p><p class="sub-desc" data-translate="desc_ids">Integrated Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ids" data-title="IDS" data-img="IMG/Ford/ford-ids.jpg">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg"><div class="card-body"><h3>GDS2</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_gds2">Global Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_gds2" data-title="GDS2" data-img="IMG/GM/gm-gds2.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg" loading="lazy"><div class="card-body"><h3>GDS2</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_gds2">Global Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_gds2" data-title="GDS2" data-img="IMG/GM/gm-gds2.jpg">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
 
         <div id="sec-hard" class="section-view">
+            <h2 class="panel-header" style="text-align:center" data-translate="nav_hard">Hardware</h2>
             <div class="grid">
-                <div class="card searchable-item"><img src="IMG/hardware/hw-openport.jpg"><div class="card-body"><h3>Openport 2.0</h3><p class="desc" data-translate="desc_interface">Interface J2534</p><p class="sub-desc" data-translate="desc_openport_full">Interface J2534...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_openport_full" data-title="Openport 2.0" data-img="IMG/hardware/hw-openport.jpg">Ver</button></div></div></div>
-                <div class="card searchable-item"><img src="IMG/hardware/hw-c4.jpg"><div class="card-body"><h3>C4 Connect</h3><p class="desc" data-translate="desc_mux">Multiplexer MB</p><p class="sub-desc" data-translate="desc_c4_full">Multiplexer SD...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_c4_full" data-title="C4 Connect" data-img="IMG/hardware/hw-c4.jpg">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/hw-openport.jpg" loading="lazy"><div class="card-body"><h3>Openport 2.0</h3><p class="desc" data-translate="desc_interface">Interface J2534</p><p class="sub-desc" data-translate="desc_openport_full">Interface J2534...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_openport_full" data-title="Openport 2.0" data-img="IMG/hardware/hw-openport.jpg">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/hw-c4.jpg" loading="lazy"><div class="card-body"><h3>C4 Connect</h3><p class="desc" data-translate="desc_mux">Multiplexer MB</p><p class="sub-desc" data-translate="desc_c4_full">Multiplexer SD...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_c4_full" data-title="C4 Connect" data-img="IMG/hardware/hw-c4.jpg">Ver</button></div></div></div>
             </div>
         </div>
 
@@ -407,12 +403,42 @@
 
         <div id="sec-serv" class="section-view">
             <h2 class="panel-header" style="text-align:center" data-translate="nav_serv">Serviços</h2>
-            <div class="services-grid">
-                <div class="service-card"><div class="service-header"><h3 data-translate="serv_fmt">Formatação</h3></div><div class="service-body"><p data-translate="desc_fmt">Instalação limpa de Windows 10/11 Pro com drivers e otimização para diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Formatação')" data-translate="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-translate="serv_av">Anti-vírus</h3></div><div class="service-body"><p data-translate="desc_av">Instalação e configuração de proteção leve e eficaz.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Anti-vírus')" data-translate="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-translate="serv_inst">Instalação</h3></div><div class="service-body"><p data-translate="desc_inst">Instalação remota completa de qualquer software de diagnóstico.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Instalação')" data-translate="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-translate="serv_opt">Otimização</h3></div><div class="service-body"><p data-translate="desc_opt">Limpeza de sistema, registo e aceleração do arranque.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Otimização')" data-translate="btn_schedule">Agendar</button></div></div>
-                <div class="service-card"><div class="service-header"><h3 data-translate="serv_upg">Upgrade HW</h3></div><div class="service-body"><p data-translate="desc_upg">Consultoria para upgrade de memória RAM e disco SSD.</p></div><div class="service-footer"><button class="btn-schedule" onclick="orderProduct('Upgrade')" data-translate="btn_schedule">Agendar</button></div></div>
+            <div class="tool-list">
+                <div class="tool-row searchable-item">
+                    <div class="tool-info">
+                        <div class="tool-icon-box" style="background:#3b82f6">FMT</div>
+                        <div class="tool-meta"><h4 data-translate="serv_fmt">Formatação</h4><p data-translate="desc_fmt">Instalação limpa...</p></div>
+                    </div>
+                    <button class="tool-btn" onclick="orderProduct('Formatação')">Agendar</button>
+                </div>
+                <div class="tool-row searchable-item">
+                    <div class="tool-info">
+                        <div class="tool-icon-box" style="background:#ef4444">AV</div>
+                        <div class="tool-meta"><h4 data-translate="serv_av">Anti-vírus</h4><p data-translate="desc_av">Instalação...</p></div>
+                    </div>
+                    <button class="tool-btn" onclick="orderProduct('Anti-vírus')">Agendar</button>
+                </div>
+                <div class="tool-row searchable-item">
+                    <div class="tool-info">
+                        <div class="tool-icon-box" style="background:#22c55e">INS</div>
+                        <div class="tool-meta"><h4 data-translate="serv_inst">Instalação</h4><p data-translate="desc_inst">Instalação remota...</p></div>
+                    </div>
+                    <button class="tool-btn" onclick="orderProduct('Instalação')">Agendar</button>
+                </div>
+                <div class="tool-row searchable-item">
+                    <div class="tool-info">
+                        <div class="tool-icon-box" style="background:#f59e0b">OPT</div>
+                        <div class="tool-meta"><h4 data-translate="serv_opt">Otimização</h4><p data-translate="desc_opt">Limpeza de sistema...</p></div>
+                    </div>
+                    <button class="tool-btn" onclick="orderProduct('Otimização')">Agendar</button>
+                </div>
+                <div class="tool-row searchable-item">
+                    <div class="tool-info">
+                        <div class="tool-icon-box" style="background:#a855f7">UPG</div>
+                        <div class="tool-meta"><h4 data-translate="serv_upg">Upgrade HW</h4><p data-translate="desc_upg">Consultoria...</p></div>
+                    </div>
+                    <button class="tool-btn" onclick="orderProduct('Upgrade')">Agendar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -436,12 +462,9 @@
     </footer>
 
     <script>
-        // TYPEWRITER (PSA Corrigido)
+        // TYPEWRITER
         const typewriter = document.querySelector(".typewriter-text");
-        const texts = [
-            "Mercedes-Benz", "Volkswagen", "BMW", "Audi", "PSA", 
-            "Renault", "JLR", "Toyota", "Nissan", "Ford", "GM"
-        ];
+        const texts = ["Mercedes-Benz", "Volkswagen", "BMW", "Audi", "PSA", "Renault", "JLR", "Toyota", "Nissan", "Ford", "GM"];
         let count = 0;
         let index = 0;
         let currentText = "";
@@ -478,20 +501,16 @@
             container.querySelector('#brand-' + id).classList.add('active');
             container.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
-            // SCROLL AUTOMÁTICO
             const contentTop = document.querySelector('.app-container').offsetTop - 100;
             window.scrollTo({top: contentTop, behavior: 'smooth'});
         }
 
-        /* --- TRADUÇÃO COMPLETA ATUALIZADA (V17.3) --- */
+        /* --- TRADUÇÃO COMPLETA ATUALIZADA (V17.8) --- */
         const translations = {
             pt: { 
                 hero_sol: "Soluções Online", hero_desc: "Instalação remota profissional.", 
                 nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", nav_about: "Sobre", 
                 badge_best: "Melhor Escolha",
-                
-                // Produtos (Títulos e Curtas)
                 prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "A Solução Completa.", price_pack: "Pack Completo",
                 desc_merc_full_detail: "Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.",
                 desc_cars: "Ligeiros", desc_trucks: "Pesados", desc_manuals: "Manuais", desc_parts: "Peças",
@@ -499,8 +518,6 @@
                 desc_util: "Utilitário", desc_guides: "Guias", desc_ident: "Identificação", desc_media: "Multimédia",
                 desc_diag: "Diagnóstico", desc_prog: "Programação", desc_new: "Recentes", desc_old: "Antigos",
                 desc_interface: "Interface J2534", desc_mux: "Multiplexer MB",
-
-                // DESCRIÇÕES DETALHADAS (Longas)
                 desc_vin_detail: "Base de dados FBS completa e inferências baseadas no VIN<br>Sistema completo de deteção de tipo de carroçaria<br>Visualização fixa de plataforma e transmissão<br>Binário restaurado e características notáveis do motor<br>Formatação melhorada para relatórios detalhados<br>A lógica exata do 'modelo completo' (E220D, C200, etc.)<br>Comportamento idêntico das imagens em ambas as versões<br>Sem janelas de consola durante a verificação<br>Descodificação manual de VIN completamente offline",
                 desc_odis_s: "Software de diagnóstico de revendedor para todas as marcas do grupo VAG (VW, Audi, Seat, Skoda, Bentley, Lamborghini). Inclui funções de diagnóstico guiado, esquemas elétricos e boletins técnicos.",
                 desc_odis_e: "Software de engenharia VAG para flashagem offline de unidades de controlo. Permite alterar parâmetros e codificações avançadas não acessíveis no ODIS Service.",
@@ -519,35 +536,26 @@
                 desc_fdrs: "Sistema de diagnóstico e reparação Ford de próxima geração. Baseado na nuvem, para todos os veículos novos da Ford. Requer licença online para funções completas.",
                 desc_ids: "Padrão de diagnóstico para veículos Ford. Cobre diagnósticos de concessionário, programação de módulos, PATS (imobilizador) e regeneração de DPF.",
                 desc_gds2: "Software de diagnóstico global para plataformas GM Global A. Suporta Buick, Cadillac, Chevrolet, GMC e Opel/Vauxhall (modelos 2010+).",
-                
-                // Hardware & Tools Detalhado
                 desc_openport_full: "Interface J2534 PassThru de alta qualidade. Compatível com Xentry, ODIS, Techstream, Forscan e muito mais. Essencial para diagnóstico multimarca.",
                 desc_c4_full: "Multiplexer SD Connect C4 de grau A+. Suporta comunicação DoIP, WiFi estável e firmware atualizável. A melhor escolha para diagnóstico Mercedes.",
                 desc_remote_full: "Software de acesso remoto de alta performance, baixa latência e seguro. Alternativa superior ao TeamViewer para suporte técnico.",
                 desc_iso_full: "Ferramenta oficial da Microsoft para criar pen drives de arranque com a versão mais recente do Windows 10/11.",
                 desc_extract_full: "Gestor de arquivos open-source. Essencial para extrair os nossos pacotes de software com máxima compatibilidade.",
                 desc_defender_full: "Utilitário portátil para desativar completamente o Windows Defender, evitando falsos positivos durante instalações.",
-
-                // Serviços Novos
                 serv_fmt: "Formatação", desc_fmt: "Instalação limpa de Windows 10/11 Pro com drivers e otimização.",
                 serv_av: "Anti-vírus", desc_av: "Instalação e configuração de proteção leve e eficaz.",
                 serv_inst: "Instalação", desc_inst: "Instalação remota completa de qualquer software de diagnóstico.",
                 serv_opt: "Otimização", desc_opt: "Limpeza de sistema, registo e aceleração do arranque.",
                 serv_upg: "Upgrade HW", desc_upg: "Consultoria para upgrade de memória RAM e disco SSD.",
-                
                 btn_schedule: "Agendar",
-                
                 about_text_full: "Somos especialistas em software de diagnóstico automóvel com anos de experiência. Oferecemos um serviço profissional, com resposta rápida e suporte assegurado. As nossas instalações são limpas, otimizadas e garantidas. Trabalhamos com as melhores ferramentas do mercado para garantir que a sua oficina nunca para.", 
                 wiz_os: "Qual é o seu Windows?", wiz_ram: "Memória RAM?", wiz_result: "Resultado",
-                
-                // Popup Text
                 popup_text: "pessoas a ver este site."
             },
             en: { 
                 hero_sol: "Online Solutions", hero_desc: "Professional remote installation.", 
                 nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", nav_about: "About", 
                 badge_best: "Best Choice",
-
                 prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "The Complete Solution.", price_pack: "Full Pack",
                 desc_merc_full_detail: "Includes Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools and Certificates.",
                 desc_cars: "Cars", desc_trucks: "Trucks", desc_manuals: "Manuals", desc_parts: "Parts",
@@ -555,8 +563,6 @@
                 desc_util: "Utility", desc_guides: "Guides", desc_ident: "Identification", desc_media: "Multimedia",
                 desc_diag: "Diagnostic", desc_prog: "Programming", desc_new: "Recent", desc_old: "Legacy",
                 desc_interface: "J2534 Interface", desc_mux: "MB Multiplexer",
-
-                // Detailed Descriptions EN
                 desc_vin_detail: "Full FBS database and VIN-based inferences<br>Complete body type detection system<br>Fixed display of platform and transmission<br>Restored torque and noticeable engine features<br>Improved formatting for detailed reports<br>The exact logic of the 'full model' (E220D, C200, etc.)<br>Identical behavior of images in both versions<br>No console windows during scanning<br>Manual VIN decoding completely offline",
                 desc_odis_s: "Dealer diagnostic software for all VAG group brands (VW, Audi, Seat, Skoda, Bentley, Lamborghini). Includes guided fault finding, wiring diagrams and TSBs.",
                 desc_odis_e: "VAG engineering software for offline ECU flashing. Allows changing parameters and advanced coding not accessible in ODIS Service.",
@@ -575,34 +581,25 @@
                 desc_fdrs: "Next-generation Ford Diagnostic and Repair System. Cloud-based, for all new Ford vehicles. Requires online license for full functions.",
                 desc_ids: "Diagnostic standard for legacy Ford fleet. Covers dealer diagnostics, module programming, PATS (immobilizer) and DPF regeneration.",
                 desc_gds2: "Global Diagnostic System 2 for GM Global A platforms. Supports Buick, Cadillac, Chevrolet, GMC and Opel/Vauxhall (2010+ models).",
-
-                // Hard/Tools Detailed EN
                 desc_openport_full: "High quality J2534 PassThru interface. Compatible with Xentry, ODIS, Techstream, Forscan and more. Essential for multi-brand diagnostics.",
                 desc_c4_full: "Grade A+ SD Connect C4 Multiplexer. Supports DoIP communication, stable WiFi and updateable firmware. The best choice for Mercedes diagnostics.",
                 desc_remote_full: "High performance, low latency and secure remote access software. Superior alternative to TeamViewer for technical support.",
                 desc_iso_full: "Official Microsoft tool to create bootable USB drives with the latest version of Windows 10/11.",
                 desc_extract_full: "Open-source file manager. Essential for extracting our software packages with maximum compatibility.",
                 desc_defender_full: "Portable utility to completely disable Windows Defender, avoiding false positives during installations.",
-
-                // Services
                 serv_fmt: "Formatting", desc_fmt: "Clean Windows 10/11 Pro install with drivers and optimization.",
                 serv_av: "Anti-virus", desc_av: "Installation and configuration of light and effective protection.",
                 serv_inst: "Installation", desc_inst: "Full remote software installation.",
                 serv_opt: "Optimization", desc_opt: "System cleaning, registry fix and boot acceleration.",
                 serv_upg: "HW Upgrade", desc_upg: "Consulting for RAM memory and SSD upgrade.",
-
                 btn_schedule: "Schedule",
                 about_text_full: "We are automotive diagnostic software specialists with years of experience. We offer professional service, fast response and guaranteed support. Our installations are clean, optimized and guaranteed. We work with the best tools on the market to ensure your workshop never stops.", 
-                wiz_os: "Which Windows?", wiz_ram: "RAM Memory?", wiz_result: "Result",
-                
-                // Popup Text
-                popup_text: "people viewing this site."
+                wiz_os: "Which Windows?", wiz_ram: "RAM Memory?", wiz_result: "Result"
             },
             fr: { 
                 hero_sol: "Solutions En Ligne", hero_desc: "Installation à distance pro.", 
                 nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", nav_about: "À propos", 
                 badge_best: "Meilleur Choix",
-
                 prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "La Solution Complète.", price_pack: "Pack Complet",
                 desc_merc_full_detail: "Comprend Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools et Certificats.",
                 desc_cars: "Voitures", desc_trucks: "Camions", desc_manuals: "Manuels", desc_parts: "Pièces",
@@ -610,8 +607,6 @@
                 desc_util: "Utilitaire", desc_guides: "Guides", desc_ident: "Identification", desc_media: "Multimédia",
                 desc_diag: "Diagnostic", desc_prog: "Programmation", desc_new: "Récents", desc_old: "Anciens",
                 desc_interface: "Interface J2534", desc_mux: "Multiplexeur MB",
-
-                // Detailed Descriptions FR
                 desc_vin_detail: "Base de données FBS complète et inférences basées sur VIN<br>Système complet de détection de type de carrosserie<br>Affichage fixe de la plateforme et de la transmission<br>Couple restauré et caractéristiques moteur notables<br>Formatage amélioré pour les rapports détaillés<br>La logique exacte du 'modèle complet' (E220D, C200, etc.)<br>Comportement identique des images<br>Pas de fenêtres de console pendant le scan<br>Décodage manuel VIN complètement hors ligne",
                 desc_odis_s: "Logiciel de diagnostic concessionnaire pour toutes les marques du groupe VAG (VW, Audi, Seat, Skoda). Comprend la recherche de pannes guidée et les schémas.",
                 desc_odis_e: "Logiciel d'ingénierie VAG pour le flashage hors ligne des calculateurs. Permet de modifier des paramètres et codages avancés.",
@@ -630,36 +625,26 @@
                 desc_fdrs: "Système de diagnostic et réparation Ford nouvelle génération. Basé sur le cloud, pour tous les nouveaux véhicules Ford.",
                 desc_ids: "Standard de diagnostic pour la flotte Ford existante. Couvre le diagnostic concessionnaire, programmation de modules et PATS.",
                 desc_gds2: "Système de diagnostic mondial pour plateformes GM Global A. Supporte Buick, Cadillac, Chevrolet, GMC et Opel/Vauxhall (2010+).",
-
-                // Hard/Tools Detailed FR
                 desc_openport_full: "Interface J2534 PassThru de haute qualité. Compatible avec Xentry, ODIS, Techstream, Forscan. Essentiel pour le diagnostic multimarque.",
                 desc_c4_full: "Multiplexeur SD Connect C4 grade A+. Supporte communication DoIP, WiFi stable. Le meilleur choix pour le diagnostic Mercedes.",
                 desc_remote_full: "Logiciel d'accès à distance haute performance et sécurisé. Alternative supérieure à TeamViewer pour le support technique.",
                 desc_iso_full: "Outil officiel Microsoft pour créer des clés USB de démarrage avec la dernière version de Windows 10/11.",
                 desc_extract_full: "Gestionnaire de fichiers open-source. Essentiel pour extraire nos packs logiciels avec une compatibilité maximale.",
                 desc_defender_full: "Utilitaire portable pour désactiver complètement Windows Defender, évitant les faux positifs pendant les installations.",
-
-                // Services
                 serv_fmt: "Formatage", desc_fmt: "Installation propre de Windows 10/11 Pro avec pilotes.",
                 serv_av: "Anti-virus", desc_av: "Installation et configuration d'une protection légère et efficace.",
                 serv_inst: "Installation", desc_inst: "Installation complète de logiciels à distance.",
                 serv_opt: "Optimisation", desc_opt: "Nettoyage du système, registre et accélération du démarrage.",
                 serv_upg: "Mise à niveau", desc_upg: "Conseil pour la mise à niveau de la RAM et du SSD.",
-
                 btn_schedule: "Planifier",
                 about_text_full: "Spécialistes en logiciels de diagnostic automobile avec des années d'expérience. Service professionnel, réponse rapide, installations propres et support garanti. Nous travaillons avec les meilleurs outils pour que votre atelier ne s'arrête jamais.", 
-                wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", wiz_result: "Résultat",
-                
-                // Popup Text
-                popup_text: "personnes consultent ce site."
+                wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", wiz_result: "Résultat"
             }
         };
 
-        // --- LÓGICA DE DETEÇÃO AUTOMÁTICA DE LÍNGUA (NOVO) ---
         window.addEventListener('DOMContentLoaded', () => {
             let userLang = navigator.language || navigator.userLanguage; 
             userLang = userLang.split('-')[0].toLowerCase();
-
             if (translations[userLang]) {
                 setLanguage(userLang);
             } else {
@@ -667,11 +652,10 @@
             }
         });
 
-        // --- FUNÇÕES EXISTENTES ---
-        let currentLang = 'pt'; // Variável global para saber a língua atual
+        let currentLang = 'pt'; 
 
         function setLanguage(lang) {
-            currentLang = lang; // Atualiza a variável global
+            currentLang = lang; 
             document.querySelectorAll('[data-translate]').forEach(el => {
                 const key = el.getAttribute('data-translate');
                 if(translations[lang][key]) {
@@ -680,87 +664,64 @@
             });
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
-            
-            // Atualiza o popup se estiver aberto ou no próximo ciclo
-            updateViewers(true); // Força atualização do texto
+            updateViewers(true); 
         }
 
-        // SCROLL
         const btnScroll = document.getElementById("scrollTopBtn");
         window.addEventListener('scroll', function() {
             if (window.scrollY > 200) { btnScroll.classList.add("visible"); } else { btnScroll.classList.remove("visible"); }
         });
 
-        // POPUP INTELIGENTE (Atualizado)
-        let currentViewers = 5; // Começa com 5
+        let currentViewers = 5; 
 
         function updateViewers(onlyTextUpdate = false) {
-            // Se não for apenas atualização de texto, muda o número
             if (!onlyTextUpdate) {
-                let change = Math.floor(Math.random() * 5) - 2; // -2, -1, 0, 1, 2
+                let change = Math.floor(Math.random() * 5) - 2; 
                 currentViewers += change;
                 if (currentViewers < 2) currentViewers = 2;
                 if (currentViewers > 15) currentViewers = 15;
             }
-
-            // Atualiza o texto com a língua atual
             const textEl = document.getElementById('viewerText');
             if(translations[currentLang] && translations[currentLang].popup_text) {
                 textEl.innerHTML = `<strong>${currentViewers}</strong> ${translations[currentLang].popup_text}`;
             }
-
-            // Se for a atualização automática do timer
             if (!onlyTextUpdate) {
                 const popup = document.getElementById('salesPopup');
                 popup.classList.add('active');
-                
-                // Esconde após 5 segundos
                 setTimeout(() => {
                     popup.classList.remove('active');
                 }, 5000);
-
-                // Agenda o próximo para 20 a 45 segundos
                 let nextRun = Math.floor(Math.random() * (45000 - 20000) + 20000);
                 setTimeout(() => updateViewers(false), nextRun);
             }
         }
+        setTimeout(() => updateViewers(false), 5000); 
 
-        // Inicia o ciclo do popup
-        setTimeout(() => updateViewers(false), 5000); // Primeiro pop após 5s
-
-        // FUNÇÕES MODAL PRODUTO
         function openDetails(btn) {
             const titleKey = btn.getAttribute('data-title-key');
             const descKey = btn.getAttribute('data-full-desc-key');
             const priceKey = btn.getAttribute('data-price-key');
             const img = btn.getAttribute('data-img');
-            
-            // Valores fallback se não houver keys de tradução
             const titleDirect = btn.getAttribute('data-title');
             
-            // Determinar língua atual (vendo qual botão está ativo)
             let lang = 'pt';
             if(document.getElementById('btn-en').classList.contains('active')) lang = 'en';
             if(document.getElementById('btn-fr').classList.contains('active')) lang = 'fr';
 
-            // Popular Modal
             document.getElementById('modalImg').src = img;
             
-            // Título
             if(titleKey && translations[lang][titleKey]) {
                 document.getElementById('modalTitle').innerText = translations[lang][titleKey];
             } else {
                 document.getElementById('modalTitle').innerText = titleDirect || 'Produto';
             }
 
-            // Descrição
             if(descKey && translations[lang][descKey]) {
                 document.getElementById('modalDesc').innerHTML = translations[lang][descKey];
             } else {
                 document.getElementById('modalDesc').innerText = "Detalhes não disponíveis.";
             }
 
-            // Preço
             if(priceKey && translations[lang][priceKey]) {
                 document.getElementById('modalPrice').innerText = translations[lang][priceKey];
             } else {
