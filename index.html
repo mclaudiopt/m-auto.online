@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V15.0</title>
+    <title>M-Auto Online | V15.1</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -134,10 +134,11 @@
             border-bottom: 1px solid var(--border); 
         }
         
+        /* CORREÇÃO DE ALINHAMENTO: margin-top: auto no .sub-desc ou flex-grow no body */
         .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card p.desc { font-size: 0.95rem; font-weight: 500; color: var(--text-main); margin-bottom: 5px; }
-        .card p.sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; }
+        .card p.sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; flex-grow: 1; /* Isto empurra o footer para baixo */ }
         
         .tech-details { background: var(--tech-bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-top: auto; margin-bottom: 15px; font-size: 0.8rem; color: var(--text-muted); }
         .tech-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
@@ -148,7 +149,8 @@
         .feature-list li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
         .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; }
 
-        .card-footer { margin-top: 0; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; }
+        /* FOOTER SEMPRE NO FUNDO DO CARD */
+        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; }
         .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); white-space: nowrap; }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; white-space: nowrap; }
 
@@ -270,7 +272,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V15.0</span>
+                <span class="version-badge">V15.1</span>
             </a>
         </div>
         <div class="header-right">
@@ -370,8 +372,8 @@
     </div>
 
     <section id="inicio" class="hero">
-        <h1 data-lang="hero_title">Soluções de Diagnóstico <span class="typewriter" id="typewriter"></span></h1>
-        <p data-lang="hero_desc">Instalação remota profissional.</p>
+        <h1 data-lang="hero_title">Instalação Remota Profissional</h1>
+        <p data-lang="hero_desc">Xentry 2025, ISTA, JLR, Diagbox. Instalação remota profissional.</p>
         <div class="hero-slider-container">
             <div class="slider-track">
                 <span class="brand-item">MERCEDES-BENZ</span><span class="brand-item">BMW</span><span class="brand-item">AUDI</span><span class="brand-item">VOLKSWAGEN</span><span class="brand-item">PORSCHE</span><span class="brand-item">LAND ROVER</span><span class="brand-item">JAGUAR</span><span class="brand-item">TOYOTA</span><span class="brand-item">LEXUS</span><span class="brand-item">FORD</span><span class="brand-item">MAZDA</span><span class="brand-item">OPEL</span><span class="brand-item">GM</span>
@@ -679,58 +681,29 @@
             document.documentElement.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
         }
 
-        // WIZARD LOGIC
-        let userSpecs = { win: '', ram: '', disk: '', cpu: '', brand: '' };
+        // WIZARD
+        let uBrand='', uHW='';
         function nextStep(n) { document.querySelectorAll('.step').forEach(s => s.classList.remove('active')); document.getElementById('step'+n).classList.add('active'); }
+        function selectBrand(b) { uBrand = b; nextStep(2); }
+        function selectHardware(h) { uHW = h; showWizResult(); nextStep(3); }
+        function resetWizard() { uBrand=''; uHW=''; nextStep(1); }
         
-        function setSpec(key, val) {
-            userSpecs[key] = val;
-            const currentStep = event.target.closest('.step').id.split('-')[2];
-            const next = parseInt(currentStep) + 1;
-            if(next <= 5) {
-                document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-                document.getElementById('wiz-step-'+next).classList.add('active');
-            } else {
-                showWizResult();
-            }
-        }
-
         function showWizResult() {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('wiz-result').classList.add('active');
-            
             let html = "";
-            let isWeak = (userSpecs.win === 'old' || userSpecs.ram === 'low' || userSpecs.disk === 'hdd');
-            
-            if (isWeak) {
-                html = `<div class="wiz-result-box" style="border-color:orange">
-                        <h4 style="color:orange">⚠️ Computador Limitado</h4>
-                        <p style="font-size:0.9rem; margin:10px 0">O seu PC pode ser lento para os softwares mais recentes (2024/2025).</p>
-                        <p><strong>Recomendação:</strong><br>1. Upgrade para SSD e +RAM.<br>2. Ou use versões mais leves (ex: Xentry Passthru antigo, Diagbox 7).</p>
-                        <button class="wiz-btn-action" onclick="orderProduct('Aconselhamento Upgrade')">Pedir Ajuda Técnica</button>
-                        </div>`;
+            if (uHW === 'weak') {
+                html = `<div class="res-card"><div class="res-title">⚠️ PC Limitado</div><p class="res-desc">Recomendamos software básico ou upgrade.</p><button class="wiz-btn" onclick="orderProduct('Xentry Basic')">Opção Leve</button><button class="wiz-btn" onclick="orderProduct('Serviço Upgrade')">Serviço Upgrade</button></div>`;
             } else {
-                html = `<div class="wiz-result-box" style="border-color:green">
-                        <h4 style="color:green">✅ PC Compatível!</h4>
-                        <p style="font-size:0.9rem; margin:10px 0">A sua máquina suporta os softwares mais recentes.</p>
-                        <p><strong>Recomendação para ${userSpecs.brand}:</strong><br>Full Pack 2025 ou Instalação Nativa.</p>
-                        <button class="wiz-btn-action" onclick="orderProduct('${userSpecs.brand} Full Pack')">Ver Pack ${userSpecs.brand}</button>
-                        </div>`;
+                html = `<div class="res-card"><div class="res-title">✅ PC Compatível</div><p class="res-desc">Suporta Pack Completo!</p><button class="wiz-btn" onclick="orderProduct('${uBrand} Full Pack')">Ver Pack</button></div>`;
             }
-            document.getElementById('finalResultContent').innerHTML = html;
+            document.getElementById('wizResult').innerHTML = html;
         }
 
-        function resetWizard() {
-            userSpecs = { win: '', ram: '', disk: '', cpu: '', brand: '' };
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('wiz-step-1').classList.add('active');
-        }
-
-        // POPUP
+        // POPUP DINÂMICO
         const popup = document.getElementById('salesPopup');
         const countSpan = document.getElementById('viewerCount');
         function showPopup() {
-            const randomCount = Math.floor(Math.random() * 10) + 1; 
+            // Número aleatório entre 1 e 10
+            const randomCount = Math.floor(Math.random() * 10) + 1; // 1 a 10
             countSpan.innerText = randomCount;
             popup.classList.add('active');
             setTimeout(() => { popup.classList.remove('active'); }, 6000);
@@ -739,20 +712,51 @@
         setInterval(showPopup, 20000);
         setTimeout(showPopup, 5000);
 
-        // LANG (SIMPLIFIED)
+        // LANG SYSTEM CORRIGIDO
         const dict = {
-            pt: { wiz_os: "Qual é o seu Windows?", wiz_ram: "Memória RAM?", wiz_disk: "Disco Rígido?", wiz_cpu: "Processador?", wiz_brand: "Marca do Carro?", wiz_result: "Resultado" },
-            en: { wiz_os: "Which Windows OS?", wiz_ram: "RAM Memory?", wiz_disk: "Hard Drive Type?", wiz_cpu: "Processor Type?", wiz_brand: "Car Brand?", wiz_result: "Analysis Result" },
-            fr: { wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", wiz_disk: "Type de Disque?", wiz_cpu: "Processeur?", wiz_brand: "Marque de Voiture?", wiz_result: "Résultat" }
+            pt: { 
+                hero_title: "Soluções de Diagnóstico", hero_desc: "Instalação remota profissional.", 
+                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", nav_about: "Sobre",
+                modal_support_title: "Suporte Remoto", modal_support_desc: "Baixe o cliente.",
+                wiz_brand_title: "Qual é a marca do seu carro?", wiz_pc_title: "Como é o seu computador?", 
+                wiz_pc_weak: "Fraco / Antigo", wiz_pc_good: "Rápido / Moderno", wiz_rec_title: "Recomendação", 
+                wiz_restart: "Recomeçar 🔄", wiz_os: "Qual é o seu Windows?", wiz_ram: "Memória RAM?", 
+                wiz_disk: "Disco Rígido?", wiz_cpu: "Processador?", wiz_result: "Resultado da Análise"
+            },
+            en: { 
+                hero_title: "Diagnostic Solutions", hero_desc: "Professional remote installation.", 
+                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", nav_about: "About",
+                modal_support_title: "Remote Support", modal_support_desc: "Download client.",
+                wiz_brand_title: "What is your car brand?", wiz_pc_title: "How is your computer?", 
+                wiz_pc_weak: "Weak / Old", wiz_pc_good: "Fast / Modern", wiz_rec_title: "Recommendation", 
+                wiz_restart: "Restart 🔄", wiz_os: "Which Windows OS?", wiz_ram: "RAM Memory?", 
+                wiz_disk: "Hard Drive Type?", wiz_cpu: "Processor Type?", wiz_result: "Analysis Result"
+            },
+            fr: { 
+                hero_title: "Solutions Diagnostic", hero_desc: "Installation à distance pro.", 
+                nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", nav_about: "À propos",
+                modal_support_title: "Soutien à distance", modal_support_desc: "Télécharger client.",
+                wiz_brand_title: "Quelle est la marque de votre voiture?", wiz_pc_title: "Comment est votre ordinateur?", 
+                wiz_pc_weak: "Faible / Vieux", wiz_pc_good: "Rapide / Moderne", wiz_rec_title: "Recommandation", 
+                wiz_restart: "Recommencer 🔄", wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", 
+                wiz_disk: "Type de Disque?", wiz_cpu: "Processeur?", wiz_result: "Résultat"
+            }
         };
 
         function changeLang(l) {
+            // 1. Atualizar textos
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const k = el.getAttribute('data-lang');
-                if(dict[l] && dict[l][k]) el.textContent = dict[l][k];
+                if(dict[l] && dict[l][k]) {
+                    el.innerText = dict[l][k]; // innerText preserva formatação básica
+                }
             });
+
+            // 2. Atualizar botões ativos (Visual)
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            event.target.closest('.lang-btn').classList.add('active');
+            // Encontra o botão clicado e ativa-o
+            const btn = document.querySelector(`.lang-btn[onclick*="${l}"]`);
+            if (btn) btn.classList.add('active');
         }
         
         // SCROLL TOP
