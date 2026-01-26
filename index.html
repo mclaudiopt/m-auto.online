@@ -56,21 +56,30 @@
         .lang-btn.active { opacity: 1; border-color: var(--accent); transform: scale(1.1); }
         .lang-btn img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-        /* HERO */
+        /* HERO TYPEWRITER CORRIGIDO */
         .hero { margin-top: var(--header-h); padding: 50px 20px 70px 20px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(-45deg, #0f172a, #1e293b, #1d4ed8, #0f172a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #ffffff; position: relative; overflow: hidden; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; position: relative; z-index: 2; }
-        .typewriter { color: #60a5fa; border-right: 3px solid #60a5fa; padding-right: 5px; animation: blink 0.7s infinite; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 800; position: relative; z-index: 2; line-height: 1.2; }
+        
+        /* Classe específica para a parte que escreve */
+        .typewriter-text { 
+            color: #60a5fa; /* Azul claro para destaque */
+            border-right: 3px solid #60a5fa; 
+            padding-right: 5px; 
+            animation: blink 0.7s infinite; 
+            display: inline-block;
+        }
         @keyframes blink { 50% { border-color: transparent; } }
-        .hero p { color: #cbd5e1; max-width: 700px; margin: 0 auto; font-size: 1.1rem; position: relative; z-index: 2; }
+        
+        .hero p { color: #cbd5e1; max-width: 700px; margin: 15px auto 0; font-size: 1.1rem; position: relative; z-index: 2; }
         
         .hero-slider-container { position: absolute; bottom: 15px; left: 0; width: 100%; overflow: hidden; white-space: nowrap; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); z-index: 1; }
         .slider-track { display: inline-block; animation: slide 40s linear infinite; }
         .brand-item { display: inline-block; font-size: 0.9rem; font-weight: 800; color: rgba(255, 255, 255, 0.25); margin: 0 40px; text-transform: uppercase; letter-spacing: 1px; }
         @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* NAV LIMPA (SEM ICONS) */
+        /* NAV LIMPA */
         .main-nav { display: flex; justify-content: center; gap: 12px; padding: 15px; background: var(--bg-body); border-bottom: 1px solid var(--border); position: sticky; top: var(--header-h); z-index: 900; overflow-x: auto; }
         .nav-pill { padding: 8px 24px; border-radius: 50px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border); background: var(--bg-card); transition: 0.3s; white-space: nowrap; font-size: 0.95rem; }
         .nav-pill:hover { background: #e2e8f0; color: var(--text-main); }
@@ -84,7 +93,7 @@
         .side-btn:hover { background: var(--bg-body); color: var(--text-main); }
         .side-btn.active { background: var(--sidebar-active-bg); color: var(--sidebar-active-text); border-left-color: var(--sidebar-active-border); }
         
-        .content-wrapper { flex: 1; min-width: 0; min-height: 800px; /* Evita saltos */ }
+        .content-wrapper { flex: 1; min-width: 0; min-height: 800px; }
         .section-view, .brand-panel { display: none; animation: fade 0.4s; }
         .section-view.active, .brand-panel.active { display: block; }
         @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -93,20 +102,20 @@
         .search-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
-        /* GRID ATUALIZADO PARA 3 COLUNAS */
-        /* Reduzi o minmax de 260px para 220px para caberem 3 cards */
+        /* GRID E IMAGENS CORRIGIDOS */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
         
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); height: 100%; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        /* IMAGEM ATUALIZADA (PREENCHE O ESPAÇO) */
+        /* CORREÇÃO DAS IMAGENS: CONTAIN + PADDING */
         .card img { 
             width: 100%; 
             height: 200px; 
-            object-fit: cover; /* Faz a imagem encher o espaço sem barras brancas */
+            object-fit: contain; /* Garante que a imagem inteira aparece (não corta) */
+            padding: 10px; /* Espaço para respirar */
             border-bottom: 1px solid var(--border);
-            background-color: #f1f5f9; /* Cor de fundo caso a imagem falhe */
+            background-color: #ffffff; /* Fundo branco limpo */
         }
         
         .card-body { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
@@ -253,7 +262,10 @@
     </div>
 
     <section id="inicio" class="hero">
-        <h1 data-translate="hero_title">Instalação Remota Profissional</h1>
+        <h1>
+            <span data-translate="hero_sol">Soluções Online</span><br>
+            <span class="typewriter-text"></span>
+        </h1>
         <p data-translate="hero_desc">Instalação remota profissional.</p>
         <div class="hero-slider-container">
             <div class="slider-track"><span class="brand-item">Mercedes</span><span class="brand-item">BMW</span><span class="brand-item">Audi</span><span class="brand-item">VW</span><span class="brand-item">Porsche</span><span class="brand-item">JLR</span><span class="brand-item">Toyota</span><span class="brand-item">Ford</span><span class="brand-item">GM</span><span class="brand-item">Mercedes</span><span class="brand-item">BMW</span><span class="brand-item">Audi</span><span class="brand-item">VW</span></div>
@@ -292,43 +304,49 @@
                         <div class="grid">
                             <div class="card gold searchable-item" style="grid-column: 1/-1;">
                                 <span class="badge" data-translate="badge_best">Melhor Escolha</span>
-                                <div class="card-body"><h3>Mercedes Full Pack 2025</h3><p class="desc">A Solução Completa.</p><p class="sub-desc">Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.</p><ul class="feature-list"><li>Xentry, WIS, EPC 2023</li><li>DTS 9.02, Vediamo 5</li><li>Price List 2025</li><li>Full Databases</li></ul><div class="card-footer"><span class="price" style="color:var(--gold)">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')">Encomendar</button></div></div>
+                                <div class="card-body">
+                                    <h3 data-translate="prod_merc_full">Mercedes Full Pack 2025</h3>
+                                    <p class="desc" data-translate="desc_merc_full">A Solução Completa.</p>
+                                    <p class="sub-desc">Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.</p>
+                                    <ul class="feature-list"><li>Xentry, WIS, EPC 2023</li><li>DTS 9.02, Vediamo 5</li><li>Price List 2025</li><li>Full Databases</li></ul>
+                                    <div class="card-footer"><span class="price" style="color:var(--gold)" data-translate="price_pack">Pack Completo</span><button class="btn-view" style="color:var(--gold)" onclick="orderProduct('Mercedes Full Pack')">Encomendar</button></div>
+                                </div>
                             </div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-cars.jpg"><div class="card-body"><h3>Xentry Cars</h3><p class="desc">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-trucks.jpg"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc">Pesados.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/wis.jpg"><div class="card-body"><h3>WIS 2021</h3><p class="desc">Manuais.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS 2021')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/epc.jpg"><div class="card-body"><h3>EPC</h3><p class="desc">Peças.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2018</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('EPC')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vgsnag2.jpg"><div class="card-body"><h3>VGSNAG2 Manager</h3><p class="desc">Caixa 722.9.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/Merc-DTS9.jpg"><div class="card-body"><h3>DTS Monaco 9.02</h3><p class="desc">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('DTS Monaco')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/Merc-Vediamo.jpg"><div class="card-body"><h3>Vediamo 4/5</h3><p class="desc">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vediamo')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-htt.jpg"><div class="card-body"><h3>HHTWIN</h3><p class="desc">Clássicos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('HHTWIN')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-cars.jpg"><div class="card-body"><h3>Xentry Cars</h3><p class="desc" data-translate="desc_cars">Ligeiros.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Cars')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-xentry-trucks.jpg"><div class="card-body"><h3>Xentry Trucks</h3><p class="desc" data-translate="desc_trucks">Pesados.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Versão:</span><span>01/2025</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Xentry Trucks')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/wis.jpg"><div class="card-body"><h3>WIS 2021</h3><p class="desc" data-translate="desc_manuals">Manuais.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2021</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('WIS 2021')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/epc.jpg"><div class="card-body"><h3>EPC</h3><p class="desc" data-translate="desc_parts">Peças.</p><div class="tech-details"><div class="tech-row"><span class="tech-label">Data:</span><span>2018</span></div></div><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('EPC')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vgsnag2.jpg"><div class="card-body"><h3>VGSNAG2 Manager</h3><p class="desc" data-translate="desc_gearbox">Caixa 722.9.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('VGSNAG2')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/Merc-DTS9.jpg"><div class="card-body"><h3>DTS Monaco 9.02</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('DTS Monaco')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/Merc-Vediamo.jpg"><div class="card-body"><h3>Vediamo 4/5</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vediamo')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-htt.jpg"><div class="card-body"><h3>HHTWIN</h3><p class="desc" data-translate="desc_classic">Clássicos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('HHTWIN')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-7g-tools.jpg"><div class="card-body"><h3>7G Tronic</h3><p class="desc">Reset.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('7G Tools')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-certificates.jpg"><div class="card-body"><h3>Certificados ZenZefi</h3><p class="desc">Acesso Offline.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ZenZefi')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-mbtools.jpg"><div class="card-body"><h3>MbTools</h3><p class="desc">Utilitário.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('MbTools')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-certificates.jpg"><div class="card-body"><h3>Certificados ZenZefi</h3><p class="desc" data-translate="desc_offline">Acesso Offline.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ZenZefi')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-mbtools.jpg"><div class="card-body"><h3>MbTools</h3><p class="desc" data-translate="desc_util">Utilitário.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('MbTools')">Ver</button></div></div></div>
                             <div class="card searchable-item"><img src="IMG/Daimler/merc-pricelist.jpg"><div class="card-body"><h3>Price List 2025</h3><p class="desc">Excel.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Price List')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-tutorials.jpg"><div class="card-body"><h3>Coding Tutorials</h3><p class="desc">Guias.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Tutorials')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vindecoder.jpg"><div class="card-body"><h3>Vin Decoder</h3><p class="desc">Identificação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vin Decoder')">Ver</button></div></div></div>
-                            <div class="card searchable-item"><img src="IMG/Daimler/merc-sdmedia.jpg"><div class="card-body"><h3>SDMedia</h3><p class="desc">Multimédia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDMedia')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-tutorials.jpg"><div class="card-body"><h3>Coding Tutorials</h3><p class="desc" data-translate="desc_guides">Guias.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Tutorials')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-vindecoder.jpg"><div class="card-body"><h3>Vin Decoder</h3><p class="desc" data-translate="desc_ident">Identificação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Vin Decoder')">Ver</button></div></div></div>
+                            <div class="card searchable-item"><img src="IMG/Daimler/merc-sdmedia.jpg"><div class="card-body"><h3>SDMedia</h3><p class="desc" data-translate="desc_media">Multimédia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDMedia')">Ver</button></div></div></div>
                         </div>
                     </div>
                     
-                    <div id="brand-vag" class="brand-panel"><h2 class="panel-header">VAG</h2><div class="grid"><div class="card searchable-item"><img src="IMG/VAG/vag-odis-service.jpg"><div class="card-body"><h3>ODIS Service</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ODIS Service')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/VAG/vag-odis-eng.jpg"><div class="card-body"><h3>ODIS Engineering</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ODIS Eng')">Ver</button></div></div></div></div></div>
+                    <div id="brand-vag" class="brand-panel"><h2 class="panel-header">VAG</h2><div class="grid"><div class="card searchable-item"><img src="IMG/VAG/vag-odis-service.jpg"><div class="card-body"><h3>ODIS Service</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ODIS Service')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/VAG/vag-odis-eng.jpg"><div class="card-body"><h3>ODIS Engineering</h3><p class="desc" data-translate="desc_eng">Engenharia.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ODIS Eng')">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card searchable-item"><img src="IMG/BMW/BMW-Ista.jpg"><div class="card-body"><h3>ISTA+</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/BMW/bmw-istap.jpg"><div class="card-body"><h3>ISTA-P</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ISTA-P')">Ver</button></div></div></div></div></div>
+                    <div id="brand-bmw" class="brand-panel"><h2 class="panel-header">BMW</h2><div class="grid"><div class="card searchable-item"><img src="IMG/BMW/BMW-Ista.jpg"><div class="card-body"><h3>ISTA+</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('BMW ISTA')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/BMW/bmw-istap.jpg"><div class="card-body"><h3>ISTA-P</h3><p class="desc" data-translate="desc_prog">Programação.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('ISTA-P')">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox9.JPG"><div class="card-body"><h3>Diagbox 9</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div></div></div>
+                    <div id="brand-psa" class="brand-panel"><h2 class="panel-header">PSA</h2><div class="grid"><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox9.JPG"><div class="card-body"><h3>Diagbox 9</h3><p class="desc" data-translate="desc_new">Recentes.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 9')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/PSA/psa-diagbox7.jpg"><div class="card-body"><h3>Diagbox 7</h3><p class="desc" data-translate="desc_old">Antigos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Diagbox 7')">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Renault/renault-clip.jpg"><div class="card-body"><h3>Can Clip</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-dialogys.jpg"><div class="card-body"><h3>Dialogys</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div></div></div>
+                    <div id="brand-renault" class="brand-panel"><h2 class="panel-header">Renault</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Renault/renault-clip.jpg"><div class="card-body"><h3>Can Clip</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Can Clip')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Renault/renault-dialogys.jpg"><div class="card-body"><h3>Dialogys</h3><p class="desc" data-translate="desc_manuals">Manuais.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Dialogys')">Ver</button></div></div></div></div></div>
                     
-                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card searchable-item"><img src="IMG/JLR/jlr-pathfinder.jpg"><div class="card-body"><h3>Pathfinder</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Pathfinder')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/JLR/JLR-sdd.jpg"><div class="card-body"><h3>SDD</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDD')">Ver</button></div></div></div></div></div>
+                    <div id="brand-jlr" class="brand-panel"><h2 class="panel-header">JLR</h2><div class="grid"><div class="card searchable-item"><img src="IMG/JLR/jlr-pathfinder.jpg"><div class="card-body"><h3>Pathfinder</h3><p class="desc" data-translate="desc_new">Recentes.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Pathfinder')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/JLR/JLR-sdd.jpg"><div class="card-body"><h3>SDD</h3><p class="desc" data-translate="desc_old">Antigos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('SDD')">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Toyota/toyota-techstream.jpg"><div class="card-body"><h3>Techstream</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Techstream')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/epc.jpg"><div class="card-body"><h3>EPC</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota EPC')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/Toylex.jpg"><div class="card-body"><h3>Toylex 4</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toylex')">Ver</button></div></div></div></div></div>
+                    <div id="brand-toyota" class="brand-panel"><h2 class="panel-header">Toyota</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Toyota/toyota-techstream.jpg"><div class="card-body"><h3>Techstream</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Techstream')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/epc.jpg"><div class="card-body"><h3>EPC</h3><p class="desc" data-translate="desc_parts">Peças.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toyota EPC')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Toyota/Toylex.jpg"><div class="card-body"><h3>Toylex 4</h3><p class="desc" data-translate="desc_util">Utilitário.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toylex')">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-nissan" class="brand-panel"><h2 class="panel-header">Nissan</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Nissan/nissan-consult.jpg"><div class="card-body"><h3>Consult III+</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Consult 3')">Ver</button></div></div></div></div></div>
+                    <div id="brand-nissan" class="brand-panel"><h2 class="panel-header">Nissan</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Nissan/nissan-consult.jpg"><div class="card-body"><h3>Consult III+</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Consult 3')">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Ford/ford-fdrs.jpg"><div class="card-body"><h3>FDRS</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('FDRS')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-ids.jpg"><div class="card-body"><h3>IDS</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('IDS')">Ver</button></div></div></div></div></div>
+                    <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Ford/ford-fdrs.jpg"><div class="card-body"><h3>FDRS</h3><p class="desc" data-translate="desc_new">Recentes.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('FDRS')">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-ids.jpg"><div class="card-body"><h3>IDS</h3><p class="desc" data-translate="desc_old">Antigos.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('IDS')">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg"><div class="card-body"><h3>GDS2</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('GDS2')">Ver</button></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg"><div class="card-body"><h3>GDS2</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('GDS2')">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
@@ -380,9 +398,12 @@
     </footer>
 
     <script>
-        // TYPEWRITER (SIMPLES)
-        const typewriter = document.querySelector(".typewriter");
-        const texts = ["Xentry", "ISTA", "Diagbox"];
+        // TYPEWRITER CORRIGIDO E ATUALIZADO
+        const typewriter = document.querySelector(".typewriter-text");
+        const texts = [
+            "Mercedes-Benz", "Volkswagen", "BMW", "Audi", "PSA Group", 
+            "Renault", "JLR", "Toyota", "Nissan", "Ford", "GM"
+        ];
         let count = 0;
         let index = 0;
         let currentText = "";
@@ -397,9 +418,9 @@
                 if (letter.length === currentText.length) {
                     count++;
                     index = 0;
-                    setTimeout(type, 2000);
+                    setTimeout(type, 2000); // Espera antes de apagar/mudar
                 } else {
-                    setTimeout(type, 150);
+                    setTimeout(type, 100); // Velocidade de escrita
                 }
             }
         })();
@@ -421,49 +442,83 @@
             btn.classList.add('active');
         }
 
-        /* --- NOVA LÓGICA DE TRADUÇÃO --- */
+        /* --- TRADUÇÃO COMPLETA (UI + PRODUTOS) --- */
         const translations = {
             pt: { 
-                hero_title: "Instalação Remota Profissional", hero_desc: "Instalação remota profissional.", 
-                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", nav_about: "Sobre", badge_best: "Melhor Escolha",
+                hero_sol: "Soluções Online", hero_desc: "Instalação remota profissional.", 
+                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Ferramentas", nav_serv: "Serviços", nav_about: "Sobre", 
+                badge_best: "Melhor Escolha",
+                
+                // Produtos
+                prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "A Solução Completa.", price_pack: "Pack Completo",
+                desc_cars: "Ligeiros", desc_trucks: "Pesados", desc_manuals: "Manuais", desc_parts: "Peças",
+                desc_gearbox: "Caixa 722.9", desc_eng: "Engenharia", desc_classic: "Clássicos", desc_offline: "Acesso Offline",
+                desc_util: "Utilitário", desc_guides: "Guias", desc_ident: "Identificação", desc_media: "Multimédia",
+                desc_diag: "Diagnóstico", desc_prog: "Programação", desc_new: "Recentes", desc_old: "Antigos",
+
+                // Serviços
                 serv_fmt: "Formatação", desc_fmt: "Instalação limpa de Windows 10/11 Pro com drivers e otimização.",
                 serv_cod: "Codificação", desc_cod: "Codificação online SCN e Component Protection.",
                 serv_inst: "Instalação", desc_inst: "Instalação remota completa de software.",
                 serv_rep: "Reparação", desc_rep: "Correção de erros de licença e drivers.",
-                about_text: "Especialistas em software de diagnóstico automóvel.", btn_schedule: "Agendar",
+                btn_schedule: "Agendar",
+                
+                about_text: "Especialistas em software de diagnóstico automóvel.", 
                 wiz_os: "Qual é o seu Windows?", wiz_ram: "Memória RAM?", wiz_result: "Resultado"
             },
             en: { 
-                hero_title: "Professional Remote Installation", hero_desc: "Professional remote installation.", 
-                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", nav_about: "About", badge_best: "Best Choice",
+                hero_sol: "Online Solutions", hero_desc: "Professional remote installation.", 
+                nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Tools", nav_serv: "Services", nav_about: "About", 
+                badge_best: "Best Choice",
+
+                // Products
+                prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "The Complete Solution.", price_pack: "Full Pack",
+                desc_cars: "Cars", desc_trucks: "Trucks", desc_manuals: "Manuals", desc_parts: "Parts",
+                desc_gearbox: "Gearbox 722.9", desc_eng: "Engineering", desc_classic: "Classics", desc_offline: "Offline Access",
+                desc_util: "Utility", desc_guides: "Guides", desc_ident: "Identification", desc_media: "Multimedia",
+                desc_diag: "Diagnostic", desc_prog: "Programming", desc_new: "Recent", desc_old: "Legacy",
+
+                // Services
                 serv_fmt: "Formatting", desc_fmt: "Clean Windows 10/11 Pro install with drivers and optimization.",
                 serv_cod: "Coding", desc_cod: "Online SCN Coding and Component Protection.",
                 serv_inst: "Installation", desc_inst: "Full remote software installation.",
                 serv_rep: "Repair", desc_rep: "Fix license errors and driver issues.",
-                about_text: "Automotive diagnostic software specialists.", btn_schedule: "Schedule",
+                btn_schedule: "Schedule",
+                
+                about_text: "Automotive diagnostic software specialists.", 
                 wiz_os: "Which Windows?", wiz_ram: "RAM Memory?", wiz_result: "Result"
             },
             fr: { 
-                hero_title: "Installation à Distance Pro", hero_desc: "Installation à distance pro.", 
-                nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", nav_about: "À propos", badge_best: "Meilleur Choix",
+                hero_sol: "Solutions En Ligne", hero_desc: "Installation à distance pro.", 
+                nav_soft: "Logiciels", nav_hard: "Matériel", nav_tools: "Outils", nav_serv: "Services", nav_about: "À propos", 
+                badge_best: "Meilleur Choix",
+
+                // Produits
+                prod_merc_full: "Mercedes Full Pack 2025", desc_merc_full: "La Solution Complète.", price_pack: "Pack Complet",
+                desc_cars: "Voitures", desc_trucks: "Camions", desc_manuals: "Manuels", desc_parts: "Pièces",
+                desc_gearbox: "Boîte 722.9", desc_eng: "Ingénierie", desc_classic: "Classiques", desc_offline: "Accès Hors Ligne",
+                desc_util: "Utilitaire", desc_guides: "Guides", desc_ident: "Identification", desc_media: "Multimédia",
+                desc_diag: "Diagnostic", desc_prog: "Programmation", desc_new: "Récents", desc_old: "Anciens",
+
+                // Services
                 serv_fmt: "Formatage", desc_fmt: "Installation propre de Windows 10/11 Pro avec pilotes.",
                 serv_cod: "Codage", desc_cod: "Codage en ligne SCN et Protection des Composants.",
                 serv_inst: "Installation", desc_inst: "Installation complète de logiciels à distance.",
                 serv_rep: "Réparation", desc_rep: "Correction des erreurs de licence et pilotes.",
-                about_text: "Spécialistes en logiciels de diagnostic automobile.", btn_schedule: "Planifier",
+                btn_schedule: "Planifier",
+                
+                about_text: "Spécialistes en logiciels de diagnostic automobile.", 
                 wiz_os: "Quel Windows?", wiz_ram: "Mémoire RAM?", wiz_result: "Résultat"
             }
         };
 
         function setLanguage(lang) {
-            // Atualiza todos os elementos com o atributo data-translate
             document.querySelectorAll('[data-translate]').forEach(el => {
                 const key = el.getAttribute('data-translate');
                 if(translations[lang][key]) {
                     el.textContent = translations[lang][key];
                 }
             });
-            // Atualiza o estado visual dos botões
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
         }
