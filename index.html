@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V15.6</title>
+    <title>M-Auto Online | V15.7</title>
 
     <style>
         /* --- 1. VARIÁVEIS --- */
@@ -44,7 +44,7 @@
         a { text-decoration: none; color: inherit; cursor: pointer; }
         button { cursor: pointer; font-family: inherit; }
 
-        /* --- 3. HEADER (CORRIGIDO) --- */
+        /* --- 3. HEADER --- */
         header {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             height: var(--header-h); padding: 0 25px; 
@@ -74,7 +74,7 @@
             border-radius: 50%; width: 28px; height: 28px;
         }
         .lang-btn:hover { opacity: 1; transform: scale(1.1); }
-        .lang-btn.active { opacity: 1; border-color: var(--accent); transform: scale(1.1); }
+        .lang-btn.active { opacity: 1; border-color: var(--accent); transform: scale(1.1); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); }
         .lang-btn img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
         /* --- 4. HERO --- */
@@ -129,23 +129,30 @@
         .search-input { width: 100%; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
+        /* GRID & CARD ALIGNMENT FIX */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; width: 100%; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; box-shadow: var(--shadow); position: relative; }
+        .card { 
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; 
+            overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; 
+            box-shadow: var(--shadow); position: relative; height: 100%; /* Garante altura total */
+        }
         .card:hover { transform: translateY(-4px); border-color: var(--accent); }
         
         .card img { 
-            width: 100%; 
-            height: 210px; 
-            object-fit: fill; /* ESTICA PARA OCUPAR TUDO */
+            width: 100%; height: 210px; 
+            object-fit: fill; /* Ocupa espaço todo */
             border-bottom: 1px solid var(--border); 
         }
         
-        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-body { 
+            padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; 
+        }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .card p.desc { font-size: 0.95rem; font-weight: 500; color: var(--text-main); margin-bottom: 5px; }
+        /* flex-grow empurra o footer para baixo */
         .card p.sub-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; flex-grow: 1; }
         
-        .tech-details { background: var(--tech-bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-top: auto; margin-bottom: 15px; font-size: 0.8rem; color: var(--text-muted); }
+        .tech-details { background: var(--tech-bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; margin-top: auto; margin-bottom: 15px; font-size: 0.75rem; color: var(--text-muted); }
         .tech-row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .tech-row:last-child { border-bottom: none; }
         .tech-label { font-weight: 600; color: var(--text-main); }
@@ -154,6 +161,7 @@
         .feature-list li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
         .feature-list li::before { content: "✓"; color: var(--gold); font-weight: bold; }
 
+        /* FOOTER CARD ALINHADO */
         .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; flex-wrap: wrap; gap: 15px; }
         .price { font-weight: 800; font-size: 1.1rem; color: var(--text-main); white-space: nowrap; }
         .btn-view { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; background: none; border: none; white-space: nowrap; }
@@ -182,7 +190,7 @@
         #scrollTopBtn.visible { opacity: 1; pointer-events: auto; }
         #scrollTopBtn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* --- 9. POPUP DINÂMICO --- */
+        /* --- 9. POPUP DINÂMICO (MENOR) --- */
         .sales-popup {
             position: fixed; bottom: 85px; left: 25px;
             background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; padding: 8px 12px; border-radius: 8px;
@@ -238,19 +246,6 @@
 
         .mobile-nav { display: none; }
 
-        /* WIZARD */
-        .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .modal { background: var(--bg-card); padding: 2rem; border-radius: 16px; width: 90%; max-width: 450px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
-        .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); background: none; border: none; cursor: pointer; }
-        .wiz-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; color: var(--text-main); }
-        .wiz-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
-        .wiz-btn { padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-body); color: var(--text-main); font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; }
-        .wiz-btn:hover { border-color: var(--accent); background: var(--sidebar-active-bg); color: var(--accent); }
-        .step { display: none; animation: fade 0.3s; }
-        .step.active { display: block; }
-        .wiz-result-box { padding: 20px; background: var(--sidebar-active-bg); border-radius: 10px; border: 2px solid var(--accent); }
-        .wiz-btn-action { margin-top: 15px; width: 100%; padding: 12px; border: none; background: var(--accent); color: white; font-weight: bold; border-radius: 8px; cursor: pointer; }
-
         @media (max-width: 768px) {
             .layout-flex { flex-direction: column; }
             .sidebar { width: 100%; min-width: 100%; flex-direction: row; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px; position: static; top: 0; }
@@ -267,6 +262,21 @@
             #scrollTopBtn { bottom: 80px; left: 20px; } 
             .sales-popup { bottom: 130px; left: 20px; }
         }
+        
+        /* MODAIS WIZARD RENOVADO */
+        .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal { background: var(--bg-card); padding: 2rem; border-radius: 16px; width: 90%; max-width: 450px; border: 1px solid var(--accent); text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
+        .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: var(--text-muted); background: none; border: none; cursor: pointer; }
+        
+        .wiz-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; color: var(--text-main); }
+        .wiz-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
+        .wiz-btn { padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-body); color: var(--text-main); font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; }
+        .wiz-btn:hover { border-color: var(--accent); background: var(--sidebar-active-bg); color: var(--accent); }
+        .step { display: none; animation: fade 0.3s; }
+        .step.active { display: block; }
+        .wiz-result-box { padding: 20px; background: var(--sidebar-active-bg); border-radius: 10px; border: 2px solid var(--accent); }
+        .wiz-btn-action { margin-top: 15px; width: 100%; padding: 12px; border: none; background: var(--accent); color: white; font-weight: bold; border-radius: 8px; cursor: pointer; }
+
     </style>
 </head>
 <body>
@@ -276,7 +286,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V15.6</span>
+                <span class="version-badge">V15.7</span>
             </a>
         </div>
         <div class="header-right">
@@ -312,7 +322,8 @@
 
     <div id="wizardModal" class="modal-bg">
         <div class="modal" id="wizContent">
-            <button class="close" onclick="document.getElementById('wizardModal').style.display='none'">&times;</button>
+            <button class="close" onclick="toggleModal('wizardModal')">&times;</button>
+            
             <div id="wiz-step-1" class="step active">
                 <h3 class="wiz-title" data-lang="wiz_os">Qual é o seu Windows?</h3>
                 <div class="wiz-grid">
@@ -320,6 +331,7 @@
                     <button class="wiz-btn" onclick="setSpec('win', 'new')">Windows 10 / 11</button>
                 </div>
             </div>
+
             <div id="wiz-step-2" class="step">
                 <h3 class="wiz-title" data-lang="wiz_ram">Memória RAM?</h3>
                 <div class="wiz-grid">
@@ -327,6 +339,7 @@
                     <button class="wiz-btn" onclick="setSpec('ram', 'high')">8GB ou mais</button>
                 </div>
             </div>
+
             <div id="wiz-step-3" class="step">
                 <h3 class="wiz-title" data-lang="wiz_disk">Disco Rígido?</h3>
                 <div class="wiz-grid">
@@ -335,6 +348,7 @@
                     <button class="wiz-btn" onclick="setSpec('disk', 'ssd_big')">SSD &gt; 256GB</button>
                 </div>
             </div>
+
             <div id="wiz-step-4" class="step">
                 <h3 class="wiz-title" data-lang="wiz_cpu">Processador?</h3>
                 <div class="wiz-grid">
@@ -342,6 +356,7 @@
                     <button class="wiz-btn" onclick="setSpec('cpu', 'new')">Intel i3 / i5 / i7 / Ryzen</button>
                 </div>
             </div>
+
             <div id="wiz-step-5" class="step">
                 <h3 class="wiz-title" data-lang="wiz_brand">Marca do Carro?</h3>
                 <div class="wiz-grid">
@@ -351,6 +366,7 @@
                     <button class="wiz-btn" onclick="setSpec('brand', 'Outra')">Outra</button>
                 </div>
             </div>
+
             <div id="wiz-result" class="step">
                 <h3 class="wiz-title" data-lang="wiz_result">Resultado da Análise</h3>
                 <div id="finalResultContent" class="wiz-result-box"></div>
@@ -361,7 +377,7 @@
 
     <div class="fab-container" id="fabMenu">
         <button class="fab-item" style="background:#25D366" onclick="orderProduct('Geral')" title="WhatsApp">
-            <svg viewBox="0 0 32 32" fill="white"><path d="M16 2C8.2 2 2 8.2 2 16c0 2.5.6 4.8 1.8 6.9L2.6 28.6l5.8-1.5c1.5.8 3.3 1.3 5.1 1.3 7.7 0 14-6.2 14-14S23.7 2 16 2z"/></svg>
+            <svg viewBox="0 0 32 32" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.51.666 4.868 1.83 6.91L2.6 28.6l5.86-1.52C10.36 28.16 13.08 29 16 29c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 24.8c-2.3 0-4.48-.64-6.36-1.74l-.46-.26-3.8 1 1.02-3.7-.28-.44C5.04 20.02 4.2 18.1 4.2 16c0-6.5 5.3-11.8 11.8-11.8 6.5 0 11.8 5.3 11.8 11.8s-5.3 11.8-11.8 11.8zm6.52-8.84c-.36-.18-2.12-1.04-2.46-1.16-.32-.12-.56-.18-.8.18-.24.36-.96 1.18-1.16 1.42-.22.24-.42.26-.78.08-1.84-.92-3.06-1.92-4.28-4.02-.16-.26 0-.38.16-.54.14-.14.32-.36.48-.54.16-.18.22-.3.32-.5.1-.2.06-.38-.02-.54-.1-.16-.9-2.16-1.22-2.94-.32-.78-.66-.66-.9-.68-.22-.02-.48-.02-.74-.02-.26 0-.68.1-1.04.5-.36.4-1.38 1.34-1.38 3.28 0 1.94 1.42 3.82 1.62 4.08.2.28 2.78 4.24 6.74 5.94 2.62 1.12 3.16.9 3.72.84.92-.1 2.12-.86 2.42-1.7.3-.82.3-1.54.22-1.68-.1-.14-.34-.22-.7-.4z"/></svg>
         </button>
         <button class="fab-item" style="background:#3b82f6" onclick="document.getElementById('wizardModal').style.display='flex'" title="Assistente">
             <svg viewBox="0 0 24 24" fill="white"><path d="M19,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M19,19H5V5H19V19M10.6,16.6L7.4,13.4L8.8,12L10.6,13.8L15.2,9.2L16.6,10.6L10.6,16.6Z"/></svg>
@@ -531,9 +547,8 @@
                 <div class="sidebar"><button class="side-btn active">Universal</button></div>
                 <div class="content-wrapper">
                     <div class="grid">
-                        <div class="card searchable-item" data-search="openport"><img src="IMG/hw-openport.jpg" alt="Openport"><div class="card-body"><h3>Openport 2.0</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Openport')">Ver</button></div></div></div>
-                        <div class="card searchable-item" data-search="c4 connect"><img src="IMG/hw-c4.jpg" alt="C4"><div class="card-body"><h3>C4 Connect</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('C4 Connect')">Ver</button></div></div></div>
-                        <div class="card searchable-item" data-search="toughbook"><img src="IMG/hw-toughbook.jpg" alt="Toughbook"><div class="card-body"><h3>Panasonic Toughbook</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Toughbook')">Ver</button></div></div></div>
+                        <div class="card searchable-item" data-search="openport"><img src="IMG/hardware/hw-openport.jpg" alt="Openport"><div class="card-body"><h3>Openport 2.0</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('Openport')">Ver</button></div></div></div>
+                        <div class="card searchable-item" data-search="c4 connect"><img src="IMG/hardware/hw-c4.jpg" alt="C4"><div class="card-body"><h3>C4 Connect</h3><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="orderProduct('C4 Connect')">Ver</button></div></div></div>
                     </div>
                 </div>
             </div>
@@ -711,7 +726,7 @@
         setInterval(showPopup, 20000);
         setTimeout(showPopup, 5000);
 
-        // LANG SYSTEM
+        // LANG SYSTEM CORRIGIDO
         const dict = {
             pt: { 
                 hero_title: "Soluções de Diagnóstico", hero_desc: "Instalação remota profissional.", 
@@ -754,11 +769,11 @@
             // 2. Atualizar botões ativos (Visual)
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             // Encontra o botão clicado e ativa-o
-            const btn = document.querySelector(`.lang-btn[onclick*="${l}"]`);
+            const btn = document.querySelector(`#btn-${l}`);
             if (btn) btn.classList.add('active');
         }
         
-        // SCROLL TOP
+        // SCROLL TOP (SENSIBILIDADE MELHORADA)
         const scrollToTopBtn = document.getElementById("scrollTopBtn");
         window.onscroll = function() {
             // Se descer mais de 100px (antes era 300), mostra o botão
@@ -769,29 +784,6 @@
             }
         };
         function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
-        
-        // WIZARD LOGIC (RESTORED)
-        let userSpecs = {};
-        function setSpec(key, val) {
-            userSpecs[key] = val;
-            const current = event.target.closest('.step');
-            const next = current.nextElementSibling;
-            current.classList.remove('active');
-            if(next && next.classList.contains('step')) {
-                next.classList.add('active');
-                if(next.id === 'wiz-result') showResult();
-            }
-        }
-        function showResult() {
-            let html = "";
-            if(userSpecs.win === 'old' || userSpecs.ram === 'low') {
-                html = `<div class="wiz-result-box" style="border-color:orange"><h4 style="color:orange">⚠️ PC Limitado</h4><p>Recomendamos upgrade.</p></div>`;
-            } else {
-                html = `<div class="wiz-result-box" style="border-color:green"><h4 style="color:green">✅ PC Compatível!</h4><p>Pode instalar o Pack Completo.</p></div>`;
-            }
-            document.getElementById('finalResultContent').innerHTML = html;
-        }
-
     </script>
 </body>
 </html>
