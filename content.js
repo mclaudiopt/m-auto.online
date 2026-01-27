@@ -1,5 +1,4 @@
 // content.js - Base de dados de textos para M-Auto Online V17.10
-// Atualizado com descrições detalhadas para EPC e WIS
 
 const translations = {
     pt: { 
@@ -18,15 +17,16 @@ const translations = {
         
         desc_xentry_detail: "Software de diagnóstico oficial da Mercedes-Benz. Permite leitura e eliminação de falhas, visualização de dados em tempo real, testes de atuação e procedimentos de serviço completos para veículos ligeiros ou pesados (consoante a versão).",
         
-        // ATUALIZADO: WIS (PT)
         desc_wis_detail: "Mercedes-Benz WIS/ASRA: Documentação de reparação e serviço, Esquemas elétricos, Diagnóstico, Reparação de carroçaria, Resolução de problemas e outros.<br>Abrange: Carros, Camiões, Veículos Todo-o-Terreno, Autocarros, Carrinhas, Unimog, Smart & Maybach.<br><br>O objetivo do WIS net é melhorar a disponibilidade eletrónica e a utilidade da documentação da oficina (reparação, manutenção, dados básicos, esquemas elétricos) dos produtos Mercedes-Benz e Smart.<br><br>Funcionalidades:<br>• Documentação de oficina/serviço<br>• Identificação e descodificação de veículos<br>• Catálogo de unidades de trabalho e taxas fixas<br>• Códigos de danos e Resolução de problemas<br>• Esquemas elétricos e Ilustrações<br>• Pesquisa e filtros avançados",
 
-        // ATUALIZADO: EPC (PT)
         desc_epc_detail: "Mercedes-Benz EPC net: Catálogo eletrónico de peças sobresselentes originais para todos os modelos de carros, camiões e autocarros Mercedes-Benz de todos os mercados (incluindo Smart & Maybach).<br><br>Ao introduzir o seu Número de Identificação do Veículo (VIN), pode visualizar as peças específicas que se adequam ao seu carro, o que é extremamente útil quando existem variações de peças ao longo da vida do modelo.<br><br>Também é possível visualizar o Cartão de Dados do veículo que mostra o número original do motor, número da caixa de velocidades, códigos de pintura, acabamentos e lista de opcionais. Isto é muito útil ao avaliar um carro usado para determinar se mantém os componentes originais.<br>O EPC mostra também uma vista explodida de cada área do carro.",
 
         desc_vgs_detail: "Ferramenta específica para reiniciar (Renew) e Virginizar unidades de controlo de transmissão 722.9 (7G-Tronic). Essencial para substituição de placas TCU usadas.",
-        desc_dts_detail: "DTS Monaco é a ferramenta de engenharia universal para diagnóstico e controlo de unidades ECUs da Daimler. Permite codificação SCN offline, alteração de variantes e flashagem.",
-        desc_vediamo_detail: "Software de engenharia de fábrica. Utilizado para diagnóstico, codificação, flash e diagnósticos especiais não acessíveis via Xentry.",
+        
+        desc_dts_detail: "DTS Monaco 9.02 traz novas funcionalidades para um desenvolvimento de diagnóstico ainda mais rápido e eficiente.<br><br>Destaques:<br>• Suporte a diagnóstico remoto na rede de engenharia<br>• Visualização e gravação de comunicação Ethernet (DoIP)<br>• Automação OTX para maior velocidade<br>• Integração com Smart Diagnostic Engine (SDE)<br><br>O engenheiro pode conectar-se remotamente, realizar os seus próprios testes e corrigir problemas diretamente (atualização remota de software), poupando tempo e recursos.",
+
+        desc_vediamo_detail: "O Vediamo é um poderoso software de diagnóstico e codificação projetado especificamente para modelos antigos da Mercedes-Benz. Perfeito para engenheiros e técnicos para programação e codificação offline.<br><br>Funcionalidades:<br>• Leitura e eliminação de erros, reset de caixas de controlo<br>• Teste de qualquer ECU em K-Line e CAN<br>• Protocolos: RTMD+, MBISO, KWFB, KW2000 e UDS<br>• Codificação e programação offline<br>• Diagnóstico, codificação ou flash de várias ECUs simultaneamente<br><br>Tarefas comuns: Cancelar sistema de ureia, Adicionar sistemas de fragrância/porta-malas elétrico, Modificar gateway, Habilitar pacote AMG, Reset de airbag, etc.",
+        
         desc_hht_detail: "Emulador HHT-WIN para diagnóstico de modelos Mercedes clássicos (anos 90 e inícios de 2000) que não são cobertos nativamente pelo Xentry moderno.",
         desc_7g_detail: "Ferramenta especializada para reset e calibração de transmissões 7G-Tronic. Permite procedimentos rápidos de adaptação.",
         desc_zenzefi_detail: "Certificados digitais que permitem o diagnóstico de veículos mais recentes (W206, W223) em modo offline, contornando a necessidade de login online oficial.",
@@ -37,19 +37,24 @@ const translations = {
         desc_vin_detail: "Base de dados FBS completa e inferências baseadas no VIN.<br>• Sistema completo de deteção de tipo de carroçaria<br>• Visualização fixa de plataforma e transmissão<br>• Binário restaurado e características notáveis do motor<br>• Formatação melhorada para relatórios detalhados<br>• A lógica exata do 'modelo completo' (E220D, C200, etc.)<br>• Sem janelas de consola durante a verificação<br>• Descodificação manual de VIN completamente offline.",
 
         // Outras Marcas
-        desc_odis_s: "ODIS Service (Offboard Diagnostic Information System). Software de diagnóstico de concessionário para todas as marcas do grupo VAG (VW, Audi, Seat, Skoda, Bentley, Lamborghini). Inclui funções de diagnóstico guiado, esquemas elétricos e boletins técnicos.",
-        desc_odis_e: "ODIS Engineering. Software de desenvolvimento VAG para flashagem offline de unidades de controlo. Permite alterar parâmetros, atualizar firmware e realizar codificações avançadas não acessíveis no ODIS Service.",
-        desc_ista_d: "ISTA+ (Rheingold). Sistema de diagnóstico oficial para BMW, Mini e Rolls-Royce. Suporta diagnóstico completo, plano de teste calculado, esquemas elétricos e manuais de reparação integrados.",
-        desc_ista_p: "Software dedicado para programação e codificação de módulos (ECU) em chassis da série E. Essencial para atualizações de software e substituição de módulos.",
+        desc_odis_s: "ODIS Service. Software de diagnóstico de concessionário para todas as marcas do grupo VAG (VW, Audi, Seat, Skoda, Bentley, Lamborghini). Inclui funções de diagnóstico guiado, esquemas elétricos e boletins técnicos.",
+        
+        desc_odis_e: "ODIS ENGINEER é um software especializado de programação e diagnóstico, suportando até 2023-2024 para marcas Audi, Volkswagen, Bentley, Skoda, Seat, MAN, Lamborghini, Bugatti.<br><br>Compatível com o dispositivo de diagnóstico padrão SAE J2534, este software permite:<br>• Diagnóstico offline de ECU<br>• Codificação e instalação offline<br>• Flashagem de unidades de controlo<br>• Alteração de parâmetros avançados",
+
+        desc_ista_d: "ISTA+ (Rheingold). Diagnóstico Nível Concessionário:<br>• Leitura e eliminação de erros de módulos (ECU)<br>• Acesso a módulos BMW que leitores OBD padrão não permitem<br><br>Atualização de Módulos:<br>• Atualize para as versões mais recentes para melhor condução e economia<br><br>Programação e Codificação:<br>• Personalize o seu BMW, retrofits, codificação de espelhos, etc.<br><br>Funcionalidades Extra:<br>• Reset de Serviço, Regeneração DPF<br>• Esquemas Elétricos, Instruções de Reparação<br>• Controlo EGR, Reset Luz Airbag/ABS<br>• Teste Vanos, Dados em Tempo Real<br>• Sincronização EWS DMW<br>• Adaptações e muito mais.",
+
         desc_diagbox9: "Diagbox v9. Versão mais recente para veículos PSA (Peugeot, Citroën, DS, Opel). Suporta os modelos mais recentes até 2024. Funciona com interfaces Lexia 3 originais ou de alta qualidade.",
         desc_clip: "Renault Can Clip. Ferramenta de diagnóstico oficial para Renault e Dacia. Permite diagnóstico completo de todos os sistemas, reprogramação, codificação de chaves e testes de atuadores.",
+        
+        desc_jlr_seed_detail: "Gerador de chaves de acesso de segurança (Seed-Key). Essencial para desbloquear funções especiais e de engenharia no SDD e Pathfinder (ex: codificação de chaves, alteração de VIN e programação de módulos protegidos).",
+        
         desc_pathfinder: "JLR Pathfinder. Nova arquitetura de diagnóstico para veículos Jaguar e Land Rover com comunicação DoIP (geralmente modelos 2017 em diante).",
         desc_sdd: "JLR SDD. Symptom Driven Diagnostics para veículos JLR de 2005 a 2016. Suporta funções de serviço, diagnósticos de avarias e programação de módulos.",
-        desc_jlr_seed_detail: "Gerador de chaves de acesso de segurança (Seed-Key). Essencial para desbloquear funções especiais e de engenharia no SDD e Pathfinder (ex: codificação de chaves, alteração de VIN).",
         desc_techstream: "Toyota Techstream. Software de diagnóstico de fábrica para Toyota, Lexus e Scion. Permite verificação de saúde do veículo, personalização de configurações (C-Best) e reprogramação.",
         desc_toyota_epc: "Catálogo de peças eletrónico global para Toyota. Identificação precisa de peças através do VIN, com diagramas detalhados de montagem.",
         desc_toylex: "Ferramenta poderosa para desativar sistemas como EGR, DPF, Adblue e IMMO em ECUs Denso da Toyota e Lexus. Edição direta de ficheiros binários.",
-        desc_consult: "Nissan Consult III Plus. Software de diagnóstico profissional para Nissan e Infiniti. Suporta diagnóstico de todos os sistemas, CAN, programação de ECU e configuração de chaves.",
+        desc_consult_detail: "Nissan Consult 3: O sistema de diagnóstico de nova geração para veículos Nissan e Infiniti. Poderoso, flexível e fácil de usar.<br><br>1. Diagnóstico e Reparação Rápidos: Diagnóstico CAN automatizado 17x mais rápido que métodos anteriores.<br>2. Autodiagnóstico Automatizado: Diagnóstico preciso sem depender apenas de competências técnicas manuais.<br>3. Múltiplos Defeitos Complexos: Autodiagnóstico simultâneo de todo o sistema, monitor de dados e osciloscópio.<br>4. Gestão de Dados Melhorada: Visualização de grandes quantidades de informação em ecrã a cores.<br>5. Atualização de Mapas: Atualização de dados de navegação (disco rígido) de alta velocidade.",
+        
         desc_fdrs: "Ford FDRS. Sistema de diagnóstico e reparação Ford de próxima geração. Baseado na nuvem, para todos os veículos novos da Ford.",
         desc_ids: "Ford IDS. Padrão de diagnóstico para a frota Ford legacy. Cobre diagnósticos de concessionário, programação de módulos, PATS (imobilizador) e regeneração de DPF.",
         desc_gds2: "GM GDS2. Software de diagnóstico global para plataformas GM Global A. Suporta Buick, Cadillac, Chevrolet, GMC e Opel/Vauxhall (modelos 2010+).",
@@ -105,15 +110,16 @@ const translations = {
 
         desc_xentry_detail: "Official Mercedes-Benz diagnostic software. Allows fault reading/clearing, live data, actuation tests, and full service procedures.",
         
-        // UPDATED: WIS (EN)
-        desc_wis_detail: "Mercedes-Benz WIS/ASRA: Repair and service documentation, Electric diagrams, Diagnosis, Body repair, Troubleshooting and more.<br>Covers: Cars, Trucks, Cross-Country vehicles, Buses, Vans, Unimog, Smart & Maybach.<br><br>The WIS net aim is to improve the electronic availability and usefulness of the workshop documentation (e.g. repair, maintenance, basic data, wiring diagrams) of Mercedes-Benz products.<br><br>Features:<br>• Workshop/service documentation<br>• Vehicle identification, decoding<br>• Work units catalog & Flat rates<br>• Damage codes & Troubleshooting<br>• Wiring diagrams & Illustrations<br>• Search/filters",
+        desc_wis_detail: "Mercedes-Benz WIS/ASRA: Repair and service documentation, Electric diagrams, Diagnosis, Body repair, Troubleshooting and more.<br>Covers: Cars, Trucks, Cross-Country vehicles, Buses, Vans, Unimog, Smart & Maybach.<br><br>The WIS net aim is to improve the electronic availability and usefulness of the workshop documentation of Mercedes-Benz products.<br><br>Features:<br>• Workshop/service documentation<br>• Vehicle identification, decoding<br>• Work units catalog & Flat rates<br>• Damage codes & Troubleshooting<br>• Wiring diagrams & Illustrations<br>• Search/filters",
 
-        // UPDATED: EPC (EN)
-        desc_epc_detail: "Mercedes-Benz EPC net: Electronic spare parts catalogue consisting of original parts for all models of Mercedes-Benz cars, trucks, and buses (including Smart & Maybach).<br><br>By entering your Vehicle Identification Number (VIN), you can view the specific parts that fit your car. This is extremely helpful when variations on a part were fitted over the model’s lifetime.<br><br>Also, the vehicle’s Data Card is viewable, showing the original engine number, gearbox number, paint/trim codes, and option codes. Very handy for verifying if a second-hand car still has original components.<br>The EPC also shows an exploded view of each area.",
+        desc_epc_detail: "Mercedes-Benz EPC net: Electronic spare parts catalogue consisting of original parts for all models of Mercedes-Benz cars, trucks, and buses.<br><br>By entering your Vehicle Identification Number (VIN), you can view the specific parts that fit your car. Also, the vehicle’s Data Card is viewable, showing the original engine number, gearbox number, paint/trim codes, and option codes.",
 
         desc_vgs_detail: "Specific tool to Renew and Virginize 722.9 (7G-Tronic) transmission control units.",
-        desc_dts_detail: "DTS Monaco is the universal engineering tool for Daimler ECUs. Allows offline SCN coding, variant coding, and flashing.",
-        desc_vediamo_detail: "Factory engineering software. Used for diagnostics, coding, flashing, and special functions not in Xentry.",
+        
+        desc_dts_detail: "DTS Monaco 9.02 has new functionalities enable even faster and more cost-efficient diagnostic development.<br><br>Highlights:<br>• Remote diagnostic support in the engineering network<br>• Display and recording of Ethernet communication (DoIP)<br>• New OTX support functions<br>• Smart Diagnostic Engine integration<br><br>The engineer can connect up remotely, carry out tests and correct problems directly (remote software update).",
+
+        desc_vediamo_detail: "Vediamo is powerful diagnostic and coding software designed for older Mercedes-Benz models. Perfect for engineers and technicians to perform offline programming and coding.<br><br>Features:<br>• Read/delete errors, reset control box<br>• Test any ECU on K-Line and CAN<br>• Protocols: RTMD+, MBISO, KWFB, KW2000, UDS<br>• Offline coding and programming<br>• Concurrent ECU flashing<br><br>Common tasks: Cancel urea calculation, Add fragrance systems, Modify gateway coding, Enable AMG package, Airbag reset, etc.",
+        
         desc_hht_detail: "HHT-WIN emulator for diagnosing classic Mercedes models (90s/early 00s).",
         desc_7g_detail: "Specialized tool for resetting and calibrating 7G-Tronic transmissions.",
         desc_zenzefi_detail: "Digital certificates allowing offline diagnosis of newer vehicles (W206, W223).",
@@ -124,18 +130,24 @@ const translations = {
         desc_vin_detail: "Full FBS database and VIN-based inferences<br>• Complete body type detection system<br>• Fixed display of platform and transmission<br>• Restored torque and noticeable engine features<br>• Improved formatting for detailed reports<br>• The exact logic of the 'full model'<br>• No console windows during scanning<br>• Manual VIN decoding completely offline",
         
         desc_odis_s: "Dealer diagnostic software for all VAG group brands (VW, Audi, Seat, Skoda). Includes guided fault finding and wiring diagrams.",
-        desc_odis_e: "VAG engineering software for offline ECU flashing. Allows changing parameters and advanced coding.",
-        desc_ista_d: "Official Rheingold diagnostic system for BMW, Mini and Rolls-Royce. Supports full diagnostics and repair manuals.",
-        desc_ista_p: "Dedicated software for module programming and coding on E-series chassis.",
+        
+        desc_odis_e: "ODIS ENGINEER is a specialized programming and diagnostic software, supporting until 2023-2024 for Audi, Volkswagen, Bentley, Skoda, Seat, MAN, Lamborghini, Bugatti.<br><br>Compatible with SAE J2534 standard devices, this software enables:<br>• Offline ECU diagnosis<br>• Encoding and installation<br>• Flash control units",
+
+        desc_ista_d: "ISTA+ (Rheingold). DEALER LEVEL DIAGNOSTICS:<br>• Module (ECU) Errors reading and clearing<br>• Access to BMW modules standard readers won't allow<br><br>UPDATE MODULES:<br>• Update modules to latest versions for improved drive-ability<br><br>PROGRAMMING & CODING:<br>• Customise your BMW, retrofit items, mirror coding etc.<br><br>Features:<br>• Service Reset, DPF Regeneration<br>• Wiring Diagrams, Repair Instructions<br>• EGR System control, Air Bag/ABS Reset<br>• Firmware Updates, Vanos Testing<br>• EWS DMW Synchronisation<br>• Adaptations Reset and much more.",
+        
         desc_diagbox9: "Latest diagnostic software for PSA vehicles (Peugeot, Citroën, DS, Opel). Supports latest models up to 2024.",
         desc_clip: "Official diagnostic tool for Renault and Dacia. Allows full system diagnostics and reprogramming.",
-        desc_jlr_seed_detail: "Security access seed-key generator for SDD and Pathfinder. Allows key coding and engineering access.",
+        
+        desc_jlr_seed_detail: "Security access seed-key generator for special functions in SDD and Pathfinder. Allows key coding and engineering access.",
+        
         desc_pathfinder: "New diagnostic architecture for JLR vehicles (2017+ models). Requires DoIP interface.",
         desc_sdd: "Symptom Driven Diagnostics for JLR vehicles (2005-2016).",
         desc_techstream: "Factory diagnostic software for Toyota, Lexus and Scion.",
         desc_toyota_epc: "Global electronic parts catalog for Toyota.",
         desc_toylex: "Powerful tool to disable EGR, DPF, Adblue and IMMO on Toyota/Lexus Denso ECUs.",
-        desc_consult: "Professional diagnostic software for Nissan and Infiniti.",
+        
+        desc_consult_detail: "Nissan Consult 3: The new generation diagnostic system for Nissan and Infiniti vehicles. Powerful, flexible and easy to use.<br><br>1. Swift diagnosis and repairs: CAN diagnosis 17x faster than previous methods.<br>2. Automated Self-diagnostics: Accurate diagnosis without relying solely on technical skills.<br>3. Complex defects handling: Simultaneous self-diagnosis of entire systems, data monitor and oscilloscope.<br>4. Enhanced data management: View large amounts of info on color-screen.<br>5. Map update function: High-speed map data update for navigation systems.",
+
         desc_fdrs: "Next-generation Ford Diagnostic and Repair System (Cloud-based).",
         desc_ids: "Diagnostic standard for legacy Ford fleet.",
         desc_gds2: "Global Diagnostic System 2 for GM Global A platforms.",
@@ -191,8 +203,11 @@ const translations = {
         desc_epc_detail: "Mercedes-Benz EPC net : Catalogue électronique de pièces détachées d'origine pour tous les modèles Mercedes-Benz (y compris Smart & Maybach).<br><br>En entrant votre numéro de châssis (VIN), vous pouvez voir les pièces spécifiques qui correspondent à votre voiture. Extrêmement utile pour les variations de pièces au fil du temps.<br><br>La carte de données du véhicule est également visible (moteur d'origine, boîte, codes peinture et options). Idéal pour vérifier l'authenticité des composants d'un véhicule d'occasion.<br>L'EPC offre aussi une vue éclatée de chaque zone.",
 
         desc_vgs_detail: "Outil spécifique pour réinitialiser les unités de commande de transmission 722.9.",
-        desc_dts_detail: "Outil d'ingénierie universel pour calculateurs Daimler. Codage SCN hors ligne et flashage.",
-        desc_vediamo_detail: "Logiciel d'ingénierie d'usine. Utilisé pour le codage et les fonctions spéciales.",
+        
+        desc_dts_detail: "DTS Monaco 9.02 offre de nouvelles fonctionnalités pour un développement de diagnostic encore plus rapide.<br><br>Points forts :<br>• Support diagnostic à distance sur réseau d'ingénierie<br>• Affichage et enregistrement communication Ethernet (DoIP)<br>• Nouvelles fonctions support OTX<br>• Intégration Smart Diagnostic Engine (SDE)<br><br>L'ingénieur peut se connecter à distance, effectuer ses tests et corriger les problèmes directement (mise à jour logicielle à distance).",
+
+        desc_vediamo_detail: "Vediamo est un logiciel puissant de diagnostic et de codage pour les anciens modèles Mercedes-Benz. Parfait pour les ingénieurs et techniciens pour la programmation hors ligne.<br><br>Fonctionnalités :<br>• Lecture/effacement erreurs, reset calculateur<br>• Test tout ECU sur K-Line et CAN<br>• Protocoles : RTMD+, MBISO, KWFB, KW2000, UDS<br>• Codage et programmation hors ligne<br>• Flashage simultané d'ECU<br><br>Tâches courantes : Annuler calcul urée, Ajout systèmes parfum, Modification codage passerelle, Activer pack AMG, Reset airbag, etc.",
+
         desc_hht_detail: "Émulateur pour le diagnostic des modèles Mercedes classiques.",
         desc_7g_detail: "Outil pour la réinitialisation et le calibrage des transmissions 7G-Tronic.",
         desc_zenzefi_detail: "Certificats numériques permettant le diagnostic hors ligne des véhicules récents.",
@@ -203,18 +218,24 @@ const translations = {
         desc_vin_detail: "Base de données FBS complète et inférences basées sur VIN<br>• Système complet de détection de type de carrosserie<br>• Affichage fixe de la plateforme et de la transmission<br>• Couple restauré et caractéristiques moteur notables<br>• Formatage amélioré pour les rapports détaillés<br>• La logique exacte du 'modèle complet'<br>• Pas de fenêtres de console pendant le scan<br>• Décodage manuel VIN complètement hors ligne",
         
         desc_odis_s: "Logiciel de diagnostic concessionnaire pour toutes les marques du groupe VAG.",
-        desc_odis_e: "Logiciel d'ingénierie VAG pour le flashage hors ligne des calculateurs.",
-        desc_ista_d: "Système de diagnostic officiel Rheingold pour BMW, Mini et Rolls-Royce.",
-        desc_ista_p: "Logiciel dédié à la programmation et au codage des modules sur châssis série E.",
+        
+        desc_odis_e: "ODIS ENGINEER est un logiciel spécialisé de programmation et de diagnostic, prenant en charge jusqu'à 2023-2024 les marques Audi, VW, Bentley, Skoda, Seat, MAN, Lamborghini, Bugatti.<br><br>Compatible avec les appareils SAE J2534, ce logiciel permet :<br>• Diagnostic ECU hors ligne<br>• Codage et installation<br>• Flashage des unités de contrôle",
+
+        desc_ista_d: "ISTA+ (Rheingold). DIAGNOSTIC NIVEAU CONCESSIONNAIRE :<br>• Lecture et effacement erreurs modules (ECU)<br>• Accès aux modules BMW bloqués par les lecteurs OBD standard<br><br>MISE À JOUR MODULES :<br>• Mettez à jour vers les dernières versions pour une meilleure conduite<br><br>PROGRAMMATION & CODAGE :<br>• Personnalisez votre BMW, rétrofits, codage rétroviseurs, etc.<br><br>Fonctionnalités :<br>• Reset Service, Régénération FAP<br>• Schémas électriques, Instructions réparation<br>• Contrôle EGR, Reset Airbag/ABS<br>• Mises à jour Firmware, Test Vanos<br>• Synchro EWS DMW<br>• Adaptations et bien plus.",
+        
         desc_diagbox9: "Dernier logiciel de diagnostic pour véhicules PSA. Supporte les modèles jusqu'à 2024.",
         desc_clip: "Outil de diagnostic officiel pour Renault et Dacia.",
-        desc_jlr_seed_detail: "Générateur de clés d'accès de sécurité (Seed-Key) pour SDD et Pathfinder.",
+        
+        desc_jlr_seed_detail: "Générateur de clés d'accès de sécurité (Seed-Key) pour fonctions spéciales dans SDD et Pathfinder. Permet le codage de clés et l'accès ingénierie.",
+        
         desc_pathfinder: "Nouvelle architecture de diagnostic pour Jaguar et Land Rover (DoIP, 2017+).",
         desc_sdd: "Symptom Driven Diagnostics pour véhicules JLR (2005-2016).",
         desc_techstream: "Logiciel de diagnostic d'usine pour Toyota, Lexus et Scion.",
         desc_toyota_epc: "Catalogue de pièces électronique mondial pour Toyota.",
         desc_toylex: "Outil pour désactiver EGR, DPF, Adblue et IMMO sur Toyota/Lexus.",
-        desc_consult: "Logiciel de diagnostic professionnel pour Nissan et Infiniti.",
+        
+        desc_consult_detail: "Nissan Consult 3 : Le système de diagnostic nouvelle génération pour Nissan et Infiniti. Puissant, flexible et facile à utiliser.<br><br>1. Diagnostic et réparation rapides : Diagnostic CAN 17x plus rapide.<br>2. Autodiagnostic automatisé : Diagnostic précis sans dépendre uniquement des compétences techniques.<br>3. Défauts complexes : Autodiagnostic simultané de tout le système, moniteur de données.<br>4. Gestion des données : Affichage de grandes quantités d'infos sur écran couleur.<br>5. Mise à jour cartes : Mise à jour rapide des données de navigation.",
+        
         desc_fdrs: "Système de diagnostic Ford nouvelle génération (Cloud).",
         desc_ids: "Standard de diagnostic pour la flotte Ford existante.",
         desc_gds2: "Système de diagnostic mondial pour plateformes GM Global A.",
