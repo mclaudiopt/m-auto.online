@@ -1,4 +1,5 @@
-// content.js - Base de dados de textos e produtos para M-Auto Online V17.9
+// content.js - Base de dados de textos para M-Auto Online V17.10
+// Atualizado com descrições detalhadas para EPC e WIS
 
 const translations = {
     pt: { 
@@ -16,8 +17,13 @@ const translations = {
         desc_merc_full_detail: "A solução definitiva para profissionais Mercedes. Inclui:<br>• Xentry (Diagnóstico PassThru/OpenShell)<br>• WIS/ASRA (Manuais de Reparação e Esquemas)<br>• EPC (Catálogo de Peças)<br>• Starfinder (Localizador de componentes)<br>• Vediamo & DTS Monaco (Engenharia e Flash)<br>• MbTools & Certificados ZenZefi para acesso offline.",
         
         desc_xentry_detail: "Software de diagnóstico oficial da Mercedes-Benz. Permite leitura e eliminação de falhas, visualização de dados em tempo real, testes de atuação e procedimentos de serviço completos para veículos ligeiros ou pesados (consoante a versão).",
-        desc_wis_detail: "Workshop Information System. Contém todas as instruções de trabalho, esquemas elétricos, binários de aperto e procedimentos de manutenção oficiais da Mercedes.",
-        desc_epc_detail: "Electronic Parts Catalog. Permite identificar a referência exata de qualquer peça do veículo através do número de chassis (VIN).",
+        
+        // ATUALIZADO: WIS (PT)
+        desc_wis_detail: "Mercedes-Benz WIS/ASRA: Documentação de reparação e serviço, Esquemas elétricos, Diagnóstico, Reparação de carroçaria, Resolução de problemas e outros.<br>Abrange: Carros, Camiões, Veículos Todo-o-Terreno, Autocarros, Carrinhas, Unimog, Smart & Maybach.<br><br>O objetivo do WIS net é melhorar a disponibilidade eletrónica e a utilidade da documentação da oficina (reparação, manutenção, dados básicos, esquemas elétricos) dos produtos Mercedes-Benz e Smart.<br><br>Funcionalidades:<br>• Documentação de oficina/serviço<br>• Identificação e descodificação de veículos<br>• Catálogo de unidades de trabalho e taxas fixas<br>• Códigos de danos e Resolução de problemas<br>• Esquemas elétricos e Ilustrações<br>• Pesquisa e filtros avançados",
+
+        // ATUALIZADO: EPC (PT)
+        desc_epc_detail: "Mercedes-Benz EPC net: Catálogo eletrónico de peças sobresselentes originais para todos os modelos de carros, camiões e autocarros Mercedes-Benz de todos os mercados (incluindo Smart & Maybach).<br><br>Ao introduzir o seu Número de Identificação do Veículo (VIN), pode visualizar as peças específicas que se adequam ao seu carro, o que é extremamente útil quando existem variações de peças ao longo da vida do modelo.<br><br>Também é possível visualizar o Cartão de Dados do veículo que mostra o número original do motor, número da caixa de velocidades, códigos de pintura, acabamentos e lista de opcionais. Isto é muito útil ao avaliar um carro usado para determinar se mantém os componentes originais.<br>O EPC mostra também uma vista explodida de cada área do carro.",
+
         desc_vgs_detail: "Ferramenta específica para reiniciar (Renew) e Virginizar unidades de controlo de transmissão 722.9 (7G-Tronic). Essencial para substituição de placas TCU usadas.",
         desc_dts_detail: "DTS Monaco é a ferramenta de engenharia universal para diagnóstico e controlo de unidades ECUs da Daimler. Permite codificação SCN offline, alteração de variantes e flashagem.",
         desc_vediamo_detail: "Software de engenharia de fábrica. Utilizado para diagnóstico, codificação, flash e diagnósticos especiais não acessíveis via Xentry.",
@@ -34,6 +40,7 @@ const translations = {
         desc_odis_s: "ODIS Service (Offboard Diagnostic Information System). Software de diagnóstico de concessionário para todas as marcas do grupo VAG (VW, Audi, Seat, Skoda, Bentley, Lamborghini). Inclui funções de diagnóstico guiado, esquemas elétricos e boletins técnicos.",
         desc_odis_e: "ODIS Engineering. Software de desenvolvimento VAG para flashagem offline de unidades de controlo. Permite alterar parâmetros, atualizar firmware e realizar codificações avançadas não acessíveis no ODIS Service.",
         desc_ista_d: "ISTA+ (Rheingold). Sistema de diagnóstico oficial para BMW, Mini e Rolls-Royce. Suporta diagnóstico completo, plano de teste calculado, esquemas elétricos e manuais de reparação integrados.",
+        desc_ista_p: "Software dedicado para programação e codificação de módulos (ECU) em chassis da série E. Essencial para atualizações de software e substituição de módulos.",
         desc_diagbox9: "Diagbox v9. Versão mais recente para veículos PSA (Peugeot, Citroën, DS, Opel). Suporta os modelos mais recentes até 2024. Funciona com interfaces Lexia 3 originais ou de alta qualidade.",
         desc_clip: "Renault Can Clip. Ferramenta de diagnóstico oficial para Renault e Dacia. Permite diagnóstico completo de todos os sistemas, reprogramação, codificação de chaves e testes de atuadores.",
         desc_pathfinder: "JLR Pathfinder. Nova arquitetura de diagnóstico para veículos Jaguar e Land Rover com comunicação DoIP (geralmente modelos 2017 em diante).",
@@ -60,7 +67,7 @@ const translations = {
         desc_scanmatik_detail: "Scanmatik SM2 Pro. A interface J2534 mais estável do mercado. Suporta tensão de programação auxiliar (FEPS) e é a recomendada para Xentry Passthru, ODIS e GDS2.",
         desc_vcx_detail: "VCX SE. Interface de diagnóstico compacta e versátil. Suporta DoIP e múltiplas licenças de fabricantes (pode ser usada como JLR, Ford, VW, etc).",
         desc_mbpro_detail: "Super MB Pro M6. Evolução do C4 com melhor dissipação de calor e design mais robusto. Suporte total a protocolos wireless e DoIP.",
-        desc_enet_detail: "Cabo E-NET (Ethernet to OBD). Essencial para codificação e programação rápida em veículos BMW das séries F, G e I.",
+        desc_enet_detail: "Cabo E-NET (Ethernet to OBD). Essencial para codificação e programação rápida em veículos BMW das séries F, G e I. Funciona com E-Sys e ISTA.",
         desc_clip_hw_detail: "Sonda VCI Can Clip (Chip Ouro/Gold). Interface de alta qualidade para garantir estabilidade na programação de módulos Renault/Dacia.",
         desc_lexia_detail: "Interface Lexia 3 Full Chip (NEC Relays). Indispensável para PSA. A versão Full Chip garante comunicação com todos os módulos, inclusive em modelos mais antigos que as versões 'Lite' não leem.",
         desc_laptop_detail: "Computador portátil recondicionado (Grau A, i5/i7, 8GB RAM, SSD). Fornecido pronto a usar, com sistema operativo limpo e otimizado para oficina.",
@@ -97,8 +104,13 @@ const translations = {
         desc_interface: "J2534 Interface", desc_mux: "MB Multiplexer", desc_hardware: "Hardware",
 
         desc_xentry_detail: "Official Mercedes-Benz diagnostic software. Allows fault reading/clearing, live data, actuation tests, and full service procedures.",
-        desc_wis_detail: "Workshop Information System. Contains all work instructions, wiring diagrams, torque specs, and maintenance procedures.",
-        desc_epc_detail: "Electronic Parts Catalog. Precise part identification via VIN chassis number.",
+        
+        // UPDATED: WIS (EN)
+        desc_wis_detail: "Mercedes-Benz WIS/ASRA: Repair and service documentation, Electric diagrams, Diagnosis, Body repair, Troubleshooting and more.<br>Covers: Cars, Trucks, Cross-Country vehicles, Buses, Vans, Unimog, Smart & Maybach.<br><br>The WIS net aim is to improve the electronic availability and usefulness of the workshop documentation (e.g. repair, maintenance, basic data, wiring diagrams) of Mercedes-Benz products.<br><br>Features:<br>• Workshop/service documentation<br>• Vehicle identification, decoding<br>• Work units catalog & Flat rates<br>• Damage codes & Troubleshooting<br>• Wiring diagrams & Illustrations<br>• Search/filters",
+
+        // UPDATED: EPC (EN)
+        desc_epc_detail: "Mercedes-Benz EPC net: Electronic spare parts catalogue consisting of original parts for all models of Mercedes-Benz cars, trucks, and buses (including Smart & Maybach).<br><br>By entering your Vehicle Identification Number (VIN), you can view the specific parts that fit your car. This is extremely helpful when variations on a part were fitted over the model’s lifetime.<br><br>Also, the vehicle’s Data Card is viewable, showing the original engine number, gearbox number, paint/trim codes, and option codes. Very handy for verifying if a second-hand car still has original components.<br>The EPC also shows an exploded view of each area.",
+
         desc_vgs_detail: "Specific tool to Renew and Virginize 722.9 (7G-Tronic) transmission control units.",
         desc_dts_detail: "DTS Monaco is the universal engineering tool for Daimler ECUs. Allows offline SCN coding, variant coding, and flashing.",
         desc_vediamo_detail: "Factory engineering software. Used for diagnostics, coding, flashing, and special functions not in Xentry.",
@@ -114,6 +126,7 @@ const translations = {
         desc_odis_s: "Dealer diagnostic software for all VAG group brands (VW, Audi, Seat, Skoda). Includes guided fault finding and wiring diagrams.",
         desc_odis_e: "VAG engineering software for offline ECU flashing. Allows changing parameters and advanced coding.",
         desc_ista_d: "Official Rheingold diagnostic system for BMW, Mini and Rolls-Royce. Supports full diagnostics and repair manuals.",
+        desc_ista_p: "Dedicated software for module programming and coding on E-series chassis.",
         desc_diagbox9: "Latest diagnostic software for PSA vehicles (Peugeot, Citroën, DS, Opel). Supports latest models up to 2024.",
         desc_clip: "Official diagnostic tool for Renault and Dacia. Allows full system diagnostics and reprogramming.",
         desc_jlr_seed_detail: "Security access seed-key generator for SDD and Pathfinder. Allows key coding and engineering access.",
@@ -127,6 +140,7 @@ const translations = {
         desc_ids: "Diagnostic standard for legacy Ford fleet.",
         desc_gds2: "Global Diagnostic System 2 for GM Global A platforms.",
 
+        // Hardware & Tools Detailed EN
         desc_openport_full: "High quality J2534 PassThru interface. Compatible with Xentry, ODIS, Techstream, Forscan and more.",
         desc_c4_full: "Grade A+ SD Connect C4 Multiplexer. Supports DoIP communication and stable WiFi.",
         desc_scanmatik_detail: "High-end J2534 interface (SM2 Pro), known for stability. Best for Xentry Passthru and ODIS.",
@@ -142,6 +156,7 @@ const translations = {
         desc_extract_full: "Open-source file manager for extracting software packages.",
         desc_defender_full: "Portable utility to completely disable Windows Defender.",
 
+        // Services
         serv_fmt: "Formatting", desc_fmt: "Clean Windows 10/11 Pro install with drivers and optimization.",
         serv_av: "Anti-virus", desc_av: "Installation and configuration of light and effective protection.",
         serv_inst: "Installation", desc_inst: "Full remote software installation.",
@@ -149,7 +164,7 @@ const translations = {
         serv_upg: "HW Upgrade", desc_upg: "Consulting for RAM memory and SSD upgrade.",
 
         btn_schedule: "Schedule",
-        about_text_full: "We are automotive diagnostic software specialists. We offer professional service, fast response and guaranteed support. Our installations are clean and optimized.", 
+        about_text_full: "We are automotive diagnostic software specialists. We offer professional service, fast response and guaranteed support. Our installations are clean, optimized and guaranteed. We work with the best tools on the market to ensure your workshop never stops.", 
         wiz_os: "Which Windows?", wiz_ram: "RAM Memory?", wiz_result: "Result",
         popup_text: "people viewing this site."
     },
@@ -168,8 +183,13 @@ const translations = {
         desc_interface: "Interface J2534", desc_mux: "Multiplexeur MB", desc_hardware: "Matériel",
 
         desc_xentry_detail: "Logiciel de diagnostic officiel Mercedes-Benz. Lecture/effacement de défauts, données en temps réel et tests.",
-        desc_wis_detail: "Système d'information d'atelier. Contient toutes les instructions de travail et schémas électriques.",
-        desc_epc_detail: "Catalogue électronique de pièces. Identification précise via VIN.",
+        
+        // MIS À JOUR : WIS (FR)
+        desc_wis_detail: "Mercedes-Benz WIS/ASRA : Documentation de réparation et d'entretien, Schémas électriques, Diagnostic, Carrosserie et Dépannage.<br>Couvre : Voitures, Camions, Bus, Utilitaires, Unimog, Smart & Maybach.<br><br>L'objectif de WIS net est d'améliorer la disponibilité électronique de la documentation d'atelier pour les produits Mercedes-Benz et Smart.<br><br>Fonctionnalités :<br>• Documentation d'atelier<br>• Identification et décodage VIN<br>• Catalogue d'unités de travail et forfaits<br>• Codes de défauts et Dépannage<br>• Schémas de câblage et Illustrations<br>• Recherche et filtres avancés",
+
+        // MIS À JOUR : EPC (FR)
+        desc_epc_detail: "Mercedes-Benz EPC net : Catalogue électronique de pièces détachées d'origine pour tous les modèles Mercedes-Benz (y compris Smart & Maybach).<br><br>En entrant votre numéro de châssis (VIN), vous pouvez voir les pièces spécifiques qui correspondent à votre voiture. Extrêmement utile pour les variations de pièces au fil du temps.<br><br>La carte de données du véhicule est également visible (moteur d'origine, boîte, codes peinture et options). Idéal pour vérifier l'authenticité des composants d'un véhicule d'occasion.<br>L'EPC offre aussi une vue éclatée de chaque zone.",
+
         desc_vgs_detail: "Outil spécifique pour réinitialiser les unités de commande de transmission 722.9.",
         desc_dts_detail: "Outil d'ingénierie universel pour calculateurs Daimler. Codage SCN hors ligne et flashage.",
         desc_vediamo_detail: "Logiciel d'ingénierie d'usine. Utilisé pour le codage et les fonctions spéciales.",
@@ -185,6 +205,7 @@ const translations = {
         desc_odis_s: "Logiciel de diagnostic concessionnaire pour toutes les marques du groupe VAG.",
         desc_odis_e: "Logiciel d'ingénierie VAG pour le flashage hors ligne des calculateurs.",
         desc_ista_d: "Système de diagnostic officiel Rheingold pour BMW, Mini et Rolls-Royce.",
+        desc_ista_p: "Logiciel dédié à la programmation et au codage des modules sur châssis série E.",
         desc_diagbox9: "Dernier logiciel de diagnostic pour véhicules PSA. Supporte les modèles jusqu'à 2024.",
         desc_clip: "Outil de diagnostic officiel pour Renault et Dacia.",
         desc_jlr_seed_detail: "Générateur de clés d'accès de sécurité (Seed-Key) pour SDD et Pathfinder.",
@@ -198,6 +219,7 @@ const translations = {
         desc_ids: "Standard de diagnostic pour la flotte Ford existante.",
         desc_gds2: "Système de diagnostic mondial pour plateformes GM Global A.",
 
+        // Hard/Tools Detailed FR
         desc_openport_full: "Interface J2534 PassThru de haute qualité. Compatible multimarque.",
         desc_c4_full: "Multiplexeur SD Connect C4 grade A+. Supporte DoIP et WiFi stable.",
         desc_scanmatik_detail: "Interface J2534 haut de gamme (SM2 Pro), très stable.",
@@ -213,6 +235,7 @@ const translations = {
         desc_extract_full: "Gestionnaire de fichiers open-source pour extraire les archives.",
         desc_defender_full: "Utilitaire pour désactiver Windows Defender.",
 
+        // Services
         serv_fmt: "Formatage", desc_fmt: "Installation propre de Windows 10/11 Pro avec pilotes.",
         serv_av: "Anti-virus", desc_av: "Installation et configuration d'une protection légère et efficace.",
         serv_inst: "Installation", desc_inst: "Installation complète de logiciels à distance.",
