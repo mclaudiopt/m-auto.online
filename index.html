@@ -1554,5 +1554,59 @@
             document.getElementById('finalResultContent').innerHTML = html;
         }
     </script>
+
+<script>
+/* =========================
+   LANGUAGE CORE – v17.12
+   ========================= */
+
+let currentLang = 'pt';
+
+/* Detetar língua do browser */
+function detectUserLanguage() {
+    const lang = (navigator.language || navigator.userLanguage || 'en')
+        .toLowerCase()
+        .split('-')[0];
+    return translations[lang] ? lang : 'en';
+}
+
+/* Aplicar traduções */
+function applyTranslations(lang) {
+    currentLang = lang;
+
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.dataset.translate;
+        if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+        }
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById(`btn-${lang}`);
+    if (btn) btn.classList.add('active');
+}
+
+/* Botões de língua */
+function setLanguage(lang) {
+    if (!translations[lang]) return;
+    localStorage.setItem('lang', lang);
+    applyTranslations(lang);
+}
+
+/* Inicialização */
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('lang');
+    const lang = savedLang && translations[savedLang]
+        ? savedLang
+        : detectUserLanguage();
+
+    applyTranslations(lang);
+});
+</script>
+
+    
 </body>
 </html>
+
