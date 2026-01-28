@@ -455,13 +455,15 @@
                     <button type="button" class="side-btn" onclick="switchBrand('nissan', this)">Nissan</button>
                     <button type="button" class="side-btn" onclick="switchBrand('ford', this)">Ford</button>
                     <button type="button" class="side-btn" onclick="switchBrand('gm', this)">GM</button>
+                    <button type="button" class="side-btn" onclick="switchBrand('multi', this)" data-translate="brand_multi">Multimarca</button>
+
                 </div>
 
                 <div class="content-wrapper">
                     <div class="search-container">
                         <input type="text" id="searchInput" class="search-input" placeholder="🔍 Procurar..." onkeyup="filterProducts()">
                     </div>
-
+                    
                     <div id="brand-merc" class="brand-panel active">
                         <h2 class="panel-header">Mercedes-Benz</h2>
                         <div class="grid">
@@ -1029,6 +1031,55 @@
                 </div><!-- content-wrapper -->
             </div><!-- layout-flex -->
         </div><!-- sec-soft -->
+
+<div id="brand-multi" class="brand-panel">
+  <h2 class="panel-header" data-translate="brand_multi_title">Multimarca</h2>
+
+  <div class="grid">
+    <!-- Delphi -->
+    <div class="card searchable-item">
+      <img src="IMG/Multibrand/delphi.jpg" loading="lazy" alt="Delphi">
+      <div class="card-body">
+        <h3>Delphi</h3>
+        <p class="desc" data-translate="desc_diag">Diagnóstico.</p>
+        <p class="sub-desc" data-translate="desc_delphi">Solução multimarca para diagnóstico e funções de serviço.</p>
+        <div class="card-footer">
+          <span class="price" data-translate="price_consult">Consulta</span>
+          <button type="button" class="btn-view"
+                  onclick="openDetails(this)"
+                  data-full-desc-key="desc_delphi_full"
+                  data-title="Delphi"
+                  data-img="IMG/Multibrand/delphi.jpg"
+                  data-price-key="price_consult">Ver</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Autocom -->
+    <div class="card searchable-item">
+      <img src="IMG/Multibrand/autocom.jpg" loading="lazy" alt="Autocom">
+      <div class="card-body">
+        <h3>Autocom</h3>
+        <p class="desc" data-translate="desc_diag">Diagnóstico.</p>
+        <p class="sub-desc" data-translate="desc_autocom">Diagnóstico multimarca com boa cobertura e rapidez.</p>
+        <div class="card-footer">
+          <span class="price" data-translate="price_consult">Consulta</span>
+          <button type="button" class="btn-view"
+                  onclick="openDetails(this)"
+                  data-full-desc-key="desc_autocom_full"
+                  data-title="Autocom"
+                  data-img="IMG/Multibrand/autocom.jpg"
+                  data-price-key="price_consult">Ver</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+        
 
         <div id="sec-hard" class="section-view">
             <h2 class="panel-header" style="text-align:center" data-translate="nav_hard">Hardware</h2>
@@ -1671,6 +1722,7 @@
     
 </body>
 </html>
+
 
 
 
