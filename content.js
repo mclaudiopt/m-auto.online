@@ -198,7 +198,7 @@
         footer { background: var(--bg-footer); border-top: 1px solid var(--border); padding: 80px 20px 120px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
         .mobile-nav { display: none; }
 
-        /* WIZARD FIXED (Estava a causar o problema) */
+        /* WIZARD FIXED */
         .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .modal { background: var(--bg-card); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 500px; border: 1px solid var(--border); text-align: center; position: relative; }
         .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; background: none; border: none; cursor: pointer; color: var(--text-muted); }
@@ -382,7 +382,7 @@
 
                     <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Ford/ford-fdrs.jpg" loading="lazy"><div class="card-body"><h3>FDRS</h3><p class="desc" data-translate="desc_new">Recentes.</p><p class="sub-desc" data-translate="desc_fdrs">Ford Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_fdrs" data-title="FDRS" data-img="IMG/Ford/ford-fdrs.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-ids.jpg" loading="lazy"><div class="card-body"><h3>IDS</h3><p class="desc" data-translate="desc_old">Antigos.</p><p class="sub-desc" data-translate="desc_ids">Integrated Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ids" data-title="IDS" data-img="IMG/Ford/ford-ids.jpg">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg" loading="lazy"><div class="card-body"><h3>GDS2</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_gds2">Global Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_gds2" data-title="GDS2" data-img="IMG/GM/gm-gds2.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg" loading="lazy"><div class="card-body"><h3>GDS2</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_gds2_full">GM Global Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_gds2_full" data-title="GDS2" data-img="IMG/GM/gm-gds2.jpg">Ver</button></div></div></div></div></div>
                 </div>
             </div>
         </div>
@@ -392,8 +392,8 @@
             <div class="grid">
                 <div class="card searchable-item"><img src="IMG/hardware/hw-openport.jpg" loading="lazy"><div class="card-body"><h3>Openport 2.0</h3><p class="desc" data-translate="desc_interface">Interface J2534</p><p class="sub-desc" data-translate="desc_openport_full">Interface J2534...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_openport_full" data-title="Openport 2.0" data-img="IMG/hardware/hw-openport.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/hw-c4.jpg" loading="lazy"><div class="card-body"><h3>C4 Connect</h3><p class="desc" data-translate="desc_mux">Multiplexer MB</p><p class="sub-desc" data-translate="desc_c4_full">Multiplexer SD...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_c4_full" data-title="C4 Connect" data-img="IMG/hardware/hw-c4.jpg">Ver</button></div></div></div>
-                <div class="card searchable-item"><img src="IMG/hardware/scanmatik.jpg" loading="lazy"><div class="card-body"><h3>Scanmatik 3</h3><p class="desc" data-translate="desc_interface">Interface J2534</p><p class="sub-desc" data-translate="desc_scanmatik_detail">J2534 de topo...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_scanmatik_detail" data-title="Scanmatik 3" data-img="IMG/hardware/scanmatik.jpg">Ver</button></div></div></div>
-                <div class="card searchable-item"><img src="IMG/hardware/vcx.jpg" loading="lazy"><div class="card-body"><h3>VCX SE</h3><p class="desc" data-translate="desc_interface">Interface OEM</p><p class="sub-desc" data-translate="desc_vcx_detail">Interface universal...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vcx_detail" data-title="VCX SE" data-img="IMG/hardware/vcx.jpg">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/scanmatik.jpg" loading="lazy"><div class="card-body"><h3>Scanmatik 3</h3><p class="desc" data-translate="desc_interface">Interface Multi-Brand</p><p class="sub-desc" data-translate="desc_scanmatik_full">Professional multi-brand...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_scanmatik_full" data-title="Scanmatik 3" data-img="IMG/hardware/scanmatik.jpg">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/vcx.jpg" loading="lazy"><div class="card-body"><h3>VCX SE</h3><p class="desc" data-translate="desc_interface">Interface OEM</p><p class="sub-desc" data-translate="desc_vcx_detail">Alternative to OEM...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vcx_detail" data-title="VCX SE" data-img="IMG/hardware/vcx.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/mbpro.jpg" loading="lazy"><div class="card-body"><h3>Super MB Pro M6</h3><p class="desc" data-translate="desc_mux">Multiplexer MB</p><p class="sub-desc" data-translate="desc_mbpro_detail">Evolução do C4...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_mbpro_detail" data-title="Super MB Pro M6" data-img="IMG/hardware/mbpro.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/enet.jpg" loading="lazy"><div class="card-body"><h3>Cabo E-NET</h3><p class="desc" data-translate="desc_interface">Cabo BMW</p><p class="sub-desc" data-translate="desc_enet_detail">Cabo Ethernet...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_enet_detail" data-title="Cabo E-NET" data-img="IMG/hardware/enet.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/clip.jpg" loading="lazy"><div class="card-body"><h3>Sonda Clip</h3><p class="desc" data-translate="desc_interface">Sonda Renault</p><p class="sub-desc" data-translate="desc_clip_hw_detail">Sonda VCI...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_clip_hw_detail" data-title="Sonda Clip" data-img="IMG/hardware/clip.jpg">Ver</button></div></div></div>
@@ -472,6 +472,43 @@
         <p class="footer-copyright">&copy; 2025 M-Auto Online - Simply Digital</p>
     </footer>
 
+    <script>
+        const translations = {
+            "pt": {
+                "hero_sol": "Soluções Online", "hero_desc": "Instalação remota profissional.", "nav_soft": "Software", "nav_hard": "Hardware",
+                "nav_tools": "Ferramentas", "nav_serv": "Serviços", "nav_about": "Sobre", "badge_best": "Melhor Escolha",
+                "prod_merc_full": "Mercedes Full Pack 2025", "desc_merc_full": "A Solução Completa.",
+                "desc_merc_full_detail": "Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.",
+                "desc_scanmatik_full": `<b>Professional multi-brand auto scanner</b> is designed for diagnostics of electronic control systems of modern cars. Works with a PC, tablet or smartphone.<br><br><b>Key Features:</b><ul><li>Works with third-party software for SAE J2534 and RP1210</li><li>USB or Wi-Fi interfaces</li><li>Supported data buses: ISO-9141, CAN 2.0/CAN-FD, J1850VPW/PWM, Single Wire CAN</li><li>Built-in multiplexer</li><li>Programming voltage supply (5-20V)</li></ul><br><b>Includes:</b> Full software version (VAZ, GAZ, Kia, Hyundai, OBD2, etc.)`,
+                "desc_vcx_detail": "<b>VCX SE</b> is a versatile diagnostic interface designed to serve as a cost-effective alternative to specialized OEM tools. It supports DoIP protocols, remote diagnostics, and provides dealer-level access for coding and programming across multiple brands like Mercedes, BMW, and JLR.",
+                "desc_enet_detail": "Cabo Ethernet para BMW F/G Series. Permite codificação e diagnóstico rápido.",
+                "desc_clip_hw_detail": "Sonda VCI para diagnóstico Renault/Dacia.",
+                "desc_lexia_detail": "Interface Full Chip para PSA (Peugeot/Citroën).",
+                "desc_laptop_detail": "Portátil recondicionado pronto a usar.",
+                "desc_gds2_full": "<b>The GM Global Diagnostic System 2 (GDS2)</b> is a PC-based software application designed to diagnose and repair on-board automotive electronic systems.<br><br><b>Functions:</b><ul><li>Read codes, status, Freeze Frame and Clear Codes.</li><li>Read VIN, ECU part numbers.</li><li>Record, store and replay data.</li><li>Control and monitor Output Control functions.</li><li>Configure and Reset functions.</li></ul>",
+                "popup_text": "pessoas a ver"
+            },
+            "en": {
+                "hero_sol": "Online Solutions", "hero_desc": "Professional remote installation.", "nav_soft": "Software", "nav_hard": "Hardware",
+                "nav_tools": "Tools", "nav_serv": "Services", "nav_about": "About", "badge_best": "Best Choice",
+                "prod_merc_full": "Mercedes Full Pack 2025", "desc_merc_full": "The Complete Solution.",
+                "desc_merc_full_detail": "Includes Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools and Certificates.",
+                "desc_scanmatik_full": `<b>Professional multi-brand auto scanner</b> is designed for diagnostics of electronic control systems of modern cars. Works with a PC, tablet or smartphone.<br><br><b>Key Features:</b><ul><li>Works with third-party software for SAE J2534 and RP1210</li><li>USB or Wi-Fi interfaces</li><li>Supported data buses: ISO-9141, CAN 2.0/CAN-FD, J1850VPW/PWM, Single Wire CAN</li><li>Built-in multiplexer</li><li>Programming voltage supply (5-20V)</li></ul><br><b>Includes:</b> Full software version (VAZ, GAZ, Kia, Hyundai, OBD2, etc.)`,
+                "desc_vcx_detail": "<b>VCX SE</b> is a versatile diagnostic interface designed to serve as a cost-effective alternative to specialized OEM tools. It supports DoIP protocols, remote diagnostics, and provides dealer-level access for coding and programming across multiple brands like Mercedes, BMW, and JLR.",
+                "desc_gds2_full": "<b>The GM Global Diagnostic System 2 (GDS2)</b> is a PC-based software application designed to diagnose and repair on-board automotive electronic systems.<br><br><b>Functions:</b><ul><li>Read codes, status, Freeze Frame and Clear Codes.</li><li>Read VIN, ECU part numbers.</li><li>Record, store and replay data.</li><li>Control and monitor Output Control functions.</li><li>Configure and Reset functions.</li></ul>",
+                "popup_text": "people viewing"
+            },
+            "fr": {
+                "hero_sol": "Solutions En Ligne", "hero_desc": "Installation à distance professionnelle.", "nav_soft": "Logiciel", "nav_hard": "Matériel",
+                "nav_tools": "Outils", "nav_serv": "Services", "nav_about": "À Propos", "badge_best": "Meilleur Choix",
+                "desc_scanmatik_full": "Scanmatik 3 est un scanner professionnel multimarque (J2534/RP1210) avec support WiFi/USB et protocoles modernes (CAN-FD, DoIP).",
+                "desc_vcx_detail": "Alternative aux outils OEM, supporte DoIP et diagnostic à distance.",
+                "desc_gds2_full": "Système de diagnostic global GM GDS2 pour PC. Lecture de codes, VIN, configuration et reset.",
+                "popup_text": "personnes regardent"
+            }
+        };
+    </script>
+    
     <script src="content.js"></script>
 
     <script>
