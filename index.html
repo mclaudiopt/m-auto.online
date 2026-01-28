@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.14</title>
+    <title>M-Auto Online | V17.15</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -1119,63 +1119,48 @@
         </div>
 
         <div id="sec-serv" class="section-view">
-            <h2 class="panel-header" style="text-align:center" data-translate="nav_serv">Serviços</h2>
-            <div class="tool-list">
-                <div class="tool-row searchable-item">
-                    <div class="tool-info">
-                        <div class="tool-icon-box" style="background:#3b82f6">FMT</div>
-                        <div class="tool-meta">
-                            <h4 data-translate="serv_fmt">Formatação</h4>
-                            <p data-translate="desc_fmt">Instalação limpa...</p>
-                        </div>
-                    </div>
-                    <button type="button" class="tool-btn" onclick="orderProduct('Formatação')" data-translate="btn_schedule">Agendar</button>
-                </div>
+       <section id="services" class="services-section">
+  <h2 class="panel-header" data-translate="services_title">Serviços</h2>
 
-                <div class="tool-row searchable-item">
-                    <div class="tool-info">
-                        <div class="tool-icon-box" style="background:#ef4444">AV</div>
-                        <div class="tool-meta">
-                            <h4 data-translate="serv_av">Anti-vírus</h4>
-                            <p data-translate="desc_av">Instalação...</p>
-                        </div>
-                    </div>
-                    <button type="button" class="tool-btn" onclick="orderProduct('Anti-vírus')" data-translate="btn_schedule">Agendar</button>
-                </div>
+  <ul class="services-list">
+    <li class="service-item">
+      <strong data-translate="srv_remote_install_title">
+        Instalação remota de software
+      </strong>
+      <span data-translate="srv_remote_install_desc">
+        Instalação profissional e otimizada de software de diagnóstico.
+      </span>
+    </li>
 
-                <div class="tool-row searchable-item">
-                    <div class="tool-info">
-                        <div class="tool-icon-box" style="background:#22c55e">INS</div>
-                        <div class="tool-meta">
-                            <h4 data-translate="serv_inst">Instalação</h4>
-                            <p data-translate="desc_inst">Instalação remota...</p>
-                        </div>
-                    </div>
-                    <button type="button" class="tool-btn" onclick="orderProduct('Instalação')" data-translate="btn_schedule">Agendar</button>
-                </div>
+    <li class="service-item">
+      <strong data-translate="srv_support_title">
+        Suporte técnico
+      </strong>
+      <span data-translate="srv_support_desc">
+        Apoio técnico remoto durante e após a instalação.
+      </span>
+    </li>
 
-                <div class="tool-row searchable-item">
-                    <div class="tool-info">
-                        <div class="tool-icon-box" style="background:#f59e0b">OPT</div>
-                        <div class="tool-meta">
-                            <h4 data-translate="serv_opt">Otimização</h4>
-                            <p data-translate="desc_opt">Limpeza de sistema...</p>
-                        </div>
-                    </div>
-                    <button type="button" class="tool-btn" onclick="orderProduct('Otimização')" data-translate="btn_schedule">Agendar</button>
-                </div>
+    <li class="service-item">
+      <strong data-translate="srv_update_title">
+        Atualizações
+      </strong>
+      <span data-translate="srv_update_desc">
+        Atualização de bases de dados e versões de software.
+      </span>
+    </li>
 
-                <div class="tool-row searchable-item">
-                    <div class="tool-info">
-                        <div class="tool-icon-box" style="background:#a855f7">UPG</div>
-                        <div class="tool-meta">
-                            <h4 data-translate="serv_upg">Upgrade HW</h4>
-                            <p data-translate="desc_upg">Consultoria...</p>
-                        </div>
-                    </div>
-                    <button type="button" class="tool-btn" onclick="orderProduct('Upgrade')" data-translate="btn_schedule">Agendar</button>
-                </div>
-            </div>
+    <li class="service-item">
+      <strong data-translate="srv_config_title">
+        Configuração de sistema
+      </strong>
+      <span data-translate="srv_config_desc">
+        Ajustes de sistema para garantir desempenho e estabilidade.
+      </span>
+    </li>
+  </ul>
+</section>
+  
         </div>
     </div><!-- app-container -->
 
@@ -1567,6 +1552,7 @@
     
 </body>
 </html>
+
 
 
 
