@@ -1131,7 +1131,7 @@
                             <p data-translate="desc_remote_full">Software de acesso remoto...</p>
                         </div>
                     </div>
-                    <a href="https://www.deskin.com/download" target="_blank" class="tool-btn" data-translate="btn_download">Download</a>
+                    <a href="https://www.deskin.com/download" target="_blank" class="tool-btn tool-icon" title="Download"></a>
                 </div>
 
                 <div class="tool-row searchable-item">
@@ -1142,7 +1142,7 @@
                             <p data-translate="desc_iso_full">Ferramenta oficial...</p>
                         </div>
                     </div>
-                    <a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="tool-btn" data-translate="btn_download">Download</a>
+                    <a href="https://www.microsoft.com/software-download/windows11" target="_blank" class="tool-btn tool-icon" title="Download"></a>
                 </div>
 
                 <div class="tool-row searchable-item">
@@ -1153,7 +1153,7 @@
                             <p data-translate="desc_extract_full">Gestor de arquivos...</p>
                         </div>
                     </div>
-                    <a href="https://www.7-zip.org/download.html" target="_blank" class="tool-btn" data-translate="btn_download">Download</a>
+                    <a href="https://www.7-zip.org/download.html" target="_blank" class="tool-btn tool-icon" title="Download"></a>
                 </div>
 
                 <div class="tool-row searchable-item">
@@ -1164,7 +1164,7 @@
                             <p data-translate="desc_defender_full">Utilitário portátil...</p>
                         </div>
                     </div>
-                    <a href="https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0" class="tool-btn" data-translate="btn_download">Download</a>
+                    <a href="https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0" class="tool-btn tool-icon" title="Download"></a>
                 </div>
             </div>
         </div>
@@ -1359,6 +1359,12 @@
 
     <script>
         /* ========= CORE LOGIC ========= */
+        const ICON_DOWNLOAD = `
+<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+  <path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17V3h1zM5 19h14v2H5z"/>
+</svg>
+`;
+
 
         // TYPEWRITER
         const typewriter = document.querySelector(".typewriter-text");
@@ -1621,6 +1627,7 @@
     
 </body>
 </html>
+
 
 
 
