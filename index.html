@@ -1251,7 +1251,7 @@
                 "desc_merc_full_detail": "Includes Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools and Certificates.",
                 "price_pack": "Full Pack",
                 "price_consult": "On request",
-                 "about_text_full": "We are specialists in automotive diagnostic software with years of experience. We offer a professional service, fast response and reliable support. Our installations are clean, optimized and guaranteed. We work with the best tools on the market to ensure your workshop never stops."
+                "about_text_full": "We are specialists in automotive diagnostic software with years of experience. We offer a professional service, fast response and reliable support. Our installations are clean, optimized and guaranteed. We work with the best tools on the market to ensure your workshop never stops."
 
                 "desc_scanmatik_full": `<b>Professional multi-brand auto scanner</b> is designed for diagnostics of electronic control systems of modern cars. Works with a PC, tablet or smartphone.<br><br><b>Key Features:</b><ul><li>Works with third-party software for SAE J2534 and RP1210</li><li>USB or Wi-Fi interfaces</li><li>Supported data buses: ISO-9141, CAN 2.0/CAN-FD, J1850VPW/PWM, Single Wire CAN</li><li>Built-in multiplexer</li><li>Programming voltage supply (5-20V)</li></ul><br><b>Includes:</b> Full software version (VAZ, GAZ, Kia, Hyundai, OBD2, etc.)`,
                 "desc_vcx_detail": "<b>VCX SE</b> is a versatile diagnostic interface designed to serve as a cost-effective alternative to specialized OEM tools. It supports DoIP protocols, remote diagnostics, and provides dealer-level access for coding and programming across multiple brands like Mercedes, BMW, and JLR.",
@@ -1270,7 +1270,7 @@
                 "wiz_restart": "Restart 🔄"
             },
             "fr": {
-                "about_text_full": "Nous sommes spécialistes des logiciels de diagnostic automobile avec des années d’expérience. Nous offrons un service professionnel, une réponse rapide et un support fiable. Nos installations sont propres, optimisées et garanties. Nous travaillons avec les meilleurs outils du marché pour que votre atelier ne s’arrête jamais."
+                "about_text_full": "Nous sommes spécialistes des logiciels de diagnostic automobile avec des années d’expérience. Nous offrons un service professionnel, une réponse rapide et un support fiable. Nos installations sont propres, optimisées et garanties. Nous travaillons avec les meilleurs outils du marché pour que votre atelier ne s’arrête jamais.",
                 "hero_sol": "Solutions En Ligne",
                 "hero_desc": "Installation à distance professionnelle.",
                 "nav_soft": "Logiciel",
@@ -1404,6 +1404,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            try { localStorage.removeItem('lang'); } catch(e) {}
             // fallback imagens
             document.querySelectorAll('img').forEach(img => {
                 img.onerror = function() {
@@ -1557,58 +1558,11 @@
         }
     </script>
 
-<script>
-/* =========================
-   LANGUAGE CORE – v17.12
-   ========================= */
-
-let currentLang = 'pt';
-
-/* Detetar língua do browser */
-function detectUserLanguage() {
-    const lang = (navigator.language || navigator.userLanguage || 'en')
-        .toLowerCase()
-        .split('-')[0];
-    return translations[lang] ? lang : 'en';
-}
-
-/* Aplicar traduções */
-function applyTranslations(lang) {
-    currentLang = lang;
-
-    document.documentElement.lang = lang;
-
-    document.querySelectorAll('[data-translate]').forEach(el => {
-        const key = el.dataset.translate;
-        if (translations[lang] && translations[lang][key]) {
-    });
-
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    const btn = document.getElementById(`btn-${lang}`);
-    if (btn) btn.classList.add('active');
-}
-
-/* Botões de língua */
-function setLanguage(lang) {
-    if (!translations[lang]) return;
-    localStorage.setItem('lang', lang);
-    applyTranslations(lang);
-}
-
-/* Inicialização */
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('lang');
-    const lang = savedLang && translations[savedLang]
-        ? savedLang
-        : detectUserLanguage();
-
-    applyTranslations(lang);
-});
-</script>
 
     
 </body>
 </html>
+
 
 
 
