@@ -1525,13 +1525,19 @@
             );
         }
 
-        function filterProducts() {
-            const val = (document.getElementById('searchInput').value || '').toLowerCase();
-            document.querySelectorAll('.searchable-item').forEach(el => {
-                // cards/tool-row são flex; quando aparece mantém flex
-                el.style.display = el.innerText.toLowerCase().includes(val) ? 'flex' : 'none';
-            });
+     function filterProducts() {
+    const val = (document.getElementById('searchInput').value || '').toLowerCase();
+
+    document.querySelectorAll('.searchable-item').forEach(el => {
+        if (!el.dataset.origDisplay) {
+            el.dataset.origDisplay = getComputedStyle(el).display;
         }
+
+        const match = el.innerText.toLowerCase().includes(val);
+        el.style.display = match ? el.dataset.origDisplay : 'none';
+    });
+}
+
 
         // WIZARD
         let userSpecs = {};
@@ -1561,6 +1567,7 @@
     
 </body>
 </html>
+
 
 
 
