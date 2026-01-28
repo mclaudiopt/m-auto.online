@@ -33,6 +33,7 @@
             --gradient-btn: linear-gradient(135deg, #2563eb, #1e40af);
         }
 
+        
         [data-theme="dark"] {
             --bg-body: #020617; --bg-card: #1e293b; --bg-sidebar: #111827; --bg-footer: #0f172a;
             --text-main: #f8fafc; --text-muted: #94a3b8; --border: #334155;
@@ -210,7 +211,57 @@
         .wiz-btn:hover { border-color: var(--accent); background: var(--sidebar-active-bg); color: var(--accent); }
         .wiz-result-box { padding: 20px; background: var(--sidebar-active-bg); border-radius: 12px; border: 2px solid var(--accent); margin-bottom: 20px; }
         .wiz-btn-action { width: 100%; padding: 15px; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
+/* ===== SERVICES SECTION (novo) ===== */
+.services-section{
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
 
+.services-section .panel-header{
+  margin: 0 0 18px 0;
+}
+
+.services-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.service-item{
+  background: var(--bg-body);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-item strong{
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.service-item span{
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px){
+  .services-list{ grid-template-columns: 1fr; }
+}
+
+
+        
         @media (max-width: 768px) {
             .layout-flex { flex-direction: column; }
             .sidebar { width: 100%; min-width: 100%; flex-direction: row; overflow-x: auto; position: static; }
@@ -1552,6 +1603,7 @@
     
 </body>
 </html>
+
 
 
 
