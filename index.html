@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     
-    <title>M-Auto Online | V17.10</title>
+    <title>M-Auto Online | V17.12</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -232,7 +232,7 @@
     <header>
         <div class="header-left">
             <a href="#inicio" class="logo-link">
-                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.10</span>
+                <span class="brand-m">M-Auto</span><span class="brand-online">Online</span><span class="version-badge">V17.12</span>
             </a>
         </div>
         <div class="header-right">
@@ -330,6 +330,7 @@
                     <button class="side-btn" onclick="switchBrand('nissan', this)">Nissan</button>
                     <button class="side-btn" onclick="switchBrand('ford', this)">Ford</button>
                     <button class="side-btn" onclick="switchBrand('gm', this)">GM</button>
+                    <button class="side-btn" onclick="switchBrand('multi', this)">Multimarca</button>
                 </div>
                 
                 <div class="content-wrapper">
@@ -382,7 +383,29 @@
 
                     <div id="brand-ford" class="brand-panel"><h2 class="panel-header">Ford</h2><div class="grid"><div class="card searchable-item"><img src="IMG/Ford/ford-fdrs.jpg" loading="lazy"><div class="card-body"><h3>FDRS</h3><p class="desc" data-translate="desc_new">Recentes.</p><p class="sub-desc" data-translate="desc_fdrs">Ford Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_fdrs" data-title="FDRS" data-img="IMG/Ford/ford-fdrs.jpg">Ver</button></div></div></div><div class="card searchable-item"><img src="IMG/Ford/ford-ids.jpg" loading="lazy"><div class="card-body"><h3>IDS</h3><p class="desc" data-translate="desc_old">Antigos.</p><p class="sub-desc" data-translate="desc_ids">Integrated Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ids" data-title="IDS" data-img="IMG/Ford/ford-ids.jpg">Ver</button></div></div></div></div></div>
 
-                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg" loading="lazy"><div class="card-body"><h3>GDS2</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_gds2">Global Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_gds2" data-title="GDS2" data-img="IMG/GM/gm-gds2.jpg">Ver</button></div></div></div></div></div>
+                    <div id="brand-gm" class="brand-panel"><h2 class="panel-header">GM</h2><div class="grid"><div class="card searchable-item"><img src="IMG/GM/gm-gds2.jpg" loading="lazy"><div class="card-body"><h3>GDS2</h3><p class="desc" data-translate="desc_diag">Diagnóstico.</p><p class="sub-desc" data-translate="desc_gds2_full">GM Global Diagnostic...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_gds2_full" data-title="GDS2" data-img="IMG/GM/gm-gds2.jpg">Ver</button></div></div></div></div></div>
+
+                    <div id="brand-multi" class="brand-panel">
+                        <h2 class="panel-header">Multimarca</h2>
+                        <div class="grid">
+                            <div class="card searchable-item">
+                                <img src="IMG/Multimarca/delphi.jpg" loading="lazy">
+                                <div class="card-body">
+                                    <h3>Delphi 2021</h3>
+                                    <p class="desc" data-translate="desc_diag">Diagnóstico.</p>
+                                    <p class="sub-desc" data-translate="desc_delphi_detail">Software ligeiros e pesados...</p>
+                                    <div class="card-footer">
+                                        <span class="price">Consulta</span>
+                                        <button class="btn-view" onclick="openDetails(this)" 
+                                            data-full-desc-key="desc_delphi_detail" 
+                                            data-title="Delphi 2021" 
+                                            data-img="IMG/Multimarca/delphi.jpg">Ver</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -392,13 +415,13 @@
             <div class="grid">
                 <div class="card searchable-item"><img src="IMG/hardware/hw-openport.jpg" loading="lazy"><div class="card-body"><h3>Openport 2.0</h3><p class="desc" data-translate="desc_interface">Interface J2534</p><p class="sub-desc" data-translate="desc_openport_full">Interface J2534...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_openport_full" data-title="Openport 2.0" data-img="IMG/hardware/hw-openport.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/hw-c4.jpg" loading="lazy"><div class="card-body"><h3>C4 Connect</h3><p class="desc" data-translate="desc_mux">Multiplexer MB</p><p class="sub-desc" data-translate="desc_c4_full">Multiplexer SD...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_c4_full" data-title="C4 Connect" data-img="IMG/hardware/hw-c4.jpg">Ver</button></div></div></div>
-                <div class="card searchable-item"><img src="IMG/hardware/scanmatik.jpg" loading="lazy"><div class="card-body"><h3>Scanmatik SM2 Pro</h3><p class="desc" data-translate="desc_interface">Interface J2534</p><p class="sub-desc" data-translate="desc_scanmatik_detail">J2534 de topo...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_scanmatik_detail" data-title="Scanmatik SM2 Pro" data-img="IMG/hardware/scanmatik.jpg">Ver</button></div></div></div>
-                <div class="card searchable-item"><img src="IMG/hardware/vcx.jpg" loading="lazy"><div class="card-body"><h3>VCX SE</h3><p class="desc" data-translate="desc_interface">Interface Multi</p><p class="sub-desc" data-translate="desc_vcx_detail">Interface universal...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vcx_detail" data-title="VCX SE" data-img="IMG/hardware/vcx.jpg">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/scanmatik.jpg" loading="lazy"><div class="card-body"><h3>Scanmatik 3</h3><p class="desc" data-translate="desc_interface">Interface Multi-Brand</p><p class="sub-desc" data-translate="desc_scanmatik_full">Professional multi-brand...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_scanmatik_full" data-title="Scanmatik 3" data-img="IMG/hardware/scanmatik.jpg">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/vcx.jpg" loading="lazy"><div class="card-body"><h3>VCX SE</h3><p class="desc" data-translate="desc_interface">Interface OEM</p><p class="sub-desc" data-translate="desc_vcx_detail">Alternative to OEM...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_vcx_detail" data-title="VCX SE" data-img="IMG/hardware/vcx.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/mbpro.jpg" loading="lazy"><div class="card-body"><h3>Super MB Pro M6</h3><p class="desc" data-translate="desc_mux">Multiplexer MB</p><p class="sub-desc" data-translate="desc_mbpro_detail">Evolução do C4...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_mbpro_detail" data-title="Super MB Pro M6" data-img="IMG/hardware/mbpro.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/enet.jpg" loading="lazy"><div class="card-body"><h3>Cabo E-NET</h3><p class="desc" data-translate="desc_interface">Cabo BMW</p><p class="sub-desc" data-translate="desc_enet_detail">Cabo Ethernet...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_enet_detail" data-title="Cabo E-NET" data-img="IMG/hardware/enet.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/clip.jpg" loading="lazy"><div class="card-body"><h3>Sonda Clip</h3><p class="desc" data-translate="desc_interface">Sonda Renault</p><p class="sub-desc" data-translate="desc_clip_hw_detail">Sonda VCI...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_clip_hw_detail" data-title="Sonda Clip" data-img="IMG/hardware/clip.jpg">Ver</button></div></div></div>
                 <div class="card searchable-item"><img src="IMG/hardware/lexia.jpg" loading="lazy"><div class="card-body"><h3>Lexia Full Chip</h3><p class="desc" data-translate="desc_interface">Interface PSA</p><p class="sub-desc" data-translate="desc_lexia_detail">Full Chip...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_lexia_detail" data-title="Lexia Full Chip" data-img="IMG/hardware/lexia.jpg">Ver</button></div></div></div>
-                <div class="card searchable-item"><img src="IMG/hardware/laptop.jpg" loading="lazy"><div class="card-body"><h3>Portátil</h3><p class="desc" data-translate="desc_hardware">Computador</p><p class="sub-desc" data-translate="desc_laptop_detail">Recondicionado...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_laptop_detail" data-title="Portátil" data-img="IMG/hardware/laptop.jpg">Ver</button></div></div></div>
+                <div class="card searchable-item"><img src="IMG/hardware/laptop.jpg" loading="lazy"><div class="card-body"><h3>Laptop</h3><p class="desc" data-translate="desc_hardware">Computador</p><p class="sub-desc" data-translate="desc_laptop_detail">Recondicionado...</p><div class="card-footer"><span class="price">Consulta</span><button class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_laptop_detail" data-title="Laptop" data-img="IMG/hardware/laptop.jpg">Ver</button></div></div></div>
             </div>
         </div>
 
@@ -534,7 +557,7 @@
 
             let userLang = navigator.language || navigator.userLanguage; 
             userLang = userLang.split('-')[0].toLowerCase();
-            if (translations[userLang]) {
+            if (typeof translations !== 'undefined' && translations[userLang]) {
                 setLanguage(userLang);
             } else {
                 setLanguage('en'); 
@@ -547,7 +570,7 @@
             currentLang = lang; 
             document.querySelectorAll('[data-translate]').forEach(el => {
                 const key = el.getAttribute('data-translate');
-                if(translations[lang][key]) {
+                if(typeof translations !== 'undefined' && translations[lang][key]) {
                     el.innerHTML = translations[lang][key];
                 }
             });
@@ -571,7 +594,7 @@
                 if (currentViewers > 15) currentViewers = 15;
             }
             const textEl = document.getElementById('viewerText');
-            if(translations[currentLang] && translations[currentLang].popup_text) {
+            if(typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang].popup_text) {
                 textEl.innerHTML = `<strong>${currentViewers}</strong> ${translations[currentLang].popup_text}`;
             }
             if (!onlyTextUpdate) {
@@ -599,19 +622,19 @@
 
             document.getElementById('modalImg').src = img;
             
-            if(titleKey && translations[lang][titleKey]) {
+            if(typeof translations !== 'undefined' && titleKey && translations[lang][titleKey]) {
                 document.getElementById('modalTitle').innerText = translations[lang][titleKey];
             } else {
                 document.getElementById('modalTitle').innerText = titleDirect || 'Produto';
             }
 
-            if(descKey && translations[lang][descKey]) {
+            if(typeof translations !== 'undefined' && descKey && translations[lang][descKey]) {
                 document.getElementById('modalDesc').innerHTML = translations[lang][descKey];
             } else {
                 document.getElementById('modalDesc').innerText = "Detalhes não disponíveis.";
             }
 
-            if(priceKey && translations[lang][priceKey]) {
+            if(typeof translations !== 'undefined' && priceKey && translations[lang][priceKey]) {
                 document.getElementById('modalPrice').innerText = translations[lang][priceKey];
             } else {
                 document.getElementById('modalPrice').innerText = "Consulta";
