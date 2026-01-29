@@ -1655,30 +1655,36 @@ renderModalContent(tKey, dKey, pKey, tDirect, dd, lang);
         setTimeout(() => updateViewers(false), 5000);
 
         // MODAL (corrigido: usa SEMPRE currentLang, não depende de class active no botão)
-        function renderModalContent(titleKey, descKey, priceKey, titleDirect, lang) {
-            const dict = safeDict(lang);
+      function renderModalContent(titleKey, descKey, priceKey, titleDirect, lang, descFallback) {
+  const dict = safeDict(lang);
 
-            // title
-            if (dict && titleKey && dict[titleKey]) {
-                document.getElementById('modalTitle').innerText = dict[titleKey];
-            } else {
-                document.getElementById('modalTitle').innerText = titleDirect || (lang === 'en' ? 'Product' : lang === 'fr' ? 'Produit' : 'Produto');
-            }
+  // title
+  if (dict && titleKey && dict[titleKey]) {
+    document.getElementById('modalTitle').innerText = dict[titleKey];
+  } else {
+    document.getElementById('modalTitle').innerText =
+      titleDirect || (lang === 'en' ? 'Product' : lang === 'fr' ? 'Produit' : 'Produto');
+  }
 
-            // desc
-            if (dict && descKey && dict[descKey]) {
-                document.getElementById('modalDesc').innerHTML = dict[descKey];
-            } else {
-                document.getElementById('modalDesc').innerText = (lang === 'en' ? 'Details not available.' : lang === 'fr' ? 'Détails non disponibles.' : 'Detalhes não disponíveis.');
-            }
+  // desc
+  if (dict && descKey && dict[descKey]) {
+    document.getElementById('modalDesc').innerHTML = dict[descKey];
+  } else if (descFallback && descFallback.trim().length > 0) {
+    // ✅ NOVO: usa o texto do cartão
+    document.getElementById('modalDesc').innerText = descFallback;
+  } else {
+    document.getElementById('modalDesc').innerText =
+      (lang === 'en' ? 'Details not available.' : lang === 'fr' ? 'Détails non disponibles.' : 'Detalhes não disponíveis.');
+  }
 
-            // price
-            if (dict && priceKey && dict[priceKey]) {
-                document.getElementById('modalPrice').innerText = dict[priceKey];
-            } else {
-                document.getElementById('modalPrice').innerText = (dict && dict.price_consult) ? dict.price_consult : (lang === 'en' ? 'On request' : lang === 'fr' ? 'Sur demande' : 'Consulta');
-            }
-        }
+  // price
+  if (dict && priceKey && dict[priceKey]) {
+    document.getElementById('modalPrice').innerText = dict[priceKey];
+  } else {
+    document.getElementById('modalPrice').innerText =
+      (dict && dict.price_consult) ? dict.price_consult : (lang === 'en' ? 'On request' : lang === 'fr' ? 'Sur demande' : 'Consulta');
+  }
+}
 
 function openDetails(btn) {
   const titleKey = btn.getAttribute('data-title-key');
@@ -1754,6 +1760,7 @@ function openDetails(btn) {
     
 </body>
 </html>
+
 
 
 
