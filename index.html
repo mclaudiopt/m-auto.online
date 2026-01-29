@@ -1583,7 +1583,8 @@
                 const pKey = document.getElementById('productModal').getAttribute('data-price-key');
                 const tDirect = document.getElementById('productModal').getAttribute('data-title-direct');
                 const dd = document.getElementById('productModal').getAttribute('data-desc-direct');
-renderModalContent(tKey, dKey, pKey, tDirect, dd, lang);
+const dFallback = document.getElementById('productModal').getAttribute('data-desc-fallback') || '';
+renderModalContent(tKey, dKey, pKey, tDirect, lang, dFallback);
     
             }
 
@@ -1760,6 +1761,7 @@ function openDetails(btn) {
     
 </body>
 </html>
+
 
 
 
