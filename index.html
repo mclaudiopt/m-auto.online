@@ -1696,6 +1696,15 @@
 
     <script>
         /* ========= CORE LOGIC ========= */
+
+        const ICON_ELLIPSIS = `
+<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+  <circle cx="5" cy="12" r="2"></circle>
+  <circle cx="12" cy="12" r="2"></circle>
+  <circle cx="19" cy="12" r="2"></circle>
+</svg>
+`;
+
         const ICON_DOWNLOAD = `
 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
   <path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17V3h1zM5 19h14v2H5z"/>
@@ -2050,6 +2059,23 @@ document.querySelectorAll('.btn-view').forEach(btn => {
   btn.setAttribute('aria-label', 'Detalhes');
   btn.setAttribute('title', 'Detalhes');
 });
+function applyViewIcons() {
+  document.querySelectorAll('button.btn-view').forEach(btn => {
+    // já convertido? não mexe
+    if (btn.dataset.iconApplied === '1') return;
+    btn.dataset.iconApplied = '1';
+
+    // acessibilidade
+    if (!btn.getAttribute('aria-label')) btn.setAttribute('aria-label', 'Detalhes');
+    if (!btn.getAttribute('title')) btn.setAttribute('title', 'Detalhes');
+
+    // transforma em ícone visual (sem apagar dataset/onclick)
+    btn.innerHTML = ICON_ELLIPSIS;
+
+    // classe de estilo do ícone
+    btn.classList.add('btn-view-icon');
+  });
+}
 
 
     </script>
@@ -2058,6 +2084,7 @@ document.querySelectorAll('.btn-view').forEach(btn => {
     
 </body>
 </html>
+
 
 
 
