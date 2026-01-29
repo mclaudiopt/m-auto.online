@@ -1582,7 +1582,9 @@
                 const dKey = document.getElementById('productModal').getAttribute('data-desc-key');
                 const pKey = document.getElementById('productModal').getAttribute('data-price-key');
                 const tDirect = document.getElementById('productModal').getAttribute('data-title-direct');
-                renderModalContent(tKey, dKey, pKey, tDirect, lang);
+                const dd = document.getElementById('productModal').getAttribute('data-desc-direct');
+renderModalContent(tKey, dKey, pKey, tDirect, dd, lang);
+    
             }
 
             // atualizar texto popup viewers
@@ -1742,6 +1744,7 @@
     
 </body>
 </html>
+
 
 
 
