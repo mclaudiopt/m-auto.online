@@ -385,7 +385,17 @@
   #scrollTopBtn { bottom: 80px; left: 20px; }
   .sales-popup { bottom: 140px; left: 20px; }
   .services-list { grid-template-columns: 1fr; }
+/* === MODAL SEM IMAGEM (remove header inteiro) === */
+.prod-header { display: none !important; }
+.prod-content { max-height: 90vh; }
+
+    
 }
+
+        
+
+
+        
 </style>
 </head>
 
@@ -1887,8 +1897,15 @@ renderModalContent(tKey, dKey, pKey, tDirect, lang, dFallback);
   document.getElementById('modalTitle').innerText = title;
 
   // desc
-  const modalDesc = document.getElementById('modalDesc');
-  if (descKey && dict[descKey]) {
+ // ✅ modal sem imagem (não setar src, não criar placeholder)
+const modalImg = document.getElementById('modalImg');
+if (modalImg) {
+  modalImg.removeAttribute('src');
+  modalImg.style.display = 'none';
+}
+
+        
+        if (descKey && dict[descKey]) {
     modalDesc.innerHTML = dict[descKey]; // mantém HTML quando existe tradução completa
   } else if (descFallback && descFallback.trim()) {
     modalDesc.innerText = descFallback.trim();
@@ -2041,6 +2058,7 @@ document.querySelectorAll('.btn-view').forEach(btn => {
     
 </body>
 </html>
+
 
 
 
