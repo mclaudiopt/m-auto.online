@@ -577,17 +577,21 @@
                                     <div class="card-footer">
                                         <span class="price" data-translate="price_consult">Consulta</span>
                                     <button type="button"
-        class="btn-view btn-view-icon"
-        onclick="openDetails(this)"
-        data-title="Xentry Cars"
-        data-img="IMG/Daimler/merc-xentry-cars.jpg"
-        aria-label="Detalhes">
-  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-    <circle cx="5" cy="12" r="2"></circle>
-    <circle cx="12" cy="12" r="2"></circle>
-    <circle cx="19" cy="12" r="2"></circle>
-  </svg>
-</button>
+                                             <button type="button"
+                                                    class="btn-view btn-view-icon"
+                                                    onclick="openDetails(this)"
+                                                    data-title="Xentry Cars"
+                                                    data-full-desc-key="desc_xentry_detail"
+                                                    data-price-key="price_consult"
+                                                    data-img="IMG/Daimler/merc-xentry-cars.jpg"
+                                                    aria-label="Detalhes">
+                                              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                                                <circle cx="5" cy="12" r="2"></circle>
+                                                <circle cx="12" cy="12" r="2"></circle>
+                                                <circle cx="19" cy="12" r="2"></circle>
+                                              </svg>
+                                            </button>
+
 
                                                 data-price-key="price_consult">Ver</button>
                                     </div>
@@ -2043,6 +2047,7 @@ document.querySelectorAll('.btn-view').forEach(btn => {
     
 </body>
 </html>
+
 
 
 
