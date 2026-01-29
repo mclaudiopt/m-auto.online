@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.21</title>
+    <title>M-Auto Online | V17.22fr</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -317,7 +317,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V17.21</span>
+                <span class="version-badge">V17.22fr</span>
             </a>
         </div>
 
@@ -822,17 +822,35 @@
                         <h2 class="panel-header">PSA</h2>
                         <div class="grid">
                             <div class="card searchable-item">
-                                <img src="https://m-auto.online/IMG/PSA/psa-diagbox9.jpg" loading="lazy" alt="Diagbox 9">
-                                <div class="card-body">
-                                    <h3>Diagbox 9</h3>
-                                    <p class="desc" data-translate="desc_new">Recentes.</p>
-                                    <p class="sub-desc" data-translate="desc_diagbox9">Diagnóstico...</p>
-                                    <div class="card-footer">
-                                        <span class="price" data-translate="price_consult">Consulta</span>
-                                        <button type="button" class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_diagbox9" data-title="Diagbox 9" data-img="https://m-auto.online/IMG/PSA/psa-diagbox9.jpg" data-price-key="price_consult">Ver</button>
-                                    </div>
+                              <img src="https://m-auto.online/IMG/PSA/psa-diagbox9.jpg" loading="lazy" alt="Diagbox 9.208">
+                              <div class="card-body">
+                                <h3 data-translate="prod_diagbox_9208">Diagbox 9.208</h3>
+                                <p class="desc" data-translate="desc_new">Recentes.</p>
+                                <p class="sub-desc" data-translate="desc_diagbox_9208_short">
+                                  Diagbox V9.208 (Versão 2025) – Instalação nativa...
+                                </p>
+                            
+                                <div class="tech-details">
+                                  <div class="tech-row"><span class="tech-label">Versão:</span><span>9.208</span></div>
+                                  <div class="tech-row"><span class="tech-label">Ano:</span><span>2025</span></div>
+                                  <div class="tech-row"><span class="tech-label">OS:</span><span>Windows 10/11 (64-bit)</span></div>
                                 </div>
+                            
+                                <div class="card-footer">
+                                  <span class="price" data-translate="price_consult">Consulta</span>
+                                  <button type="button" class="btn-view"
+                                          onclick="openDetails(this)"
+                                          data-title-key="prod_diagbox_9208"
+                                          data-full-desc-key="desc_diagbox_9208_full"
+                                          data-img="https://m-auto.online/IMG/PSA/psa-diagbox9.jpg"
+                                          data-price-key="price_consult">Ver</button>
+                                </div>
+                              </div>
                             </div>
+
+
+
+                            
                             <div class="card searchable-item">
                                 <img src="IMG/PSA/psa-diagbox7.jpg" loading="lazy" alt="Diagbox 7">
                                 <div class="card-body">
@@ -1336,7 +1354,35 @@
 
             
             "pt": {
-                
+                "prod_diagbox_9208": "Diagbox 9.208",
+                    "desc_diagbox_9208_short": "Diagbox V9.208 (Versão 2025) – Instalação nativa para Peugeot, Citroën, DS e Opel.",
+                    "desc_diagbox_9208_full": `
+                    <b>Diagbox V9.208 (Versão 2025) – Instalação Nativa para Peugeot, Citroën, DS e Opel</b><br><br>
+                    <b>Resumo:</b><br>
+                    Obtenha a versão mais recente e estável do software de diagnóstico PSA. O Diagbox 9.208 oferece suporte total aos veículos mais recentes lançados até o final de 2024/início de 2025, com instalação direta no Windows (sem necessidade de Máquina Virtual).<br><br>
+                    
+                    <b>📋 Changelog & Novidades (O que há de novo na V9.208):</b><br>
+                    Esta atualização traz melhorias significativas em comparação com as versões anteriores (9.150 / 9.180):<br><br>
+                    
+                    <ul>
+                      <li><b>Base de Dados Atualizada (2025):</b> Inclusão de novos modelos e variantes de veículos fabricados até ao presente momento.</li>
+                      <li><b>Novos Modelos Suportados:</b> Compatibilidade total com os lançamentos recentes, incluindo o novo Peugeot 308 III, 408, Citroën C4 X, C5 X e as versões facelift do 208/2008.</li>
+                      <li><b>Melhoria na Integração Opel/Vauxhall:</b> Diagnóstico aprimorado para a gama Opel baseada na plataforma PSA (Corsa F, Mokka B, Grandland, Astra L).</li>
+                      <li><b>Instalação Nativa:</b> O software corre diretamente no Windows 10 ou 11 (64 bits), garantindo maior rapidez e estabilidade do que as versões antigas em Máquina Virtual (VM).</li>
+                      <li><b>Correção de Bugs:</b> Resolução de erros de comunicação em ECUs mais recentes (AdBlue, BSI 2020+, etc.).</li>
+                    </ul>
+                    
+                    <b>🔧 Funcionalidades Principais:</b>
+                    <ul>
+                      <li>Leitura e apagamento de códigos de erro (DTC).</li>
+                      <li>Leitura de parâmetros em tempo real (fluxo de dados).</li>
+                      <li>Reset de intervalos de serviço e manutenção.</li>
+                      <li>Regeneração de FAP/DPF e verificação de AdBlue.</li>
+                      <li>Codificação de injetores e adaptação de novos componentes (offline).</li>
+                      <li>Auto-scan completo de todos os módulos eletrónicos.</li>
+                    </ul>
+                    `,
+
                 
                 "brand_multi": "Multimarca",
                 "brand_multi_title": "Multimarca",
@@ -1379,6 +1425,35 @@
                 "wiz_restart": "Recomeçar 🔄"
             },
             "en": {
+
+                "prod_diagbox_9208": "Diagbox 9.208",
+"desc_diagbox_9208_short": "Diagbox v9.208 (2025 version) – Native install for Peugeot, Citroën, DS and Opel.",
+"desc_diagbox_9208_full": `
+<b>Diagbox v9.208 (2025 Version) – Native Installation for Peugeot, Citroën, DS and Opel</b><br><br>
+<b>Summary:</b><br>
+Get the latest and most stable PSA diagnostic software. Diagbox 9.208 provides full support for the newest vehicles released up to late 2024 / early 2025, with direct installation on Windows (no Virtual Machine required).<br><br>
+
+<b>📋 Changelog & What's New in v9.208:</b><br>
+This update brings significant improvements compared to previous versions (9.150 / 9.180):<br><br>
+
+<ul>
+  <li><b>Updated Database (2025):</b> Adds new models and vehicle variants manufactured up to the present time.</li>
+  <li><b>New Models Supported:</b> Full compatibility with recent launches, including Peugeot 308 III, 408, Citroën C4 X, C5 X and facelift versions of 208/2008.</li>
+  <li><b>Improved Opel/Vauxhall Integration:</b> Enhanced diagnostics for Opel range based on the PSA platform (Corsa F, Mokka B, Grandland, Astra L).</li>
+  <li><b>Native Installation:</b> Runs directly on Windows 10 or 11 (64-bit), delivering better speed and stability than older VM-based versions.</li>
+  <li><b>Bug Fixes:</b> Fixes communication issues on newer ECUs (AdBlue, BSI 2020+, etc.).</li>
+</ul>
+
+<b>🔧 Key Features:</b>
+<ul>
+  <li>Read and clear trouble codes (DTC).</li>
+  <li>Live data / real-time parameters.</li>
+  <li>Service and maintenance interval reset.</li>
+  <li>DPF/FAP regeneration and AdBlue checks.</li>
+  <li>Injector coding and component adaptations (offline).</li>
+  <li>Full auto-scan across all electronic modules.</li>
+</ul>
+`,
 
                 "brand_multi": "Multi-brand",
                 "brand_multi_title": "Multi-brand",
@@ -1431,6 +1506,34 @@
             },
             "fr": {
 
+"prod_diagbox_9208": "Diagbox 9.208",
+"desc_diagbox_9208_short": "Diagbox v9.208 (Version 2025) – Installation native pour Peugeot, Citroën, DS et Opel.",
+"desc_diagbox_9208_full": `
+<b>Diagbox v9.208 (Version 2025) – Installation native pour Peugeot, Citroën, DS et Opel</b><br><br>
+<b>Résumé :</b><br>
+Obtenez la version la plus récente et la plus stable du logiciel de diagnostic PSA. Diagbox 9.208 offre une prise en charge complète des véhicules récents jusqu’à fin 2024 / début 2025, avec une installation directe sous Windows (sans Machine Virtuelle).<br><br>
+
+<b>📋 Changelog & Nouveautés (v9.208) :</b><br>
+Cette mise à jour apporte des améliorations significatives par rapport aux versions précédentes (9.150 / 9.180) :<br><br>
+
+<ul>
+  <li><b>Base de données mise à jour (2025) :</b> Ajout de nouveaux modèles et variantes fabriqués jusqu’à aujourd’hui.</li>
+  <li><b>Nouveaux modèles pris en charge :</b> Compatibilité complète avec les lancements récents, dont Peugeot 308 III, 408, Citroën C4 X, C5 X et les versions restylées 208/2008.</li>
+  <li><b>Meilleure intégration Opel/Vauxhall :</b> Diagnostic amélioré pour la gamme Opel basée sur la plateforme PSA (Corsa F, Mokka B, Grandland, Astra L).</li>
+  <li><b>Installation native :</b> Fonctionne directement sur Windows 10/11 (64 bits), plus rapide et plus stable que les anciennes versions en VM.</li>
+  <li><b>Corrections de bugs :</b> Résolution de problèmes de communication sur des calculateurs récents (AdBlue, BSI 2020+, etc.).</li>
+</ul>
+
+<b>🔧 Fonctions principales :</b>
+<ul>
+  <li>Lecture et effacement des codes défauts (DTC).</li>
+  <li>Données en temps réel (live data).</li>
+  <li>Remise à zéro des intervalles d’entretien.</li>
+  <li>Régénération FAP/DPF et vérification AdBlue.</li>
+  <li>Codage des injecteurs et adaptations de composants (offline).</li>
+  <li>Auto-scan complet de tous les calculateurs.</li>
+</ul>
+`,
 
 
                     "brand_multi": "Multimarque",
