@@ -2011,12 +2011,22 @@ function openDetails(btn) {
             }
             document.getElementById('finalResultContent').innerHTML = html;
         }
+
+
+// === Acessibilidade + tooltip para todos os botões "Ver" ===
+document.querySelectorAll('.btn-view').forEach(btn => {
+  btn.setAttribute('aria-label', 'Detalhes');
+  btn.setAttribute('title', 'Detalhes');
+});
+
+
     </script>
 
 
     
 </body>
 </html>
+
 
 
 
