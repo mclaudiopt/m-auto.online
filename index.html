@@ -389,6 +389,37 @@
 .prod-header { display: none !important; }
 .prod-content { max-height: 90vh; }
 
+/* === BOTÃO VER -> ÍCONE (final, sem conflitos) === */
+button.btn-view.btn-view-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 36px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--accent);
+  opacity: 0.80;
+  transition: opacity .2s, transform .2s;
+}
+
+button.btn-view.btn-view-icon:hover{
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+.card.gold button.btn-view.btn-view-icon{
+  color: var(--gold);
+}
+
+/* garante que mesmo que exista texto residual, não aparece */
+button.btn-view.btn-view-icon{
+  font-size: 0 !important;
+}
+
+
     
 }
 
@@ -2084,6 +2115,7 @@ function applyViewIcons() {
     
 </body>
 </html>
+
 
 
 
