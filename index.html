@@ -56,6 +56,28 @@
             --gradient-btn: linear-gradient(135deg, #2563eb, #1e40af);
         }
 
+        /* === BOTÃO VER → ÍCONE RETICÊNCIAS === */
+.btn-view-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  opacity: 0.75;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-view-icon:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.card.gold .btn-view-icon {
+  color: var(--gold);
+}
+
         
         [data-theme="dark"] {
             --bg-body: #020617; --bg-card: #1e293b; --bg-sidebar: #111827; --bg-footer: #0f172a;
@@ -1955,6 +1977,7 @@ function openDetails(btn) {
     
 </body>
 </html>
+
 
 
 
