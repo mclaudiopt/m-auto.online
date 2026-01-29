@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.18</title>
+    <title>M-Auto Online | V17.19</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -317,7 +317,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V17.18</span>
+                <span class="version-badge">V17.19</span>
             </a>
         </div>
 
@@ -1582,8 +1582,7 @@
                 const dKey = document.getElementById('productModal').getAttribute('data-desc-key');
                 const pKey = document.getElementById('productModal').getAttribute('data-price-key');
                 const tDirect = document.getElementById('productModal').getAttribute('data-title-direct');
-                const dd = document.getElementById('productModal').getAttribute('data-desc-direct');
-const dFallback = document.getElementById('productModal').getAttribute('data-desc-fallback') || '';
+                const dFallback = document.getElementById('productModal').getAttribute('data-desc-fallback') || '';
 renderModalContent(tKey, dKey, pKey, tDirect, lang, dFallback);
     
             }
@@ -1656,36 +1655,32 @@ renderModalContent(tKey, dKey, pKey, tDirect, lang, dFallback);
         setTimeout(() => updateViewers(false), 5000);
 
         // MODAL (corrigido: usa SEMPRE currentLang, não depende de class active no botão)
-      function renderModalContent(titleKey, descKey, priceKey, titleDirect, lang, descFallback) {
-  const dict = safeDict(lang);
+    function renderModalContent(titleKey, descKey, priceKey, titleDirect, lang, descFallback) {
+  const dict = safeDict(lang) || {};
+  const stripHtml = (s) => String(s || '').replace(/<[^>]*>/g, '').trim();
 
   // title
-  if (dict && titleKey && dict[titleKey]) {
-    document.getElementById('modalTitle').innerText = dict[titleKey];
-  } else {
-    document.getElementById('modalTitle').innerText =
-      titleDirect || (lang === 'en' ? 'Product' : lang === 'fr' ? 'Produit' : 'Produto');
-  }
+  const title =
+    (titleKey && dict[titleKey]) ? stripHtml(dict[titleKey]) :
+    (titleDirect ? titleDirect : (lang === 'en' ? 'Product' : lang === 'fr' ? 'Produit' : 'Produto'));
+  document.getElementById('modalTitle').innerText = title;
 
   // desc
-  if (dict && descKey && dict[descKey]) {
-    document.getElementById('modalDesc').innerHTML = dict[descKey];
-  } else if (descFallback && descFallback.trim().length > 0) {
-    // ✅ NOVO: usa o texto do cartão
-    document.getElementById('modalDesc').innerText = descFallback;
+  const modalDesc = document.getElementById('modalDesc');
+  if (descKey && dict[descKey]) {
+    modalDesc.innerHTML = dict[descKey]; // mantém HTML quando existe tradução completa
+  } else if (descFallback && descFallback.trim()) {
+    modalDesc.innerText = descFallback.trim();
   } else {
-    document.getElementById('modalDesc').innerText =
-      (lang === 'en' ? 'Details not available.' : lang === 'fr' ? 'Détails non disponibles.' : 'Detalhes não disponíveis.');
+    modalDesc.innerText = (lang === 'en' ? 'Details not available.' : lang === 'fr' ? 'Détails non disponibles.' : 'Detalhes não disponíveis.');
   }
 
   // price
-  if (dict && priceKey && dict[priceKey]) {
-    document.getElementById('modalPrice').innerText = dict[priceKey];
-  } else {
-    document.getElementById('modalPrice').innerText =
-      (dict && dict.price_consult) ? dict.price_consult : (lang === 'en' ? 'On request' : lang === 'fr' ? 'Sur demande' : 'Consulta');
-  }
+  document.getElementById('modalPrice').innerText =
+    (priceKey && dict[priceKey]) ? stripHtml(dict[priceKey]) :
+    (dict.price_consult ? stripHtml(dict.price_consult) : (lang === 'en' ? 'On request' : lang === 'fr' ? 'Sur demande' : 'Consulta'));
 }
+
 
 function openDetails(btn) {
   const titleKey = btn.getAttribute('data-title-key');
@@ -1694,27 +1689,51 @@ function openDetails(btn) {
   const img      = btn.getAttribute('data-img');
   const titleDirect = btn.getAttribute('data-title');
 
-  // ✅ NOVO: fallback com o texto que já está no cartão (desc + sub-desc)
+  const dict = safeDict(currentLang) || {};
+
+  // helper: remove tags HTML (para fallback limpo)
+  const stripHtml = (s) => String(s || '').replace(/<[^>]*>/g, '').trim();
+
+  // ✅ fallback forte: tenta buscar texto do cartão por chave de tradução, e só depois por DOM textContent
+  let descFallback = '';
+
   const card = btn.closest('.card');
-  const shortDesc = card ? (card.querySelector('.desc')?.innerText || '') : '';
-  const subDesc   = card ? (card.querySelector('.sub-desc')?.innerText || '') : '';
-  const descFallback = (subDesc || shortDesc || '').trim();
+  if (card) {
+    const descEl = card.querySelector('.desc');
+    const subEl  = card.querySelector('.sub-desc');
 
-  document.getElementById('modalImg').src = img || '';
+    // 1) pela tradução (se existir data-translate)
+    const descT = descEl ? descEl.getAttribute('data-translate') : null;
+    const subT  = subEl  ? subEl.getAttribute('data-translate')  : null;
 
-  // guarda contexto no modal para re-render quando muda a língua com modal aberto
+    const subFromDict  = subT  && dict[subT]  ? stripHtml(dict[subT])  : '';
+    const descFromDict = descT && dict[descT] ? stripHtml(dict[descT]) : '';
+
+    // 2) fallback por DOM textContent (não depende do layout/line-clamp)
+    const subFromDom  = subEl  ? (subEl.textContent || '').trim()  : '';
+    const descFromDom = descEl ? (descEl.textContent || '').trim() : '';
+
+    descFallback = (subFromDict || subFromDom || descFromDict || descFromDom || '').trim();
+  }
+
+  // imagem
+  const modalImg = document.getElementById('modalImg');
+  if (modalImg) {
+    modalImg.style.display = ''; // ✅ se a img já tinha sido escondida por erro antes, reativa
+    modalImg.src = img || '';
+  }
+
+  // guarda contexto no modal (para refresh de idioma)
   const modal = document.getElementById('productModal');
   modal.setAttribute('data-title-key', titleKey || '');
   modal.setAttribute('data-desc-key', descKey || '');
   modal.setAttribute('data-price-key', priceKey || '');
   modal.setAttribute('data-title-direct', titleDirect || '');
-  modal.setAttribute('data-desc-fallback', descFallback || ''); // ✅ NOVO
+  modal.setAttribute('data-desc-fallback', descFallback || '');
 
   renderModalContent(titleKey, descKey, priceKey, titleDirect, currentLang, descFallback);
   modal.style.display = 'flex';
 }
-
-        
         
         function closeProductModal() {
             document.getElementById('productModal').style.display = 'none';
@@ -1761,6 +1780,7 @@ function openDetails(btn) {
     
 </body>
 </html>
+
 
 
 
