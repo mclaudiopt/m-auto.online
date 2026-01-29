@@ -1840,54 +1840,30 @@ renderModalContent(tKey, dKey, pKey, tDirect, lang, dFallback);
             updateViewers(true);
         }
 
-        function setLanguage(lang) {
-            currentLang = lang;
-            try { localStorage.setItem('mauto_lang', lang); } catch(e) {}
-            applyTranslations(lang);
+
+function setLanguage(lang) {
+    currentLang = lang;
+    try { localStorage.setItem('mauto_lang', lang); } catch(e) {}
+    applyTranslations(lang);
+       
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            try { localStorage.removeItem('lang'); } catch(e) {}
-            // fallback imagens
-          document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('error', function () {
+window.addEventListener('DOMContentLoaded', () => {
+    try { localStorage.removeItem('lang'); } catch(e) {}
 
-    // ✅ 1) não mexer na imagem do modal (o modal trata do fallback)
-    if (this.id === 'modalImg') return;
-
-    // ✅ 2) evitar repetir fallback na mesma imagem
-    if (this.dataset.fallbackApplied === '1') return;
-    this.dataset.fallbackApplied = '1';
-
-    // ✅ 3) se já existir placeholder no mesmo pai, não inserir outro
-    const parent = this.parentNode;
-    if (parent && parent.querySelector && parent.querySelector('.img-placeholder')) {
-      this.style.display = 'none';
-      return;
+    // lingua: localStorage -> browser -> fallback pt
+    let lang = null;
+    try { lang = localStorage.getItem('mauto_lang'); } catch(e) {}
+    if (!lang) {
+        lang = (navigator.language || 'pt').split('-')[0].toLowerCase();
     }
+    if (!translations[lang]) lang = 'pt';
+    setLanguage(lang);
 
-    // aplica fallback
-    this.style.display = 'none';
-
-    const fallback = document.createElement('div');
-    fallback.className = 'img-placeholder';
-    fallback.innerText =
-      (currentLang === 'en') ? 'Image Unavailable' :
-      (currentLang === 'fr') ? 'Image indisponible' :
-      'Imagem Indisponível';
-
-    if (parent) parent.insertBefore(fallback, this);
-  }, { once: true }); // ✅ garante 1x por imagem
+    // ✅ 4.3 — aplicar ícones "⋯" aos botões VER
+    applyViewIcons();
 });
 
-
-            // lingua: localStorage -> browser -> fallback pt
-            let lang = null;
-            try { lang = localStorage.getItem('mauto_lang'); } catch(e) {}
-            if (!lang) {
-                lang = (navigator.language || 'pt').split('-')[0].toLowerCase();
-            }
-            if (!translations[lang]) lang = 'pt';
             setLanguage(lang);
         });
 
@@ -2115,6 +2091,7 @@ function applyViewIcons() {
     
 </body>
 </html>
+
 
 
 
