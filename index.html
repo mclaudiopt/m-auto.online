@@ -1680,25 +1680,35 @@ renderModalContent(tKey, dKey, pKey, tDirect, dd, lang);
             }
         }
 
-        function openDetails(btn) {
-            const titleKey = btn.getAttribute('data-title-key');
-            const descKey  = btn.getAttribute('data-full-desc-key');
-            const priceKey = btn.getAttribute('data-price-key') || 'price_consult';
-            const img      = btn.getAttribute('data-img');
-            const titleDirect = btn.getAttribute('data-title');
+function openDetails(btn) {
+  const titleKey = btn.getAttribute('data-title-key');
+  const descKey  = btn.getAttribute('data-full-desc-key');
+  const priceKey = btn.getAttribute('data-price-key') || 'price_consult';
+  const img      = btn.getAttribute('data-img');
+  const titleDirect = btn.getAttribute('data-title');
 
-            document.getElementById('modalImg').src = img || '';
-            // guarda contexto no modal para re-render quando muda a lingua com modal aberto
-            const modal = document.getElementById('productModal');
-            modal.setAttribute('data-title-key', titleKey || '');
-            modal.setAttribute('data-desc-key', descKey || '');
-            modal.setAttribute('data-price-key', priceKey || '');
-            modal.setAttribute('data-title-direct', titleDirect || '');
+  // ✅ NOVO: fallback com o texto que já está no cartão (desc + sub-desc)
+  const card = btn.closest('.card');
+  const shortDesc = card ? (card.querySelector('.desc')?.innerText || '') : '';
+  const subDesc   = card ? (card.querySelector('.sub-desc')?.innerText || '') : '';
+  const descFallback = (subDesc || shortDesc || '').trim();
 
-            renderModalContent(titleKey, descKey, priceKey, titleDirect, currentLang);
-            modal.style.display = 'flex';
-        }
+  document.getElementById('modalImg').src = img || '';
 
+  // guarda contexto no modal para re-render quando muda a língua com modal aberto
+  const modal = document.getElementById('productModal');
+  modal.setAttribute('data-title-key', titleKey || '');
+  modal.setAttribute('data-desc-key', descKey || '');
+  modal.setAttribute('data-price-key', priceKey || '');
+  modal.setAttribute('data-title-direct', titleDirect || '');
+  modal.setAttribute('data-desc-fallback', descFallback || ''); // ✅ NOVO
+
+  renderModalContent(titleKey, descKey, priceKey, titleDirect, currentLang, descFallback);
+  modal.style.display = 'flex';
+}
+
+        
+        
         function closeProductModal() {
             document.getElementById('productModal').style.display = 'none';
         }
@@ -1744,6 +1754,7 @@ renderModalContent(tKey, dKey, pKey, tDirect, dd, lang);
     
 </body>
 </html>
+
 
 
 
