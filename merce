@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.27</title>
+    <title>M-Auto Online | V17.28</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -55,6 +55,38 @@
             --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
             --gradient-btn: linear-gradient(135deg, #2563eb, #1e40af);
         }
+
+/* === SUBSTITUI "Ver" POR ÍCONE DE RETICÊNCIAS (GLOBAL) === */
+.btn-view {
+  position: relative;
+  font-size: 0;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-view::after {
+  content: "•••";
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.75;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-view:hover::after {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* dourado nos cards premium */
+.card.gold .btn-view::after {
+  color: var(--gold);
+}
+
 
         /* === BOTÃO VER → ÍCONE RETICÊNCIAS === */
 .btn-view-icon {
@@ -346,7 +378,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V17.27</span>
+                <span class="version-badge">V17.28</span>
             </a>
         </div>
 
