@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.22fr</title>
+    <title>M-Auto Online | V17.23fr</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -292,6 +292,33 @@
           line-height: 1.5;
         }
         
+        
+
+        }
+
+/* === C1: remover visualmente "Consulta" nos produtos (todas as resoluções) === */
+.card-footer .price {
+  display: none !important;
+}
+
+        @media (max-width: 768px) {
+            .layout-flex { flex-direction: column; }
+            .sidebar { width: 100%; min-width: 100%; flex-direction: row; overflow-x: auto; position: static; }
+            .side-btn { min-width: 130px; text-align: center; border-left: none; border-bottom: 3px solid transparent; }
+            .side-btn.active { border-bottom-color: var(--accent); }
+            .main-nav { display: none; }
+            .mobile-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; background: var(--bg-card); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 2000; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
+            .mob-item { flex: 1; text-align: center; font-size: 0.75rem; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; font-weight: 600; padding: 5px; }
+            .mob-item.active { color: var(--accent); }
+            .fab-container { bottom: 80px; }
+            .hero { margin-top: 70px; padding: 30px 15px; }
+            #scrollTopBtn { bottom: 80px; left: 20px; }
+            .sales-popup { bottom: 140px; left: 20px; }
+
+            /* (REMOVIDO) C1 não fica aqui dentro */
+        }
+
+        
         @media (max-width: 768px){
           .services-list{ grid-template-columns: 1fr; }
         }
@@ -327,7 +354,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V17.22fr</span>
+                <span class="version-badge">V17.23fr</span>
             </a>
         </div>
 
@@ -1958,6 +1985,7 @@ function openDetails(btn) {
     
 </body>
 </html>
+
 
 
 
