@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.19</title>
+    <title>M-Auto Online | V17.20</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -317,7 +317,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V17.19</span>
+                <span class="version-badge">V17.20</span>
             </a>
         </div>
 
@@ -1600,15 +1600,37 @@ renderModalContent(tKey, dKey, pKey, tDirect, lang, dFallback);
         window.addEventListener('DOMContentLoaded', () => {
             try { localStorage.removeItem('lang'); } catch(e) {}
             // fallback imagens
-            document.querySelectorAll('img').forEach(img => {
-                img.onerror = function() {
-                    this.style.display = 'none';
-                    const fallback = document.createElement('div');
-                    fallback.className = 'img-placeholder';
-                    fallback.innerText = (currentLang === 'en') ? 'Image Unavailable' : (currentLang === 'fr') ? 'Image indisponible' : 'Imagem Indisponível';
-                    this.parentNode.insertBefore(fallback, this);
-                };
-            });
+          document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('error', function () {
+
+    // ✅ 1) não mexer na imagem do modal (o modal trata do fallback)
+    if (this.id === 'modalImg') return;
+
+    // ✅ 2) evitar repetir fallback na mesma imagem
+    if (this.dataset.fallbackApplied === '1') return;
+    this.dataset.fallbackApplied = '1';
+
+    // ✅ 3) se já existir placeholder no mesmo pai, não inserir outro
+    const parent = this.parentNode;
+    if (parent && parent.querySelector && parent.querySelector('.img-placeholder')) {
+      this.style.display = 'none';
+      return;
+    }
+
+    // aplica fallback
+    this.style.display = 'none';
+
+    const fallback = document.createElement('div');
+    fallback.className = 'img-placeholder';
+    fallback.innerText =
+      (currentLang === 'en') ? 'Image Unavailable' :
+      (currentLang === 'fr') ? 'Image indisponible' :
+      'Imagem Indisponível';
+
+    if (parent) parent.insertBefore(fallback, this);
+  }, { once: true }); // ✅ garante 1x por imagem
+});
+
 
             // lingua: localStorage -> browser -> fallback pt
             let lang = null;
@@ -1780,6 +1802,7 @@ function openDetails(btn) {
     
 </body>
 </html>
+
 
 
 
