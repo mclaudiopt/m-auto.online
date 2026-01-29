@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.20</title>
+    <title>M-Auto Online | V17.21</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -317,7 +317,7 @@
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V17.20</span>
+                <span class="version-badge">V17.21</span>
             </a>
         </div>
 
@@ -1740,10 +1740,41 @@ function openDetails(btn) {
 
   // imagem
   const modalImg = document.getElementById('modalImg');
-  if (modalImg) {
-    modalImg.style.display = ''; // ✅ se a img já tinha sido escondida por erro antes, reativa
+ if (modalImg) {
+    const header = modalImg.parentElement;
+
+    // limpa placeholders antigos do modal (segurança)
+    if (header) {
+        header.querySelectorAll('.img-placeholder').forEach(el => el.remove());
+    }
+
+    modalImg.style.display = '';
     modalImg.src = img || '';
-  }
+
+    // fallback apenas para o modal
+    modalImg.onerror = () => {
+        modalImg.style.display = 'none';
+
+        if (!header) return;
+
+        const ph = document.createElement('div');
+        ph.className = 'img-placeholder';
+        ph.innerText =
+            (currentLang === 'en') ? 'Image Unavailable' :
+            (currentLang === 'fr') ? 'Image indisponible' :
+            'Imagem Indisponível';
+
+        header.insertBefore(ph, modalImg);
+    };
+
+    modalImg.onload = () => {
+        modalImg.style.display = '';
+        if (header) {
+            header.querySelectorAll('.img-placeholder').forEach(el => el.remove());
+        }
+    };
+}
+   
 
   // guarda contexto no modal (para refresh de idioma)
   const modal = document.getElementById('productModal');
@@ -1802,6 +1833,7 @@ function openDetails(btn) {
     
 </body>
 </html>
+
 
 
 
