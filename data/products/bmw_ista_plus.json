@@ -1,1 +1,35 @@
-a
+{
+  "id": "bmw_ista_plus",
+  "meta": {
+    "version": "",
+    "year": "",
+    "os": ""
+  },
+  "pt": {
+    "short": "Diagnóstico BMW/MINI com funções avançadas e leitura completa de módulos.",
+    "summary": [
+      "Leitura e apagamento de erros (DTC)",
+      "Dados em tempo real e testes",
+      "Funções de serviço e manutenção"
+    ],
+    "details": "Texto de detalhe (PT) — escreve aqui a descrição completa do ISTA+.\n\nSugestão de estrutura:\n- O que inclui / para que serve\n- Compatibilidade (BMW/MINI, séries, anos)\n- O que o cliente recebe (instalação remota, configuração)\n- Notas (requisitos, recomendações)"
+  },
+  "en": {
+    "short": "BMW/MINI diagnostics with advanced functions and full module scanning.",
+    "summary": [
+      "Read & clear fault codes (DTC)",
+      "Live data and tests",
+      "Service and maintenance functions"
+    ],
+    "details": "Long description (EN) — write the full ISTA+ description here.\n\nSuggested structure:\n- What it is / what's included\n- Compatibility (BMW/MINI, series, years)\n- What the customer gets (remote install, setup)\n- Notes (requirements, recommendations)"
+  },
+  "fr": {
+    "short": "Diagnostic BMW/MINI avec fonctions avancées et scan complet des calculateurs.",
+    "summary": [
+      "Lecture/effacement des défauts (DTC)",
+      "Données en temps réel et tests",
+      "Fonctions service et maintenance"
+    ],
+    "details": "Description détaillée (FR) — écris ici la description complète de ISTA+.\n\nStructure suggérée:\n- Présentation / inclus\n- Compatibilité (BMW/MINI, séries, années)\n- Ce que le client reçoit (installation à distance, configuration)\n- Notes (prérequis, recommandations)"
+  }
+}
