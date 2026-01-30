@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.30b</title>
+    <title>M-Auto Online | V17.31b</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -424,7 +424,7 @@ button.btn-view.btn-view-icon{
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V17.30b</span>
+                <span class="version-badge">V17.31b</span>
             </a>
         </div>
 
@@ -1894,107 +1894,84 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => updateViewers(false), 5000);
 
         // MODAL (corrigido: usa SEMPRE currentLang, não depende de class active no botão)
-    function renderModalContent(titleKey, descKey, priceKey, titleDirect, lang, descFallback) {
+  function renderModalContent(titleKey, descKey, priceKey, titleDirect, lang, descFallback) {
   const dict = safeDict(lang) || {};
   const stripHtml = (s) => String(s || '').replace(/<[^>]*>/g, '').trim();
+
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc  = document.getElementById('modalDesc');
+  const modalPrice = document.getElementById('modalPrice');
+  const modalImg   = document.getElementById('modalImg');
 
   // title
   const title =
     (titleKey && dict[titleKey]) ? stripHtml(dict[titleKey]) :
     (titleDirect ? titleDirect : (lang === 'en' ? 'Product' : lang === 'fr' ? 'Produit' : 'Produto'));
-  document.getElementById('modalTitle').innerText = title;
+  if (modalTitle) modalTitle.innerText = title;
+
+  // ✅ modal sem imagem
+  if (modalImg) {
+    modalImg.removeAttribute('src');
+    modalImg.style.display = 'none';
+  }
 
   // desc
- // ✅ modal sem imagem (não setar src, não criar placeholder)
-const modalImg = document.getElementById('modalImg');
-if (modalImg) {
-  modalImg.removeAttribute('src');
-  modalImg.style.display = 'none';
-}
-
-        
-        if (descKey && dict[descKey]) {
-    modalDesc.innerHTML = dict[descKey]; // mantém HTML quando existe tradução completa
-  } else if (descFallback && descFallback.trim()) {
-    modalDesc.innerText = descFallback.trim();
-  } else {
-    modalDesc.innerText = (lang === 'en' ? 'Details not available.' : lang === 'fr' ? 'Détails non disponibles.' : 'Detalhes não disponíveis.');
+  if (modalDesc) {
+    if (descKey && dict[descKey] !== undefined) {
+      modalDesc.innerHTML = dict[descKey]; // mantém HTML quando existe (ex: listas)
+    } else if (descFallback && descFallback.trim()) {
+      modalDesc.innerText = descFallback.trim();
+    } else {
+      modalDesc.innerText =
+        (lang === 'en') ? 'Details not available.' :
+        (lang === 'fr') ? 'Détails non disponibles.' :
+        'Detalhes não disponíveis.';
+    }
   }
 
   // price
-  document.getElementById('modalPrice').innerText =
+  const priceText =
     (priceKey && dict[priceKey]) ? stripHtml(dict[priceKey]) :
-    (dict.price_consult ? stripHtml(dict.price_consult) : (lang === 'en' ? 'On request' : lang === 'fr' ? 'Sur demande' : 'Consulta'));
+    (dict.price_consult ? stripHtml(dict.price_consult) :
+      (lang === 'en' ? 'On request' : lang === 'fr' ? 'Sur demande' : 'Consulta'));
+  if (modalPrice) modalPrice.innerText = priceText;
 }
 
-
 function openDetails(btn) {
-  const titleKey = btn.getAttribute('data-title-key');
-  const descKey  = btn.getAttribute('data-full-desc-key');
-  const priceKey = btn.getAttribute('data-price-key') || 'price_consult';
-  const img      = btn.getAttribute('data-img');
-  const titleDirect = btn.getAttribute('data-title');
+  const titleKey    = btn.getAttribute('data-title-key') || '';
+  const descKey     = btn.getAttribute('data-full-desc-key') || '';
+  const priceKey    = btn.getAttribute('data-price-key') || 'price_consult';
+  const titleDirect = btn.getAttribute('data-title') || '';
 
   const dict = safeDict(currentLang) || {};
-
-  // helper: remove tags HTML (para fallback limpo)
   const stripHtml = (s) => String(s || '').replace(/<[^>]*>/g, '').trim();
 
-  // ✅ fallback forte: tenta buscar texto do cartão por chave de tradução, e só depois por DOM textContent
+  // fallback forte: tenta (1) tradução do card, (2) texto do DOM
   let descFallback = '';
-
   const card = btn.closest('.card');
   if (card) {
     const descEl = card.querySelector('.desc');
     const subEl  = card.querySelector('.sub-desc');
 
-    // 1) pela tradução (se existir data-translate)
     const descT = descEl ? descEl.getAttribute('data-translate') : null;
     const subT  = subEl  ? subEl.getAttribute('data-translate')  : null;
 
     const subFromDict  = subT  && dict[subT]  ? stripHtml(dict[subT])  : '';
     const descFromDict = descT && dict[descT] ? stripHtml(dict[descT]) : '';
 
-    // 2) fallback por DOM textContent (não depende do layout/line-clamp)
     const subFromDom  = subEl  ? (subEl.textContent || '').trim()  : '';
     const descFromDom = descEl ? (descEl.textContent || '').trim() : '';
 
     descFallback = (subFromDict || subFromDom || descFromDict || descFromDom || '').trim();
   }
 
-
-    // fallback apenas para o modal
-    modalImg.onerror = () => {
-        modalImg.style.display = 'none';
-
-        if (!header) return;
-
-        const ph = document.createElement('div');
-        ph.className = 'img-placeholder';
-        ph.innerText =
-            (currentLang === 'en') ? 'Image Unavailable' :
-            (currentLang === 'fr') ? 'Image indisponible' :
-            'Imagem Indisponível';
-
-        header.insertBefore(ph, modalImg);
-    };
-
-    modalImg.onload = () => {
-        modalImg.style.display = '';
-        if (header) {
-            header.querySelectorAll('.img-placeholder').forEach(el => el.remove());
-        }
-    };
-}
-   
-
-  // guarda contexto no modal (para refresh de idioma)
+  // guardar contexto no modal (para refresh ao mudar língua)
   const modal = document.getElementById('productModal');
-  modal.setAttribute('data-title-key', titleKey || '');
-  modal.setAttribute('data-desc-key', descKey || '');
-  modal.setAttribute('data-price-key', priceKey || '');
-  modal.setAttribute('data-title-direct', titleDirect || '');
-  modal.setAttribute('data-desc-fallback', descFallback || '');
+  modal.setAttribute('data-title-key', titleKey);
+  modal.setAttribute('data-desc-key', descKey);
+  modal.setAttribute('data-price-key', priceKey);
+  modal.setAttribute('data-title-direct', titleDirect);
+  modal.setAttribute('data-desc-fallback', descFallback);
 
   renderModalContent(titleKey, descKey, priceKey, titleDirect, currentLang, descFallback);
   modal.style.display = 'flex';
@@ -2071,6 +2048,7 @@ function applyViewIcons() {
     
 </body>
 </html>
+
 
 
 
