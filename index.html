@@ -1945,6 +1945,7 @@ function openDetails(btn) {
 
   const dict = safeDict(currentLang) || {};
   const stripHtml = (s) => String(s || '').replace(/<[^>]*>/g, '').trim();
+  document.getElementById('productModal').style.display = 'flex';
 
   // fallback forte: tenta (1) tradução do card, (2) texto do DOM
   let descFallback = '';
@@ -2048,6 +2049,7 @@ function applyViewIcons() {
     
 </body>
 </html>
+
 
 
 
