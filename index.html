@@ -59,15 +59,7 @@
             /* Botão VER → mostrar só ícone (…) */
             .btn-view {
               font-size: 0;          /* esconde texto */
-            }
-            
-            .btn-view::after {
-              content: "⋯";
-              font-size: 1.2rem;
-              font-weight: 900;
-              color: var(--accent);
-              letter-spacing: 2px;
-            }
+       
 
 
 
@@ -84,15 +76,7 @@
   padding: 0;
 }
 
-.btn-view::after {
-  content: "•••";
-  font-size: 20px;
-  letter-spacing: 3px;
-  font-weight: 900;
-  line-height: 1;
-  opacity: 0.75;
-  transition: opacity 0.2s, transform 0.2s;
-}
+
 
 .btn-view:hover::after {
   opacity: 1;
@@ -2139,6 +2123,7 @@ document.getElementById('productModal').addEventListener('click', (e) => {
     
 </body>
 </html>
+
 
 
 
