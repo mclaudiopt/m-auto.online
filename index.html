@@ -1962,18 +1962,6 @@ function openDetails(btn) {
     descFallback = (subFromDict || subFromDom || descFromDict || descFromDom || '').trim();
   }
 
-  // imagem
-  const modalImg = document.getElementById('modalImg');
- if (modalImg) {
-    const header = modalImg.parentElement;
-
-    // limpa placeholders antigos do modal (segurança)
-    if (header) {
-        header.querySelectorAll('.img-placeholder').forEach(el => el.remove());
-    }
-
-    modalImg.style.display = '';
-    modalImg.src = img || '';
 
     // fallback apenas para o modal
     modalImg.onerror = () => {
@@ -2083,6 +2071,7 @@ function applyViewIcons() {
     
 </body>
 </html>
+
 
 
 
