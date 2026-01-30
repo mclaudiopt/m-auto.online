@@ -2126,6 +2126,12 @@ function applyViewIcons() {
   });
 }
 
+// depois de todas as funções (openDetails, closeProductModal, etc.)
+document.getElementById('productModal').addEventListener('click', (e) => {
+  if (e.target.id === 'productModal') closeProductModal();
+});
+
+        
 
     </script>
 
@@ -2133,6 +2139,7 @@ function applyViewIcons() {
     
 </body>
 </html>
+
 
 
 
