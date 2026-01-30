@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | V17.31b</title>
+    <title>M-Auto Online | V17.32b</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -237,6 +237,89 @@
         .badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
         /* MODAL DE PRODUTO */
+/* =========================
+   ✅ MODAL DE PRODUTO (BASE)
+   ========================= */
+.prod-modal{
+  display: none;               /* escondido por defeito */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  z-index: 2500;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.prod-content{
+  width: 100%;
+  max-width: 720px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+  overflow: hidden;
+  position: relative;
+}
+
+.prod-close{
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-body);
+  color: var(--text-main);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prod-body{
+  padding: 22px;
+}
+
+.prod-title{
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  color: var(--text-main);
+}
+
+.prod-text{
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-size: 0.98rem;
+}
+
+.prod-footer{
+  border-top: 1px solid var(--border);
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.prod-price{
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.prod-btn{
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+}
 
         /* LISTA */
         .tool-list { display: flex; flex-direction: column; gap: 15px; max-width: 900px; margin: 0 auto; }
@@ -424,7 +507,7 @@ button.btn-view.btn-view-icon{
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">V17.31b</span>
+                <span class="version-badge">V17.32b</span>
             </a>
         </div>
 
@@ -2049,6 +2132,7 @@ function applyViewIcons() {
     
 </body>
 </html>
+
 
 
 
