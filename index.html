@@ -976,17 +976,38 @@ button.btn-view.btn-view-icon{
                     <div id="brand-bmw" class="brand-panel">
                         <h2 class="panel-header">BMW</h2>
                         <div class="grid">
-                            <div class="card searchable-item">
-                                <img src="IMG/BMW/BMW-Ista.jpg" loading="lazy" alt="ISTA+">
-                                <div class="card-body">
-                                    <h3>ISTA+</h3>
-                                    <p class="desc" data-translate="desc_diag">Diagnóstico.</p>
-                                    <p class="sub-desc" data-translate="desc_ista_d">Diagnóstico...</p>
-                                    <div class="card-footer">
-                                        <span class="price" data-translate="price_consult">Consulta</span>
-                                        <button type="button" class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ista_d" data-title="ISTA+" data-img="IMG/BMW/BMW-Ista.jpg" data-price-key="price_consult">Ver</button>
-                                    </div>
-                                </div>
+                           <div class="card searchable-item">
+  <img src="IMG/BMW/BMW-Ista.jpg" loading="lazy" alt="ISTA+">
+  <div class="card-body">
+    <h3>ISTA+</h3>
+
+    <p class="desc" data-translate="desc_diag">Diagnóstico.</p>
+
+    <!-- ✅ 3 linhas (igual ao PSA) -->
+    <p class="sub-desc" data-translate="desc_ista_short">
+      Diagnóstico BMW/MINI com funções avançadas e leitura completa de módulos.
+    </p>
+
+    <!-- ✅ 3 caixinhas (igual ao PSA) -->
+    <div class="tech-details">
+      <div class="tech-row"><span class="tech-label">Versão:</span><span>2025</span></div>
+      <div class="tech-row"><span class="tech-label">Ano:</span><span>2025</span></div>
+      <div class="tech-row"><span class="tech-label">OS:</span><span>Windows 10/11 (64-bit)</span></div>
+    </div>
+
+    <div class="card-footer">
+      <span class="price" data-translate="price_consult">Consulta</span>
+
+      <button type="button" class="btn-view"
+              onclick="openDetails(this)"
+              data-title="ISTA+"
+              data-full-desc-key="desc_ista_full"
+              data-img="IMG/BMW/BMW-Ista.jpg"
+              data-price-key="price_consult">Ver</button>
+    </div>
+  </div>
+</div>
+
                             </div>
                             <div class="card searchable-item">
                                 <img src="IMG/BMW/bmw-istap.jpg" loading="lazy" alt="ISTA-P">
