@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <title>M-Auto Online | v3</title>
+    <title>M-Auto Online | v3a</title>
 
     <style>
         /* --- CSS LIMPO E ESTÁVEL --- */
@@ -490,7 +490,7 @@ button.btn-view.btn-view-icon{
             <a href="#inicio" class="logo-link">
                 <span class="brand-m">M-Auto</span>
                 <span class="brand-online">Online</span>
-                <span class="version-badge">v3</span>
+                <span class="version-badge">v3a</span>
             </a>
         </div>
 
@@ -1806,7 +1806,7 @@ button.btn-view.btn-view-icon{
 
         const ICON_DOWNLOAD = `
 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-  <path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17V3h1zM5 19h14v2H5z"/>
+  <path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17v3ah1zM5 19h14v2H5z"/>
 </svg>
 `;
 
@@ -2012,46 +2012,55 @@ window.addEventListener('DOMContentLoaded', () => {
   if (modalPrice) modalPrice.innerText = priceText;
 }
 
-function openDetails(btn) {
-  const titleKey    = btn.getAttribute('data-title-key') || '';
-  const descKey     = btn.getAttribute('data-full-desc-key') || '';
-  const priceKey    = btn.getAttribute('data-price-key') || 'price_consult';
-  const titleDirect = btn.getAttribute('data-title') || '';
+async function openDetails(btn) {
+  const modal = document.getElementById("productModal");
+  modal.style.display = "flex";
 
-  const dict = safeDict(currentLang) || {};
-  const stripHtml = (s) => String(s || '').replace(/<[^>]*>/g, '').trim();
-  document.getElementById('productModal').style.display = 'flex';
+  const productId = btn.getAttribute("data-product-id");
 
-  // fallback forte: tenta (1) tradução do card, (2) texto do DOM
-  let descFallback = '';
-  const card = btn.closest('.card');
-  if (card) {
-    const descEl = card.querySelector('.desc');
-    const subEl  = card.querySelector('.sub-desc');
+  // CASO NOVO (ficheiro externo)
+  if (productId) {
+    try {
+      const res = await fetch(`data/products/${productId}.json`, { cache: "no-store" });
+      const prod = await res.json();
+      const lang = currentLang || "pt";
+      const L = prod[lang] || prod.pt;
 
-    const descT = descEl ? descEl.getAttribute('data-translate') : null;
-    const subT  = subEl  ? subEl.getAttribute('data-translate')  : null;
+      document.getElementById("modalTitle").innerText =
+        btn.getAttribute("data-title") || "Produto";
 
-    const subFromDict  = subT  && dict[subT]  ? stripHtml(dict[subT])  : '';
-    const descFromDict = descT && dict[descT] ? stripHtml(dict[descT]) : '';
+      // sem imagem
+      const modalImg = document.getElementById("modalImg");
+      if (modalImg) modalImg.style.display = "none";
 
-    const subFromDom  = subEl  ? (subEl.textContent || '').trim()  : '';
-    const descFromDom = descEl ? (descEl.textContent || '').trim() : '';
+      document.getElementById("modalDesc").innerHTML = `
+        <div><strong>${L.short}</strong></div>
+        <ul>${L.summary.map(x => `<li>${x}</li>`).join("")}</ul>
+        <div>${L.details}</div>
+      `;
 
-    descFallback = (subFromDict || subFromDom || descFromDict || descFromDom || '').trim();
+      document.getElementById("modalPrice").innerText =
+        currentLang === "en" ? "On request" :
+        currentLang === "fr" ? "Sur demande" : "Consulta";
+
+      modal.setAttribute("data-product-id", productId);
+      return;
+    } catch (e) {
+      console.error("Erro a carregar ficheiro do produto", e);
+    }
   }
 
-  // guardar contexto no modal (para refresh ao mudar língua)
-  const modal = document.getElementById('productModal');
-  modal.setAttribute('data-title-key', titleKey);
-  modal.setAttribute('data-desc-key', descKey);
-  modal.setAttribute('data-price-key', priceKey);
-  modal.setAttribute('data-title-direct', titleDirect);
-  modal.setAttribute('data-desc-fallback', descFallback);
-
-  renderModalContent(titleKey, descKey, priceKey, titleDirect, currentLang, descFallback);
-  modal.style.display = 'flex';
+  // FALLBACK — produtos antigos continuam a funcionar
+  renderModalContent(
+    btn.getAttribute("data-title-key"),
+    btn.getAttribute("data-full-desc-key"),
+    btn.getAttribute("data-price-key"),
+    btn.getAttribute("data-title"),
+    currentLang,
+    ""
+  );
 }
+
         
         function closeProductModal() {
             document.getElementById('productModal').style.display = 'none';
@@ -2130,6 +2139,7 @@ document.getElementById('productModal').addEventListener('click', (e) => {
     
 </body>
 </html>
+
 
 
 
