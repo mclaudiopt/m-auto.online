@@ -996,7 +996,15 @@ button.btn-view.btn-view-icon{
                                     <p class="sub-desc" data-translate="desc_ista_p">Programação...</p>
                                     <div class="card-footer">
                                         <span class="price" data-translate="price_consult">Consulta</span>
-                                        <button type="button" class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_ista_p" data-title="ISTA-P" data-img="IMG/BMW/bmw-istap.jpg" data-price-key="price_consult">Ver</button>
+                                   <button type="button"
+        class="btn-view"
+        onclick="openDetails(this)"
+        data-product-id="bmw_ista_plus"
+        data-title="ISTA+"
+        aria-label="Detalhes ISTA+">
+</button>
+
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -2122,6 +2130,7 @@ document.getElementById('productModal').addEventListener('click', (e) => {
     
 </body>
 </html>
+
 
 
 
