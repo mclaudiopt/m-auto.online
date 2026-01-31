@@ -647,19 +647,7 @@ font-size: 0 !important;
 </button>
 </div>
 
-<section id="inicio" class="hero">
-<h1>
-<span data-translate="hero_sol">Soluções Online</span>&nbsp;<span class="typewriter-text"></span>
-</h1>
-<p data-translate="hero_desc">Instalação remota profissional.</p>
-<div class="hero-slider-container">
-<div class="slider-track">
-<span class="brand-item">Mercedes</span><span class="brand-item">BMW</span><span class="brand-item">Audi</span><span class="brand-item">VW</span>
-<span class="brand-item">Porsche</span><span class="brand-item">JLR</span><span class="brand-item">Toyota</span><span class="brand-item">Ford</span>
-<span class="brand-item">GM</span><span class="brand-item">Mercedes</span><span class="brand-item">BMW</span><span class="brand-item">Audi</span><span class="brand-item">VW</span>
-</div>
-</div>
-</section>
+    <div id="heroMount"></div>
 
 <div class="main-nav">
 <button type="button" class="nav-pill active" onclick="switchSection('soft', this)" data-translate="nav_soft">Software</button>
@@ -1852,6 +1840,22 @@ const ICON_ELLIPSIS = `
  <circle cx="19" cy="12" r="2"></circle>
 </svg>
 `;
+        // Carregar HERO externo (partials/hero.html)
+        function loadHero() {
+            const mount = document.getElementById('heroMount');
+            if (!mount) return Promise.resolve(); // se não existir, não faz nada
+
+            return fetch('partials/hero.html', { cache: 'no-store' })
+                .then(r => {
+                    if (!r.ok) throw new Error('Falha a carregar hero.html');
+                    return r.text();
+                })
+                .then(html => { mount.innerHTML = html; })
+                .catch(err => {
+                    console.warn(err);
+                    // fallback: mantém vazio sem partir o site
+                });
+        }
 
 const ICON_DOWNLOAD = `
 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
@@ -1860,27 +1864,30 @@ const ICON_DOWNLOAD = `
 `;
 
 
-// TYPEWRITER
-const typewriter = document.querySelector(".typewriter-text");
-const texts = ["Mercedes-Benz", "Volkswagen", "BMW", "Audi", "PSA", "Renault", "JLR", "Toyota", "Nissan", "Ford", "GM"];
-let count = 0;
-let index = 0;
+        // TYPEWRITER (agora em função para suportar hero externo)
+        function startTypewriter() {
+            const typewriter = document.querySelector(".typewriter-text");
+            if (!typewriter) return;
 
-(function type() {
-if (!typewriter) return;
-if (count === texts.length) count = 0;
-const currentText = texts[count];
-const letter = currentText.slice(0, ++index);
-typewriter.textContent = letter;
+            const texts = ["Mercedes-Benz", "Volkswagen", "BMW", "Audi", "PSA", "Renault", "JLR", "Toyota", "Nissan", "Ford", "GM"];
+            let count = 0;
+            let index = 0;
 
-if (letter.length === currentText.length) {
-count++;
-index = 0;
-setTimeout(type, 2000);
-} else {
-setTimeout(type, 100);
-}
-})();
+            (function type() {
+                if (count === texts.length) count = 0;
+                const currentText = texts[count];
+                const letter = currentText.slice(0, ++index);
+                typewriter.textContent = letter;
+
+                if (letter.length === currentText.length) {
+                    count++;
+                    index = 0;
+                    setTimeout(type, 2000);
+                } else {
+                    setTimeout(type, 100);
+                }
+            })();
+        }
 
 // NAV
 function switchSection(id, btn) {
@@ -1965,20 +1972,26 @@ applyTranslations(lang);
 
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-try { localStorage.removeItem('lang'); } catch(e) {}
+window.addEventListener('DOMContentLoaded', async () => {
+    try { localStorage.removeItem('lang'); } catch(e) {}
 
-// lingua: localStorage -> browser -> fallback pt
-let lang = null;
-try { lang = localStorage.getItem('mauto_lang'); } catch(e) {}
-if (!lang) {
-lang = (navigator.language || 'pt').split('-')[0].toLowerCase();
-}
-if (!translations[lang]) lang = 'pt';
-setLanguage(lang);
+    // 1) carrega o HERO primeiro (para a tradução apanhar o conteúdo)
+    await loadHero();
 
-// ✅ 4.3 — aplicar ícones "⋯" aos botões VER
-applyViewIcons();
+    // 2) lingua: localStorage -> browser -> fallback pt
+    let lang = null;
+    try { lang = localStorage.getItem('mauto_lang'); } catch(e) {}
+    if (!lang) {
+        lang = (navigator.language || 'pt').split('-')[0].toLowerCase();
+    }
+    if (!translations[lang]) lang = 'pt';
+    setLanguage(lang);
+
+    // 3) aplica ícones "⋯" aos botões VER
+    applyViewIcons();
+
+    // 4) inicia typewriter (agora que o HERO já existe no DOM)
+    startTypewriter();
 });
 
 
@@ -2179,6 +2192,7 @@ if (e.target.id === 'productModal') closeProductModal();
 
 </body>
 </html>
+
 
 
 
