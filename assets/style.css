@@ -1,94 +1,93 @@
 
-
 <style>
 /* --- CSS LIMPO E ESTÁVEL --- */
-:root {
---bg-body: #f8fafc; --bg-card: #ffffff; --bg-sidebar: #ffffff; --bg-footer: #ffffff;
---text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0;
---accent: #2563eb; --accent-hover: #1d4ed8;
---sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
---gold: #b45309; --red: #ef4444; --header-h: 70px; --tech-bg: #f1f5f9;
---shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
---gradient-btn: linear-gradient(135deg, #2563eb, #1e40af);
-}
+        :root {
+                --bg-body: #f8fafc; --bg-card: #ffffff; --bg-sidebar: #ffffff; --bg-footer: #ffffff;
+                --text-main: #0f172a; --text-muted: #475569; --border: #e2e8f0;
+                --accent: #2563eb; --accent-hover: #1d4ed8;
+                --sidebar-active-bg: #eff6ff; --sidebar-active-border: #2563eb; --sidebar-active-text: #1e40af;
+                --gold: #b45309; --red: #ef4444; --header-h: 70px; --tech-bg: #f1f5f9;
+                --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+                --gradient-btn: linear-gradient(135deg, #2563eb, #1e40af);
+                }
 
 /* Botão VER → mostrar só ícone (…) */
-.btn-view {
-font-size: 0;          /* esconde texto */
-}
-
-
+        .btn-view {    
+                    font-size: 0;          /* esconde texto */
+                  }        
 
 
 /* === SUBSTITUI "Ver" POR ÍCONE DE RETICÊNCIAS (GLOBAL) === */
-.btn-view {
-position: relative;
-font-size: 0;
-color: var(--accent);
-background: none;
-border: none;
-cursor: pointer;
-padding: 0;
-}
-
-
-
-.btn-view:hover::after {
-opacity: 1;
-transform: scale(1.15);
-}
-
-/* dourado nos cards premium */
-.card.gold .btn-view::after {
-color: var(--gold);
-}
-
-
+            .btn-view {
+                        position: relative;
+                        font-size: 0;
+                        color: var(--accent);
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        padding: 0;
+                       }
+            
+            
+            
+            .btn-view:hover::after {
+            opacity: 1;
+            transform: scale(1.15);
+            }
+            
+            /* dourado nos cards premium */
+            .card.gold .btn-view::after {
+            color: var(--gold);
+            }
+            
+            
 /* === BOTÃO VER → ÍCONE RETICÊNCIAS === */
-.btn-view-icon {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-padding: 0;
-background: none;
-border: none;
-color: var(--accent);
-opacity: 0.75;
-transition: opacity 0.2s, transform 0.2s;
-}
-
-.btn-view-icon:hover {
-opacity: 1;
-transform: scale(1.15);
-}
-
-.card.gold .btn-view-icon {
-color: var(--gold);
-}
 
 
-[data-theme="dark"] {
-    --bg-body: #020617;
-    --bg-card: #0f172a;
-    --bg-sidebar: #0b1220;
-    --bg-footer: #020617;
+            .btn-view-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: none;
+            border: none;
+            color: var(--accent);
+            opacity: 0.75;
+            transition: opacity 0.2s, transform 0.2s;
+            }
+            
+            .btn-view-icon:hover {
+            opacity: 1;
+            transform: scale(1.15);
+            }
+            
+            .card.gold .btn-view-icon {
+            color: var(--gold);
+            }
+            
 
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-
-    --border: #1e293b;
-
-    --accent: #3b82f6;
-    --accent-hover: #60a5fa;
-
-    --sidebar-active-bg: #111827;
-    --sidebar-active-border: #3b82f6;
-    --sidebar-active-text: #bfdbfe;
-
-    --tech-bg: #020617;
-    --gold: #fbbf24;
-}
-
+            [data-theme="dark"] {
+                --bg-body: #020617;
+                --bg-card: #0f172a;
+                --bg-sidebar: #0b1220;
+                --bg-footer: #020617;
+            
+                --text-main: #f8fafc;
+                --text-muted: #94a3b8;
+            
+                --border: #1e293b;
+            
+                --accent: #3b82f6;
+                --accent-hover: #60a5fa;
+            
+                --sidebar-active-bg: #111827;
+                --sidebar-active-border: #3b82f6;
+                --sidebar-active-text: #bfdbfe;
+            
+                --tech-bg: #020617;
+                --gold: #fbbf24;
+            }
+            
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 html { scroll-behavior: smooth; }
 body { background: var(--bg-body); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; transition: background 0.2s; }
@@ -480,3 +479,4 @@ font-size: 0 !important;
 
 
 </style>
+
