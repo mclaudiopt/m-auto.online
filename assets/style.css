@@ -364,7 +364,7 @@ header {
 	padding: 8px 24px;
 	border-radius: 50px;
 	font-weight: 600;
-	color: var(--text-muted);
+	color: var(--text-main);
 	border: 1px solid var(--border);
 	background: var(--bg-card);
 	transition: 0.3s;
@@ -373,7 +373,7 @@ header {
 }
 
 .nav-pill:hover {
-	background: #e2e8f0;
+	background: var(--bg-muted);
 	color: var(--text-main);
 }
 
@@ -1341,5 +1341,6 @@ footer {
 		font-size: 0 !important;
 	}
 }
+
 
 
