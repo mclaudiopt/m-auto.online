@@ -438,17 +438,39 @@
 					</div>
 					<div id="brand-renault" class="brand-panel">
 						<h2 class="panel-header">Renault</h2>
-						<div class="grid">
-							<div class="card searchable-item"> <img src="IMG/Renault/renault-clip.jpg" loading="lazy" alt="Can Clip">
-								<div class="card-body">
-									<h3>Can Clip</h3>
-									<p class="desc" data-translate="desc_diag">Diagnóstico.</p>
-									<p class="sub-desc" data-translate="desc_clip">Ferramenta oficial...</p>
-									<div class="card-footer"> <span class="price" data-translate="price_consult">Consulta</span>
-										<button type="button" class="btn-view" onclick="openDetails(this)" data-full-desc-key="desc_clip" data-title="Can Clip" data-img="IMG/Renault/renault-clip.jpg" data-price-key="price_consult">Ver</button>
-									</div>
-								</div>
-							</div>
+								<div class="grid">
+								<div class="card searchable-item" data-product="renault_clip">
+  <img src="IMG/Renault/clip.jpg" loading="lazy" alt="Renault CLIP">
+  <div class="card-body">
+    <h3 data-translate="prod_renault_clip">Renault CLIP</h3>
+
+    <p class="desc" data-translate="desc_diag">Diagnóstico.</p>
+    <p class="sub-desc" data-translate="desc_renault_clip_short">...</p>
+
+    <div class="tech-details">
+      <div class="tech-row"><span class="tech-label">Versão:</span><span data-fill="version">—</span></div>
+      <div class="tech-row"><span class="tech-label">Ano:</span><span data-fill="year">—</span></div>
+      <div class="tech-row"><span class="tech-label">OS:</span><span data-fill="os">—</span></div>
+    </div>
+
+		    <div class="card-footer">
+		      <span class="price" data-translate="price_consult">Consulta</span>
+		      <button type="button"
+		        class="btn-view"
+		        onclick="openDetails(this)"
+		        data-title-key="prod_renault_clip"
+		        data-full-desc-key="desc_renault_clip_full"
+		        data-img="IMG/Renault/clip.jpg"
+		        data-price-key="price_consult"
+		        aria-label="Detalhes Renault CLIP">
+		        ⋯
+		      </button>
+		    </div>
+		  </div>
+		</div>
+
+
+									
 							<div class="card searchable-item"> <img src="IMG/Renault/renault-dialogys.jpg" loading="lazy" alt="Dialogys">
 								<div class="card-body">
 									<h3>Dialogys</h3>
@@ -1115,6 +1137,7 @@ Ajustes de sistema para garantir desempenho e estabilidade.
 // ===== Product JSON loader (scalable) =====
 const PRODUCT_JSON = {
   bmw_ista_plus: 'data/products/bmw_ista_plus.json'
+  renault_clip: 'data/products/renault_clip.json'	
 };
 
 function nl2br(s) {
@@ -1126,6 +1149,30 @@ function ensureLang(translations, lang) {
   return translations[lang];
 }
 
+
+function injectRenaultClipIntoTranslations(product, translations) {
+  ['pt','en','fr'].forEach(lang => {
+    ensureLang(translations, lang)['prod_renault_clip'] = 'Renault CLIP';
+    ensureLang(translations, lang)['desc_renault_clip_short'] = product[lang]?.short || '';
+    ensureLang(translations, lang)['desc_renault_clip_full'] = (function(p){
+      if (!p) return '';
+      const bullets = Array.isArray(p.summary)
+        ? `<ul>${p.summary.map(x=>`<li>${x}</li>`).join('')}</ul><br>`
+        : '';
+      return `<b>${p.short}</b><br><br>${bullets}${p.details || ''}`;
+    })(product[lang]);
+  });
+}
+
+function fillRenaultClipMeta(product) {
+  const card = document.querySelector('.card[data-product="renault_clip"]');
+  if (!card) return;
+  card.querySelector('[data-fill="version"]').textContent = product.meta?.version || '—';
+  card.querySelector('[data-fill="year"]').textContent = product.meta?.year || '—';
+  card.querySelector('[data-fill="os"]').textContent = product.meta?.os || '—';
+}
+
+		
 function injectIstaPlusIntoTranslations(product, translations) {
   // title key (mantém “ISTA+” em todas as línguas por agora)
   ensureLang(translations, 'pt')['prod_bmw_ista_plus'] = 'ISTA+';
@@ -1413,5 +1460,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 </body>
 
 </html>
+
 
 
