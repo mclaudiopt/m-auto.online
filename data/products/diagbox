@@ -1,0 +1,35 @@
+{
+  "id": "bmw_ista_plus",
+  "meta": {
+    "version": "9.91",
+    "year": "2026",
+    "os": "W10/11"
+  },
+  "pt": {
+    "short": "DIAGBOX PSA com funções avançadas e leitura completa de módulos.",
+    "summary": [
+      "Leitura e apagamento de erros (DTC)",
+      "Dados em tempo real e testes",
+      "Funções de serviço e manutenção"
+    ],
+    "details": "Detalhe.\n\nSugestão de estrutura:\n- O que inclui / para que serve\n- Compatibilidade ate abril 2025\n- O que o cliente recebe (instalação remota, configuração)\n- Notas (requisitos, recomendações)"
+  },
+  "en": {
+    "short": "DIAGBOX PSA software .",
+    "summary": [
+      "Read & clear fault codes (DTC)",
+      "Live data and tests",
+      "Service and maintenance functions"
+    ],
+    "details": "Detaill.\n\nSuggested structure:\n- What it is / what's included\n- Compatibility \n- What the customer gets (remote install, setup)\n- Notes (requirements, recommendations)"
+  },
+  "fr": {
+    "short": "DIAGBOX avec fonctions avancées et scan complet des calculateurs.",
+    "summary": [
+      "Lecture/effacement des défauts (DTC)",
+      "Données en temps réel et tests",
+      "Fonctions service et maintenance"
+    ],
+    "details": "Detaille.\n\nStructure suggérée:\n- Présentation / inclus\n- Compatibilité (BMW/MINI, séries, années)\n- Ce que le client reçoit (installation à distance, configuration)\n- Notes (prérequis, recommandations)"
+  }
+}
