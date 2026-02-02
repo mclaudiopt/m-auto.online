@@ -1111,6 +1111,79 @@ Ajustes de sistema para garantir desempenho e estabilidade.
 		return(translations && translations[lang]) ? translations[lang] : null;
 	}
 
+
+// ===== Product JSON loader (scalable) =====
+const PRODUCT_JSON = {
+  bmw_ista_plus: 'data/products/bmw_ista_plus.json'
+};
+
+function nl2br(s) {
+  return String(s || '').replace(/\n/g, '<br>');
+}
+
+function ensureLang(translations, lang) {
+  if (!translations[lang]) translations[lang] = {};
+  return translations[lang];
+}
+
+function injectIstaPlusIntoTranslations(product, translations) {
+  // title key (mantém “ISTA+” em todas as línguas por agora)
+  ensureLang(translations, 'pt')['prod_bmw_ista_plus'] = 'ISTA+';
+  ensureLang(translations, 'en')['prod_bmw_ista_plus'] = 'ISTA+';
+  ensureLang(translations, 'fr')['prod_bmw_ista_plus'] = 'ISTA+';
+
+  // short (vai para o card)
+  ensureLang(translations, 'pt')['desc_bmw_ista_plus_short'] = product.pt?.short || '';
+  ensureLang(translations, 'en')['desc_bmw_ista_plus_short'] = product.en?.short || '';
+  ensureLang(translations, 'fr')['desc_bmw_ista_plus_short'] = product.fr?.short || '';
+
+  // full (vai para o modal) -> short + bullets + details
+  const buildFull = (p) => {
+    const short = p?.short ? `<b>${p.short}</b><br><br>` : '';
+    const bullets = Array.isArray(p?.summary) && p.summary.length
+      ? `<ul>${p.summary.map(x => `<li>${x}</li>`).join('')}</ul><br>`
+      : '';
+    const details = p?.details ? `<div>${nl2br(p.details)}</div>` : '';
+    return `${short}${bullets}${details}` || '—';
+  };
+
+  ensureLang(translations, 'pt')['desc_bmw_ista_plus_full'] = buildFull(product.pt);
+  ensureLang(translations, 'en')['desc_bmw_ista_plus_full'] = buildFull(product.en);
+  ensureLang(translations, 'fr')['desc_bmw_ista_plus_full'] = buildFull(product.fr);
+}
+
+function fillIstaPlusMeta(product) {
+  const card = document.querySelector('.card[data-product="bmw_ista_plus"]');
+  if (!card) return;
+
+  const meta = product.meta || {};
+  const version = meta.version || '—';
+  const year = meta.year || '—';
+  const os = meta.os || '—';
+
+  const v = card.querySelector('[data-fill="version"]');
+  const y = card.querySelector('[data-fill="year"]');
+  const o = card.querySelector('[data-fill="os"]');
+
+  if (v) v.textContent = version;
+  if (y) y.textContent = year;
+  if (o) o.textContent = os;
+}
+
+async function loadProductJsonAndInject(translations) {
+  // por agora só ISTA+, mas a estrutura já escala
+  const url = PRODUCT_JSON.bmw_ista_plus;
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to load: ' + url);
+
+  const product = await res.json();
+  injectIstaPlusIntoTranslations(product, translations);
+  fillIstaPlusMeta(product);
+}
+
+		
+
+		
 	function applyTranslations(lang) {
 		const dict = safeDict(lang);
 		if(!dict) return;
@@ -1156,28 +1229,34 @@ Ajustes de sistema para garantir desempenho e estabilidade.
 		} catch(e) {}
 		applyTranslations(lang);
 	}
-	window.addEventListener('DOMContentLoaded', async() => {
-		try {
-			localStorage.removeItem('lang');
-		} catch(e) {}
-		// 1) carrega o HERO primeiro (para a tradução apanhar o conteúdo)
-		await loadHero();
-		// 2) lingua: localStorage -> browser -> fallback pt
-		let lang = null;
-		try {
-			lang = localStorage.getItem('mauto_lang');
-		} catch(e) {}
-		if(!lang) {
-			lang = (navigator.language || 'pt').split('-')[0].toLowerCase();
-		}
-		if(!translations[lang]) lang = 'pt';
-		setLanguage(lang);
-		// 3) aplica ícones "⋯" aos botões VER
-		applyViewIcons();
-		// 4) inicia typewriter (agora que o HERO já existe no DOM)
-		startTypewriter();
-	});
-	// SCROLL TOP
+
+window.addEventListener('DOMContentLoaded', async () => {
+  try { localStorage.removeItem('lang'); } catch(e) {}
+
+  // lingua: localStorage -> browser -> fallback pt
+  let lang = null;
+  try { lang = localStorage.getItem('mauto_lang'); } catch(e) {}
+  if (!lang) lang = (navigator.language || 'pt').split('-')[0].toLowerCase();
+  if (!translations[lang]) lang = 'pt';
+
+  // ✅ 1) carregar JSON e injetar keys
+  try {
+    await loadProductJsonAndInject(translations);
+  } catch (e) {
+    console.warn(e);
+  }
+
+  // ✅ 2) só depois aplicar linguagem (agora as keys já existem)
+  setLanguage(lang);
+
+  // (mantém o resto do que já tinhas aqui: ícones, etc.)
+  if (typeof applyViewIcons === 'function') applyViewIcons();
+});
+
+		
+		
+		
+		// SCROLL TOP
 	const btnScroll = document.getElementById("scrollTopBtn");
 	window.addEventListener('scroll', function() {
 		if(window.scrollY > 200) btnScroll.classList.add("visible");
@@ -1334,4 +1413,5 @@ Ajustes de sistema para garantir desempenho e estabilidade.
 </body>
 
 </html>
+
 
