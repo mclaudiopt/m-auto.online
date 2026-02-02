@@ -12,7 +12,12 @@
       "Dados em tempo real e testes",
       "Funções de serviço e manutenção"
     ],
-    "details": "Detalhe.\n\nSugestão de estrutura:\n- O que inclui / para que serve\n- Compatibilidade (BMW/MINI, séries, anos)\n- O que o cliente recebe (instalação remota, configuração)\n- Notas (requisitos, recomendações)"
+    "details": "Key Capabilities & Features
+Diagnostics (ISTA-D/Rheingold): Reads comprehensive error codes, displays the control unit tree, and provides guided test plans to pinpoint issues.
+Programming & Coding (ISTA-P): Handles ECU software updates, module replacements, and retrofits.
+Technical Data: Includes built-in repair manuals, torque specifications, and electrical wiring diagrams (AIR - Aftersales Information Research).
+Service Functions: Facilitates maintenance tasks like battery registration, injector calibration, and brake bleeding.
+Compatibility: Works with ENET (F/G-series) and K+DCAN (older models) cables, or ICOM factory interfaces. "
   },
   "en": {
     "short": "BMW/MINI diagnostics with advanced functions and full module scanning.",
@@ -21,7 +26,12 @@
       "Live data and tests",
       "Service and maintenance functions"
     ],
-    "details": "Detaill.\n\nSuggested structure:\n- What it is / what's included\n- Compatibility (BMW/MINI, series, years)\n- What the customer gets (remote install, setup)\n- Notes (requirements, recommendations)"
+    "details": "Key Capabilities & Features
+Diagnostics (ISTA-D/Rheingold): Reads comprehensive error codes, displays the control unit tree, and provides guided test plans to pinpoint issues.
+Programming & Coding (ISTA-P): Handles ECU software updates, module replacements, and retrofits.
+Technical Data: Includes built-in repair manuals, torque specifications, and electrical wiring diagrams (AIR - Aftersales Information Research).
+Service Functions: Facilitates maintenance tasks like battery registration, injector calibration, and brake bleeding.
+Compatibility: Works with ENET (F/G-series) and K+DCAN (older models) cables, or ICOM factory interfaces. "
   },
   "fr": {
     "short": "Diagnostic BMW/MINI avec fonctions avancées et scan complet des calculateurs.",
