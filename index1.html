@@ -1252,16 +1252,17 @@ async function loadProductJsonAndInject(translations) {
 
 		
 	function applyTranslations(lang) {
-		const dict = safeDict(lang);
-		if(!dict) return;
-		document.querySelectorAll('[data-translate]').forEach(el => {
-			const key = el.getAttribute('data-translate');
-			if(dict[key] !== undefined) el.innerHTML = dict[key];
-		});
-		document.querySelectorAll('[data-translate-aria]').forEach(el => {
-			const key = el.getAttribute('data-translate-aria');
-			if(dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
-		});
+										const dict = safeDict(lang);
+										if(!dict) return;
+										document.querySelectorAll('[data-translate]').forEach(el => {
+											const key = el.getAttribute('data-translate');
+											if(dict[key] !== undefined) el.innerHTML = dict[key];
+										});
+										document.querySelectorAll('[data-translate-aria]').forEach(el => {
+											const key = el.getAttribute('data-translate-aria');
+											if(dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+										});
+		
 		// também traduz o placeholder da pesquisa (sem mexer no teu HTML)
 		const search = document.getElementById('searchInput');
 		if(search) {
@@ -1318,6 +1319,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   // (mantém o resto do que já tinhas aqui: ícones, etc.)
   if (typeof applyViewIcons === 'function') applyViewIcons();
+// carregar produtos externos (ISTA+ por agora)
+loadProductJsonAndInject(translations).catch(console.error);
+
+	
 });
 
 		
