@@ -12,7 +12,7 @@
       "Dados em tempo real e testes",
       "Funções de serviço e manutenção"
     ],
-    "details": "P",
+    "details": "Detalhe.\n\nSugestão de estrutura:\n- O que inclui / para que serve\n- Compatibilidade (BMW/MINI, séries, anos)\n- O que o cliente recebe (instalação remota, configuração)\n- Notas (requisitos, recomendações)"
   },
   "en": {
     "short": "BMW/MINI diagnostics with advanced functions and full module scanning.",
@@ -21,7 +21,7 @@
       "Live data and tests",
       "Service and maintenance functions"
     ],
-    "details": "Key Capabilities & Features",
+    "details": "Detaill.\n\nSuggested structure:\n- What it is / what's included\n- Compatibility (BMW/MINI, series, years)\n- What the customer gets (remote install, setup)\n- Notes (requirements, recommendations)"
   },
   "fr": {
     "short": "Diagnostic BMW/MINI avec fonctions avancées et scan complet des calculateurs.",
