@@ -21,12 +21,7 @@
       "Live data and tests",
       "Service and maintenance functions"
     ],
-    "details": "Key Capabilities & Features
-Diagnostics (ISTA-D/Rheingold): Reads comprehensive error codes, displays the control unit tree, and provides guided test plans to pinpoint issues.
-Programming & Coding (ISTA-P): Handles ECU software updates, module replacements, and retrofits.
-Technical Data: Includes built-in repair manuals, torque specifications, and electrical wiring diagrams (AIR - Aftersales Information Research).
-Service Functions: Facilitates maintenance tasks like battery registration, injector calibration, and brake bleeding.
-Compatibility: Works with ENET (F/G-series) and K+DCAN (older models) cables, or ICOM factory interfaces. ",
+    "details": "Key Capabilities & Features",
   },
   "fr": {
     "short": "Diagnostic BMW/MINI avec fonctions avancées et scan complet des calculateurs.",
