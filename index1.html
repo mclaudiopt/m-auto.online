@@ -1218,14 +1218,29 @@ function fillIstaPlusMeta(product) {
 }
 
 async function loadProductJsonAndInject(translations) {
-  // por agora só ISTA+, mas a estrutura já escala
-  const url = PRODUCT_JSON.bmw_ista_plus;
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) throw new Error('Failed to load: ' + url);
 
-  const product = await res.json();
-  injectIstaPlusIntoTranslations(product, translations);
-  fillIstaPlusMeta(product);
+  /* ===== ISTA+ ===== */
+  {
+    const url = PRODUCT_JSON.bmw_ista_plus;
+    const res = await fetch(url, { cache: 'no-store' });
+    if (res.ok) {
+      const product = await res.json();
+      injectIstaPlusIntoTranslations(product, translations);
+      fillIstaPlusMeta(product);
+    }
+  }
+
+  /* ===== RENAULT CLIP ===== */
+  {
+    const url = PRODUCT_JSON.renault_clip;
+    const res = await fetch(url, { cache: 'no-store' });
+    if (res.ok) {
+      const product = await res.json();
+      injectRenaultClipIntoTranslations(product, translations);
+      fillRenaultClipMeta(product);
+    }
+  }
+
 }
 
 		
