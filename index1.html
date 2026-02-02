@@ -1136,7 +1136,7 @@ Ajustes de sistema para garantir desempenho e estabilidade.
 
 // ===== Product JSON loader (scalable) =====
 const PRODUCT_JSON = {
-  bmw_ista_plus: 'data/products/bmw_ista_plus.json'
+  bmw_ista_plus: 'data/products/bmw_ista_plus.json',
   renault_clip: 'data/products/renault_clip.json'	
 };
 
@@ -1218,18 +1218,19 @@ function fillIstaPlusMeta(product) {
 }
 
 async function loadProductJsonAndInject(translations) {
-
-  /* ===== ISTA+ ===== */
-  {
-    const url = PRODUCT_JSON.bmw_ista_plus;
+  try {
+    const url = 'data/products/bmw_ista_plus.json';
     const res = await fetch(url, { cache: 'no-store' });
-    if (res.ok) {
-      const product = await res.json();
-      injectIstaPlusIntoTranslations(product, translations);
-      fillIstaPlusMeta(product);
-    }
-  }
+    if (!res.ok) return;
 
+    const product = await res.json();
+    injectIstaPlusIntoTranslations(product, translations);
+    fillIstaPlusMeta(product);
+
+  } catch (e) {
+    console.warn('ISTA+ load failed', e);
+  }
+}
   /* ===== RENAULT CLIP ===== */
   {
     const url = PRODUCT_JSON.renault_clip;
