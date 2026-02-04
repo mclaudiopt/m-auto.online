@@ -1288,18 +1288,27 @@ async function loadProductJsonAndInject(translations) {
 window.addEventListener('DOMContentLoaded', async () => {
   try { localStorage.removeItem('lang'); } catch(e) {}
 
-  // lingua: localStorage -> browser -> fallback pt
+  // 1) Carregar HERO primeiro (para existir .typewriter-text e conteúdo traduzível)
+  await loadHero();
+
+  // 2) Arrancar o typewriter depois do hero estar no DOM
+  startTypewriter();
+
+  // 3) Carregar JSONs de produtos (por agora ISTA+)
+  await loadProductJsonAndInject(translations);
+
+  // 4) Língua: localStorage -> browser -> fallback pt
   let lang = null;
   try { lang = localStorage.getItem('mauto_lang'); } catch(e) {}
   if (!lang) lang = (navigator.language || 'pt').split('-')[0].toLowerCase();
   if (!translations[lang]) lang = 'pt';
+  setLanguage(lang);
 
-  // ✅ 1) carregar JSON e injetar keys
-  try {
-    await loadProductJsonAndInject(translations);
-  } catch (e) {
-    console.warn(e);
-  }
+  // 5) Ícones "⋯" nos botões VER
+  applyViewIcons();
+});
+
+		
 
   // ✅ 2) só depois aplicar linguagem (agora as keys já existem)
   setLanguage(lang);
