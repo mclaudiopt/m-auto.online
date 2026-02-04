@@ -1233,7 +1233,7 @@ async function loadProductJsonAndInject(translations) {
 }
 
 		
-}
+
 
 		
 
@@ -1349,7 +1349,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 		const stripHtml = (s) => String(s || '').replace(/<[^>]*>/g, '').trim();
 		const modalTitle = document.getElementById('modalTitle');
 		const modalDesc = document.getElementById('modalDesc');
-		const modalPrice = document.getElementById('modalPrice');
+		const modalPrice = document.getEltementById('modalPrice');
 		const modalImg = document.getElementById('modalImg');
 		// title
 		const title = (titleKey && dict[titleKey]) ? stripHtml(dict[titleKey]) : (titleDirect ? titleDirect : (lang === 'en' ? 'Product' : lang === 'fr' ? 'Produit' : 'Produto'));
