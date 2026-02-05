@@ -42,7 +42,7 @@
 <body>
 	<header>
 		<div class="header-left">
-			<a href="#inicio" class="logo-link"> <span class="brand-m">M-Auto</span> <span class="brand-online">Online</span> <span class="version-badge">v6</span> </a>
+			<a href="#inicio" class="logo-link"> <span class="brand-m">M-Auto</span> <span class="brand-online">Online</span> <span class="version-badge">v7</span> </a>
 		</div>
 		<div class="header-right">
 			<div class="controls-wrapper">
@@ -1414,16 +1414,53 @@ window.addEventListener('DOMContentLoaded', async () => {
 		orderProduct(title);
 	}
 
-	function orderProduct(name) {
-		const phone = "351911157459";
-		window.open(`https://wa.me/${phone}?text=${encodeURIComponent('Tenho interesse em: ' + name)}`, '_blank');
-	}
 
+function orderProduct(name) {
+  const phone = "351911157459";
+
+  const prefix =
+    (currentLang === 'en') ? 'I am interested in:' :
+    (currentLang === 'fr') ? 'Je suis intéressé par :' :
+    'Tenho interesse em:';
+
+  window.open(
+    `https://wa.me/${phone}?text=${encodeURIComponent(prefix + ' ' + name)}`,
+    '_blank'
+  );
+}
+
+		
 	function toggleTheme() {
 		document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark');
 	}
 
 	function filterProducts() {
+
+		// ===== WIZARD (estado + navegação) =====
+const userSpecs = { win: null, ram: null, disk: null, brand: null };
+
+function goWizStep(step) {
+  document.querySelectorAll('#wizardModal .step').forEach(s => s.classList.remove('active'));
+
+  const id = (step === 'result') ? 'wiz-result' : ('wiz-step-' + step);
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+function setSpec(key, value) {
+  userSpecs[key] = value;
+
+  if (key === 'win') return goWizStep(2);
+  if (key === 'ram') return goWizStep(3);
+  if (key === 'disk') return goWizStep(4);
+
+  if (key === 'brand') {
+    showResult();
+    return goWizStep('result');
+  }
+}
+
+		
 		const val = (document.getElementById('searchInput').value || '').toLowerCase();
 		document.querySelectorAll('.searchable-item').forEach(el => {
 			const match = el.innerText.toLowerCase().includes(val);
@@ -1468,8 +1505,3 @@ window.addEventListener('DOMContentLoaded', async () => {
 </body>
 
 </html>
-
-
-
-
-
