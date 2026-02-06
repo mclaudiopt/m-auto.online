@@ -39,6 +39,7 @@ footer { text-align: center; padding: 20px 0; color: #555; }
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
 <script>
 function checkPassword() {
     if (document.getElementById("pwd").value === "proqc") {
@@ -48,6 +49,7 @@ function checkPassword() {
         alert("Incorrect password");
     }
 }
+
 function downloadPDF() {
     const element = document.getElementById('proposalContainer');
     html2pdf().set({margin:0.5, filename:'IATF16949-Proposal.pdf'}).from(element).save();
@@ -170,15 +172,15 @@ function downloadPDF() {
 
     <!-- TERMS & CONDITIONS -->
     <section id="terms" class="section">
-        <h3>Terms & Conditions</h3>
+        <h3>6. TERMS & CONDITIONS</h3>
         <div class="box">
-            <p>Services in this proposal are provided under agreed industry standards. Times and deliverables are estimates based on current information and may require adjustment should the scope change. Cancellation must be notified in writing at least <strong>5 business days</strong> prior to planned start. All expenses and additional costs are subject to prior agreement. This proposal is contingent on confirmation of audit dates and schedule availability.</p>
+            <p>Services in this proposal are provided under agreed industry standards. Times and deliverables are estimates based on current information and may require adjustment should the scope change. Cancellation must be notified in writing at least <strong>5 business days</strong> prior to the planned start. All expenses and additional costs are subject to prior agreement. This proposal is contingent on confirmation of audit dates and agenda availability.</p>
         </div>
     </section>
 
     <!-- PAYMENT CONDITIONS -->
     <section id="payment" class="section">
-        <h3>6. PAYMENT CONDITIONS</h3>
+        <h3>7. PAYMENT CONDITIONS</h3>
         <div class="box">
             <p>Payments to be made as follows:</p>
             <ul>
@@ -192,11 +194,39 @@ function downloadPDF() {
 
     <!-- CONFIDENTIALITY -->
     <section id="confidentiality" class="section">
-        <h3>7. CONFIDENTIALITY</h3>
+        <h3>8. CONFIDENTIALITY</h3>
         <div class="box">
             <p>All information exchanged will be treated as confidential and used solely for fulfilling the audit scope. No information will be disclosed to third parties without prior written consent.</p>
         </div>
     </section>
 
     <!-- ACCEPTANCE -->
-::contentReference[oaicite:0]{index=0}
+    <section id="accept" class="section">
+        <h3>9. ACCEPTANCE & VALIDITY OF AGENDA</h3>
+        <div class="box">
+            <p>This proposal is valid for acceptance for <strong>30 days</strong> from the issue date. Audit dates and agenda must be confirmed within 5 business days of acceptance to secure scheduling.</p>
+            <p class="accept-row">
+                Accepted by: <input type="text" placeholder="Client Name">
+                Date: <input type="date">
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT DETAILS -->
+    <section id="contact" class="section">
+        <h3>10. CONTACT DETAILS</h3>
+        <div class="box">
+            <p>Email: marcelo.claudio@outlook.pt<br>
+            Phone: +351 911 157 459<br>
+            Location: Caldas da Rainha, Portugal</p>
+        </div>
+    </section>
+
+</div>
+<footer>
+    <p>&copy; 2026 – All rights reserved.</p>
+</footer>
+
+</div>
+</body>
+</html>
