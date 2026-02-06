@@ -42,7 +42,7 @@
 <body>
 	<header>
 		<div class="header-left">
-			<a href="#inicio" class="logo-link"> <span class="brand-m">M-Auto</span> <span class="brand-online">Online</span> <span class="version-badge">v7</span> </a>
+			<a href="#inicio" class="logo-link"> <span class="brand-m">M-Auto</span> <span class="brand-online">Online</span> <span class="version-badge">v7 0602</span> </a>
 		</div>
 		<div class="header-right">
 			<div class="controls-wrapper">
@@ -1502,6 +1502,123 @@ function setSpec(key, value) {
 		if(e.target.id === 'productModal') closeProductModal();
 	});
 	</script>
+
+<script>
+/* =========================
+   ✅ WIZARD (FIX)
+   - Depende apenas dos IDs que já tens no HTML:
+     #wizardModal, #wiz-step-1..4, #wiz-result, #finalResultContent
+   ========================= */
+
+const userSpecs = { win: null, ram: null, disk: null, brand: null };
+
+function openWizard() {
+  const modal = document.getElementById('wizardModal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  resetWizard();
+}
+
+function closeWizard() {
+  const modal = document.getElementById('wizardModal');
+  if (!modal) return;
+  modal.style.display = 'none';
+}
+
+function showStep(stepNum) {
+  // esconde todos
+  document.querySelectorAll('#wizardModal .step').forEach(s => s.classList.remove('active'));
+  // mostra o pretendido
+  const el = document.getElementById(`wiz-step-${stepNum}`);
+  if (el) el.classList.add('active');
+}
+
+function resetWizard() {
+  userSpecs.win = null;
+  userSpecs.ram = null;
+  userSpecs.disk = null;
+  userSpecs.brand = null;
+
+  // garante estado inicial
+  const result = document.getElementById('wiz-result');
+  if (result) result.classList.remove('active');
+  showStep(1);
+}
+
+function setSpec(key, value) {
+  userSpecs[key] = value;
+
+  // fluxo 1→2→3→4→resultado
+  if (key === 'win') return showStep(2);
+  if (key === 'ram') return showStep(3);
+  if (key === 'disk') return showStep(4);
+  if (key === 'brand') return showResult();
+}
+
+function showResult() {
+  // mostra ecrã de resultado
+  document.querySelectorAll('#wizardModal .step').forEach(s => s.classList.remove('active'));
+  const resultStep = document.getElementById('wiz-result');
+  if (resultStep) resultStep.classList.add('active');
+
+  const box = document.getElementById('finalResultContent');
+  if (!box) return;
+
+  // mesma lógica simples que tinhas antes (podes ajustar depois)
+  const isLimited = (userSpecs.win === 'old' || userSpecs.ram === 'low' || userSpecs.disk === 'hdd');
+
+  const lang = (window.currentLang || document.documentElement.lang || 'pt').toLowerCase();
+
+  const t = {
+    pt: {
+      limitedTitle: '⚠️ PC Limitado',
+      limitedText: 'Recomendamos upgrade para melhor desempenho.',
+      okTitle: '✅ PC Compatível!',
+      okText: 'Pode instalar o Pack Completo.',
+    },
+    en: {
+      limitedTitle: '⚠️ Limited PC',
+      limitedText: 'We recommend an upgrade for best performance.',
+      okTitle: '✅ Compatible PC!',
+      okText: 'You can install the Full Pack.',
+    },
+    fr: {
+      limitedTitle: '⚠️ PC Limité',
+      limitedText: 'Nous recommandons une mise à niveau.',
+      okTitle: '✅ PC Compatible !',
+      okText: 'Vous pouvez installer le pack complet.',
+    }
+  };
+
+  const dict = t[lang] || t.pt;
+
+  box.innerHTML = isLimited
+    ? `<div class="wiz-result-box" style="border-color:orange">
+         <h4 style="color:orange;margin-bottom:8px">${dict.limitedTitle}</h4>
+         <p>${dict.limitedText}</p>
+       </div>`
+    : `<div class="wiz-result-box" style="border-color:green">
+         <h4 style="color:green;margin-bottom:8px">${dict.okTitle}</h4>
+         <p>${dict.okText}</p>
+       </div>`;
+}
+
+/* ✅ Fechar ao clicar fora */
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('wizardModal');
+  if (!modal) return;
+  if (modal.style.display === 'flex' && e.target === modal) closeWizard();
+});
+
+/* ✅ Se o teu botão do FAB abre o wizard via onclick inline, podes ignorar isto.
+   Caso NÃO tenhas onclick no FAB, ativa por selector (ajusta se necessário). */
+window.openWizard = openWizard;
+window.closeWizard = closeWizard;
+window.setSpec = setSpec;
+</script>
+
+
+
 </body>
 
 </html>
