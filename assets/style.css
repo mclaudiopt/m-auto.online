@@ -741,8 +741,14 @@ header {
 
 .prod-text {
 	color: var(--text-muted);
-	line-height: 1.65;
-	font-size: 0.98rem;
+	line-height: 1.55;
+	font-size: 0.95rem;
+}
+
+.prod-text {
+	color: var(--text-muted);
+	line-height: 1.55;
+	font-size: 0.95rem;
 }
 
 .prod-footer {
@@ -1341,6 +1347,7 @@ footer {
 		font-size: 0 !important;
 	}
 }
+
 
 
 
