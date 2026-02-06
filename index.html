@@ -1046,6 +1046,24 @@ Ajustes de sistema para garantir desempenho e estabilidade.
  <path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17v4h1zM5 19h14v2H5z"/>
 </svg>
 `;
+
+		async function loadWizard() {
+  const mount = document.getElementById('wizardMount');
+  if (!mount) return;
+
+  try {
+    const res = await fetch('partials/wizard.html', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Wizard HTTP ' + res.status);
+
+    mount.innerHTML = await res.text();
+  } catch (e) {
+    console.warn('Wizard load failed:', e);
+  }
+}
+
+
+
+		
 	// TYPEWRITER (agora em função para suportar hero externo)
 	function startTypewriter() {
 		const typewriter = document.querySelector(".typewriter-text");
@@ -1256,6 +1274,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   // 1) Carregar HERO primeiro (para existir .typewriter-text e conteúdo traduzível)
   await loadHero();
 
+
+	
   // 2) Arrancar o typewriter depois do hero estar no DOM
   startTypewriter();
 
@@ -1588,4 +1608,5 @@ window.setSpec = setSpec;
 </body>
 
 </html>
+
 
