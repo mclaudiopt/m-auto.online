@@ -2,126 +2,99 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IATF 16949 Internal Audit Proposal</title>
+<title>Protected IATF 16949 Proposal</title>
 <style>
-    body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; margin: 20px; }
-    .container { max-width: 800px; margin: auto; }
-    h1, h2, h3 { color: #2a4d69; }
-    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #f4f4f4; }
-    .section { margin-bottom: 25px; }
-    .footer { font-size: 0.9em; color: #555; margin-top: 40px; }
+    body { font-family: Arial, sans-serif; background: #f4f4f4; }
+    #loginBox { max-width: 350px; margin: 100px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0px 0px 12px rgba(0,0,0,0.15); }
+    input { width: 100%; padding: 10px; font-size: 1em; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 10px; background: #2a4d69; color: white; border: none; font-size: 1em; cursor: pointer; border-radius: 4px; }
+    button:hover { background: #1f3953; }
 </style>
+<script>
+function checkPassword() {
+    var pwd = document.getElementById("pwd").value;
+    if (pwd === "IATF06022026") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("proposalContent").style.display = "block";
+    } else {
+        alert("Incorrect password. Please try again.");
+    }
+}
+</script>
 </head>
 <body>
 
-<div class="container">
+<div id="loginBox">
+    <h3 align="center">Secure Access</h3>
+    <p align="center">Please enter the password to view the proposal:</p>
+    <input type="password" id="pwd" placeholder="Enter password">
+    <button onclick="checkPassword()">Submit</button>
+</div>
+
+<div id="proposalContent" style="display:none; padding: 20px;">
 
     <h1 align="center">SERVICE PROPOSAL</h1>
     <h2 align="center">IATF 16949 INTERNAL AUDIT</h2>
 
-    <div class="section">
-        <strong><em>Date:</em></strong> February 6, 2026<br>
-        <strong><em>From:</em></strong> Marcelo Pinto Cláudio<br>
-        <strong><em>To:</em></strong> Quality Management / General Management
-    </div>
+    <p><strong>Date:</strong> February 6, 2026<br>
+       <strong>From:</strong> Marcelo Pinto Cláudio<br>
+       <strong>To:</strong> Quality Management / General Management
+    </p>
 
-    <div class="section">
-        <h3>1. AUDITOR PROFILE</h3>
-        <p>Senior Quality Professional with extensive automotive industry experience, focusing on
-        industrial environments and operational excellence.</p>
-        <ul>
-            <li><strong>Key Qualifications:</strong> Official VDA QMC Auditor and Trainer (VDA 6.3, 6.5, MLA, PSCR, Core Tools) and AIAG specialist (APQP, PPAP, FMEA, MSA, SPC).</li>
-            <li><strong>Systems Expertise:</strong> Implementing and maintaining IATF 16949, ISO 9001, and ISO 14001 systems.</li>
-            <li><strong>Technical Skills:</strong> Coordination of multidisciplinary teams, continuous improvement, and root-cause problem solving.</li>
-            <li><strong>OEM Experience:</strong> Direct quality management experience for major OEMs, including Volkswagen, Audi, Porsche, and PSA.</li>
-        </ul>
-    </div>
+    <h3>1. AUDITOR PROFILE</h3>
+    <p>Senior Quality Professional with extensive automotive industry experience, focusing on
+    industrial environments and operational excellence.</p>
+    <ul>
+        <li><strong>Key Qualifications:</strong> Official VDA QMC Auditor and Trainer (VDA 6.3, 6.5, MLA, PSCR, Core Tools) and AIAG specialist (APQP, PPAP, FMEA, MSA, SPC).</li>
+        <li><strong>Systems Expertise:</strong> Implementing and maintaining IATF 16949, ISO 9001, and ISO 14001 systems.</li>
+        <li><strong>Technical Skills:</strong> Coordination of multidisciplinary teams, continuous improvement, and root-cause problem solving.</li>
+        <li><strong>OEM Experience:</strong> Direct quality management experience for major OEMs, including Volkswagen, Audi, Porsche, and PSA.</li>
+    </ul>
 
-    <div class="section">
-        <h3>2. QUALIFICATION VALIDATION</h3>
-        <p>Please note that formal qualification records and certifications have already been submitted.
-        Validation is required from your side and, if applicable, from the final customer to ensure compliance with audit requirements.</p>
-    </div>
+    <h3>2. QUALIFICATION VALIDATION</h3>
+    <p>Please note that formal qualification records and certifications have already been submitted.
+    Validation is required from your side and, if applicable, from the final customer to ensure compliance with audit requirements.</p>
 
-    <div class="section">
-        <h3>3. COMMERCIAL CONDITIONS & TOTAL ESTIMATE</h3>
-        <p>This proposal covers an internal audit with an estimated duration of <strong>2 to 2.5 days</strong>.</p>
-        <p><strong><em>Availability:</em></strong> Subject to confirmation based on current agenda.</p>
+    <h3>3. COMMERCIAL CONDITIONS & TOTAL ESTIMATE</h3>
+    <p>This proposal covers an internal audit with an estimated duration of <strong>2 to 2.5 days</strong>.</p>
+    <p><strong>Availability:</strong> Subject to confirmation based on current agenda.</p>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Qty</th>
-                    <th>Unit Price</th>
-                    <th>Net Value</th>
-                    <th>VAT (23%)</th>
-                    <th>Total Incl. VAT</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Preparation & Reporting</td>
-                    <td>4h</td>
-                    <td>€0.00</td>
-                    <td>€0.00</td>
-                    <td>€0.00</td>
-                    <td>€0.00</td>
-                </tr>
-                <tr>
-                    <td>Technical Fees (Audit)</td>
-                    <td>16h</td>
-                    <td>€130.00</td>
-                    <td>€2,080.00</td>
-                    <td>€478.40</td>
-                    <td>€2,558.40</td>
-                </tr>
-                <tr>
-                    <td>Travel (Caldas – S.J. Madeira)</td>
-                    <td>370km</td>
-                    <td>€0.40</td>
-                    <td>€148.00</td>
-                    <td>€34.04</td>
-                    <td>€182.04</td>
-                </tr>
-                <tr>
-                    <td>Tolls (Estimated)</td>
-                    <td>1</td>
-                    <td>€32.00</td>
-                    <td>€32.00</td>
-                    <td>€7.36</td>
-                    <td>€39.36</td>
-                </tr>
-            </tbody>
-        </table>
+    <table border="1" cellspacing="0" cellpadding="8" style="width:100%; border-collapse: collapse;">
+        <tr>
+            <th>Description</th><th>Qty</th><th>Unit Price</th><th>Net Value</th><th>VAT (23%)</th><th>Total Incl. VAT</th>
+        </tr>
+        <tr>
+            <td>Preparation & Reporting</td><td>4h</td><td>€0.00</td><td>€0.00</td><td>€0.00</td><td>€0.00</td>
+        </tr>
+        <tr>
+            <td>Technical Fees (Audit)</td><td>16h</td><td>€130.00</td><td>€2,080.00</td><td>€478.40</td><td>€2,558.40</td>
+        </tr>
+        <tr>
+            <td>Travel (Caldas – S.J. Madeira)</td><td>370km</td><td>€0.40</td><td>€148.00</td><td>€34.04</td><td>€182.04</td>
+        </tr>
+        <tr>
+            <td>Tolls (Estimated)</td><td>1</td><td>€32.00</td><td>€32.00</td><td>€7.36</td><td>€39.36</td>
+        </tr>
+    </table>
 
-        <p><strong>Estimated Total (2 days):</strong> €2,260.00 + €519.80 VAT = <strong>€2,779.80</strong></p>
+    <p><strong>Estimated Total (2 days):</strong> €2,260.00 + €519.80 VAT = <strong>€2,779.80</strong></p>
 
-        <p><em>Note on Accommodation:</em> Not included; invoiced separately at actual cost with invoice support.</p>
-    </div>
+    <p><em>Note on Accommodation:</em> Not included; invoiced separately at actual cost with invoice support.</p>
 
-    <div class="section">
-        <h3>4. METHODOLOGY AND DELIVERY</h3>
-        <p>The audit will be conducted using a risk-based approach aligned with performance indicators (KPIs).</p>
-        <ul>
-            <li><strong>Focus:</strong> Evaluation of production process compliance and support area effectiveness.</li>
-            <li><strong>Reporting:</strong> Delivery of detailed final report within 5 business days after on-site activities.</li>
-            <li><strong>Languages:</strong> Portuguese, English, Spanish, or French.</li>
-        </ul>
-    </div>
+    <h3>4. METHODOLOGY AND DELIVERY</h3>
+    <ul>
+        <li><strong>Focus:</strong> Evaluation of production process compliance and support area effectiveness.</li>
+        <li><strong>Reporting:</strong> Delivery of detailed final report within 5 business days after on-site activities.</li>
+        <li><strong>Languages:</strong> Portuguese, English, Spanish, or French.</li>
+    </ul>
 
-    <div class="section">
-        <h3>5. CONTACT DETAILS</h3>
-        <p><strong>Email:</strong> marcelo.claudio@outlook.pt<br>
-        <strong>Phone:</strong> +351 911 157 459<br>
-        <strong>Location:</strong> Caldas da Rainha, Portugal</p>
-    </div>
+    <h3>5. CONTACT DETAILS</h3>
+    <p><strong>Email:</strong> marcelo.claudio@outlook.pt<br>
+       <strong>Phone:</strong> +351 911 157 459<br>
+       <strong>Location:</strong> Caldas da Rainha, Portugal
+    </p>
 
-    <div class="footer">
-        <p>Proposal subject to confirmation based on availability of agenda.</p>
-    </div>
+    <p style="margin-top:30px;"><em>Proposal subject to confirmation based on availability of agenda.</em></p>
 
 </div>
 
