@@ -2,19 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IATF16949:2016 Proposal</title>
+<title>IATF16949:2016 / Proposal</title>
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
 
 <style>
-body { font-family: 'Open Sans', sans-serif; margin: 0; background: #eef2f7; color: #333; }
+/* GLOBAL STYLES */
+body { font-family: 'Open Sans', sans-serif; margin: 0; background: #eef2f7; color: #333; scroll-behavior: smooth; }
 .container { width: 95%; max-width: 960px; margin: auto; padding: 20px; }
+
+/* HEADER */
 header { text-align: center; padding: 30px 0; }
 h1, h2, h3 { color: #02457a; }
-p, li { font-size: 15px; line-height: 1.6; }
-nav { background: #fff; padding: 16px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
-nav a { margin-right: 18px; font-weight: 600; text-decoration: none; color: #02457a; }
-nav a:hover { text-decoration: underline; }
+
+/* NAVIGATION */
+.nav-bar {
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.nav-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 8px 0;
+}
+.nav-bar a {
+  padding: 8px 12px;
+  margin: 0 4px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #02457a;
+  white-space: nowrap;
+  font-size: 14px;
+}
+.nav-bar a:hover {
+  background: #f0f6fb;
+  color: #01355e;
+  border-radius: 4px;
+}
+
+/* SECTION STYLES */
 .section { padding: 18px 0; border-bottom: 1px solid #ddd; }
 .box { border-left: 4px solid #02457a; padding-left: 12px; margin-top: 12px; }
 table { width: 100%; border-collapse: collapse; margin-top: 14px; }
@@ -24,32 +58,63 @@ td { padding: 8px; border: 1px solid #ccc; }
 footer { text-align: center; padding: 20px 0; color: #555; }
 
 /* PASSWORD BOX */
-#loginBox { background: #fff; padding: 28px; text-align: center; margin: 120px auto; max-width: 380px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.15); }
-#loginBox input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #bbb; border-radius: 6px; }
-#loginBox button { background: #02457a; color: #fff; padding: 10px 18px; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; }
+#loginBox {
+    background: #fff;
+    padding: 28px;
+    text-align: center;
+    margin: 120px auto;
+    max-width: 380px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+#loginBox input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+}
+#loginBox button {
+    background: #02457a;
+    color: #fff;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
 #loginBox button:hover { background: #01355e; }
 
 /* DOWNLOAD BUTTON */
-#downloadBtn { background: #2a4d69; color: #fff; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; float: right; margin-top: -30px; }
+#downloadBtn {
+    background: #2a4d69;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+    margin-top: -30px;
+}
 #downloadBtn:hover { background: #1f3753; }
 
-/* ACCEPTANCE */
-.accept-row { margin-top: 22px; }
-.accept-row input { width: 220px; padding: 8px; margin-right: 12px; border: 1px solid #ccc; border-radius: 6px; }
+/* ACCEPTANCE INPUTS */
+.accept-row input {
+    width: 220px; padding: 8px; margin-right: 12px;
+    border: 1px solid #ccc; border-radius: 6px;
+}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-
 <script>
 function checkPassword() {
-    if (document.getElementById("pwd").value === "proqc") {
+    if (document.getElementById("pwd").value.trim() === "proqc") {
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("proposalContent").style.display = "block";
     } else {
         alert("Incorrect password");
     }
 }
-
 function downloadPDF() {
     const element = document.getElementById('proposalContainer');
     html2pdf().set({margin:0.5, filename:'IATF16949-Proposal.pdf'}).from(element).save();
@@ -60,7 +125,8 @@ function downloadPDF() {
 
 <!-- PASSWORD LOGIN -->
 <div id="loginBox">
-    <h2>Enter Password to View Proposal</h2>
+    <h2>Protected Proposal</h2>
+    <p>Enter Password to View:</p>
     <input type="password" id="pwd" placeholder="Password">
     <button onclick="checkPassword()">Submit</button>
 </div>
@@ -71,16 +137,18 @@ function downloadPDF() {
 
     <!-- HEADER -->
     <header>
-        <h1>IATF16949:2016 INTERNAL AUDIT</h1>
-        <p>Service Proposal – February 6, 2026</p>
+        <h1>IATF16949:2016 Internal Audit</h1>
+        <h2>Service Proposal</h2>
+        <p>February 6, 2026</p>
         <p style="font-size:16px; color:#555;"><em>26 years of experience in multinational automotive industry – quality, operations and systems excellence</em></p>
     </header>
 
-    <!-- DOWNLOAD BUTTON -->
+    <!-- DOWNLOAD PDF-->
     <button id="downloadBtn" onclick="downloadPDF()">Download as PDF</button>
 
     <!-- NAVIGATION -->
-    <nav>
+    <nav class="nav-bar">
+      <div class="nav-container">
         <a href="#summary">Executive Summary</a>
         <a href="#profile">Profile</a>
         <a href="#estimate">Estimate</a>
@@ -92,6 +160,7 @@ function downloadPDF() {
         <a href="#confidentiality">Confidentiality</a>
         <a href="#accept">Acceptance</a>
         <a href="#contact">Contact</a>
+      </div>
     </nav>
 
     <!-- EXECUTIVE SUMMARY -->
@@ -102,9 +171,9 @@ function downloadPDF() {
         </div>
     </section>
 
-    <!-- AUDITOR PROFILE -->
+    <!-- PROFILE -->
     <section id="profile" class="section">
-        <h3>1. AUDITOR PROFILE</h3>
+        <h3>1. Auditor Profile</h3>
         <div class="box">
             <p>Senior Quality Professional with 26 years of experience in the multinational automotive industry, including quality systems, operational excellence, supply chain, and process performance.</p>
             <ul>
@@ -118,11 +187,10 @@ function downloadPDF() {
 
     <!-- ESTIMATE -->
     <section id="estimate" class="section">
-        <h3>2. COMMERCIAL CONDITIONS & TOTAL ESTIMATE</h3>
+        <h3>2. Commercial Conditions & Total Estimate</h3>
         <div class="box">
             <p>Rate is based on a standard internal audit of <strong>2 days on-site</strong>. The total rate may be adjusted depending on the client’s requirements, areas to audit, and number of units/sites. The cost shown represents a first-collaboration special value, and is therefore below the typical rates practiced in Portugal for similar services.</p>
         </div>
-
         <table>
             <tr><th>Description</th><th>Qty</th><th>Net €</th></tr>
             <tr><td>Preparation & Reporting</td><td>4h</td><td>€0</td></tr>
@@ -131,13 +199,12 @@ function downloadPDF() {
             <tr><td>Travel & Tolls (Estimated)</td><td>—</td><td>€180</td></tr>
             <tr><th>Total Net</th><th>—</th><th>€1,860</th></tr>
         </table>
-
         <p class="footer-note"><strong>Note:</strong> All values shown are <strong>net</strong>. VAT at the applicable legal rate (e.g., 23%) should be added to the net value shown above. Net (€1,860) + VAT (23%) example = <strong>€2,287.80</strong>.</p>
     </section>
 
     <!-- SCOPE -->
     <section id="scope" class="section">
-        <h3>3. SCOPE & INCLUDED SERVICES</h3>
+        <h3>3. Scope & Included Services</h3>
         <div class="box">
             <ul>
                 <li>Audit preparation (documentation collection, audit planning, scheduling)</li>
@@ -150,7 +217,7 @@ function downloadPDF() {
 
     <!-- DELIVERABLES -->
     <section id="deliverables" class="section">
-        <h3>4. DELIVERABLES</h3>
+        <h3>4. Deliverables</h3>
         <ul>
             <li>Internal audit report with findings, evidence and practical recommendations</li>
             <li>Summary of compliance against IATF16949:2016 requirements</li>
@@ -159,9 +226,9 @@ function downloadPDF() {
         </ul>
     </section>
 
-    <!-- OPTIONAL SERVICES -->
+    <!-- OPTIONAL -->
     <section id="optional" class="section">
-        <h3>5. OPTIONAL SERVICES</h3>
+        <h3>5. Optional Services</h3>
         <ul>
             <li>Action validation support after audit</li>
             <li>Technical guidance for corrective actions planning</li>
@@ -172,17 +239,16 @@ function downloadPDF() {
 
     <!-- TERMS & CONDITIONS -->
     <section id="terms" class="section">
-        <h3>6. TERMS & CONDITIONS</h3>
+        <h3>6. Terms & Conditions</h3>
         <div class="box">
             <p>Services in this proposal are provided under agreed industry standards. Times and deliverables are estimates based on current information and may require adjustment should the scope change. Cancellation must be notified in writing at least <strong>5 business days</strong> prior to the planned start. All expenses and additional costs are subject to prior agreement. This proposal is contingent on confirmation of audit dates and agenda availability.</p>
         </div>
     </section>
 
-    <!-- PAYMENT CONDITIONS -->
+    <!-- PAYMENT -->
     <section id="payment" class="section">
-        <h3>7. PAYMENT CONDITIONS</h3>
+        <h3>7. Payment Conditions</h3>
         <div class="box">
-            <p>Payments to be made as follows:</p>
             <ul>
                 <li><strong>30% upon proposal acceptance</strong></li>
                 <li><strong>40% on start of on-site audit</strong></li>
@@ -194,7 +260,7 @@ function downloadPDF() {
 
     <!-- CONFIDENTIALITY -->
     <section id="confidentiality" class="section">
-        <h3>8. CONFIDENTIALITY</h3>
+        <h3>8. Confidentiality</h3>
         <div class="box">
             <p>All information exchanged will be treated as confidential and used solely for fulfilling the audit scope. No information will be disclosed to third parties without prior written consent.</p>
         </div>
@@ -202,7 +268,7 @@ function downloadPDF() {
 
     <!-- ACCEPTANCE -->
     <section id="accept" class="section">
-        <h3>9. ACCEPTANCE & VALIDITY OF AGENDA</h3>
+        <h3>9. Acceptance & Validity of Agenda</h3>
         <div class="box">
             <p>This proposal is valid for acceptance for <strong>30 days</strong> from the issue date. Audit dates and agenda must be confirmed within 5 business days of acceptance to secure scheduling.</p>
             <p class="accept-row">
@@ -212,9 +278,9 @@ function downloadPDF() {
         </div>
     </section>
 
-    <!-- CONTACT DETAILS -->
+    <!-- CONTACT -->
     <section id="contact" class="section">
-        <h3>10. CONTACT DETAILS</h3>
+        <h3>10. Contact Details</h3>
         <div class="box">
             <p>Email: marcelo.claudio@outlook.pt<br>
             Phone: +351 911 157 459<br>
@@ -223,9 +289,7 @@ function downloadPDF() {
     </section>
 
 </div>
-<footer>
-    <p>&copy; 2026 – All rights reserved.</p>
-</footer>
+<footer><p>&copy; 2026 – All rights reserved.</p></footer>
 
 </div>
 </body>
