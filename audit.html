@@ -2,18 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IATF16949:2016 / Proposal</title>
+<title>IATF16949:2016 Proposal</title>
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
 
 <style>
-/* GLOBAL STYLES */
-body { font-family: 'Open Sans', sans-serif; margin: 0; background: #eef2f7; color: #333; scroll-behavior: smooth; }
-.container { width: 95%; max-width: 960px; margin: auto; padding: 20px; }
+/* GLOBAL */
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  background: #eef2f7;
+  color: #333;
+  scroll-behavior: smooth;
+}
+.container {
+  width: 95%;
+  max-width: 960px;
+  margin: auto;
+  padding: 20px;
+}
 
 /* HEADER */
-header { text-align: center; padding: 30px 0; }
-h1, h2, h3 { color: #02457a; }
+header {
+  text-align: center;
+  padding: 30px 0 18px 0;
+}
+h1, h2, h3 {
+  color: #02457a;
+}
+p, li {
+  font-size: 15px;
+  line-height: 1.6;
+}
 
 /* NAVIGATION */
 .nav-bar {
@@ -21,11 +41,11 @@ h1, h2, h3 { color: #02457a; }
   background: white;
   border-bottom: 1px solid #ccc;
   box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-  margin-bottom: 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
+
 .nav-container {
   display: flex;
   flex-wrap: wrap;
@@ -33,6 +53,7 @@ h1, h2, h3 { color: #02457a; }
   align-items: center;
   padding: 8px 0;
 }
+
 .nav-bar a {
   padding: 8px 12px;
   margin: 0 4px;
@@ -42,69 +63,113 @@ h1, h2, h3 { color: #02457a; }
   white-space: nowrap;
   font-size: 14px;
 }
+
 .nav-bar a:hover {
   background: #f0f6fb;
   color: #01355e;
   border-radius: 4px;
 }
 
-/* SECTION STYLES */
-.section { padding: 18px 0; border-bottom: 1px solid #ddd; }
-.box { border-left: 4px solid #02457a; padding-left: 12px; margin-top: 12px; }
-table { width: 100%; border-collapse: collapse; margin-top: 14px; }
-th { background: #dbe9f5; padding: 8px; text-align: left; }
-td { padding: 8px; border: 1px solid #ccc; }
-.footer-note { font-size: 14px; color: #555; margin-top: 8px; }
-footer { text-align: center; padding: 20px 0; color: #555; }
+/* SECTION COMMON */
+.section {
+  padding: 22px 0;
+  border-bottom: 1px solid #ddd;
+}
+.section h3 {
+  margin-bottom: 12px;
+}
+.box {
+  border-left: 4px solid #02457a;
+  padding-left: 12px;
+  margin-top: 12px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+th {
+  background: #dbe9f5;
+  padding: 8px;
+  text-align: left;
+}
+td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+.footer-note {
+  font-size: 14px;
+  color: #555;
+  margin-top: 8px;
+}
+footer {
+  text-align: center;
+  padding: 20px 0;
+  color: #555;
+}
+
+/* OFFSETS FOR SCROLL */
+#profile, #estimate, #scope, #deliverables,
+#optional, #terms, #payment, #confidentiality,
+#accept, #contact, #summary {
+  scroll-margin-top: 80px;
+}
 
 /* PASSWORD BOX */
 #loginBox {
-    background: #fff;
-    padding: 28px;
-    text-align: center;
-    margin: 120px auto;
-    max-width: 380px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  background: #fff;
+  padding: 28px;
+  text-align: center;
+  margin: 120px auto;
+  max-width: 380px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 #loginBox input {
-    width: 90%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #bbb;
-    border-radius: 6px;
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #bbb;
+  border-radius: 6px;
 }
 #loginBox button {
-    background: #02457a;
-    color: #fff;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
+  background: #02457a;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
 }
-#loginBox button:hover { background: #01355e; }
+#loginBox button:hover {
+  background: #01355e;
+}
 
 /* DOWNLOAD BUTTON */
 #downloadBtn {
-    background: #2a4d69;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    float: right;
-    margin-top: -30px;
+  background: #2a4d69;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right;
+  margin-top: -16px;
+  margin-bottom: 16px;
 }
-#downloadBtn:hover { background: #1f3753; }
+#downloadBtn:hover {
+  background: #1f3753;
+}
 
-/* ACCEPTANCE INPUTS */
+/* ACCEPTANCE */
 .accept-row input {
-    width: 220px; padding: 8px; margin-right: 12px;
-    border: 1px solid #ccc; border-radius: 6px;
+  width: 220px;
+  padding: 8px;
+  margin-right: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 </style>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
 function checkPassword() {
@@ -123,12 +188,12 @@ function downloadPDF() {
 </head>
 <body>
 
-<!-- PASSWORD LOGIN -->
+<!-- PASSWORD PROTECTION -->
 <div id="loginBox">
-    <h2>Protected Proposal</h2>
-    <p>Enter Password to View:</p>
-    <input type="password" id="pwd" placeholder="Password">
-    <button onclick="checkPassword()">Submit</button>
+  <h2>Protected Proposal</h2>
+  <p>Enter Password:</p>
+  <input type="password" id="pwd" placeholder="Password">
+  <button onclick="checkPassword()">Submit</button>
 </div>
 
 <!-- PROPOSAL CONTENT -->
@@ -143,7 +208,7 @@ function downloadPDF() {
         <p style="font-size:16px; color:#555;"><em>26 years of experience in multinational automotive industry – quality, operations and systems excellence</em></p>
     </header>
 
-    <!-- DOWNLOAD PDF-->
+    <!-- PDF BUTTON -->
     <button id="downloadBtn" onclick="downloadPDF()">Download as PDF</button>
 
     <!-- NAVIGATION -->
@@ -199,7 +264,7 @@ function downloadPDF() {
             <tr><td>Travel & Tolls (Estimated)</td><td>—</td><td>€180</td></tr>
             <tr><th>Total Net</th><th>—</th><th>€1,860</th></tr>
         </table>
-        <p class="footer-note"><strong>Note:</strong> All values shown are <strong>net</strong>. VAT at the applicable legal rate (e.g., 23%) should be added to the net value shown above. Net (€1,860) + VAT (23%) example = <strong>€2,287.80</strong>.</p>
+        <p class="footer-note"><strong>Note:</strong> All values shown are <strong>net</strong>. VAT at the applicable legal rate should be added to the net value shown above.</p>
     </section>
 
     <!-- SCOPE -->
@@ -226,14 +291,14 @@ function downloadPDF() {
         </ul>
     </section>
 
-    <!-- OPTIONAL -->
+    <!-- OPTIONAL SERVICES -->
     <section id="optional" class="section">
         <h3>5. Optional Services</h3>
         <ul>
             <li>Action validation support after audit</li>
             <li>Technical guidance for corrective actions planning</li>
             <li>Gap readiness assessment</li>
-            <li><strong>A VDA 6.3:2016 audit report may be included upon request. This optional add-on incurs a 10% premium on the total audit fee.</strong></li>
+            <li><strong>A VDA 6.3:2016 audit report may be included upon request with a 10% premium on the total audit fee.</strong></li>
         </ul>
     </section>
 
@@ -254,7 +319,6 @@ function downloadPDF() {
                 <li><strong>40% on start of on-site audit</strong></li>
                 <li><strong>30% upon delivery of final report</strong></li>
             </ul>
-            <p>Invoices will be issued with applicable VAT at the legal rate.</p>
         </div>
     </section>
 
@@ -262,7 +326,7 @@ function downloadPDF() {
     <section id="confidentiality" class="section">
         <h3>8. Confidentiality</h3>
         <div class="box">
-            <p>All information exchanged will be treated as confidential and used solely for fulfilling the audit scope. No information will be disclosed to third parties without prior written consent.</p>
+            <p>All information exchanged will be treated as confidential and used solely for fulfilling the audit scope.</p>
         </div>
     </section>
 
@@ -270,7 +334,7 @@ function downloadPDF() {
     <section id="accept" class="section">
         <h3>9. Acceptance & Validity of Agenda</h3>
         <div class="box">
-            <p>This proposal is valid for acceptance for <strong>30 days</strong> from the issue date. Audit dates and agenda must be confirmed within 5 business days of acceptance to secure scheduling.</p>
+            <p>This proposal is valid for acceptance for <strong>30 days</strong> from the issue date. Audit dates and agenda must be confirmed within 5 business days of acceptance.</p>
             <p class="accept-row">
                 Accepted by: <input type="text" placeholder="Client Name">
                 Date: <input type="date">
@@ -283,12 +347,13 @@ function downloadPDF() {
         <h3>10. Contact Details</h3>
         <div class="box">
             <p>Email: marcelo.claudio@outlook.pt<br>
-            Phone: +351 911 157 459<br>
+            Phone: +351 911 157459<br>
             Location: Caldas da Rainha, Portugal</p>
         </div>
     </section>
 
 </div>
+
 <footer><p>&copy; 2026 – All rights reserved.</p></footer>
 
 </div>
