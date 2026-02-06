@@ -2,73 +2,102 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IATF 16949 Proposal Access</title>
+<title>IATF 16949 Protected Proposal</title>
 
 <style>
+/* GLOBAL STYLES */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f5f8;
     margin: 0;
     padding: 0;
-    background: #e0e0e0;
+    color: #333;
 }
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+h1, h2, h3 {
+    font-family: "Segoe UI Semibold", sans-serif;
+    color: #02457a;
+}
+p, li {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* LOGIN BOX */
 #loginBox {
-    width: 100%;
-    max-width: 360px;
-    margin: 140px auto;
-    padding: 22px;
-    background: #fff;
+    background: #ffffff;
+    max-width: 400px;
+    margin: 120px auto;
+    padding: 28px;
     border-radius: 10px;
-    box-shadow: 0px 0px 18px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.15);
+    text-align: center;
 }
-input {
-    width: 100%;
+#loginBox input {
+    width: 90%;
     padding: 12px;
-    border: 1px solid #ccc;
-    margin-bottom: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
 }
-button {
-    width: 100%;
-    padding: 12px;
-    background: #2a4d69;
-    color: white;
+#loginBox button {
+    background: #02457a;
+    color: #fff;
     border: none;
-    border-radius: 6px;
+    padding: 12px 24px;
     font-size: 16px;
+    border-radius: 6px;
     cursor: pointer;
 }
-button:hover {
-    background: #1f3753;
+#loginBox button:hover {
+    background: #01355e;
 }
 
+/* PROPOSAL STYLES */
 #proposalWrapper {
     display: none;
-    background: white;
-    margin: 20px auto;
-    padding: 30px;
-    max-width: 900px;
+    background: #fff;
+    padding: 30px 40px;
     border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.12);
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
 }
 
-h1, h2, h3 {
-    color: #2a4d69;
+section {
+    margin-top: 24px;
 }
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 18px;
 }
-th, td {
-    border: 1px solid #999;
-    padding: 8px 10px;
-}
 th {
-    background: #f4f4f4;
+    background: #e6eff8;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+    text-align: left;
 }
-.section {
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.footer-note {
     margin-top: 28px;
+    font-size: 14px;
+    color: #555;
+    font-style: italic;
+}
+
+/* BOXES */
+.box {
+    border-left: 4px solid #02457a;
+    padding-left: 14px;
+    margin-top: 12px;
 }
 </style>
 
@@ -79,7 +108,7 @@ function checkPassword() {
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("proposalWrapper").style.display = "block";
     } else {
-        alert("Incorrect password 🤖 Please try again.");
+        alert("Incorrect password!");
     }
 }
 </script>
@@ -87,46 +116,53 @@ function checkPassword() {
 </head>
 <body>
 
+<!-- PASSWORD LOGIN -->
 <div id="loginBox">
-    <h2 align="center">Secure Access</h2>
-    <p>Please enter the password to view the proposal</p>
+    <h2>Protected Proposal</h2>
+    <p>Please enter password:</p>
     <input type="password" id="pwd" placeholder="Enter password">
     <button onclick="checkPassword()">Submit</button>
 </div>
 
-<div id="proposalWrapper">
+<!-- PROPOSAL CONTENT -->
+<div id="proposalWrapper" class="container">
 
-    <!-- Visual “print” style proposal -->
-    <h1 align="center">SERVICE PROPOSAL</h1>
-    <h2 align="center">IATF 16949 INTERNAL AUDIT</h2>
+    <header style="text-align:center;">
+        <h1>SERVICE PROPOSAL</h1>
+        <h2>IATF 16949 INTERNAL AUDIT</h2>
+        <p><em>Date:</em> February 6, 2026</p>
+    </header>
 
-    <p><strong>Date:</strong> February 6, 2026<br>
-    <strong>From:</strong> Marcelo Pinto Cláudio<br>
-    <strong>To:</strong> Quality / General Management</p>
+    <section>
+        <div class="box">
+            <h3>1. AUDITOR PROFILE</h3>
+            <p>Senior Quality Professional with extensive automotive experience focusing on industrial systems and operational excellence.</p>
+            <ul>
+                <li>Official VDA QMC Auditor & Trainer (VDA 6.3, 6.5, MLA, PSCR, Core Tools)</li>
+                <li>AIAG Specialist (APQP, PPAP, FMEA, MSA, SPC)</li>
+                <li>Systems: IATF 16949, ISO 9001, ISO 14001</li>
+                <li>OEM Experience: Volkswagen, Audi, Porsche, PSA</li>
+            </ul>
+        </div>
+    </section>
 
-    <div class="section">
-        <h3>1. AUDITOR PROFILE</h3>
-        <p>Senior Quality Professional with extensive automotive industry experience, focusing on industrial excellence.</p>
-        <ul>
-            <li>Official VDA QMC Auditor & Trainer (VDA 6.3, 6.5, MLA, PSCR, Core Tools)</li>
-            <li>AIAG Specialist (APQP, PPAP, FMEA, MSA, SPC)</li>
-            <li>Systems: IATF 16949, ISO 9001, ISO 14001</li>
-            <li>OEM Experience: VW, Audi, Porsche, PSA</li>
-        </ul>
-    </div>
+    <section>
+        <div class="box">
+            <h3>2. QUALIFICATION VALIDATION</h3>
+            <p>Qualification records and certifications submitted. Validation is required by you and, if applicable, by the final customer.</p>
+        </div>
+    </section>
 
-    <div class="section">
-        <h3>2. QUALIFICATION VALIDATION</h3>
-        <p>Qualification records and certifications have been submitted. Validation is required from your side and, if applicable, from the final customer.</p>
-    </div>
-
-    <div class="section">
-        <h3>3. COMMERCIAL CONDITIONS & TOTAL ESTIMATE</h3>
-        <p>This proposal covers an estimated audit duration of <strong>2 to 2.5 days</strong>. <em>Availability subject to agenda confirmation.</em></p>
+    <section>
+        <div class="box">
+            <h3>3. COMMERCIAL CONDITIONS & TOTAL ESTIMATE</h3>
+            <p>Estimated audit duration: <strong>2 to 2.5 days</strong>.<br>
+            Availability subject to agenda confirmation.</p>
+        </div>
 
         <table>
             <tr>
-                <th>Description</th><th>Qty</th><th>Unit Price</th><th>Net Value</th><th>VAT (23%)</th><th>Total Incl. VAT</th>
+                <th>Description</th><th>Qty</th><th>Unit Price</th><th>Net</th><th>VAT (23%)</th><th>Total</th>
             </tr>
             <tr><td>Preparation & Reporting</td><td>4h</td><td>€0.00</td><td>€0.00</td><td>€0.00</td><td>€0.00</td></tr>
             <tr><td>Technical Fees (Audit)</td><td>16h</td><td>€130.00</td><td>€2,080.00</td><td>€478.40</td><td>€2,558.40</td></tr>
@@ -135,23 +171,29 @@ function checkPassword() {
         </table>
 
         <p><strong>Estimated Total (2 days):</strong> €2,260.00 + €519.80 VAT = <strong>€2,779.80</strong></p>
-        <p><em>Note: Accommodation costs not included and will be invoiced separately with supporting invoices.</em></p>
-    </div>
+        <p class="footer-note">Accommodation not included and will be invoiced separately with supporting documentation.</p>
+    </section>
 
-    <div class="section">
-        <h3>4. METHODOLOGY & DELIVERY</h3>
-        <ul>
-            <li>Risk-based audit aligned with KPIs</li>
-            <li>Focus on production process and support areas</li>
-            <li>Final report delivered within 5 business days</li>
-            <li>Languages: PT, EN, ES, FR</li>
-        </ul>
-    </div>
+    <section>
+        <div class="box">
+            <h3>4. METHODOLOGY & DELIVERY</h3>
+            <ul>
+                <li>Risk-based audit aligned with KPIs</li>
+                <li>Production & support area compliance evaluation</li>
+                <li>Final report within 5 business days</li>
+                <li>Languages: PT, EN, ES, FR</li>
+            </ul>
+        </div>
+    </section>
 
-    <div class="section">
-        <h3>5. CONTACT DETAILS</h3>
-        <p>Email: marcelo.claudio@outlook.pt<br>Phone: +351 911 157 459<br>Location: Caldas da Rainha, Portugal</p>
-    </div>
+    <section>
+        <div class="box">
+            <h3>5. CONTACT DETAILS</h3>
+            <p>Email: marcelo.claudio@outlook.pt<br>
+               Phone: +351 911 157 459<br>
+               Location: Caldas da Rainha, Portugal</p>
+        </div>
+    </section>
 
 </div>
 
