@@ -2,114 +2,158 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IATF 16949 Protected Proposal</title>
+<title>IATF 16949 Proposal</title>
 
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+
+<!-- STYLES -->
 <style>
-/* GLOBAL STYLES */
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f2f5f8;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
-    padding: 0;
+    background: #eef2f7;
     color: #333;
 }
 .container {
-    width: 100%;
-    max-width: 900px;
-    margin: 30px auto;
+    width: 95%;
+    max-width: 960px;
+    margin: auto;
     padding: 20px;
 }
+header {
+    text-align: center;
+    padding: 30px 0;
+}
+header img {
+    max-width: 140px;
+    margin-bottom: 12px;
+}
 h1, h2, h3 {
-    font-family: "Segoe UI Semibold", sans-serif;
     color: #02457a;
+    margin-bottom: 10px;
 }
 p, li {
     font-size: 15px;
     line-height: 1.6;
 }
-
-/* LOGIN BOX */
-#loginBox {
-    background: #ffffff;
-    max-width: 400px;
-    margin: 120px auto;
-    padding: 28px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.15);
+nav {
+    background: #fff;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.08);
+}
+nav a {
+    margin-right: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #02457a;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+.section {
+    padding: 18px 0;
+    border-bottom: 1px solid #ddd;
+}
+.box {
+    border-left: 4px solid #02457a;
+    padding-left: 12px;
+    margin-top: 12px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+}
+th {
+    background: #dbe9f5;
+    padding: 8px;
+    text-align: left;
+}
+td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+footer {
     text-align: center;
+    padding: 20px 0;
+    color: #555;
+}
+
+/* PASSWORD BOX */
+#loginBox {
+    background: #fff;
+    padding: 28px;
+    text-align: center;
+    margin: 120px auto;
+    max-width: 380px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 #loginBox input {
     width: 90%;
     padding: 12px;
     margin: 10px 0;
-    border: 1px solid #ddd;
+    border: 1px solid #bbb;
     border-radius: 6px;
-    font-size: 16px;
 }
 #loginBox button {
     background: #02457a;
     color: #fff;
+    padding: 10px 18px;
     border: none;
-    padding: 12px 24px;
-    font-size: 16px;
     border-radius: 6px;
     cursor: pointer;
+    font-size: 15px;
 }
 #loginBox button:hover {
     background: #01355e;
 }
 
-/* PROPOSAL STYLES */
-#proposalWrapper {
-    display: none;
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+/* DOWNLOAD BUTTON */
+#downloadBtn {
+    background: #2a4d69;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+    margin-top: -36px;
+}
+#downloadBtn:hover {
+    background: #1f3753;
 }
 
-section {
-    margin-top: 24px;
+/* ACCEPTANCE */
+.accept-row {
+    margin-top: 22px;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 18px;
-}
-th {
-    background: #e6eff8;
-    padding: 10px;
-    border-bottom: 2px solid #ccc;
-    text-align: left;
-}
-td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-.footer-note {
-    margin-top: 28px;
-    font-size: 14px;
-    color: #555;
-    font-style: italic;
-}
-
-/* BOXES */
-.box {
-    border-left: 4px solid #02457a;
-    padding-left: 14px;
-    margin-top: 12px;
+.accept-row input {
+    width: 250px;
+    padding: 8px;
+    margin-right: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 </style>
 
+<!-- SCRIPT FOR PDF EXPORT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
 function checkPassword() {
-    var pwd = document.getElementById("pwd").value;
-    if (pwd === "Teste") {
+    if (document.getElementById("pwd").value === "Teste") {
         document.getElementById("loginBox").style.display = "none";
-        document.getElementById("proposalWrapper").style.display = "block";
+        document.getElementById("proposalContent").style.display = "block";
     } else {
-        alert("Incorrect password!");
+        alert("Incorrect password");
     }
+}
+function downloadPDF() {
+    const element = document.getElementById('proposalContainer');
+    html2pdf().set({margin:0.5, filename:'IATF16949-Proposal.pdf'}).from(element).save();
 }
 </script>
 
@@ -118,113 +162,108 @@ function checkPassword() {
 
 <!-- PASSWORD LOGIN -->
 <div id="loginBox">
-    <h2>Protected Proposal</h2>
-    <p>Please enter password:</p>
-    <input type="password" id="pwd" placeholder="Enter password">
+    <h2>Enter Password to View Proposal</h2>
+    <input type="password" id="pwd" placeholder="Password">
     <button onclick="checkPassword()">Submit</button>
 </div>
 
-<!-- PROPOSAL CONTENT -->
-<div id="proposalWrapper" class="container">
+<!-- PROPOSAL -->
+<div id="proposalContent" style="display:none;">
+<div id="proposalContainer" class="container">
 
-    <header style="text-align:center;">
-        <h1>SERVICE PROPOSAL</h1>
-        <h2>IATF 16949 INTERNAL AUDIT</h2>
-        <p><em>Date:</em> February 6, 2026</p>
+    <!-- HEADER WITH LOGO -->
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Quality_Audit_Checklist.png" alt="Audit Logo">
+        <h1>IATF 16949 INTERNAL AUDIT</h1>
+        <p>Service Proposal – February 6, 2026</p>
     </header>
 
-    <section>
+    <!-- DOWNLOAD PDF BUTTON -->
+    <button id="downloadBtn" onclick="downloadPDF()">Download as PDF</button>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#profile">Profile</a>
+        <a href="#estimate">Estimate</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#optional">Optional Services</a>
+        <a href="#accept">Acceptance</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- SECTIONS -->
+    <section id="profile" class="section">
+        <h3>1. AUDITOR PROFILE</h3>
         <div class="box">
-            <h3>1. AUDITOR PROFILE</h3>
-            <p>Senior Quality Professional with extensive automotive experience focusing on industrial systems and operational excellence.</p>
+            <p>Senior Quality Professional with extensive automotive experience focusing on operational excellence.</p>
             <ul>
                 <li>Official VDA QMC Auditor & Trainer (VDA 6.3, 6.5, MLA, PSCR, Core Tools)</li>
                 <li>AIAG Specialist (APQP, PPAP, FMEA, MSA, SPC)</li>
-                <li>Systems: IATF 16949, ISO 9001, ISO 14001</li>
-                <li>OEM Experience: Volkswagen, Audi, Porsche, PSA</li>
+                <li>Experience with IATF 16949, ISO 9001 & ISO 14001</li>
             </ul>
         </div>
     </section>
 
-    <section>
+    <section id="estimate" class="section">
+        <h3>2. COMMERCIAL CONDITIONS & TOTAL ESTIMATE</h3>
         <div class="box">
-            <h3>2. QUALIFICATION VALIDATION</h3>
-            <p>Qualification records and certifications submitted. Validation is required by you and, if applicable, by the final customer.</p>
+            <p>Estimated audit duration: <strong>2 to 2.5 days</strong><br>
+            (Subject to agenda confirmation)</p>
         </div>
-    </section>
-
-    <section>
-        <div class="box">
-            <h3>3. COMMERCIAL CONDITIONS & TOTAL ESTIMATE</h3>
-            <p>Estimated audit duration: <strong>2 to 2.5 days</strong>.<br>
-            Availability subject to agenda confirmation.</p>
-        </div>
-
         <table>
-            <tr>
-                <th>Description</th><th>Qty</th><th>Unit Price</th><th>Net</th><th>VAT (23%)</th><th>Total</th>
-            </tr>
-            <tr><td>Preparation & Reporting</td><td>4h</td><td>€0.00</td><td>€0.00</td><td>€0.00</td><td>€0.00</td></tr>
-            <tr><td>Technical Fees (Audit)</td><td>16h</td><td>€115.00</td><td>€1,840.00</td><td>€423.20</td><td>€2,263.20</td></tr>
-            <tr><td>Travel (Caldas – S.J. Madeira)</td><td>370km</td><td>€0.40</td><td>€148.00</td><td>€34.04</td><td>€182.04</td></tr>
-            <tr><td>Tolls (Estimated)</td><td>1</td><td>€32.00</td><td>€32.00</td><td>€7.36</td><td>€39.36</td></tr>
+            <tr><th>Description</th><th>Qty</th><th>Unit €</th><th>Net</th><th>VAT</th><th>Total</th></tr>
+            <tr><td>Preparation & Reporting</td><td>4h</td><td>€0</td><td>€0</td><td>€0</td><td>€0</td></tr>
+            <tr><td>Technical Fees (Audit)</td><td>16h</td><td>€115</td><td>€1,840</td><td>€423.20</td><td>€2,263.20</td></tr>
+            <tr><td>Travel</td><td>370km</td><td>€0.40</td><td>€148</td><td>€34.04</td><td>€182.04</td></tr>
+            <tr><td>Tolls (Est.)</td><td>1</td><td>€32</td><td>€32</td><td>€7.36</td><td>€39.36</td></tr>
         </table>
-
-        <p><strong>Estimated Total (2 days):</strong> €2,020.00 + €464.60 VAT = <strong>€2,484.60</strong></p>
-        <p class="footer-note">Accommodation not included and will be invoiced separately with supporting documentation.</p>
+        <p><strong>Total Estimated:</strong> €2,020 + €464.60 VAT = <strong>€2,484.60</strong></p>
     </section>
 
-    <section>
+    <section id="deliverables" class="section">
+        <h3>3. DELIVERABLES</h3>
+        <ul>
+            <li>Audit report with findings, evidence and recommendations</li>
+            <li>Compliance summary with IATF 16949</li>
+            <li>Report delivered within <strong>3 business days</strong></li>
+            <li>Closing meeting & feedback session</li>
+        </ul>
+    </section>
+
+    <section id="optional" class="section">
+        <h3>4. OPTIONAL SERVICES (Extra)</h3>
+        <ul>
+            <li>Action validation support after audit</li>
+            <li>Technical guidance for corrective actions</li>
+            <li>Gap analysis or readiness check</li>
+        </ul>
+    </section>
+
+    <section id="accept" class="section">
+        <h3>5. ACCEPTANCE</h3>
         <div class="box">
-            <h3>4. METHODOLOGY & DELIVERY</h3>
-            <ul>
-                <li>Risk-based audit aligned with KPIs</li>
-                <li>Production & support area compliance evaluation</li>
-                <li><strong>Final report delivered within 3 business days</strong> after on-site activities</li>
-                <li>Languages: PT, EN, ES, FR</li>
-            </ul>
+            <p>Proposal valid for <strong>30 days</strong> from issue date.</p>
+            <p class="accept-row">
+                Accepted by: <input type="text" placeholder="Client Name"> 
+                Date: <input type="date">
+            </p>
         </div>
     </section>
 
-    <section>
+    <section id="contact" class="section">
+        <h3>6. CONTACT DETAILS</h3>
         <div class="box">
-            <h3>5. VALIDITY</h3>
-            <p>This proposal is valid for acceptance for a period of <strong>30 (thirty) calendar days</strong> from the date issued.</p>
-        </div>
-    </section>
-
-    <section>
-        <div class="box">
-            <h3>6. DELIVERABLES</h3>
-            <ul>
-                <li><strong>Internal Audit Report</strong> including findings, objective evidence, non-conformities, observations, and recommendations.</li>
-                <li>Summary of compliance with IATF 16949 requirements.</li>
-                <li>Closing meeting and presentation of results.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section>
-        <div class="box">
-            <h3>7. OPTIONAL SERVICES (ADDITIONAL)</h3>
-            <ul>
-                <li><strong>Action Validation Support</strong> – verification of corrective actions effectiveness after audit closure.</li>
-                <li><strong>Technical Support</strong> – guidance on corrective action planning and implementation aligned with IATF 16949.</li>
-                <li>Gap analysis or readiness assessment prior to certification audit.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section>
-        <div class="box">
-            <h3>8. CONTACT DETAILS</h3>
             <p>Email: marcelo.claudio@outlook.pt<br>
-               Phone: +351 911 157 459<br>
-               Location: Caldas da Rainha, Portugal</p>
+            Phone: +351 911 157 459<br>
+            Location: Caldas da Rainha, Portugal</p>
         </div>
     </section>
 
 </div>
+<footer>
+    <p>&copy; 2026 – All rights reserved.</p>
+</footer>
 
+</div>
 </body>
 </html>
