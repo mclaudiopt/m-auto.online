@@ -1,0 +1,38 @@
+<div id="wizardModal" class="modal-bg" style="display:none;">
+		<div class="modal" id="wizContent">
+			<button type="button" class="close" onclick="document.getElementById('wizardModal').style.display='none'">&times;</button>
+			<div id="wiz-step-1" class="step active">
+				<h3 class="wiz-title" data-translate="wiz_os">Qual é o seu Windows?</h3>
+				<div class="wiz-grid">
+					<button type="button" class="wiz-btn" onclick="setSpec('win', 'old')">Windows 7 / 8</button>
+					<button type="button" class="wiz-btn" onclick="setSpec('win', 'new')">Windows 10 / 11</button>
+				</div>
+			</div>
+			<div id="wiz-step-2" class="step">
+				<h3 class="wiz-title" data-translate="wiz_ram">Memória RAM?</h3>
+				<div class="wiz-grid">
+					<button type="button" class="wiz-btn" onclick="setSpec('ram', 'low')">4GB ou menos</button>
+					<button type="button" class="wiz-btn" onclick="setSpec('ram', 'high')">8GB ou mais</button>
+				</div>
+			</div>
+			<div id="wiz-step-3" class="step">
+				<h3 class="wiz-title" data-translate="wiz_disk">Disco?</h3>
+				<div class="wiz-grid">
+					<button type="button" class="wiz-btn" onclick="setSpec('disk','hdd')">HDD</button>
+					<button type="button" class="wiz-btn" onclick="setSpec('disk','ssd')">SSD</button>
+				</div>
+			</div>
+			<div id="wiz-step-4" class="step">
+				<h3 class="wiz-title" data-translate="wiz_brand">Marca?</h3>
+				<div class="wiz-grid">
+					<button type="button" class="wiz-btn" onclick="setSpec('brand','Mercedes')">Mercedes</button>
+					<button type="button" class="wiz-btn" onclick="setSpec('brand','BMW')">BMW</button>
+				</div>
+			</div>
+			<div id="wiz-result" class="step">
+				<h3 class="wiz-title" data-translate="wiz_result">Resultado</h3>
+				<div id="finalResultContent" class="wiz-result-box"></div>
+				<button type="button" class="wiz-btn-action" onclick="location.reload()" data-translate="wiz_restart">Recomeçar 🔄</button>
+			</div>
+		</div>
+	</div>
