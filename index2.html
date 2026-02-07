@@ -72,9 +72,13 @@
 		<div class="prod-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
 			<button type="button" class="prod-close" onclick="closeProductModal()" aria-label="Fechar">×</button>
 			<!-- header opcional (neste momento escondemos a imagem via JS) -->
-			<div class="prod-header" style="display:none;"> <img id="modalImg" src="" alt=""> </div>
+			<div class="prod-header" style="display:none;"> <img id="modalImg" src="" hidden> </div>
 			<div class="prod-body">
-				<h2 id="modalTitle" class="prod-title"></h2>
+			<h2 id="modalTitle" class="prod-title">
+				<span class="visually-hidden">Detalhes do produto</span>
+				</h2>
+
+
 				<div id="modalDesc" class="prod-text"></div>
 			</div>
 			<div class="prod-footer"> <span id="modalPrice" class="prod-price"></span>
@@ -82,7 +86,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="wizardModal" class="modal-bg" style="display:none;">
+</body>div id="wizardModal" class="modal-bg" style="display:none;">
 		<div class="modal" id="wizContent">
 			<button type="button" class="close" onclick="document.getElementById('wizardModal').style.display='none'">&times;</button>
 			<div id="wiz-step-1" class="step active">
