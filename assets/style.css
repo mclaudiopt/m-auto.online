@@ -22,6 +22,14 @@
 	--gradient-btn: linear-gradient(135deg, #2563eb, #1e40af);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 
 /* Botão VER → mostrar só ícone (…) */
 
