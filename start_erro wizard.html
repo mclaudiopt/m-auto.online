@@ -72,13 +72,9 @@
 		<div class="prod-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
 			<button type="button" class="prod-close" onclick="closeProductModal()" aria-label="Fechar">×</button>
 			<!-- header opcional (neste momento escondemos a imagem via JS) -->
-			<div class="prod-header" style="display:none;"> <img id="modalImg" src="" hidden> </div>
+			<div class="prod-header" style="display:none;"> <img id="modalImg" src="" alt=""> </div>
 			<div class="prod-body">
-			<h2 id="modalTitle" class="prod-title">
-				<span class="visually-hidden">Detalhes do produto</span>
-				</h2>
-
-
+				<h2 id="modalTitle" class="prod-title"></h2>
 				<div id="modalDesc" class="prod-text"></div>
 			</div>
 			<div class="prod-footer"> <span id="modalPrice" class="prod-price"></span>
@@ -86,7 +82,7 @@
 			</div>
 		</div>
 	</div>
-</body>div id="wizardModal" class="modal-bg" style="display:none;">
+	<div id="wizardModal" class="modal-bg" style="display:none;">
 		<div class="modal" id="wizContent">
 			<button type="button" class="close" onclick="document.getElementById('wizardModal').style.display='none'">&times;</button>
 			<div id="wiz-step-1" class="step active">
@@ -175,7 +171,7 @@
 								<div class="card-body">
 									<h3 data-translate="prod_merc_full">Mercedes Full Pack 2025</h3>
 									<p class="desc" data-translate="desc_merc_full">A Solução Completa.</p>
-									<p class="sub-desc" data-translate="desc_merc_full_detail">O pack mais completo do mercado. mais de 200gb de software, bases de dados, tutoriais, etc.</p>
+									<p class="sub-desc" data-translate="desc_merc_full_detail">Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.</p>
 									<ul class="feature-list">
 										<li>Xentry, WIS, EPC 2023</li>
 										<li>DTS 9.02, Vediamo 5</li>
@@ -847,15 +843,16 @@ Ajustes de sistema para garantir desempenho e estabilidade.
 			"desc_diagbox_9208_full": `
                    <b>Diagbox V9.208 (Versão 2025) – Instalação Nativa para Peugeot, Citroën, DS e Opel</b><br><br>
                    <b>Resumo:</b><br>
-                   Suporte total aos veículos mais recentes lançados até o final de 2024/início de 2025.<br><br>
+                   Obtenha a versão mais recente e estável do software de diagnóstico PSA. O Diagbox 9.208 oferece suporte total aos veículos mais recentes lançados até o final de 2024/início de 2025, com instalação direta no Windows (sem necessidade de Máquina Virtual).<br><br>
                    
                    <b>📋 Changelog & Novidades (O que há de novo na V9.208):</b><br>
-                          Melhorias significativas em comparação com as versões anteriores (9.150 / 9.180):<br><br>
+                   Esta atualização traz melhorias significativas em comparação com as versões anteriores (9.150 / 9.180):<br><br>
                    
                    <ul>
-                     <li><b>Base de Dados Atualizada (2025):</b> </li>
+                     <li><b>Base de Dados Atualizada (2025):</b> Inclusão de novos modelos e variantes de veículos fabricados até ao presente momento.</li>
                      <li><b>Novos Modelos Suportados:</b> Compatibilidade total com os lançamentos recentes, incluindo o novo Peugeot 308 III, 408, Citroën C4 X, C5 X e as versões facelift do 208/2008.</li>
                      <li><b>Melhoria na Integração Opel/Vauxhall:</b> Diagnóstico aprimorado para a gama Opel baseada na plataforma PSA (Corsa F, Mokka B, Grandland, Astra L).</li>
+                     <li><b>Instalação Nativa:</b> O software corre diretamente no Windows 10 ou 11 (64 bits), garantindo maior rapidez e estabilidade do que as versões antigas em Máquina Virtual (VM).</li>
                      <li><b>Correção de Bugs:</b> Resolução de erros de comunicação em ECUs mais recentes (AdBlue, BSI 2020+, etc.).</li>
                    </ul>
                    
@@ -885,7 +882,7 @@ Ajustes de sistema para garantir desempenho e estabilidade.
 			"badge_best": "Melhor Escolha",
 			"prod_merc_full": "Mercedes Full Pack 2025",
 			"desc_merc_full": "A Solução Completa.",
-			"desc_merc_full_detail": "O pack mais completo do mercado. mais de 200gb de software, bases de dados, tutoriais, etc",
+			"desc_merc_full_detail": "Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados.",
 			"price_pack": "Pack Completo",
 			"price_consult": "Consulta",
 			"desc_scanmatik_full": `<b>Professional multi-brand auto scanner</b> is designed for diagnostics of electronic control systems of modern cars. Works with a PC, tablet or smartphone.<br><br><b>Key Features:</b><ul><li>Works with third-party software for SAE J2534 and RP1210</li><li>USB or Wi-Fi interfaces</li><li>Supported data buses: ISO-9141, CAN 2.0/CAN-FD, J1850VPW/PWM, Single Wire CAN</li><li>Built-in multiplexer</li><li>Programming voltage supply (5-20V)</li></ul><br><b>Includes:</b> Full software version (VAZ, GAZ, Kia, Hyundai, OBD2, etc.)`,
@@ -961,7 +958,7 @@ Ajustes de sistema para garantir desempenho e estabilidade.
 			"badge_best": "Best Choice",
 			"prod_merc_full": "Mercedes Full Pack 2025",
 			"desc_merc_full": "The Complete Solution.",
-			"desc_merc_full_detail": "The most comprenshive pack in the market all inclusive.",
+			"desc_merc_full_detail": "Includes Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools and Certificates.",
 			"price_pack": "Full Pack",
 			"price_consult": "On request",
 			"about_text_full": "We are specialists in automotive diagnostic software with years of experience. We offer a professional service, fast response and reliable support. Our installations are clean, optimized and guaranteed. We work with the best tools on the market to ensure your workshop never stops.",
@@ -1418,53 +1415,16 @@ window.addEventListener('DOMContentLoaded', async () => {
 		orderProduct(title);
 	}
 
+	function orderProduct(name) {
+		const phone = "351911157459";
+		window.open(`https://wa.me/${phone}?text=${encodeURIComponent('Tenho interesse em: ' + name)}`, '_blank');
+	}
 
-function orderProduct(name) {
-  const phone = "351911157459";
-
-  const prefix =
-    (currentLang === 'en') ? 'I am interested in:' :
-    (currentLang === 'fr') ? 'Je suis intéressé par :' :
-    'Tenho interesse em:';
-
-  window.open(
-    `https://wa.me/${phone}?text=${encodeURIComponent(prefix + ' ' + name)}`,
-    '_blank'
-  );
-}
-
-		
 	function toggleTheme() {
 		document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark');
 	}
 
 	function filterProducts() {
-
-		// ===== WIZARD (estado + navegação) =====
-const userSpecs = { win: null, ram: null, disk: null, brand: null };
-
-function goWizStep(step) {
-  document.querySelectorAll('#wizardModal .step').forEach(s => s.classList.remove('active'));
-
-  const id = (step === 'result') ? 'wiz-result' : ('wiz-step-' + step);
-  const el = document.getElementById(id);
-  if (el) el.classList.add('active');
-}
-
-function setSpec(key, value) {
-  userSpecs[key] = value;
-
-  if (key === 'win') return goWizStep(2);
-  if (key === 'ram') return goWizStep(3);
-  if (key === 'disk') return goWizStep(4);
-
-  if (key === 'brand') {
-    showResult();
-    return goWizStep('result');
-  }
-}
-
-		
 		const val = (document.getElementById('searchInput').value || '').toLowerCase();
 		document.querySelectorAll('.searchable-item').forEach(el => {
 			const match = el.innerText.toLowerCase().includes(val);
@@ -1506,123 +1466,6 @@ function setSpec(key, value) {
 		if(e.target.id === 'productModal') closeProductModal();
 	});
 	</script>
-
-<script>
-/* =========================
-   ✅ WIZARD (FIX)
-   - Depende apenas dos IDs que já tens no HTML:
-     #wizardModal, #wiz-step-1..4, #wiz-result, #finalResultContent
-   ========================= */
-
-const userSpecs = { win: null, ram: null, disk: null, brand: null };
-
-function openWizard() {
-  const modal = document.getElementById('wizardModal');
-  if (!modal) return;
-  modal.style.display = 'flex';
-  resetWizard();
-}
-
-function closeWizard() {
-  const modal = document.getElementById('wizardModal');
-  if (!modal) return;
-  modal.style.display = 'none';
-}
-
-function showStep(stepNum) {
-  // esconde todos
-  document.querySelectorAll('#wizardModal .step').forEach(s => s.classList.remove('active'));
-  // mostra o pretendido
-  const el = document.getElementById(`wiz-step-${stepNum}`);
-  if (el) el.classList.add('active');
-}
-
-function resetWizard() {
-  userSpecs.win = null;
-  userSpecs.ram = null;
-  userSpecs.disk = null;
-  userSpecs.brand = null;
-
-  // garante estado inicial
-  const result = document.getElementById('wiz-result');
-  if (result) result.classList.remove('active');
-  showStep(1);
-}
-
-function setSpec(key, value) {
-  userSpecs[key] = value;
-
-  // fluxo 1→2→3→4→resultado
-  if (key === 'win') return showStep(2);
-  if (key === 'ram') return showStep(3);
-  if (key === 'disk') return showStep(4);
-  if (key === 'brand') return showResult();
-}
-
-function showResult() {
-  // mostra ecrã de resultado
-  document.querySelectorAll('#wizardModal .step').forEach(s => s.classList.remove('active'));
-  const resultStep = document.getElementById('wiz-result');
-  if (resultStep) resultStep.classList.add('active');
-
-  const box = document.getElementById('finalResultContent');
-  if (!box) return;
-
-  // mesma lógica simples que tinhas antes (podes ajustar depois)
-  const isLimited = (userSpecs.win === 'old' || userSpecs.ram === 'low' || userSpecs.disk === 'hdd');
-
-  const lang = (window.currentLang || document.documentElement.lang || 'pt').toLowerCase();
-
-  const t = {
-    pt: {
-      limitedTitle: '⚠️ PC Limitado',
-      limitedText: 'Recomendamos upgrade para melhor desempenho.',
-      okTitle: '✅ PC Compatível!',
-      okText: 'Pode instalar o Pack Completo.',
-    },
-    en: {
-      limitedTitle: '⚠️ Limited PC',
-      limitedText: 'We recommend an upgrade for best performance.',
-      okTitle: '✅ Compatible PC!',
-      okText: 'You can install the Full Pack.',
-    },
-    fr: {
-      limitedTitle: '⚠️ PC Limité',
-      limitedText: 'Nous recommandons une mise à niveau.',
-      okTitle: '✅ PC Compatible !',
-      okText: 'Vous pouvez installer le pack complet.',
-    }
-  };
-
-  const dict = t[lang] || t.pt;
-
-  box.innerHTML = isLimited
-    ? `<div class="wiz-result-box" style="border-color:orange">
-         <h4 style="color:orange;margin-bottom:8px">${dict.limitedTitle}</h4>
-         <p>${dict.limitedText}</p>
-       </div>`
-    : `<div class="wiz-result-box" style="border-color:green">
-         <h4 style="color:green;margin-bottom:8px">${dict.okTitle}</h4>
-         <p>${dict.okText}</p>
-       </div>`;
-}
-
-/* ✅ Fechar ao clicar fora */
-document.addEventListener('click', (e) => {
-  const modal = document.getElementById('wizardModal');
-  if (!modal) return;
-  if (modal.style.display === 'flex' && e.target === modal) closeWizard();
-});
-
-/* ✅ Se o teu botão do FAB abre o wizard via onclick inline, podes ignorar isto.
-   Caso NÃO tenhas onclick no FAB, ativa por selector (ajusta se necessário). */
-window.openWizard = openWizard;
-window.closeWizard = closeWizard;
-window.setSpec = setSpec;
-</script>
-
-
-
 </body>
 
 </html>
