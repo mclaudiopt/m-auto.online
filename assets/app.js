@@ -11,7 +11,7 @@ const TRANS = {
   pt: {
     nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Downloads",
     nav_serv: "Serviços", nav_about: "Sobre",
-    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv",
+    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Encomendar", btn_download: "Download", btn_details: "Detalhes",
     btn_schedule: "Agendar", btn_close: "Fechar",
     price_consult: "Consulta", price_pack: "Pack Completo",
@@ -49,7 +49,7 @@ const TRANS = {
   en: {
     nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Downloads",
     nav_serv: "Services", nav_about: "About",
-    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv",
+    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Order", btn_download: "Download", btn_details: "Details",
     btn_schedule: "Book", btn_close: "Close",
     price_consult: "On request", price_pack: "Full Pack",
@@ -87,7 +87,7 @@ const TRANS = {
   fr: {
     nav_soft: "Logiciel", nav_hard: "Matériel", nav_tools: "Téléchargements",
     nav_serv: "Services", nav_about: "À Propos",
-    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv",
+    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Commander", btn_download: "Télécharger", btn_details: "Détails",
     btn_schedule: "Planifier", btn_close: "Fermer",
     price_consult: "Sur demande", price_pack: "Pack Complet",
@@ -137,7 +137,7 @@ const BRANDS = [
   { id:"toyota",   label:"Toyota",         color:"#cc0000", colorLight:"#fff0f0", colorMid:"#f08080", abbr:"TYT", watermark:"TOYOTA" },
   { id:"nissan",   label:"Nissan",         color:"#b8002c", colorLight:"#fff0f3", colorMid:"#e87890", abbr:"NSN", watermark:"NISSAN" },
   { id:"ford",     label:"Ford",           color:"#003478", colorLight:"#e8eefb", colorMid:"#6080d0", abbr:"FRD", watermark:"FORD" },
-  { id:"gm",       label:"GM",             color:"#1c4077", colorLight:"#e8eef8", colorMid:"#6080c0", abbr:"GM",  watermark:"GM" },
+  { id:"gm",       label:"General Motors",  color:"#1c4077", colorLight:"#e8eef8", colorMid:"#6080c0", abbr:"GM",  watermark:"GENERAL MOTORS" },
   { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" }
 ];
 
@@ -276,12 +276,77 @@ function buildNav() {
   `;
 
   mobNav.innerHTML = [
-    { id: 'soft',  key: 'mob_soft',  fn: `selectBrandFromNav('${activeBrand}')` },
-    { id: 'hard',  key: 'mob_hard',  fn: `switchSection('hard',  this)` },
-    { id: 'tools', key: 'mob_tools', fn: `switchSection('tools', this)` },
-    { id: 'serv',  key: 'mob_serv',  fn: `switchSection('serv',  this)` },
+    { id: 'soft',  icon: 'fa-solid fa-car-side',           key: 'mob_soft',  fn: `toggleMobBrandPicker()` },
+    { id: 'hard',  icon: 'fa-solid fa-microchip',          key: 'mob_hard',  fn: `switchSection('hard',  this)` },
+    { id: 'tools', icon: 'fa-solid fa-download',           key: 'mob_tools', fn: `switchSection('tools', this)` },
+    { id: 'serv',  icon: 'fa-solid fa-screwdriver-wrench', key: 'mob_serv',  fn: `switchSection('serv',  this)` },
+    { id: 'about', icon: 'fa-solid fa-circle-info',        key: 'mob_about', fn: `switchSection('about', this)` },
   ].map(n => `<div class="mob-item${activeSection === n.id ? ' active' : ''}"
-    onclick="${n.fn}" data-nav-key="${n.key}">${t(n.key)}</div>`).join('');
+    onclick="${n.fn}" data-nav-key="${n.key}">
+    <i class="${n.icon} mob-icon"></i>
+    <span class="mob-label">${t(n.key)}</span>
+  </div>`).join('');
+}
+
+/* ── MOBILE BRAND PICKER (bottom sheet) ── */
+function toggleMobBrandPicker() {
+  let sheet = document.getElementById('mobBrandSheet');
+  if (!sheet) {
+    createMobBrandSheet();
+    sheet = document.getElementById('mobBrandSheet');
+  } else {
+    // actualiza marca activa
+    sheet.querySelectorAll('.mob-sheet-brand-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.brandId === activeBrand);
+    });
+  }
+  const overlay = document.getElementById('mobSheetOverlay');
+  const isOpen  = sheet.classList.contains('open');
+  if (isOpen) {
+    closeMobBrandPicker();
+  } else {
+    sheet.classList.add('open');
+    overlay.classList.add('open');
+  }
+}
+
+function closeMobBrandPicker() {
+  document.getElementById('mobBrandSheet')?.classList.remove('open');
+  document.getElementById('mobSheetOverlay')?.classList.remove('open');
+}
+
+function createMobBrandSheet() {
+  // overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'mobSheetOverlay';
+  overlay.className = 'mob-sheet-overlay';
+  overlay.addEventListener('click', closeMobBrandPicker);
+  document.body.appendChild(overlay);
+
+  // sheet
+  const sheet = document.createElement('div');
+  sheet.id    = 'mobBrandSheet';
+  sheet.className = 'mob-brand-sheet';
+
+  const brandBtns = BRANDS.map(b => {
+    const label = b.label.startsWith('brand_') ? t(b.label) : b.label;
+    const count = catalog.filter(p => p.section === 'soft' && p.brand === b.id).length;
+    return `<button class="mob-sheet-brand-btn${b.id === activeBrand ? ' active' : ''}"
+      data-brand-id="${b.id}"
+      onclick="selectBrandFromNav('${b.id}'); closeMobBrandPicker();">
+      <span class="mob-sheet-brand-swatch" style="background:${b.color}">${b.abbr}</span>
+      <span class="mob-sheet-brand-name">${label}</span>
+      ${count > 0 ? `<span class="mob-sheet-brand-count">${count}</span>` : ''}
+    </button>`;
+  }).join('');
+
+  const title = { pt:'Software de Diagnóstico', en:'Diagnostic Software', fr:'Logiciel de Diagnostic' }[lang] || 'Software';
+  sheet.innerHTML = `
+    <div class="mob-sheet-handle"></div>
+    <div class="mob-sheet-title">${title}</div>
+    <div class="mob-sheet-brands">${brandBtns}</div>
+  `;
+  document.body.appendChild(sheet);
 }
 
 function toggleSoftDropdown(e) {
@@ -408,7 +473,7 @@ function renderHard() {
       <h2 class="section-hero-title">${t('hard_title')}</h2>
       <p class="section-hero-meta">${products.length} ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
     </div>
-    <div class="grid" style="padding:20px 22px 28px">${products.map(p => createCard(p)).join('')}</div>`;
+    <div class="grid hard-grid">${products.map(p => createCard(p)).join('')}</div>`;
 }
 
 function renderTools() {

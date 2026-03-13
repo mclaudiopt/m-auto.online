@@ -398,6 +398,8 @@ header {
 .app-container {
 	width: 100%;
 	padding: 30px;
+	/* compensa a nav sticky que sobrepõe 70px (= --header-h) de conteúdo */
+	padding-top: calc(var(--header-h) + 30px);
 	box-sizing: border-box;
 	min-height: 600px;
 	max-width: 1600px;
@@ -1274,6 +1276,7 @@ body {
 .brand-hero-eyebrow,
 .brand-hero-title,
 .brand-hero-wm,
+.section-hero-wm,
 .panel-header,
 .content-title {
   font-family: 'Syne', 'Inter', sans-serif !important;
@@ -1417,25 +1420,14 @@ body {
 .brand-hero {
   background: var(--brand-color);
   background: linear-gradient(135deg, var(--brand-color) 0%, var(--brand-color) 100%);
-  padding: 22px 28px 18px;
+  padding: 22px 30px 18px;
+  /* alinhar com edges externas: content-wrapper herdou padding do app-container */
+  margin: 0 -30px;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
 }
-.brand-hero-wm {
-  position: absolute;
-  right: -10px;
-  top: -20px;
-  font-size: 6.5rem;
-  font-weight: 900;
-  color: rgba(255,255,255,0.07);
-  letter-spacing: -0.04em;
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
-  text-transform: uppercase;
-  font-style: italic;
-}
+/* .brand-hero-wm — estilos de animação estão no bloco v8.1b abaixo */
 .brand-hero-eyebrow {
   font-size: 0.65rem;
   font-weight: 700;
@@ -1468,7 +1460,9 @@ body {
   display: none; /* substituído pelo brand-hero */
 }
 .brand-grid {
-  padding: 20px 22px 28px;
+  /* margens negativas para alinhar com brand-hero (que também tem margin: 0 -30px) */
+  margin: 0 -30px;
+  padding: 20px 30px 28px;
   flex: 1;
 }
 
@@ -1646,20 +1640,38 @@ body {
   margin-bottom: 8px !important;
 }
 
-/* ── WATERMARK: animação da esquerda para a direita ── */
-@keyframes wm-scroll {
-  0%   { transform: translateX(-120%); opacity: 0.04; }
-  10%  { opacity: 0.07; }
-  90%  { opacity: 0.07; }
-  100% { transform: translateX(120%); opacity: 0.04; }
+/* ── WATERMARK: animação marquee cinematic — esquerda → direita ── */
+@keyframes wm-sweep {
+  0%   { transform: translateY(-50%) translateX(calc(-100% - 30px)); }
+  100% { transform: translateY(-50%) translateX(calc(100vw + 30px)); }
 }
 .brand-hero-wm {
   position: absolute !important;
   left: 0 !important;
-  right: auto !important;
-  top: -15px !important;
-  animation: wm-scroll 14s linear infinite !important;
+  top: 50% !important;
+  font-size: 8rem !important;
+  font-weight: 900 !important;
+  font-style: italic !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1 !important;
   white-space: nowrap !important;
+  user-select: none !important;
+  pointer-events: none !important;
+  text-transform: uppercase !important;
+  /* Gradiente horizontal: fade nas bordas, mais visível no centro — efeito reflexo */
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0)    0%,
+    rgba(255,255,255,0.12) 25%,
+    rgba(255,255,255,0.20) 50%,
+    rgba(255,255,255,0.12) 75%,
+    rgba(255,255,255,0)    100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: wm-sweep 22s linear infinite !important;
 }
 
 /* ── NAV PILL ACTIVE: azul fixo — independente da cor da marca ── */
@@ -1974,7 +1986,8 @@ body {
 /* ── SECTION HERO (Hardware / Downloads / Serviços) ── */
 .section-hero {
   background: linear-gradient(135deg, #1a2744 0%, #1e3a5f 100%);
-  padding: 22px 28px 18px;
+  padding: 22px 30px 18px;
+  margin: 0 -30px;  /* flush lateral com o nav bar — sem toque no top */
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -1982,18 +1995,29 @@ body {
 .section-hero-wm {
   position: absolute;
   left: 0;
-  top: -15px;
-  font-size: 6.5rem;
+  top: 50%;
+  font-size: 8rem;
   font-weight: 900;
-  color: rgba(255,255,255,0.06);
+  font-style: italic;
   letter-spacing: -0.04em;
   line-height: 1;
+  white-space: nowrap;
   user-select: none;
   pointer-events: none;
   text-transform: uppercase;
-  font-style: italic;
-  white-space: nowrap;
-  animation: wm-scroll 14s linear infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0)    0%,
+    rgba(255,255,255,0.12) 25%,
+    rgba(255,255,255,0.20) 50%,
+    rgba(255,255,255,0.12) 75%,
+    rgba(255,255,255,0)    100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: wm-sweep 22s linear infinite;
 }
 .section-hero-eyebrow {
   font-size: 0.65rem;
@@ -2022,7 +2046,9 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
-  padding: 22px;
+  /* alinhar com edges do section-hero (que tem margin: -30px) */
+  margin: 0 -30px;
+  padding: 22px 30px;
 }
 @media (max-width: 900px) {
   .tool-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2087,6 +2113,12 @@ body {
 }
 .tool-card-btn:hover { background: #1d4ed8; }
 
+/* ── HARD-GRID: alinha com section-hero (margin flush) ── */
+.hard-grid {
+  margin: 0 -30px;
+  padding: 20px 30px 28px;
+}
+
 /* ── FIX LAYER: search-container com fundo sólido ── */
 .search-container {
   background: var(--bg-body) !important;
@@ -2095,3 +2127,171 @@ body {
 /* ── SOBRE: remover espaço do about-feats (já removido no HTML) ── */
 .about-feats { display: none !important; }
 .about-body  { min-height: 0 !important; }
+
+/* ══════════════════════════════════════════════════════
+   v8.1d — MOBILE NAV: ícones · 5 tabs · brand picker sheet
+   ══════════════════════════════════════════════════════ */
+
+/* 1. MOB-ITEM com ícone + label */
+.mob-item {
+  flex: 1;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  padding: 8px 4px !important;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-weight: 600;
+  transition: color 0.18s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.mob-item.active { color: var(--accent) !important; }
+.mob-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.mob-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* 2. MOBILE NAV — altura e safe-area iOS */
+@media (max-width: 768px) {
+  .mobile-nav {
+    height: calc(65px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+  }
+  /* brand hero e section hero flush lateral em mobile */
+  .section-hero,
+  .brand-hero {
+    margin-left:  -30px !important;
+    margin-right: -30px !important;
+  }
+  /* removido margin-top negativo — causa banner escondido atrás da nav */
+  /* grids alinhados com os heroes */
+  .tool-grid,
+  .brand-grid,
+  .hard-grid {
+    margin-left:  -30px !important;
+    margin-right: -30px !important;
+    padding-left:  30px !important;
+    padding-right: 30px !important;
+  }
+  /* espaço extra na parte inferior para não ficar atrás da mobile-nav */
+  .app-container {
+    padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* 3. BRAND PICKER — bottom sheet */
+.mob-sheet-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1998;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.mob-sheet-overlay.open { display: block; }
+
+.mob-brand-sheet {
+  position: fixed;
+  bottom: calc(65px + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-radius: 22px 22px 0 0;
+  padding: 12px 0 20px;
+  z-index: 1999;
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+  max-height: 72vh;
+  overflow-y: auto;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.15);
+}
+.mob-brand-sheet.open { transform: translateY(0); }
+
+.mob-sheet-handle {
+  width: 38px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 0 auto 14px;
+}
+.mob-sheet-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 20px 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+.mob-sheet-brands {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+}
+.mob-sheet-brand-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.mob-sheet-brand-btn:active,
+.mob-sheet-brand-btn.active {
+  background: var(--bg-body);
+}
+.mob-sheet-brand-swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.mob-sheet-brand-name {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+.mob-sheet-brand-btn.active .mob-sheet-brand-name {
+  font-weight: 700;
+  color: var(--accent);
+}
+.mob-sheet-brand-count {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg-body);
+  color: var(--text-muted);
+}
+[data-theme="dark"] .mob-brand-sheet {
+  background: #0f172a;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.5);
+}
+[data-theme="dark"] .mob-sheet-brand-btn:active,
+[data-theme="dark"] .mob-sheet-brand-btn.active {
+  background: #020617;
+}
