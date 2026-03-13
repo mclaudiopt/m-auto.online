@@ -1,0 +1,30 @@
+[
+  {
+    "id": "srv_remote_install",
+    "icon": "🖥️",
+    "pt": { "title": "Instalação remota de software", "desc": "Instalação profissional e otimizada de software de diagnóstico via acesso remoto." },
+    "en": { "title": "Remote software installation", "desc": "Professional and optimized diagnostic software installation via remote access." },
+    "fr": { "title": "Installation logicielle à distance", "desc": "Installation professionnelle et optimisée de logiciels de diagnostic via accès à distance." }
+  },
+  {
+    "id": "srv_support",
+    "icon": "🔧",
+    "pt": { "title": "Suporte técnico", "desc": "Apoio técnico remoto durante e após a instalação do software." },
+    "en": { "title": "Technical support", "desc": "Remote technical support during and after software installation." },
+    "fr": { "title": "Support technique", "desc": "Assistance technique à distance pendant et après l'installation." }
+  },
+  {
+    "id": "srv_update",
+    "icon": "🔄",
+    "pt": { "title": "Atualizações", "desc": "Atualização de bases de dados e novas versões de software de diagnóstico." },
+    "en": { "title": "Updates", "desc": "Database updates and new diagnostic software versions." },
+    "fr": { "title": "Mises à jour", "desc": "Mise à jour des bases de données et nouvelles versions logicielles." }
+  },
+  {
+    "id": "srv_config",
+    "icon": "⚙️",
+    "pt": { "title": "Configuração de sistema", "desc": "Ajustes de sistema operativo para garantir desempenho e estabilidade do software." },
+    "en": { "title": "System setup", "desc": "Operating system tweaks to ensure software performance and stability." },
+    "fr": { "title": "Configuration système", "desc": "Réglages du système d'exploitation pour garantir performance et stabilité." }
+  }
+]

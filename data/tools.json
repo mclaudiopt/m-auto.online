@@ -1,0 +1,42 @@
+[
+  {
+    "id": "tool_deskin",
+    "icon": "DK",
+    "faIcon": "fa-solid fa-display",
+    "iconBg": "#10b981",
+    "url": "https://www.deskin.io/download",
+    "pt": { "name": "DeskIn", "desc": "Software de acesso remoto para instalação assistida." },
+    "en": { "name": "DeskIn", "desc": "Remote access software for assisted installation." },
+    "fr": { "name": "DeskIn", "desc": "Logiciel d'accès à distance pour installation assistée." }
+  },
+  {
+    "id": "tool_win11",
+    "icon": "W11",
+    "faIcon": "fa-brands fa-windows",
+    "iconBg": "#0078d4",
+    "url": "https://www.microsoft.com/software-download/windows11",
+    "pt": { "name": "Win 11 Boot", "desc": "Ferramenta oficial Microsoft de criação de mídia Windows 11." },
+    "en": { "name": "Win 11 Boot", "desc": "Official Microsoft Windows 11 media creation tool." },
+    "fr": { "name": "Win 11 Boot", "desc": "Outil officiel Microsoft de création de média Windows 11." }
+  },
+  {
+    "id": "tool_7zip",
+    "icon": "7Z",
+    "faIcon": "fa-solid fa-file-zipper",
+    "iconBg": "#f59e0b",
+    "url": "https://www.7-zip.org/download.html",
+    "pt": { "name": "7-Zip", "desc": "Gestor de arquivos comprimidos gratuito e open-source." },
+    "en": { "name": "7-Zip", "desc": "Free and open-source file archiver." },
+    "fr": { "name": "7-Zip", "desc": "Archiveur de fichiers gratuit et open-source." }
+  },
+  {
+    "id": "tool_dcontrol",
+    "icon": "DC",
+    "faIcon": "fa-solid fa-shield-halved",
+    "iconBg": "#ef4444",
+    "url": "https://drive.usercontent.google.com/download?id=1jxmKjN820qP_cLZLgbeBi-aP5DUbROle&export=download&authuser=0",
+    "pt": { "name": "DControl", "desc": "Utilitário portátil para gestão do Windows Defender." },
+    "en": { "name": "DControl", "desc": "Portable utility for Windows Defender management." },
+    "fr": { "name": "DControl", "desc": "Utilitaire portable pour la gestion de Windows Defender." }
+  }
+]

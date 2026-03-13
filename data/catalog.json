@@ -1,0 +1,544 @@
+[
+  {
+    "id": "merc_full_pack",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/mauto/m-auto.png",
+    "premium": true,
+    "badge": "badge_best",
+    "span_full": false,
+    "price_key": "price_pack",
+    "features": ["Xentry, WIS, EPC 2023", "DTS 9.02, Vediamo 5", "Price List 2025", "Full Databases"],
+    "meta": {},
+    "pt": { "name": "Mercedes Full Pack 2026", "short": "The Complete Solution.", "details": "Inclui Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools e Certificados." },
+    "en": { "name": "Mercedes Full Pack 2026", "short": "The Complete Solution.", "details": "Includes Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools and Certificates." },
+    "fr": { "name": "Mercedes Full Pack 2026", "short": "The Complete Solution.", "details": "Inclut Xentry, WIS, EPC, Starfinder, Vediamo, DTS 9, MbTools et certificats." }
+  },
+  {
+    "id": "merc_xentry_cars",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-xentry-cars.jpg",
+    "meta": { "version": "01/2025" },
+    "pt": { "name": "Xentry Cars", "short": "Ligeiros.", "details": "" },
+    "en": { "name": "Xentry Cars", "short": "Passenger cars.", "details": "" },
+    "fr": { "name": "Xentry Cars", "short": "Voitures particulières.", "details": "" }
+  },
+  {
+    "id": "merc_xentry_trucks",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-xentry-trucks.jpg",
+    "meta": { "version": "01/2025" },
+    "pt": { "name": "Xentry Trucks", "short": "Pesados.", "details": "" },
+    "en": { "name": "Xentry Trucks", "short": "Heavy vehicles.", "details": "" },
+    "fr": { "name": "Xentry Trucks", "short": "Poids lourds.", "details": "" }
+  },
+  {
+    "id": "merc_wis",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/wis.jpg",
+    "meta": { "year": "2021" },
+    "pt": { "name": "WIS 2021", "short": "Manuais técnicos.", "details": "" },
+    "en": { "name": "WIS 2021", "short": "Workshop manuals.", "details": "" },
+    "fr": { "name": "WIS 2021", "short": "Manuels techniques.", "details": "" }
+  },
+  {
+    "id": "merc_epc",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/epc.jpg",
+    "meta": { "year": "2018" },
+    "pt": { "name": "EPC", "short": "Catálogo de peças.", "details": "" },
+    "en": { "name": "EPC", "short": "Parts catalog.", "details": "" },
+    "fr": { "name": "EPC", "short": "Catalogue de pièces.", "details": "" }
+  },
+  {
+    "id": "merc_vgsnag2",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-vgsnag2.jpg",
+    "meta": {},
+    "pt": { "name": "VGSNAG2 Manager", "short": "Caixa de velocidades 722.9.", "details": "" },
+    "en": { "name": "VGSNAG2 Manager", "short": "722.9 Gearbox tool.", "details": "" },
+    "fr": { "name": "VGSNAG2 Manager", "short": "Boîte de vitesses 722.9.", "details": "" }
+  },
+  {
+    "id": "merc_dts9",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/Merc-DTS9.jpg",
+    "meta": {},
+    "pt": { "name": "DTS Monaco 9.02", "short": "Engenharia.", "details": "" },
+    "en": { "name": "DTS Monaco 9.02", "short": "Engineering.", "details": "" },
+    "fr": { "name": "DTS Monaco 9.02", "short": "Ingénierie.", "details": "" }
+  },
+  {
+    "id": "merc_vediamo",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/Merc-Vediamo.jpg",
+    "meta": {},
+    "pt": { "name": "Vediamo 4/5", "short": "Engenharia avançada.", "details": "" },
+    "en": { "name": "Vediamo 4/5", "short": "Advanced engineering.", "details": "" },
+    "fr": { "name": "Vediamo 4/5", "short": "Ingénierie avancée.", "details": "" }
+  },
+  {
+    "id": "merc_hhtwin",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-htt.jpg",
+    "meta": {},
+    "pt": { "name": "HHTWIN", "short": "Veículos clássicos.", "details": "" },
+    "en": { "name": "HHTWIN", "short": "Classic vehicles.", "details": "" },
+    "fr": { "name": "HHTWIN", "short": "Véhicules classiques.", "details": "" }
+  },
+  {
+    "id": "merc_7g",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-7g-tools.jpg",
+    "meta": {},
+    "pt": { "name": "7G Tronic", "short": "Reset de transmissão.", "details": "" },
+    "en": { "name": "7G Tronic", "short": "Transmission reset.", "details": "" },
+    "fr": { "name": "7G Tronic", "short": "Réinitialisation transmission.", "details": "" }
+  },
+  {
+    "id": "merc_zenzefi",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-certificates.jpg",
+    "meta": {},
+    "pt": { "name": "Certificados ZenZefi", "short": "Acesso offline.", "details": "" },
+    "en": { "name": "ZenZefi Certificates", "short": "Offline access.", "details": "" },
+    "fr": { "name": "Certificats ZenZefi", "short": "Accès hors ligne.", "details": "" }
+  },
+  {
+    "id": "merc_mbtools",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-mbtools.jpg",
+    "meta": {},
+    "pt": { "name": "MbTools", "short": "Utilitário.", "details": "" },
+    "en": { "name": "MbTools", "short": "Utility.", "details": "" },
+    "fr": { "name": "MbTools", "short": "Utilitaire.", "details": "" }
+  },
+  {
+    "id": "merc_pricelist",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-pricelist.jpg",
+    "meta": {},
+    "pt": { "name": "Price List 2025", "short": "Lista de preços Excel.", "details": "" },
+    "en": { "name": "Price List 2025", "short": "Excel price list.", "details": "" },
+    "fr": { "name": "Price List 2025", "short": "Liste de prix Excel.", "details": "" }
+  },
+  {
+    "id": "merc_tutorials",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-tutorials.jpg",
+    "meta": {},
+    "pt": { "name": "Coding Tutorials", "short": "Guias de codificação.", "details": "" },
+    "en": { "name": "Coding Tutorials", "short": "Coding guides.", "details": "" },
+    "fr": { "name": "Coding Tutorials", "short": "Guides de codage.", "details": "" }
+  },
+  {
+    "id": "merc_vindecoder",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-vindecoder.jpg",
+    "meta": {},
+    "pt": { "name": "VIN Decoder", "short": "Identificação de veículo.", "details": "Base de dados FBS completa para identificação e descodificação de VIN Mercedes-Benz." },
+    "en": { "name": "VIN Decoder", "short": "Vehicle identification.", "details": "Full FBS database for Mercedes-Benz VIN identification and decoding." },
+    "fr": { "name": "VIN Decoder", "short": "Identification véhicule.", "details": "Base de données FBS complète pour l'identification et le décodage VIN Mercedes-Benz." }
+  },
+  {
+    "id": "merc_sdmedia",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-sdmedia.jpg",
+    "meta": {},
+    "pt": { "name": "SDMedia", "short": "Multimédia.", "details": "" },
+    "en": { "name": "SDMedia", "short": "Multimedia.", "details": "" },
+    "fr": { "name": "SDMedia", "short": "Multimédia.", "details": "" }
+  },
+  {
+    "id": "vag_odis_service",
+    "section": "soft",
+    "brand": "vag",
+    "img": "IMG/VAG/vag-odis-service.jpg",
+    "meta": {},
+    "pt": { "name": "ODIS Service", "short": "Diagnóstico.", "details": "Sistema oficial de diagnóstico VAG para leitura/apagamento de falhas, dados em tempo real e funções de serviço." },
+    "en": { "name": "ODIS Service", "short": "Diagnostics.", "details": "Official VAG diagnostic system for fault reading/clearing, live data and service functions." },
+    "fr": { "name": "ODIS Service", "short": "Diagnostic.", "details": "Système officiel de diagnostic VAG pour lecture/effacement de défauts, données en temps réel et fonctions de service." }
+  },
+  {
+    "id": "vag_odis_eng",
+    "section": "soft",
+    "brand": "vag",
+    "img": "IMG/VAG/vag-odis-eng.jpg",
+    "meta": {},
+    "pt": { "name": "ODIS Engineering", "short": "Engenharia.", "details": "Software de engenharia VAG para codificação avançada e parametrização de módulos." },
+    "en": { "name": "ODIS Engineering", "short": "Engineering.", "details": "VAG engineering software for advanced coding and module parameterisation." },
+    "fr": { "name": "ODIS Engineering", "short": "Ingénierie.", "details": "Logiciel d'ingénierie VAG pour le codage avancé et la paramétrisation des calculateurs." }
+  },
+  {
+    "id": "bmw_ista_plus",
+    "section": "soft",
+    "brand": "bmw",
+    "img": "IMG/BMW/BMW-Ista.jpg",
+    "meta": { "version": "4.4x", "year": "2026", "os": "W10/11" },
+    "pt": {
+      "name": "ISTA+",
+      "short": "Diagnóstico BMW/MINI com funções avançadas e leitura completa de módulos.",
+      "details": "<ul><li>Leitura e apagamento de erros (DTC)</li><li>Dados em tempo real e testes</li><li>Funções de serviço e manutenção</li></ul>"
+    },
+    "en": {
+      "name": "ISTA+",
+      "short": "BMW/MINI diagnostics with advanced functions and full module scanning.",
+      "details": "<ul><li>Read &amp; clear fault codes (DTC)</li><li>Live data and tests</li><li>Service and maintenance functions</li></ul>"
+    },
+    "fr": {
+      "name": "ISTA+",
+      "short": "Diagnostic BMW/MINI avec fonctions avancées et scan complet des calculateurs.",
+      "details": "<ul><li>Lecture/effacement des défauts (DTC)</li><li>Données en temps réel et tests</li><li>Fonctions service et maintenance</li></ul>"
+    }
+  },
+  {
+    "id": "bmw_ista_p",
+    "section": "soft",
+    "brand": "bmw",
+    "img": "IMG/BMW/BMW-Ista.jpg",
+    "meta": {},
+    "pt": { "name": "ISTA-P", "short": "Programação de módulos.", "details": "" },
+    "en": { "name": "ISTA-P", "short": "Module programming.", "details": "" },
+    "fr": { "name": "ISTA-P", "short": "Programmation de calculateurs.", "details": "" }
+  },
+  {
+    "id": "psa_diagbox_9208",
+    "section": "soft",
+    "brand": "psa",
+    "img": "IMG/PSA/psa-diagbox9.jpg",
+    "meta": { "version": "9.208", "year": "2025", "os": "Win 10/11 (64-bit)" },
+    "pt": {
+      "name": "Diagbox 9.208",
+      "short": "Diagbox V9.208 (2025) — Instalação nativa para Peugeot, Citroën, DS e Opel.",
+      "details": "<b>Diagbox V9.208 (Versão 2025) — Instalação Nativa</b><br><br>A versão mais recente e estável do software de diagnóstico PSA. Suporte total aos veículos lançados até início de 2025, sem necessidade de Máquina Virtual.<br><br><b>Novidades na V9.208:</b><ul><li><b>Base de dados atualizada (2025):</b> novos modelos Peugeot 308 III, 408, Citroën C4 X, C5 X, facelift 208/2008.</li><li><b>Integração Opel melhorada:</b> Corsa F, Mokka B, Grandland, Astra L.</li><li><b>Instalação nativa Win 10/11 (64-bit):</b> mais rápida e estável que VM.</li><li><b>Correção de bugs:</b> ECUs recentes, AdBlue, BSI 2020+.</li></ul><b>Funcionalidades:</b><ul><li>Leitura/apagamento de DTCs</li><li>Dados em tempo real</li><li>Reset de intervalos de serviço</li><li>Regeneração FAP/DPF e verificação AdBlue</li><li>Codificação de injetores</li><li>Auto-scan completo</li></ul>"
+    },
+    "en": {
+      "name": "Diagbox 9.208",
+      "short": "Diagbox v9.208 (2025) — Native install for Peugeot, Citroën, DS and Opel.",
+      "details": "<b>Diagbox v9.208 (2025) — Native Installation</b><br><br>The latest and most stable PSA diagnostic software. Full support for vehicles up to early 2025, no Virtual Machine required.<br><br><b>What's new in v9.208:</b><ul><li><b>Updated database (2025):</b> Peugeot 308 III, 408, Citroën C4 X, C5 X, facelift 208/2008.</li><li><b>Improved Opel integration:</b> Corsa F, Mokka B, Grandland, Astra L.</li><li><b>Native Win 10/11 (64-bit):</b> faster and more stable than VM versions.</li><li><b>Bug fixes:</b> newer ECUs, AdBlue, BSI 2020+.</li></ul><b>Features:</b><ul><li>Read/clear DTCs</li><li>Live data</li><li>Service interval reset</li><li>DPF/FAP regeneration and AdBlue checks</li><li>Injector coding</li><li>Full auto-scan</li></ul>"
+    },
+    "fr": {
+      "name": "Diagbox 9.208",
+      "short": "Diagbox v9.208 (2025) — Installation native pour Peugeot, Citroën, DS et Opel.",
+      "details": "<b>Diagbox v9.208 (2025) — Installation native</b><br><br>La version la plus récente et stable du logiciel PSA. Support complet jusqu'à début 2025, sans Machine Virtuelle.<br><br><b>Nouveautés v9.208 :</b><ul><li><b>Base de données 2025 :</b> Peugeot 308 III, 408, Citroën C4 X, C5 X, facelift 208/2008.</li><li><b>Meilleure intégration Opel :</b> Corsa F, Mokka B, Grandland, Astra L.</li><li><b>Natif Win 10/11 (64-bit) :</b> plus rapide et stable qu'en VM.</li><li><b>Corrections de bugs :</b> ECUs récents, AdBlue, BSI 2020+.</li></ul><b>Fonctions :</b><ul><li>Lecture/effacement DTCs</li><li>Données en temps réel</li><li>Reset intervalles d'entretien</li><li>Régénération FAP/DPF et AdBlue</li><li>Codage injecteurs</li><li>Auto-scan complet</li></ul>"
+    }
+  },
+  {
+    "id": "psa_diagbox_7",
+    "section": "soft",
+    "brand": "psa",
+    "img": "IMG/PSA/psa-diagbox7.jpg",
+    "meta": {},
+    "pt": { "name": "Diagbox 7", "short": "Modelos antigos.", "details": "Versão clássica do Diagbox para veículos Peugeot/Citroën mais antigos." },
+    "en": { "name": "Diagbox 7", "short": "Legacy vehicles.", "details": "Classic Diagbox version for older Peugeot/Citroën vehicles." },
+    "fr": { "name": "Diagbox 7", "short": "Anciens modèles.", "details": "Version classique du Diagbox pour les anciens véhicules Peugeot/Citroën." }
+  },
+  {
+    "id": "renault_clip",
+    "section": "soft",
+    "brand": "renault",
+    "img": "IMG/Renault/clip.jpg",
+    "meta": { "version": "—", "year": "—", "os": "—" },
+    "pt": {
+      "name": "Renault CLIP",
+      "short": "Diagnóstico Renault/Dacia com funções avançadas.",
+      "details": "<ul><li>Leitura e apagamento de erros (DTC)</li><li>Dados em tempo real e testes</li><li>Funções de serviço e manutenção</li></ul>"
+    },
+    "en": {
+      "name": "Renault CLIP",
+      "short": "Renault/Dacia diagnostics with advanced functions.",
+      "details": "<ul><li>Read &amp; clear fault codes (DTC)</li><li>Live data and tests</li><li>Service and maintenance functions</li></ul>"
+    },
+    "fr": {
+      "name": "Renault CLIP",
+      "short": "Diagnostic Renault/Dacia avec fonctions avancées.",
+      "details": "<ul><li>Lecture/effacement des défauts (DTC)</li><li>Données en temps réel et tests</li><li>Fonctions service et maintenance</li></ul>"
+    }
+  },
+  {
+    "id": "renault_dialogys",
+    "section": "soft",
+    "brand": "renault",
+    "img": "IMG/Renault/renault-dialogys.jpg",
+    "meta": {},
+    "pt": { "name": "Dialogys", "short": "Documentação técnica.", "details": "Documentação técnica oficial Renault/Dacia: manuais de reparação, esquemas elétricos e catálogo de peças." },
+    "en": { "name": "Dialogys", "short": "Technical documentation.", "details": "Official Renault/Dacia technical documentation: repair manuals, wiring diagrams and parts catalog." },
+    "fr": { "name": "Dialogys", "short": "Documentation technique.", "details": "Documentation technique officielle Renault/Dacia : manuels de réparation, schémas électriques et catalogue de pièces." }
+  },
+  {
+    "id": "jlr_seedkey",
+    "section": "soft",
+    "brand": "jlr",
+    "img": "IMG/JLR/seedkey.jpg",
+    "meta": {},
+    "pt": { "name": "JLR SeedKey", "short": "Gerador de chaves de segurança.", "details": "Gerador de chaves Seed/Key para acesso a módulos de segurança JLR." },
+    "en": { "name": "JLR SeedKey", "short": "Security key generator.", "details": "Seed/Key generator for JLR security module access." },
+    "fr": { "name": "JLR SeedKey", "short": "Générateur de clés de sécurité.", "details": "Générateur Seed/Key pour l'accès aux modules de sécurité JLR." }
+  },
+  {
+    "id": "jlr_pathfinder",
+    "section": "soft",
+    "brand": "jlr",
+    "img": "IMG/JLR/jlr-pathfinder.jpg",
+    "meta": {},
+    "pt": { "name": "Pathfinder", "short": "Veículos recentes.", "details": "Software de diagnóstico JLR para a nova arquitectura de veículos Land Rover e Jaguar." },
+    "en": { "name": "Pathfinder", "short": "Modern vehicles.", "details": "JLR diagnostic software for the new Land Rover and Jaguar vehicle architecture." },
+    "fr": { "name": "Pathfinder", "short": "Véhicules récents.", "details": "Logiciel de diagnostic JLR pour la nouvelle architecture Land Rover et Jaguar." }
+  },
+  {
+    "id": "jlr_sdd",
+    "section": "soft",
+    "brand": "jlr",
+    "img": "IMG/JLR/JLR-sdd.jpg",
+    "meta": {},
+    "pt": { "name": "SDD", "short": "Veículos antigos.", "details": "Symptom Driven Diagnostics — ferramenta de diagnóstico clássica para modelos JLR anteriores ao Pathfinder." },
+    "en": { "name": "SDD", "short": "Legacy vehicles.", "details": "Symptom Driven Diagnostics — classic diagnostic tool for JLR models prior to Pathfinder." },
+    "fr": { "name": "SDD", "short": "Anciens modèles.", "details": "Symptom Driven Diagnostics — outil de diagnostic classique pour les modèles JLR antérieurs à Pathfinder." }
+  },
+  {
+    "id": "toyota_techstream",
+    "section": "soft",
+    "brand": "toyota",
+    "img": "IMG/Toyota/toyota-techstream.jpg",
+    "meta": {},
+    "pt": { "name": "Techstream", "short": "Diagnóstico Toyota/Lexus.", "details": "Software oficial de fábrica Toyota/Lexus para diagnóstico completo, codificação e funções de serviço." },
+    "en": { "name": "Techstream", "short": "Toyota/Lexus diagnostics.", "details": "Official Toyota/Lexus factory software for full diagnostics, coding and service functions." },
+    "fr": { "name": "Techstream", "short": "Diagnostic Toyota/Lexus.", "details": "Logiciel d'usine officiel Toyota/Lexus pour diagnostic complet, codage et fonctions de service." }
+  },
+  {
+    "id": "toyota_epc",
+    "section": "soft",
+    "brand": "toyota",
+    "img": "IMG/Toyota/epc.jpg",
+    "meta": {},
+    "pt": { "name": "Toyota EPC", "short": "Catálogo de peças.", "details": "" },
+    "en": { "name": "Toyota EPC", "short": "Parts catalog.", "details": "" },
+    "fr": { "name": "Toyota EPC", "short": "Catalogue de pièces.", "details": "" }
+  },
+  {
+    "id": "toyota_toylex",
+    "section": "soft",
+    "brand": "toyota",
+    "img": "IMG/Toyota/Toylex.jpg",
+    "meta": {},
+    "pt": { "name": "Toylex 4", "short": "Utilitário Toyota.", "details": "Desativador de sensor de imobilizador para Toyota/Lexus." },
+    "en": { "name": "Toylex 4", "short": "Toyota utility.", "details": "Immobiliser sensor deactivator for Toyota/Lexus." },
+    "fr": { "name": "Toylex 4", "short": "Utilitaire Toyota.", "details": "Désactivateur de capteur d'immobilisateur pour Toyota/Lexus." }
+  },
+  {
+    "id": "nissan_consult",
+    "section": "soft",
+    "brand": "nissan",
+    "img": "IMG/Nissan/nissan-consult.jpg",
+    "meta": {},
+    "pt": { "name": "Consult III+", "short": "Diagnóstico Nissan.", "details": "Sistema avançado de diagnóstico oficial Nissan para leitura/apagamento de falhas, testes e programação." },
+    "en": { "name": "Consult III+", "short": "Nissan diagnostics.", "details": "Nissan official advanced diagnostic system for fault reading/clearing, tests and programming." },
+    "fr": { "name": "Consult III+", "short": "Diagnostic Nissan.", "details": "Système de diagnostic officiel Nissan pour lecture/effacement de défauts, tests et programmation." }
+  },
+  {
+    "id": "ford_fdrs",
+    "section": "soft",
+    "brand": "ford",
+    "img": "IMG/Ford/ford-fdrs.jpg",
+    "meta": {},
+    "pt": { "name": "FDRS", "short": "Veículos recentes.", "details": "Ford Diagnostic and Repair System — software oficial para diagnóstico e programação de veículos Ford modernos." },
+    "en": { "name": "FDRS", "short": "Modern vehicles.", "details": "Ford Diagnostic and Repair System — official software for diagnostics and programming of modern Ford vehicles." },
+    "fr": { "name": "FDRS", "short": "Véhicules récents.", "details": "Ford Diagnostic and Repair System — logiciel officiel pour diagnostic et programmation des Ford récents." }
+  },
+  {
+    "id": "ford_ids",
+    "section": "soft",
+    "brand": "ford",
+    "img": "IMG/Ford/ford-fdrs.jpg",
+    "meta": {},
+    "pt": { "name": "IDS", "short": "Veículos antigos.", "details": "Integrated Diagnostic System — ferramenta clássica Ford para modelos anteriores ao FDRS." },
+    "en": { "name": "IDS", "short": "Legacy vehicles.", "details": "Integrated Diagnostic System — classic Ford tool for models prior to FDRS." },
+    "fr": { "name": "IDS", "short": "Anciens modèles.", "details": "Integrated Diagnostic System — outil classique Ford pour les modèles antérieurs au FDRS." }
+  },
+  {
+    "id": "gm_gds2",
+    "section": "soft",
+    "brand": "gm",
+    "img": "IMG/GM/gm-gds2.jpg",
+    "meta": {},
+    "pt": {
+      "name": "GDS2",
+      "short": "Diagnóstico GM.",
+      "details": "<b>GDS2 — GM Global Diagnostic System 2</b><br><br>Aplicação de diagnóstico para veículos GM (Chevrolet, Opel, Cadillac, etc.).<br><br><b>Funções principais:</b><ul><li>Leitura e apagamento de DTCs e Freeze Frame</li><li>Leitura de VIN e números de peça ECU</li><li>Gravação e reprodução de dados</li><li>Controlo de saídas e testes de atuadores</li><li>Configuração e reset de funções</li></ul>"
+    },
+    "en": {
+      "name": "GDS2",
+      "short": "GM diagnostics.",
+      "details": "<b>GDS2 — GM Global Diagnostic System 2</b><br><br>PC-based diagnostic application for GM vehicles (Chevrolet, Opel, Cadillac, etc.).<br><br><b>Functions:</b><ul><li>Read codes, Freeze Frame and Clear Codes</li><li>Read VIN and ECU part numbers</li><li>Record, store and replay data</li><li>Output Control and actuator tests</li><li>Configure and Reset functions</li></ul>"
+    },
+    "fr": {
+      "name": "GDS2",
+      "short": "Diagnostic GM.",
+      "details": "<b>GDS2 — GM Global Diagnostic System 2</b><br><br>Application de diagnostic pour véhicules GM (Chevrolet, Opel, Cadillac, etc.).<br><br><b>Fonctions :</b><ul><li>Lecture et effacement de DTCs et Freeze Frame</li><li>Lecture du VIN et numéros de pièce ECU</li><li>Enregistrement et lecture des données</li><li>Contrôle des sorties et tests d'actionneurs</li><li>Configuration et reset de fonctions</li></ul>"
+    }
+  },
+  {
+    "id": "multi_delphi",
+    "section": "soft",
+    "brand": "multi",
+    "img": "IMG/Multibrand/delphi.jpg",
+    "meta": {},
+    "pt": {
+      "name": "Delphi",
+      "short": "Diagnóstico multimarca.",
+      "details": "Solução de diagnóstico multimarca com leitura/apagamento de falhas, dados em tempo real, funções de serviço e testes de atuadores (consoante versão e veículo)."
+    },
+    "en": {
+      "name": "Delphi",
+      "short": "Multi-brand diagnostics.",
+      "details": "Multi-brand diagnostic solution with fault reading/clearing, live data, service functions and actuator tests (depending on version and vehicle)."
+    },
+    "fr": {
+      "name": "Delphi",
+      "short": "Diagnostic multimarque.",
+      "details": "Solution de diagnostic multimarque avec lecture/effacement de défauts, données en temps réel, fonctions de service et tests d'actionneurs (selon version et véhicule)."
+    }
+  },
+  {
+    "id": "multi_autocom",
+    "section": "soft",
+    "brand": "multi",
+    "img": "IMG/Multibrand/autocom.jpg",
+    "meta": {},
+    "pt": {
+      "name": "Autocom",
+      "short": "Diagnóstico multimarca.",
+      "details": "Diagnóstico multimarca com boa cobertura para ligeiros e comerciais. Leitura/apagamento de falhas, dados em tempo real e funções de serviço (consoante versão)."
+    },
+    "en": {
+      "name": "Autocom",
+      "short": "Multi-brand diagnostics.",
+      "details": "Fast multi-brand diagnostics with good coverage for passenger cars and LCVs. Fault reading/clearing, live data and service functions (depending on version)."
+    },
+    "fr": {
+      "name": "Autocom",
+      "short": "Diagnostic multimarque.",
+      "details": "Diagnostic multimarque rapide pour véhicules légers et utilitaires. Lecture/effacement de défauts, données en temps réel et fonctions de service (selon version)."
+    }
+  },
+  {
+    "id": "hw_openport",
+    "section": "hard",
+    "img": "IMG/hardware/hw-openport.jpg",
+    "meta": {},
+    "pt": { "name": "Openport 2.0", "short": "Interface J2534.", "details": "Interface J2534 para diagnóstico e programação de ECUs. Compatível com múltiplos softwares de terceiros." },
+    "en": { "name": "Openport 2.0", "short": "J2534 Interface.", "details": "J2534 interface for ECU diagnostics and programming. Compatible with multiple third-party software tools." },
+    "fr": { "name": "Openport 2.0", "short": "Interface J2534.", "details": "Interface J2534 pour diagnostic et programmation d'ECU. Compatible avec plusieurs logiciels tiers." }
+  },
+  {
+    "id": "hw_c4",
+    "section": "hard",
+    "img": "IMG/hardware/hw-c4.jpg",
+    "meta": {},
+    "pt": { "name": "C4 Connect", "short": "Multiplexer Mercedes.", "details": "Multiplexer SD Connect C4 para diagnóstico completo Mercedes-Benz com Xentry/DAS." },
+    "en": { "name": "C4 Connect", "short": "Mercedes multiplexer.", "details": "SD Connect C4 multiplexer for full Mercedes-Benz diagnostics with Xentry/DAS." },
+    "fr": { "name": "C4 Connect", "short": "Multiplexeur Mercedes.", "details": "Multiplexeur SD Connect C4 pour diagnostic complet Mercedes-Benz avec Xentry/DAS." }
+  },
+  {
+    "id": "hw_scanmatik",
+    "section": "hard",
+    "img": "IMG/hardware/scanmatik.jpg",
+    "meta": {},
+    "pt": {
+      "name": "Scanmatik 3",
+      "short": "Interface multimarca profissional.",
+      "details": "<b>Scanmatik 3 — Scanner Profissional Multimarca</b><br><br>Interface J2534/RP1210 com suporte WiFi/USB e protocolos modernos (CAN-FD, DoIP).<br><ul><li>Tensão de programação ajustável (5-20V)</li><li>Multiplexer integrado</li><li>Barramentos: ISO-9141, CAN 2.0/CAN-FD, J1850VPW/PWM, Single Wire CAN</li><li>Inclui software para VAZ, GAZ, OBD2, etc.</li></ul>"
+    },
+    "en": {
+      "name": "Scanmatik 3",
+      "short": "Professional multi-brand interface.",
+      "details": "<b>Scanmatik 3 — Professional Multi-Brand Scanner</b><br><br>J2534/RP1210 interface with WiFi/USB and modern protocols (CAN-FD, DoIP).<br><ul><li>Adjustable programming voltage (5-20V)</li><li>Built-in multiplexer</li><li>Buses: ISO-9141, CAN 2.0/CAN-FD, J1850VPW/PWM, Single Wire CAN</li><li>Includes software for VAZ, GAZ, OBD2, etc.</li></ul>"
+    },
+    "fr": {
+      "name": "Scanmatik 3",
+      "short": "Interface multimarque professionnelle.",
+      "details": "<b>Scanmatik 3 — Scanner Professionnel Multimarque</b><br><br>Interface J2534/RP1210 avec WiFi/USB et protocoles modernes (CAN-FD, DoIP).<br><ul><li>Tension de programmation réglable (5-20V)</li><li>Multiplexeur intégré</li><li>Bus: ISO-9141, CAN 2.0/CAN-FD, J1850VPW/PWM, Single Wire CAN</li></ul>"
+    }
+  },
+  {
+    "id": "hw_vcx",
+    "section": "hard",
+    "img": "IMG/hardware/vcx.jpg",
+    "meta": {},
+    "pt": {
+      "name": "VCX SE",
+      "short": "Interface OEM multi-marca.",
+      "details": "<b>VCX SE</b> — Interface de diagnóstico versátil, alternativa económica a ferramentas OEM. Suporta DoIP, diagnóstico remoto e acesso dealer-level para Mercedes, BMW, JLR e outras marcas."
+    },
+    "en": {
+      "name": "VCX SE",
+      "short": "Multi-brand OEM interface.",
+      "details": "<b>VCX SE</b> — Versatile diagnostic interface, cost-effective OEM tool alternative. Supports DoIP, remote diagnostics and dealer-level access for Mercedes, BMW, JLR and more."
+    },
+    "fr": {
+      "name": "VCX SE",
+      "short": "Interface OEM multimarque.",
+      "details": "<b>VCX SE</b> — Interface de diagnostic polyvalente, alternative économique aux outils OEM. Supporte DoIP, diagnostic à distance et accès dealer pour Mercedes, BMW, JLR et autres."
+    }
+  },
+  {
+    "id": "hw_mbpro",
+    "section": "hard",
+    "img": "IMG/hardware/mbpro.jpg",
+    "meta": {},
+    "pt": { "name": "Super MB Pro M6", "short": "Multiplexer Mercedes.", "details": "Evolução do C4 Connect para diagnóstico Mercedes-Benz. Maior estabilidade e compatibilidade com versões recentes do Xentry." },
+    "en": { "name": "Super MB Pro M6", "short": "Mercedes multiplexer.", "details": "Evolution of the C4 Connect for Mercedes-Benz diagnostics. Greater stability and compatibility with recent Xentry versions." },
+    "fr": { "name": "Super MB Pro M6", "short": "Multiplexeur Mercedes.", "details": "Évolution du C4 Connect pour le diagnostic Mercedes-Benz. Plus grande stabilité et compatibilité avec les versions récentes de Xentry." }
+  },
+  {
+    "id": "hw_enet",
+    "section": "hard",
+    "img": "IMG/hardware/enet.jpg",
+    "meta": {},
+    "pt": { "name": "Cabo E-NET", "short": "Cabo Ethernet BMW.", "details": "Cabo Ethernet para BMW Série F/G. Permite codificação e diagnóstico rápido com ISTA+ e E-Sys." },
+    "en": { "name": "E-NET Cable", "short": "BMW Ethernet cable.", "details": "Ethernet cable for BMW F/G Series. Enables fast coding and diagnostics with ISTA+ and E-Sys." },
+    "fr": { "name": "Câble E-NET", "short": "Câble Ethernet BMW.", "details": "Câble Ethernet pour BMW Série F/G. Permet un codage et un diagnostic rapides avec ISTA+ et E-Sys." }
+  },
+  {
+    "id": "hw_clip",
+    "section": "hard",
+    "img": "IMG/hardware/clip.jpg",
+    "meta": {},
+    "pt": { "name": "Sonda Clip", "short": "Sonda VCI Renault.", "details": "Sonda VCI para diagnóstico Renault/Dacia com Renault CLIP." },
+    "en": { "name": "Clip Probe", "short": "Renault VCI probe.", "details": "VCI probe for Renault/Dacia diagnostics with Renault CLIP." },
+    "fr": { "name": "Sonde Clip", "short": "Sonde VCI Renault.", "details": "Sonde VCI pour le diagnostic Renault/Dacia avec Renault CLIP." }
+  },
+  {
+    "id": "hw_lexia",
+    "section": "hard",
+    "img": "IMG/hardware/lexia.jpg",
+    "meta": {},
+    "pt": { "name": "Lexia Full Chip", "short": "Interface PSA.", "details": "Interface Full Chip para diagnóstico PSA (Peugeot/Citroën) com Diagbox." },
+    "en": { "name": "Lexia Full Chip", "short": "PSA interface.", "details": "Full Chip interface for PSA (Peugeot/Citroën) diagnostics with Diagbox." },
+    "fr": { "name": "Lexia Full Chip", "short": "Interface PSA.", "details": "Interface Full Chip pour le diagnostic PSA (Peugeot/Citroën) avec Diagbox." }
+  },
+  {
+    "id": "hw_laptop",
+    "section": "hard",
+    "img": "IMG/hardware/laptop.jpg",
+    "meta": {},
+    "pt": { "name": "Laptop", "short": "Portátil recondicionado.", "details": "Portátil recondicionado pré-configurado e pronto a usar com software de diagnóstico." },
+    "en": { "name": "Laptop", "short": "Refurbished laptop.", "details": "Refurbished laptop pre-configured and ready to use with diagnostic software." },
+    "fr": { "name": "Laptop", "short": "Ordinateur reconditionné.", "details": "Ordinateur portable reconditionné, préconfiguré et prêt à l'emploi avec logiciel de diagnostic." }
+  }
+]
