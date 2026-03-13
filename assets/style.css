@@ -2301,6 +2301,10 @@ body {
    ══════════════════════════════════════════════════════ */
 
 /* ── 1. SEARCH NO HEADER ── */
+.header-right {
+  flex: 1 !important;
+  justify-content: flex-end !important;
+}
 .header-search {
   flex: 1 1 200px;
   max-width: 280px;
@@ -2386,5 +2390,93 @@ body {
 @media (max-width: 768px) {
   .sales-popup {
     bottom: calc(65px + 12px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   v8.1f — nav counts · skeleton loading · swipe dots
+   ══════════════════════════════════════════════════════ */
+
+/* ── 1. NAV PILL COUNTS ── */
+.nav-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 16px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 10px;
+  font-size: 0.60rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 0 5px;
+  margin-left: 5px;
+  vertical-align: middle;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-pill.active .nav-pill-count {
+  background: rgba(37,99,235,0.15);
+  color: #2563eb;
+}
+[data-theme="dark"] .nav-pill-count {
+  background: rgba(255,255,255,0.10);
+  color: #94a3b8;
+}
+[data-theme="dark"] .nav-pill.active .nav-pill-count {
+  background: rgba(59,130,246,0.20);
+  color: #60a5fa;
+}
+
+/* ── 2. SKELETON LOADING ── */
+@keyframes shimmer {
+  0%   { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
+}
+.card-skeleton {
+  pointer-events: none;
+  min-height: 164px;
+  overflow: hidden;
+}
+.skel {
+  background: linear-gradient(
+    90deg,
+    var(--border) 0%,
+    var(--bg-card) 45%,
+    var(--border) 100%
+  );
+  background-size: 500px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+.skel-bar  { height: 4px; border-radius: 0; width: 100%; }
+.skel-h3   { height: 18px; width: 68%; margin-bottom: 12px; }
+.skel-p1   { height: 11px; width: 100%; margin-bottom: 8px; }
+.skel-p2   { height: 11px; width: 52%; }
+
+/* ── 3. BRAND DOTS (indicador swipe mobile) ── */
+.brand-dots {
+  display: none;
+}
+@media (max-width: 768px) {
+  .brand-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 0 6px;
+    background: var(--brand-light);
+  }
+  .brand-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: width 0.22s ease, border-radius 0.22s ease, background 0.22s ease;
+  }
+  .brand-dot.active {
+    width: 20px;
+    border-radius: 3px;
   }
 }

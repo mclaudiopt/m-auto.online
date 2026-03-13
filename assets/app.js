@@ -160,6 +160,7 @@ let tools     = [];
 let lang      = 'pt';
 let activeSection = 'about';
 let activeBrand   = 'mercedes';
+let dataLoaded    = false;
 
 /* ─────────────────────────────────────────────
    4. UTILITÁRIOS
@@ -174,6 +175,48 @@ function prodData(item) {
 
 const ICON_ELLIPSIS = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`;
 const ICON_DOWNLOAD = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17V3zM5 19h14v2H5z"/></svg>`;
+
+function renderSkeletonCards(n = 6) {
+  return Array(n).fill(0).map(() => `
+    <div class="card card-skeleton">
+      <div class="skel skel-bar"></div>
+      <div class="card-body">
+        <div class="skel skel-h3"></div>
+        <div class="skel skel-p1"></div>
+        <div class="skel skel-p2"></div>
+      </div>
+    </div>`).join('');
+}
+
+function initBrandSwipe() {
+  const sec = document.getElementById('sec-soft');
+  if (!sec) return;
+  let startX = 0, startY = 0, startT = 0, moving = false;
+  sec.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    startT = Date.now();
+    moving = false;
+  }, { passive: true });
+  sec.addEventListener('touchmove', e => {
+    if (!moving) {
+      const dx = Math.abs(e.touches[0].clientX - startX);
+      const dy = Math.abs(e.touches[0].clientY - startY);
+      if (dx > dy && dx > 10) moving = true;
+    }
+  }, { passive: true });
+  sec.addEventListener('touchend', e => {
+    if (!moving) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50 && Date.now() - startT < 500) {
+      const ids = BRANDS.map(b => b.id);
+      const i = ids.indexOf(activeBrand);
+      if (dx < 0 && i < ids.length - 1) selectBrandFromNav(ids[i + 1]);
+      else if (dx > 0 && i > 0)         selectBrandFromNav(ids[i - 1]);
+    }
+    moving = false;
+  }, { passive: true });
+}
 
 /* ─────────────────────────────────────────────
    5. INICIALIZAÇÃO
@@ -192,6 +235,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     catalog  = cat;
     services = srv;
     tools    = tls;
+    dataLoaded = true;
   } catch(e) {
     console.error('Erro ao carregar dados:', e);
   }
@@ -206,6 +250,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   setBrandTheme(BRANDS[0]); // tema inicial: Mercedes
   renderSection('about');   // página inicial = SOBRE
   applyLang();
+  initBrandSwipe();
 
   // Viewers popup
   setTimeout(() => updateViewers(false), 5000);
@@ -256,21 +301,27 @@ function buildNav() {
     </button>`;
   }).join('');
 
+  const softCount  = catalog.filter(p => p.section === 'soft').length;
+  const hardCount  = catalog.filter(p => p.section === 'hard').length;
+  const toolCount  = tools.length;
+  const servCount  = services.length;
+  const nb = n => n > 0 ? `<span class="nav-pill-count">${n}</span>` : '';
+
   mainNav.innerHTML = `
     <div class="nav-dropdown-wrap${activeSection === 'soft' ? ' nav-sec-active' : ''}" id="softDropdown">
       <button type="button" class="nav-pill${activeSection === 'soft' ? ' active' : ''}"
         onclick="toggleSoftDropdown(event)" data-nav-key="nav_soft">
-        <span class="nav-pill-label">${t('nav_soft')}</span>
+        <span class="nav-pill-label">${t('nav_soft')}</span>${nb(softCount)}
         <span class="nav-dd-arrow">▾</span>
       </button>
       <div class="nav-dropdown-menu" id="softDropdownMenu">${brandItems}</div>
     </div>
     <button type="button" class="nav-pill${activeSection === 'hard'  ? ' active' : ''}"
-      onclick="switchSection('hard',  this)" data-nav-key="nav_hard">${t('nav_hard')}</button>
+      onclick="switchSection('hard',  this)" data-nav-key="nav_hard">${t('nav_hard')}${nb(hardCount)}</button>
     <button type="button" class="nav-pill${activeSection === 'tools' ? ' active' : ''}"
-      onclick="switchSection('tools', this)" data-nav-key="nav_tools">${t('nav_tools')}</button>
+      onclick="switchSection('tools', this)" data-nav-key="nav_tools">${t('nav_tools')}${nb(toolCount)}</button>
     <button type="button" class="nav-pill${activeSection === 'serv'  ? ' active' : ''}"
-      onclick="switchSection('serv',  this)" data-nav-key="nav_serv">${t('nav_serv')}</button>
+      onclick="switchSection('serv',  this)" data-nav-key="nav_serv">${t('nav_serv')}${nb(servCount)}</button>
     <button type="button" class="nav-pill${activeSection === 'about' ? ' active' : ''}"
       onclick="switchSection('about', this)" data-nav-key="nav_about">${t('nav_about')}</button>
   `;
@@ -450,18 +501,32 @@ function renderBrand(brandId) {
   const panel = document.getElementById('brand-' + brandId);
   if (!panel) return;
 
-  const brand = BRANDS.find(b => b.id === brandId) || BRANDS[0];
-  const label = brand.label.startsWith('brand_') ? t(brand.label) : brand.label;
+  const brand    = BRANDS.find(b => b.id === brandId) || BRANDS[0];
+  const label    = brand.label.startsWith('brand_') ? t(brand.label) : brand.label;
   const products = catalog.filter(p => p.section === 'soft' && p.brand === brandId);
+
+  // Brand dots (indicador swipe — visível só em mobile via CSS)
+  const brandIdx = BRANDS.findIndex(b => b.id === brandId);
+  const dotsHtml = `<div class="brand-dots">${BRANDS.map((b, i) =>
+    `<span class="brand-dot${i === brandIdx ? ' active' : ''}"
+      onclick="selectBrandFromNav('${b.id}')"
+      ${i === brandIdx ? `style="background:${brand.color}"` : ''}></span>`
+  ).join('')}</div>`;
+
+  // Grid: skeleton se dados ainda não carregaram, cards se já tem dados
+  const gridHtml = dataLoaded
+    ? (products.length > 0 ? products.map(p => createCard(p)).join('') : '')
+    : renderSkeletonCards(6);
 
   panel.innerHTML = `
     <div class="brand-hero">
       <div class="brand-hero-wm">${brand.watermark}</div>
       <div class="brand-hero-eyebrow">${t('brand_hero_eyebrow')}</div>
       <h2 class="brand-hero-title">${label}</h2>
-      <p class="brand-hero-meta">${products.length} ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
+      <p class="brand-hero-meta">${dataLoaded ? products.length : '—'} ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
     </div>
-    <div class="grid brand-grid">${products.map(p => createCard(p)).join('')}</div>
+    ${dotsHtml}
+    <div class="grid brand-grid">${gridHtml}</div>
   `;
 }
 
