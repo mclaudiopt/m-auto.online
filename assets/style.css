@@ -2295,3 +2295,96 @@ body {
 [data-theme="dark"] .mob-sheet-brand-btn.active {
   background: #020617;
 }
+
+/* ══════════════════════════════════════════════════════
+   v8.1e — search no header · banners uniformes · 4-col · popup inferior
+   ══════════════════════════════════════════════════════ */
+
+/* ── 1. SEARCH NO HEADER ── */
+.header-search {
+  flex: 1 1 200px;
+  max-width: 280px;
+  min-width: 120px;
+}
+.search-input-header {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-body);
+  color: var(--text-main);
+  font-size: 0.83rem;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input-header:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+[data-theme="dark"] .search-input-header {
+  background: #0b1220;
+  border-color: #1e293b;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .search-input-header:focus {
+  border-color: #3b82f6;
+}
+/* ocultar search no header em ecrã muito pequeno */
+@media (max-width: 540px) {
+  .header-search { display: none !important; }
+}
+/* garantir que o antigo search-container (removido do HTML) não aparece */
+.search-container { display: none !important; }
+
+/* ── 2. BANNERS UNIFORMES: section-hero igual ao brand-hero ── */
+/* border-radius na base — igual ao brand-hero */
+.section-hero {
+  border-radius: 0 0 14px 14px !important;
+}
+/* eyebrow pill — igual ao brand-hero-eyebrow */
+.section-hero-eyebrow {
+  display: inline-block !important;
+  background: rgba(255,255,255,0.15) !important;
+  padding: 3px 12px !important;
+  border-radius: 20px !important;
+  margin-bottom: 8px !important;
+}
+
+/* ── 3. DOWNLOADS: 4 colunas ── */
+.tool-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+@media (max-width: 1100px) {
+  .tool-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 750px) {
+  .tool-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 480px) {
+  .tool-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── 4. POPUP VISITANTES: dourado · inferior · centrado ── */
+.sales-popup {
+  bottom: 24px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) translateY(16px) !important;
+  opacity: 0 !important;
+  padding: 7px 14px 7px 10px !important;
+  gap: 7px !important;
+  max-width: 210px !important;
+  border-radius: 30px !important;
+  background: linear-gradient(90deg, #d97706, #b45309) !important;
+  box-shadow: 0 4px 20px rgba(180, 83, 9, 0.35) !important;
+}
+.sales-popup.active {
+  opacity: 1 !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+@media (max-width: 768px) {
+  .sales-popup {
+    bottom: calc(65px + 12px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}

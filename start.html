@@ -148,6 +148,10 @@
       </a>
     </div>
     <div class="header-right">
+      <div class="header-search">
+        <input type="text" id="searchInput" class="search-input-header"
+          placeholder="🔍 Procurar..." onkeyup="filterProducts()">
+      </div>
       <div class="controls-wrapper">
         <button type="button" class="theme-btn" onclick="toggleTheme()" title="Tema">☀️</button>
         <div class="lang-group">
@@ -281,10 +285,6 @@
     <div id="sec-soft" class="section-view">
       <div class="layout-flex">
         <div class="content-wrapper">
-          <div class="search-container">
-            <input type="text" id="searchInput" class="search-input"
-              placeholder="🔍 Procurar..." onkeyup="filterProducts()">
-          </div>
           <!-- Painéis de marca (construídos via JS) -->
           <div id="brand-mercedes"  class="brand-panel active"></div>
           <div id="brand-vag"       class="brand-panel"></div>

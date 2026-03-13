@@ -24,7 +24,7 @@ const TRANS = {
     hard_title: "Hardware", tools_title: "Downloads", serv_title: "Serviços",
     about_title: "Sobre",
     tools_meta: "Instalação remota assistida",
-    about_text: "Somos especialistas em software de diagnóstico automóvel com anos de experiência. Oferecemos um serviço profissional, com resposta rápida e suporte assegurado. As nossas instalações são limpas, otimizadas e garantidas. Trabalhamos com as melhores ferramentas do mercado para garantir que a sua oficina nunca para.",
+    about_text: "Somos especialistas em software de diagnóstico automóvel com anos de experiência. Oferecemos um serviço profissional, com resposta rápida e suporte assegurado.",
     popup_viewers: "visitantes online",
     wiz_os: "Que Windows tem?", wiz_ram: "Memória RAM?",
     wiz_disk: "Tipo de disco?", wiz_brand: "Marca do veículo?",
@@ -62,7 +62,7 @@ const TRANS = {
     hard_title: "Hardware", tools_title: "Downloads", serv_title: "Services",
     about_title: "About",
     tools_meta: "Remote assisted installation",
-    about_text: "We are specialists in automotive diagnostic software with years of experience. We offer a professional service, fast response and reliable support. Our installations are clean, optimized and guaranteed. We work with the best tools on the market to ensure your workshop never stops.",
+    about_text: "We are specialists in automotive diagnostic software with years of experience. We offer a professional service, fast response and reliable support.",
     popup_viewers: "visitors online",
     wiz_os: "Which Windows?", wiz_ram: "RAM memory?",
     wiz_disk: "Disk type?", wiz_brand: "Vehicle brand?",
@@ -100,7 +100,7 @@ const TRANS = {
     hard_title: "Matériel", tools_title: "Téléchargements", serv_title: "Services",
     about_title: "À Propos",
     tools_meta: "Installation à distance assistée",
-    about_text: "Nous sommes spécialistes des logiciels de diagnostic automobile avec des années d'expérience. Nous offrons un service professionnel, une réponse rapide et un support fiable. Nos installations sont propres, optimisées et garanties. Nous travaillons avec les meilleurs outils du marché pour que votre atelier ne s'arrête jamais.",
+    about_text: "Nous sommes spécialistes des logiciels de diagnostic automobile avec des années d'expérience. Nous offrons un service professionnel, une réponse rapide et un support fiable.",
     popup_viewers: "personnes en ligne",
     wiz_os: "Quel Windows ?", wiz_ram: "Mémoire RAM ?",
     wiz_disk: "Type de disque ?", wiz_brand: "Marque du véhicule ?",
@@ -407,6 +407,9 @@ function switchSection(id, btn) {
   document.getElementById('sec-' + id)?.classList.add('active');
   document.querySelectorAll('.nav-pill, .mob-item').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
+  // Limpar pesquisa ao mudar de secção
+  const srch = document.getElementById('searchInput');
+  if (srch && srch.value) { srch.value = ''; filterProducts(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   if (id === 'soft')  renderBrand(activeBrand);
