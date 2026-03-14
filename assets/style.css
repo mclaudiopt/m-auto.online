@@ -1466,17 +1466,7 @@ body {
   flex: 1;
 }
 
-/* ── CARD: brand top bar ── */
-.card-top-bar {
-  height: 4px;
-  background: var(--brand-color);
-  opacity: 0.7;
-  flex-shrink: 0;
-}
-.card.gold .card-top-bar {
-  background: var(--gold);
-  opacity: 1;
-}
+/* ── CARD: top bar removido (v8.1i) — cards mais compactos ── */
 
 /* ── CARD button: brand color ── */
 .btn-view-icon {
@@ -2903,3 +2893,116 @@ body {
 /* ── 6. ABOUT: remover features antigas (já limpas no JS) ── */
 .about-features { display: none !important; }
 .about-body { min-height: 0 !important; margin-bottom: 28px !important; }
+
+/* ════════════════════════════════════════════
+   v8.1i — Soft Landing page + card compact
+════════════════════════════════════════════ */
+
+/* ── SOFT LANDING: página "escolha software" ── */
+.soft-landing {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-start;
+}
+.soft-landing-wm {
+  position: absolute;
+  top: -0.15em;
+  right: -0.05em;
+  font-size: clamp(5rem, 16vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--brand-color);
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  line-height: 1;
+  animation: wmScroll 22s linear infinite;
+}
+.soft-landing-content {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem 2rem 2rem;
+  width: 100%;
+}
+.soft-landing-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  -webkit-font-smoothing: antialiased;
+}
+.soft-landing-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--brand-color);
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+  transition: color 0.45s ease;
+}
+.soft-landing-sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.soft-landing-brands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  max-width: 680px;
+}
+.soft-landing-brand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem 0.45rem 0.4rem;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: border-color 0.18s, background 0.18s, transform 0.16s, box-shadow 0.18s;
+  -webkit-font-smoothing: antialiased;
+}
+.soft-landing-brand-btn:hover {
+  border-color: var(--b-color, var(--brand-color));
+  background: var(--b-light, var(--brand-light));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.soft-landing-brand-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.58rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+
+/* ── CARD: sem top-bar → footer sem linha separadora ── */
+.card-footer {
+  margin-top: auto !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-top: none !important;
+  padding-top: 10px !important;
+}
+
+@media (max-width: 640px) {
+  .soft-landing-content { padding: 1.5rem 1.25rem; }
+  .soft-landing-brands { gap: 0.5rem; }
+  .soft-landing-brand-btn { font-size: 0.78rem; padding: 0.4rem 0.75rem 0.4rem 0.35rem; }
+  .soft-landing-brand-icon { width: 22px; height: 22px; font-size: 0.52rem; }
+}

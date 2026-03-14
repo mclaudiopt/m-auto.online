@@ -166,6 +166,7 @@ let tools     = [];
 let lang      = 'pt';
 let activeSection = 'about';
 let activeBrand   = 'mercedes';
+let confirmedBrand = null; // null = utilizador ainda não escolheu marca
 let dataLoaded    = false;
 let swipeHintShown = false;
 
@@ -196,6 +197,34 @@ function hoverSelectBrand(brandId) {
   renderBrand(brandId);
   document.querySelectorAll('.nav-dd-item').forEach(b =>
     b.classList.toggle('active', b.dataset.brandId === brandId));
+}
+
+// Landing "Escolha Software" — mostrada quando dropdown abre antes de escolher marca
+function renderSoftLanding() {
+  const panel = document.getElementById('brand-active');
+  if (!panel) return;
+  const titles    = { pt: 'Software de Diagnóstico', en: 'Diagnostic Software', fr: 'Logiciel de Diagnostic' };
+  const subtitles = { pt: 'Escolha a marca do veículo para ver os produtos disponíveis.', en: 'Select a vehicle brand to view available products.', fr: 'Sélectionnez une marque pour voir les produits disponibles.' };
+  const brandBtns = BRANDS.map(b => {
+    const lbl = b.label.startsWith('brand_') ? t(b.label) : b.label;
+    return `<button class="soft-landing-brand-btn" onclick="selectBrandFromNav('${b.id}')"
+      style="--b-color:${b.color};--b-light:${b.colorLight}">
+      <span class="soft-landing-brand-icon" style="background:${b.color}">${b.abbr}</span>
+      <span>${lbl}</span>
+    </button>`;
+  }).join('');
+  panel.innerHTML = `
+    <div class="soft-landing">
+      <div class="soft-landing-wm">SOFTWARE</div>
+      <div class="soft-landing-content">
+        <p class="soft-landing-eyebrow">M-Auto Online</p>
+        <h2 class="soft-landing-title">${titles[lang] || titles.pt}</h2>
+        <p class="soft-landing-sub">${subtitles[lang] || subtitles.pt}</p>
+        <div class="soft-landing-brands">${brandBtns}</div>
+      </div>
+    </div>
+  `;
+  applyWmOffset(panel);
 }
 
 // Swipe hint — aparece apenas 1× em mobile ao entrar na sec. Software
@@ -463,6 +492,10 @@ function createMobBrandSheet() {
 
 function openSoftDropdown() {
   document.getElementById('softDropdown')?.classList.add('open');
+  // Mostrar landing ao abrir dropdown — switcha para sec-soft e mostra "Escolha marca"
+  document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
+  document.getElementById('sec-soft')?.classList.add('active');
+  renderSoftLanding();
 }
 
 function toggleSoftDropdown(e) {
@@ -472,8 +505,14 @@ function toggleSoftDropdown(e) {
   if (isOpen) setTimeout(() => document.addEventListener('click', closeSoftDropdown, { once: true }), 0);
 }
 
-function closeSoftDropdown() {
+function closeSoftDropdown(skipRender = false) {
   document.getElementById('softDropdown')?.classList.remove('open');
+  // Ao fechar, mostrar marca confirmada (se existir) — senão mantém landing
+  if (!skipRender && confirmedBrand) {
+    document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
+    document.getElementById('sec-soft')?.classList.add('active');
+    renderBrand(confirmedBrand);
+  }
 }
 
 // Atualiza estado ativo no nav SEM recriar DOM — evita reabrir dropdown por hover implícito
@@ -487,7 +526,8 @@ function updateNavBrandActive(brandId) {
 }
 
 function selectBrandFromNav(brandId) {
-  closeSoftDropdown();
+  confirmedBrand = brandId; // confirmar antes de fechar (closeSoftDropdown usa confirmedBrand)
+  closeSoftDropdown(true);  // true = skipRender, renderBrand é chamado abaixo
   activeBrand = brandId;
   activeSection = 'soft';
   document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
@@ -536,7 +576,7 @@ function switchSection(id, btn) {
   if (srch && srch.value) { srch.value = ''; filterProducts(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  if (id === 'soft')  renderBrand(activeBrand);
+  if (id === 'soft')  { confirmedBrand ? renderBrand(confirmedBrand) : renderSoftLanding(); }
   if (id === 'hard')  renderHard();
   if (id === 'tools') renderTools();
   if (id === 'serv')  renderServices();
@@ -560,7 +600,7 @@ function switchBrand(id, btn) {
 ───────────────────────────────────────────── */
 function renderSection(id) {
   activeSection = id;
-  if (id === 'soft')  renderBrand(activeBrand);
+  if (id === 'soft')  { confirmedBrand ? renderBrand(confirmedBrand) : renderSoftLanding(); }
   if (id === 'hard')  renderHard();
   if (id === 'tools') renderTools();
   if (id === 'serv')  renderServices();
@@ -702,7 +742,6 @@ function createCard(item) {
   return `<div class="card${isPremium ? ' gold' : ''} searchable-item card-clickable"${spanClass}
     onclick="openProductModal('${item.id}')" role="button" tabindex="0"
     onkeydown="if(event.key==='Enter'||event.key===' ')openProductModal('${item.id}')">
-    <div class="card-top-bar"></div>
     ${badgeHtml}
     ${item.img ? `<img src="${item.img}" loading="lazy" alt="${d.name || ''}">` : ''}
     <div class="card-body">
