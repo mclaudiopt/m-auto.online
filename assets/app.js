@@ -360,7 +360,8 @@ function buildNav() {
   const nb = n => n > 0 ? `<span class="nav-pill-count">${n}</span>` : '';
 
   mainNav.innerHTML = `
-    <div class="nav-dropdown-wrap${activeSection === 'soft' ? ' nav-sec-active' : ''}" id="softDropdown">
+    <div class="nav-dropdown-wrap${activeSection === 'soft' ? ' nav-sec-active' : ''}" id="softDropdown"
+      onmouseenter="openSoftDropdown()" onmouseleave="closeSoftDropdown()">
       <button type="button" class="nav-pill${activeSection === 'soft' ? ' active' : ''}"
         onclick="toggleSoftDropdown(event)" data-nav-key="nav_soft">
         <span class="nav-pill-label">${t('nav_soft')}</span>${nb(softCount)}
@@ -460,6 +461,10 @@ function createMobBrandSheet() {
   document.body.appendChild(sheet);
 }
 
+function openSoftDropdown() {
+  document.getElementById('softDropdown')?.classList.add('open');
+}
+
 function toggleSoftDropdown(e) {
   e.stopPropagation();
   const wrap = document.getElementById('softDropdown');
@@ -471,6 +476,16 @@ function closeSoftDropdown() {
   document.getElementById('softDropdown')?.classList.remove('open');
 }
 
+// Atualiza estado ativo no nav SEM recriar DOM — evita reabrir dropdown por hover implícito
+function updateNavBrandActive(brandId) {
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+  document.querySelector('#softDropdown .nav-pill')?.classList.add('active');
+  document.querySelectorAll('.nav-dd-item').forEach(b =>
+    b.classList.toggle('active', b.dataset.brandId === brandId));
+  document.querySelectorAll('.mob-item').forEach(m =>
+    m.classList.toggle('active', m.dataset.navKey === 'mob_soft'));
+}
+
 function selectBrandFromNav(brandId) {
   closeSoftDropdown();
   activeBrand = brandId;
@@ -480,7 +495,7 @@ function selectBrandFromNav(brandId) {
   const brand = BRANDS.find(b => b.id === brandId) || BRANDS[0];
   setBrandTheme(brand);
   renderBrand(brandId);
-  buildNav(); // actualiza estado activo no dropdown
+  updateNavBrandActive(brandId); // sem rebuild DOM — dropdown fica fechado
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

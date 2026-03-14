@@ -2539,10 +2539,8 @@ body {
   border-radius: 0 !important;
 }
 
-/* ── 3. DROPDOWN SOFTWARE — abre com hover (CSS) ── */
-.nav-dropdown-wrap:hover .nav-dropdown-menu {
-  display: block !important;
-}
+/* ── 3. DROPDOWN SOFTWARE — controlado por JS (onmouseenter/onmouseleave no wrap) ── */
+/* CSS hover removido: reconstrução do DOM via buildNav() causava re-abertura imediata. */
 
 /* ── 4. ABOUT HERO ── */
 .about-hero {
