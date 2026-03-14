@@ -24,7 +24,9 @@ const TRANS = {
     hard_title: "Hardware", tools_title: "Downloads", serv_title: "Serviços",
     about_title: "Sobre",
     tools_meta: "Instalação remota assistida",
-    about_text: "Somos especialistas em software de diagnóstico automóvel com anos de experiência. Oferecemos um serviço profissional, com resposta rápida e suporte assegurado.",
+    about_text: "O que nos distingue é a qualidade do suporte e a experiência real em soluções que funcionam. Instalação remota assistida, aconselhamento gratuito e respostas rápidas — a confiança de quem já ajudou centenas de profissionais em toda a Europa.",
+    about_wm: "SOBRE",
+    serv_wm: "SERVIÇOS",
     popup_viewers: "visitantes online",
     wiz_os: "Que Windows tem?", wiz_ram: "Memória RAM?",
     wiz_disk: "Tipo de disco?", wiz_brand: "Marca do veículo?",
@@ -62,7 +64,9 @@ const TRANS = {
     hard_title: "Hardware", tools_title: "Downloads", serv_title: "Services",
     about_title: "About",
     tools_meta: "Remote assisted installation",
-    about_text: "We are specialists in automotive diagnostic software with years of experience. We offer a professional service, fast response and reliable support.",
+    about_text: "What sets us apart is the quality of our support and real hands-on experience. We work with solutions that genuinely work — remote assisted installation, free advice and fast responses. Trusted by hundreds of professionals across Europe.",
+    about_wm: "ABOUT",
+    serv_wm: "SERVICES",
     popup_viewers: "visitors online",
     wiz_os: "Which Windows?", wiz_ram: "RAM memory?",
     wiz_disk: "Disk type?", wiz_brand: "Vehicle brand?",
@@ -100,7 +104,9 @@ const TRANS = {
     hard_title: "Matériel", tools_title: "Téléchargements", serv_title: "Services",
     about_title: "À Propos",
     tools_meta: "Installation à distance assistée",
-    about_text: "Nous sommes spécialistes des logiciels de diagnostic automobile avec des années d'expérience. Nous offrons un service professionnel, une réponse rapide et un support fiable.",
+    about_text: "Ce qui nous distingue, c'est la qualité du support et l'expérience réelle avec des solutions qui fonctionnent. Installation à distance assistée, conseils gratuits et réponses rapides — la confiance de centaines de professionnels à travers l'Europe.",
+    about_wm: "À PROPOS",
+    serv_wm: "SERVICES",
     popup_viewers: "personnes en ligne",
     wiz_os: "Quel Windows ?", wiz_ram: "Mémoire RAM ?",
     wiz_disk: "Type de disque ?", wiz_brand: "Marque du véhicule ?",
@@ -128,7 +134,7 @@ const TRANS = {
    2. CONFIG DE MARCAS (ordem da sidebar)
 ───────────────────────────────────────────── */
 const BRANDS = [
-  { id:"mercedes", label:"Mercedes-Benz",  color:"#1c1c1c", colorLight:"#f5f5f5", colorMid:"#8a8a8a", abbr:"MB",  watermark:"MERCEDES" },
+  { id:"mercedes", label:"Mercedes-Benz",  color:"#163354", colorLight:"#eef2f8", colorMid:"#4a6fa0", abbr:"MB",  watermark:"MERCEDES" },
   { id:"vag",      label:"VAG Group",      color:"#003fa5", colorLight:"#e8efff", colorMid:"#80a4e8", abbr:"VAG", watermark:"VAG" },
   { id:"bmw",      label:"BMW / Mini",     color:"#0053a0", colorLight:"#e8f2ff", colorMid:"#6aace0", abbr:"BMW", watermark:"BMW" },
   { id:"psa",      label:"PSA Group",      color:"#6d1fa0", colorLight:"#f3edff", colorMid:"#b47dd4", abbr:"PSA", watermark:"PSA" },
@@ -176,6 +182,21 @@ function prodData(item) {
 
 const ICON_ELLIPSIS = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`;
 const ICON_DOWNLOAD = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17V3zM5 19h14v2H5z"/></svg>`;
+const ICON_EYE = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+
+// Hover no dropdown de marcas — selecciona marca sem fechar dropdown
+function hoverSelectBrand(brandId) {
+  if (activeBrand === brandId) return;
+  activeBrand = brandId;
+  const brand = BRANDS.find(b => b.id === brandId) || BRANDS[0];
+  setBrandTheme(brand);
+  activeSection = 'soft';
+  document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
+  document.getElementById('sec-soft')?.classList.add('active');
+  renderBrand(brandId);
+  document.querySelectorAll('.nav-dd-item').forEach(b =>
+    b.classList.toggle('active', b.dataset.brandId === brandId));
+}
 
 // Swipe hint — aparece apenas 1× em mobile ao entrar na sec. Software
 function showSwipeHint() {
@@ -324,7 +345,8 @@ function buildNav() {
     const label = b.label.startsWith('brand_') ? t(b.label) : b.label;
     const count = catalog.filter(p => p.section === 'soft' && p.brand === b.id).length;
     return `<button type="button" class="nav-dd-item${b.id === activeBrand ? ' active' : ''}"
-      onclick="selectBrandFromNav('${b.id}')" data-brand-id="${b.id}">
+      onclick="selectBrandFromNav('${b.id}')" data-brand-id="${b.id}"
+      onmouseenter="hoverSelectBrand('${b.id}')">
       <span class="nav-dd-icon" style="background:${b.color}">${b.abbr}</span>
       <span class="nav-dd-label">${label}</span>
       ${count > 0 ? `<span class="nav-dd-count">${count}</span>` : ''}
@@ -457,8 +479,6 @@ function selectBrandFromNav(brandId) {
   document.getElementById('sec-soft')?.classList.add('active');
   const brand = BRANDS.find(b => b.id === brandId) || BRANDS[0];
   setBrandTheme(brand);
-  document.querySelectorAll('.brand-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('brand-' + brandId)?.classList.add('active');
   renderBrand(brandId);
   buildNav(); // actualiza estado activo no dropdown
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -513,10 +533,7 @@ function switchBrand(id, btn) {
   activeBrand = id;
   const brand = BRANDS.find(b => b.id === id) || BRANDS[0];
   setBrandTheme(brand);
-  const container = btn.closest('.layout-flex');
-  container?.querySelectorAll('.brand-panel').forEach(c => c.classList.remove('active'));
-  container?.querySelector('#brand-' + id)?.classList.add('active');
-  container?.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   const appTop = document.querySelector('.app-container')?.offsetTop - 100 || 0;
   window.scrollTo({ top: appTop, behavior: 'smooth' });
@@ -536,37 +553,51 @@ function renderSection(id) {
 
 function renderBrand(brandId) {
   activeBrand = brandId;
-  const panel = document.getElementById('brand-' + brandId);
+  const panel = document.getElementById('brand-active');
   if (!panel) return;
 
   const brand    = BRANDS.find(b => b.id === brandId) || BRANDS[0];
   const label    = brand.label.startsWith('brand_') ? t(brand.label) : brand.label;
   const products = catalog.filter(p => p.section === 'soft' && p.brand === brandId);
-
-  // Brand dots (indicador swipe — visível só em mobile via CSS)
   const brandIdx = BRANDS.findIndex(b => b.id === brandId);
-  const dotsHtml = `<div class="brand-dots">${BRANDS.map((b, i) =>
+
+  const dotsHtml = BRANDS.map((b, i) =>
     `<span class="brand-dot${i === brandIdx ? ' active' : ''}"
       onclick="selectBrandFromNav('${b.id}')"
       ${i === brandIdx ? `style="background:${brand.color}"` : ''}></span>`
-  ).join('')}</div>`;
+  ).join('');
 
-  // Grid: skeleton se dados ainda não carregaram, cards se já tem dados
   const gridHtml = dataLoaded
     ? (products.length > 0 ? products.map(p => createCard(p)).join('') : '')
     : renderSkeletonCards(6);
 
-  panel.innerHTML = `
-    <div class="brand-hero">
-      <div class="brand-hero-wm">${brand.watermark}</div>
-      <div class="brand-hero-eyebrow">${t('brand_hero_eyebrow')}</div>
-      <h2 class="brand-hero-title">${label}</h2>
-      <p class="brand-hero-meta">${dataLoaded ? products.length : '—'} ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
-    </div>
-    ${dotsHtml}
-    <div class="grid brand-grid">${gridHtml}</div>
-  `;
-  applyWmOffset(panel);
+  const existingHero = panel.querySelector('.brand-hero');
+  if (existingHero) {
+    // Partial update — preserva layout, apenas actualiza conteúdo → transição CSS suave
+    const titleEl = existingHero.querySelector('.brand-hero-title');
+    const metaEl  = existingHero.querySelector('.brand-hero-meta');
+    const wmEl    = existingHero.querySelector('.brand-hero-wm');
+    if (titleEl) titleEl.textContent = label;
+    if (metaEl)  metaEl.textContent  = `${dataLoaded ? products.length : '—'} ${t('brand_hero_products')} · ${t('brand_hero_meta')}`;
+    if (wmEl)  { wmEl.textContent = brand.watermark; applyWmOffset(panel); }
+    const dotsEl = panel.querySelector('.brand-dots');
+    if (dotsEl) dotsEl.innerHTML = dotsHtml;
+    const gridEl = panel.querySelector('.brand-grid');
+    if (gridEl) gridEl.innerHTML = gridHtml;
+  } else {
+    // Primeiro render — full HTML
+    panel.innerHTML = `
+      <div class="brand-hero">
+        <div class="brand-hero-wm">${brand.watermark}</div>
+        <div class="brand-hero-eyebrow">${t('brand_hero_eyebrow')}</div>
+        <h2 class="brand-hero-title">${label}</h2>
+        <p class="brand-hero-meta">${dataLoaded ? products.length : '—'} ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
+      </div>
+      <div class="brand-dots">${dotsHtml}</div>
+      <div class="grid brand-grid">${gridHtml}</div>
+    `;
+    applyWmOffset(panel);
+  }
   if (dataLoaded && !swipeHintShown) showSwipeHint();
 }
 
@@ -604,7 +635,7 @@ function renderServices() {
   if (!sec) return;
   sec.innerHTML = `
     <div class="section-hero">
-      <div class="section-hero-wm">SERVICES</div>
+      <div class="section-hero-wm">${t('serv_wm')}</div>
       <div class="section-hero-eyebrow">M-Auto Online</div>
       <h2 class="section-hero-title">${t('serv_title')}</h2>
     </div>
@@ -626,18 +657,13 @@ function renderAbout() {
   const wmDelay = -(Math.random() * 22).toFixed(2);
   sec.innerHTML = `
     <div class="section-hero about-hero">
-      <div class="section-hero-wm" style="animation-delay:${wmDelay}s">SOBRE</div>
+      <div class="section-hero-wm" style="animation-delay:${wmDelay}s">${t('about_wm')}</div>
       <div class="section-hero-eyebrow">M-Auto Online</div>
       <h2 class="section-hero-title">${t('about_title')}</h2>
       <p class="section-hero-meta">Simply Digital · Diagnóstico Profissional</p>
     </div>
     <div class="about-landing">
       <p class="about-body">${t('about_text')}</p>
-      <div class="about-features">
-        <div class="about-feat"><span class="about-feat-icon">⚡</span><span>${t('about_feat_install')}</span></div>
-        <div class="about-feat"><span class="about-feat-icon">🚗</span><span>${t('about_feat_brands')}</span></div>
-        <div class="about-feat"><span class="about-feat-icon">🛡️</span><span>${t('about_feat_support')}</span></div>
-      </div>
       <button class="about-cta" onclick="selectBrandFromNav('mercedes')">${t('about_cta')}</button>
     </div>
   `;
@@ -656,22 +682,22 @@ function createCard(item) {
   if (item.badge) badgeHtml = `<span class="badge">${t(item.badge)}</span>`;
 
   const priceColor = isPremium ? ' style="color:var(--gold)"' : '';
-  const btnColor   = isPremium ? ' style="color:var(--gold)"' : '';
+  const eyeColor   = isPremium ? ' card-eye-gold' : '';
 
-  return `<div class="card${isPremium ? ' gold' : ''} searchable-item"${spanClass}>
+  return `<div class="card${isPremium ? ' gold' : ''} searchable-item card-clickable"${spanClass}
+    onclick="openProductModal('${item.id}')" role="button" tabindex="0"
+    onkeydown="if(event.key==='Enter'||event.key===' ')openProductModal('${item.id}')">
     <div class="card-top-bar"></div>
     ${badgeHtml}
     ${item.img ? `<img src="${item.img}" loading="lazy" alt="${d.name || ''}">` : ''}
     <div class="card-body">
-      <h3>${d.name || ''}</h3>
+      <div class="card-title-row">
+        <h3>${d.name || ''}</h3>
+        <span class="card-eye${eyeColor}" aria-hidden="true">${ICON_EYE}</span>
+      </div>
       <p class="sub-desc">${d.short || ''}</p>
       <div class="card-footer">
         <span class="price"${priceColor}>${t(priceKey)}</span>
-        <button type="button" class="btn-view btn-view-icon"${btnColor}
-          onclick="openProductModal('${item.id}')"
-          aria-label="${t('btn_details')}" title="${t('btn_details')}">
-          ${ICON_ELLIPSIS}
-        </button>
       </div>
     </div>
   </div>`;

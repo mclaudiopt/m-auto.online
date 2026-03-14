@@ -352,18 +352,8 @@
     <div id="sec-soft" class="section-view">
       <div class="layout-flex">
         <div class="content-wrapper">
-          <!-- Painéis de marca (construídos via JS) -->
-          <div id="brand-mercedes"  class="brand-panel active"></div>
-          <div id="brand-vag"       class="brand-panel"></div>
-          <div id="brand-bmw"       class="brand-panel"></div>
-          <div id="brand-psa"       class="brand-panel"></div>
-          <div id="brand-renault"   class="brand-panel"></div>
-          <div id="brand-jlr"       class="brand-panel"></div>
-          <div id="brand-toyota"    class="brand-panel"></div>
-          <div id="brand-nissan"    class="brand-panel"></div>
-          <div id="brand-ford"      class="brand-panel"></div>
-          <div id="brand-gm"        class="brand-panel"></div>
-          <div id="brand-multi"     class="brand-panel"></div>
+          <!-- Painel único de marca — renderBrand() actualiza in-place para transição suave -->
+          <div id="brand-active" class="brand-panel active"></div>
         </div>
       </div>
     </div>

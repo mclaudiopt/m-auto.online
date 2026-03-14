@@ -2787,3 +2787,121 @@ body {
   cursor: pointer; transition: opacity 0.18s;
 }
 .wiz-restart-btn:hover { opacity: 0.88; }
+
+/* ══════════════════════════════════════════════════════
+   v8.1h — smooth brand transition · nav antialiasing · gold highlight · card eye
+   ══════════════════════════════════════════════════════ */
+
+/* ── 1. CSS CUSTOM PROPERTIES ANIMÁVEIS (registadas para transição de cor) ── */
+@property --brand-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #163354;
+}
+@property --brand-light {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #eef2f8;
+}
+@property --brand-mid {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #4a6fa0;
+}
+
+/* ── 2. TRANSIÇÃO SUAVE AO MUDAR MARCA — mutação de cor sem flash branco ── */
+:root {
+  transition:
+    --brand-color  0.45s ease,
+    --brand-light  0.45s ease,
+    --brand-mid    0.45s ease;
+}
+
+/* brand-hero: background usa --brand-color e deve transitar */
+.brand-hero {
+  background: linear-gradient(135deg, var(--brand-color) 0%, color-mix(in srgb, var(--brand-color) 75%, #000) 100%) !important;
+  transition: background 0.45s ease !important;
+}
+
+/* dots row — colorLight background transita também */
+.brand-dots {
+  transition: background 0.45s ease !important;
+}
+
+/* ── 3. NAV PILL ACTIVE — antialiasing, sem desfoque ── */
+.nav-pill {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+.nav-pill.active {
+  font-weight: 700 !important;   /* baixar de 800 → 700 evita desfoque em subpixel */
+  letter-spacing: 0.06em !important;
+}
+
+/* ── 4. PREMIUM GOLD HIGHLIGHT ── */
+.card.gold {
+  border-color: rgba(180, 83, 9, 0.25) !important;
+}
+.card.gold:hover {
+  border-color: var(--gold) !important;
+  box-shadow: 0 4px 20px rgba(180, 83, 9, 0.18) !important;
+}
+[data-theme="dark"] .card.gold {
+  border-color: rgba(251, 191, 36, 0.22) !important;
+}
+[data-theme="dark"] .card.gold:hover {
+  border-color: #fbbf24 !important;
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.15) !important;
+}
+
+/* ── 5. CARD — card inteiro clicável + eye icon ── */
+.card-clickable {
+  cursor: pointer !important;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s !important;
+  user-select: none;
+}
+.card-clickable:hover {
+  transform: translateY(-3px) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 6px 22px rgba(37, 99, 235, 0.12) !important;
+}
+.card-clickable:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* remover hover do botão anterior (já não existe, mas por segurança) */
+.card-clickable .btn-view { display: none !important; }
+
+.card-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.card-title-row h3 {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+.card-eye {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--text-muted);
+  opacity: 0.55;
+  transition: opacity 0.18s, color 0.18s;
+}
+.card-clickable:hover .card-eye {
+  opacity: 1;
+  color: var(--accent);
+}
+.card-eye-gold {
+  color: var(--gold) !important;
+}
+.card-clickable:hover .card-eye-gold {
+  color: var(--gold) !important;
+  opacity: 1 !important;
+}
+
+/* ── 6. ABOUT: remover features antigas (já limpas no JS) ── */
+.about-features { display: none !important; }
+.about-body { min-height: 0 !important; margin-bottom: 28px !important; }
