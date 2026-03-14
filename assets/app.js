@@ -161,6 +161,7 @@ let lang      = 'pt';
 let activeSection = 'about';
 let activeBrand   = 'mercedes';
 let dataLoaded    = false;
+let swipeHintShown = false;
 
 /* ─────────────────────────────────────────────
    4. UTILITÁRIOS
@@ -175,6 +176,35 @@ function prodData(item) {
 
 const ICON_ELLIPSIS = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`;
 const ICON_DOWNLOAD = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17V3zM5 19h14v2H5z"/></svg>`;
+
+// Swipe hint — aparece apenas 1× em mobile ao entrar na sec. Software
+function showSwipeHint() {
+  if (!window.matchMedia('(hover: none)').matches) return; // skip desktop
+  swipeHintShown = true;
+  const hint = document.createElement('div');
+  hint.className = 'swipe-hint';
+  const labels = { pt: '← deslize para mudar marca →', en: '← swipe to change brand →', fr: '← glissez pour changer de marque →' };
+  hint.textContent = labels[lang] || labels.pt;
+  document.body.appendChild(hint);
+  setTimeout(() => hint.remove(), 3200);
+}
+
+// Hover-nav desktop: mudar secção ao passar o rato (com pequeno delay)
+let _navHoverTimer = null;
+function scheduleNavHover(id, btn) {
+  if (window.matchMedia('(hover: none)').matches) return;
+  clearTimeout(_navHoverTimer);
+  _navHoverTimer = setTimeout(() => {
+    if (activeSection !== id) switchSection(id, btn);
+  }, 180);
+}
+function cancelNavHover() { clearTimeout(_navHoverTimer); }
+
+// Offset aleatório no watermark para evitar sempre começar da posição inicial
+function applyWmOffset(container) {
+  const wm = container?.querySelector('.brand-hero-wm, .section-hero-wm');
+  if (wm) wm.style.animationDelay = `-${(Math.random() * 22).toFixed(2)}s`;
+}
 
 function renderSkeletonCards(n = 6) {
   return Array(n).fill(0).map(() => `
@@ -317,13 +347,21 @@ function buildNav() {
       <div class="nav-dropdown-menu" id="softDropdownMenu">${brandItems}</div>
     </div>
     <button type="button" class="nav-pill${activeSection === 'hard'  ? ' active' : ''}"
-      onclick="switchSection('hard',  this)" data-nav-key="nav_hard">${t('nav_hard')}${nb(hardCount)}</button>
+      onclick="switchSection('hard',  this)"
+      onmouseenter="scheduleNavHover('hard', this)" onmouseleave="cancelNavHover()"
+      data-nav-key="nav_hard">${t('nav_hard')}${nb(hardCount)}</button>
     <button type="button" class="nav-pill${activeSection === 'tools' ? ' active' : ''}"
-      onclick="switchSection('tools', this)" data-nav-key="nav_tools">${t('nav_tools')}${nb(toolCount)}</button>
+      onclick="switchSection('tools', this)"
+      onmouseenter="scheduleNavHover('tools', this)" onmouseleave="cancelNavHover()"
+      data-nav-key="nav_tools">${t('nav_tools')}${nb(toolCount)}</button>
     <button type="button" class="nav-pill${activeSection === 'serv'  ? ' active' : ''}"
-      onclick="switchSection('serv',  this)" data-nav-key="nav_serv">${t('nav_serv')}${nb(servCount)}</button>
+      onclick="switchSection('serv',  this)"
+      onmouseenter="scheduleNavHover('serv', this)" onmouseleave="cancelNavHover()"
+      data-nav-key="nav_serv">${t('nav_serv')}${nb(servCount)}</button>
     <button type="button" class="nav-pill${activeSection === 'about' ? ' active' : ''}"
-      onclick="switchSection('about', this)" data-nav-key="nav_about">${t('nav_about')}</button>
+      onclick="switchSection('about', this)"
+      onmouseenter="scheduleNavHover('about', this)" onmouseleave="cancelNavHover()"
+      data-nav-key="nav_about">${t('nav_about')}</button>
   `;
 
   mobNav.innerHTML = [
@@ -528,6 +566,8 @@ function renderBrand(brandId) {
     ${dotsHtml}
     <div class="grid brand-grid">${gridHtml}</div>
   `;
+  applyWmOffset(panel);
+  if (dataLoaded && !swipeHintShown) showSwipeHint();
 }
 
 function renderHard() {
@@ -542,6 +582,7 @@ function renderHard() {
       <p class="section-hero-meta">${products.length} ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
     </div>
     <div class="grid hard-grid">${products.map(p => createCard(p)).join('')}</div>`;
+  applyWmOffset(sec);
 }
 
 function renderTools() {
@@ -555,6 +596,7 @@ function renderTools() {
       <p class="section-hero-meta">${tools.length} apps · ${t('tools_meta')}</p>
     </div>
     <div class="tool-grid">${tools.map(tl => createToolCard(tl)).join('')}</div>`;
+  applyWmOffset(sec);
 }
 
 function renderServices() {
@@ -575,20 +617,27 @@ function renderServices() {
         </li>`;
       }).join('')}</ul>
     </section>`;
+  applyWmOffset(sec);
 }
 
 function renderAbout() {
   const sec = document.getElementById('sec-about');
   if (!sec) return;
+  const wmDelay = -(Math.random() * 22).toFixed(2);
   sec.innerHTML = `
+    <div class="section-hero about-hero">
+      <div class="section-hero-wm" style="animation-delay:${wmDelay}s">SOBRE</div>
+      <div class="section-hero-eyebrow">M-Auto Online</div>
+      <h2 class="section-hero-title">${t('about_title')}</h2>
+      <p class="section-hero-meta">Simply Digital · Diagnóstico Profissional</p>
+    </div>
     <div class="about-landing">
-      <div class="about-logo-block">
-        <div class="about-logo-text">
-          <span class="brand-m">M-Auto</span>&nbsp;<span class="brand-online">Online</span>
-        </div>
-        <div class="about-tagline">Simply Digital</div>
-      </div>
       <p class="about-body">${t('about_text')}</p>
+      <div class="about-features">
+        <div class="about-feat"><span class="about-feat-icon">⚡</span><span>${t('about_feat_install')}</span></div>
+        <div class="about-feat"><span class="about-feat-icon">🚗</span><span>${t('about_feat_brands')}</span></div>
+        <div class="about-feat"><span class="about-feat-icon">🛡️</span><span>${t('about_feat_support')}</span></div>
+      </div>
       <button class="about-cta" onclick="selectBrandFromNav('mercedes')">${t('about_cta')}</button>
     </div>
   `;
@@ -788,6 +837,12 @@ function openWizard() {
   userSpecs = {};
   document.querySelectorAll('#wizContent .step').forEach(s => s.classList.remove('active'));
   document.getElementById('wiz-step-1')?.classList.add('active');
+  // Reiniciar stepper visual
+  document.querySelectorAll('.wiz-step-dot').forEach((dot, i) => {
+    dot.classList.remove('wiz-dot-done', 'wiz-dot-active');
+    if (i === 0) dot.classList.add('wiz-dot-active');
+  });
+  document.querySelectorAll('.wiz-step-line').forEach(line => line.classList.remove('wiz-line-done'));
   applyWizardTranslations();
   document.getElementById('wizardModal').style.display = 'flex';
 }
@@ -803,9 +858,26 @@ function setSpec(key, val) {
   document.querySelectorAll('#wizContent .step').forEach(s => s.classList.remove('active'));
   if (idx < steps.length - 1) {
     document.getElementById('wiz-step-' + (idx + 2))?.classList.add('active');
+    updateWizStepper(idx + 2);
   } else {
     showWizResult();
+    updateWizStepper(5);
   }
+}
+
+function updateWizStepper(currentStep) {
+  document.querySelectorAll('.wiz-step-dot').forEach(dot => {
+    const n = parseInt(dot.dataset.step);
+    dot.classList.toggle('wiz-dot-done',   n < currentStep);
+    dot.classList.toggle('wiz-dot-active', n === currentStep);
+    dot.classList.remove('wiz-dot-done');
+    if (n < currentStep) dot.classList.add('wiz-dot-done');
+    if (n === currentStep) dot.classList.add('wiz-dot-active');
+    else dot.classList.remove('wiz-dot-active');
+  });
+  document.querySelectorAll('.wiz-step-line').forEach((line, i) => {
+    line.classList.toggle('wiz-line-done', i + 2 < currentStep);
+  });
 }
 
 function showWizResult() {
@@ -813,48 +885,86 @@ function showWizResult() {
   const resultEl = document.getElementById('finalResultContent');
   if (!resultEl) return;
 
-  const limited  = win === 'old' || ram === 'low';
-  const optimal  = !limited && disk === 'ssd';
-  const msgs = { pt: {}, en: {}, fr: {} };
+  const limited = win === 'old' || ram === 'low';
+  const optimal = !limited && disk === 'ssd';
 
-  let color, title, lines = [];
+  let statusColor, statusIcon, statusTitle, statusMsg, tips = [];
 
   if (limited) {
-    color = '#f59e0b';
-    title = t('wiz_limited_title');
-    lines.push(t('wiz_limited_msg'));
-    if (win === 'old') lines.push({ pt: '⚠️ Windows 7/8 não suporta software recente.', en: '⚠️ Windows 7/8 does not support recent software.', fr: '⚠️ Windows 7/8 ne supporte pas les logiciels récents.' }[lang]);
-    if (ram === 'low') lines.push({ pt: '💾 4 GB RAM é insuficiente — mínimo recomendado: 8 GB.', en: '💾 4 GB RAM is insufficient — recommended minimum: 8 GB.', fr: '💾 4 Go de RAM insuffisant — minimum recommandé : 8 Go.' }[lang]);
+    statusColor = '#f59e0b';
+    statusIcon  = '⚠️';
+    statusTitle = t('wiz_limited_title');
+    statusMsg   = t('wiz_limited_msg');
+    if (win === 'old') tips.push({ pt: 'Actualizar para Windows 10/11 para suporte total.', en: 'Upgrade to Windows 10/11 for full software support.', fr: 'Mettre à jour vers Windows 10/11 pour un support complet.' }[lang]);
+    if (ram === 'low') tips.push({ pt: 'Aumentar RAM para mínimo 8 GB.', en: 'Upgrade RAM to a minimum of 8 GB.', fr: 'Augmenter la RAM à 8 Go minimum.' }[lang]);
   } else if (optimal) {
-    color = '#10b981';
-    title = { pt: '🚀 PC Óptimo!', en: '🚀 Optimal PC!', fr: '🚀 PC Optimal !' }[lang];
-    lines.push({ pt: 'SSD + RAM 8 GB+ — instalação rápida e estável.', en: 'SSD + 8 GB+ RAM — fast and stable installation.', fr: 'SSD + 8 Go+ RAM — installation rapide et stable.' }[lang]);
+    statusColor = '#10b981';
+    statusIcon  = '🚀';
+    statusTitle = { pt: 'PC Óptimo!', en: 'Optimal PC!', fr: 'PC Optimal !' }[lang];
+    statusMsg   = { pt: 'SSD + 8 GB+ RAM — instalação rápida e estável garantida.', en: 'SSD + 8 GB+ RAM — fast and stable installation guaranteed.', fr: 'SSD + 8 Go+ RAM — installation rapide et stable garantie.' }[lang];
   } else {
-    color = '#2563eb';
-    title = t('wiz_compatible_title');
-    lines.push(t('wiz_compatible_msg'));
-    if (disk === 'hdd') lines.push({ pt: '💡 SSD recomendado para melhor desempenho.', en: '💡 SSD recommended for better performance.', fr: '💡 SSD recommandé pour de meilleures performances.' }[lang]);
+    statusColor = '#2563eb';
+    statusIcon  = '✅';
+    statusTitle = t('wiz_compatible_title');
+    statusMsg   = t('wiz_compatible_msg');
+    if (disk === 'hdd') tips.push({ pt: 'SSD recomendado para melhor desempenho.', en: 'SSD recommended for better performance.', fr: 'SSD recommandé pour de meilleures performances.' }[lang]);
   }
 
-  if (brand) lines.push({ pt: `🔧 Marca seleccionada: <strong>${brand}</strong>`, en: `🔧 Selected brand: <strong>${brand}</strong>`, fr: `🔧 Marque sélectionnée : <strong>${brand}</strong>` }[lang]);
-
-  resultEl.innerHTML = `<div class="wiz-result-box" style="border:2px solid ${color};border-radius:12px;padding:20px">
-    <h4 style="color:${color};margin-bottom:12px">${title}</h4>
-    ${lines.map(l => `<p style="margin:6px 0;font-size:0.9rem">${l}</p>`).join('')}
-  </div>`;
+  // Recomendação por marca
+  const brandMap = {
+    mercedes: { prod: 'Mercedes Full Pack 2026', id: 'merc_full_pack', bg: '#0a1628', abbr: 'MB' },
+    bmw:      { prod: 'ISTA+',                  id: 'bmw_ista_plus',  bg: '#0066b2', abbr: 'BMW' },
+    vag:      { prod: 'ODIS Service',            id: 'vag_odis_service', bg: '#001f6e', abbr: 'VAG' },
+    psa:      { prod: 'Diagbox 9.208',           id: 'psa_diagbox_9208', bg: '#001f5c', abbr: 'PSA' },
+    other:    { prod: 'Delphi / Autocom',        id: 'multi_delphi',   bg: '#374151', abbr: '🔧' },
+  };
+  const rec = brand ? brandMap[brand] : null;
+  const recHtml = rec ? `
+    <div class="wiz-rec-card" onclick="closeWizard(); openProductModal('${rec.id}')">
+      <div class="wiz-rec-abbr" style="background:${rec.bg}">${rec.abbr}</div>
+      <div class="wiz-rec-info">
+        <div class="wiz-rec-label">${{ pt: 'Recomendado:', en: 'Recommended:', fr: 'Recommandé :' }[lang]}</div>
+        <div class="wiz-rec-prod">${rec.prod}</div>
+      </div>
+      <div class="wiz-rec-arrow">→</div>
+    </div>` : '';
 
   document.getElementById('wiz-result')?.classList.add('active');
+  resultEl.innerHTML = `
+    <div class="wiz-status-card" style="border-left:4px solid ${statusColor}">
+      <span class="wiz-status-icon">${statusIcon}</span>
+      <div>
+        <div class="wiz-status-title" style="color:${statusColor}">${statusTitle}</div>
+        <div class="wiz-status-msg">${statusMsg}</div>
+      </div>
+    </div>
+    ${tips.length ? `<ul class="wiz-tips">${tips.map(tip => `<li>${tip}</li>`).join('')}</ul>` : ''}
+    ${recHtml}
+  `;
 }
 
 function applyWizardTranslations() {
+  // Step dot labels (stepper)
+  const stepLabels = [
+    { pt: 'Sistema', en: 'System',  fr: 'Système' },
+    { pt: 'RAM',     en: 'RAM',     fr: 'RAM' },
+    { pt: 'Disco',   en: 'Drive',   fr: 'Disque' },
+    { pt: 'Marca',   en: 'Brand',   fr: 'Marque' },
+  ];
+  document.querySelectorAll('.wiz-dot-label').forEach((el, i) => {
+    if (stepLabels[i]) el.textContent = stepLabels[i][lang] || stepLabels[i].pt;
+  });
+  // Botão resultado reiniciar
+  const restartEl = document.getElementById('wiz_restart_btn');
+  if (restartEl) restartEl.textContent = t('wiz_restart');
+  // Títulos dos steps e opções
   const map = {
     'wiz_title_1': 'wiz_os', 'wiz_title_2': 'wiz_ram',
     'wiz_title_3': 'wiz_disk', 'wiz_title_4': 'wiz_brand',
-    'wiz_title_result': 'wiz_result_title', 'wiz_restart_btn': 'wiz_restart',
+    'wiz_title_result': 'wiz_result_title',
     'wiz_btn_win_old': 'wiz_win_old', 'wiz_btn_win_new': 'wiz_win_new',
     'wiz_btn_ram_low': 'wiz_ram_low', 'wiz_btn_ram_high': 'wiz_ram_high',
     'wiz_btn_disk_hdd': 'wiz_disk_hdd', 'wiz_btn_disk_ssd': 'wiz_disk_ssd',
-    'wiz_btn_brand_merc': 'wiz_brand_merc', 'wiz_btn_brand_bmw': 'wiz_brand_bmw'
   };
   Object.entries(map).forEach(([id, key]) => {
     const el = document.getElementById(id);

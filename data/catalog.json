@@ -20,9 +20,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-xentry-cars.jpg",
     "meta": { "version": "01/2025" },
-    "pt": { "name": "Xentry Cars", "short": "Ligeiros.", "details": "" },
-    "en": { "name": "Xentry Cars", "short": "Passenger cars.", "details": "" },
-    "fr": { "name": "Xentry Cars", "short": "Voitures particulières.", "details": "" }
+    "pt": { "name": "Xentry Cars", "short": "Ligeiros.", "details": "Software oficial Mercedes-Benz para diagnóstico de veículos de passageiros (Classe A, C, E, S, GLC, GLE, EQ…). Inclui leitura/apagamento de DTCs, dados em tempo real, SCN coding, funções de serviço e acesso dealer-level. Versão 01/2025 com suporte aos modelos mais recentes." },
+    "en": { "name": "Xentry Cars", "short": "Passenger cars.", "details": "Official Mercedes-Benz software for passenger car diagnostics (A, C, E, S, GLC, GLE, EQ Class…). Includes DTC read/clear, live data, SCN coding, service functions and dealer-level access. Version 01/2025 supporting the latest models." },
+    "fr": { "name": "Xentry Cars", "short": "Voitures particulières.", "details": "Logiciel officiel Mercedes-Benz pour le diagnostic des véhicules particuliers (Classe A, C, E, S, GLC, GLE, EQ…). Lecture/effacement de DTCs, données en temps réel, SCN coding et fonctions de service. Version 01/2025 avec support des derniers modèles." }
   },
   {
     "id": "merc_xentry_trucks",
@@ -30,9 +30,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-xentry-trucks.jpg",
     "meta": { "version": "01/2025" },
-    "pt": { "name": "Xentry Trucks", "short": "Pesados.", "details": "" },
-    "en": { "name": "Xentry Trucks", "short": "Heavy vehicles.", "details": "" },
-    "fr": { "name": "Xentry Trucks", "short": "Poids lourds.", "details": "" }
+    "pt": { "name": "Xentry Trucks", "short": "Pesados.", "details": "Versão do Xentry dedicada a veículos pesados Mercedes-Benz: Actros, Atego, Axor, Sprinter, Unimog e Vans. Diagnóstico completo, programação de módulos, funções de serviço e SCN coding para toda a gama de pesados. Versão 01/2025." },
+    "en": { "name": "Xentry Trucks", "short": "Heavy vehicles.", "details": "Xentry version dedicated to Mercedes-Benz heavy vehicles: Actros, Atego, Axor, Sprinter, Unimog and Vans. Full diagnostics, module programming, service functions and SCN coding for the entire truck range. Version 01/2025." },
+    "fr": { "name": "Xentry Trucks", "short": "Poids lourds.", "details": "Version de Xentry dédiée aux poids lourds Mercedes-Benz : Actros, Atego, Axor, Sprinter, Unimog et Vans. Diagnostic complet, programmation de calculateurs, fonctions de service et SCN coding. Version 01/2025." }
   },
   {
     "id": "merc_wis",
@@ -40,9 +40,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/wis.jpg",
     "meta": { "year": "2021" },
-    "pt": { "name": "WIS 2021", "short": "Manuais técnicos.", "details": "" },
-    "en": { "name": "WIS 2021", "short": "Workshop manuals.", "details": "" },
-    "fr": { "name": "WIS 2021", "short": "Manuels techniques.", "details": "" }
+    "pt": { "name": "WIS 2021", "short": "Manuais técnicos.", "details": "Workshop Information System — base de dados de documentação técnica Mercedes-Benz. Inclui manuais de reparação passo a passo, diagramas elétricos, procedimentos de manutenção e dados de torques. Edição 2021, cobrindo toda a gama de ligeiros e comerciais." },
+    "en": { "name": "WIS 2021", "short": "Workshop manuals.", "details": "Workshop Information System — Mercedes-Benz technical documentation database. Includes step-by-step repair manuals, wiring diagrams, maintenance procedures and torque values. 2021 edition covering the full passenger car and commercial vehicle range." },
+    "fr": { "name": "WIS 2021", "short": "Manuels techniques.", "details": "Workshop Information System — base de documentation technique Mercedes-Benz. Manuels de réparation étape par étape, schémas électriques, procédures de maintenance et couples de serrage. Édition 2021 couvrant toute la gamme." }
   },
   {
     "id": "merc_epc",
@@ -50,9 +50,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/epc.jpg",
     "meta": { "year": "2018" },
-    "pt": { "name": "EPC", "short": "Catálogo de peças.", "details": "" },
-    "en": { "name": "EPC", "short": "Parts catalog.", "details": "" },
-    "fr": { "name": "EPC", "short": "Catalogue de pièces.", "details": "" }
+    "pt": { "name": "EPC", "short": "Catálogo de peças.", "details": "Electronic Parts Catalogue — catálogo electrónico oficial de peças Mercedes-Benz. Identifica peças por modelo, VIN ou número de referência, com ilustrações explodidas e lista de preços de rede. Edição 2018, cobrindo toda a gama ligeiros e pesados." },
+    "en": { "name": "EPC", "short": "Parts catalog.", "details": "Electronic Parts Catalogue — official Mercedes-Benz electronic parts catalog. Identify parts by model, VIN or part number, with exploded diagrams and dealer price lists. 2018 edition covering the full passenger and commercial vehicle range." },
+    "fr": { "name": "EPC", "short": "Catalogue de pièces.", "details": "Electronic Parts Catalogue — catalogue électronique officiel de pièces Mercedes-Benz. Recherche par modèle, VIN ou référence, avec vues éclatées et tarifs revendeur. Édition 2018 pour toute la gamme." }
   },
   {
     "id": "merc_vgsnag2",
@@ -60,9 +60,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-vgsnag2.jpg",
     "meta": {},
-    "pt": { "name": "VGSNAG2 Manager", "short": "Caixa de velocidades 722.9.", "details": "" },
-    "en": { "name": "VGSNAG2 Manager", "short": "722.9 Gearbox tool.", "details": "" },
-    "fr": { "name": "VGSNAG2 Manager", "short": "Boîte de vitesses 722.9.", "details": "" }
+    "pt": { "name": "VGSNAG2 Manager", "short": "Caixa de velocidades 722.9.", "details": "Ferramenta especializada para a transmissão automática Mercedes-Benz 722.9 (7G-Tronic). Permite reset de adaptações de marcha, calibração do módulo TCM, leitura de dados e parametrização — essencial após substituição ou reparação da caixa." },
+    "en": { "name": "VGSNAG2 Manager", "short": "722.9 Gearbox tool.", "details": "Specialised tool for the Mercedes-Benz 722.9 (7G-Tronic) automatic transmission. Gear adaptation reset, TCM module calibration, data reading and parameterisation — essential after gearbox replacement or repair." },
+    "fr": { "name": "VGSNAG2 Manager", "short": "Boîte de vitesses 722.9.", "details": "Outil spécialisé pour la boîte automatique Mercedes-Benz 722.9 (7G-Tronic). Reset des adaptations de vitesses, calibration du module TCM, lecture de données et paramétrage — indispensable après remplacement ou réparation." }
   },
   {
     "id": "merc_dts9",
@@ -70,9 +70,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/Merc-DTS9.jpg",
     "meta": {},
-    "pt": { "name": "DTS Monaco 9.02", "short": "Engenharia.", "details": "" },
-    "en": { "name": "DTS Monaco 9.02", "short": "Engineering.", "details": "" },
-    "fr": { "name": "DTS Monaco 9.02", "short": "Ingénierie.", "details": "" }
+    "pt": { "name": "DTS Monaco 9.02", "short": "Engenharia.", "details": "<b>DTS Monaco 9.02</b> — ferramenta de engenharia Mercedes-Benz para diagnóstico avançado e desenvolvimento. Acesso directo a protocolos UDS/KWP2000/CAN, codificação livre de ECUs, flash de firmware via ODX/FLASH e criação de scripts personalizados. Utilizado por técnicos avançados e engenheiros." },
+    "en": { "name": "DTS Monaco 9.02", "short": "Engineering.", "details": "<b>DTS Monaco 9.02</b> — Mercedes-Benz engineering tool for advanced diagnostics and development. Direct UDS/KWP2000/CAN protocol access, unrestricted ECU coding, firmware flashing via ODX/FLASH and custom script creation. Used by advanced technicians and engineers." },
+    "fr": { "name": "DTS Monaco 9.02", "short": "Ingénierie.", "details": "<b>DTS Monaco 9.02</b> — outil d'ingénierie Mercedes-Benz pour diagnostic avancé et développement. Accès direct aux protocoles UDS/KWP2000/CAN, codage libre des ECUs, flash firmware via ODX/FLASH et scripts personnalisés. Utilisé par les techniciens avancés et ingénieurs." }
   },
   {
     "id": "merc_vediamo",
@@ -80,9 +80,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/Merc-Vediamo.jpg",
     "meta": {},
-    "pt": { "name": "Vediamo 4/5", "short": "Engenharia avançada.", "details": "" },
-    "en": { "name": "Vediamo 4/5", "short": "Advanced engineering.", "details": "" },
-    "fr": { "name": "Vediamo 4/5", "short": "Ingénierie avancée.", "details": "" }
+    "pt": { "name": "Vediamo 4/5", "short": "Engenharia avançada.", "details": "<b>Vediamo</b> — a ferramenta de engenharia original da Daimler. Acesso total e irrestrito a todos os módulos Mercedes-Benz via KWP2000 e UDS. Codificação avançada de ECUs (ZGW, EZS, SRS…), programação de módulos e edição directa de parâmetros. Compatível com W204 e posteriores." },
+    "en": { "name": "Vediamo 4/5", "short": "Advanced engineering.", "details": "<b>Vediamo</b> — the original Daimler engineering tool. Full unrestricted access to all Mercedes-Benz control units via KWP2000 and UDS. Advanced ECU coding (ZGW, EZS, SRS…), module programming and direct parameter editing. Compatible with W204 and later models." },
+    "fr": { "name": "Vediamo 4/5", "short": "Ingénierie avancée.", "details": "<b>Vediamo</b> — l'outil d'ingénierie original de Daimler. Accès total et non restreint à tous les calculateurs Mercedes-Benz via KWP2000 et UDS. Codage avancé (ZGW, EZS, SRS…), programmation et édition directe de paramètres. Compatible W204 et ultérieurs." }
   },
   {
     "id": "merc_hhtwin",
@@ -90,9 +90,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-htt.jpg",
     "meta": {},
-    "pt": { "name": "HHTWIN", "short": "Veículos clássicos.", "details": "" },
-    "en": { "name": "HHTWIN", "short": "Classic vehicles.", "details": "" },
-    "fr": { "name": "HHTWIN", "short": "Véhicules classiques.", "details": "" }
+    "pt": { "name": "HHTWIN", "short": "Veículos clássicos.", "details": "Software de diagnóstico para Mercedes-Benz clássicos e históricos, cobrindo modelos das séries W124, W140, W210 e anteriores. Suporta protocolos de diagnóstico legado não compatíveis com o Xentry moderno. Ideal para oficinas especializadas em clássicos MB." },
+    "en": { "name": "HHTWIN", "short": "Classic vehicles.", "details": "Diagnostic software for classic and historic Mercedes-Benz vehicles, covering W124, W140, W210 series and earlier. Supports legacy diagnostic protocols not compatible with modern Xentry. Ideal for workshops specialising in classic MB vehicles." },
+    "fr": { "name": "HHTWIN", "short": "Véhicules classiques.", "details": "Logiciel de diagnostic pour les Mercedes-Benz classiques et historiques, séries W124, W140, W210 et antérieures. Protocoles legacy non supportés par Xentry moderne. Idéal pour les ateliers spécialisés dans les véhicules MB anciens." }
   },
   {
     "id": "merc_7g",
@@ -100,9 +100,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-7g-tools.jpg",
     "meta": {},
-    "pt": { "name": "7G Tronic", "short": "Reset de transmissão.", "details": "" },
-    "en": { "name": "7G Tronic", "short": "Transmission reset.", "details": "" },
-    "fr": { "name": "7G Tronic", "short": "Réinitialisation transmission.", "details": "" }
+    "pt": { "name": "7G Tronic", "short": "Reset de transmissão.", "details": "Conjunto de ferramentas para reset e adaptação da caixa automática 7G-Tronic Mercedes-Benz. Efectua o reset de adaptações de marcha e calibração do módulo de transmissão, garantindo mudanças suaves após substituição de componentes ou reparação." },
+    "en": { "name": "7G Tronic", "short": "Transmission reset.", "details": "Toolset for reset and adaptation of the Mercedes-Benz 7G-Tronic automatic transmission. Performs gear adaptation reset and transmission module calibration, ensuring smooth gear changes after component replacement or repair." },
+    "fr": { "name": "7G Tronic", "short": "Réinitialisation transmission.", "details": "Ensemble d'outils pour le reset et l'adaptation de la boîte automatique 7G-Tronic Mercedes-Benz. Reset des adaptations et calibration du module de transmission pour des changements de vitesse fluides après remplacement ou réparation." }
   },
   {
     "id": "merc_zenzefi",
@@ -110,9 +110,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-certificates.jpg",
     "meta": {},
-    "pt": { "name": "Certificados ZenZefi", "short": "Acesso offline.", "details": "" },
-    "en": { "name": "ZenZefi Certificates", "short": "Offline access.", "details": "" },
-    "fr": { "name": "Certificats ZenZefi", "short": "Accès hors ligne.", "details": "" }
+    "pt": { "name": "Certificados ZenZefi", "short": "Acesso offline.", "details": "Pacote de certificados digitais que permite ao Xentry funcionar em modo offline, sem ligação contínua à internet Daimler. Inclui gerador de certificados para instalações em rede local e PCs sem acesso à internet da fábrica. Imprescindível para uso profissional sem dependência de cobertura." },
+    "en": { "name": "ZenZefi Certificates", "short": "Offline access.", "details": "Digital certificate package that allows Xentry to run in offline mode, without a continuous Daimler internet connection. Includes a certificate generator for local network setups and PCs without factory internet access. Essential for professional use without connectivity dependency." },
+    "fr": { "name": "Certificats ZenZefi", "short": "Accès hors ligne.", "details": "Paquet de certificats numériques permettant à Xentry de fonctionner hors ligne, sans connexion internet Daimler continue. Inclut un générateur de certificats pour réseaux locaux et PC sans accès internet usine. Indispensable pour usage professionnel sans dépendance réseau." }
   },
   {
     "id": "merc_mbtools",
@@ -120,9 +120,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-mbtools.jpg",
     "meta": {},
-    "pt": { "name": "MbTools", "short": "Utilitário.", "details": "" },
-    "en": { "name": "MbTools", "short": "Utility.", "details": "" },
-    "fr": { "name": "MbTools", "short": "Utilitaire.", "details": "" }
+    "pt": { "name": "MbTools", "short": "Utilitário.", "details": "Colecção de utilitários auxiliares para técnicos Mercedes-Benz: limpeza de instalações Xentry corrompidas, geração de licenças, ferramentas de diagnóstico de conectividade, leitores de logs e outros utilitários de suporte técnico no dia-a-dia da oficina." },
+    "en": { "name": "MbTools", "short": "Utility.", "details": "Collection of auxiliary utilities for Mercedes-Benz technicians: cleanup of corrupted Xentry installations, licence generation, connectivity diagnostic tools, log readers and other technical support utilities for day-to-day workshop use." },
+    "fr": { "name": "MbTools", "short": "Utilitaire.", "details": "Collection d'utilitaires auxiliaires pour les techniciens Mercedes-Benz : nettoyage d'installations Xentry corrompues, génération de licences, outils de diagnostic de connectivité, lecteurs de journaux et autres utilitaires de support technique au quotidien." }
   },
   {
     "id": "merc_pricelist",
@@ -130,9 +130,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-pricelist.jpg",
     "meta": {},
-    "pt": { "name": "Price List 2025", "short": "Lista de preços Excel.", "details": "" },
-    "en": { "name": "Price List 2025", "short": "Excel price list.", "details": "" },
-    "fr": { "name": "Price List 2025", "short": "Liste de prix Excel.", "details": "" }
+    "pt": { "name": "Price List 2025", "short": "Lista de preços Excel.", "details": "Lista de preços oficial Mercedes-Benz em formato Excel para a rede de concessionários. Inclui referências de peças, preços de retalho e grosso, actualizados a 2025. Ferramenta indispensável para orçamentação rápida e gestão de encomendas de peças." },
+    "en": { "name": "Price List 2025", "short": "Excel price list.", "details": "Official Mercedes-Benz price list in Excel format for the dealer network. Includes part references, retail and wholesale prices updated to 2025. Essential tool for fast quotations and parts order management." },
+    "fr": { "name": "Price List 2025", "short": "Liste de prix Excel.", "details": "Liste de prix officielle Mercedes-Benz au format Excel pour le réseau concessionnaire. Références de pièces, prix de détail et de gros mis à jour en 2025. Outil indispensable pour devis rapides et gestion des commandes de pièces." }
   },
   {
     "id": "merc_tutorials",
@@ -140,9 +140,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-tutorials.jpg",
     "meta": {},
-    "pt": { "name": "Coding Tutorials", "short": "Guias de codificação.", "details": "" },
-    "en": { "name": "Coding Tutorials", "short": "Coding guides.", "details": "" },
-    "fr": { "name": "Coding Tutorials", "short": "Guides de codage.", "details": "" }
+    "pt": { "name": "Coding Tutorials", "short": "Guias de codificação.", "details": "Colecção de guias de codificação Mercedes-Benz: activação de funções ocultas, adaptação de módulos substituídos, reset de serviços, coding de faróis, câmara de marcha atrás, som ambiente e muito mais. Com exemplos práticos para Vediamo e DTS Monaco." },
+    "en": { "name": "Coding Tutorials", "short": "Coding guides.", "details": "Collection of Mercedes-Benz coding guides: hidden function activation, replacement module adaptation, service reset, headlight coding, reversing camera, ambient sound and more. With practical examples using Vediamo and DTS Monaco." },
+    "fr": { "name": "Coding Tutorials", "short": "Guides de codage.", "details": "Collection de guides de codage Mercedes-Benz : activation de fonctions cachées, adaptation de calculateurs remplacés, reset de services, phares, caméra de recul, son d'ambiance et bien plus. Avec exemples pratiques Vediamo et DTS Monaco." }
   },
   {
     "id": "merc_vindecoder",
@@ -160,9 +160,9 @@
     "brand": "mercedes",
     "img": "IMG/Daimler/merc-sdmedia.jpg",
     "meta": {},
-    "pt": { "name": "SDMedia", "short": "Multimédia.", "details": "" },
-    "en": { "name": "SDMedia", "short": "Multimedia.", "details": "" },
-    "fr": { "name": "SDMedia", "short": "Multimédia.", "details": "" }
+    "pt": { "name": "SDMedia", "short": "Multimédia.", "details": "Gestor de multimédia e navegação Mercedes-Benz. Permite actualizar, criar e personalizar cartões de dados para os sistemas Audio 20, Comand Online e MBUX. Compatível com múltiplas gerações de sistemas de bordo MB — essencial para actualização de mapas e conteúdo." },
+    "en": { "name": "SDMedia", "short": "Multimedia.", "details": "Mercedes-Benz multimedia and navigation manager. Update, create and customise data cards for Audio 20, Comand Online and MBUX systems. Compatible with multiple generations of MB onboard systems — essential for map and content updates." },
+    "fr": { "name": "SDMedia", "short": "Multimédia.", "details": "Gestionnaire multimédia et navigation Mercedes-Benz. Mise à jour, création et personnalisation des cartes de données pour Audio 20, Comand Online et MBUX. Compatible avec plusieurs générations de systèmes embarqués MB — essentiel pour les mises à jour cartographiques." }
   },
   {
     "id": "vag_odis_service",
@@ -212,9 +212,9 @@
     "brand": "bmw",
     "img": "IMG/BMW/BMW-Ista.jpg",
     "meta": {},
-    "pt": { "name": "ISTA-P", "short": "Programação de módulos.", "details": "" },
-    "en": { "name": "ISTA-P", "short": "Module programming.", "details": "" },
-    "fr": { "name": "ISTA-P", "short": "Programmation de calculateurs.", "details": "" }
+    "pt": { "name": "ISTA-P", "short": "Programação de módulos.", "details": "<b>ISTA-P</b> — ferramenta oficial BMW para programação e codificação de módulos de controlo (ECU, ZGM, FEM, BDC). Flash e actualização de software, codificação VIN (Vehicle Order) e procedimentos guiados passo a passo. Indispensável para substituição de módulos BMW/MINI nas séries E, F e G." },
+    "en": { "name": "ISTA-P", "short": "Module programming.", "details": "<b>ISTA-P</b> — official BMW tool for programming and coding of control modules (ECU, ZGM, FEM, BDC). Module flashing, software updates, VIN coding (Vehicle Order) and guided step-by-step procedures. Essential for BMW/MINI module replacement on E, F and G series." },
+    "fr": { "name": "ISTA-P", "short": "Programmation de calculateurs.", "details": "<b>ISTA-P</b> — outil officiel BMW pour la programmation et le codage des calculateurs (ECU, ZGM, FEM, BDC). Flash de calculateurs, mises à jour logicielles, codage VIN et procédures guidées étape par étape. Indispensable pour le remplacement de calculateurs BMW/MINI séries E, F et G." }
   },
   {
     "id": "psa_diagbox_9208",
@@ -326,9 +326,9 @@
     "brand": "toyota",
     "img": "IMG/Toyota/epc.jpg",
     "meta": {},
-    "pt": { "name": "Toyota EPC", "short": "Catálogo de peças.", "details": "" },
-    "en": { "name": "Toyota EPC", "short": "Parts catalog.", "details": "" },
-    "fr": { "name": "Toyota EPC", "short": "Catalogue de pièces.", "details": "" }
+    "pt": { "name": "Toyota EPC", "short": "Catálogo de peças.", "details": "Catálogo electrónico oficial de peças Toyota e Lexus. Localização e identificação de peças originais por modelo, ano, VIN e motor. Inclui preços de referência e renvios cruzados para toda a gama Toyota, Lexus e Daihatsu — ferramenta diária de officina e recepção." },
+    "en": { "name": "Toyota EPC", "short": "Parts catalog.", "details": "Official Toyota and Lexus electronic parts catalog. Locate and identify genuine parts by model, year, VIN and engine. Includes reference prices and cross-references for the full Toyota, Lexus and Daihatsu range — the daily tool for workshop and reception." },
+    "fr": { "name": "Toyota EPC", "short": "Catalogue de pièces.", "details": "Catalogue électronique officiel de pièces Toyota et Lexus. Identification de pièces d'origine par modèle, année, VIN et moteur. Prix de référence et renvois croisés pour toute la gamme Toyota, Lexus et Daihatsu — l'outil quotidien d'atelier et de réception." }
   },
   {
     "id": "toyota_toylex",

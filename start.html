@@ -202,46 +202,113 @@
 
   <!-- ═══ WIZARD DE COMPATIBILIDADE ═══ -->
   <div id="wizardModal" class="modal-bg" style="display:none">
-    <div class="modal" id="wizContent">
-      <button type="button" class="close" onclick="closeWizard()">&times;</button>
+    <div class="wiz-modal" id="wizContent">
+      <button type="button" class="wiz-close-btn" onclick="closeWizard()">×</button>
 
+      <!-- ── Progress Stepper ── -->
+      <div class="wiz-stepper">
+        <div class="wiz-step-dot wiz-dot-active" data-step="1">
+          <span class="wiz-dot-num">1</span>
+          <span class="wiz-dot-label">Sistema</span>
+        </div>
+        <div class="wiz-step-line"></div>
+        <div class="wiz-step-dot" data-step="2">
+          <span class="wiz-dot-num">2</span>
+          <span class="wiz-dot-label">RAM</span>
+        </div>
+        <div class="wiz-step-line"></div>
+        <div class="wiz-step-dot" data-step="3">
+          <span class="wiz-dot-num">3</span>
+          <span class="wiz-dot-label">Disco</span>
+        </div>
+        <div class="wiz-step-line"></div>
+        <div class="wiz-step-dot" data-step="4">
+          <span class="wiz-dot-num">4</span>
+          <span class="wiz-dot-label">Marca</span>
+        </div>
+      </div>
+
+      <!-- ── Step 1: Windows ── -->
       <div id="wiz-step-1" class="step active">
         <h3 class="wiz-title" id="wiz_title_1">Que Windows tem?</h3>
-        <div class="wiz-grid">
-          <button type="button" class="wiz-btn" id="wiz_btn_win_old" onclick="setSpec('win','old')">Windows 7 / 8</button>
-          <button type="button" class="wiz-btn" id="wiz_btn_win_new" onclick="setSpec('win','new')">Windows 10 / 11</button>
+        <div class="wiz-options">
+          <button type="button" class="wiz-opt-card" id="wiz_btn_win_old" onclick="setSpec('win','old')">
+            <span class="wiz-opt-icon">💻</span>
+            <span class="wiz-opt-label">Windows 7 / 8</span>
+            <span class="wiz-opt-sub">Legacy</span>
+          </button>
+          <button type="button" class="wiz-opt-card wiz-opt-recommended" id="wiz_btn_win_new" onclick="setSpec('win','new')">
+            <span class="wiz-opt-icon">🖥️</span>
+            <span class="wiz-opt-label">Windows 10 / 11</span>
+            <span class="wiz-opt-sub">Recomendado ✓</span>
+          </button>
         </div>
       </div>
 
+      <!-- ── Step 2: RAM ── -->
       <div id="wiz-step-2" class="step">
         <h3 class="wiz-title" id="wiz_title_2">Memória RAM?</h3>
-        <div class="wiz-grid">
-          <button type="button" class="wiz-btn" id="wiz_btn_ram_low"  onclick="setSpec('ram','low')">4 GB ou menos</button>
-          <button type="button" class="wiz-btn" id="wiz_btn_ram_high" onclick="setSpec('ram','high')">8 GB ou mais</button>
+        <div class="wiz-options">
+          <button type="button" class="wiz-opt-card" id="wiz_btn_ram_low" onclick="setSpec('ram','low')">
+            <span class="wiz-opt-icon">🔴</span>
+            <span class="wiz-opt-label">4 GB ou menos</span>
+            <span class="wiz-opt-sub">Básico</span>
+          </button>
+          <button type="button" class="wiz-opt-card wiz-opt-recommended" id="wiz_btn_ram_high" onclick="setSpec('ram','high')">
+            <span class="wiz-opt-icon">✅</span>
+            <span class="wiz-opt-label">8 GB ou mais</span>
+            <span class="wiz-opt-sub">Ideal ✓</span>
+          </button>
         </div>
       </div>
 
+      <!-- ── Step 3: Disco ── -->
       <div id="wiz-step-3" class="step">
         <h3 class="wiz-title" id="wiz_title_3">Tipo de disco?</h3>
-        <div class="wiz-grid">
-          <button type="button" class="wiz-btn" id="wiz_btn_disk_hdd" onclick="setSpec('disk','hdd')">HDD</button>
-          <button type="button" class="wiz-btn" id="wiz_btn_disk_ssd" onclick="setSpec('disk','ssd')">SSD</button>
+        <div class="wiz-options">
+          <button type="button" class="wiz-opt-card" id="wiz_btn_disk_hdd" onclick="setSpec('disk','hdd')">
+            <span class="wiz-opt-icon">💿</span>
+            <span class="wiz-opt-label">HDD</span>
+            <span class="wiz-opt-sub">Mecânico</span>
+          </button>
+          <button type="button" class="wiz-opt-card wiz-opt-recommended" id="wiz_btn_disk_ssd" onclick="setSpec('disk','ssd')">
+            <span class="wiz-opt-icon">⚡</span>
+            <span class="wiz-opt-label">SSD</span>
+            <span class="wiz-opt-sub">Rápido ✓</span>
+          </button>
         </div>
       </div>
 
+      <!-- ── Step 4: Marca ── -->
       <div id="wiz-step-4" class="step">
-        <h3 class="wiz-title" id="wiz_title_4">Marca?</h3>
-        <div class="wiz-grid">
-          <button type="button" class="wiz-btn" id="wiz_btn_brand_merc" onclick="setSpec('brand','Mercedes')">Mercedes</button>
-          <button type="button" class="wiz-btn" id="wiz_btn_brand_bmw"  onclick="setSpec('brand','BMW')">BMW</button>
+        <h3 class="wiz-title" id="wiz_title_4">Marca do veículo?</h3>
+        <div class="wiz-options wiz-options-4">
+          <button type="button" class="wiz-opt-card" onclick="setSpec('brand','mercedes')">
+            <span class="wiz-opt-icon wiz-brand-abbr" style="background:#0a1628;color:#fff">MB</span>
+            <span class="wiz-opt-label">Mercedes-Benz</span>
+          </button>
+          <button type="button" class="wiz-opt-card" onclick="setSpec('brand','bmw')">
+            <span class="wiz-opt-icon wiz-brand-abbr" style="background:#0066b2;color:#fff">BMW</span>
+            <span class="wiz-opt-label">BMW / MINI</span>
+          </button>
+          <button type="button" class="wiz-opt-card" onclick="setSpec('brand','vag')">
+            <span class="wiz-opt-icon wiz-brand-abbr" style="background:#001f6e;color:#fff">VAG</span>
+            <span class="wiz-opt-label">VW / Audi / Seat</span>
+          </button>
+          <button type="button" class="wiz-opt-card" onclick="setSpec('brand','other')">
+            <span class="wiz-opt-icon">🔧</span>
+            <span class="wiz-opt-label">Outra marca</span>
+          </button>
         </div>
       </div>
 
+      <!-- ── Resultado ── -->
       <div id="wiz-result" class="step">
         <h3 class="wiz-title" id="wiz_title_result">Resultado</h3>
         <div id="finalResultContent"></div>
-        <button type="button" class="wiz-btn-action" id="wiz_restart_btn"
-          onclick="openWizard()">Recomeçar 🔄</button>
+        <button type="button" class="wiz-restart-btn" id="wiz_restart_btn" onclick="openWizard()">
+          Recomeçar 🔄
+        </button>
       </div>
     </div>
   </div>
