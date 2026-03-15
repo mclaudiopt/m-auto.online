@@ -359,8 +359,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   applyLang();
   initBrandSwipe();
 
-  // Viewers popup
-  setTimeout(() => updateViewers(false), 5000);
+  // Popup de visitantes — só aparece ao navegar (não no arranque)
 
   // Scroll top
   const scrollBtn = document.getElementById('scrollTopBtn');
@@ -609,6 +608,7 @@ function switchSection(id, btn) {
   if (id === 'serv')  renderServices();
   if (id === 'about') renderAbout();
   buildNav(); // mantém estado activo correcto no nav
+  showConsultPopup();
 }
 
 function switchBrand(id, btn) {
@@ -620,6 +620,7 @@ function switchBrand(id, btn) {
   const appTop = document.querySelector('.app-container')?.offsetTop - 100 || 0;
   window.scrollTo({ top: appTop, behavior: 'smooth' });
   renderBrand(id);
+  showConsultPopup();
 }
 
 /* ─────────────────────────────────────────────
@@ -660,7 +661,7 @@ function renderBrand(brandId) {
     const metaEl  = existingHero.querySelector('.brand-hero-meta');
     const wmEl    = existingHero.querySelector('.brand-hero-wm');
     if (titleEl) titleEl.textContent = label;
-    if (metaEl)  metaEl.textContent  = `${dataLoaded ? products.length : '—'} ${t('brand_hero_products')} · ${t('brand_hero_meta')}`;
+    if (metaEl)  metaEl.innerHTML = `<span class="hero-count">0</span> ${t('brand_hero_products')} · ${t('brand_hero_meta')}`;
     if (wmEl)  { wmEl.textContent = brand.watermark; applyWmOffset(panel); }
     const dotsEl = panel.querySelector('.brand-dots');
     if (dotsEl) dotsEl.innerHTML = dotsHtml;
@@ -673,14 +674,17 @@ function renderBrand(brandId) {
         <div class="brand-hero-wm">${brand.watermark}</div>
         <div class="brand-hero-eyebrow">${t('brand_hero_eyebrow')}</div>
         <h2 class="brand-hero-title">${label}</h2>
-        <p class="brand-hero-meta">${dataLoaded ? products.length : '—'} ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
+        <p class="brand-hero-meta"><span class="hero-count">0</span> ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
       </div>
       <div class="brand-dots">${dotsHtml}</div>
       <div class="grid brand-grid">${gridHtml}</div>
     `;
     applyWmOffset(panel);
   }
-  if (dataLoaded && !swipeHintShown) showSwipeHint();
+  if (dataLoaded) {
+    initSectionFx(panel, panel.querySelector('.hero-count'), products.length);
+    if (!swipeHintShown) showSwipeHint();
+  }
 }
 
 function renderHard() {
@@ -692,10 +696,11 @@ function renderHard() {
       <div class="section-hero-wm">HARDWARE</div>
       <div class="section-hero-eyebrow">M-Auto Online</div>
       <h2 class="section-hero-title">${t('hard_title')}</h2>
-      <p class="section-hero-meta">${products.length} ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
+      <p class="section-hero-meta"><span class="hero-count">0</span> ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
     </div>
-    <div class="grid hard-grid">${products.map(p => createCard(p)).join('')}</div>`;
+    <div class="grid hard-grid">${dataLoaded ? products.map(p => createCard(p)).join('') : renderSkeletonCards(4)}</div>`;
   applyWmOffset(sec);
+  initSectionFx(sec, sec.querySelector('.hero-count'), products.length);
 }
 
 function renderTools() {
@@ -706,10 +711,11 @@ function renderTools() {
       <div class="section-hero-wm">DOWNLOADS</div>
       <div class="section-hero-eyebrow">M-Auto Online</div>
       <h2 class="section-hero-title">${t('tools_title')}</h2>
-      <p class="section-hero-meta">${tools.length} apps · ${t('tools_meta')}</p>
+      <p class="section-hero-meta"><span class="hero-count">0</span> apps · ${t('tools_meta')}</p>
     </div>
-    <div class="tool-grid">${tools.map(tl => createToolCard(tl)).join('')}</div>`;
+    <div class="tool-grid">${dataLoaded ? tools.map(tl => createToolCard(tl)).join('') : renderSkeletonToolCards(4)}</div>`;
   applyWmOffset(sec);
+  initSectionFx(sec, sec.querySelector('.hero-count'), tools.length);
 }
 
 function renderServices() {
@@ -736,10 +742,11 @@ function renderServices() {
       <div class="section-hero-wm">${t('serv_wm')}</div>
       <div class="section-hero-eyebrow">M-Auto Online</div>
       <h2 class="section-hero-title">${t('serv_title')}</h2>
-      <p class="section-hero-meta">${services.length} ${t('nav_serv').toLowerCase()} · ${t('brand_hero_meta')}</p>
+      <p class="section-hero-meta"><span class="hero-count">0</span> ${t('nav_serv').toLowerCase()} · ${t('brand_hero_meta')}</p>
     </div>
     <div class="tool-grid">${serviceCards}</div>`;
   applyWmOffset(sec);
+  initSectionFx(sec, sec.querySelector('.hero-count'), services.length);
 }
 
 function renderAbout() {
@@ -840,8 +847,11 @@ function openProductModal(id) {
   activeModalId = id;
   const item = catalog.find(p => p.id === id);
   if (!item) return;
+  const modal = document.getElementById('productModal');
   renderModalContent(item);
-  document.getElementById('productModal').style.display = 'flex';
+  modal.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('open')));
+  showConsultPopup();
 }
 
 function renderModalContent(item) {
@@ -867,8 +877,12 @@ function renderModalContent(item) {
 }
 
 function closeProductModal() {
-  document.getElementById('productModal').style.display = 'none';
-  activeModalId = null;
+  const modal = document.getElementById('productModal');
+  modal.classList.remove('open');
+  setTimeout(() => {
+    modal.style.display = 'none';
+    activeModalId = null;
+  }, 380);
 }
 
 function orderFromModal() {
@@ -906,6 +920,83 @@ function orderGeneral() {
   const phone = "351911157459";
   const text = t('wa_general');
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+/* ─────────────────────────────────────────────
+   13b. EFEITOS VISUAIS — tilt · reveal · count-up · skeleton
+───────────────────────────────────────────── */
+
+// 3D Tilt hover nos cards
+function initCardTilt() {
+  document.querySelectorAll('.card:not([data-tilt]), .tool-card:not([data-tilt])').forEach(card => {
+    card.dataset.tilt = '1';
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(700px) rotateY(${x * 9}deg) rotateX(${-y * 9}deg) scale3d(1.03,1.03,1.03)`;
+      card.style.boxShadow = `${-x * 12}px ${-y * 12}px 28px rgba(0,0,0,0.13)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.boxShadow = '';
+    });
+  });
+}
+
+// Scroll-triggered reveal
+let _scrollObserver = null;
+function initScrollReveal() {
+  if (!_scrollObserver) {
+    _scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-in');
+          _scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+  }
+  document.querySelectorAll('.card:not(.reveal-obs), .tool-card:not(.reveal-obs)').forEach((el, i) => {
+    el.classList.add('reveal-obs');
+    el.style.setProperty('--reveal-delay', `${Math.min(i * 55, 400)}ms`);
+    _scrollObserver.observe(el);
+  });
+}
+
+// Count-up animation nos números do hero
+function animateCount(el, target) {
+  if (!el || !target) return;
+  const dur = 750;
+  const start = performance.now();
+  const update = (now) => {
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(eased * target);
+    if (p < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+// Skeleton para tool-cards
+function renderSkeletonToolCards(n = 4) {
+  return Array(n).fill(0).map(() => `
+    <div class="tool-card card-skeleton">
+      <div class="skel" style="width:44px;height:44px;border-radius:12px;flex-shrink:0"></div>
+      <div class="tool-card-body" style="flex:1">
+        <div class="skel skel-h3" style="width:60%"></div>
+        <div class="skel skel-p1" style="width:90%"></div>
+      </div>
+    </div>`).join('');
+}
+
+// Inicializa efeitos depois de render
+function initSectionFx(sec, countEl, countVal) {
+  requestAnimationFrame(() => {
+    initScrollReveal();
+    initCardTilt();
+    if (countEl && countVal) animateCount(countEl, countVal);
+  });
 }
 
 /* ─────────────────────────────────────────────
@@ -1171,23 +1262,27 @@ function startTypewriter() {
    17. POPUP DE VISITANTES
 ───────────────────────────────────────────── */
 let viewers = 5;
+let _popupTimer = null;
 
-function updateViewers(textOnly = false) {
-  if (!textOnly) {
-    viewers = Math.max(2, Math.min(15, viewers + Math.floor(Math.random() * 5) - 2));
-  }
+function showConsultPopup() {
+  viewers = Math.max(2, Math.min(15, viewers + Math.floor(Math.random() * 3) - 1));
   const el = document.getElementById('viewerText');
   if (el) el.innerHTML = `
     <span class="popup-viewers-line"><strong>${viewers}</strong> ${t('popup_viewers')}</span>
     <span class="popup-consult-line">${t('popup_consult')}</span>
   `;
+  const popup = document.getElementById('salesPopup');
+  if (!popup) return;
+  popup.classList.remove('active');
+  clearTimeout(_popupTimer);
+  void popup.offsetWidth; // reflow para reset da transição CSS
+  popup.classList.add('active');
+  _popupTimer = setTimeout(() => popup.classList.remove('active'), 5000);
+}
 
-  if (!textOnly) {
-    const popup = document.getElementById('salesPopup');
-    popup?.classList.add('active');
-    setTimeout(() => popup?.classList.remove('active'), 7000);
-    setTimeout(() => updateViewers(false), Math.random() * 25000 + 20000);
-  }
+// Mantém updateViewers como alias para applyLang não quebrar
+function updateViewers(textOnly = false) {
+  if (!textOnly) showConsultPopup();
 }
 
 /* ─────────────────────────────────────────────

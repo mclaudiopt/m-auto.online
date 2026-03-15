@@ -3053,16 +3053,133 @@ body {
   margin-top: 1rem;
 }
 
-/* ── Popup consult two-line ── */
-.popup-viewers-line {
-  display: block;
-  font-size: 0.88rem;
+/* ══════════════════════════════════════════════════════
+   v8.1k — popup azul · brand wash · modal slide-in
+             tilt · scroll reveal · count-up
+   ══════════════════════════════════════════════════════ */
+
+/* ── Popup: azul, canto inferior esquerdo ── */
+.sales-popup {
+  left: 18px !important;
+  right: auto !important;
+  bottom: 18px !important;
+  transform: translateY(16px) !important;
+  opacity: 0 !important;
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%) !important;
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.38) !important;
+  border-radius: 14px !important;
+  max-width: 240px !important;
+  padding: 10px 14px 10px 11px !important;
+  gap: 8px !important;
 }
+.sales-popup.active {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+.sales-popup .popup-text p,
+.sales-popup .popup-viewers-line { color: #fff !important; }
+.sales-popup .popup-consult-line { color: rgba(255,255,255,0.75) !important; opacity: 1 !important; }
+.sales-popup .popup-close { color: rgba(255,255,255,0.65) !important; }
+@media (max-width: 768px) {
+  .sales-popup {
+    bottom: calc(65px + 10px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 12px !important;
+    max-width: 200px !important;
+  }
+}
+
+/* ── Popup consult two-line ── */
+.popup-viewers-line { display: block; font-size: 0.88rem; }
 .popup-consult-line {
   display: block;
   font-size: 0.72rem;
-  color: var(--text-muted);
   margin-top: 3px;
   font-style: italic;
-  opacity: 0.85;
+}
+
+/* ── Brand color wash — fundo subtil com a cor da marca ── */
+.app-container {
+  position: relative;
+}
+.app-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 45% at 60% 0%,
+    color-mix(in srgb, var(--brand-color) 9%, transparent),
+    transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Card tilt — transição suave ── */
+.card, .tool-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  will-change: transform;
+}
+
+/* ── Scroll reveal ── */
+.card:not(.reveal-in),
+.tool-card:not(.reveal-in) {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.card.reveal-in,
+.tool-card.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.42s ease var(--reveal-delay, 0ms),
+    transform 0.42s ease var(--reveal-delay, 0ms);
+}
+/* Card-skeleton visível mesmo sem reveal-in */
+.card-skeleton {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ── Modal slide-in lateral ── */
+.prod-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.68);
+  z-index: 2500;
+  backdrop-filter: blur(5px);
+  justify-content: flex-end;
+  align-items: stretch;
+  padding: 0;
+}
+.prod-content {
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-card);
+  border: none;
+  border-left: 1px solid var(--border);
+  border-radius: 20px 0 0 20px;
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.22);
+  overflow-y: auto;
+  position: relative;
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.prod-modal.open .prod-content {
+  transform: translateX(0);
+}
+@media (max-width: 768px) {
+  .prod-modal {
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .prod-content {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    max-height: 88vh;
+    transform: translateY(100%);
+  }
+  .prod-modal.open .prod-content {
+    transform: translateY(0);
+  }
 }
