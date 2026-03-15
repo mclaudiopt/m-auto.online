@@ -3183,3 +3183,23 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ── Fix 2: section-hero usa brand-color (igual ao brand-hero) ── */
+.section-hero {
+  background: linear-gradient(135deg, var(--brand-color) 0%, color-mix(in srgb, var(--brand-color) 72%, #000) 100%) !important;
+  transition: background 0.45s ease !important;
+}
+
+/* ── Fix 1: popup consult-mode — transparente, sem ícone ── */
+.sales-popup.consult-mode {
+  background: linear-gradient(135deg, rgba(29,78,216,0.65), rgba(37,99,235,0.65)) !important;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.22) !important;
+}
+.sales-popup.consult-mode .popup-icon { display: none !important; }
+/* Visitor popup — texto mais espaçado e grande */
+.sales-popup:not(.consult-mode) .popup-viewers-line {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.5 !important;
+}

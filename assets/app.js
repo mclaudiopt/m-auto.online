@@ -359,7 +359,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   applyLang();
   initBrandSwipe();
 
-  // Popup de visitantes — só aparece ao navegar (não no arranque)
+  // Popup de visitantes — inicia após 8s, depois disparo aleatório periódico
+  setTimeout(showViewersPopup, 8000);
 
   // Scroll top
   const scrollBtn = document.getElementById('scrollTopBtn');
@@ -1264,25 +1265,40 @@ function startTypewriter() {
 let viewers = 5;
 let _popupTimer = null;
 
-function showConsultPopup() {
+// Popup de visitantes — só contagem, espaçado, opaco, 7s
+function showViewersPopup() {
   viewers = Math.max(2, Math.min(15, viewers + Math.floor(Math.random() * 3) - 1));
   const el = document.getElementById('viewerText');
-  if (el) el.innerHTML = `
-    <span class="popup-viewers-line"><strong>${viewers}</strong> ${t('popup_viewers')}</span>
-    <span class="popup-consult-line">${t('popup_consult')}</span>
-  `;
+  if (el) el.innerHTML = `<span class="popup-viewers-line"><strong>${viewers}</strong> ${t('popup_viewers')}</span>`;
+  const popup = document.getElementById('salesPopup');
+  if (!popup) return;
+  popup.classList.remove('consult-mode', 'active');
+  clearTimeout(_popupTimer);
+  void popup.offsetWidth;
+  popup.classList.add('active');
+  _popupTimer = setTimeout(() => popup.classList.remove('active'), 7000);
+  setTimeout(showViewersPopup, Math.random() * 20000 + 20000);
+}
+
+// Popup de consulta — só mensagem, transparente, 2.5s (trigger: mudar marca/secção)
+function showConsultPopup() {
+  const el = document.getElementById('viewerText');
+  if (el) el.innerHTML = `<span class="popup-consult-line">${t('popup_consult')}</span>`;
   const popup = document.getElementById('salesPopup');
   if (!popup) return;
   popup.classList.remove('active');
   clearTimeout(_popupTimer);
-  void popup.offsetWidth; // reflow para reset da transição CSS
-  popup.classList.add('active');
-  _popupTimer = setTimeout(() => popup.classList.remove('active'), 5000);
+  void popup.offsetWidth;
+  popup.classList.add('consult-mode', 'active');
+  _popupTimer = setTimeout(() => {
+    popup.classList.remove('active');
+    setTimeout(() => popup.classList.remove('consult-mode'), 500);
+  }, 2500);
 }
 
-// Mantém updateViewers como alias para applyLang não quebrar
+// Alias para applyLang não quebrar
 function updateViewers(textOnly = false) {
-  if (!textOnly) showConsultPopup();
+  if (!textOnly) showViewersPopup();
 }
 
 /* ─────────────────────────────────────────────
