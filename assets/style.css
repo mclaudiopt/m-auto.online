@@ -3058,16 +3058,19 @@ body {
              tilt · scroll reveal · count-up
    ══════════════════════════════════════════════════════ */
 
-/* ── Popup: azul, canto inferior esquerdo ── */
+/* ── Popup: cinzento semi-transparente, canto inferior esquerdo ── */
 .sales-popup {
   left: 18px !important;
   right: auto !important;
   bottom: 18px !important;
   transform: translateY(16px) !important;
   opacity: 0 !important;
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%) !important;
-  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.38) !important;
-  border-radius: 14px !important;
+  background: rgba(28, 32, 42, 0.82) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
   max-width: 240px !important;
   padding: 10px 14px 10px 11px !important;
   gap: 8px !important;
@@ -3078,13 +3081,13 @@ body {
 }
 .sales-popup .popup-text p,
 .sales-popup .popup-viewers-line { color: #fff !important; }
-.sales-popup .popup-consult-line { color: rgba(255,255,255,0.75) !important; opacity: 1 !important; }
-.sales-popup .popup-close { color: rgba(255,255,255,0.65) !important; }
+.sales-popup .popup-consult-line { color: rgba(255,255,255,0.80) !important; opacity: 1 !important; }
+.sales-popup .popup-close { color: rgba(255,255,255,0.55) !important; }
 @media (max-width: 768px) {
   .sales-popup {
     bottom: calc(65px + 10px + env(safe-area-inset-bottom, 0px)) !important;
     left: 12px !important;
-    max-width: 200px !important;
+    max-width: 210px !important;
   }
 }
 
@@ -3193,17 +3196,18 @@ body {
   transition: none !important;
 }
 
-/* ── Popup consult-mode — transparente, sem ícone, uma linha ── */
+/* ── Popup consult-mode — cinzento, sem ícone, uma linha ── */
 .sales-popup.consult-mode {
-  background: linear-gradient(135deg, rgba(29,78,216,0.60), rgba(37,99,235,0.60)) !important;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.18) !important;
-  padding: 7px 12px !important;
+  background: rgba(28, 32, 42, 0.78) !important;
+  max-width: none !important;
+  padding: 7px 13px !important;
 }
 .sales-popup.consult-mode .popup-icon { display: none !important; }
 .popup-consult-line {
   white-space: nowrap !important;
-  font-size: 0.72rem !important;
+  font-size: 0.75rem !important;
   font-style: italic !important;
+  color: rgba(255,255,255,0.85) !important;
 }
 
 /* ── Popup visitantes — muito mais pequeno ── */

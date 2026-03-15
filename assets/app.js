@@ -28,7 +28,7 @@ const TRANS = {
     about_wm: "SOBRE",
     serv_wm: "SERVIÇOS",
     popup_viewers: "visitantes online",
-    popup_consult: "Podem existir softwares não listados — consulte-nos.",
+    popup_consult: "Outros softwares disponíveis — consulte-nos.",
     serv_contact: "Consultar",
     search_no_results: "Sem resultados para",
     wiz_os: "Que Windows tem?", wiz_ram: "Memória RAM?",
@@ -77,7 +77,7 @@ const TRANS = {
     about_wm: "ABOUT",
     serv_wm: "SERVICES",
     popup_viewers: "visitors online",
-    popup_consult: "There may be software not listed on the site — ask us.",
+    popup_consult: "More software available — ask us.",
     serv_contact: "Contact us",
     search_no_results: "No results for",
     wiz_os: "Which Windows?", wiz_ram: "RAM memory?",
@@ -126,7 +126,7 @@ const TRANS = {
     about_wm: "À PROPOS",
     serv_wm: "SERVICES",
     popup_viewers: "personnes en ligne",
-    popup_consult: "Il peut exister des logiciels non référencés — consultez-nous.",
+    popup_consult: "Plus de logiciels disponibles — contactez-nous.",
     serv_contact: "Nous contacter",
     search_no_results: "Aucun résultat pour",
     wiz_os: "Quel Windows ?", wiz_ram: "Mémoire RAM ?",
@@ -609,7 +609,7 @@ function switchSection(id, btn) {
   if (id === 'serv')  renderServices();
   if (id === 'about') renderAbout();
   buildNav(); // mantém estado activo correcto no nav
-  showConsultPopup();
+  if (id === 'soft') showConsultPopup(); // só na tab Software
 }
 
 function switchBrand(id, btn) {
