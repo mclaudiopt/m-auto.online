@@ -2585,14 +2585,14 @@ body {
 /* ── 6. WIZARD REDESIGN ── */
 .wiz-modal {
   background: var(--bg-card);
-  border-radius: 20px;
-  padding: 28px 28px 24px;
-  width: 90%;
-  max-width: 520px;
+  border-radius: 24px;
+  padding: 36px 36px 28px;
+  width: 92%;
+  max-width: 640px;
   border: 1px solid var(--border);
   position: relative;
   text-align: center;
-  max-height: 90vh;
+  max-height: 92vh;
   overflow-y: auto;
 }
 .wiz-close-btn {
@@ -2659,8 +2659,8 @@ body {
 .wiz-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 6px;
+  gap: 14px;
+  margin-bottom: 8px;
 }
 .wiz-options-4 {
   grid-template-columns: 1fr 1fr;
@@ -2669,10 +2669,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 18px 12px 14px;
+  gap: 8px;
+  padding: 22px 14px 18px;
   border: 2px solid var(--border);
-  border-radius: 14px;
+  border-radius: 16px;
   background: var(--bg-body);
   cursor: pointer;
   transition: border-color 0.18s, background 0.18s, transform 0.15s;
@@ -2690,7 +2690,7 @@ body {
   background: rgba(16,185,129,0.05);
 }
 .wiz-opt-icon {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   line-height: 1;
 }
 .wiz-brand-abbr {
@@ -2706,12 +2706,12 @@ body {
   line-height: 1 !important;
 }
 .wiz-opt-label {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-main);
 }
 .wiz-opt-sub {
-  font-size: 0.7rem;
+  font-size: 0.74rem;
   color: var(--text-muted);
 }
 /* Result */
@@ -2894,6 +2894,31 @@ body {
 .about-features { display: none !important; }
 .about-body { min-height: 0 !important; margin-bottom: 28px !important; }
 
+/* ── 7. WIZARD resultado: animação de entrada ── */
+@keyframes wizItemIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+#wiz-result.active #finalResultContent .wiz-status-card {
+  animation: wizItemIn 0.42s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  animation-delay: 0ms;
+}
+#wiz-result.active #finalResultContent .wiz-tips {
+  animation: wizItemIn 0.42s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  animation-delay: 100ms;
+}
+#wiz-result.active #finalResultContent .wiz-rec-card {
+  animation: wizItemIn 0.42s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  animation-delay: 160ms;
+}
+#wiz-result.active .wiz-restart-btn {
+  animation: wizItemIn 0.42s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  animation-delay: 220ms;
+}
+.wiz-status-icon { font-size: 1.6rem !important; flex-shrink: 0; }
+.wiz-status-title { font-weight: 800; font-size: 1.05rem !important; margin-bottom: 6px; }
+.wiz-status-msg { font-size: 0.87rem; color: var(--text-muted); }
+
 /* ════════════════════════════════════════════
    v8.1i — Soft Landing page + card compact
 ════════════════════════════════════════════ */
@@ -3005,4 +3030,39 @@ body {
   .soft-landing-brands { gap: 0.5rem; }
   .soft-landing-brand-btn { font-size: 0.78rem; padding: 0.4rem 0.75rem 0.4rem 0.35rem; }
   .soft-landing-brand-icon { width: 22px; height: 22px; font-size: 0.52rem; }
+}
+
+/* ── Search Results Panel ── */
+.search-results-panel {
+  display: none;
+  padding: 1rem 0 2rem;
+}
+.search-results-panel.active {
+  display: block;
+}
+.search-empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+.search-grid {
+  margin-top: 0.5rem;
+}
+.search-tool-grid {
+  margin-top: 1rem;
+}
+
+/* ── Popup consult two-line ── */
+.popup-viewers-line {
+  display: block;
+  font-size: 0.88rem;
+}
+.popup-consult-line {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+  font-style: italic;
+  opacity: 0.85;
 }

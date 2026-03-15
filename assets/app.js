@@ -28,6 +28,9 @@ const TRANS = {
     about_wm: "SOBRE",
     serv_wm: "SERVIÇOS",
     popup_viewers: "visitantes online",
+    popup_consult: "Podem existir softwares não listados — consulte-nos.",
+    serv_contact: "Consultar",
+    search_no_results: "Sem resultados para",
     wiz_os: "Que Windows tem?", wiz_ram: "Memória RAM?",
     wiz_disk: "Tipo de disco?", wiz_brand: "Marca do veículo?",
     wiz_result_title: "Resultado",
@@ -40,13 +43,19 @@ const TRANS = {
     wiz_ram_low: "4 GB ou menos", wiz_ram_high: "8 GB ou mais",
     wiz_disk_hdd: "HDD", wiz_disk_ssd: "SSD",
     wiz_brand_merc: "Mercedes", wiz_brand_bmw: "BMW",
+    wiz_sub_win_old: "Legado", wiz_sub_win_new: "Recomendado ✓",
+    wiz_sub_ram_low: "Básico", wiz_sub_ram_high: "Ideal ✓",
+    wiz_sub_disk_hdd: "Mecânico", wiz_sub_disk_ssd: "Rápido ✓",
+    wiz_brand_other: "Outra marca",
     brand_hero_eyebrow: "Software de Diagnóstico",
     brand_hero_products: "produtos",
     brand_hero_meta: "Instalação remota profissional",
     about_cta: "Ver Software →",
     about_feat_install: "Instalação remota profissional",
     about_feat_brands: "Mercedes · BMW · VAG · PSA · Toyota e mais",
-    about_feat_support: "Suporte rápido e garantido"
+    about_feat_support: "Suporte rápido e garantido",
+    wa_interest: "Olá! Tenho interesse em:",
+    wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico."
   },
   en: {
     nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Downloads",
@@ -68,6 +77,9 @@ const TRANS = {
     about_wm: "ABOUT",
     serv_wm: "SERVICES",
     popup_viewers: "visitors online",
+    popup_consult: "There may be software not listed on the site — ask us.",
+    serv_contact: "Contact us",
+    search_no_results: "No results for",
     wiz_os: "Which Windows?", wiz_ram: "RAM memory?",
     wiz_disk: "Disk type?", wiz_brand: "Vehicle brand?",
     wiz_result_title: "Result",
@@ -80,13 +92,19 @@ const TRANS = {
     wiz_ram_low: "4 GB or less", wiz_ram_high: "8 GB or more",
     wiz_disk_hdd: "HDD", wiz_disk_ssd: "SSD",
     wiz_brand_merc: "Mercedes", wiz_brand_bmw: "BMW",
+    wiz_sub_win_old: "Legacy", wiz_sub_win_new: "Recommended ✓",
+    wiz_sub_ram_low: "Basic", wiz_sub_ram_high: "Ideal ✓",
+    wiz_sub_disk_hdd: "Mechanical", wiz_sub_disk_ssd: "Fast ✓",
+    wiz_brand_other: "Other brand",
     brand_hero_eyebrow: "Diagnostic Software",
     brand_hero_products: "products",
     brand_hero_meta: "Professional remote installation",
     about_cta: "View Software →",
     about_feat_install: "Professional remote installation",
     about_feat_brands: "Mercedes · BMW · VAG · PSA · Toyota and more",
-    about_feat_support: "Fast and guaranteed support"
+    about_feat_support: "Fast and guaranteed support",
+    wa_interest: "Hello! I'm interested in:",
+    wa_general: "Hello! I would like more information about your diagnostic software."
   },
   fr: {
     nav_soft: "Logiciel", nav_hard: "Matériel", nav_tools: "Téléchargements",
@@ -108,6 +126,9 @@ const TRANS = {
     about_wm: "À PROPOS",
     serv_wm: "SERVICES",
     popup_viewers: "personnes en ligne",
+    popup_consult: "Il peut exister des logiciels non référencés — consultez-nous.",
+    serv_contact: "Nous contacter",
+    search_no_results: "Aucun résultat pour",
     wiz_os: "Quel Windows ?", wiz_ram: "Mémoire RAM ?",
     wiz_disk: "Type de disque ?", wiz_brand: "Marque du véhicule ?",
     wiz_result_title: "Résultat",
@@ -120,13 +141,19 @@ const TRANS = {
     wiz_ram_low: "4 Go ou moins", wiz_ram_high: "8 Go ou plus",
     wiz_disk_hdd: "HDD", wiz_disk_ssd: "SSD",
     wiz_brand_merc: "Mercedes", wiz_brand_bmw: "BMW",
+    wiz_sub_win_old: "Ancien", wiz_sub_win_new: "Recommandé ✓",
+    wiz_sub_ram_low: "Basique", wiz_sub_ram_high: "Idéal ✓",
+    wiz_sub_disk_hdd: "Mécanique", wiz_sub_disk_ssd: "Rapide ✓",
+    wiz_brand_other: "Autre marque",
     brand_hero_eyebrow: "Logiciel de Diagnostic",
     brand_hero_products: "produits",
     brand_hero_meta: "Installation à distance professionnelle",
     about_cta: "Voir les Logiciels →",
     about_feat_install: "Installation à distance professionnelle",
     about_feat_brands: "Mercedes · BMW · VAG · PSA · Toyota et plus",
-    about_feat_support: "Support rapide et garanti"
+    about_feat_support: "Support rapide et garanti",
+    wa_interest: "Bonjour ! Je suis intéressé par :",
+    wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic."
   }
 };
 
@@ -688,21 +715,30 @@ function renderTools() {
 function renderServices() {
   const sec = document.getElementById('sec-serv');
   if (!sec) return;
+  const serviceCards = services.map(s => {
+    const d = s[lang] || s.pt;
+    // Cores por tipo de serviço
+    const bgMap = { srv_remote_install:'#2563eb', srv_support:'#059669', srv_update:'#7c3aed', srv_config:'#d97706' };
+    const bg = bgMap[s.id] || '#2563eb';
+    return `<div class="tool-card searchable-item">
+      <div class="tool-card-icon" style="background:${bg};font-size:1.5rem">${s.icon}</div>
+      <div class="tool-card-body">
+        <div class="tool-card-name">${d.title}</div>
+        <div class="tool-card-desc">${d.desc}</div>
+      </div>
+      <button type="button" class="tool-card-btn" onclick="orderProduct('${d.title.replace(/'/g,"\\'")}','${t('nav_serv')}')">
+        ${t('serv_contact')}
+      </button>
+    </div>`;
+  }).join('');
   sec.innerHTML = `
     <div class="section-hero">
       <div class="section-hero-wm">${t('serv_wm')}</div>
       <div class="section-hero-eyebrow">M-Auto Online</div>
       <h2 class="section-hero-title">${t('serv_title')}</h2>
+      <p class="section-hero-meta">${services.length} ${t('nav_serv').toLowerCase()} · ${t('brand_hero_meta')}</p>
     </div>
-    <section class="services-section">
-      <ul class="services-list">${services.map(s => {
-        const d = s[lang] || s.pt;
-        return `<li class="service-item">
-          <span class="service-icon">${s.icon}</span>
-          <div><strong>${d.title}</strong><span>${d.desc}</span></div>
-        </li>`;
-      }).join('')}</ul>
-    </section>`;
+    <div class="tool-grid">${serviceCards}</div>`;
   applyWmOffset(sec);
 }
 
@@ -837,13 +873,39 @@ function closeProductModal() {
 
 function orderFromModal() {
   const item = catalog.find(p => p.id === activeModalId);
-  const name = item ? (prodData(item).name || activeModalId) : 'Produto';
-  orderProduct(name);
+  if (!item) {
+    orderProduct(t('wa_general'), '');
+    return;
+  }
+  const d = prodData(item);
+  const name = d.name || item.id;
+  // Contexto: secção › marca (se soft)
+  const sectionLabels = { soft: t('nav_soft'), hard: t('nav_hard'), tools: t('nav_tools'), serv: t('nav_serv') };
+  const parts = [];
+  if (item.section) parts.push(sectionLabels[item.section] || item.section);
+  if (item.brand && item.section === 'soft') parts.push(getBrandLabel(item.brand));
+  if (d.short) parts.push(d.short.replace(/\.$/, ''));
+  orderProduct(name, parts.join(' › '));
 }
 
-function orderProduct(name) {
+function orderProduct(nameOrMsg, context = '') {
   const phone = "351911157459";
-  window.open(`https://wa.me/${phone}?text=${encodeURIComponent('Tenho interesse em: ' + name)}`, '_blank');
+  let text;
+  // Se nameOrMsg já é a mensagem completa (wa_general)
+  if (!context && nameOrMsg === t('wa_general')) {
+    text = nameOrMsg;
+  } else {
+    text = `${t('wa_interest')} *${nameOrMsg}*`;
+    if (context) text += `\n📂 ${context}`;
+    text += `\n🌐 m-auto.online`;
+  }
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function orderGeneral() {
+  const phone = "351911157459";
+  const text = t('wa_general');
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
 }
 
 /* ─────────────────────────────────────────────
@@ -903,9 +965,39 @@ function applyLang() {
 ───────────────────────────────────────────── */
 function filterProducts() {
   const val = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
-  document.querySelectorAll('.searchable-item').forEach(el => {
-    el.hidden = val ? !el.textContent.toLowerCase().includes(val) : false;
+  const panel = document.getElementById('searchResultsPanel');
+  if (!panel) return;
+
+  if (!val) {
+    panel.classList.remove('active');
+    return;
+  }
+
+  // Pesquisar em catalog + tools (dados, não DOM)
+  const catMatches = catalog.filter(p => {
+    const d = prodData(p);
+    return (d.name || '').toLowerCase().includes(val)
+        || (d.short || '').toLowerCase().includes(val)
+        || (p.brand || '').toLowerCase().includes(val);
   });
+  const toolMatches = tools.filter(tl => {
+    const d = tl[lang] || tl.pt;
+    return (d.name || '').toLowerCase().includes(val)
+        || (d.desc || '').toLowerCase().includes(val);
+  });
+
+  if (catMatches.length === 0 && toolMatches.length === 0) {
+    panel.innerHTML = `<p class="search-empty">${t('search_no_results')} "<strong>${val}</strong>"</p>`;
+  } else {
+    const catHtml = catMatches.length
+      ? `<div class="grid search-grid">${catMatches.map(p => createCard(p)).join('')}</div>`
+      : '';
+    const toolHtml = toolMatches.length
+      ? `<div class="tool-grid search-tool-grid">${toolMatches.map(tl => createToolCard(tl)).join('')}</div>`
+      : '';
+    panel.innerHTML = catHtml + toolHtml;
+  }
+  panel.classList.add('active');
 }
 
 /* ─────────────────────────────────────────────
@@ -1037,7 +1129,7 @@ function applyWizardTranslations() {
   // Botão resultado reiniciar
   const restartEl = document.getElementById('wiz_restart_btn');
   if (restartEl) restartEl.textContent = t('wiz_restart');
-  // Títulos dos steps e opções
+  // Títulos dos steps, opções e sub-labels
   const map = {
     'wiz_title_1': 'wiz_os', 'wiz_title_2': 'wiz_ram',
     'wiz_title_3': 'wiz_disk', 'wiz_title_4': 'wiz_brand',
@@ -1045,6 +1137,12 @@ function applyWizardTranslations() {
     'wiz_btn_win_old': 'wiz_win_old', 'wiz_btn_win_new': 'wiz_win_new',
     'wiz_btn_ram_low': 'wiz_ram_low', 'wiz_btn_ram_high': 'wiz_ram_high',
     'wiz_btn_disk_hdd': 'wiz_disk_hdd', 'wiz_btn_disk_ssd': 'wiz_disk_ssd',
+    // sub-labels
+    'wiz_sub_win_old': 'wiz_sub_win_old', 'wiz_sub_win_new': 'wiz_sub_win_new',
+    'wiz_sub_ram_low': 'wiz_sub_ram_low', 'wiz_sub_ram_high': 'wiz_sub_ram_high',
+    'wiz_sub_disk_hdd': 'wiz_sub_disk_hdd', 'wiz_sub_disk_ssd': 'wiz_sub_disk_ssd',
+    // brand step
+    'wiz_btn_brand_other': 'wiz_brand_other',
   };
   Object.entries(map).forEach(([id, key]) => {
     const el = document.getElementById(id);
@@ -1079,12 +1177,15 @@ function updateViewers(textOnly = false) {
     viewers = Math.max(2, Math.min(15, viewers + Math.floor(Math.random() * 5) - 2));
   }
   const el = document.getElementById('viewerText');
-  if (el) el.innerHTML = `<strong>${viewers}</strong> ${t('popup_viewers')}`;
+  if (el) el.innerHTML = `
+    <span class="popup-viewers-line"><strong>${viewers}</strong> ${t('popup_viewers')}</span>
+    <span class="popup-consult-line">${t('popup_consult')}</span>
+  `;
 
   if (!textOnly) {
     const popup = document.getElementById('salesPopup');
     popup?.classList.add('active');
-    setTimeout(() => popup?.classList.remove('active'), 5000);
+    setTimeout(() => popup?.classList.remove('active'), 7000);
     setTimeout(() => updateViewers(false), Math.random() * 25000 + 20000);
   }
 }
