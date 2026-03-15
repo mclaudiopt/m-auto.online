@@ -564,6 +564,7 @@ function selectBrandFromNav(brandId) {
   renderBrand(brandId);
   updateNavBrandActive(brandId); // sem rebuild DOM — dropdown fica fechado
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  showConsultPopup();
 }
 
 /* ─────────────────────────────────────────────
