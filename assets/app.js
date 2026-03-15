@@ -692,31 +692,49 @@ function renderHard() {
   const sec = document.getElementById('sec-hard');
   if (!sec) return;
   const products = catalog.filter(p => p.section === 'hard');
-  sec.innerHTML = `
-    <div class="section-hero">
-      <div class="section-hero-wm">HARDWARE</div>
-      <div class="section-hero-eyebrow">M-Auto Online</div>
-      <h2 class="section-hero-title">${t('hard_title')}</h2>
-      <p class="section-hero-meta"><span class="hero-count">0</span> ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
-    </div>
-    <div class="grid hard-grid">${dataLoaded ? products.map(p => createCard(p)).join('') : renderSkeletonCards(4)}</div>`;
-  applyWmOffset(sec);
-  initSectionFx(sec, sec.querySelector('.hero-count'), products.length);
+  let heroEl = sec.querySelector('.section-hero');
+  if (!heroEl) {
+    sec.innerHTML = `
+      <div class="section-hero no-transition">
+        <div class="section-hero-wm">HARDWARE</div>
+        <div class="section-hero-eyebrow">M-Auto Online</div>
+        <h2 class="section-hero-title">${t('hard_title')}</h2>
+        <p class="section-hero-meta"><span class="hero-count">0</span> ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
+      </div>
+      <div class="sec-body hard-body"></div>`;
+    heroEl = sec.querySelector('.section-hero');
+    applyWmOffset(sec);
+    requestAnimationFrame(() => requestAnimationFrame(() => heroEl.classList.remove('no-transition')));
+  } else {
+    heroEl.querySelector('.section-hero-title').textContent = t('hard_title');
+    heroEl.querySelector('.section-hero-meta').innerHTML = `<span class="hero-count">0</span> ${t('brand_hero_products')} · ${t('brand_hero_meta')}`;
+  }
+  sec.querySelector('.hard-body').innerHTML = `<div class="grid hard-grid">${dataLoaded ? products.map(p => createCard(p)).join('') : renderSkeletonCards(4)}</div>`;
+  initSectionFx(sec, heroEl.querySelector('.hero-count'), products.length);
 }
 
 function renderTools() {
   const sec = document.getElementById('sec-tools');
   if (!sec) return;
-  sec.innerHTML = `
-    <div class="section-hero">
-      <div class="section-hero-wm">DOWNLOADS</div>
-      <div class="section-hero-eyebrow">M-Auto Online</div>
-      <h2 class="section-hero-title">${t('tools_title')}</h2>
-      <p class="section-hero-meta"><span class="hero-count">0</span> apps · ${t('tools_meta')}</p>
-    </div>
-    <div class="tool-grid">${dataLoaded ? tools.map(tl => createToolCard(tl)).join('') : renderSkeletonToolCards(4)}</div>`;
-  applyWmOffset(sec);
-  initSectionFx(sec, sec.querySelector('.hero-count'), tools.length);
+  let heroEl = sec.querySelector('.section-hero');
+  if (!heroEl) {
+    sec.innerHTML = `
+      <div class="section-hero no-transition">
+        <div class="section-hero-wm">DOWNLOADS</div>
+        <div class="section-hero-eyebrow">M-Auto Online</div>
+        <h2 class="section-hero-title">${t('tools_title')}</h2>
+        <p class="section-hero-meta"><span class="hero-count">0</span> apps · ${t('tools_meta')}</p>
+      </div>
+      <div class="sec-body tools-body"></div>`;
+    heroEl = sec.querySelector('.section-hero');
+    applyWmOffset(sec);
+    requestAnimationFrame(() => requestAnimationFrame(() => heroEl.classList.remove('no-transition')));
+  } else {
+    heroEl.querySelector('.section-hero-title').textContent = t('tools_title');
+    heroEl.querySelector('.section-hero-meta').innerHTML = `<span class="hero-count">0</span> apps · ${t('tools_meta')}`;
+  }
+  sec.querySelector('.tools-body').innerHTML = `<div class="tool-grid">${dataLoaded ? tools.map(tl => createToolCard(tl)).join('') : renderSkeletonToolCards(4)}</div>`;
+  initSectionFx(sec, heroEl.querySelector('.hero-count'), tools.length);
 }
 
 function renderServices() {
@@ -738,16 +756,25 @@ function renderServices() {
       </button>
     </div>`;
   }).join('');
-  sec.innerHTML = `
-    <div class="section-hero">
-      <div class="section-hero-wm">${t('serv_wm')}</div>
-      <div class="section-hero-eyebrow">M-Auto Online</div>
-      <h2 class="section-hero-title">${t('serv_title')}</h2>
-      <p class="section-hero-meta"><span class="hero-count">0</span> ${t('nav_serv').toLowerCase()} · ${t('brand_hero_meta')}</p>
-    </div>
-    <div class="tool-grid">${serviceCards}</div>`;
-  applyWmOffset(sec);
-  initSectionFx(sec, sec.querySelector('.hero-count'), services.length);
+  let heroEl = sec.querySelector('.section-hero');
+  if (!heroEl) {
+    sec.innerHTML = `
+      <div class="section-hero no-transition">
+        <div class="section-hero-wm">${t('serv_wm')}</div>
+        <div class="section-hero-eyebrow">M-Auto Online</div>
+        <h2 class="section-hero-title">${t('serv_title')}</h2>
+        <p class="section-hero-meta"><span class="hero-count">0</span> ${t('nav_serv').toLowerCase()} · ${t('brand_hero_meta')}</p>
+      </div>
+      <div class="sec-body serv-body"></div>`;
+    heroEl = sec.querySelector('.section-hero');
+    applyWmOffset(sec);
+    requestAnimationFrame(() => requestAnimationFrame(() => heroEl.classList.remove('no-transition')));
+  } else {
+    heroEl.querySelector('.section-hero-title').textContent = t('serv_title');
+    heroEl.querySelector('.section-hero-meta').innerHTML = `<span class="hero-count">0</span> ${t('nav_serv').toLowerCase()} · ${t('brand_hero_meta')}`;
+  }
+  sec.querySelector('.serv-body').innerHTML = `<div class="tool-grid">${serviceCards}</div>`;
+  initSectionFx(sec, heroEl.querySelector('.hero-count'), services.length);
 }
 
 function renderAbout() {

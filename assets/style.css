@@ -3184,22 +3184,41 @@ body {
   }
 }
 
-/* ── Fix 2: section-hero usa brand-color (igual ao brand-hero) ── */
+/* ── section-hero usa brand-color + sem flash no primeiro render ── */
 .section-hero {
   background: linear-gradient(135deg, var(--brand-color) 0%, color-mix(in srgb, var(--brand-color) 72%, #000) 100%) !important;
   transition: background 0.45s ease !important;
 }
+.section-hero.no-transition {
+  transition: none !important;
+}
 
-/* ── Fix 1: popup consult-mode — transparente, sem ícone ── */
+/* ── Popup consult-mode — transparente, sem ícone, uma linha ── */
 .sales-popup.consult-mode {
-  background: linear-gradient(135deg, rgba(29,78,216,0.65), rgba(37,99,235,0.65)) !important;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.22) !important;
+  background: linear-gradient(135deg, rgba(29,78,216,0.60), rgba(37,99,235,0.60)) !important;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.18) !important;
+  padding: 7px 12px !important;
 }
 .sales-popup.consult-mode .popup-icon { display: none !important; }
-/* Visitor popup — texto mais espaçado e grande */
+.popup-consult-line {
+  white-space: nowrap !important;
+  font-size: 0.72rem !important;
+  font-style: italic !important;
+}
+
+/* ── Popup visitantes — muito mais pequeno ── */
+.sales-popup:not(.consult-mode) {
+  padding: 6px 10px 6px 9px !important;
+  gap: 6px !important;
+  max-width: 170px !important;
+  border-radius: 10px !important;
+}
+.sales-popup:not(.consult-mode) .popup-icon { font-size: 0.85rem !important; }
 .sales-popup:not(.consult-mode) .popup-viewers-line {
-  font-size: 1rem !important;
+  font-size: 0.78rem !important;
   font-weight: 700 !important;
-  letter-spacing: 0.01em !important;
-  line-height: 1.5 !important;
+  line-height: 1.3 !important;
+}
+.sales-popup:not(.consult-mode) .popup-close {
+  font-size: 0.85rem !important;
 }
