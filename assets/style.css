@@ -3046,7 +3046,7 @@ body {
   right: 0;
   bottom: 0;
   background: var(--bg-body);
-  z-index: 900;
+  z-index: 950;
   overflow-y: auto;
   padding: 1.5rem 1rem 5rem;
 }
