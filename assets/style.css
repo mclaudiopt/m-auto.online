@@ -3239,39 +3239,7 @@ header {
   box-shadow: 0 1px 0 rgba(255,255,255,0.04) !important;
 }
 
-/* ── 2. Conic-gradient border no hover dos cards ── */
-@property --card-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-@keyframes card-spin { to { --card-angle: 360deg; } }
-
-.card, .tool-card {
-  isolation: isolate;
-}
-.card::before, .tool-card::before {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: inherit;
-  background: conic-gradient(
-    from var(--card-angle),
-    transparent 0%,
-    transparent 60%,
-    var(--brand-color) 80%,
-    color-mix(in srgb, var(--brand-color) 60%, #fff) 90%,
-    transparent 100%
-  );
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-}
-.card:hover::before, .tool-card:hover::before {
-  opacity: 1;
-  animation: card-spin 2.5s linear infinite;
-}
+/* conic-gradient border removido */
 
 /* ── 3. Scroll progress bar (topo) ── */
 #scrollProgress {
@@ -3310,29 +3278,7 @@ body::after {
   mix-blend-mode: overlay;
 }
 
-/* ── 6. Custom cursor ── */
-.custom-cursor-active * { cursor: none !important; }
-
-#custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--brand-color);
-  pointer-events: none;
-  z-index: 99999;
-  transition: background 0.4s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s;
-  will-change: transform;
-  mix-blend-mode: difference;
-  opacity: 0;
-}
-#custom-cursor.cursor-ready { opacity: 1; }
-#custom-cursor.cursor-hover {
-  width: 28px;
-  height: 28px;
-}
+/* custom cursor removido */
 
 /* ── Wizard SVG icons ── */
 .wiz-opt-icon svg {

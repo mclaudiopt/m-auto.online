@@ -362,9 +362,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Popup de visitantes — inicia após 8s, depois disparo aleatório periódico
   setTimeout(showViewersPopup, 8000);
 
-  // Cursor personalizado
-  initCustomCursor();
-
   // Scroll progress bar
   const _sp = document.getElementById('scrollProgress');
   if (_sp) {
@@ -1383,26 +1380,4 @@ function updateOGMeta(titleSuffix, desc, url) {
   set('og:url', url || 'https://m-auto.online/');
 }
 
-/* ─────────────────────────────────────────────
-   21. CURSOR PERSONALIZADO
-───────────────────────────────────────────── */
-function initCustomCursor() {
-  const cursor = document.getElementById('custom-cursor');
-  if (!cursor || window.matchMedia('(pointer: coarse)').matches) return;
-  document.body.classList.add('custom-cursor-active');
-  let mx = -100, my = -100, cx = -100, cy = -100;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.classList.add('cursor-ready');
-  });
-  (function animate() {
-    cx += (mx - cx) * 0.18;
-    cy += (my - cy) * 0.18;
-    cursor.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
-    requestAnimationFrame(animate);
-  })();
-  document.addEventListener('mouseover', e => {
-    const el = e.target.closest('button,a,.card,.tool-card,.side-btn,.nav-pill');
-    cursor.classList.toggle('cursor-hover', !!el);
-  });
-}
+/* cursor personalizado removido */
