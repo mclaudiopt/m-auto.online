@@ -3126,6 +3126,13 @@ body {
   opacity: 1 !important;
   transform: none !important;
 }
+/* Cards no painel de pesquisa: sem animação de reveal — visíveis imediatamente */
+.search-results-panel .card,
+.search-results-panel .tool-card {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease !important;
+}
 
 /* ── Modal slide-in lateral ── */
 .prod-modal {

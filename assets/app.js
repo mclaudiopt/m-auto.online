@@ -161,16 +161,16 @@ const TRANS = {
    2. CONFIG DE MARCAS (ordem da sidebar)
 ───────────────────────────────────────────── */
 const BRANDS = [
-  { id:"mercedes", label:"Mercedes-Benz",  color:"#163354", colorLight:"#eef2f8", colorMid:"#4a6fa0", abbr:"MB",  watermark:"MERCEDES" },
+  { id:"mercedes", label:"Mercedes",       color:"#163354", colorLight:"#eef2f8", colorMid:"#4a6fa0", abbr:"MB",  watermark:"MERCEDES" },
   { id:"vag",      label:"VAG Group",      color:"#003fa5", colorLight:"#e8efff", colorMid:"#80a4e8", abbr:"VAG", watermark:"VAG" },
   { id:"bmw",      label:"BMW / Mini",     color:"#0053a0", colorLight:"#e8f2ff", colorMid:"#6aace0", abbr:"BMW", watermark:"BMW" },
   { id:"psa",      label:"PSA Group",      color:"#6d1fa0", colorLight:"#f3edff", colorMid:"#b47dd4", abbr:"PSA", watermark:"PSA" },
-  { id:"renault",  label:"Renault / Dacia",color:"#c8a000", colorLight:"#fff9e0", colorMid:"#e8c850", abbr:"RNL", watermark:"RENAULT" },
+  { id:"renault",  label:"Renault",        color:"#c8a000", colorLight:"#fff9e0", colorMid:"#e8c850", abbr:"RNL", watermark:"RENAULT" },
   { id:"jlr",      label:"JLR",            color:"#1e5c3a", colorLight:"#eaf4ee", colorMid:"#72b08a", abbr:"JLR", watermark:"JAGUAR" },
   { id:"toyota",   label:"Toyota",         color:"#cc0000", colorLight:"#fff0f0", colorMid:"#f08080", abbr:"TYT", watermark:"TOYOTA" },
   { id:"nissan",   label:"Nissan",         color:"#b8002c", colorLight:"#fff0f3", colorMid:"#e87890", abbr:"NSN", watermark:"NISSAN" },
   { id:"ford",     label:"Ford",           color:"#003478", colorLight:"#e8eefb", colorMid:"#6080d0", abbr:"FRD", watermark:"FORD" },
-  { id:"gm",       label:"General Motors",  color:"#1c4077", colorLight:"#e8eef8", colorMid:"#6080c0", abbr:"GM",  watermark:"GENERAL MOTORS" },
+  { id:"gm",       label:"GM / Opel",      color:"#1c4077", colorLight:"#e8eef8", colorMid:"#6080c0", abbr:"GM",  watermark:"GM OPEL" },
   { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" }
 ];
 
