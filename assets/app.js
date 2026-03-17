@@ -829,7 +829,7 @@ function createCard(item) {
     onclick="openProductModal('${item.id}')" role="button" tabindex="0"
     onkeydown="if(event.key==='Enter'||event.key===' ')openProductModal('${item.id}')">
     ${badgeHtml}
-    ${item.img ? `<img src="${item.img}" loading="lazy" alt="${d.name || ''}">` : ''}
+    ${item.img ? `<img src="${item.img}" loading="lazy" alt="${d.name || ''}">` : `<div class="img-placeholder"><span>${d.name || item.id}</span></div>`}
     <div class="card-body">
       <div class="card-title-row">
         <h3>${d.name || ''}</h3>
