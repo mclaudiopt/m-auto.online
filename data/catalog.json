@@ -428,17 +428,17 @@
     "pt": {
       "name": "ISTA+",
       "short": "Diagnóstico BMW/MINI com funções avançadas e leitura completa de módulos.",
-      "details": "<b>ISTA+</b> (Rheingold) — ferramenta oficial de diagnóstico BMW para as séries E, F, G e I, MINI e Rolls-Royce. Leitura e apagamento de falhas em todos os sistemas (motor, caixa, ABS, airbag, ZGW), dados em tempo real, programação e codificação de módulos, reset de serviços, detecção automática de VIN e diagramas de cablagem integrados. Suporta interfaces ICOM, DCAN e ENET. Versão 4.46+, cobre modelos até 2025."
+      "details": "<b>ISTA+</b> (Rheingold) — ferramenta oficial de diagnóstico BMW para as séries E, F, G e I, MINI e Rolls-Royce. Leitura e apagamento de falhas em todos os sistemas (motor, caixa, ABS, airbag, ZGW), dados em tempo real, programação e codificação de módulos, reset de serviços, detecção automática de VIN e diagramas de cablagem integrados. Suporta interfaces ICOM, DCAN e ENET. Cobre modelos até 2025."
     },
     "en": {
       "name": "ISTA+",
       "short": "BMW/MINI diagnostics with advanced functions and full module scanning.",
-      "details": "<b>ISTA+</b> (Rheingold) — official BMW diagnostic tool for E, F, G and I series, MINI and Rolls-Royce. Fault code reading/clearing across all systems (engine, gearbox, ABS, airbag, ZGW), live data, module programming and coding, service resets, automatic VIN detection and integrated wiring diagrams. Supports ICOM, DCAN and ENET interfaces. Version 4.46+, covering models up to 2025."
+      "details": "<b>ISTA+</b> (Rheingold) — official BMW diagnostic tool for E, F, G and I series, MINI and Rolls-Royce. Fault code reading/clearing across all systems (engine, gearbox, ABS, airbag, ZGW), live data, module programming and coding, service resets, automatic VIN detection and integrated wiring diagrams. Supports ICOM, DCAN and ENET interfaces. Covering models up to 2025."
     },
     "fr": {
       "name": "ISTA+",
       "short": "Diagnostic BMW/MINI avec fonctions avancées et scan complet des calculateurs.",
-      "details": "<b>ISTA+</b> (Rheingold) — outil de diagnostic officiel BMW pour les séries E, F, G et I, MINI et Rolls-Royce. Lecture et effacement des DTCs sur tous les systèmes (moteur, boîte, ABS, airbag, ZGW), données temps réel, programmation et codage des calculateurs, réinitialisation des services, détection automatique du VIN et schémas électriques intégrés. Compatible ICOM, DCAN et ENET. Version 4.46+, modèles jusqu'en 2025."
+      "details": "<b>ISTA+</b> (Rheingold) — outil de diagnostic officiel BMW pour les séries E, F, G et I, MINI et Rolls-Royce. Lecture et effacement des DTCs sur tous les systèmes (moteur, boîte, ABS, airbag, ZGW), données temps réel, programmation et codage des calculateurs, réinitialisation des services, détection automatique du VIN et schémas électriques intégrés. Compatible ICOM, DCAN et ENET. Modèles jusqu'en 2025."
     }
   },
   {
@@ -524,17 +524,17 @@
     "pt": {
       "name": "Renault CLIP",
       "short": "Diagnóstico Renault/Dacia com funções avançadas.",
-      "details": "<b>Renault CAN Clip</b> v237 — ferramenta oficial Renault/Dacia para diagnóstico completo, codificação e programação de módulos. Leitura e apagamento de DTCs em todos os sistemas (motor, caixa, ABS, airbag, climatização), dados em tempo real, testes bidireccionais (injectores, ventiladores, válvulas), adaptações, reprogramação ECU e reset de intervalos de serviço. Cobre toda a gama Renault, Dacia e Renault Samsung de 2000 a 2024+."
+      "details": "<b>Renault CAN Clip</b> — ferramenta oficial Renault/Dacia para diagnóstico completo, codificação e programação de módulos. Leitura e apagamento de DTCs em todos os sistemas (motor, caixa, ABS, airbag, climatização), dados em tempo real, testes bidireccionais (injectores, ventiladores, válvulas), adaptações, reprogramação ECU e reset de intervalos de serviço. Cobre toda a gama Renault, Dacia e Renault Samsung de 2000 a 2024+."
     },
     "en": {
       "name": "Renault CLIP",
       "short": "Renault/Dacia diagnostics with advanced functions.",
-      "details": "<b>Renault CAN Clip</b> v237 — official Renault/Dacia tool for full diagnostics, coding and module programming. DTC read/clear across all systems (engine, gearbox, ABS, airbag, climate), live data, bi-directional tests (injectors, fans, solenoid valves), adaptations, ECU reprogramming and service interval reset. Covers the full Renault, Dacia and Renault Samsung range from 2000 to 2024+."
+      "details": "<b>Renault CAN Clip</b> — official Renault/Dacia tool for full diagnostics, coding and module programming. DTC read/clear across all systems (engine, gearbox, ABS, airbag, climate), live data, bi-directional tests (injectors, fans, solenoid valves), adaptations, ECU reprogramming and service interval reset. Covers the full Renault, Dacia and Renault Samsung range from 2000 to 2024+."
     },
     "fr": {
       "name": "Renault CLIP",
       "short": "Diagnostic Renault/Dacia avec fonctions avancées.",
-      "details": "<b>Renault CAN Clip</b> v237 — outil officiel Renault/Dacia pour le diagnostic complet, le codage et la programmation des calculateurs. Lecture et effacement des DTCs sur tous les systèmes (moteur, boîte, ABS, airbag, clim), données temps réel, tests bidirectionnels (injecteurs, ventilateurs, électrovannes), adaptations, reprogrammation ECU et réinitialisation des intervalles d'entretien. Couvre toute la gamme Renault, Dacia et Renault Samsung de 2000 à 2024+."
+      "details": "<b>Renault CAN Clip</b> — outil officiel Renault/Dacia pour le diagnostic complet, le codage et la programmation des calculateurs. Lecture et effacement des DTCs sur tous les systèmes (moteur, boîte, ABS, airbag, clim), données temps réel, tests bidirectionnels (injecteurs, ventilateurs, électrovannes), adaptations, reprogrammation ECU et réinitialisation des intervalles d'entretien. Couvre toute la gamme Renault, Dacia et Renault Samsung de 2000 à 2024+."
     }
   },
   {
@@ -634,17 +634,17 @@
     "pt": {
       "name": "Techstream",
       "short": "Software oficial Toyota/Lexus para diagnóstico completo, codificação e serviço.",
-      "details": "<b>Toyota TIS Techstream</b> v17 — ferramenta de diagnóstico oficial Toyota, Lexus e Scion para todos os modelos OBD2 a partir de 1996. Leitura e apagamento de DTCs, dados em tempo real, reprogramação de ECU e TCU, calibração de sistemas ADAS (pre-collision, cruise adaptativo), programação de chaves e imobilizador, testes activos e reset de intervalos de manutenção. Compatível com J2534, interfaces VIM e Mini VCI."
+      "details": "<b>Toyota TIS Techstream</b> — ferramenta de diagnóstico oficial Toyota, Lexus e Scion para todos os modelos OBD2 a partir de 1996. Leitura e apagamento de DTCs, dados em tempo real, reprogramação de ECU e TCU, calibração de sistemas ADAS (pre-collision, cruise adaptativo), programação de chaves e imobilizador, testes activos e reset de intervalos de manutenção. Compatível com J2534, interfaces VIM e Mini VCI."
     },
     "en": {
       "name": "Techstream",
       "short": "Official Toyota/Lexus software for full diagnostics, coding and service functions.",
-      "details": "<b>Toyota TIS Techstream</b> v17 — official diagnostic tool for Toyota, Lexus and Scion on all OBD2 models from 1996. DTC reading/clearing, live data, ECU and TCU reprogramming, ADAS calibration (pre-collision, adaptive cruise), key and immobiliser programming, active tests and maintenance interval reset. Compatible with J2534, VIM and Mini VCI interfaces."
+      "details": "<b>Toyota TIS Techstream</b> — official diagnostic tool for Toyota, Lexus and Scion on all OBD2 models from 1996. DTC reading/clearing, live data, ECU and TCU reprogramming, ADAS calibration (pre-collision, adaptive cruise), key and immobiliser programming, active tests and maintenance interval reset. Compatible with J2534, VIM and Mini VCI interfaces."
     },
     "fr": {
       "name": "Techstream",
       "short": "Logiciel officiel Toyota/Lexus pour diagnostic complet, codage et fonctions de service.",
-      "details": "<b>Toyota TIS Techstream</b> v17 — outil de diagnostic officiel Toyota, Lexus et Scion pour tous les modèles OBD2 depuis 1996. Lecture/effacement des DTCs, données temps réel, reprogrammation ECU et TCU, calibration ADAS (pré-collision, régulateur adaptatif), programmation des clés et de l'immobiliseur, tests actifs et réinitialisation des intervalles d'entretien. Compatible J2534, VIM et Mini VCI."
+      "details": "<b>Toyota TIS Techstream</b> — outil de diagnostic officiel Toyota, Lexus et Scion pour tous les modèles OBD2 depuis 1996. Lecture/effacement des DTCs, données temps réel, reprogrammation ECU et TCU, calibration ADAS (pré-collision, régulateur adaptatif), programmation des clés et de l'immobiliseur, tests actifs et réinitialisation des intervalles d'entretien. Compatible J2534, VIM et Mini VCI."
     }
   },
   {
