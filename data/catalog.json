@@ -415,6 +415,30 @@
     }
   },
   {
+    "id": "vag_vcds",
+    "section": "soft",
+    "brand": "vag",
+    "img": "",
+    "meta": {
+      "os": "W10/11"
+    },
+    "pt": {
+      "name": "VCDS",
+      "short": "VCDS (VAG-COM) — diagnóstico completo para VW, Audi, Seat e Škoda.",
+      "details": "<b>VCDS</b> (VAG-COM Diagnostic System) by Ross-Tech — ferramenta de diagnóstico de referência para o grupo VAG. Leitura e apagamento de DTCs em todos os sistemas electrónicos (motor, caixa, ABS, airbag, climatização, conforto), dados em tempo real, codificação de módulos, adaptações de canal, testes de actuadores e reset de intervalos de serviço. Alternativa popular ao ODIS para oficinas independentes. Suporta toda a gama VW, Audi, Seat, Škoda, Bentley e Lamborghini com interface OBD-II."
+    },
+    "en": {
+      "name": "VCDS",
+      "short": "VCDS (VAG-COM) — full diagnostics for VW, Audi, Seat and Škoda.",
+      "details": "<b>VCDS</b> (VAG-COM Diagnostic System) by Ross-Tech — the reference diagnostic tool for the VAG group. DTC reading/clearing across all electronic systems (engine, gearbox, ABS, airbag, climate, comfort), live data, module coding, channel adaptations, actuator tests and service interval resets. Popular alternative to ODIS for independent workshops. Supports the full VW, Audi, Seat, Škoda, Bentley and Lamborghini range with OBD-II interface."
+    },
+    "fr": {
+      "name": "VCDS",
+      "short": "VCDS (VAG-COM) — diagnostic complet pour VW, Audi, Seat et Škoda.",
+      "details": "<b>VCDS</b> (VAG-COM Diagnostic System) de Ross-Tech — outil de diagnostic de référence pour le groupe VAG. Lecture et effacement des DTCs sur tous les systèmes électroniques (moteur, boîte, ABS, airbag, climatisation, confort), données temps réel, codage des calculateurs, adaptations de canaux, tests d'actionneurs et réinitialisation des intervalles d'entretien. Alternative populaire à ODIS pour les ateliers indépendants. Compatible avec toute la gamme VW, Audi, Seat, Škoda, Bentley et Lamborghini via interface OBD-II."
+    }
+  },
+  {
     "id": "bmw_ista_plus",
     "badge": "badge_top",
     "section": "soft",
