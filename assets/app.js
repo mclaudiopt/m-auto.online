@@ -15,7 +15,7 @@ const TRANS = {
     btn_order: "Encomendar", btn_download: "Download", btn_details: "Detalhes",
     btn_schedule: "Agendar", btn_close: "Fechar",
     price_consult: "Consulta", price_pack: "Pack Completo",
-    badge_best: "Melhor Escolha",
+    badge_best: "Melhor Escolha", badge_top: "Mais Vendido",
     hero_sol: "Soluções Online", hero_desc: "Instalação remota profissional.",
     modal_order: "Encomendar", modal_no_details: "Detalhes não disponíveis.",
     search_placeholder: "🔍 Procurar...",
@@ -64,7 +64,7 @@ const TRANS = {
     btn_order: "Order", btn_download: "Download", btn_details: "Details",
     btn_schedule: "Book", btn_close: "Close",
     price_consult: "On request", price_pack: "Full Pack",
-    badge_best: "Best Choice",
+    badge_best: "Best Choice", badge_top: "Best Seller",
     hero_sol: "Online Solutions", hero_desc: "Professional remote installation.",
     modal_order: "Order", modal_no_details: "Details not available.",
     search_placeholder: "🔍 Search...",
@@ -113,7 +113,7 @@ const TRANS = {
     btn_order: "Commander", btn_download: "Télécharger", btn_details: "Détails",
     btn_schedule: "Planifier", btn_close: "Fermer",
     price_consult: "Sur demande", price_pack: "Pack Complet",
-    badge_best: "Meilleur Choix",
+    badge_best: "Meilleur Choix", badge_top: "Best Seller",
     hero_sol: "Solutions En Ligne", hero_desc: "Installation à distance professionnelle.",
     modal_order: "Commander", modal_no_details: "Détails non disponibles.",
     search_placeholder: "🔍 Rechercher...",
@@ -806,7 +806,7 @@ function createCard(item) {
   const spanClass = item.span_full ? ' style="grid-column:1/-1;position:relative"' : '';
 
   let badgeHtml = '';
-  if (item.badge) badgeHtml = `<span class="badge">${t(item.badge)}</span>`;
+  if (item.badge) badgeHtml = `<span class="badge${item.badge === 'badge_top' ? ' badge-top' : ''}">${t(item.badge)}</span>`;
 
   const priceColor = isPremium ? ' style="color:var(--gold)"' : '';
   const eyeColor   = isPremium ? ' card-eye-gold' : '';

@@ -1,0 +1,25 @@
+{
+  "name": "M-Auto Online",
+  "short_name": "M-Auto",
+  "description": "Software de diagnóstico automóvel — instalação remota profissional",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f1623",
+  "theme_color": "#0f1623",
+  "lang": "pt",
+  "icons": [
+    {
+      "src": "/IMG/mauto/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/IMG/mauto/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

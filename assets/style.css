@@ -690,6 +690,11 @@ header {
 }
 
 
+.badge-top {
+  background: #059669 !important;
+  box-shadow: 0 2px 5px rgba(5, 150, 105, 0.35) !important;
+}
+
 /* MODAL DE PRODUTO */
 
 

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M-Auto — Preview B: Clean SaaS</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg:      #f6f5f2;
+  --bg-w:    #ffffff;
+  --bg-card: #ffffff;
+  --ink:     #111118;
+  --ink2:    #3a3a44;
+  --muted:   #8a8a96;
+  --border:  #e4e3df;
+  --accent:  #0f62fe;
+  --accent-l:#e8f0ff;
+  --green:   #0d9955;
+  --sw:      200px;
+}
+
+body {
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+}
+
+/* ── HEADER ───────────────────────── */
+header {
+  height:60px;background:var(--bg-w);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;position:sticky;top:0;z-index:100;
+}
+.logo {display:flex;align-items:baseline;gap:3px}
+.logo-m  {font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin:0 1px 2px}
+.logo-on {font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:600;color:var(--muted);letter-spacing:.02em;text-transform:uppercase}
+.v-badge {font-size:.65rem;font-weight:700;color:var(--accent);background:var(--accent-l);padding:2px 8px;border-radius:20px;margin-left:10px;letter-spacing:.03em}
+
+.hdr-right {display:flex;align-items:center;gap:24px}
+.flags {display:flex;gap:4px}
+.flag {
+  padding:4px 10px;border-radius:20px;font-size:.72rem;font-weight:600;
+  color:var(--muted);cursor:pointer;transition:all .18s;letter-spacing:.03em;
+}
+.flag.on {background:var(--ink);color:#fff}
+
+/* ── NAV ──────────────────────────── */
+nav.main {
+  background:var(--bg-w);border-bottom:1px solid var(--border);
+  display:flex;padding:0 32px;gap:0;
+}
+.ntab {
+  padding:14px 20px;font-size:.84rem;font-weight:600;
+  color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .18s;
+  letter-spacing:.01em;
+}
+.ntab:hover{color:var(--ink)}
+.ntab.on {color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ── LAYOUT ───────────────────────── */
+.layout {display:flex;min-height:calc(100vh - 110px)}
+
+/* ── SIDEBAR ──────────────────────── */
+aside {
+  width:var(--sw);flex-shrink:0;
+  border-right:1px solid var(--border);
+  padding:28px 0;background:var(--bg-w);
+}
+.sb-label {
+  font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);padding:0 20px 14px;
+}
+.sb-btn {
+  display:flex;align-items:center;gap:10px;
+  width:100%;padding:10px 20px;background:transparent;border:none;
+  color:var(--ink2);font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.84rem;font-weight:500;cursor:pointer;text-align:left;transition:all .18s;
+}
+.sb-btn:hover  {color:var(--ink);background:var(--bg)}
+.sb-btn.on     {color:var(--accent);background:var(--accent-l);font-weight:600}
+
+.sb-ind {
+  width:4px;height:20px;border-radius:2px;flex-shrink:0;
+  background:transparent;transition:background .18s;
+}
+.sb-btn.on .sb-ind {background:var(--accent)}
+.sb-btn:hover:not(.on) .sb-ind {background:var(--border)}
+
+/* ── CONTENT ──────────────────────── */
+main {flex:1;padding:36px 40px;max-width:900px}
+
+.content-hdr {margin-bottom:8px}
+.content-title {
+  font-family:'Fraunces',serif;font-size:2rem;font-weight:700;
+  color:var(--ink);letter-spacing:-.03em;line-height:1.1;
+}
+.content-title em {font-style:italic;font-weight:300}
+.content-sub {font-size:.82rem;color:var(--muted);margin-top:6px}
+
+.divider {height:1px;background:var(--border);margin:24px 0}
+
+.search-wrap {position:relative;margin-bottom:28px;max-width:420px}
+.search-ico {position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem}
+.search-inp {
+  width:100%;background:var(--bg-w);border:1px solid var(--border);
+  color:var(--ink);padding:9px 14px 9px 38px;border-radius:8px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:.84rem;outline:none;
+  transition:border-color .18s,box-shadow .18s;
+}
+.search-inp:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(15,98,254,.12)}
+.search-inp::placeholder{color:var(--muted)}
+
+/* ── CARDS (horizontal) ───────────── */
+.list {display:flex;flex-direction:column;gap:12px}
+
+.card {
+  display:flex;background:var(--bg-card);
+  border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;cursor:pointer;transition:all .2s;
+}
+.card:hover {border-color:#c8c7c3;box-shadow:0 4px 20px rgba(0,0,0,.07);transform:translateY(-1px)}
+
+.card-stripe {
+  width:6px;flex-shrink:0;
+}
+.s-blue   {background:linear-gradient(180deg,#0f62fe,#0046cc)}
+.s-gray   {background:linear-gradient(180deg,#6b7280,#4b5563)}
+.s-purple {background:linear-gradient(180deg,#7c3aed,#5b21b6)}
+.s-teal   {background:linear-gradient(180deg,#0d9955,#057a3f)}
+
+.card-thumb {
+  width:120px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg);border-right:1px solid var(--border);
+  font-family:'Fraunces',serif;
+}
+.t-xentry {background:#edf2ff}
+.t-dts    {background:#ecfdf5}
+.t-vediamo{background:#f5f3ff}
+.t-pass   {background:#fff8ed}
+
+.thumb-abbr {
+  font-size:1.6rem;font-weight:700;letter-spacing:-.02em;opacity:.5;
+}
+.t-xentry .thumb-abbr {color:#0f62fe}
+.t-dts    .thumb-abbr {color:#0d9955}
+.t-vediamo .thumb-abbr{color:#7c3aed}
+.t-pass   .thumb-abbr {color:#d97706}
+
+.card-body {flex:1;padding:18px 22px;display:flex;align-items:center;gap:20px}
+.card-info {flex:1}
+
+.card-name {
+  font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;
+  color:var(--ink);margin-bottom:5px;letter-spacing:-.01em;
+}
+.card-desc {
+  font-size:.8rem;color:var(--muted);line-height:1.55;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-tags {display:flex;gap:6px;margin-top:9px}
+.tag {
+  font-size:.68rem;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;padding:3px 9px;border-radius:20px;
+  background:var(--bg);border:1px solid var(--border);color:var(--muted);
+}
+.tag.blue  {background:var(--accent-l);border-color:#c7d9ff;color:var(--accent)}
+.tag.green {background:#dcfce7;border-color:#86efac;color:#166534}
+
+.card-action {display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex-shrink:0}
+.price {font-size:.78rem;font-weight:600;color:var(--muted)}
+.btn-det {
+  font-size:.78rem;font-weight:600;
+  background:var(--ink);color:#fff;
+  border:none;padding:8px 18px;border-radius:8px;
+  cursor:pointer;white-space:nowrap;transition:background .18s;
+  letter-spacing:.01em;
+}
+.btn-det:hover {background:#2a2a35}
+
+.card.prem {border-color:#ddd0f5}
+.card.prem .card-body {background:linear-gradient(90deg,#fefeff 0%,#faf8ff 100%)}
+.prem-label {
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:#7c3aed;background:#f5f3ff;border:1px solid #ddd0f5;
+  padding:2px 8px;border-radius:20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-m">M-Auto</span>
+    <span class="logo-dot"></span>
+    <span class="logo-on">Online</span>
+    <span class="v-badge">v8</span>
+  </div>
+  <div class="hdr-right">
+    <div class="flags">
+      <span class="flag on">PT</span>
+      <span class="flag">EN</span>
+      <span class="flag">FR</span>
+    </div>
+  </div>
+</header>
+
+<nav class="main">
+  <div class="ntab on">Software</div>
+  <div class="ntab">Hardware</div>
+  <div class="ntab">Tools</div>
+  <div class="ntab">Serviços</div>
+</nav>
+
+<div class="layout">
+  <aside>
+    <div class="sb-label">Marcas</div>
+    <button class="sb-btn on"><span class="sb-ind"></span>Mercedes-Benz</button>
+    <button class="sb-btn"><span class="sb-ind"></span>VAG Group</button>
+    <button class="sb-btn"><span class="sb-ind"></span>BMW / Mini</button>
+    <button class="sb-btn"><span class="sb-ind"></span>PSA Group</button>
+    <button class="sb-btn"><span class="sb-ind"></span>Renault / Dacia</button>
+  </aside>
+
+  <main>
+    <div class="content-hdr">
+      <h1 class="content-title">Mercedes-Benz <em>Software</em></h1>
+      <p class="content-sub">4 produtos disponíveis · Instalação remota profissional</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="search-wrap">
+      <span class="search-ico">⌕</span>
+      <input class="search-inp" placeholder="Procurar produto...">
+    </div>
+
+    <div class="list">
+      <div class="card prem">
+        <div class="card-stripe s-purple"></div>
+        <div class="card-thumb t-xentry">
+          <span class="thumb-abbr" style="color:#0f62fe">X</span>
+        </div>
+        <div class="card-body">
+          <div class="card-info">
+            <div class="card-name">Xentry Cars</div>
+            <div class="card-desc">Software oficial Mercedes-Benz para diagnóstico completo, leitura de falhas e programação de ECUs em todos os modelos desde 2000.</div>
+            <div class="card-tags">
+              <span class="tag blue">Oficial OEM</span>
+              <span class="tag green">Win 10/11</span>
+              <span class="tag">Remoto</span>
+            </div>
+          </div>
+          <div class="card-action">
+            <span class="prem-label">★ Mais vendido</span>
+            <span class="price">A consultar</span>
+            <button class="btn-det">Ver Detalhes</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-stripe s-gray"></div>
+        <div class="card-thumb t-dts">
+          <span class="thumb-abbr" style="color:#0d9955">DTS</span>
+        </div>
+        <div class="card-body">
+          <div class="card-info">
+            <div class="card-name">DTS Monaco</div>
+            <div class="card-desc">Ferramenta avançada de codificação e flash de ECU para veículos Mercedes-Benz e Smart. Ideal para técnicos especializados.</div>
+            <div class="card-tags">
+              <span class="tag">Avançado</span>
+              <span class="tag green">Win 10/11</span>
+            </div>
+          </div>
+          <div class="card-action">
+            <span class="price">A consultar</span>
+            <button class="btn-det">Ver Detalhes</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-stripe s-purple"></div>
+        <div class="card-thumb t-vediamo">
+          <span class="thumb-abbr" style="color:#7c3aed">VDM</span>
+        </div>
+        <div class="card-body">
+          <div class="card-info">
+            <div class="card-name">Vediamo</div>
+            <div class="card-desc">Plataforma de engenharia Mercedes para desenvolvimento, diagnóstico e programação a nível de ECU. Nível de oficina oficial.</div>
+            <div class="card-tags">
+              <span class="tag">Engenharia</span>
+              <span class="tag">Win 7/10</span>
+            </div>
+          </div>
+          <div class="card-action">
+            <span class="price">A consultar</span>
+            <button class="btn-det">Ver Detalhes</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-stripe s-teal"></div>
+        <div class="card-thumb t-pass">
+          <span class="thumb-abbr" style="color:#d97706">J25</span>
+        </div>
+        <div class="card-body">
+          <div class="card-info">
+            <div class="card-name">Pass-Thru J2534</div>
+            <div class="card-desc">Interface padrão J2534 para reflash de módulos de controlo via protocolo OEM oficial Mercedes-Benz.</div>
+            <div class="card-tags">
+              <span class="tag">J2534</span>
+              <span class="tag">OBD-II</span>
+            </div>
+          </div>
+          <div class="card-action">
+            <span class="price">A consultar</span>
+            <button class="btn-det">Ver Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

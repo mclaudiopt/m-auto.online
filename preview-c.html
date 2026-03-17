@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M-Auto — Preview C: Brand Identity</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  /* BMW active theme */
+  --brand-h:    #0053a0;
+  --brand-m:    #d4e4f7;
+  --brand-l:    #f0f6ff;
+  --brand-card: #e8f1fb;
+  --brand-acc:  #0053a0;
+
+  --bg:     #f4f4f6;
+  --bg-w:   #ffffff;
+  --ink:    #16161e;
+  --ink2:   #40404c;
+  --muted:  #90909e;
+  --border: #e2e2e8;
+  --sw:     218px;
+}
+
+body {
+  font-family:'Manrope',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+}
+
+/* ── HEADER ───────────────────────── */
+header {
+  height:60px;background:var(--ink);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;position:sticky;top:0;z-index:100;
+}
+.logo {display:flex;align-items:center;gap:10px}
+.logo-txt {font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff;letter-spacing:-.01em}
+.logo-txt span {color:var(--brand-h);filter:brightness(1.8) saturate(1.5)}
+.v-badge {
+  font-size:.6rem;font-weight:700;letter-spacing:.08em;
+  color:rgba(255,255,255,.5);background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);padding:3px 8px;border-radius:4px;
+}
+
+.hdr-right {display:flex;align-items:center;gap:20px}
+.flags {display:flex;gap:6px}
+.flag {
+  padding:4px 10px;border-radius:6px;font-size:.7rem;font-weight:700;
+  letter-spacing:.05em;color:rgba(255,255,255,.4);
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  cursor:pointer;transition:all .18s;
+}
+.flag.on {background:var(--brand-h);color:#fff;border-color:var(--brand-h)}
+
+/* ── NAV ──────────────────────────── */
+nav.main {
+  background:var(--bg-w);border-bottom:1px solid var(--border);
+  display:flex;padding:0 28px;gap:4px;
+}
+.ntab {
+  padding:13px 18px;font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;
+  color:var(--muted);cursor:pointer;letter-spacing:.04em;
+  border-bottom:3px solid transparent;transition:all .18s;text-transform:uppercase;
+}
+.ntab:hover{color:var(--ink)}
+.ntab.on {color:var(--brand-acc);border-bottom-color:var(--brand-acc)}
+
+/* ── LAYOUT ───────────────────────── */
+.layout {display:flex;min-height:calc(100vh - 110px)}
+
+/* ── SIDEBAR ──────────────────────── */
+aside {
+  width:var(--sw);flex-shrink:0;
+  border-right:1px solid var(--border);
+  padding:20px 0;background:var(--bg-w);
+}
+.sb-label {
+  font-family:'Syne',sans-serif;font-size:.62rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  padding:0 18px 14px;
+}
+.sb-btn {
+  display:flex;align-items:center;gap:0;
+  width:100%;padding:0;background:transparent;border:none;
+  cursor:pointer;text-align:left;transition:all .18s;overflow:hidden;
+  border-radius:0;
+}
+.sb-color {
+  width:5px;height:48px;flex-shrink:0;transition:width .2s;
+}
+.sb-inner {
+  flex:1;padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.sb-name {
+  font-family:'Manrope',sans-serif;font-size:.84rem;font-weight:600;
+  color:var(--ink2);transition:color .18s;
+}
+.sb-pill {
+  font-size:.62rem;font-weight:700;letter-spacing:.06em;
+  padding:2px 7px;border-radius:10px;opacity:0;transition:opacity .18s;
+}
+
+.sb-btn:hover .sb-name  {color:var(--ink)}
+.sb-btn:hover .sb-color {width:8px}
+
+.sb-btn.on .sb-name  {color:var(--brand-acc);font-weight:700}
+.sb-btn.on .sb-inner {background:var(--brand-l)}
+.sb-btn.on .sb-color {width:6px}
+.sb-btn.on .sb-pill  {opacity:1}
+
+/* Brand colors */
+.bc-merc  {background:#6b7280}  .bp-merc  {background:#f3f4f6;color:#374151}
+.bc-vag   {background:#2563eb}  .bp-vag   {background:#eff6ff;color:#1d4ed8}
+.bc-bmw   {background:#0053a0}  .bp-bmw   {background:#e0f0ff;color:#0053a0}
+.bc-psa   {background:#7c3aed}  .bp-psa   {background:#f5f3ff;color:#6d28d9}
+.bc-ren   {background:#dc2626}  .bp-ren   {background:#fef2f2;color:#dc2626}
+
+/* ── BRAND HERO ───────────────────── */
+.brand-hero {
+  background:linear-gradient(135deg,var(--brand-h) 0%,#003d80 100%);
+  padding:26px 36px 22px;
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.brand-hero::before {
+  content:'BMW';
+  position:absolute;right:-10px;top:-20px;
+  font-family:'Syne',sans-serif;font-size:8rem;font-weight:800;
+  color:rgba(255,255,255,.06);letter-spacing:-.05em;user-select:none;
+  line-height:1;
+}
+.hero-inner {position:relative;z-index:1}
+.brand-eyebrow {
+  font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);
+  margin-bottom:6px;
+}
+.brand-title {
+  font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;
+  color:#fff;letter-spacing:-.02em;line-height:1;
+  margin-bottom:8px;
+}
+.brand-title span {opacity:.55;font-weight:400}
+.brand-meta {font-size:.8rem;color:rgba(255,255,255,.6)}
+
+/* ── CONTENT AREA ─────────────────── */
+.content-area {flex:1;background:var(--brand-l)}
+
+.content-inner {padding:28px 32px}
+
+.search-wrap {position:relative;margin-bottom:24px;max-width:380px}
+.search-ico {position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem}
+.search-inp {
+  width:100%;background:var(--bg-w);border:1px solid var(--brand-m);
+  color:var(--ink);padding:9px 14px 9px 38px;border-radius:8px;
+  font-family:'Manrope',sans-serif;font-size:.84rem;outline:none;
+  transition:border-color .18s,box-shadow .18s;
+}
+.search-inp:focus{border-color:var(--brand-acc);box-shadow:0 0 0 3px rgba(0,83,160,.12)}
+.search-inp::placeholder{color:var(--muted)}
+
+/* ── CARDS ────────────────────────── */
+.grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+
+.card {
+  background:var(--bg-w);border:1px solid var(--brand-m);
+  border-radius:12px;overflow:hidden;cursor:pointer;
+  transition:all .2s;position:relative;
+}
+.card:hover {box-shadow:0 8px 30px rgba(0,83,160,.14);transform:translateY(-3px);border-color:var(--brand-acc)}
+
+.card-top-bar {height:4px;background:linear-gradient(90deg,var(--brand-h),rgba(0,83,160,.4))}
+
+.card-thumb {
+  height:140px;display:flex;align-items:center;justify-content:center;
+  background:var(--brand-card);position:relative;
+}
+.thumb-abbr {
+  font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;
+  color:var(--brand-acc);opacity:.3;letter-spacing:-.03em;
+}
+.thumb-label {
+  position:absolute;bottom:10px;left:12px;
+  font-family:'Syne',sans-serif;font-size:.6rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--brand-acc);opacity:.5;
+}
+
+.prem-badge {
+  position:absolute;top:10px;right:10px;
+  background:var(--brand-h);color:#fff;
+  font-family:'Syne',sans-serif;font-size:.58rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 9px;border-radius:4px;z-index:2;
+}
+
+.card-body {padding:16px}
+.card-name {
+  font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;
+  color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;
+}
+.card-desc {
+  font-size:.78rem;color:var(--muted);line-height:1.55;margin-bottom:14px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-foot {display:flex;align-items:center;justify-content:space-between}
+.btn-det {
+  font-family:'Syne',sans-serif;font-size:.74rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  background:var(--brand-acc);color:#fff;
+  border:none;padding:7px 16px;border-radius:7px;cursor:pointer;
+  transition:background .18s;
+}
+.btn-det:hover{background:#003d80}
+.price {font-size:.74rem;color:var(--muted);font-weight:600}
+
+/* Brand count badge in sidebar */
+.sb-count {
+  font-size:.68rem;font-weight:700;
+  background:var(--brand-m);color:var(--brand-acc);
+  padding:2px 7px;border-radius:10px;
+}
+.sb-btn:not(.on) .sb-count{background:var(--bg);color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-txt">M-Auto <span>Online</span></div>
+    <span class="v-badge">V8</span>
+  </div>
+  <div class="hdr-right">
+    <div class="flags">
+      <span class="flag on">PT</span>
+      <span class="flag">EN</span>
+      <span class="flag">FR</span>
+    </div>
+  </div>
+</header>
+
+<nav class="main">
+  <div class="ntab on">Software</div>
+  <div class="ntab">Hardware</div>
+  <div class="ntab">Tools</div>
+  <div class="ntab">Serviços</div>
+</nav>
+
+<div class="layout">
+  <aside>
+    <div class="sb-label">Marcas</div>
+
+    <button class="sb-btn">
+      <span class="sb-color bc-merc"></span>
+      <span class="sb-inner">
+        <span class="sb-name">Mercedes-Benz</span>
+        <span class="sb-pill bp-merc sb-count">5</span>
+      </span>
+    </button>
+
+    <button class="sb-btn">
+      <span class="sb-color bc-vag"></span>
+      <span class="sb-inner">
+        <span class="sb-name">VAG Group</span>
+        <span class="sb-pill bp-vag sb-count">4</span>
+      </span>
+    </button>
+
+    <button class="sb-btn on">
+      <span class="sb-color bc-bmw"></span>
+      <span class="sb-inner">
+        <span class="sb-name">BMW / Mini</span>
+        <span class="sb-pill bp-bmw sb-count">3</span>
+      </span>
+    </button>
+
+    <button class="sb-btn">
+      <span class="sb-color bc-psa"></span>
+      <span class="sb-inner">
+        <span class="sb-name">PSA Group</span>
+        <span class="sb-pill bp-psa sb-count">3</span>
+      </span>
+    </button>
+
+    <button class="sb-btn">
+      <span class="sb-color bc-ren"></span>
+      <span class="sb-inner">
+        <span class="sb-name">Renault / Dacia</span>
+        <span class="sb-pill bp-ren sb-count">2</span>
+      </span>
+    </button>
+  </aside>
+
+  <div class="content-area">
+    <div class="brand-hero">
+      <div class="hero-inner">
+        <div class="brand-eyebrow">Software de diagnóstico</div>
+        <h1 class="brand-title">BMW <span>/ Mini</span></h1>
+        <p class="brand-meta">3 produtos · Instalação remota · Windows 10/11</p>
+      </div>
+    </div>
+
+    <div class="content-inner">
+      <div class="search-wrap">
+        <span class="search-ico">⌕</span>
+        <input class="search-inp" placeholder="Procurar produto BMW...">
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-top-bar"></div>
+          <div class="card-thumb">
+            <span class="thumb-abbr">ISTA</span>
+            <span class="thumb-label">ISTA+ · Professional</span>
+          </div>
+          <div class="prem-badge">★ Top</div>
+          <div class="card-body">
+            <div class="card-name">ISTA+ Professional</div>
+            <div class="card-desc">Diagnóstico oficial BMW/Mini para todos os modelos. Leitura de falhas, codificação e programação completa.</div>
+            <div class="card-foot">
+              <button class="btn-det">Ver Detalhes</button>
+              <span class="price">A consultar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top-bar"></div>
+          <div class="card-thumb">
+            <span class="thumb-abbr">E-SYS</span>
+            <span class="thumb-label">E-SYS · Coding</span>
+          </div>
+          <div class="card-body">
+            <div class="card-name">E-Sys</div>
+            <div class="card-desc">Ferramenta de codificação BMW para personalização de funções e módulos em veículos F/G/I series.</div>
+            <div class="card-foot">
+              <button class="btn-det">Ver Detalhes</button>
+              <span class="price">A consultar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top-bar"></div>
+          <div class="card-thumb">
+            <span class="thumb-abbr">NCS</span>
+            <span class="thumb-label">NCS · Expert</span>
+          </div>
+          <div class="card-body">
+            <div class="card-name">NCS Expert</div>
+            <div class="card-desc">Clássico de codificação BMW para modelos E-series. Acesso total a parâmetros de fábrica dos módulos.</div>
+            <div class="card-foot">
+              <button class="btn-det">Ver Detalhes</button>
+              <span class="price">A consultar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

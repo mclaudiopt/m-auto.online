@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="">
+<head>
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYEBRSYQ2T"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-MYEBRSYQ2T');</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="M-Auto: Soluções de Diagnóstico Automóvel Profissional.">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="M-Auto Online">
+  <meta property="og:title" content="M-Auto Online">
+  <meta property="og:description" content="Automotive diagnostic software & remote installation.">
+  <meta property="og:url" content="https://m-auto.online/">
+  <meta property="og:image" content="https://m-auto.online/IMG/mauto/og.jpg">
+  <meta property="og:image:alt" content="M-Auto Online">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="M-Auto Online">
+  <meta name="twitter:description" content="Automotive diagnostic software & remote installation.">
+  <meta name="twitter:image" content="https://m-auto.online/IMG/mauto/og.jpg">
+
+  <link rel="canonical" href="https://m-auto.online/">
+  <link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,900;1,900&family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 Free — icons para ferramentas e marcas -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <title>M-Auto Online</title>
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- ── SPLASH SCREEN CSS ── -->
+  <style>
+    #splashScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: linear-gradient(160deg, #060d1a 0%, #0b1220 55%, #0d1830 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Manrope', 'Segoe UI', sans-serif;
+      transition: opacity 0.9s ease, visibility 0.9s ease;
+    }
+    #splashScreen.sp-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .sp-ring {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid rgba(37, 99, 235, 0.18);
+      border-top-color: #2563eb;
+      animation: spSpin 1.1s linear infinite;
+      margin-bottom: 30px;
+    }
+    .sp-logo {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+      animation: spFadeDown 0.7s ease both;
+    }
+    .sp-logo .sp-m    { color: #ffffff; }
+    .sp-logo .sp-sep  { color: rgba(255,255,255,0.25); font-style: normal; font-weight: 300; }
+    .sp-logo .sp-o    { color: #2563eb; }
+    .sp-tagline {
+      font-family: 'Syne', 'Segoe UI', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #3a5a8a;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-bottom: 56px;
+      animation: spFadeDown 0.9s ease both;
+    }
+    .sp-bar-track {
+      width: 260px;
+      height: 3px;
+      background: rgba(37, 99, 235, 0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .sp-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #1e40af 0%, #2563eb 60%, #60a5fa 100%);
+      border-radius: 2px;
+      transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+    }
+    .sp-status {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #2563eb;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      min-height: 14px;
+      animation: spFadeUp 1s ease both;
+    }
+    .sp-credits {
+      position: absolute;
+      bottom: 22px;
+      font-size: 10px;
+      color: rgba(148, 163, 184, 0.3);
+      letter-spacing: 0.06em;
+    }
+    @keyframes spSpin     { to { transform: rotate(360deg); } }
+    @keyframes spFadeDown { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes spFadeUp   { from { opacity:0; transform:translateY(10px);  } to { opacity:1; transform:translateY(0); } }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ SPLASH SCREEN ═══ -->
+  <div id="splashScreen">
+    <div class="sp-ring"></div>
+    <div class="sp-logo">
+      <span class="sp-m">M-Auto</span><span class="sp-sep"> · </span><span class="sp-o">Online</span>
+    </div>
+    <div class="sp-tagline">Simply Digital</div>
+    <div class="sp-bar-track">
+      <div id="spBar" class="sp-bar-fill"></div>
+    </div>
+    <div id="spStatus" class="sp-status">A inicializar...</div>
+    <div class="sp-credits">© 2026 M-Auto Online</div>
+  </div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <div class="header-left">
+      <a href="#inicio" class="logo-link">
+        <span class="brand-m">M-Auto</span>
+        <span class="brand-online">Online</span>
+        <span class="version-badge">v8.1</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <div class="header-search">
+        <input type="text" id="searchInput" class="search-input-header"
+          placeholder="🔍 Procurar..." oninput="filterProducts()">
+      </div>
+      <div class="controls-wrapper">
+        <button type="button" class="theme-btn" onclick="toggleTheme()" title="Tema">☀️</button>
+        <div class="lang-group">
+          <button type="button" id="btn-pt" onclick="setLanguage('pt')" class="lang-btn active">
+            <img src="https://flagcdn.com/w40/pt.png" alt="PT">
+          </button>
+          <button type="button" id="btn-en" onclick="setLanguage('en')" class="lang-btn">
+            <img src="https://flagcdn.com/w40/gb.png" alt="EN">
+          </button>
+          <button type="button" id="btn-fr" onclick="setLanguage('fr')" class="lang-btn">
+            <img src="https://flagcdn.com/w40/fr.png" alt="FR">
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ SCROLL TOP ═══ -->
+  <button id="scrollTopBtn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24" fill="white" style="width:30px;height:30px">
+      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+    </svg>
+  </button>
+
+  <!-- ═══ POPUP VISITANTES ═══ -->
+  <div id="salesPopup" class="sales-popup">
+    <button type="button" class="popup-close"
+      onclick="document.getElementById('salesPopup').classList.remove('active')">×</button>
+    <div class="popup-icon">👀</div>
+    <div class="popup-text"><p id="viewerText"></p></div>
+  </div>
+
+  <!-- ═══ MODAL DE PRODUTO ═══ -->
+  <div id="productModal" class="prod-modal">
+    <div class="prod-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="prod-close" onclick="closeProductModal()" aria-label="Fechar">×</button>
+      <div class="prod-header" style="display:none"><img id="modalImg" src="" alt=""></div>
+      <div class="prod-body">
+        <h2 id="modalTitle" class="prod-title"></h2>
+        <div id="modalDesc" class="prod-text"></div>
+      </div>
+      <div class="prod-footer">
+        <span id="modalPrice" class="prod-price"></span>
+        <button type="button" class="prod-btn" onclick="orderFromModal()">Encomendar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ WIZARD DE COMPATIBILIDADE ═══ -->
+  <div id="wizardModal" class="modal-bg" style="display:none">
+    <div class="wiz-modal" id="wizContent">
+      <button type="button" class="wiz-close-btn" onclick="closeWizard()">×</button>
+
+      <!-- ── Progress Stepper ── -->
+      <div class="wiz-stepper">
+        <div class="wiz-step-dot wiz-dot-active" data-step="1">
+          <span class="wiz-dot-num">1</span>
+          <span class="wiz-dot-label">Sistema</span>
+        </div>
+        <div class="wiz-step-line"></div>
+        <div class="wiz-step-dot" data-step="2">
+          <span class="wiz-dot-num">2</span>
+          <span class="wiz-dot-label">RAM</span>
+        </div>
+        <div class="wiz-step-line"></div>
+        <div class="wiz-step-dot" data-step="3">
+          <span class="wiz-dot-num">3</span>
+          <span class="wiz-dot-label">Disco</span>
+        </div>
+        <div class="wiz-step-line"></div>
+        <div class="wiz-step-dot" data-step="4">
+          <span class="wiz-dot-num">4</span>
+          <span class="wiz-dot-label">Marca</span>
+        </div>
+      </div>
+
+      <!-- ── Step 1: Windows ── -->
+      <div id="wiz-step-1" class="step active">
+        <h3 class="wiz-title" id="wiz_title_1">Que Windows tem?</h3>
+        <div class="wiz-options">
+          <button type="button" class="wiz-opt-card" id="wiz_btn_win_old" onclick="setSpec('win','old')">
+            <span class="wiz-opt-icon">💻</span>
+            <span class="wiz-opt-label">Windows 7 / 8</span>
+            <span class="wiz-opt-sub" id="wiz_sub_win_old">Legacy</span>
+          </button>
+          <button type="button" class="wiz-opt-card wiz-opt-recommended" id="wiz_btn_win_new" onclick="setSpec('win','new')">
+            <span class="wiz-opt-icon">🖥️</span>
+            <span class="wiz-opt-label">Windows 10 / 11</span>
+            <span class="wiz-opt-sub" id="wiz_sub_win_new">Recomendado ✓</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Step 2: RAM ── -->
+      <div id="wiz-step-2" class="step">
+        <h3 class="wiz-title" id="wiz_title_2">Memória RAM?</h3>
+        <div class="wiz-options">
+          <button type="button" class="wiz-opt-card" id="wiz_btn_ram_low" onclick="setSpec('ram','low')">
+            <span class="wiz-opt-icon">🔴</span>
+            <span class="wiz-opt-label">4 GB ou menos</span>
+            <span class="wiz-opt-sub" id="wiz_sub_ram_low">Básico</span>
+          </button>
+          <button type="button" class="wiz-opt-card wiz-opt-recommended" id="wiz_btn_ram_high" onclick="setSpec('ram','high')">
+            <span class="wiz-opt-icon">✅</span>
+            <span class="wiz-opt-label">8 GB ou mais</span>
+            <span class="wiz-opt-sub" id="wiz_sub_ram_high">Ideal ✓</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Step 3: Disco ── -->
+      <div id="wiz-step-3" class="step">
+        <h3 class="wiz-title" id="wiz_title_3">Tipo de disco?</h3>
+        <div class="wiz-options">
+          <button type="button" class="wiz-opt-card" id="wiz_btn_disk_hdd" onclick="setSpec('disk','hdd')">
+            <span class="wiz-opt-icon">💿</span>
+            <span class="wiz-opt-label">HDD</span>
+            <span class="wiz-opt-sub" id="wiz_sub_disk_hdd">Mecânico</span>
+          </button>
+          <button type="button" class="wiz-opt-card wiz-opt-recommended" id="wiz_btn_disk_ssd" onclick="setSpec('disk','ssd')">
+            <span class="wiz-opt-icon">⚡</span>
+            <span class="wiz-opt-label">SSD</span>
+            <span class="wiz-opt-sub" id="wiz_sub_disk_ssd">Rápido ✓</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Step 4: Marca ── -->
+      <div id="wiz-step-4" class="step">
+        <h3 class="wiz-title" id="wiz_title_4">Marca do veículo?</h3>
+        <div class="wiz-options wiz-options-4">
+          <button type="button" class="wiz-opt-card" onclick="setSpec('brand','mercedes')">
+            <span class="wiz-opt-icon wiz-brand-abbr" style="background:#0a1628;color:#fff">MB</span>
+            <span class="wiz-opt-label">Mercedes-Benz</span>
+          </button>
+          <button type="button" class="wiz-opt-card" onclick="setSpec('brand','bmw')">
+            <span class="wiz-opt-icon wiz-brand-abbr" style="background:#0066b2;color:#fff">BMW</span>
+            <span class="wiz-opt-label">BMW / MINI</span>
+          </button>
+          <button type="button" class="wiz-opt-card" onclick="setSpec('brand','vag')">
+            <span class="wiz-opt-icon wiz-brand-abbr" style="background:#001f6e;color:#fff">VAG</span>
+            <span class="wiz-opt-label">VW / Audi / Seat</span>
+          </button>
+          <button type="button" class="wiz-opt-card" onclick="setSpec('brand','other')">
+            <span class="wiz-opt-icon">🔧</span>
+            <span class="wiz-opt-label" id="wiz_btn_brand_other">Outra marca</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Resultado ── -->
+      <div id="wiz-result" class="step">
+        <h3 class="wiz-title" id="wiz_title_result">Resultado</h3>
+        <div id="finalResultContent"></div>
+        <button type="button" class="wiz-restart-btn" id="wiz_restart_btn" onclick="openWizard()">
+          Recomeçar 🔄
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FAB MENU ═══ -->
+  <div class="fab-container" id="fabMenu">
+    <button type="button" class="fab-item" style="background:#25D366" onclick="orderGeneral()"
+      aria-label="WhatsApp">
+      <svg viewBox="0 0 32 32" fill="white">
+        <path d="M16 2C8.2 2 2 8.2 2 16c0 2.5.6 4.8 1.8 6.9L2.6 28.6l5.8-1.5c1.5.8 3.3 1.3 5.1 1.3 7.7 0 14-6.2 14-14S23.7 2 16 2z"/>
+      </svg>
+    </button>
+    <button type="button" class="fab-item" style="background:#82f6" onclick="openWizard()"
+      aria-label="Wizard">
+      <svg viewBox="0 0 24 24" fill="white">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/>
+      </svg>
+    </button>
+    <button type="button" class="fab-main"
+      onclick="this.parentElement.classList.toggle('open');this.classList.toggle('active')"
+      aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="white">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ═══ HERO (desativado — código guardado para uso futuro) ═══ -->
+  <!-- <div id="heroMount"></div> -->
+
+  <!-- ═══ NAV PRINCIPAL (construído via JS) ═══ -->
+  <nav class="main-nav"></nav>
+
+  <!-- ═══ CONTEÚDO PRINCIPAL ═══ -->
+  <div class="app-container">
+
+    <!-- PAINEL DE PESQUISA — aparece sobre as secções quando há query -->
+    <div id="searchResultsPanel" class="search-results-panel"></div>
+
+    <!-- SOBRE — página inicial -->
+    <div id="sec-about" class="section-view active"></div>
+
+    <!-- SOFTWARE: dropdown no nav, sem sidebar fixa -->
+    <div id="sec-soft" class="section-view">
+      <div class="layout-flex">
+        <div class="content-wrapper">
+          <!-- Painel único de marca — renderBrand() actualiza in-place para transição suave -->
+          <div id="brand-active" class="brand-panel active"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HARDWARE -->
+    <div id="sec-hard" class="section-view"></div>
+
+    <!-- FERRAMENTAS -->
+    <div id="sec-tools" class="section-view"></div>
+
+    <!-- SERVIÇOS -->
+    <div id="sec-serv" class="section-view"></div>
+
+  </div><!-- /.app-container -->
+
+  <!-- ═══ NAV MOBILE (construído via JS) ═══ -->
+  <nav class="mobile-nav"></nav>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer id="contacto">
+    <p class="footer-copyright">&copy; 2026 M-Auto Online — Simply Digital</p>
+  </footer>
+
+  <!-- ── SPLASH SCREEN JS ── -->
+  <script>
+  (function() {
+    var bar    = document.getElementById('spBar');
+    var status = document.getElementById('spStatus');
+    var splash = document.getElementById('splashScreen');
+    var steps  = [
+      { p: 8,   t: 'Initializing...'            },
+      { p: 20,  t: 'Loading configuration...'   },
+      { p: 34,  t: 'Checking engine...'         },
+      { p: 48,  t: 'Loading diagnostics...'     },
+      { p: 61,  t: 'Connecting to servers...'   },
+      { p: 75,  t: 'Verifying database...'      },
+      { p: 90,  t: 'Almost ready...'            },
+      { p: 100, t: 'System ready.'              }
+    ];
+    var i = 0;
+    function next() {
+      if (i < steps.length) {
+        bar.style.width    = steps[i].p + '%';
+        status.textContent = steps[i].t;
+        i++;
+        setTimeout(next, 260 + Math.random() * 320);
+      } else {
+        setTimeout(function() { splash.classList.add('sp-hidden'); }, 550);
+      }
+    }
+    setTimeout(next, 300);
+  })();
+  </script>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

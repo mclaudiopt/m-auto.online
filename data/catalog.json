@@ -166,6 +166,7 @@
   },
   {
     "id": "vag_odis_service",
+    "badge": "badge_top",
     "section": "soft",
     "brand": "vag",
     "img": "IMG/VAG/vag-odis-service.jpg",
@@ -186,6 +187,7 @@
   },
   {
     "id": "bmw_ista_plus",
+    "badge": "badge_top",
     "section": "soft",
     "brand": "bmw",
     "img": "IMG/BMW/BMW-Ista.jpg",
