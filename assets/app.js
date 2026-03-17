@@ -378,6 +378,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Scroll top
   const scrollBtn = document.getElementById('scrollTopBtn');
   if (scrollBtn) {
+    scrollBtn.classList.add('fab-scroll-top');
     window.addEventListener('scroll', () => {
       scrollBtn.classList.toggle('visible', window.scrollY > 200);
     });
@@ -916,7 +917,8 @@ function renderModalContent(item) {
     ? `<ul class="modal-features">${item.features.map(f => `<li>✓ ${f}</li>`).join('')}</ul>`
     : '';
   if (descEl)  descEl.innerHTML = (d.details || `<em>${t('modal_no_details')}</em>`) + featHtml;
-  if (priceEl) priceEl.textContent = t(priceKey);
+  if (priceEl) priceEl.style.display = priceKey === 'price_consult' ? 'none' : '';
+  if (priceEl && priceKey !== 'price_consult') priceEl.textContent = t(priceKey);
   if (imgEl)   { imgEl.removeAttribute('src'); imgEl.style.display = 'none'; }
 
   // Botão encomendar

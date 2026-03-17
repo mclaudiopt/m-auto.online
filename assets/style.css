@@ -983,36 +983,32 @@ header {
 
 /* SCROLL TOP */
 
-#scrollTopBtn {
-	position: fixed;
-	bottom: 30px;
-	left: 30px;
-	width: 60px;
-	height: 60px;
-	background: var(--gradient-btn);
-	border: none;
+.fab-scroll-top {
+	width: 44px;
+	height: 44px;
 	border-radius: 50%;
-	color: white;
-	font-size: 1.5rem;
-	cursor: pointer;
-	box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
-	z-index: 9999;
+	background: rgba(30, 40, 60, 0.85);
+	border: 1px solid rgba(255,255,255,0.12);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
+	box-shadow: 0 4px 14px rgba(0,0,0,0.28);
+	transition: opacity 0.3s, transform 0.2s, background 0.3s;
 	opacity: 0;
 	pointer-events: none;
-	transition: 0.3s;
+	backdrop-filter: blur(8px);
 }
-
-#scrollTopBtn:hover {
-	transform: scale(1.05);
+.fab-scroll-top:hover {
+	background: var(--brand-color);
+	transform: translateY(-2px);
 }
-
-#scrollTopBtn.visible {
+.fab-scroll-top.visible {
 	opacity: 1;
 	pointer-events: auto;
 }
+/* keep old id alias */
+#scrollTopBtn { all: unset; }
 
 
 /* POPUP & SOBRE */
@@ -1563,10 +1559,7 @@ body {
 		margin-top: 70px;
 		padding: 30px 15px;
 	}
-	#scrollTopBtn {
-		bottom: 80px;
-		left: 20px;
-	}
+
 	.sales-popup {
 		bottom: 140px;
 		left: 20px;
@@ -3339,4 +3332,21 @@ body::after {
 #custom-cursor.cursor-hover {
   width: 28px;
   height: 28px;
+}
+
+/* ── Wizard SVG icons ── */
+.wiz-opt-icon svg {
+  display: block;
+  color: var(--brand-color);
+  transition: color 0.3s, transform 0.2s;
+}
+.wiz-opt-card:hover .wiz-opt-icon svg,
+.wiz-opt-card.selected .wiz-opt-icon svg {
+  color: #fff;
+  transform: scale(1.08);
+}
+.wiz-opt-card .wiz-opt-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
