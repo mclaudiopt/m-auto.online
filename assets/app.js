@@ -362,16 +362,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Popup de visitantes — inicia após 8s, depois disparo aleatório periódico
   setTimeout(showViewersPopup, 8000);
 
-  // Scroll progress bar
-  const _sp = document.getElementById('scrollProgress');
-  if (_sp) {
-    const _updateScroll = () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      _sp.style.transform = `scaleX(${h > 0 ? window.scrollY / h : 0})`;
-    };
-    window.addEventListener('scroll', _updateScroll, { passive: true });
-  }
-
   // Scroll top
   const scrollBtn = document.getElementById('scrollTopBtn');
   if (scrollBtn) {

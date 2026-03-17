@@ -3250,20 +3250,7 @@ header {
 
 /* conic-gradient border removido */
 
-/* ── 3. Scroll progress bar (topo) ── */
-#scrollProgress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--brand-color);
-  transform: scaleX(0);
-  transform-origin: left;
-  z-index: 9999;
-  pointer-events: none;
-  transition: background 0.45s ease;
-}
+/* scroll progress bar removido */
 
 /* ── 4. Modal brand gradient ── */
 .prod-content {
