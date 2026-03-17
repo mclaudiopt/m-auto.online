@@ -362,14 +362,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Popup de visitantes — inicia após 8s, depois disparo aleatório periódico
   setTimeout(showViewersPopup, 8000);
 
-  // Scroll top
-  const scrollBtn = document.getElementById('scrollTopBtn');
-  if (scrollBtn) {
-    scrollBtn.classList.add('fab-scroll-top');
-    window.addEventListener('scroll', () => {
-      scrollBtn.classList.toggle('visible', window.scrollY > 200);
-    });
-  }
+  // scroll top btn removido
 
   // Fechar modal ao clicar fora
   document.getElementById('productModal')?.addEventListener('click', e => {
