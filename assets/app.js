@@ -1336,3 +1336,12 @@ function toggleTheme() {
   const current = document.documentElement.getAttribute('data-theme');
   document.documentElement.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
 }
+
+/* ─────────────────────────────────────────────
+   19. PWA — SERVICE WORKER
+───────────────────────────────────────────── */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
