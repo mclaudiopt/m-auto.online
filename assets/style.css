@@ -1,6 +1,10 @@
 
 /* --- CSS LIMPO E ESTÁVEL --- */
 
+/* ── Esconder scrollbar nativo (barra elevador lateral) ── */
+html { scrollbar-width: none; }          /* Firefox */
+html::-webkit-scrollbar { display: none; } /* Chrome/Safari/Edge */
+
 :root {
 	--bg-body: #f8fafc;
 	--bg-card: #ffffff;
