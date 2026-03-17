@@ -9,7 +9,7 @@
 ───────────────────────────────────────────── */
 const TRANS = {
   pt: {
-    nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Downloads",
+    nav_soft: "Software", nav_all: "Tudo", nav_hard: "Hardware", nav_tools: "Downloads",
     nav_serv: "Serviços", nav_about: "Sobre",
     mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Encomendar", btn_download: "Download", btn_details: "Detalhes",
@@ -58,7 +58,7 @@ const TRANS = {
     wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico."
   },
   en: {
-    nav_soft: "Software", nav_hard: "Hardware", nav_tools: "Downloads",
+    nav_soft: "Software", nav_all: "All", nav_hard: "Hardware", nav_tools: "Downloads",
     nav_serv: "Services", nav_about: "About",
     mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Order", btn_download: "Download", btn_details: "Details",
@@ -107,7 +107,7 @@ const TRANS = {
     wa_general: "Hello! I would like more information about your diagnostic software."
   },
   fr: {
-    nav_soft: "Logiciel", nav_hard: "Matériel", nav_tools: "Téléchargements",
+    nav_soft: "Logiciel", nav_all: "Tout", nav_hard: "Matériel", nav_tools: "Téléchargements",
     nav_serv: "Services", nav_about: "À Propos",
     mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Commander", btn_download: "Télécharger", btn_details: "Détails",
@@ -398,10 +398,18 @@ function buildNav() {
   if (!mainNav || !mobNav) return;
 
   // Dropdown de marcas para SOFTWARE
-  const brandItems = BRANDS.map(b => {
+  const isAllActive = activeSection === 'soft' && !confirmedBrand;
+  const _softTotal = catalog.filter(p => p.section === 'soft').length;
+  const allItem = `<button type="button" class="nav-dd-item nav-dd-all${isAllActive ? ' active' : ''}"
+    onclick="selectAllBrands()" data-brand-id="all">
+    <span class="nav-dd-icon nav-dd-icon-all">≡</span>
+    <span class="nav-dd-label">${t('nav_all')}</span>
+    ${_softTotal > 0 ? `<span class="nav-dd-count">${_softTotal}</span>` : ''}
+  </button>`;
+  const brandItems = allItem + BRANDS.map(b => {
     const label = b.label.startsWith('brand_') ? t(b.label) : b.label;
     const count = catalog.filter(p => p.section === 'soft' && p.brand === b.id).length;
-    return `<button type="button" class="nav-dd-item${b.id === activeBrand ? ' active' : ''}"
+    return `<button type="button" class="nav-dd-item${confirmedBrand === b.id ? ' active' : ''}"
       onclick="selectBrandFromNav('${b.id}')" data-brand-id="${b.id}"
       onmouseenter="hoverSelectBrand('${b.id}')">
       <span class="nav-dd-icon" style="background:${b.color}">${b.abbr}</span>
@@ -570,16 +578,45 @@ function selectBrandFromNav(brandId) {
   if (_bNav) updateOGMeta(_bNav.label?.startsWith('brand_') ? t(_bNav.label) : _bNav.label, null, `https://m-auto.online/#soft/${brandId}`);
 }
 
+function selectAllBrands() {
+  confirmedBrand = null;
+  activeBrand = BRANDS[0].id;
+  activeSection = 'soft';
+  closeSoftDropdown(true);
+  document.querySelectorAll('.section-view').forEach(p => p.classList.remove('active'));
+  document.getElementById('sec-soft')?.classList.add('active');
+  setBrandTheme(BRANDS[0]);
+  renderSoftLanding();
+  // Mark "Tudo" item as active
+  document.querySelectorAll('.nav-dd-item').forEach(b => b.classList.remove('active'));
+  document.querySelector('.nav-dd-item[data-brand-id="all"]')?.classList.add('active');
+  document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.side-btn[data-brand-id="all"]')?.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 /* ─────────────────────────────────────────────
    8. SIDEBAR DE MARCAS
 ───────────────────────────────────────────── */
 function buildSidebar() {
   const sidebar = document.querySelector('.sidebar');
   if (!sidebar) return;
-  sidebar.innerHTML = BRANDS.map((b, i) => {
+  const isTudo = !confirmedBrand;
+  const allCount = catalog.filter(p => p.section === 'soft').length;
+  const allBtn = `<button type="button" class="side-btn side-btn-all${isTudo ? ' active' : ''}"
+    onclick="selectAllBrands()"
+    data-brand-id="all">
+    <span class="sb-color-strip sb-color-strip-all"></span>
+    <span class="sb-inner-row">
+      <span class="sb-brand-icon sb-brand-icon-all">≡</span>
+      <span class="sb-label-text">${t('nav_all')}</span>
+      ${allCount > 0 ? `<span class="sb-count">${allCount}</span>` : ''}
+    </span>
+  </button>`;
+  sidebar.innerHTML = allBtn + BRANDS.map(b => {
     const label = b.label.startsWith('brand_') ? t(b.label) : b.label;
     const count = catalog.filter(p => p.section === 'soft' && p.brand === b.id).length;
-    return `<button type="button" class="side-btn${i === 0 ? ' active' : ''}"
+    return `<button type="button" class="side-btn${confirmedBrand === b.id ? ' active' : ''}"
       onclick="switchBrand('${b.id}', this)"
       data-brand-id="${b.id}">
       <span class="sb-color-strip" style="background:${b.color}"></span>
@@ -619,6 +656,7 @@ function switchSection(id, btn) {
 }
 
 function switchBrand(id, btn) {
+  confirmedBrand = id;
   activeBrand = id;
   const brand = BRANDS.find(b => b.id === id) || BRANDS[0];
   setBrandTheme(brand);

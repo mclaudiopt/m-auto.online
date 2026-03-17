@@ -3259,6 +3259,32 @@ header {
 
 /* scroll progress bar removido */
 
+/* ── "Tudo" item no nav dropdown e sidebar ── */
+.nav-dd-icon-all {
+  background: linear-gradient(135deg, #334155, #475569) !important;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.nav-dd-all.active .nav-dd-icon-all {
+  background: linear-gradient(135deg, var(--brand-color), var(--brand-mid)) !important;
+}
+.sb-brand-icon-all {
+  background: linear-gradient(135deg, #334155, #475569) !important;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.side-btn-all.active .sb-brand-icon-all {
+  background: linear-gradient(135deg, var(--brand-color), var(--brand-mid)) !important;
+}
+.sb-color-strip-all {
+  background: linear-gradient(to bottom, #334155, #64748b) !important;
+}
+.side-btn-all.active .sb-color-strip-all {
+  background: var(--brand-color) !important;
+}
+
 /* ── 4. Modal brand gradient ── */
 .prod-content {
   background: linear-gradient(
