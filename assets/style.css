@@ -3033,7 +3033,15 @@ body {
 /* ── Search Results Panel ── */
 .search-results-panel {
   display: none;
-  padding: 1rem 0 2rem;
+  position: fixed;
+  top: var(--header-h, 64px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg);
+  z-index: 900;
+  overflow-y: auto;
+  padding: 1.5rem 1rem 5rem;
 }
 .search-results-panel.active {
   display: block;
@@ -3210,9 +3218,9 @@ body {
 
 /* ── Popup visitantes — muito mais pequeno ── */
 .sales-popup:not(.consult-mode) {
-  padding: 6px 10px 6px 9px !important;
+  padding: 6px 12px 6px 10px !important;
   gap: 6px !important;
-  max-width: 170px !important;
+  max-width: none !important;
   border-radius: 10px !important;
 }
 .sales-popup:not(.consult-mode) .popup-icon { font-size: 0.85rem !important; }
@@ -3220,6 +3228,7 @@ body {
   font-size: 0.78rem !important;
   font-weight: 700 !important;
   line-height: 1.3 !important;
+  white-space: nowrap !important;
 }
 .sales-popup:not(.consult-mode) .popup-close {
   font-size: 0.85rem !important;
