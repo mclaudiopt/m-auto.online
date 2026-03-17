@@ -1035,5 +1035,69 @@
       "short": "Ordinateur reconditionné préconfiguré avec logiciel de diagnostic installé et testé.",
       "details": "Ordinateur portable reconditionné préconfiguré et prêt à l'emploi avec logiciel de diagnostic automobile. Système Windows optimisé, logiciel installé et testé, prêt à connecter au véhicule. Idéal pour démarrer sans complications."
     }
+  },
+  {
+    "id": "fiat_multiecuscan",
+    "section": "soft",
+    "brand": "fiat",
+    "img": "IMG/mauto/m-auto.png",
+    "premium": false,
+    "badge": "",
+    "span_full": false,
+    "price_key": "price_consult",
+    "features": [
+      "Fiat, Alfa Romeo, Lancia, Jeep",
+      "Leitura e reset de erros",
+      "Dados em tempo real",
+      "Compatível com ELM327"
+    ],
+    "meta": {},
+    "pt": {
+      "name": "MultiecuScan",
+      "short": "Diagnóstico multi-ECU para todo o grupo FCA — Fiat, Alfa Romeo, Lancia, Jeep, Chrysler.",
+      "details": "MultiecuScan é uma ferramenta de diagnóstico avançada para veículos do grupo FCA: Fiat, Alfa Romeo, Lancia, Fiat Professional, Jeep, Chrysler, Dodge e Ram. Permite leitura e reset de códigos de avaria em todos os módulos (motor, caixa, ABS, airbag, conforto), dados ao vivo, testes de actuação e resets de serviço. Compatível com adaptadores ELM327 via Bluetooth, Wi-Fi e USB. Suporta Windows e Android. Alternativa acessível às ferramentas de concessionário para toda a gama FCA."
+    },
+    "en": {
+      "name": "MultiecuScan",
+      "short": "Multi-ECU diagnostic for the full FCA group — Fiat, Alfa Romeo, Lancia, Jeep, Chrysler.",
+      "details": "MultiecuScan is an advanced diagnostic tool for FCA group vehicles: Fiat, Alfa Romeo, Lancia, Fiat Professional, Jeep, Chrysler, Dodge and Ram. Supports reading and clearing fault codes across all modules (engine, gearbox, ABS, airbag, comfort), live data, actuation tests and service resets. Compatible with ELM327 adapters via Bluetooth, Wi-Fi and USB. Runs on Windows and Android. An affordable alternative to dealer tools for the full FCA range."
+    },
+    "fr": {
+      "name": "MultiecuScan",
+      "short": "Diagnostic multi-ECU pour tout le groupe FCA — Fiat, Alfa Romeo, Lancia, Jeep, Chrysler.",
+      "details": "MultiecuScan est un outil de diagnostic avancé pour les véhicules du groupe FCA : Fiat, Alfa Romeo, Lancia, Fiat Professional, Jeep, Chrysler, Dodge et Ram. Permet la lecture et l'effacement des codes défaut sur tous les modules (moteur, boîte, ABS, airbag, confort), données en temps réel, tests d'actionneurs et réinitialisations de service. Compatible avec les adaptateurs ELM327 en Bluetooth, Wi-Fi et USB. Fonctionne sous Windows et Android."
+    }
+  },
+  {
+    "id": "fiat_alfaobd",
+    "section": "soft",
+    "brand": "fiat",
+    "img": "IMG/mauto/m-auto.png",
+    "premium": true,
+    "badge": "",
+    "span_full": false,
+    "price_key": "price_consult",
+    "features": [
+      "Alfa Romeo, Fiat, Lancia, Jeep",
+      "Programação e codificação ECU",
+      "Activações e adaptações",
+      "Windows e Android"
+    ],
+    "meta": {},
+    "pt": {
+      "name": "AlfaOBD",
+      "short": "Diagnóstico profissional nível concessionário para Alfa Romeo, Fiat, Lancia e Jeep.",
+      "details": "AlfaOBD é uma solução de diagnóstico de nível profissional para veículos FCA: Alfa Romeo, Fiat, Lancia e Jeep. Vai além da simples leitura de erros — permite programação de ECUs, activações de funcionalidades, adaptações de módulos, codificação de injectores, calibração de câmara e muito mais. Disponível para Windows (versão PC) e Android. Compatível com adaptadores ELM327 e interfaces KL (K-Line). Amplamente utilizado por técnicos e preparadores para operações que normalmente requerem equipamento de concessionário."
+    },
+    "en": {
+      "name": "AlfaOBD",
+      "short": "Dealer-level professional diagnostic for Alfa Romeo, Fiat, Lancia and Jeep.",
+      "details": "AlfaOBD is a professional-grade diagnostic solution for FCA vehicles: Alfa Romeo, Fiat, Lancia and Jeep. Goes far beyond fault code reading — enabling ECU programming, feature activations, module adaptations, injector coding, camera calibration and more. Available for Windows (PC version) and Android. Compatible with ELM327 and KL (K-Line) adapters. Widely used by technicians and tuners for operations that normally require dealer-level equipment."
+    },
+    "fr": {
+      "name": "AlfaOBD",
+      "short": "Diagnostic professionnel niveau concessionnaire pour Alfa Romeo, Fiat, Lancia et Jeep.",
+      "details": "AlfaOBD est une solution de diagnostic de niveau professionnel pour les véhicules FCA : Alfa Romeo, Fiat, Lancia et Jeep. Va bien au-delà de la simple lecture de codes — permet la programmation d'ECU, les activations de fonctionnalités, les adaptations de modules, le codage des injecteurs, la calibration de caméra et bien plus. Disponible pour Windows (version PC) et Android. Compatible avec les adaptateurs ELM327 et interfaces KL."
+    }
   }
 ]

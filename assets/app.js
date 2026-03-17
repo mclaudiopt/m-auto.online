@@ -171,6 +171,7 @@ const BRANDS = [
   { id:"nissan",   label:"Nissan",         color:"#b8002c", colorLight:"#fff0f3", colorMid:"#e87890", abbr:"NSN", watermark:"NISSAN" },
   { id:"ford",     label:"Ford",           color:"#003478", colorLight:"#e8eefb", colorMid:"#6080d0", abbr:"FRD", watermark:"FORD" },
   { id:"gm",       label:"GM / Opel",      color:"#1c4077", colorLight:"#e8eef8", colorMid:"#6080c0", abbr:"GM",  watermark:"GM OPEL" },
+  { id:"fiat",     label:"Fiat / FCA",     color:"#1c2f6e", colorLight:"#eaefff", colorMid:"#6882c8", abbr:"FCA", watermark:"FIAT" },
   { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" }
 ];
 

@@ -24,7 +24,7 @@
     "icon": "7Z",
     "faIcon": "fa-solid fa-file-zipper",
     "iconBg": "#f59e0b",
-    "url": "https://www.7-zip.org/download.html",
+    "url": "https://www.7-zip.org/a/7z2600-x64.exe",
     "pt": { "name": "7-Zip", "desc": "Gestor de arquivos comprimidos gratuito e open-source." },
     "en": { "name": "7-Zip", "desc": "Free and open-source file archiver." },
     "fr": { "name": "7-Zip", "desc": "Archiveur de fichiers gratuit et open-source." }
@@ -38,5 +38,15 @@
     "pt": { "name": "DControl", "desc": "Utilitário portátil para gestão do Windows Defender." },
     "en": { "name": "DControl", "desc": "Portable utility for Windows Defender management." },
     "fr": { "name": "DControl", "desc": "Utilitaire portable pour la gestion de Windows Defender." }
+  },
+  {
+    "id": "tool_fdm",
+    "icon": "FDM",
+    "faIcon": "fa-solid fa-download",
+    "iconBg": "#0a84ff",
+    "url": "https://files2.freedownloadmanager.org/6/latest/fdm_x64_setup.exe",
+    "pt": { "name": "Free Download Manager", "desc": "Gestor de downloads gratuito — acelera transferências de ficheiros grandes." },
+    "en": { "name": "Free Download Manager", "desc": "Free download manager — accelerates large file transfers." },
+    "fr": { "name": "Free Download Manager", "desc": "Gestionnaire de téléchargements gratuit — accélère les transferts de fichiers volumineux." }
   }
 ]
