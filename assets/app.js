@@ -362,6 +362,19 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Popup de visitantes — inicia após 8s, depois disparo aleatório periódico
   setTimeout(showViewersPopup, 8000);
 
+  // Cursor personalizado
+  initCustomCursor();
+
+  // Scroll progress bar
+  const _sp = document.getElementById('scrollProgress');
+  if (_sp) {
+    const _updateScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      _sp.style.transform = `scaleX(${h > 0 ? window.scrollY / h : 0})`;
+    };
+    window.addEventListener('scroll', _updateScroll, { passive: true });
+  }
+
   // Scroll top
   const scrollBtn = document.getElementById('scrollTopBtn');
   if (scrollBtn) {
@@ -565,6 +578,8 @@ function selectBrandFromNav(brandId) {
   updateNavBrandActive(brandId); // sem rebuild DOM — dropdown fica fechado
   window.scrollTo({ top: 0, behavior: 'smooth' });
   showConsultPopup();
+  const _bNav = BRANDS.find(b => b.id === brandId);
+  if (_bNav) updateOGMeta(_bNav.label?.startsWith('brand_') ? t(_bNav.label) : _bNav.label, null, `https://m-auto.online/#soft/${brandId}`);
 }
 
 /* ─────────────────────────────────────────────
@@ -611,6 +626,8 @@ function switchSection(id, btn) {
   if (id === 'about') renderAbout();
   buildNav(); // mantém estado activo correcto no nav
   if (id === 'soft') showConsultPopup(); // só na tab Software
+  const _secLabels = { soft: t('nav_soft'), hard: t('nav_hard'), tools: t('nav_tools'), serv: t('nav_serv'), about: 'Sobre' };
+  updateOGMeta(_secLabels[id] || id, null, `https://m-auto.online/#${id}`);
 }
 
 function switchBrand(id, btn) {
@@ -623,6 +640,8 @@ function switchBrand(id, btn) {
   window.scrollTo({ top: appTop, behavior: 'smooth' });
   renderBrand(id);
   showConsultPopup();
+  const _bl = BRANDS.find(b => b.id === id);
+  if (_bl) updateOGMeta(_bl.label?.startsWith('brand_') ? t(_bl.label) : _bl.label, null, `https://m-auto.online/#soft/${id}`);
 }
 
 /* ─────────────────────────────────────────────
@@ -1343,5 +1362,45 @@ function toggleTheme() {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+
+/* ─────────────────────────────────────────────
+   20. OG META DINÂMICOS
+───────────────────────────────────────────── */
+function updateOGMeta(titleSuffix, desc, url) {
+  const base = 'M-Auto Online';
+  const fullTitle = titleSuffix ? `${base} · ${titleSuffix}` : base;
+  document.title = fullTitle;
+  const set = (prop, val) => {
+    const el = document.querySelector(`meta[property="${prop}"]`);
+    if (el) el.setAttribute('content', val);
+  };
+  set('og:title', fullTitle);
+  set('og:description', desc || 'Software de diagnóstico automóvel — instalação remota profissional.');
+  set('og:url', url || 'https://m-auto.online/');
+}
+
+/* ─────────────────────────────────────────────
+   21. CURSOR PERSONALIZADO
+───────────────────────────────────────────── */
+function initCustomCursor() {
+  const cursor = document.getElementById('custom-cursor');
+  if (!cursor || window.matchMedia('(pointer: coarse)').matches) return;
+  document.body.classList.add('custom-cursor-active');
+  let mx = -100, my = -100, cx = -100, cy = -100;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.classList.add('cursor-ready');
+  });
+  (function animate() {
+    cx += (mx - cx) * 0.18;
+    cy += (my - cy) * 0.18;
+    cursor.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    requestAnimationFrame(animate);
+  })();
+  document.addEventListener('mouseover', e => {
+    const el = e.target.closest('button,a,.card,.tool-card,.side-btn,.nav-pill');
+    cursor.classList.toggle('cursor-hover', !!el);
   });
 }

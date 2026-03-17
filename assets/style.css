@@ -3231,3 +3231,112 @@ body {
 .sales-popup:not(.consult-mode) .popup-close {
   font-size: 0.85rem !important;
 }
+
+/* ══════════════════════════════════════════════════════
+   v8.1p — glassmorphism · conic border · scroll bar
+             modal gradient · grain · custom cursor
+   ══════════════════════════════════════════════════════ */
+
+/* ── 1. Nav glassmorphism ── */
+header {
+  background: rgba(15, 22, 35, 0.80) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) !important;
+}
+
+/* ── 2. Conic-gradient border no hover dos cards ── */
+@property --card-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes card-spin { to { --card-angle: 360deg; } }
+
+.card, .tool-card {
+  isolation: isolate;
+}
+.card::before, .tool-card::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--card-angle),
+    transparent 0%,
+    transparent 60%,
+    var(--brand-color) 80%,
+    color-mix(in srgb, var(--brand-color) 60%, #fff) 90%,
+    transparent 100%
+  );
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.card:hover::before, .tool-card:hover::before {
+  opacity: 1;
+  animation: card-spin 2.5s linear infinite;
+}
+
+/* ── 3. Scroll progress bar (topo) ── */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--brand-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 9999;
+  pointer-events: none;
+  transition: background 0.45s ease;
+}
+
+/* ── 4. Modal brand gradient ── */
+.prod-content {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--brand-color) 10%, var(--bg-card)) 0%,
+    var(--bg-card) 140px
+  ) !important;
+  transition: background 0.45s ease !important;
+}
+
+/* ── 5. Grain texture overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23g)' opacity='0.45'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9990;
+  mix-blend-mode: overlay;
+}
+
+/* ── 6. Custom cursor ── */
+.custom-cursor-active * { cursor: none !important; }
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand-color);
+  pointer-events: none;
+  z-index: 99999;
+  transition: background 0.4s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s;
+  will-change: transform;
+  mix-blend-mode: difference;
+  opacity: 0;
+}
+#custom-cursor.cursor-ready { opacity: 1; }
+#custom-cursor.cursor-hover {
+  width: 28px;
+  height: 28px;
+}

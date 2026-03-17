@@ -122,9 +122,30 @@
     @keyframes spFadeDown { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
     @keyframes spFadeUp   { from { opacity:0; transform:translateY(10px);  } to { opacity:1; transform:translateY(0); } }
   </style>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "M-Auto Online",
+    "url": "https://m-auto.online",
+    "logo": "https://m-auto.online/IMG/mauto/m-auto.png",
+    "description": "Software de diagnóstico automóvel profissional com instalação remota.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+351911157459",
+      "contactType": "sales",
+      "availableLanguage": ["Portuguese", "English", "French"]
+    },
+    "sameAs": ["https://wa.me/351911157459"]
+  }
+  </script>
 </head>
 
 <body>
+  <div id="scrollProgress" aria-hidden="true"></div>
+  <div id="custom-cursor" aria-hidden="true"></div>
 
   <!-- ═══ SPLASH SCREEN ═══ -->
   <div id="splashScreen">
