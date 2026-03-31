@@ -371,59 +371,6 @@ if ($response -match "^[sS]") {
     }
 }
 
-#-- 15. Dark Mode ────────────────────────────────────────────────────────
-Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Ativar Dark Mode?" -NoNewline
-$response = Read-Host " [s/n]"
-if ($response -match "^[sS]") {
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A ativar..." -NoNewline
-    try {
-        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
-        if (-not (Test-Path $regPath)) {
-            New-Item -Path $regPath -Force | Out-Null
-        }
-        Set-ItemProperty -Path $regPath -Name "AppsUseLightTheme" -Value 0 -ErrorAction Stop
-        Set-ItemProperty -Path $regPath -Name "SystemUsesLightTheme" -Value 0 -ErrorAction Stop
-        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-        $completed += "Dark Mode"
-    } catch {
-        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-        $failed += "Dark Mode"
-    }
-}
-
-#-- 16. Mostrar Extensoes de Ficheiros ────────────────────────────────────
-Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Mostrar extensoes de ficheiros?" -NoNewline
-$response = Read-Host " [s/n]"
-if ($response -match "^[sS]") {
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A aplicar..." -NoNewline
-    try {
-        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
-        if (-not (Test-Path $regPath)) {
-            New-Item -Path $regPath -Force | Out-Null
-        }
-        Set-ItemProperty -Path $regPath -Name "HideFileExt" -Value 0 -ErrorAction Stop
-        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-        $completed += "Extensoes"
-    } catch {
-        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-        $failed += "Extensoes"
-    }
-}
-
-#-- 17. Ocultar Ícones do Desktop ────────────────────────────────────────
-Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Ocultar ícones do Desktop?" -NoNewline
-$response = Read-Host " [s/n]"
-if ($response -match "^[sS]") {
-    Write-Host ""
-    try {
-        irm "https://m-auto.online/scripts/utils/hide_desktop_icons.ps1" -UseBasicParsing | iex
-        $completed += "Ícones Desktop"
-    } catch {
-        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-        $failed += "Ícones Desktop"
-    }
-}
-
 #-- RESUMO ───────────────────────────────────────────────────────────────
 Write-Host ""
 Write-Host "  ${e}[38;2;100;149;237m>> Resumo${e}[0m"
