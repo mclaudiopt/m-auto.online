@@ -243,9 +243,9 @@ while ($true) {
     Write-Header
     Write-Title "Menu Principal"
     Write-Opt 1  "Start Engine"                "Diagnostico + Preparacao + Ferramentas"
-    Write-Opt 2  "Clientes"                   "Tesla..."
-    Write-Opt 3  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
-    Write-Opt 4  "Opcoes Manuais - Backup"    "Opcoes individuais de prep, ferramenta & sistema"
+    Write-Opt 2  "Cliente"                    "Tesla..."
+    Write-Opt 3  "Software"                   "Mercedes / VAG / BMW / PSA / Renault..."
+    Write-Opt 4  "Tools"                      "Opcoes manuais + Backup"
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
