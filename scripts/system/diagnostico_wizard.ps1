@@ -1,4 +1,5 @@
 # system/diagnostico_wizard.ps1 - Diagnostico + acoes do sistema
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $e = [char]27
 
 function Write-Row($label, $value, $color = "97") {
