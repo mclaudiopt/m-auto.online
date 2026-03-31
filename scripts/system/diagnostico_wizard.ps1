@@ -112,6 +112,10 @@ if (Ask-YesNo "Limpar ficheiros temporarios?") {
     $actions += @{ name = "Cleanup"; action = "cleanup" }
 }
 
+if (Ask-YesNo "Teste de velocidade (Ookla Speedtest)?") {
+    $actions += @{ name = "Speedtest"; action = "speedtest" }
+}
+
 if (Ask-YesNo "Desactivar actualizacoes?") {
     $actions += @{ name = "Disable Updates"; action = "disable_updates" }
 }
@@ -164,6 +168,11 @@ foreach ($action in $actions) {
             "cleanup" {
                 Remove-Item "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
                 Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+                $completed += $action.name
+            }
+            "speedtest" {
+                Write-Host ""
+                irm "$env:BASE_URL/system/speedtest.ps1" -UseBasicParsing | iex
                 $completed += $action.name
             }
             "disable_updates" {
