@@ -10,6 +10,57 @@ Write-Host ""
 $completed = @()
 $failed = @()
 
+#-- PASSO 0: Desabilitar Proteções (Firewall + Defender + Tamper) ────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Desabilitar proteções do Windows?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host ""
+    try {
+        # 0.1 Desabilitar Firewall
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desabilitar Firewall..." -NoNewline
+        Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -ErrorAction Stop | Out-Null
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+
+        # 0.2 Desabilitar Windows Defender
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desabilitar Defender..." -NoNewline
+        try {
+            Set-MpPreference -DisableRealtimeMonitoring $true -ErrorAction Stop
+            Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        } catch {
+            Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m"
+        }
+
+        # 0.3 Desabilitar Tamper Protection
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desabilitar Tamper Protection..." -NoNewline
+        try {
+            $regPath = "HKLM:\SOFTWARE\Microsoft\Windows Defender\Features"
+            $acl = Get-Acl $regPath -ErrorAction Stop
+            $adminSid = New-Object System.Security.Principal.SecurityIdentifier("S-1-5-32-544")
+            $acl.SetOwner($adminSid)
+            $rule = New-Object System.Security.AccessControl.RegistryAccessRule(
+                $adminSid, "FullControl",
+                [System.Security.AccessControl.InheritanceFlags]"ContainerInherit,ObjectInherit",
+                [System.Security.AccessControl.PropagationFlags]::None,
+                [System.Security.AccessControl.AccessControlType]::Allow
+            )
+            $acl.AddAccessRule($rule)
+            Set-Acl -Path $regPath -AclObject $acl -ErrorAction Stop
+            Set-ItemProperty -Path $regPath -Name "TamperProtection" -Value 4 -ErrorAction Stop
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        } catch {
+            Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m"
+        }
+
+        Write-Host ""
+        $completed += "Desabilitar Proteções"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
+        $failed += "Desabilitar Proteções"
+    }
+}
+
 #-- PASSO 1: Trucks Setup (7-Zip + robocopy + Extract) ──────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Instalar 7-Zip + Copiar Trucks.zip?" -NoNewline
 $response = Read-Host " [s/n]"
