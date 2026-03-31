@@ -220,6 +220,8 @@ while ($true) {
     Write-Opt 3  "Software"                   "Mercedes / VAG / BMW / PSA / Renault..."
     Write-Opt 4  "Tools"                      "Opcoes manuais + Backup"
     Write-Opt 9  "Wallpaper M-Auto"           "Aplicar m-auto-rust.png"
+    Write-Opt 10 "Remover Search Taskbar"     "Ocultar search box da taskbar"
+    Write-Opt 11 "Remover News Taskbar"       "Ocultar news and interests"
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
@@ -229,6 +231,8 @@ while ($true) {
         "3" { Show-Software }
         "4" { Show-Backup }
         "9" { Run-Sub "utils/set_wallpaper" }
+        "10" { Run-Sub "utils/remove_search_taskbar" }
+        "11" { Run-Sub "utils/remove_news_taskbar" }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }
