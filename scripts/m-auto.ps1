@@ -1,9 +1,13 @@
 # M-Auto Online - Remote Installer Launcher
 # Usage: irm https://m-auto.online/scripts/m-auto.ps1 | iex
 
+$VERSION  = "1.0 [2026-03-31 15:35:00]"
 $BASE_URL = "https://m-auto.online/scripts"
-$VERSION  = "1.0"
 $e = [char]27
+
+#-- Clear Cache ---------------------------------------------------------------
+$null = $PSVersionTable
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 #-- Auto-elevate -----------------------------------------------------------
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
