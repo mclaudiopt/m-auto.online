@@ -1,5 +1,5 @@
 # prep/basic.ps1 - Preparacao basica
-# Desativa Defender + Tamper + Firewall + Apaga regras + Instala 7-Zip
+# Desativa Defender + Tamper + Firewall + Apaga regras + Instala 7-Zip + Activa Windows
 $e = [char]27
 
 function Write-Step($n, $total, $msg) {
@@ -14,67 +14,89 @@ Write-Host "  ${e}[1;97mPreparacao Basic${e}[0m"
 Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
 Write-Host ""
 
+# Pre-verificacao: estado do servico Defender
+$defSvc = Get-Service -Name WinDefend -ErrorAction SilentlyContinue
+$defRunning = $defSvc -and ($defSvc.Status -eq 'Running')
+
 
 # ── 1. Tamper Protection OFF ──────────────────────────────────────────────
 Write-Step 1 5 "Tamper Protection OFF...          "
-try {
-    $regPath = "HKLM:\SOFTWARE\Microsoft\Windows Defender\Features"
-    $acl = Get-Acl $regPath
-    $adminSid = New-Object System.Security.Principal.SecurityIdentifier("S-1-5-32-544")
-    $acl.SetOwner($adminSid)
-    $rule = New-Object System.Security.AccessControl.RegistryAccessRule(
-        $adminSid, "FullControl",
-        [System.Security.AccessControl.InheritanceFlags]"ContainerInherit,ObjectInherit",
-        [System.Security.AccessControl.PropagationFlags]::None,
-        [System.Security.AccessControl.AccessControlType]::Allow
-    )
-    $acl.AddAccessRule($rule)
-    Set-Acl -Path $regPath -AclObject $acl
-    Set-ItemProperty -Path $regPath -Name "TamperProtection" -Value 4 -ErrorAction Stop
-    Write-OK
-} catch {
+if (-not $defRunning) {
+    Write-Skip
+} else {
     try {
-        $tp = (Get-MpComputerStatus -ErrorAction Stop).IsTamperProtected
-        if ($tp) {
+        $regPath = "HKLM:\SOFTWARE\Microsoft\Windows Defender\Features"
+        $acl = Get-Acl $regPath -ErrorAction Stop
+        $adminSid = New-Object System.Security.Principal.SecurityIdentifier("S-1-5-32-544")
+        $acl.SetOwner($adminSid)
+        $rule = New-Object System.Security.AccessControl.RegistryAccessRule(
+            $adminSid, "FullControl",
+            [System.Security.AccessControl.InheritanceFlags]"ContainerInherit,ObjectInherit",
+            [System.Security.AccessControl.PropagationFlags]::None,
+            [System.Security.AccessControl.AccessControlType]::Allow
+        )
+        $acl.AddAccessRule($rule)
+        Set-Acl -Path $regPath -AclObject $acl -ErrorAction Stop
+        Set-ItemProperty -Path $regPath -Name "TamperProtection" -Value 4 -ErrorAction Stop
+        Write-OK
+    } catch {
+        # Se Set-Acl falhou mas IsTamperProtected=false -> ja esta OFF
+        $tp = (Get-MpComputerStatus -ErrorAction SilentlyContinue).IsTamperProtected
+        if ($tp -eq $false) { Write-Skip }
+        elseif ($tp -eq $true) {
             Write-Host "  ${e}[38;2;250;204;21m[MANUAL]${e}[0m  -> Seguranca do Windows > Protecao virus > desativar"
         } else { Write-OK }
-    } catch { Write-Fail }
+    }
 }
 
 
 # ── 2. Microsoft Defender OFF ────────────────────────────────────────────
 Write-Step 2 5 "Microsoft Defender OFF...         "
-try {
-    Set-MpPreference `
-        -DisableRealtimeMonitoring $true `
-        -DisableBehaviorMonitoring $true `
-        -DisableIOAVProtection $true `
-        -DisableScriptScanning $true `
-        -DisableArchiveScanning $true `
-        -DisableBlockAtFirstSeen $true `
-        -MAPSReporting 0 `
-        -SubmitSamplesConsent 2 `
-        -ErrorAction Stop
-    Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue
-    Set-Service  -Name WinDefend -StartupType Disabled -ErrorAction SilentlyContinue
-    Write-OK
-} catch {
-    Write-Fail
-    Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
+if (-not $defRunning) {
+    Write-Skip
+} else {
+    try {
+        Set-MpPreference `
+            -DisableRealtimeMonitoring $true `
+            -DisableBehaviorMonitoring $true `
+            -DisableIOAVProtection $true `
+            -DisableScriptScanning $true `
+            -DisableArchiveScanning $true `
+            -DisableBlockAtFirstSeen $true `
+            -MAPSReporting 0 `
+            -SubmitSamplesConsent 2 `
+            -ErrorAction Stop
+        Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue
+        Set-Service  -Name WinDefend -StartupType Disabled -ErrorAction SilentlyContinue
+        Write-OK
+    } catch {
+        # 0x800106ba = servico nao esta a correr = ja desativado
+        if ($_.Exception.Message -match "0x800106ba" -or $_.Exception.HResult -eq -2147023158) {
+            Write-Skip
+        } else {
+            Write-Fail
+            Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
+        }
+    }
 }
+
 
 # ── 3. Firewall OFF + apagar todas as regras ─────────────────────────────
 Write-Step 3 5 "Firewall OFF + limpar regras...   "
 try {
     Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -ErrorAction Stop
-    $count = (Get-NetFirewallRule -ErrorAction SilentlyContinue).Count
-    Remove-NetFirewallRule -All -ErrorAction SilentlyContinue
-    Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  ($count regras apagadas)"
+    $rules = Get-NetFirewallRule -ErrorAction SilentlyContinue
+    $count = if ($rules) { $rules.Count } else { 0 }
+    if ($count -gt 0) {
+        Remove-NetFirewallRule -All -ErrorAction SilentlyContinue
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  ($count regras apagadas)"
+    } else {
+        Write-Host "  ${e}[38;2;250;204;21m[OK]${e}[0m  (firewall ja limpa)"
+    }
 } catch {
     Write-Fail
     Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
 }
-
 
 # ── 4. Instalar 7-Zip ────────────────────────────────────────────────────
 Write-Step 4 5 "Instalar 7-Zip...                 "
