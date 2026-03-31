@@ -1,4 +1,5 @@
 # system/ferramentas_wizard.ps1 - Wizard de ferramentas adicionais
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $e = [char]27
 
 function Ask-YesNo($question) {

@@ -1,4 +1,5 @@
 # system/preparacao_wizard.ps1 - Wizard de preparacao (cada operacao pergunta s/n)
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $e = [char]27
 
 function Ask-YesNo($question) {
