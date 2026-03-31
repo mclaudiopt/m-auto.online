@@ -167,22 +167,50 @@ function Show-System {
     while ($true) {
         Write-Header
         Write-Title "Diagnostico & Sistema"
-        Write-Opt 1  "Info do sistema"                  "OS / CPU / RAM / Disco"
-        Write-Opt 2  "Teste de internet + Velocidade"  "Ping + Speedtest"
-        Write-Opt 3  "Limpar ficheiros temporarios"
-        Write-Opt 4  "Desactivar actualizacoes automaticas"
-        Write-Opt 5  "Configurar Alta Performance"
-        Write-Opt 6  "Alterar DNS para Cloudflare"     "1.1.1.1 / 1.0.0.1"
+        Write-Opt 1  "Info do sistema"                  "OS / CPU / RAM / Disco [+ teste rede]"
+        Write-Opt 2  "Limpar ficheiros temporarios"
+        Write-Opt 3  "Desactivar actualizacoes automaticas"
+        Write-Opt 4  "Configurar Alta Performance"
+        Write-Opt 5  "Alterar DNS para Cloudflare"     "1.1.1.1 / 1.0.0.1"
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
-            "1" { Run-Sub "system/sysinfo" }
-            "2" { Run-Sub "system/netcheck" }
-            "3" { Run-Sub "system/cleanup" }
-            "4" { Run-Sub "system/disable_updates" }
-            "5" { Run-Sub "system/power_plan" }
-            "6" { Run-Sub "system/dns_cloudflare" }
+            "1" {
+                Run-Sub "system/sysinfo"
+                Write-Host ""
+                $r = Read-Key "Executar teste de rede [s/n]"
+                if ($r -match "^[sS]") { Run-Sub "system/netcheck" }
+            }
+            "2" { Run-Sub "system/cleanup" }
+            "3" { Run-Sub "system/disable_updates" }
+            "4" { Run-Sub "system/power_plan" }
+            "5" { Run-Sub "system/dns_cloudflare" }
+            "0" { return }
+            default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
+        }
+    }
+}
+
+#-- Menu: Tweaks ------------------------------------------------------------
+function Show-Tweaks {
+    while ($true) {
+        Write-Header
+        Write-Title "Tweaks & Otimizacoes"
+        Write-Opt 1  "Reserved Storage OFF"       "Liberta alguns GB"
+        Write-Opt 2  "CompactOS"                  "Comprimir ficheiros do SO"
+        Write-Opt 3  "WinSxS Cleanup + ResetBase" "Limpeza profunda (5-15 min)"
+        Write-Opt 4  "Hibernacao OFF"             "Desativa hibernacao"
+        Write-Opt 5  "DriverStoreExplorer"        "Gerir drivers do sistema"
+        Write-Host ""
+        Write-Opt 0  "<- Voltar"
+        Write-Host ""
+        switch (Read-Key) {
+            "1" { Run-Sub "tweaks/reserved_storage" }
+            "2" { Run-Sub "tweaks/compactos" }
+            "3" { Run-Sub "tweaks/winsxs_cleanup" }
+            "4" { Run-Sub "tweaks/hibernation_off" }
+            "5" { Run-Sub "tweaks/driverstoreexplorer" }
             "0" { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
@@ -198,7 +226,8 @@ while ($true) {
     Write-Opt 2  "Clientes"                   "Tesla..."
     Write-Opt 3  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
     Write-Opt 4  "Utilitarios & Ferramentas"  "7-Zip / DeskIn / FDM / DControl..."
-    Write-Opt 5  "Diagnostico & Sistema"      "Info / Limpeza / Performance..."
+    Write-Opt 5  "Diagnostico & Sistema"      "Info / Rede / Limpeza / Performance..."
+    Write-Opt 6  "Tweaks & Otimizacoes"       "Reserved Storage / CompactOS / WinSxS / Drivers..."
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
@@ -208,6 +237,7 @@ while ($true) {
         "3" { Show-Software }
         "4" { Show-Tools }
         "5" { Show-System }
+        "6" { Show-Tweaks }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }
