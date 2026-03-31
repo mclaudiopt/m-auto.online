@@ -74,13 +74,28 @@ function Show-Prep {
         Write-Header
         Write-Title "Preparacao"
         Write-Opt 1  "Basic"   "Defender OFF + Firewall OFF + 7-Zip + Activar Windows"
-        Write-Opt 2  "Tesla"   "(em breve)"
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
             "1" { Run-Sub "prep/basic" }
-            "2" { Run-Sub "prep/tesla" }
+            "0" { return }
+            default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
+        }
+    }
+}
+
+#-- Menu: Clientes ---------------------------------------------------------
+function Show-Clientes {
+    while ($true) {
+        Write-Header
+        Write-Title "Clientes"
+        Write-Opt 1  "Tesla"   "(em preparacao - aguarda links)"
+        Write-Host ""
+        Write-Opt 0  "<- Voltar"
+        Write-Host ""
+        switch (Read-Key) {
+            "1" { Run-Sub "clients/tesla" }
             "0" { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
@@ -177,18 +192,20 @@ Set-Console
 while ($true) {
     Write-Header
     Write-Title "Menu Principal"
-    Write-Opt 1  "Preparacao"                 "Basic / Tesla"
-    Write-Opt 2  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
-    Write-Opt 3  "Utilitarios & Ferramentas"  "7-Zip / DeskIn / FDM / DControl..."
-    Write-Opt 4  "Diagnostico & Sistema"      "Info / Limpeza / Performance..."
+    Write-Opt 1  "Preparacao"                 "Basic"
+    Write-Opt 2  "Clientes"                   "Tesla..."
+    Write-Opt 3  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
+    Write-Opt 4  "Utilitarios & Ferramentas"  "7-Zip / DeskIn / FDM / DControl..."
+    Write-Opt 5  "Diagnostico & Sistema"      "Info / Limpeza / Performance..."
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
     switch (Read-Key "Escolha uma opcao") {
         "1" { Show-Prep }
-        "2" { Show-Software }
-        "3" { Show-Tools }
-        "4" { Show-System }
+        "2" { Show-Clientes }
+        "3" { Show-Software }
+        "4" { Show-Tools }
+        "5" { Show-System }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }
