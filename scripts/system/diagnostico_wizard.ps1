@@ -1,15 +1,9 @@
-# system/diagnostico_wizard.ps1 - Diagnostico + acoes do sistema
+# system/diagnostico_wizard.ps1 - Diagnostico + acoes (executa logo)
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $e = [char]27
 
 function Write-Row($label, $value, $color = "97") {
     Write-Host "  ${e}[38;2;100;149;237m$($label.PadRight(28))${e}[0m  ${e}[${color}m$value${e}[0m"
-}
-
-function Ask-YesNo($question) {
-    Write-Host ""
-    $response = Read-Host "  ${e}[38;2;100;149;237m·${e}[0m  $question [s/n]"
-    return $response -match "^[sS]"
 }
 
 #-- DIAGNOSTICO DO SISTEMA ---------------------------------------------------
@@ -46,7 +40,7 @@ $drives | ForEach-Object {
     Write-Host "    ${e}[38;2;100;149;237m$($_.Name): $used GB / $total GB ($perc%)${e}[0m"
 }
 
-# Security Status
+# Security
 try {
     $bl = Get-BitLockerVolume -MountPoint C: -ErrorAction SilentlyContinue
     if ($bl -and $bl.ProtectionStatus -eq "On") {
@@ -89,120 +83,150 @@ try {
 }
 
 Write-Host ""
-Write-Host "  ${e}[38;2;100;149;237m>> Acoes Disponiveis${e}[0m"
-Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
-
-$actions = @()
-
-if ($blActive -and (Ask-YesNo "Desativar BitLocker?")) {
-    $actions += @{ name = "BitLocker"; action = "bitlocker" }
-}
-
-if ($defActive -and (Ask-YesNo "Desativar Windows Defender?")) {
-    $actions += @{ name = "Windows Defender"; action = "defender" }
-}
-
-if ($fwEnabled -and (Ask-YesNo "Desativar Firewall?")) {
-    $actions += @{ name = "Firewall"; action = "firewall" }
-}
-
-if (Ask-YesNo "Limpar ficheiros temporarios?") {
-    $actions += @{ name = "Cleanup"; action = "cleanup" }
-}
-
-if (Ask-YesNo "Teste de velocidade (Ookla Speedtest)?") {
-    $actions += @{ name = "Speedtest"; action = "speedtest" }
-}
-
-if (Ask-YesNo "Desactivar actualizacoes?") {
-    $actions += @{ name = "Disable Updates"; action = "disable_updates" }
-}
-
-if (Ask-YesNo "Aplicar Alta Performance?") {
-    $actions += @{ name = "Power Plan"; action = "power_plan" }
-}
-
-if (Ask-YesNo "Alterar DNS para Cloudflare?") {
-    $actions += @{ name = "DNS Cloudflare"; action = "dns_cloudflare" }
-}
-
-Write-Host ""
-
-if ($actions.Count -eq 0) {
-    Write-Host "  ${e}[38;2;148;163;184m(nenhuma acao selecionada)${e}[0m"
-    Write-Host ""
-    Read-Host "  Pressione ENTER para voltar"
-    return
-}
-
-Write-Host "  ${e}[38;2;100;149;237m>> Executando...${e}[0m"
+Write-Host "  ${e}[38;2;100;149;237m>> Acoes${e}[0m"
 Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
 Write-Host ""
 
 $completed = @()
 $failed = @()
 
-foreach ($action in $actions) {
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  $($action.name)..." -NoNewline
-    try {
-        switch ($action.action) {
-            "bitlocker" {
-                Disable-BitLocker -MountPoint C: -ErrorAction Stop | Out-Null
-                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-                $completed += $action.name
-            }
-            "defender" {
-                Set-MpPreference -DisableRealtimeMonitoring $true -ErrorAction Stop
-                Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue
-                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-                $completed += $action.name
-            }
-            "firewall" {
-                Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -ErrorAction Stop
-                Remove-NetFirewallRule -All -ErrorAction SilentlyContinue
-                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-                $completed += $action.name
-            }
-            "cleanup" {
-                Remove-Item "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-                $completed += $action.name
-            }
-            "speedtest" {
-                Write-Host ""
-                irm "$env:BASE_URL/system/speedtest.ps1" -UseBasicParsing | iex
-                $completed += $action.name
-            }
-            "disable_updates" {
-                # Just launch the script
-                Write-Host ""
-                irm "$env:BASE_URL/system/disable_updates.ps1" -UseBasicParsing | iex
-                $completed += $action.name
-            }
-            "power_plan" {
-                Write-Host ""
-                irm "$env:BASE_URL/system/power_plan.ps1" -UseBasicParsing | iex
-                $completed += $action.name
-            }
-            "dns_cloudflare" {
-                Write-Host ""
-                irm "$env:BASE_URL/system/dns_cloudflare.ps1" -UseBasicParsing | iex
-                $completed += $action.name
-            }
+#-- 1. BitLocker OFF ─────────────────────────────────────────────────────
+if ($blActive) {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Desativar BitLocker?" -NoNewline
+    $response = Read-Host " [s/n]"
+    if ($response -match "^[sS]") {
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desativar..." -NoNewline
+        try {
+            Disable-BitLocker -MountPoint C: -ErrorAction Stop | Out-Null
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+            $completed += "BitLocker"
+        } catch {
+            Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+            $failed += "BitLocker"
         }
-    } catch {
-        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-        $failed += $action.name
     }
 }
 
+#-- 2. Windows Defender OFF ──────────────────────────────────────────────
+if ($defActive) {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Desativar Windows Defender?" -NoNewline
+    $response = Read-Host " [s/n]"
+    if ($response -match "^[sS]") {
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desativar..." -NoNewline
+        try {
+            Set-MpPreference -DisableRealtimeMonitoring $true -ErrorAction Stop
+            Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+            $completed += "Windows Defender"
+        } catch {
+            Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+            $failed += "Windows Defender"
+        }
+    }
+}
+
+#-- 3. Firewall OFF ──────────────────────────────────────────────────────
+if ($fwEnabled) {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Desativar Firewall?" -NoNewline
+    $response = Read-Host " [s/n]"
+    if ($response -match "^[sS]") {
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desativar..." -NoNewline
+        try {
+            Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -ErrorAction Stop
+            Remove-NetFirewallRule -All -ErrorAction SilentlyContinue
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+            $completed += "Firewall"
+        } catch {
+            Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+            $failed += "Firewall"
+        }
+    }
+}
+
+#-- 4. Limpar ficheiros temporarios ──────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Limpar ficheiros temporarios?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A limpar..." -NoNewline
+    try {
+        Remove-Item "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $completed += "Cleanup"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "Cleanup"
+    }
+}
+
+#-- 5. Teste de velocidade ───────────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Teste de velocidade (Ookla Speedtest)?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host ""
+    try {
+        irm "https://m-auto.online/scripts/system/speedtest.ps1" -UseBasicParsing | iex
+        $completed += "Speedtest"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  $_"
+        $failed += "Speedtest"
+    }
+}
+
+#-- 6. Desactivar actualizacoes ───────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Desactivar actualizacoes?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host ""
+    try {
+        irm "https://m-auto.online/scripts/system/disable_updates.ps1" -UseBasicParsing | iex
+        $completed += "Disable Updates"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  Nao foi possivel carregar o script"
+        $failed += "Disable Updates"
+    }
+}
+
+#-- 7. Alta Performance ──────────────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Aplicar Alta Performance?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host ""
+    try {
+        irm "https://m-auto.online/scripts/system/power_plan.ps1" -UseBasicParsing | iex
+        $completed += "Power Plan"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  Nao foi possivel carregar o script"
+        $failed += "Power Plan"
+    }
+}
+
+#-- 8. Alterar DNS ──────────────────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Alterar DNS para Cloudflare?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host ""
+    try {
+        irm "https://m-auto.online/scripts/system/dns_cloudflare.ps1" -UseBasicParsing | iex
+        $completed += "DNS Cloudflare"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  Nao foi possivel carregar o script"
+        $failed += "DNS Cloudflare"
+    }
+}
+
+#-- RESUMO ───────────────────────────────────────────────────────────────
 Write-Host ""
 Write-Host "  ${e}[38;2;100;149;237m>> Resumo${e}[0m"
+Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
+Write-Host ""
+
 if ($completed.Count -gt 0) {
     Write-Host "  ${e}[38;2;34;197;94m✓ Concluido:${e}[0m"
     $completed | ForEach-Object { Write-Host "    - $_" }
 }
+
 if ($failed.Count -gt 0) {
+    Write-Host ""
     Write-Host "  ${e}[38;2;239;68;68m✗ Falhou:${e}[0m"
     $failed | ForEach-Object { Write-Host "    - $_" }
 }
