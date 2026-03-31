@@ -1,9 +1,10 @@
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 # bump-version.ps1 - Incrementa versao e timestamp antes de push
 
 $scriptPath = "scripts/m-auto.ps1"
 
 # Ler conteudo
-$content = Get-Content $scriptPath -Raw
+$content = Get-Content $scriptPath -Raw -Encoding UTF8
 
 # Extrair versao atual
 if ($content -match '\$VERSION\s*=\s*"([^"]+)"') {
@@ -38,4 +39,5 @@ Set-Content $scriptPath $content -Encoding UTF8
 git add $scriptPath
 git commit -m "version: bump to $newVersion [$timestamp]"
 
-Write-Host "`n✓ Versao atualizada. Pronto para 'git push'" -ForegroundColor Green
+Write-Host ""
+Write-Host "OK - Versao atualizada. Pronto para git push" -ForegroundColor Green
