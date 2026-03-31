@@ -184,18 +184,20 @@ function Show-Tools {
         Write-Title "Utilitarios & Ferramentas"
         Write-Opt 1  "Instalar 7-Zip"                  "Descompressao de arquivos"
         Write-Opt 2  "Instalar DeskIn"                  "Acesso remoto para assistencia"
-        Write-Opt 3  "DControl - gerir Windows Defender"
-        Write-Opt 4  "Criar ponto de restauro do sistema"
-        Write-Opt 5  "Activar Windows"
+        Write-Opt 3  "Instalar MSMQ Queuing Services"   "Message Queuing"
+        Write-Opt 4  "DControl - gerir Windows Defender"
+        Write-Opt 5  "Criar ponto de restauro do sistema"
+        Write-Opt 6  "Activar Windows"
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
             "1" { Run-Sub "tools/install_7zip" }
             "2" { Run-Sub "tools/install_deskin" }
-            "3" { Run-Sub "tools/dcontrol" }
-            "4" { Run-Sub "tools/restore_point" }
-            "5" { Write-Header; Write-Info "A lancar activador..."; irm https://get.activated.win | iex }
+            "3" { Run-Sub "tools/install_msmq" }
+            "4" { Run-Sub "tools/dcontrol" }
+            "5" { Run-Sub "tools/restore_point" }
+            "6" { Write-Header; Write-Info "A lancar activador..."; irm https://get.activated.win | iex }
             "0" { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
