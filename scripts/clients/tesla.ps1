@@ -10,7 +10,7 @@ Write-Host ""
 $completed = @()
 $failed = @()
 
-#-- PASSO 1: Trucks Setup (7-Zip + Copy + Extract) ──────────────────────
+#-- PASSO 1: Trucks Setup (7-Zip + robocopy + Extract) ──────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Instalar 7-Zip + Copiar Trucks.zip?" -NoNewline
 $response = Read-Host " [s/n]"
 if ($response -match "^[sS]") {
@@ -21,7 +21,6 @@ if ($response -match "^[sS]") {
         $7zipURL = "https://www.7-zip.org/a/7z2600-x64.exe"
         $7zipTMP = "$env:TEMP\7z_setup.exe"
 
-        # Verificar se já está instalado
         $installed7zip = Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" `
             -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like "*7-Zip*" }
 
@@ -42,43 +41,46 @@ if ($response -match "^[sS]") {
         }
         Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
 
-        # 1.3 Copiar Trucks.zip
-        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A copiar Trucks.zip..." -NoNewline
-        $sourceZip = "D:\marcelo\Trucks.zip"
-        $destZip = "$mAutoPath\Trucks.zip"
+        # 1.3 Copiar Trucks.zip com robocopy (muito mais rápido)
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A copiar Trucks.zip (robocopy)..." -NoNewline
+        $sourceDir = "D:\marcelo"
+        $sourceZip = "$sourceDir\Trucks.zip"
 
         if (-not (Test-Path $sourceZip)) {
             Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
             Write-Host "  ${e}[38;2;148;163;184m    Ficheiro nao encontrado: $sourceZip${e}[0m"
             $failed += "Trucks Setup"
         } else {
-            Copy-Item -Path $sourceZip -Destination $destZip -Force -ErrorAction Stop
-            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+            robocopy $sourceDir $mAutoPath Trucks.zip /R:3 /W:1 | Out-Null
+            if ($LASTEXITCODE -le 1) {
+                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
 
-            # 1.4 Descomprimir
-            Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A descomprimir..." -NoNewline
-            $extractPath = "$mAutoPath\Trucks"
-            if (-not (Test-Path $extractPath)) {
-                New-Item -ItemType Directory -Path $extractPath -Force | Out-Null
-            }
+                # 1.4 Descomprimir
+                Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A descomprimir..." -NoNewline
+                $extractPath = "$mAutoPath\Trucks"
+                if (-not (Test-Path $extractPath)) {
+                    New-Item -ItemType Directory -Path $extractPath -Force | Out-Null
+                }
 
-            # Usar 7z.exe para extrair
-            $7zExe = "C:\Program Files\7-Zip\7z.exe"
-            if (Test-Path $7zExe) {
-                & $7zExe x $destZip -o"$extractPath" -y | Out-Null
+                $7zExe = "C:\Program Files\7-Zip\7z.exe"
+                if (Test-Path $7zExe) {
+                    & $7zExe x "$mAutoPath\Trucks.zip" -o"$extractPath" -y | Out-Null
+                } else {
+                    Expand-Archive -Path "$mAutoPath\Trucks.zip" -DestinationPath $extractPath -Force -ErrorAction Stop
+                }
+                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+
+                # 1.5 Apagar ficheiro .zip
+                Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A limpar ficheiro .zip..." -NoNewline
+                Remove-Item "$mAutoPath\Trucks.zip" -Force -ErrorAction SilentlyContinue
+                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+
+                Write-Host ""
+                $completed += "Trucks Setup"
             } else {
-                # Fallback: usar PowerShell Expand-Archive
-                Expand-Archive -Path $destZip -DestinationPath $extractPath -Force -ErrorAction Stop
+                Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+                $failed += "Trucks Setup"
             }
-            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-
-            # 1.5 Apagar ficheiro .zip
-            Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A limpar ficheiro .zip..." -NoNewline
-            Remove-Item $destZip -Force -ErrorAction SilentlyContinue
-            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-
-            Write-Host ""
-            $completed += "Trucks Setup (7-Zip + Copy + Extract)"
         }
     } catch {
         Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
