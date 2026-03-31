@@ -68,17 +68,55 @@ function Run-Sub($name) {
     }
 }
 
-#-- Menu: Preparacao -------------------------------------------------------
-function Show-Prep {
+#-- Menu: Opcoes Manuais (Menu 99 Backup) -----------------------------------
+function Show-Backup {
     while ($true) {
         Write-Header
-        Write-Title "Preparacao"
-        Write-Opt 1  "Basic"   "Defender OFF + Firewall OFF + 7-Zip + Activar Windows"
+        Write-Title "Opcoes Manuais - Preparacao & Diagnostico"
+        Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Preparacao]${e}[0m"
+        Write-Opt 1  "Tamper Protection OFF"
+        Write-Opt 2  "Microsoft Defender OFF"
+        Write-Opt 3  "Firewall OFF + limpar regras"
+        Write-Opt 4  "BitLocker OFF"
+        Write-Opt 5  "Secure Boot OFF"
+        Write-Opt 6  "Instalar 7-Zip"
+        Write-Opt 7  "Activar Windows"
+        Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Diagnostico & Ferramentas]${e}[0m"
+        Write-Opt 8  "Info do Sistema"
+        Write-Opt 9  "Teste de Internet"
+        Write-Opt 10 "Limpar ficheiros temporarios"
+        Write-Opt 11 "Desactivar actualizacoes"
+        Write-Opt 12 "Alta Performance"
+        Write-Opt 13 "Alterar DNS Cloudflare"
+        Write-Opt 14 "Reserved Storage OFF"
+        Write-Opt 15 "CompactOS"
+        Write-Opt 16 "WinSxS Cleanup + ResetBase"
+        Write-Opt 17 "Hibernacao OFF"
+        Write-Opt 18 "DriverStoreExplorer"
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
-            "1" { Run-Sub "prep/basic" }
+            "1"  { Run-Sub "prep/tamper_off" }
+            "2"  { Run-Sub "prep/defender_off" }
+            "3"  { Run-Sub "prep/firewall_off" }
+            "4"  { Run-Sub "prep/bitlocker_off" }
+            "5"  { Run-Sub "prep/secureboot_off" }
+            "6"  { Run-Sub "tools/install_7zip" }
+            "7"  { Write-Header; Write-Info "A lancar activador..."; irm https://get.activated.win | iex }
+            "8"  { Run-Sub "system/sysinfo" }
+            "9"  { Run-Sub "system/netcheck" }
+            "10" { Run-Sub "system/cleanup" }
+            "11" { Run-Sub "system/disable_updates" }
+            "12" { Run-Sub "system/power_plan" }
+            "13" { Run-Sub "system/dns_cloudflare" }
+            "14" { Run-Sub "tweaks/reserved_storage" }
+            "15" { Run-Sub "tweaks/compactos" }
+            "16" { Run-Sub "tweaks/winsxs_cleanup" }
+            "17" { Run-Sub "tweaks/hibernation_off" }
+            "18" { Run-Sub "tweaks/driverstoreexplorer" }
             "0" { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
@@ -162,79 +200,29 @@ function Show-Tools {
     }
 }
 
-#-- Menu: System -----------------------------------------------------------
+#-- Wizard: System, Prep & Tools (automatizado) ----------------------------
 function Show-System {
-    while ($true) {
-        Write-Header
-        Write-Title "Diagnostico & Sistema"
-        Write-Opt 1  "Info do sistema"                  "Windows / Hardware / Seguranca"
-        Write-Opt 2  "Teste de Internet"                "Ping + Speedtest"
-        Write-Opt 3  "Limpar ficheiros temporarios"
-        Write-Opt 4  "Desactivar actualizacoes"
-        Write-Opt 5  "Alta Performance"
-        Write-Opt 6  "Alterar DNS Cloudflare"          "1.1.1.1 / 1.0.0.1"
-        Write-Opt 7  "Tweaks & Otimizacoes"             "Reserved Storage / CompactOS / WinSxS..."
-        Write-Host ""
-        Write-Opt 0  "<- Voltar"
-        Write-Host ""
-        switch (Read-Key) {
-            "1" { Run-Sub "system/sysinfo" }
-            "2" { Run-Sub "system/netcheck" }
-            "3" { Run-Sub "system/cleanup" }
-            "4" { Run-Sub "system/disable_updates" }
-            "5" { Run-Sub "system/power_plan" }
-            "6" { Run-Sub "system/dns_cloudflare" }
-            "7" { Show-Tweaks }
-            "0" { return }
-            default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
-        }
-    }
+    Run-Sub "system/wizard"
 }
 
-#-- Menu: Tweaks (dentro de System) -----------------------------------------
-function Show-Tweaks {
-    while ($true) {
-        Write-Header
-        Write-Title "Tweaks & Otimizacoes"
-        Write-Opt 1  "Reserved Storage OFF"       "Liberta alguns GB"
-        Write-Opt 2  "CompactOS"                  "Comprimir ficheiros do SO"
-        Write-Opt 3  "WinSxS Cleanup + ResetBase" "Limpeza profunda (5-15 min)"
-        Write-Opt 4  "Hibernacao OFF"             "Desativa hibernacao"
-        Write-Opt 5  "DriverStoreExplorer"        "Gerir drivers do sistema"
-        Write-Host ""
-        Write-Opt 0  "<- Voltar"
-        Write-Host ""
-        switch (Read-Key) {
-            "1" { Run-Sub "tweaks/reserved_storage" }
-            "2" { Run-Sub "tweaks/compactos" }
-            "3" { Run-Sub "tweaks/winsxs_cleanup" }
-            "4" { Run-Sub "tweaks/hibernation_off" }
-            "5" { Run-Sub "tweaks/driverstoreexplorer" }
-            "0" { return }
-            default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
-        }
-    }
-}
 
 #-- Main -------------------------------------------------------------------
 Set-Console
 while ($true) {
     Write-Header
     Write-Title "Menu Principal"
-    Write-Opt 1  "Preparacao"                 "Basic"
+    Write-Opt 1  "Diagnostico, Preparacao & Ferramentas"  "Sistema, Defesa & Configuracao automatica"
     Write-Opt 2  "Clientes"                   "Tesla..."
     Write-Opt 3  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
-    Write-Opt 4  "Utilitarios & Ferramentas"  "7-Zip / DeskIn / FDM / DControl..."
-    Write-Opt 5  "Diagnostico & Sistema"      "Info / Rede / Limpeza / Tweaks..."
+    Write-Opt 4  "Opcoes Manuais - Backup"    "Opcoes individuais de prep, ferramenta & sistema"
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
     switch (Read-Key "Escolha uma opcao") {
-        "1" { Show-Prep }
+        "1" { Show-System }
         "2" { Show-Clientes }
         "3" { Show-Software }
-        "4" { Show-Tools }
-        "5" { Show-System }
+        "4" { Show-Backup }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }

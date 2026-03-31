@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VCX SE — Como funciona</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+/* ─── HEADER ─── */
+header {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.logo { font-size: 20px; font-weight: 800; color: #2563eb; }
+.logo span { color: #0f172a; }
+header p { font-size: 14px; color: #64748b; border-left: 1px solid #e2e8f0; padding-left: 14px; }
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  color: #fff;
+  text-align: center;
+  padding: 56px 24px;
+}
+.hero h1 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+.hero p  { font-size: 17px; opacity: .85; max-width: 560px; margin: 0 auto; }
+
+/* ─── SECTIONS ─── */
+.section { max-width: 900px; margin: 0 auto; padding: 52px 24px; }
+.section + .section { padding-top: 0; }
+
+.chip {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+h2.st { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+p.sub { font-size: 15px; color: #64748b; margin-bottom: 36px; }
+
+hr.div { border: none; border-top: 1px solid #e2e8f0; }
+
+/* ─── SCHEMA CONTAINER ─── */
+.schema {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.schema-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+/* ─── FLOW ROW ─── */
+.flow-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.flow-row:last-child { margin-bottom: 0; }
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 90px;
+}
+.node-box {
+  width: 76px;
+  height: 64px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 24px;
+  border: 2px solid transparent;
+  position: relative;
+}
+.node-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  color: #475569;
+  line-height: 1.3;
+  max-width: 80px;
+}
+.node-sub {
+  font-size: 10px;
+  color: #94a3b8;
+  text-align: center;
+  max-width: 80px;
+  line-height: 1.3;
+}
+
+.arrow {
+  font-size: 22px;
+  color: #cbd5e1;
+  padding: 0 6px;
+  flex-shrink: 0;
+}
+
+/* ─── NODE COLORS ─── */
+.n-car   { background: #f0fdf4; border-color: #86efac; }
+.n-hw    { background: #eff6ff; border-color: #93c5fd; }
+.n-key   { background: #fffbeb; border-color: #fcd34d; }
+.n-sw    { background: #f0fdf4; border-color: #6ee7b7; }
+.n-vcx   { background: #1e40af; border-color: #1e40af; color: #fff; }
+.n-warn  { background: #fef2f2; border-color: #fca5a5; }
+.n-ok    { background: #f0fdf4; border-color: #6ee7b7; }
+
+/* VCX label white override */
+.n-vcx .node-sub { color: #93c5fd; }
+
+/* ─── BRAND SEPARATOR ─── */
+.brand-row-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.brand-tag {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ─── BIG VCX SCHEMA ─── */
+.vcx-schema {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+}
+.brands-in {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.brand-bubble {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid transparent;
+}
+.center-vcx {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 12px 0;
+}
+.vcx-box-big {
+  background: #1e40af;
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px 36px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(30,64,175,.35);
+}
+.vcx-box-big .icon { font-size: 36px; margin-bottom: 6px; }
+.vcx-box-big .name { font-size: 18px; font-weight: 900; }
+.vcx-box-big .desc { font-size: 12px; opacity: .75; margin-top: 4px; }
+
+.arrow-down { font-size: 28px; color: #cbd5e1; line-height: 1; text-align: center; }
+.arrow-up   { font-size: 28px; color: #cbd5e1; line-height: 1; text-align: center; }
+
+.pc-out {
+  background: #f0fdf4;
+  border: 2px solid #6ee7b7;
+  border-radius: 14px;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #065f46;
+}
+.pc-out .icon { font-size: 28px; display: block; margin-bottom: 4px; }
+
+/* ─── 3 STEPS ─── */
+.steps-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.step-box {
+  flex: 1;
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+  position: relative;
+}
+.step-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 auto 14px;
+}
+.step-icon { font-size: 38px; margin-bottom: 12px; display: block; }
+.step-title { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+.step-body  { font-size: 13px; color: #64748b; line-height: 1.5; }
+.step-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  font-size: 26px;
+  color: #cbd5e1;
+}
+
+.step-hw { background: #eff6ff; border: 2px solid #93c5fd; }
+.step-hw .step-num { background: #2563eb; }
+.step-hw .step-title { color: #1e40af; }
+
+.step-key { background: #fffbeb; border: 2px solid #fcd34d; }
+.step-key .step-num { background: #b45309; }
+.step-key .step-title { color: #92400e; }
+
+.step-sw { background: #f0fdf4; border: 2px solid #6ee7b7; }
+.step-sw .step-num { background: #16a34a; }
+.step-sw .step-title { color: #15803d; }
+
+@media (max-width: 620px) {
+  .steps-row { flex-direction: column; }
+  .step-arrow { transform: rotate(90deg); justify-content: center; }
+}
+
+/* ─── SITUATION CARDS ─── */
+.sit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+.sit-card {
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+}
+.sit-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+.sit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.sit-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.dot-ok   { background: #dcfce7; }
+.dot-miss { background: #fee2e2; }
+
+.sit-ok  { background: #f0fdf4; border-color: #bbf7d0; }
+.sit-ok  h4 { color: #16a34a; }
+.sit-warn { background: #fff7ed; border-color: #fed7aa; }
+.sit-warn h4 { color: #c2410c; }
+
+/* ─── TABLE ─── */
+.tbl-wrap {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+thead { background: #0f172a; color: #fff; }
+thead th { padding: 13px 16px; text-align: left; font-size: 12px; font-weight: 600; white-space: nowrap; }
+tbody tr { border-bottom: 1px solid #f1f5f9; }
+tbody tr:hover { background: #f8fafc; }
+tbody td { padding: 12px 16px; vertical-align: middle; }
+td.brand { font-weight: 700; }
+.pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.pb { background: #dbeafe; color: #1e40af; }
+.pg { background: #dcfce7; color: #15803d; }
+.py { background: #fef9c3; color: #854d0e; }
+.pp { background: #f3e8ff; color: #7e22ce; }
+.ps { background: #f1f5f9; color: #475569; }
+
+/* ─── FOOTER ─── */
+footer {
+  text-align: center;
+  padding: 28px;
+  font-size: 13px;
+  color: #94a3b8;
+  border-top: 1px solid #e2e8f0;
+  background: #fff;
+  margin-top: 48px;
+}
+footer strong { color: #2563eb; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">m<span>-auto</span></div>
+  <p>Guia VCX SE — Diagnostico Automóvel</p>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Como funciona o diagnostico por marca?</h1>
+  <p>Explicacao visual simples — para perceber o que e a maquina, a licenca e o software</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     PARTE 1 — SISTEMA TRADICIONAL
+════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="chip">Parte 1 — Sistema tradicional</div>
+  <h2 class="st">Cada marca tem a sua propria maquina</h2>
+  <p class="sub">No sistema normal, para diagnosticar um VW precisas da maquina VW. Para Mercedes, a maquina Mercedes. E assim para cada marca — todas diferentes, todas com o seu cabo e software.</p>
+
+  <div class="schema">
+    <div class="schema-title">Carro → Cabo → Maquina de diagnostico → PC com software</div>
+
+    <!-- VW -->
+    <div class="brand-row-label">
+      <span class="brand-tag" style="background:#dbeafe;color:#1e40af;">VW · Audi · SEAT · Skoda</span>
+    </div>
+    <div class="flow-row">
+      <div class="node">
+        <div class="node-box n-car">🚗</div>
+        <div class="node-label">Carro VW</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:13px;font-weight:700;color:#1e40af;">VAS<br>6154</div>
+        <div class="node-label">Maquina VW</div>
+        <div class="node-sub">cabo incluido</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-sw">💻</div>
+        <div class="node-label">Software ODIS</div>
+        <div class="node-sub">instalado no PC</div>
+      </div>
+    </div>
+
+    <!-- MERCEDES -->
+    <div class="brand-row-label" style="margin-top:18px;">
+      <span class="brand-tag" style="background:#f0fdf4;color:#166534;">Mercedes · Smart</span>
+    </div>
+    <div class="flow-row">
+      <div class="node">
+        <div class="node-box n-car">🚗</div>
+        <div class="node-label">Carro MB</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:13px;font-weight:700;color:#1e40af;">C4 /<br>SDconn.</div>
+        <div class="node-label">Maquina MB</div>
+        <div class="node-sub">cabo incluido</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-sw">💻</div>
+        <div class="node-label">Software Xentry</div>
+        <div class="node-sub">instalado no PC</div>
+      </div>
+    </div>
+
+    <!-- BMW -->
+    <div class="brand-row-label" style="margin-top:18px;">
+      <span class="brand-tag" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb;">BMW · MINI</span>
+    </div>
+    <div class="flow-row">
+      <div class="node">
+        <div class="node-box n-car">🚗</div>
+        <div class="node-label">Carro BMW</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:13px;font-weight:700;color:#1e40af;">ICOM<br>A2/Next</div>
+        <div class="node-label">Maquina BMW</div>
+        <div class="node-sub">cabo incluido</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-sw">💻</div>
+        <div class="node-label">Software ISTA</div>
+        <div class="node-sub">instalado no PC</div>
+      </div>
+    </div>
+
+    <!-- PSA -->
+    <div class="brand-row-label" style="margin-top:18px;">
+      <span class="brand-tag" style="background:#fef9c3;color:#854d0e;">Peugeot · Citroen · DS · Opel</span>
+    </div>
+    <div class="flow-row">
+      <div class="node">
+        <div class="node-box n-car">🚗</div>
+        <div class="node-label">Carro PSA</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:12px;font-weight:700;color:#1e40af;">Lexia 3<br>PP2000</div>
+        <div class="node-label">Maquina PSA</div>
+        <div class="node-sub">cabo incluido</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-sw">💻</div>
+        <div class="node-label">DiagBox</div>
+        <div class="node-sub">instalado no PC</div>
+      </div>
+    </div>
+
+    <!-- RENAULT -->
+    <div class="brand-row-label" style="margin-top:18px;">
+      <span class="brand-tag" style="background:#fff7ed;color:#c2410c;">Renault · Dacia</span>
+    </div>
+    <div class="flow-row">
+      <div class="node">
+        <div class="node-box n-car">🚗</div>
+        <div class="node-label">Carro Renault</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:13px;font-weight:700;color:#1e40af;">CAN<br>Clip</div>
+        <div class="node-label">Maquina Renault</div>
+        <div class="node-sub">cabo incluido</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-sw">💻</div>
+        <div class="node-label">Software Clip</div>
+        <div class="node-sub">instalado no PC</div>
+      </div>
+    </div>
+
+    <!-- GM/Ford -->
+    <div class="brand-row-label" style="margin-top:18px;">
+      <span class="brand-tag" style="background:#f0f9ff;color:#075985;">GM · Chevrolet · Ford</span>
+    </div>
+    <div class="flow-row">
+      <div class="node">
+        <div class="node-box n-car">🚗</div>
+        <div class="node-label">Carro GM/Ford</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:12px;font-weight:700;color:#1e40af;">Tech2<br>MDI/VCM</div>
+        <div class="node-label">Maquina GM/Ford</div>
+        <div class="node-sub">cabo incluido</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-sw">💻</div>
+        <div class="node-label">GDS2 / IDS</div>
+        <div class="node-sub">instalado no PC</div>
+      </div>
+    </div>
+
+  </div><!-- /schema -->
+
+  <!-- PROBLEMA VISUAL -->
+  <div class="schema" style="background:#fef2f2;border-color:#fca5a5;">
+    <div class="schema-title" style="color:#b91c1c;">O problema: 6 marcas = 6 maquinas diferentes</div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;">
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:11px;font-weight:700;color:#1e40af;">VAS<br>6154</div>
+        <div class="node-label">VW Group</div>
+      </div>
+      <div style="font-size:20px;color:#fca5a5;">+</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:11px;font-weight:700;color:#1e40af;">C4 /<br>SDconn.</div>
+        <div class="node-label">Mercedes</div>
+      </div>
+      <div style="font-size:20px;color:#fca5a5;">+</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:11px;font-weight:700;color:#1e40af;">ICOM<br>A2</div>
+        <div class="node-label">BMW</div>
+      </div>
+      <div style="font-size:20px;color:#fca5a5;">+</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:11px;font-weight:700;color:#1e40af;">Lexia<br>3</div>
+        <div class="node-label">PSA</div>
+      </div>
+      <div style="font-size:20px;color:#fca5a5;">+</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:11px;font-weight:700;color:#1e40af;">CAN<br>Clip</div>
+        <div class="node-label">Renault</div>
+      </div>
+      <div style="font-size:20px;color:#fca5a5;">+</div>
+      <div class="node">
+        <div class="node-box n-hw" style="font-size:11px;font-weight:700;color:#1e40af;">Tech2<br>MDI</div>
+        <div class="node-label">GM/Ford</div>
+      </div>
+      <div style="font-size:28px;color:#fca5a5;font-weight:900;">=</div>
+      <div style="background:#b91c1c;color:#fff;border-radius:12px;padding:14px 18px;text-align:center;font-weight:800;font-size:14px;line-height:1.4;">
+        Muito dinheiro<br>Muito espaco<br>Muito caos
+      </div>
+    </div>
+  </div>
+
+</div><!-- /section -->
+
+<hr class="div">
+
+
+<!-- ══════════════════════════════════════════════════
+     PARTE 2 — VCX SE
+════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="chip">Parte 2 — A solucao VCX SE</div>
+  <h2 class="st">Uma maquina para todas as marcas</h2>
+  <p class="sub">A VCX SE substitui todas as maquinas acima. Um unico cabo OBD-II universal liga a qualquer carro. Mas ha 3 componentes que precisas de perceber.</p>
+
+  <!-- SCHEMA VCX CENTRAL -->
+  <div class="schema">
+    <div class="schema-title">VCX SE — todos os carros, uma unica maquina</div>
+    <div class="vcx-schema">
+
+      <!-- CARROS EM CIMA -->
+      <div class="brands-in">
+        <span class="brand-bubble" style="background:#dbeafe;color:#1e40af;border-color:#93c5fd;">🚗 VW/Audi</span>
+        <span class="brand-bubble" style="background:#f0fdf4;color:#166534;border-color:#86efac;">🚗 Mercedes</span>
+        <span class="brand-bubble" style="background:#f8fafc;color:#374151;border-color:#e2e8f0;">🚗 BMW</span>
+        <span class="brand-bubble" style="background:#fef9c3;color:#854d0e;border-color:#fde68a;">🚗 PSA</span>
+        <span class="brand-bubble" style="background:#fff7ed;color:#c2410c;border-color:#fed7aa;">🚗 Renault</span>
+        <span class="brand-bubble" style="background:#f0f9ff;color:#075985;border-color:#bae6fd;">🚗 GM/Ford</span>
+      </div>
+
+      <!-- SETA PARA BAIXO -->
+      <div class="arrow-down">↓ ↓ ↓ ↓ ↓ ↓</div>
+      <div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:-6px;margin-bottom:10px;">mesmo cabo OBD-II para todos</div>
+
+      <!-- VCX BOX -->
+      <div class="center-vcx">
+        <div class="vcx-box-big">
+          <div class="icon">🔌</div>
+          <div class="name">VCX SE</div>
+          <div class="desc">Interface universal de diagnostico</div>
+        </div>
+      </div>
+
+      <!-- SETA PARA BAIXO -->
+      <div class="arrow-down">↓</div>
+      <div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:-6px;margin-bottom:10px;">USB ou Wi-Fi</div>
+
+      <!-- PC -->
+      <div class="pc-out">
+        <span class="icon">💻</span>
+        Software no PC<br><span style="font-size:12px;font-weight:400;color:#16a34a;">(ODIS / Xentry / ISTA / DiagBox / ...)</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- OS 3 COMPONENTES -->
+  <div class="schema" style="border-color:#2563eb;">
+    <div class="schema-title" style="color:#2563eb;">MAS ATENCAO — sao sempre 3 componentes separados</div>
+
+    <div class="steps-row">
+      <div class="step-box step-hw">
+        <div class="step-num">1</div>
+        <span class="step-icon">🔌</span>
+        <div class="step-title">Maquina VCX SE</div>
+        <div class="step-body">O hardware fisico. O aparelho que tu compras. E o mesmo para todas as marcas. Fica ligado ao carro por OBD-II e ao PC por USB ou Wi-Fi.</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-box step-key">
+        <div class="step-num">2</div>
+        <span class="step-icon">🔑</span>
+        <div class="step-title">Licenca por marca</div>
+        <div class="step-body">Ativa o protocolo da marca na maquina. Sem ela, a VCX nao consegue "falar" com o carro. Compra-se separadamente para cada marca que queiras usar.</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-box step-sw">
+        <div class="step-num">3</div>
+        <span class="step-icon">💻</span>
+        <div class="step-title">Software no PC</div>
+        <div class="step-body">O programa instalado no computador. Cada marca tem o seu proprio software. Tem de ser instalado e configurado separadamente — nao vem com a maquina.</div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /section -->
+
+<hr class="div">
+
+
+<!-- ══════════════════════════════════════════════════
+     PARTE 3 — 3 CASOS REAIS
+════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="chip">Parte 3 — Os 3 casos reais</div>
+  <h2 class="st">O que tens e o que falta?</h2>
+  <p class="sub">Identifica o teu caso e ve exactamente o que ainda precisas.</p>
+
+  <!-- ── CASO 1 ── -->
+  <div class="schema" style="border-color:#fca5a5;margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+      <div style="background:#dc2626;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;flex-shrink:0;">1</div>
+      <div>
+        <div style="font-size:16px;font-weight:800;color:#dc2626;">Tenho a maquina. Nao tenho licenca nem software.</div>
+        <div style="font-size:13px;color:#64748b;">Situacao de arranque — acabaste de receber a VCX SE</div>
+      </div>
+    </div>
+
+    <!-- estado actual -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:10px;">Estado actual</div>
+    <div class="flow-row" style="margin-bottom:20px;">
+      <div class="node">
+        <div class="node-box n-ok">&#10003;<br><span style="font-size:18px;">🔌</span></div>
+        <div class="node-label" style="color:#16a34a;">VCX SE</div>
+        <div class="node-sub">tens</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-warn">&#10007;<br><span style="font-size:18px;">🔑</span></div>
+        <div class="node-label" style="color:#dc2626;">Licenca</div>
+        <div class="node-sub">nao tens</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-warn">&#10007;<br><span style="font-size:18px;">💻</span></div>
+        <div class="node-label" style="color:#dc2626;">Software</div>
+        <div class="node-sub">nao tens</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-warn" style="font-size:26px;">&#128683;</div>
+        <div class="node-label" style="color:#dc2626;">Nao funciona</div>
+      </div>
+    </div>
+
+    <!-- o que precisas -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:10px;">O que precisas de adquirir</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="background:#fef9c3;border:2px solid #fcd34d;border-radius:12px;padding:14px 18px;flex:1;min-width:180px;">
+        <div style="font-size:20px;margin-bottom:6px;">🔑</div>
+        <div style="font-size:14px;font-weight:700;color:#92400e;margin-bottom:4px;">Licenca da marca</div>
+        <div style="font-size:12px;color:#78716c;">Comprada separadamente para cada marca que queiras usar (VW, BMW, Mercedes...)</div>
+      </div>
+      <div style="background:#f0fdf4;border:2px solid #6ee7b7;border-radius:12px;padding:14px 18px;flex:1;min-width:180px;">
+        <div style="font-size:20px;margin-bottom:6px;">💻</div>
+        <div style="font-size:14px;font-weight:700;color:#166534;margin-bottom:4px;">Software no PC</div>
+        <div style="font-size:12px;color:#4b5563;">Instalar o software original da marca (ODIS, Xentry, ISTA...) no teu computador</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CASO 2 ── -->
+  <div class="schema" style="border-color:#fcd34d;margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+      <div style="background:#b45309;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;flex-shrink:0;">2</div>
+      <div>
+        <div style="font-size:16px;font-weight:800;color:#92400e;">Tenho a maquina e a licenca. Nao tenho o software.</div>
+        <div style="font-size:13px;color:#64748b;">Maquina preparada — falta apenas instalar o software no PC</div>
+      </div>
+    </div>
+
+    <!-- estado actual -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:10px;">Estado actual</div>
+    <div class="flow-row" style="margin-bottom:20px;">
+      <div class="node">
+        <div class="node-box n-ok">&#10003;<br><span style="font-size:18px;">🔌</span></div>
+        <div class="node-label" style="color:#16a34a;">VCX SE</div>
+        <div class="node-sub">tens</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-ok">&#10003;<br><span style="font-size:18px;">🔑</span></div>
+        <div class="node-label" style="color:#16a34a;">Licenca</div>
+        <div class="node-sub">tens</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-warn">&#10007;<br><span style="font-size:18px;">💻</span></div>
+        <div class="node-label" style="color:#dc2626;">Software</div>
+        <div class="node-sub">nao tens</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-warn" style="font-size:26px;">&#128683;</div>
+        <div class="node-label" style="color:#dc2626;">Ainda nao funciona</div>
+      </div>
+    </div>
+
+    <!-- o que precisas -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:10px;">O que precisas de fazer</div>
+    <div style="background:#f0fdf4;border:2px solid #6ee7b7;border-radius:12px;padding:14px 18px;">
+      <div style="font-size:20px;margin-bottom:6px;">💻</div>
+      <div style="font-size:14px;font-weight:700;color:#166534;margin-bottom:4px;">Instalar o software no PC — so isso</div>
+      <div style="font-size:12px;color:#4b5563;">A maquina ja esta preparada. Falta apenas instalar e configurar o software original da marca no teu computador. Depois esta tudo pronto.</div>
+    </div>
+  </div>
+
+  <!-- ── CASO 3 ── -->
+  <div class="schema" style="border-color:#93c5fd;margin-bottom:0;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+      <div style="background:#2563eb;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;flex-shrink:0;">3</div>
+      <div>
+        <div style="font-size:16px;font-weight:800;color:#1e40af;">Tenho maquina e software. Nao tenho licenca.</div>
+        <div style="font-size:13px;color:#64748b;">Caso especial — pode funcionar em modo J2534 (gratuito) em muitas marcas</div>
+      </div>
+    </div>
+
+    <!-- estado actual -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:10px;">Estado actual</div>
+    <div class="flow-row" style="margin-bottom:20px;">
+      <div class="node">
+        <div class="node-box n-ok">&#10003;<br><span style="font-size:18px;">🔌</span></div>
+        <div class="node-label" style="color:#16a34a;">VCX SE</div>
+        <div class="node-sub">tens</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-warn">&#10007;<br><span style="font-size:18px;">🔑</span></div>
+        <div class="node-label" style="color:#dc2626;">Licenca</div>
+        <div class="node-sub">nao tens</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="node">
+        <div class="node-box n-ok">&#10003;<br><span style="font-size:18px;">💻</span></div>
+        <div class="node-label" style="color:#16a34a;">Software</div>
+        <div class="node-sub">tens</div>
+      </div>
+    </div>
+
+    <!-- J2534 explicacao -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:10px;">Modo J2534 — o que e?</div>
+    <div style="background:#eff6ff;border:2px solid #93c5fd;border-radius:12px;padding:16px 18px;margin-bottom:16px;">
+      <div style="font-size:13px;color:#1e40af;line-height:1.6;">
+        <strong>J2534</strong> e uma norma aberta que permite que a VCX SE funcione como interface generica — sem precisar de licenca proprietaria.<br>
+        O software da marca comunica directamente com a maquina usando este protocolo padrao, gratuito.
+      </div>
+    </div>
+
+    <div style="background:#fef9c3;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin-top:14px;font-size:13px;color:#78350f;">
+      <strong>Nota:</strong> Em modo J2534 algumas funcoes avancadas podem nao estar disponiveis (codificacoes, SCN, parametrizacoes). Para uso profissional completo, a licenca da marca e sempre recomendada.
+    </div>
+  </div>
+
+</div><!-- /section -->
+
+<hr class="div">
+
+
+<!-- ══════════════════════════════════════════════════
+     PARTE 4 — TABELA RESUMO
+════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="chip">Parte 4 — Resumo por marca</div>
+  <h2 class="st">O que precisas para cada marca com VCX SE</h2>
+  <p class="sub">Maquina = sempre a mesma. O que muda e a licenca e o software.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Marca / Grupo</th>
+          <th>🔌 Maquina</th>
+          <th>🔑 Licenca</th>
+          <th>💻 Software no PC</th>
+          <th>Sistema tradicional substituido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="brand">VW · Audi · SEAT · Skoda</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca VW</span></td>
+          <td><span class="pill pg">ODIS</span></td>
+          <td><span class="pill pb">VAS 6154</span></td>
+        </tr>
+        <tr>
+          <td class="brand">Mercedes · Smart</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca MB</span></td>
+          <td><span class="pill pg">Xentry / DAS</span></td>
+          <td><span class="pill pb">C4 / SDconnect</span></td>
+        </tr>
+        <tr>
+          <td class="brand">BMW · MINI</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca BMW</span></td>
+          <td><span class="pill pg">ISTA / E-sys</span></td>
+          <td><span class="pill pb">ICOM A2/Next</span></td>
+        </tr>
+        <tr>
+          <td class="brand">Peugeot · Citroen · DS · Opel</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca PSA</span></td>
+          <td><span class="pill pg">DiagBox</span></td>
+          <td><span class="pill pb">Lexia 3 / PP2000</span></td>
+        </tr>
+        <tr>
+          <td class="brand">Renault · Dacia</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca Renault</span></td>
+          <td><span class="pill pg">Clip</span></td>
+          <td><span class="pill pb">CAN Clip</span></td>
+        </tr>
+        <tr>
+          <td class="brand">Ford · Lincoln</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca Ford</span></td>
+          <td><span class="pill pg">IDS / FDRS</span></td>
+          <td><span class="pill pb">VCM II</span></td>
+        </tr>
+        <tr>
+          <td class="brand">GM · Chevrolet · Opel</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca GM</span></td>
+          <td><span class="pill pg">GDS2</span></td>
+          <td><span class="pill pb">Tech2 / MDI</span></td>
+        </tr>
+        <tr>
+          <td class="brand">Fiat · Alfa · Jeep</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca FCA</span></td>
+          <td><span class="pill pg">Witech 2.0</span></td>
+          <td><span class="pill pb">Examiner / MES</span></td>
+        </tr>
+        <tr>
+          <td class="brand">Toyota · Lexus</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca Toyota</span></td>
+          <td><span class="pill pg">Techstream</span></td>
+          <td><span class="pill pb">IT2 / Techstream HW</span></td>
+        </tr>
+        <tr>
+          <td class="brand">Volvo</td>
+          <td><span class="pill ps">VCX SE</span></td>
+          <td><span class="pill py">Licenca Volvo</span></td>
+          <td><span class="pill pg">Vida</span></td>
+          <td><span class="pill pb">Vida HW</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LEGENDA -->
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;">
+    <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+      <span class="pill ps">cinza</span> = sempre VCX SE (mesmo hardware)
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+      <span class="pill py">amarelo</span> = compra separada por marca
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+      <span class="pill pg">verde</span> = instalar no PC por marca
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+      <span class="pill pb">azul</span> = o que a VCX SE substitui
+    </div>
+  </div>
+
+</div><!-- /section -->
+
+<!-- FOOTER -->
+<footer>
+  Guia informativo <strong>m-auto.online</strong> &mdash; VCX SE Diagnostico Universal
+</footer>
+
+</body>
+</html>
