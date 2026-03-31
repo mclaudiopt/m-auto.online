@@ -167,32 +167,31 @@ function Show-System {
     while ($true) {
         Write-Header
         Write-Title "Diagnostico & Sistema"
-        Write-Opt 1  "Info do sistema"                  "OS / CPU / RAM / Disco [+ teste rede]"
-        Write-Opt 2  "Limpar ficheiros temporarios"
-        Write-Opt 3  "Desactivar actualizacoes automaticas"
-        Write-Opt 4  "Configurar Alta Performance"
-        Write-Opt 5  "Alterar DNS para Cloudflare"     "1.1.1.1 / 1.0.0.1"
+        Write-Opt 1  "Info do sistema"                  "Windows / Hardware / Seguranca"
+        Write-Opt 2  "Teste de Internet"                "Ping + Speedtest"
+        Write-Opt 3  "Limpar ficheiros temporarios"
+        Write-Opt 4  "Desactivar actualizacoes"
+        Write-Opt 5  "Alta Performance"
+        Write-Opt 6  "Alterar DNS Cloudflare"          "1.1.1.1 / 1.0.0.1"
+        Write-Opt 7  "Tweaks & Otimizacoes"             "Reserved Storage / CompactOS / WinSxS..."
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
-            "1" {
-                Run-Sub "system/sysinfo"
-                Write-Host ""
-                $r = Read-Key "Executar teste de rede [s/n]"
-                if ($r -match "^[sS]") { Run-Sub "system/netcheck" }
-            }
-            "2" { Run-Sub "system/cleanup" }
-            "3" { Run-Sub "system/disable_updates" }
-            "4" { Run-Sub "system/power_plan" }
-            "5" { Run-Sub "system/dns_cloudflare" }
+            "1" { Run-Sub "system/sysinfo" }
+            "2" { Run-Sub "system/netcheck" }
+            "3" { Run-Sub "system/cleanup" }
+            "4" { Run-Sub "system/disable_updates" }
+            "5" { Run-Sub "system/power_plan" }
+            "6" { Run-Sub "system/dns_cloudflare" }
+            "7" { Show-Tweaks }
             "0" { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
     }
 }
 
-#-- Menu: Tweaks ------------------------------------------------------------
+#-- Menu: Tweaks (dentro de System) -----------------------------------------
 function Show-Tweaks {
     while ($true) {
         Write-Header
@@ -226,8 +225,7 @@ while ($true) {
     Write-Opt 2  "Clientes"                   "Tesla..."
     Write-Opt 3  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
     Write-Opt 4  "Utilitarios & Ferramentas"  "7-Zip / DeskIn / FDM / DControl..."
-    Write-Opt 5  "Diagnostico & Sistema"      "Info / Rede / Limpeza / Performance..."
-    Write-Opt 6  "Tweaks & Otimizacoes"       "Reserved Storage / CompactOS / WinSxS / Drivers..."
+    Write-Opt 5  "Diagnostico & Sistema"      "Info / Rede / Limpeza / Tweaks..."
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
@@ -237,7 +235,6 @@ while ($true) {
         "3" { Show-Software }
         "4" { Show-Tools }
         "5" { Show-System }
-        "6" { Show-Tweaks }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }
