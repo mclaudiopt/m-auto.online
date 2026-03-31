@@ -18,7 +18,7 @@ Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A obter link de download..." -NoN
 
 try {
     $url = "https://www.speedtest.net/apps/cli"
-    $webContent = Invoke-WebRequest -Uri $url -UseBasicParsing -ErrorAction Stop
+    $webContent = Invoke-WebRequest -Uri $url -UseBasicParsing -ErrorAction Stop -TimeoutSec 10
 
     if ($webContent.Content -match 'href="(https://install\.speedtest\.net/app/cli/ookla-speedtest-[\d\.]+-win64\.zip)"') {
         $downloadLink = $matches[1]
@@ -31,7 +31,7 @@ try {
     }
 } catch {
     Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-    Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
+    Write-Host "  ${e}[38;2;148;163;184m    Ligacao falhou: $($_.Exception.Message)${e}[0m"
     Read-Host "  Pressione ENTER para voltar"
     return
 }
