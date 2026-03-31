@@ -1,9 +1,9 @@
 # system/netcheck.ps1 - Teste de Internet + Speedtest
 $e = [char]27
 
-function Test-Ping($host) {
+function Test-Ping($address) {
     try {
-        $ping = Test-Connection -ComputerName $host -Count 1 -Quiet -ErrorAction Stop
+        $ping = Test-Connection -ComputerName $address -Count 1 -Quiet -ErrorAction Stop
         return $ping
     } catch {
         return $false
