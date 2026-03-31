@@ -10,6 +10,83 @@ Write-Host ""
 $completed = @()
 $failed = @()
 
+#-- PASSO 1: Trucks Setup (7-Zip + Copy + Extract) ──────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Instalar 7-Zip + Copiar Trucks.zip?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host ""
+    try {
+        # 1.1 Instalar 7-Zip silent
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A instalar 7-Zip..." -NoNewline
+        $7zipURL = "https://www.7-zip.org/a/7z2600-x64.exe"
+        $7zipTMP = "$env:TEMP\7z_setup.exe"
+
+        # Verificar se já está instalado
+        $installed7zip = Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" `
+            -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like "*7-Zip*" }
+
+        if (-not $installed7zip) {
+            Invoke-WebRequest -Uri $7zipURL -OutFile $7zipTMP -UseBasicParsing -ErrorAction Stop -TimeoutSec 30
+            Start-Process -FilePath $7zipTMP -ArgumentList "/S" -Wait -ErrorAction Stop
+            Remove-Item $7zipTMP -Force -ErrorAction SilentlyContinue
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        } else {
+            Write-Host "  ${e}[38;2;250;204;21m[JA]${e}[0m"
+        }
+
+        # 1.2 Criar pasta C:\M-Auto
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A criar pasta C:\M-Auto..." -NoNewline
+        $mAutoPath = "C:\M-Auto"
+        if (-not (Test-Path $mAutoPath)) {
+            New-Item -ItemType Directory -Path $mAutoPath -Force | Out-Null
+        }
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+
+        # 1.3 Copiar Trucks.zip
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A copiar Trucks.zip..." -NoNewline
+        $sourceZip = "D:\marcelo\Trucks.zip"
+        $destZip = "$mAutoPath\Trucks.zip"
+
+        if (-not (Test-Path $sourceZip)) {
+            Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+            Write-Host "  ${e}[38;2;148;163;184m    Ficheiro nao encontrado: $sourceZip${e}[0m"
+            $failed += "Trucks Setup"
+        } else {
+            Copy-Item -Path $sourceZip -Destination $destZip -Force -ErrorAction Stop
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+
+            # 1.4 Descomprimir
+            Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A descomprimir..." -NoNewline
+            $extractPath = "$mAutoPath\Trucks"
+            if (-not (Test-Path $extractPath)) {
+                New-Item -ItemType Directory -Path $extractPath -Force | Out-Null
+            }
+
+            # Usar 7z.exe para extrair
+            $7zExe = "C:\Program Files\7-Zip\7z.exe"
+            if (Test-Path $7zExe) {
+                & $7zExe x $destZip -o"$extractPath" -y | Out-Null
+            } else {
+                # Fallback: usar PowerShell Expand-Archive
+                Expand-Archive -Path $destZip -DestinationPath $extractPath -Force -ErrorAction Stop
+            }
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+
+            # 1.5 Apagar ficheiro .zip
+            Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A limpar ficheiro .zip..." -NoNewline
+            Remove-Item $destZip -Force -ErrorAction SilentlyContinue
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+
+            Write-Host ""
+            $completed += "Trucks Setup (7-Zip + Copy + Extract)"
+        }
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        Write-Host "  ${e}[38;2;148;163;184m    $($_.Exception.Message)${e}[0m"
+        $failed += "Trucks Setup"
+    }
+}
+
 #-- 1. Criar pasta NAO MEXER no Desktop ───────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Criar pasta NAO MEXER no Desktop?" -NoNewline
 $response = Read-Host " [s/n]"
