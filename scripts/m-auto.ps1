@@ -68,6 +68,25 @@ function Run-Sub($name) {
     }
 }
 
+#-- Menu: Preparacao -------------------------------------------------------
+function Show-Prep {
+    while ($true) {
+        Write-Header
+        Write-Title "Preparacao"
+        Write-Opt 1  "Basic"   "Defender OFF + Firewall OFF + 7-Zip + Activar Windows"
+        Write-Opt 2  "Tesla"   "(em breve)"
+        Write-Host ""
+        Write-Opt 0  "<- Voltar"
+        Write-Host ""
+        switch (Read-Key) {
+            "1" { Run-Sub "prep/basic" }
+            "2" { Run-Sub "prep/tesla" }
+            "0" { return }
+            default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
+        }
+    }
+}
+
 #-- Menu: Software ---------------------------------------------------------
 function Show-Software {
     while ($true) {
@@ -158,16 +177,18 @@ Set-Console
 while ($true) {
     Write-Header
     Write-Title "Menu Principal"
-    Write-Opt 1  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
-    Write-Opt 2  "Utilitarios & Ferramentas"  "7-Zip / DeskIn / FDM / DControl..."
-    Write-Opt 3  "Diagnostico & Sistema"      "Info / Limpeza / Performance..."
+    Write-Opt 1  "Preparacao"                 "Basic / Tesla"
+    Write-Opt 2  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
+    Write-Opt 3  "Utilitarios & Ferramentas"  "7-Zip / DeskIn / FDM / DControl..."
+    Write-Opt 4  "Diagnostico & Sistema"      "Info / Limpeza / Performance..."
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
     switch (Read-Key "Escolha uma opcao") {
-        "1" { Show-Software }
-        "2" { Show-Tools }
-        "3" { Show-System }
+        "1" { Show-Prep }
+        "2" { Show-Software }
+        "3" { Show-Tools }
+        "4" { Show-System }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }
