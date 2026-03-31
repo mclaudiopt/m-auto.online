@@ -1,7 +1,7 @@
-# M-Auto Online - Remote Installer Launcher
+﻿# M-Auto Online - Remote Installer Launcher
 # Usage: irm https://m-auto.online/scripts/m-auto.ps1 | iex
 
-$VERSION  = "1.0 [2026-03-31 15:35:00]"
+$VERSION  = "1.1 [2026-03-31 16:25:53]"
 $BASE_URL = "https://m-auto.online/scripts"
 $e = [char]27
 
@@ -231,3 +231,4 @@ while ($true) {
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }
 }
+
