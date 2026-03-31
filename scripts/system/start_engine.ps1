@@ -277,23 +277,6 @@ if ($response -match "^[sS]") {
     }
 }
 
-#-- RESUMO ───────────────────────────────────────────────────────────────
-Write-Host ""
-Write-Host "  ${e}[38;2;100;149;237m>> Resumo${e}[0m"
-Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
-Write-Host ""
-
-if ($completed.Count -gt 0) {
-    Write-Host "  ${e}[38;2;34;197;94m✓ Concluido${e}[0m]: $($completed -join ', ')"
-}
-
-if ($failed.Count -gt 0) {
-    Write-Host "  ${e}[38;2;239;68;68m✗ Falhou${e}[0m]: $($failed -join ', ')"
-    Write-Host "  ${e}[38;2;148;163;184mTente novamente em Tools > Backup${e}[0m"
-}
-
-Write-Host ""
-Write-Host "  ${e}[38;2;148;163;184m  Recomenda-se reiniciar o PC.${e}[0m"
 #-- 11. Remover Search Taskbar ───────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Remover Search do Taskbar?" -NoNewline
 $response = Read-Host " [s/n]"
