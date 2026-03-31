@@ -242,7 +242,7 @@ Set-Console
 while ($true) {
     Write-Header
     Write-Title "Menu Principal"
-    Write-Opt 1  "Diagnostico, Preparacao & Ferramentas"  "Sistema, Defesa & Configuracao automatica"
+    Write-Opt 1  "Start Engine"                "Diagnostico + Preparacao + Ferramentas"
     Write-Opt 2  "Clientes"                   "Tesla..."
     Write-Opt 3  "Software de Diagnostico"    "Mercedes / VAG / BMW / PSA / Renault..."
     Write-Opt 4  "Opcoes Manuais - Backup"    "Opcoes individuais de prep, ferramenta & sistema"
