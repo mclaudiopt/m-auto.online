@@ -204,40 +204,9 @@ function Show-Tools {
     }
 }
 
-#-- Menu: Diagnostico & Sistema Wizard ----------------------------------------
+#-- Start Engine (tudo integrado) ----------------------------------------
 function Show-System {
-    while ($true) {
-        Write-Header
-        Write-Title "Diagnostico & Sistema"
-        Write-Opt 1  "Diagnostico"               "Estado do sistema + selecao de acoes"
-        Write-Opt 2  "Preparacao"                "Wizard: desativar seguranca, instalar ferramentas"
-        Write-Opt 3  "Ferramentas"               "7-Zip, DeskIn, Restore Point, etc."
-        Write-Host ""
-        Write-Opt 0  "<- Voltar"
-        Write-Host ""
-        switch (Read-Key) {
-            "1" { Show-Diagnostico }
-            "2" { Show-Preparacao }
-            "3" { Show-Ferramentas }
-            "0" { return }
-            default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
-        }
-    }
-}
-
-#-- Submenu: Diagnostico -----------------------------------------------------
-function Show-Diagnostico {
-    Run-Sub "system/diagnostico_wizard"
-}
-
-#-- Submenu: Preparacao -------------------------------------------------------
-function Show-Preparacao {
-    Run-Sub "system/preparacao_wizard"
-}
-
-#-- Submenu: Ferramentas -------------------------------------------------------
-function Show-Ferramentas {
-    Run-Sub "system/ferramentas_wizard"
+    Run-Sub "system/start_engine"
 }
 
 
