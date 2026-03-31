@@ -24,11 +24,7 @@ if ($response -match "^[sS]") {
             New-Item -ItemType Directory -Path $folderPath -Force | Out-Null
         }
 
-        # Proteger pasta (read-only)
-        $folder = Get-Item $folderPath
-        $folder.Attributes = "ReadOnly"
-
-        # Tentar adicionar ícone personalizado (usar ícone proibido do sistema)
+        # Adicionar ícone personalizado (usar ícone proibido do sistema)
         $desktopIniPath = Join-Path $folderPath "desktop.ini"
         $desktopIniContent = @"
 [.ShellClassInfo]

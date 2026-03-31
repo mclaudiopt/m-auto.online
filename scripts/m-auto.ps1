@@ -219,14 +219,6 @@ while ($true) {
     Write-Opt 2  "Cliente"                    "Tesla..."
     Write-Opt 3  "Software"                   "Mercedes / VAG / BMW / PSA / Renault..."
     Write-Opt 4  "Tools"                      "Opcoes manuais + Backup"
-    Write-Opt 9  "Wallpaper M-Auto"           "Aplicar m-auto-rust.png"
-    Write-Opt 10 "Remover Search Taskbar"     "Ocultar search box da taskbar"
-    Write-Opt 11 "Remover News Taskbar"       "Ocultar news and interests"
-    Write-Opt 12 "Remover Cortana"            "Desabilitar Cortana"
-    Write-Opt 13 "Remover OneDrive Visual"    "Ocultar do File Explorer"
-    Write-Opt 14 "Dark Mode"                  "Ativar tema escuro"
-    Write-Opt 15 "Mostrar Extensoes"          "Mostrar extensoes de ficheiros"
-    Write-Opt 16 "Ocultar Desktop Icons"      "This PC / Recycle Bin"
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
@@ -235,14 +227,6 @@ while ($true) {
         "2" { Show-Clientes }
         "3" { Show-Software }
         "4" { Show-Backup }
-        "9" { Run-Sub "utils/set_wallpaper" }
-        "10" { Run-Sub "utils/remove_search_taskbar" }
-        "11" { Run-Sub "utils/remove_news_taskbar" }
-        "12" { Run-Sub "utils/remove_cortana" }
-        "13" { Run-Sub "utils/remove_onedrive_visual" }
-        "14" { Run-Sub "utils/enable_dark_mode" }
-        "15" { Run-Sub "utils/show_file_extensions" }
-        "16" { Run-Sub "utils/hide_desktop_icons" }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }

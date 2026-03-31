@@ -294,5 +294,152 @@ if ($failed.Count -gt 0) {
 
 Write-Host ""
 Write-Host "  ${e}[38;2;148;163;184m  Recomenda-se reiniciar o PC.${e}[0m"
+#-- 11. Remover Search Taskbar ───────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Remover Search do Taskbar?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A remover..." -NoNewline
+    try {
+        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        Set-ItemProperty -Path $regPath -Name "SearchboxTaskbarMode" -Value 0 -ErrorAction Stop
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $completed += "Search Taskbar"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "Search Taskbar"
+    }
+}
+
+#-- 12. Remover News Taskbar ─────────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Remover News do Taskbar?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A remover..." -NoNewline
+    try {
+        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds"
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        Set-ItemProperty -Path $regPath -Name "ShellFeedsTaskbarViewMode" -Value 2 -ErrorAction Stop
+        Set-ItemProperty -Path $regPath -Name "NewsFeedsTaskbarMode" -Value 0 -ErrorAction Stop
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $completed += "News Taskbar"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "News Taskbar"
+    }
+}
+
+#-- 13. Remover Cortana ──────────────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Remover Cortana?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A remover..." -NoNewline
+    try {
+        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        Set-ItemProperty -Path $regPath -Name "ShowCortanaButton" -Value 0 -ErrorAction Stop
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $completed += "Cortana"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "Cortana"
+    }
+}
+
+#-- 14. Remover OneDrive Visual ──────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Remover OneDrive visual?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A remover..." -NoNewline
+    try {
+        $regPath = "HKCU:\Software\Microsoft\OneDrive"
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        Set-ItemProperty -Path $regPath -Name "ShowSyncProviderNotifications" -Value 0 -ErrorAction Stop
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $completed += "OneDrive Visual"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "OneDrive Visual"
+    }
+}
+
+#-- 15. Dark Mode ────────────────────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Ativar Dark Mode?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A ativar..." -NoNewline
+    try {
+        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        Set-ItemProperty -Path $regPath -Name "AppsUseLightTheme" -Value 0 -ErrorAction Stop
+        Set-ItemProperty -Path $regPath -Name "SystemUsesLightTheme" -Value 0 -ErrorAction Stop
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $completed += "Dark Mode"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "Dark Mode"
+    }
+}
+
+#-- 16. Mostrar Extensoes de Ficheiros ────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Mostrar extensoes de ficheiros?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A aplicar..." -NoNewline
+    try {
+        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        Set-ItemProperty -Path $regPath -Name "HideFileExt" -Value 0 -ErrorAction Stop
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $completed += "Extensoes"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "Extensoes"
+    }
+}
+
+#-- 17. Ocultar Ícones do Desktop ────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Ocultar ícones do Desktop?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host ""
+    try {
+        irm "https://m-auto.online/scripts/utils/hide_desktop_icons.ps1" -UseBasicParsing | iex
+        $completed += "Ícones Desktop"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "Ícones Desktop"
+    }
+}
+
+#-- RESUMO ───────────────────────────────────────────────────────────────
+Write-Host ""
+Write-Host "  ${e}[38;2;100;149;237m>> Resumo${e}[0m"
+Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
+Write-Host ""
+
+if ($completed.Count -gt 0) {
+    Write-Host "  ${e}[38;2;34;197;94m✓ Concluido${e}[0m]: $($completed -join ', ')"
+}
+
+if ($failed.Count -gt 0) {
+    Write-Host "  ${e}[38;2;239;68;68m✗ Falhou${e}[0m}: $($failed -join ', ')"
+    Write-Host "  ${e}[38;2;148;163;184mTente novamente em Tools > Backup${e}[0m"
+}
+
+Write-Host ""
+Write-Host "  ${e}[38;2;148;163;184m  Recomenda-se reiniciar o PC.${e}[0m"
 Write-Host ""
 Read-Host "  Pressione ENTER para voltar"
