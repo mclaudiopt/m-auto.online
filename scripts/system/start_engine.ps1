@@ -80,13 +80,12 @@ $failed = @()
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Aplicar Wallpaper M-Auto?" -NoNewline
 $response = Read-Host " [s/n]"
 if ($response -match "^[sS]") {
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A aplicar..." -NoNewline
+    Write-Host ""
     try {
-        irm "https://m-auto.online/scripts/utils/set_wallpaper.ps1" -UseBasicParsing | iex -ArgumentList "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/IMG/mauto/m-auto-rust.png"
-        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        irm "https://m-auto.online/scripts/utils/set_wallpaper.ps1" -UseBasicParsing | iex
         $completed += "Wallpaper M-Auto"
     } catch {
-        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  Nao foi possivel aplicar wallpaper"
         $failed += "Wallpaper M-Auto"
     }
 }
