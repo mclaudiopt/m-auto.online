@@ -214,6 +214,20 @@ function Show-System {
 Set-Console
 while ($true) {
     Write-Header
+
+    # Wallpaper M-Auto (quick option)
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Aplicar Wallpaper M-Auto?" -NoNewline
+    $wallpaperResponse = Read-Host " [s/n]"
+    if ($wallpaperResponse -match "^[sS]") {
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A aplicar..." -NoNewline
+        try {
+            $wallpaperPath = "$BASE_URL/../IMG/mauto/m-auto-rust.png"
+            irm "$BASE_URL/utils/set_wallpaper.ps1" -UseBasicParsing | iex -ArgumentList $wallpaperPath
+        } catch {
+            Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  Nao foi possivel aplicar wallpaper"
+        }
+    }
+
     Write-Title "Menu Principal"
     Write-Opt 1  "Start Engine"                "Diagnostico + Preparacao + Ferramentas"
     Write-Opt 2  "Cliente"                    "Tesla..."

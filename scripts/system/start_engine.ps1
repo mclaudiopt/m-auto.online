@@ -76,6 +76,21 @@ Write-Host ""
 $completed = @()
 $failed = @()
 
+#-- 0. Wallpaper M-Auto ──────────────────────────────────────────────────
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Aplicar Wallpaper M-Auto?" -NoNewline
+$response = Read-Host " [s/n]"
+if ($response -match "^[sS]") {
+    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A aplicar..." -NoNewline
+    try {
+        irm "https://m-auto.online/scripts/utils/set_wallpaper.ps1" -UseBasicParsing | iex -ArgumentList "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/IMG/mauto/m-auto-rust.png"
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $completed += "Wallpaper M-Auto"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+        $failed += "Wallpaper M-Auto"
+    }
+}
+
 #-- 1. BitLocker OFF ─────────────────────────────────────────────────────
 if ($blActive) {
     Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Desativar BitLocker?" -NoNewline
