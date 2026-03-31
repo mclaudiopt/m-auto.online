@@ -69,6 +69,29 @@ if ($response -match "^[sS]") {
             Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m"
         }
 
+        # 0.5 Desabilitar OneDrive no Startup
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desabilitar OneDrive..." -NoNewline
+        try {
+            # Parar serviço OneDrive
+            Stop-Service -Name "OneSyncSvc" -Force -ErrorAction SilentlyContinue
+
+            # Remover do startup (Run registry)
+            $runPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+            Remove-ItemProperty -Path $runPath -Name "OneDrive" -ErrorAction SilentlyContinue
+
+            # Desabilitar OneDrive no File Explorer
+            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+                -Name "ShowSyncProviderNotifications" -Value 0 -ErrorAction SilentlyContinue
+
+            # Desabilitar no HKLM (para todos os utilizadores)
+            Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" `
+                -Name "DisableFileSyncNGSC" -Value 1 -ErrorAction SilentlyContinue
+
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        } catch {
+            Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m"
+        }
+
         Write-Host ""
         $completed += "Desabilitar Proteções"
     } catch {
