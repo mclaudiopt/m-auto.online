@@ -1,4 +1,4 @@
-# system/sysinfo.ps1 - Informacao completa do sistema
+# system/sysinfo.ps1 - Informacao do Sistema
 $e = [char]27
 
 function Write-Row($label, $value, $color = "97") {
@@ -6,75 +6,48 @@ function Write-Row($label, $value, $color = "97") {
 }
 
 Write-Host ""
-Write-Host "  ${e}[1;97mInformacao Detalhada do Sistema${e}[0m"
+Write-Host "  ${e}[1;97mInformacao do Sistema${e}[0m"
 Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
 Write-Host ""
 
 # ── Windows Version ─────────────────────────────────────────────────────
-Write-Host "  ${e}[38;2;100;149;237m>> Sistema Operativo${e}[0m"
-Write-Host ""
-
 $os = Get-CimInstance Win32_OperatingSystem
 $winVer = if ($os.Caption -match "11") { "Windows 11" } elseif ($os.Caption -match "10") { "Windows 10" } else { $os.Caption }
-Write-Row "OS" "$winVer"
+Write-Row "SO" "$winVer"
 Write-Row "Build" "$($os.BuildNumber)"
-Write-Row "Versao" "$($os.Version)"
 
 # ── Computer Info ───────────────────────────────────────────────────────
-Write-Host ""
-Write-Host "  ${e}[38;2;100;149;237m>> Computador${e}[0m"
-Write-Host ""
-
 $comp = Get-CimInstance Win32_ComputerSystem
-$bios = Get-CimInstance Win32_BIOS
 Write-Row "Marca" "$($comp.Manufacturer)"
 Write-Row "Modelo" "$($comp.Model)"
-Write-Row "Hostname" "$($comp.Name)"
-Write-Row "Utilizador" "$($env:USERNAME)"
-Write-Row "BIOS" "$($bios.Manufacturer) $($bios.SMBIOSBIOSVersion)"
 
 # ── Processor ───────────────────────────────────────────────────────────
-Write-Host ""
-Write-Host "  ${e}[38;2;100;149;237m>> Processador${e}[0m"
-Write-Host ""
-
 $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
-Write-Row "Nome" "$($cpu.Name.Trim())"
-Write-Row "Nucleos" "$($cpu.NumberOfCores)"
-Write-Row "Threads" "$($cpu.NumberOfLogicalProcessors)"
-Write-Row "Frequencia" "$($cpu.MaxClockSpeed) MHz"
+Write-Row "Processador" "$($cpu.Name.Trim())"
 
 # ── Memory ──────────────────────────────────────────────────────────────
-Write-Host ""
-Write-Host "  ${e}[38;2;100;149;237m>> Memoria${e}[0m"
-Write-Host ""
-
 $ram = [math]::Round($os.TotalVisibleMemorySize / 1MB, 1)
 $free = [math]::Round($os.FreePhysicalMemory / 1MB, 1)
 $usado = $ram - $free
 $percUsado = [math]::Round(($usado / $ram) * 100, 1)
-Write-Row "RAM Total" "${ram} GB"
-Write-Row "RAM Usada" "${usado} GB ($percUsado%)"
-Write-Row "RAM Livre" "${free} GB"
+Write-Row "RAM" "${usado} GB / ${ram} GB ($percUsado%)"
 
 # ── Discos ──────────────────────────────────────────────────────────────
 Write-Host ""
-Write-Host "  ${e}[38;2;100;149;237m>> Armazenamento${e}[0m"
+Write-Host "  ${e}[38;2;100;149;237m>> Discos${e}[0m"
 Write-Host ""
 
-Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -match "^[A-Z]$" } | ForEach-Object {
-    $drive = $_
-    $used = [math]::Round($drive.Used / 1GB, 1)
-    $free = [math]::Round($drive.Free / 1GB, 1)
+$drives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -match "^[A-Z]$" }
+$drives | ForEach-Object {
+    $used = [math]::Round($_.Used / 1GB, 1)
+    $free = [math]::Round($_.Free / 1GB, 1)
     $total = $used + $free
     $perc = [math]::Round(($used / $total) * 100, 1)
     $color = if ($perc -gt 80) { "31" } elseif ($perc -gt 60) { "33" } else { "97" }
-    Write-Row "Disco $($drive.Name):" "$used GB / $total GB ($perc%)" $color
+    Write-Row "Disco $($_.Name):" "$used GB / $total GB ($perc%)" $color
 }
 
-# Discos fisicos
-$disks = Get-CimInstance Win32_LogicalDisk
-$diskCount = ($disks | Measure-Object).Count
+$diskCount = ($drives | Measure-Object).Count
 Write-Row "Total Discos" "$diskCount"
 
 # ── Seguranca ───────────────────────────────────────────────────────────
@@ -84,11 +57,11 @@ Write-Host ""
 
 # Secure Boot
 try {
-    $sb = Get-SecureBootUEFI -ErrorAction SilentlyContinue
-    $sbStatus = if ($sb) { "${e}[38;2;34;197;94mACTIVO${e}[0m" } else { "${e}[38;2;239;68;68mDESACTIVADO${e}[0m" }
+    $sbEnabled = Confirm-SecureBootUEFI -ErrorAction SilentlyContinue
+    $sbStatus = if ($sbEnabled -eq $true) { "${e}[38;2;34;197;94mACTIVO${e}[0m" } else { "${e}[38;2;239;68;68mDESACTIVADO${e}[0m" }
     Write-Host "  ${e}[38;2;100;149;237m$("Secure Boot".PadRight(28))${e}[0m  $sbStatus"
 } catch {
-    Write-Host "  ${e}[38;2;100;149;237m$("Secure Boot".PadRight(28))${e}[0m  ${e}[38;2;148;163;184m(indisponivel)${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m$("Secure Boot".PadRight(28))${e}[0m  ${e}[38;2;148;163;184m(nao disponivel/Legacy BIOS)${e}[0m"
 }
 
 # BitLocker
@@ -101,7 +74,7 @@ try {
     }
     Write-Host "  ${e}[38;2;100;149;237m$("BitLocker".PadRight(28))${e}[0m  $blStatus"
 } catch {
-    Write-Host "  ${e}[38;2;100;149;237m$("BitLocker".PadRight(28))${e}[0m  ${e}[38;2;148;163;184m(indisponivel)${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m$("BitLocker".PadRight(28))${e}[0m  ${e}[38;2;148;163;184m(nao disponivel)${e}[0m"
 }
 
 # Defender
@@ -114,7 +87,7 @@ try {
     }
     Write-Host "  ${e}[38;2;100;149;237m$("Windows Defender".PadRight(28))${e}[0m  $defStatus"
 } catch {
-    Write-Host "  ${e}[38;2;100;149;237m$("Windows Defender".PadRight(28))${e}[0m  ${e}[38;2;148;163;184m(indisponivel)${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m$("Windows Defender".PadRight(28))${e}[0m  ${e}[38;2;148;163;184m(nao disponivel)${e}[0m"
 }
 
 # Firewall
@@ -124,7 +97,7 @@ try {
     $fwStatus = if ($fwEnabled -gt 0) { "${e}[38;2;34;197;94mACTIVO ($fwEnabled)${e}[0m" } else { "${e}[38;2;239;68;68mDESACTIVADO${e}[0m" }
     Write-Host "  ${e}[38;2;100;149;237m$("Firewall".PadRight(28))${e}[0m  $fwStatus"
 } catch {
-    Write-Host "  ${e}[38;2;100;149;237m$("Firewall".PadRight(28))${e}[0m  ${e}[38;2;148;163;184m(indisponivel)${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m$("Firewall".PadRight(28))${e}[0m  ${e}[38;2;148;163;184m(nao disponivel)${e}[0m"
 }
 
 # ── Drivers ─────────────────────────────────────────────────────────────
@@ -136,7 +109,7 @@ try {
     $pnpDevices = Get-PnpDevice -Status Error -ErrorAction SilentlyContinue
     $errorCount = ($pnpDevices | Measure-Object).Count
     if ($errorCount -gt 0) {
-        Write-Host "  ${e}[38;2;239;68;68m[X]  $errorCount dispositivos com drivers em falta${e}[0m"
+        Write-Host "  ${e}[38;2;239;68;68m[X]  $errorCount dispositivos com drivers em falta:${e}[0m"
         $pnpDevices | Select-Object -First 5 | ForEach-Object {
             Write-Host "      - $($_.Name)"
         }
