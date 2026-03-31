@@ -1,5 +1,5 @@
 # prep/basic.ps1 - Preparacao basica
-# Desativa Defender + Tamper + Firewall + Apaga regras + Instala 7-Zip + Activa Windows
+# Desativa Defender + Tamper + Firewall + BitLocker + SecureBoot + Apaga regras + Instala 7-Zip + Activa Windows
 $e = [char]27
 
 function Write-Step($n, $total, $msg) {
@@ -12,6 +12,11 @@ function Write-Skip { Write-Host "  ${e}[38;2;250;204;21m[JA FEITO]${e}[0m" }
 Write-Host ""
 Write-Host "  ${e}[1;97mPreparacao Basic${e}[0m"
 Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
+Write-Host ""
+Write-Host "  ${e}[38;2;100;149;237m[OPCOES ADICIONAIS]${e}[0m"
+Write-Host ""
+$disableBL = Read-Host "  Desativar BitLocker [s/n]"
+$disableSB = Read-Host "  Desativar Secure Boot [s/n]"
 Write-Host ""
 
 # Pre-verificacao: estado do servico Defender
@@ -98,8 +103,38 @@ try {
     Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
 }
 
-# ── 4. Instalar 7-Zip ────────────────────────────────────────────────────
-Write-Step 4 5 "Instalar 7-Zip...                 "
+# ── 4. BitLocker OFF (opcional) ──────────────────────────────────────────
+if ($disableBL -match "^[sS]") {
+    Write-Step 4 7 "BitLocker OFF...                  "
+    try {
+        $bl = Get-BitLockerVolume -MountPoint C: -ErrorAction SilentlyContinue
+        if ($bl -and $bl.ProtectionStatus -eq "On") {
+            Disable-BitLocker -MountPoint C: -ErrorAction Stop | Out-Null
+            Write-OK
+        } else {
+            Write-Skip
+        }
+    } catch {
+        Write-Fail
+        Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
+    }
+} else {
+    Write-Step 4 5 "BitLocker OFF...                  "
+    Write-Host "  ${e}[38;2;250;204;21m[PULADO]${e}[0m"
+}
+
+# ── 5. Secure Boot OFF (opcional) ────────────────────────────────────────
+if ($disableSB -match "^[sS]") {
+    Write-Step 5 7 "Secure Boot OFF...                "
+    Write-Host "  ${e}[38;2;250;204;21m[MANUAL]${e}[0m  -> Reinicia em modo UEFI BIOS Setup"
+    Write-Host "  ${e}[38;2;148;163;184m         -> Security/Secure Boot > Disabled${e}[0m"
+} else {
+    Write-Step 5 5 "Secure Boot OFF...                "
+    Write-Host "  ${e}[38;2;250;204;21m[PULADO]${e}[0m"
+}
+
+# ── 6. Instalar 7-Zip ────────────────────────────────────────────────────
+Write-Step 6 7 "Instalar 7-Zip...                 "
 $inst = Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" `
     -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like "*7-Zip*" }
 if ($inst) {
@@ -120,8 +155,8 @@ if ($inst) {
     }
 }
 
-# ── 5. Activar Windows ───────────────────────────────────────────────────
-Write-Step 5 5 "Activar Windows...                "
+# ── 7. Activar Windows ───────────────────────────────────────────────────
+Write-Step 7 7 "Activar Windows...                "
 Write-Host ""
 try {
     irm https://get.activated.win | iex
