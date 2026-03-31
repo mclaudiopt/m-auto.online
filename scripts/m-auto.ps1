@@ -168,10 +168,11 @@ function Show-System {
         Write-Header
         Write-Title "Diagnostico & Sistema"
         Write-Opt 1  "Info do sistema"                  "OS / CPU / RAM / Disco"
-        Write-Opt 2  "Verificar ligacao a internet"
+        Write-Opt 2  "Teste de internet + Velocidade"  "Ping + Speedtest"
         Write-Opt 3  "Limpar ficheiros temporarios"
         Write-Opt 4  "Desactivar actualizacoes automaticas"
         Write-Opt 5  "Configurar Alta Performance"
+        Write-Opt 6  "Alterar DNS para Cloudflare"     "1.1.1.1 / 1.0.0.1"
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
@@ -181,6 +182,7 @@ function Show-System {
             "3" { Run-Sub "system/cleanup" }
             "4" { Run-Sub "system/disable_updates" }
             "5" { Run-Sub "system/power_plan" }
+            "6" { Run-Sub "system/dns_cloudflare" }
             "0" { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
