@@ -47,47 +47,44 @@ $drives | ForEach-Object {
 }
 
 # Security Status
-Write-Row "BitLocker" ""
 try {
     $bl = Get-BitLockerVolume -MountPoint C: -ErrorAction SilentlyContinue
     if ($bl -and $bl.ProtectionStatus -eq "On") {
-        Write-Host "    ${e}[38;2;34;197;94mACTIVO${e}[0m"
+        Write-Row "BitLocker" "${e}[38;2;34;197;94mACTIVO${e}[0m"
         $blActive = $true
     } else {
-        Write-Host "    ${e}[38;2;239;68;68mDESACTIVADO${e}[0m"
+        Write-Row "BitLocker" "${e}[38;2;239;68;68mDESACTIVADO${e}[0m"
         $blActive = $false
     }
 } catch {
-    Write-Host "    ${e}[38;2;148;163;184m(nao disponivel)${e}[0m"
+    Write-Row "BitLocker" "${e}[38;2;148;163;184mnao disponivel${e}[0m"
     $blActive = $false
 }
 
-Write-Row "Windows Defender" ""
 try {
     $def = Get-MpComputerStatus -ErrorAction SilentlyContinue
     if ($def.RealTimeProtectionEnabled) {
-        Write-Host "    ${e}[38;2;34;197;94mACTIVO${e}[0m"
+        Write-Row "Windows Defender" "${e}[38;2;34;197;94mACTIVO${e}[0m"
         $defActive = $true
     } else {
-        Write-Host "    ${e}[38;2;239;68;68mDESACTIVADO${e}[0m"
+        Write-Row "Windows Defender" "${e}[38;2;239;68;68mDESACTIVADO${e}[0m"
         $defActive = $false
     }
 } catch {
-    Write-Host "    ${e}[38;2;148;163;184m(nao disponivel)${e}[0m"
+    Write-Row "Windows Defender" "${e}[38;2;148;163;184mnao disponivel${e}[0m"
     $defActive = $false
 }
 
-Write-Row "Firewall" ""
 try {
     $fw = Get-NetFirewallProfile -All -ErrorAction SilentlyContinue
     $fwEnabled = ($fw | Where-Object { $_.Enabled -eq $true } | Measure-Object).Count -gt 0
     if ($fwEnabled) {
-        Write-Host "    ${e}[38;2;34;197;94mACTIVO${e}[0m"
+        Write-Row "Firewall" "${e}[38;2;34;197;94mACTIVO${e}[0m"
     } else {
-        Write-Host "    ${e}[38;2;239;68;68mDESACTIVADO${e}[0m"
+        Write-Row "Firewall" "${e}[38;2;239;68;68mDESACTIVADO${e}[0m"
     }
 } catch {
-    Write-Host "    ${e}[38;2;148;163;184m(nao disponivel)${e}[0m"
+    Write-Row "Firewall" "${e}[38;2;148;163;184mnao disponivel${e}[0m"
     $fwEnabled = $false
 }
 
