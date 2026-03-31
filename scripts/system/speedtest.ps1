@@ -1,9 +1,12 @@
 # system/speedtest.ps1 - Ookla Speedtest CLI wrapper (clean version)
 # Based on asheroto/speedtest, privacy-optimized for m-auto
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 $e = [char]27
 
 $ProgressPreference = 'SilentlyContinue'
 $ConfirmPreference = 'None'
+$ErrorActionPreference = 'Continue'
 
 Write-Host ""
 Write-Host "  ${e}[1;97mOokla Speedtest${e}[0m"
