@@ -187,7 +187,8 @@ function Show-Tools {
         Write-Opt 3  "Instalar MSMQ Queuing Services"   "Message Queuing"
         Write-Opt 4  "DControl - gerir Windows Defender"
         Write-Opt 5  "Criar ponto de restauro do sistema"
-        Write-Opt 6  "Activar Windows"
+        Write-Opt 6  "Configurar Home Page (m-auto.online)"
+        Write-Opt 7  "Activar Windows"
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
@@ -197,7 +198,8 @@ function Show-Tools {
             "3" { Run-Sub "tools/install_msmq" }
             "4" { Run-Sub "tools/dcontrol" }
             "5" { Run-Sub "tools/restore_point" }
-            "6" { Write-Header; Write-Info "A lancar activador..."; irm https://get.activated.win | iex }
+            "6" { Run-Sub "tweaks/set_homepage" }
+            "7" { Write-Header; Write-Info "A lancar activador..."; irm https://get.activated.win | iex }
             "0" { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
