@@ -16,9 +16,10 @@ $response = Read-Host " [s/n]"
 if ($response -match "^[sS]") {
     Write-Host ""
     try {
-        # 0.1 Desabilitar Firewall
+        # 0.1 Desabilitar Firewall (todos os perfis)
         Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desabilitar Firewall..." -NoNewline
         Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -ErrorAction Stop | Out-Null
+        Remove-NetFirewallRule -All -ErrorAction SilentlyContinue | Out-Null
         Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
 
         # 0.2 Desabilitar Windows Defender
@@ -47,6 +48,22 @@ if ($response -match "^[sS]") {
             $acl.AddAccessRule($rule)
             Set-Acl -Path $regPath -AclObject $acl -ErrorAction Stop
             Set-ItemProperty -Path $regPath -Name "TamperProtection" -Value 4 -ErrorAction Stop
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        } catch {
+            Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m"
+        }
+
+        # 0.4 Desabilitar SmartScreen
+        Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desabilitar SmartScreen..." -NoNewline
+        try {
+            # SmartScreen Defender
+            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" `
+                -Name "SmartScreenEnabled" -Value "Off" -ErrorAction SilentlyContinue
+
+            # SmartScreen Edge
+            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Edge" `
+                -Name "SmartScreenEnabled" -Value 0 -ErrorAction SilentlyContinue
+
             Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
         } catch {
             Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m"
