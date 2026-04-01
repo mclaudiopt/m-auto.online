@@ -228,7 +228,7 @@ while ($true) {
         "1" { Show-System }
         "2" { Show-Clientes }
         "3" { Show-Software }
-        "4" { Show-Backup }
+        "4" { Show-Tools }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }
