@@ -214,21 +214,7 @@ if ($response -match "^[sS]") {
     }
 }
 
-#-- 7. Teste de Velocidade ───────────────────────────────────────────────
-Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Teste de velocidade (Speedtest)?" -NoNewline
-$response = Read-Host " [s/n]"
-if ($response -match "^[sS]") {
-    Write-Host ""
-    try {
-        irm "https://m-auto.online/scripts/system/speedtest.ps1" -UseBasicParsing | iex
-        $completed += "Speedtest"
-    } catch {
-        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-        $failed += "Speedtest"
-    }
-}
-
-#-- 8. Cleanup ────────────────────────────────────────────────────────────
+#-- 7. Cleanup ────────────────────────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Limpar ficheiros temporarios?" -NoNewline
 $response = Read-Host " [s/n]"
 if ($response -match "^[sS]") {
