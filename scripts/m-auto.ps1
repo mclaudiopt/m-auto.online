@@ -100,6 +100,12 @@ function Show-Backup {
         Write-Opt 17 "Hibernacao OFF"
         Write-Opt 18 "DriverStoreExplorer"
         Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Customizacoes]${e}[0m"
+        Write-Opt 19 "Remover Search Taskbar"
+        Write-Opt 20 "Remover News Taskbar"
+        Write-Opt 21 "Remover Cortana"
+        Write-Opt 22 "Remover OneDrive Visual"
+        Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
@@ -121,6 +127,10 @@ function Show-Backup {
             "16" { Run-Sub "tweaks/winsxs_cleanup" }
             "17" { Run-Sub "tweaks/hibernation_off" }
             "18" { Run-Sub "tweaks/driverstoreexplorer" }
+            "19" { Run-Sub "utils/remove_search_taskbar" }
+            "20" { Run-Sub "utils/remove_news_taskbar" }
+            "21" { Run-Sub "utils/remove_cortana" }
+            "22" { Run-Sub "utils/remove_onedrive_visual" }
             "0" { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
