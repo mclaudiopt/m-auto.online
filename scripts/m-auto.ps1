@@ -220,6 +220,33 @@ function Show-Tools {
     }
 }
 
+#-- Menu: SOS --------------------------------------------------------------
+function Show-SOS {
+    while ($true) {
+        Write-Header
+        Write-Title "SOS - Recuperacao de Emergencia"
+        Write-Opt 1  "Reparar ficheiros de sistema"    "sfc /scannow"
+        Write-Opt 2  "Reparar Windows"                 "DISM RestoreHealth"
+        Write-Opt 3  "Reset TCP/IP e DNS"              "Winsock + flush + renew"
+        Write-Opt 4  "Reparar Windows Update"          "Limpar cache + reiniciar servicos"
+        Write-Opt 5  "Reiniciar para BIOS / UEFI"      "shutdown /r /fw /t 0"
+        Write-Opt 6  "Listar processos suspeitos"      "Top 15 + scan por nome"
+        Write-Host ""
+        Write-Opt 0  "<- Voltar"
+        Write-Host ""
+        switch (Read-Key) {
+            "1" { Run-Sub "sos/sfc_scan" }
+            "2" { Run-Sub "sos/dism_repair" }
+            "3" { Run-Sub "sos/reset_network" }
+            "4" { Run-Sub "sos/fix_windows_update" }
+            "5" { Run-Sub "sos/reboot_bios" }
+            "6" { Run-Sub "sos/suspicious_processes" }
+            "0" { return }
+            default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
+        }
+    }
+}
+
 #-- Start Engine (tudo integrado) ----------------------------------------
 function Show-System {
     Run-Sub "system/start_engine"
@@ -233,16 +260,16 @@ while ($true) {
     Write-Title "Menu Principal"
     Write-Opt 1  "Start Engine"                "Diagnostico + Preparacao + Ferramentas"
     Write-Opt 2  "Cliente"                    "Tesla..."
-    Write-Opt 3  "Software"                   "Mercedes / VAG / BMW / PSA / Renault..."
-    Write-Opt 4  "Tools"                      "Opcoes manuais + Backup"
+    Write-Opt 3  "Tools"                      "Utilitarios & Ferramentas"
+    Write-Opt 4  "SOS"                        "Recuperacao de emergencia"
     Write-Host ""
     Write-Opt 0  "Sair"
     Write-Host ""
     switch (Read-Key "Escolha uma opcao") {
         "1" { Show-System }
         "2" { Show-Clientes }
-        "3" { Show-Software }
-        "4" { Show-Tools }
+        "3" { Show-Tools }
+        "4" { Show-SOS }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
     }
