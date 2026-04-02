@@ -2,71 +2,102 @@
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $e = [char]27
 
+$homePage = "https://www.m-auto.online/"
+
 Write-Host ""
 Write-Host "  ${e}[1;97mConfigurar Home Page${e}[0m"
 Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
 Write-Host ""
-
-$homePage = "https://www.m-auto.online/"
-
 Write-Host "  ${e}[38;2;148;163;184m·${e}[0m  Home page: ${e}[38;2;100;149;237m$homePage${e}[0m"
 Write-Host ""
 
+# --- Microsoft Edge ---
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A configurar Microsoft Edge..." -NoNewline
 try {
-    # Configurar Edge
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A configurar Microsoft Edge..." -NoNewline
-    $edgePath = "HKCU:\Software\Microsoft\Edge"
-    if (-not (Test-Path $edgePath)) {
-        New-Item -Path $edgePath -Force | Out-Null
+    # Edge usa Group Policy registry (nao HKCU\Software\Microsoft\Edge)
+    $edgePolicy = "HKCU:\Software\Policies\Microsoft\Edge"
+    if (-not (Test-Path $edgePolicy)) {
+        New-Item -Path $edgePolicy -Force | Out-Null
     }
-    Set-ItemProperty -Path $edgePath -Name "HomepageURL" -Value $homePage -ErrorAction Stop
-    Set-ItemProperty -Path $edgePath -Name "HomepageIsNewTabPage" -Value 0 -ErrorAction Stop
+    Set-ItemProperty -Path $edgePolicy -Name "HomepageLocation"      -Value $homePage -ErrorAction Stop
+    Set-ItemProperty -Path $edgePolicy -Name "HomepageIsNewTabPage"   -Value 0        -Type DWord -ErrorAction Stop
+    Set-ItemProperty -Path $edgePolicy -Name "RestoreOnStartup"       -Value 4        -Type DWord -ErrorAction Stop
+
+    # URL de startup
+    $edgeStartup = "$edgePolicy\RestoreOnStartupURLs"
+    if (-not (Test-Path $edgeStartup)) {
+        New-Item -Path $edgeStartup -Force | Out-Null
+    }
+    Set-ItemProperty -Path $edgeStartup -Name "1" -Value $homePage -ErrorAction Stop
+
     Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-
-    # Configurar Chrome se estiver instalado
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A configurar Google Chrome..." -NoNewline
-    $chromePath = "HKCU:\Software\Google\Chrome\RestoreOnStartup"
-    $chromeSettingsPath = "HKCU:\Software\Google\Chrome\RestoreOnStartupURLs"
-
-    if (Test-Path "C:\Program Files\Google\Chrome\Application\chrome.exe") {
-        if (-not (Test-Path $chromePath)) {
-            New-Item -Path $chromePath -Force | Out-Null
-        }
-        if (-not (Test-Path $chromeSettingsPath)) {
-            New-Item -Path $chromeSettingsPath -Force | Out-Null
-        }
-
-        Set-ItemProperty -Path $chromePath -Name "RestoreOnStartup" -Value 4 -ErrorAction SilentlyContinue
-        Set-ItemProperty -Path $chromeSettingsPath -Name "1" -Value $homePage -ErrorAction SilentlyContinue
-        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-    } else {
-        Write-Host "  ${e}[38;2;250;204;21m[N/A]${e}[0m"
-    }
-
-    # Configurar Firefox se estiver instalado
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A configurar Mozilla Firefox..." -NoNewline
-    $firefoxPath = "HKCU:\Software\Mozilla\Firefox\Main"
-
-    if (Test-Path "C:\Program Files\Mozilla Firefox\firefox.exe") {
-        if (-not (Test-Path $firefoxPath)) {
-            New-Item -Path $firefoxPath -Force | Out-Null
-        }
-
-        Set-ItemProperty -Path $firefoxPath -Name "StartPage" -Value 3 -ErrorAction SilentlyContinue
-        Set-ItemProperty -Path $firefoxPath -Name "homepage" -Value $homePage -ErrorAction SilentlyContinue
-        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-    } else {
-        Write-Host "  ${e}[38;2;250;204;21m[N/A]${e}[0m"
-    }
-
-    Write-Host ""
-    Write-Host "  ${e}[38;2;34;197;94m✔${e}[0m  Home page configurada com sucesso."
-    Write-Host "  ${e}[38;2;148;163;184m  Feche e reabra os navegadores para aplicar.${e}[0m"
-
 } catch {
-    Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-    Write-Host "  ${e}[38;2;239;68;68m✖${e}[0m  Erro na configuracao: $($_.Exception.Message)"
+    Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  $($_.Exception.Message)"
 }
 
+# --- Google Chrome ---
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A configurar Google Chrome..." -NoNewline
+$chromeExe = @(
+    "C:\Program Files\Google\Chrome\Application\chrome.exe",
+    "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+) | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+if ($chromeExe) {
+    try {
+        $chromePolicy = "HKCU:\Software\Policies\Google\Chrome"
+        if (-not (Test-Path $chromePolicy)) {
+            New-Item -Path $chromePolicy -Force | Out-Null
+        }
+        Set-ItemProperty -Path $chromePolicy -Name "HomepageLocation"    -Value $homePage -ErrorAction Stop
+        Set-ItemProperty -Path $chromePolicy -Name "HomepageIsNewTabPage" -Value 0        -Type DWord -ErrorAction Stop
+        Set-ItemProperty -Path $chromePolicy -Name "RestoreOnStartup"     -Value 4        -Type DWord -ErrorAction Stop
+
+        $chromeStartup = "$chromePolicy\RestoreOnStartupURLs"
+        if (-not (Test-Path $chromeStartup)) {
+            New-Item -Path $chromeStartup -Force | Out-Null
+        }
+        Set-ItemProperty -Path $chromeStartup -Name "1" -Value $homePage -ErrorAction Stop
+
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  $($_.Exception.Message)"
+    }
+} else {
+    Write-Host "  ${e}[38;2;250;204;21m[N/A]${e}[0m"
+}
+
+# --- Mozilla Firefox ---
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A configurar Mozilla Firefox..." -NoNewline
+$firefoxExe = @(
+    "C:\Program Files\Mozilla Firefox\firefox.exe",
+    "C:\Program Files (x86)\Mozilla Firefox\firefox.exe"
+) | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+if ($firefoxExe) {
+    try {
+        $ffPolicies = "C:\Program Files\Mozilla Firefox\distribution"
+        if (-not (Test-Path $ffPolicies)) {
+            New-Item -ItemType Directory -Path $ffPolicies -Force | Out-Null
+        }
+        $ffPolicy = @{
+            policies = @{
+                Homepage = @{
+                    URL    = $homePage
+                    Locked = $false
+                    StartPage = "homepage"
+                }
+            }
+        } | ConvertTo-Json -Depth 5
+        Set-Content -Path "$ffPolicies\policies.json" -Value $ffPolicy -Encoding UTF8 -Force
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+    } catch {
+        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  $($_.Exception.Message)"
+    }
+} else {
+    Write-Host "  ${e}[38;2;250;204;21m[N/A]${e}[0m"
+}
+
+Write-Host ""
+Write-Host "  ${e}[38;2;34;197;94m✔${e}[0m  Home page configurada. Feche e reabra os navegadores."
 Write-Host ""
 Read-Host "  Pressione ENTER para voltar"
