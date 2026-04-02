@@ -192,29 +192,48 @@ function Show-Tools {
     while ($true) {
         Write-Header
         Write-Title "Utilitarios & Ferramentas"
+        Write-Host "  ${e}[38;2;100;149;237m[Instalar]${e}[0m"
         Write-Opt 1  "Instalar 7-Zip"                  "Descompressao de arquivos"
         Write-Opt 2  "Instalar DeskIn"                  "Acesso remoto para assistencia"
         Write-Opt 3  "Instalar MSMQ Queuing Services"   "Message Queuing"
+        Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Sistema]${e}[0m"
         Write-Opt 4  "DControl - gerir Windows Defender"
         Write-Opt 5  "Criar ponto de restauro do sistema"
         Write-Opt 6  "Configurar Home Page (m-auto.online)"
-        Write-Opt 7  "Listar interfaces J2534"             "PassThru instalados"
-        Write-Opt 8  "Speedtest"                           "Teste de velocidade"
+        Write-Opt 7  "Listar interfaces J2534"          "PassThru instalados"
+        Write-Opt 8  "Speedtest"                        "Teste de velocidade"
         Write-Opt 9  "Activar Windows"
+        Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Customizacao]${e}[0m"
+        Write-Opt 10 "Remover Search Taskbar"           "Ocultar search box"
+        Write-Opt 11 "Remover News Taskbar"             "Ocultar news and interests"
+        Write-Opt 12 "Remover Cortana"                  "Desabilitar Cortana"
+        Write-Opt 13 "Remover OneDrive Visual"          "Ocultar do File Explorer"
+        Write-Opt 14 "Dark Mode"                        "Ativar tema escuro"
+        Write-Opt 15 "Mostrar Extensoes"                "Mostrar extensoes de ficheiros"
+        Write-Opt 16 "Ocultar Desktop Icons"            "This PC / Recycle Bin"
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
-            "1" { Run-Sub "tools/install_7zip" }
-            "2" { Run-Sub "tools/install_deskin" }
-            "3" { Run-Sub "tools/install_msmq" }
-            "4" { Run-Sub "tools/dcontrol" }
-            "5" { Run-Sub "tools/restore_point" }
-            "6" { Run-Sub "tweaks/set_homepage" }
-            "7" { Run-Sub "tools/list_j2534" }
-            "8" { Run-Sub "system/speedtest" }
-            "9" { Write-Header; Write-Info "A lancar activador..."; irm https://get.activated.win | iex }
-            "0" { return }
+            "1"  { Run-Sub "tools/install_7zip" }
+            "2"  { Run-Sub "tools/install_deskin" }
+            "3"  { Run-Sub "tools/install_msmq" }
+            "4"  { Run-Sub "tools/dcontrol" }
+            "5"  { Run-Sub "tools/restore_point" }
+            "6"  { Run-Sub "tweaks/set_homepage" }
+            "7"  { Run-Sub "tools/list_j2534" }
+            "8"  { Run-Sub "system/speedtest" }
+            "9"  { Write-Header; Write-Info "A lancar activador..."; irm https://get.activated.win | iex }
+            "10" { Run-Sub "utils/remove_search_taskbar" }
+            "11" { Run-Sub "utils/remove_news_taskbar" }
+            "12" { Run-Sub "utils/remove_cortana" }
+            "13" { Run-Sub "utils/remove_onedrive_visual" }
+            "14" { Run-Sub "utils/enable_dark_mode" }
+            "15" { Run-Sub "utils/show_file_extensions" }
+            "16" { Run-Sub "utils/hide_desktop_icons" }
+            "0"  { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
     }
