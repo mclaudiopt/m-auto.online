@@ -1,4 +1,4 @@
-﻿# M-Auto Online - Remote Installer Launcher
+# M-Auto Online - Remote Installer Launcher
 # Usage: irm https://m-auto.online/scripts/m-auto.ps1 | iex
 
 $VERSION  = "1.1 [2026-04-02 16:12:40]"
