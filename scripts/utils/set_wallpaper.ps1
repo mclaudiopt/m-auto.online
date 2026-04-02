@@ -3,8 +3,8 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $e = [char]27
 
-$ImageURL     = "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/IMG/mauto/m-auto-rust.png"
-$destDir      = "$env:APPDATA\M-Auto"
+$ImageURL      = "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/IMG/mauto/m-auto-rust.png"
+$destDir       = "$env:APPDATA\M-Auto"
 $wallpaperPath = "$destDir\wallpaper.png"
 
 Write-Host ""
@@ -16,35 +16,21 @@ if (-not (Test-Path $destDir)) {
     New-Item -ItemType Directory -Path $destDir -Force | Out-Null
 }
 
-# Transferir com timeout e fallback para WebClient
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A transferir wallpaper..." -NoNewline
-$downloaded = $false
 
 try {
-    Invoke-WebRequest -Uri $ImageURL -OutFile $wallpaperPath `
-        -UseBasicParsing -TimeoutSec 20 -ErrorAction Stop
-    $downloaded = $true
+    # WebClient - mais rapido e compativel com Windows 10/11
+    $wc = New-Object System.Net.WebClient
+    $wc.DownloadFile($ImageURL, $wallpaperPath)
+    Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
 } catch {
-    # Fallback: WebClient (mais compativel com Windows 10)
-    try {
-        $wc = New-Object System.Net.WebClient
-        $wc.DownloadFile($ImageURL, $wallpaperPath)
-        $downloaded = $true
-    } catch {
-        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-        Write-Host "  ${e}[38;2;148;163;184m    $($_.Exception.Message)${e}[0m"
-    }
-}
-
-if (-not $downloaded) {
+    Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+    Write-Host "  ${e}[38;2;148;163;184m    $($_.Exception.Message)${e}[0m"
     Write-Host ""
     Read-Host "  Pressione ENTER para voltar"
     return
 }
 
-Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-
-# Aplicar wallpaper
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A aplicar..." -NoNewline
 try {
     Add-Type -TypeDefinition @"
