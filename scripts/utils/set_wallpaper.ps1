@@ -25,8 +25,6 @@ try {
     Start-BitsTransfer `
         -Source $ImageURL `
         -Destination $wallpaperPath `
-        -DisplayName "M-Auto Wallpaper" `
-        -Description "A transferir de GitHub..." `
         -ErrorAction Stop
     $downloaded = $true
     Write-Host "  ${e}[38;2;34;197;94m  [OK] Download concluido.${e}[0m"
