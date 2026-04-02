@@ -1,31 +1,53 @@
 # utils/set_wallpaper.ps1 - Aplicar wallpaper M-Auto
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $e = [char]27
 
-function Set-WallpaperFromURL {
-    param([string]$ImageURL)
+$ImageURL     = "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/IMG/mauto/m-auto-rust.png"
+$destDir      = "$env:APPDATA\M-Auto"
+$wallpaperPath = "$destDir\wallpaper.png"
 
-    # Guardar em local permanente (nao temp - o Windows precisa do ficheiro)
-    $destDir = "$env:APPDATA\M-Auto"
-    $wallpaperPath = "$destDir\wallpaper.png"
+Write-Host ""
+Write-Host "  ${e}[1;97mAplicar Wallpaper M-Auto${e}[0m"
+Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
+Write-Host ""
 
-    if (-not (Test-Path $destDir)) {
-        New-Item -ItemType Directory -Path $destDir -Force | Out-Null
-    }
+if (-not (Test-Path $destDir)) {
+    New-Item -ItemType Directory -Path $destDir -Force | Out-Null
+}
 
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A transferir wallpaper..." -NoNewline
+# Transferir com timeout e fallback para WebClient
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A transferir wallpaper..." -NoNewline
+$downloaded = $false
+
+try {
+    Invoke-WebRequest -Uri $ImageURL -OutFile $wallpaperPath `
+        -UseBasicParsing -TimeoutSec 20 -ErrorAction Stop
+    $downloaded = $true
+} catch {
+    # Fallback: WebClient (mais compativel com Windows 10)
     try {
-        Invoke-WebRequest -Uri $ImageURL -OutFile $wallpaperPath -UseBasicParsing -ErrorAction Stop
-        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+        $wc = New-Object System.Net.WebClient
+        $wc.DownloadFile($ImageURL, $wallpaperPath)
+        $downloaded = $true
     } catch {
         Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-        Write-Host "  ${e}[38;2;148;163;184m    Nao foi possivel transferir: $($_.Exception.Message)${e}[0m"
-        return
+        Write-Host "  ${e}[38;2;148;163;184m    $($_.Exception.Message)${e}[0m"
     }
+}
 
-    Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A aplicar..." -NoNewline
-    try {
-        Add-Type -TypeDefinition @"
+if (-not $downloaded) {
+    Write-Host ""
+    Read-Host "  Pressione ENTER para voltar"
+    return
+}
+
+Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+
+# Aplicar wallpaper
+Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A aplicar..." -NoNewline
+try {
+    Add-Type -TypeDefinition @"
 using System;
 using System.Runtime.InteropServices;
 public class WallpaperSetter {
@@ -37,19 +59,18 @@ public class WallpaperSetter {
 }
 "@ -ErrorAction SilentlyContinue
 
-        [WallpaperSetter]::Set($wallpaperPath)
+    [WallpaperSetter]::Set($wallpaperPath)
 
-        # Confirmar via registry
-        $regPath = "HKCU:\Control Panel\Desktop"
-        Set-ItemProperty -Path $regPath -Name "Wallpaper" -Value $wallpaperPath -ErrorAction Stop
+    $regPath = "HKCU:\Control Panel\Desktop"
+    Set-ItemProperty -Path $regPath -Name "Wallpaper" -Value $wallpaperPath -ErrorAction Stop
 
-        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
-        Write-Host "  ${e}[38;2;148;163;184m  Guardado em: $wallpaperPath${e}[0m"
-    } catch {
-        Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
-        Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
-    }
+    Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+    Write-Host ""
+    Write-Host "  ${e}[38;2;34;197;94m✔${e}[0m  Wallpaper aplicado com sucesso."
+} catch {
+    Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+    Write-Host "  ${e}[38;2;148;163;184m    $_${e}[0m"
 }
 
-# Execute
-Set-WallpaperFromURL "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/IMG/mauto/m-auto-rust.png"
+Write-Host ""
+Read-Host "  Pressione ENTER para voltar"
