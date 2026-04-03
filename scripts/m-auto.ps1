@@ -239,6 +239,9 @@ function Show-Tools {
         Write-Host "  ${e}[38;2;100;149;237m[Atalhos]${e}[0m"
         Write-Opt 18 "Criar Atalhos"                    "SDMEDIA, StarFinder, Coding Tutorials"
         Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Java]${e}[0m"
+        Write-Opt 19 "Java Exception Site - localhost:81" "Necessario para EWA / Xentry"
+        Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
@@ -260,6 +263,7 @@ function Show-Tools {
             "16" { Run-Sub "utils/show_file_extensions" }
             "17" { Run-Sub "utils/hide_desktop_icons" }
             "18" { Run-Sub "tools/criar_atalhos" }
+            "19" { Run-Sub "tools/java_exception_site" }
             "0"  { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
