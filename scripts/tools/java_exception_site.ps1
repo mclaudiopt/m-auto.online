@@ -30,14 +30,15 @@ if (Test-Path $sitesFile) {
     }
 }
 
+# Ler entradas existentes, garantir que o url esta incluido, reescrever sempre sem BOM
+$existing = if (Test-Path $sitesFile) { Get-Content $sitesFile } else { @() }
+$lines = @($existing) + $url | Where-Object { $_ -ne "" } | Select-Object -Unique
+$enc = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllLines($sitesFile, $lines, $enc)
+
 if ($exists) {
-    Write-Warn "$url ja esta na lista de excecoes Java"
+    Write-OK "$url ja estava na lista - ficheiro reescrito sem BOM"
 } else {
-    # Adicionar entrada
-    $existing = if (Test-Path $sitesFile) { (Get-Content $sitesFile) } else { @() }
-    $lines = @($existing) + $url | Where-Object { $_ -ne "" }
-    $enc = New-Object System.Text.UTF8Encoding $false
-    [System.IO.File]::WriteAllLines($sitesFile, $lines, $enc)
     Write-OK "$url adicionado a lista de excecoes Java"
 }
 
