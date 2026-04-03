@@ -34,7 +34,10 @@ if ($exists) {
     Write-Warn "$url ja esta na lista de excecoes Java"
 } else {
     # Adicionar entrada
-    Add-Content -Path $sitesFile -Value $url -Encoding UTF8
+    $existing = if (Test-Path $sitesFile) { (Get-Content $sitesFile) } else { @() }
+    $lines = @($existing) + $url | Where-Object { $_ -ne "" }
+    $enc = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllLines($sitesFile, $lines, $enc)
     Write-OK "$url adicionado a lista de excecoes Java"
 }
 
