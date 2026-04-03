@@ -5,13 +5,21 @@ $VERSION  = "1.1 [2026-04-02 16:12:40]"
 $BASE_URL = "https://m-auto.online/scripts"
 $e = [char]27
 
-#-- Enable ANSI colors (VirtualTerminalProcessing) ----------------------------
+#-- Forcar consola moderna (desativa legacy console, activa ANSI) --------------
 try {
-    Add-Type -Name 'VT' -Namespace 'Win32' -MemberDefinition '
-        [DllImport("kernel32.dll")] public static extern IntPtr GetStdHandle(int h);
-        [DllImport("kernel32.dll")] public static extern bool GetConsoleMode(IntPtr h, out uint m);
-        [DllImport("kernel32.dll")] public static extern bool SetConsoleMode(IntPtr h, uint m);
-    ' -ErrorAction SilentlyContinue
+    Set-ItemProperty 'HKCU:\Console' ForceV2              1 -Type DWord -Force -EA SilentlyContinue
+    Set-ItemProperty 'HKCU:\Console' VirtualTerminalLevel 1 -Type DWord -Force -EA SilentlyContinue
+} catch {}
+
+#-- Enable ANSI colors na sessao actual (VirtualTerminalProcessing) -----------
+try {
+    if (-not ([System.Management.Automation.PSTypeName]'Win32.VT').Type) {
+        Add-Type -Name 'VT' -Namespace 'Win32' -MemberDefinition '
+            [DllImport("kernel32.dll")] public static extern IntPtr GetStdHandle(int h);
+            [DllImport("kernel32.dll")] public static extern bool GetConsoleMode(IntPtr h, out uint m);
+            [DllImport("kernel32.dll")] public static extern bool SetConsoleMode(IntPtr h, uint m);
+        ' -ErrorAction SilentlyContinue
+    }
     $h = [Win32.VT]::GetStdHandle(-11)
     $m = 0
     [Win32.VT]::GetConsoleMode($h, [ref]$m) | Out-Null
@@ -19,10 +27,10 @@ try {
 } catch {}
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-#-- TLS / Cache ---------------------------------------------------------------
+#-- TLS -----------------------------------------------------------------------
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-#-- Auto-elevate -----------------------------------------------------------
+#-- Auto-elevate --------------------------------------------------------------
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if (-not $isAdmin) {
     Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"irm $BASE_URL/m-auto.ps1 | iex`"" -Verb RunAs
