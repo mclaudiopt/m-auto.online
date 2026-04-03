@@ -32,7 +32,7 @@ $atalhos = @(
         Num   = "2"
         Nome  = "StarFinder WebETM"
         Label = "StarFinder WebETM"
-        Alvo  = "C:\M-Auto\Starfinder 2024\StarFinder_webETM\WebETM-SDmedia.exe"
+        Alvo  = "C:\M-Auto\Startfifinder 2024\StarFinder_webETM\WebETM-SDmedia.exe"
         Icon  = $null
         Desc  = "Usa icon do executavel"
     },
