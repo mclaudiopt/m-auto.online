@@ -5,8 +5,21 @@ $VERSION  = "1.1 [2026-04-02 16:12:40]"
 $BASE_URL = "https://m-auto.online/scripts"
 $e = [char]27
 
-#-- Clear Cache ---------------------------------------------------------------
-$null = $PSVersionTable
+#-- Enable ANSI colors (VirtualTerminalProcessing) ----------------------------
+try {
+    Add-Type -Name 'VT' -Namespace 'Win32' -MemberDefinition '
+        [DllImport("kernel32.dll")] public static extern IntPtr GetStdHandle(int h);
+        [DllImport("kernel32.dll")] public static extern bool GetConsoleMode(IntPtr h, out uint m);
+        [DllImport("kernel32.dll")] public static extern bool SetConsoleMode(IntPtr h, uint m);
+    ' -ErrorAction SilentlyContinue
+    $h = [Win32.VT]::GetStdHandle(-11)
+    $m = 0
+    [Win32.VT]::GetConsoleMode($h, [ref]$m) | Out-Null
+    [Win32.VT]::SetConsoleMode($h, ($m -bor 4)) | Out-Null
+} catch {}
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+#-- TLS / Cache ---------------------------------------------------------------
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 #-- Auto-elevate -----------------------------------------------------------
