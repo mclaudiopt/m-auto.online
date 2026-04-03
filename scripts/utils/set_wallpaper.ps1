@@ -19,70 +19,60 @@ if (-not (Test-Path $destDir)) {
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A transferir wallpaper..."
 $downloaded = $false
 
-# Metodo 1: BITS (mostra progresso, nao bloqueia, Win 10/11)
+# WebClient async com barra de progresso no terminal
 try {
-    Import-Module BitsTransfer -ErrorAction Stop
-    Start-BitsTransfer `
-        -Source $ImageURL `
-        -Destination $wallpaperPath `
-        -ErrorAction Stop
+    $wc = New-Object System.Net.WebClient
+
+    $global:wcDone  = $false
+    $global:wcError = $null
+
+    $progressSub = Register-ObjectEvent -InputObject $wc -EventName DownloadProgressChanged -Action {
+        $pct   = $Event.SourceEventArgs.ProgressPercentage
+        $recv  = [math]::Round($Event.SourceEventArgs.BytesReceived / 1KB, 0)
+        $total = [math]::Round($Event.SourceEventArgs.TotalBytesToReceive / 1KB, 0)
+        $fill  = [math]::Floor($pct / 5)
+        $bar   = ("#" * $fill) + ("-" * (20 - $fill))
+        Write-Host -NoNewline "`r  [$bar] $pct%  ($recv KB / $total KB)   "
+    }
+
+    $completedSub = Register-ObjectEvent -InputObject $wc -EventName DownloadFileCompleted -Action {
+        $global:wcDone  = $true
+        $global:wcError = $Event.SourceEventArgs.Error
+    }
+
+    $wc.DownloadFileAsync([Uri]$ImageURL, $wallpaperPath)
+
+    $timeout = 60
+    $elapsed = 0
+    while (-not $global:wcDone -and $elapsed -lt $timeout) {
+        Start-Sleep -Milliseconds 500
+        $elapsed += 0.5
+    }
+
+    $wc.Dispose()
+    Unregister-Event -SourceIdentifier $progressSub.Name   -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier $completedSub.Name  -ErrorAction SilentlyContinue
+    Remove-Job -Name $progressSub.Name  -Force -ErrorAction SilentlyContinue
+    Remove-Job -Name $completedSub.Name -Force -ErrorAction SilentlyContinue
+
+    Write-Host ""
+
+    if (-not $global:wcDone) {
+        throw "Timeout apos ${timeout}s"
+    }
+    if ($global:wcError) {
+        throw $global:wcError.Message
+    }
+    if (-not (Test-Path $wallpaperPath) -or (Get-Item $wallpaperPath).Length -eq 0) {
+        throw "Ficheiro vazio ou nao criado"
+    }
+
     $downloaded = $true
     Write-Host "  ${e}[38;2;34;197;94m  [OK] Download concluido.${e}[0m"
+
 } catch {
-    Write-Host "  ${e}[38;2;250;204;21m  [!] BITS falhou, a tentar WebClient...${e}[0m"
-}
-
-# Metodo 2: WebClient com progresso manual
-if (-not $downloaded) {
-    try {
-        $wc = New-Object System.Net.WebClient
-
-        # Evento de progresso
-        $global:lastPct = -1
-        $progressAction = Register-ObjectEvent -InputObject $wc `
-            -EventName DownloadProgressChanged `
-            -Action {
-                $pct = $Event.SourceEventArgs.ProgressPercentage
-                $recv = [math]::Round($Event.SourceEventArgs.BytesReceived / 1KB, 0)
-                $total = [math]::Round($Event.SourceEventArgs.TotalBytesToReceive / 1KB, 0)
-                if ($pct -ne $global:lastPct) {
-                    $global:lastPct = $pct
-                    $bar = "#" * [math]::Floor($pct / 5)
-                    $empty = "-" * (20 - [math]::Floor($pct / 5))
-                    Write-Host -NoNewline "`r  [$bar$empty] $pct%  ($recv KB / $total KB)   "
-                }
-            }
-
-        $completedEvent = Register-ObjectEvent -InputObject $wc `
-            -EventName DownloadFileCompleted `
-            -Action { $global:wcDone = $true }
-
-        $global:wcDone = $false
-        $wc.DownloadFileAsync([Uri]$ImageURL, $wallpaperPath)
-
-        # Aguardar com timeout de 30s
-        $timeout = 30
-        $elapsed = 0
-        while (-not $global:wcDone -and $elapsed -lt $timeout) {
-            Start-Sleep -Milliseconds 500
-            $elapsed += 0.5
-        }
-
-        Unregister-Event -SourceIdentifier $progressAction.Name -ErrorAction SilentlyContinue
-        Unregister-Event -SourceIdentifier $completedEvent.Name -ErrorAction SilentlyContinue
-
-        if ($global:wcDone -and (Test-Path $wallpaperPath) -and (Get-Item $wallpaperPath).Length -gt 0) {
-            $downloaded = $true
-            Write-Host ""
-            Write-Host "  ${e}[38;2;34;197;94m  [OK] Download concluido.${e}[0m"
-        } else {
-            Write-Host ""
-            Write-Host "  ${e}[38;2;239;68;68m  [ERRO] Timeout ou ficheiro vazio.${e}[0m"
-        }
-    } catch {
-        Write-Host ""
-        Write-Host "  ${e}[38;2;239;68;68m  [ERRO] $($_.Exception.Message)${e}[0m"
-    }
+    Write-Host ""
+    Write-Host "  ${e}[38;2;239;68;68m  [ERRO] $($_.Exception.Message)${e}[0m"
 }
 
 if (-not $downloaded) {
