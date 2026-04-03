@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M-Auto.online — VCX Manager</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #0f172a; color: #f1f5f9; }
+
+/* HEADER */
+#header { background: #1e293b; border-bottom: 2px solid #2563eb; padding: 0; }
+#header-inner { padding: 14px 20px; }
+#logo { font-size: 20px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; }
+#logo span { color: #f1f5f9; }
+#tagline { font-size: 11px; color: #64748b; margin-top: 2px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* STATUS BAR */
+#statusbar { background: #334155; padding: 6px 20px; font-size: 11px; color: #94a3b8; }
+#statusbar strong { color: #22c55e; }
+
+/* NAV TABS */
+#nav { background: #1e293b; border-bottom: 1px solid #334155; }
+#nav a { display: inline-block; padding: 10px 18px; font-size: 12px; color: #94a3b8; text-decoration: none; border-bottom: 3px solid transparent; }
+#nav a:hover { color: #f1f5f9; border-bottom-color: #2563eb; }
+#nav a.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 600; }
+
+/* MAIN LAYOUT */
+#main { padding: 20px; }
+
+/* CARDS */
+.card { background: #1e293b; border: 1px solid #334155; margin-bottom: 16px; padding: 16px; }
+.card-title { font-size: 12px; font-weight: 700; color: #2563eb; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+
+/* INFO TABLE */
+.info-table { width: 100%; border-collapse: collapse; }
+.info-table td { padding: 7px 0; border-bottom: 1px solid #334155; vertical-align: top; }
+.info-table td:first-child { color: #64748b; width: 40%; font-size: 12px; }
+.info-table td:last-child { color: #f1f5f9; font-size: 12px; }
+.info-table tr:last-child td { border-bottom: none; }
+
+/* BUTTONS */
+.btn { display: inline-block; padding: 8px 16px; font-size: 12px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; }
+.btn-blue { background: #2563eb; color: #fff; }
+.btn-blue:hover { background: #1d4ed8; color: #fff; }
+.btn-outline { background: transparent; color: #2563eb; border: 1px solid #2563eb; }
+.btn-outline:hover { background: #1e3a8a; }
+.btn-green { background: #16a34a; color: #fff; }
+
+/* LINKS LIST */
+.link-item { padding: 10px 0; border-bottom: 1px solid #334155; }
+.link-item:last-child { border-bottom: none; }
+.link-item a { color: #60a5fa; text-decoration: none; font-size: 12px; }
+.link-item a:hover { color: #93c5fd; text-decoration: underline; }
+.link-item .desc { color: #64748b; font-size: 11px; margin-top: 2px; }
+
+/* TWO COLUMN */
+.col2 { width: 48%; float: left; margin-right: 4%; }
+.col2:last-child { margin-right: 0; }
+.clearfix:after { content: ""; display: table; clear: both; }
+
+/* BADGE */
+.badge { display: inline-block; padding: 2px 8px; font-size: 10px; font-weight: 700; }
+.badge-green { background: #166534; color: #4ade80; }
+.badge-blue { background: #1e3a8a; color: #93c5fd; }
+.badge-gray { background: #334155; color: #94a3b8; }
+
+/* FOOTER */
+#footer { background: #1e293b; border-top: 1px solid #334155; padding: 14px 20px; font-size: 11px; color: #475569; text-align: center; }
+#footer a { color: #2563eb; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-inner">
+    <div id="logo">M-AUTO<span>.online</span></div>
+    <div id="tagline">Simply Digital &mdash; Diagnóstico Profissional</div>
+  </div>
+</div>
+
+<div id="statusbar">
+  Interface VCX SE &nbsp;|&nbsp; <strong>&#9679; Ligada</strong> &nbsp;|&nbsp; Software: VX Manager 1.8.9.0601 &nbsp;|&nbsp; <a href="mailto:suporte@m-auto.online" style="color:#60a5fa;text-decoration:none;">suporte@m-auto.online</a>
+</div>
+
+<div id="nav">
+  <a href="vcx.html" class="active">&#8962; Início</a>
+  <a href="vcx.html#software">&#8659; Software</a>
+  <a href="vcx.html#suporte">&#9993; Suporte</a>
+  <a href="vcx.html#licencas">&#128274; Licenças</a>
+  <a href="vcx.html#tutoriais">&#9654; Tutoriais</a>
+</div>
+
+<div id="main">
+
+  <!-- STATUS DA INTERFACE -->
+  <div class="card">
+    <div class="card-title">&#9881; Estado da Interface VCX SE</div>
+    <div class="clearfix">
+      <div class="col2">
+        <table class="info-table">
+          <tr><td>Modelo</td><td>VCX SE &nbsp;<span class="badge badge-blue">DoIP</span></td></tr>
+          <tr><td>Estado</td><td><span class="badge badge-green">&#9679; Online</span></td></tr>
+          <tr><td>Firmware VCI</td><td>1.9.6.0 &nbsp;<span class="badge badge-gray">2025-11-21</span></td></tr>
+          <tr><td>Firmware DoIP</td><td>1.9.2</td></tr>
+          <tr><td>Driver SDK</td><td>1.8.9.0</td></tr>
+          <tr><td>SSID WiFi</td><td>DoIP-VCI-D1D6</td></tr>
+          <tr><td>IP padrão</td><td>192.168.8.1</td></tr>
+        </table>
+      </div>
+      <div class="col2">
+        <table class="info-table">
+          <tr><td>Protocolos</td><td>OBD-II, CAN, DoIP/UDS, K-Line</td></tr>
+          <tr><td>Ligação</td><td>USB, WiFi, LAN, BT</td></tr>
+          <tr><td>J2534</td><td>SAE J2534-1, J2534-2</td></tr>
+          <tr><td>Marcas</td><td>Multimarca (JLR, BMW, Ford, VW…)</td></tr>
+          <tr><td>Suporte</td><td>Diagnóstico + Programação + Codificação</td></tr>
+          <tr><td>VX Manager</td><td><a href="#software" style="color:#60a5fa;">1.8.9.0601</a> &nbsp;<span class="badge badge-gray">atual</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACESSO RÁPIDO -->
+  <a name="software"></a>
+  <div class="clearfix">
+    <div class="col2">
+      <div class="card">
+        <div class="card-title">&#8659; Software de Diagnóstico</div>
+        <div class="link-item">
+          <div><a href="https://m-auto.online/vcx-se-explicacao.html">VCX SE — Guia completo</a></div>
+          <div class="desc">Como instalar, configurar e usar o VCX SE</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://www.vxdiag.net" target="_blank">Xentry / Mercedes-Benz DAS</a></div>
+          <div class="desc">Software de diagnóstico oficial Mercedes</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://www.vxdiag.net" target="_blank">ISTA-D / BMW</a></div>
+          <div class="desc">ISTA-D e ISTA-P para BMW, Mini e Rolls-Royce</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://www.vxdiag.net" target="_blank">ODIS / Volkswagen Group</a></div>
+          <div class="desc">VW, Audi, SEAT, Skoda — ODIS Engineering</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://www.vxdiag.net" target="_blank">IDS / Ford &amp; Mazda</a></div>
+          <div class="desc">Ford IDS, FDRS, Mazda MDARS</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://www.vxdiag.net" target="_blank">SDD / JLR DoIP</a></div>
+          <div class="desc">Jaguar &amp; Land Rover — SDD e Pathfinder</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col2">
+      <div class="card">
+        <a name="suporte"></a>
+        <div class="card-title">&#9993; Suporte M-Auto.online</div>
+        <div class="link-item">
+          <div><a href="mailto:suporte@m-auto.online">suporte@m-auto.online</a></div>
+          <div class="desc">Email — resposta em 24h úteis</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://wa.me/351910000000" target="_blank">WhatsApp</a></div>
+          <div class="desc">Suporte técnico rápido via WhatsApp</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://m-auto.online" target="_blank">www.m-auto.online</a></div>
+          <div class="desc">Portal principal — loja e serviços</div>
+        </div>
+        <div style="margin-top:12px;">
+          <a href="mailto:suporte@m-auto.online" class="btn btn-blue">Pedir suporte</a>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:0;">
+        <a name="licencas"></a>
+        <div class="card-title">&#128274; Licenças &amp; Ativação</div>
+        <div class="link-item">
+          <div style="color:#f1f5f9;font-size:12px;">Para adquirir ou renovar licenças de diagnóstico, contacta-nos.</div>
+        </div>
+        <div class="link-item">
+          <div><a href="mailto:suporte@m-auto.online?subject=Licenca VCX">&#8594; Solicitar licença por email</a></div>
+          <div class="desc">Indica o número de série da tua interface</div>
+        </div>
+        <div class="link-item">
+          <div style="color:#94a3b8;font-size:11px;">Número de série: ver ecrã "Device → Information" no VX Manager</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TUTORIAIS -->
+  <a name="tutoriais"></a>
+  <div class="card">
+    <div class="card-title">&#9654; Tutoriais &amp; Documentação</div>
+    <div class="clearfix">
+      <div class="col2">
+        <div class="link-item">
+          <div><a href="https://m-auto.online/vcx-se-explicacao.html" target="_blank">Como funciona o VCX SE</a></div>
+          <div class="desc">Guia completo de instalação e configuração</div>
+        </div>
+        <div class="link-item">
+          <div><a href="http://blog.vxdiagshop.com/2022/08/18/change-vxdiag-vcx-doip-devices-ip-address/" target="_blank">Alterar IP do VCX DoIP</a></div>
+          <div class="desc">Login: 192.168.8.1 &mdash; user: root / pass: NZY1150263</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://m-auto.online" target="_blank">J2534 — Passthru API</a></div>
+          <div class="desc">Como usar o VCX com software J2534 de terceiros</div>
+        </div>
+      </div>
+      <div class="col2">
+        <div class="link-item">
+          <div><a href="https://m-auto.online" target="_blank">DoNet — Diagnóstico Remoto</a></div>
+          <div class="desc">Configurar acesso remoto via DoNet</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://m-auto.online" target="_blank">Atualização de Firmware</a></div>
+          <div class="desc">Como atualizar o firmware VCI e DoIP</div>
+        </div>
+        <div class="link-item">
+          <div><a href="https://m-auto.online" target="_blank">Resolução de problemas</a></div>
+          <div class="desc">Erros comuns e soluções</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div id="footer">
+  &copy; 2026 <a href="https://m-auto.online">M-Auto.online</a> &mdash; Diagnóstico Profissional &mdash; Todos os direitos reservados
+</div>
+
+<script>
+// IE-compatible tab highlighting based on anchor
+(function() {
+  var hash = window.location.hash;
+  var links = document.getElementById('nav').getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (hash && links[i].getAttribute('href') === 'vcx.html' + hash) {
+      links[i].className = 'active';
+      links[0].className = '';
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
