@@ -215,6 +215,9 @@ function Show-Tools {
         Write-Opt 16 "Mostrar Extensoes"                "Mostrar extensoes de ficheiros"
         Write-Opt 17 "Ocultar Desktop Icons"            "This PC / Recycle Bin"
         Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Atalhos]${e}[0m"
+        Write-Opt 18 "Criar Atalhos"                    "SDMEDIA, StarFinder, Coding Tutorials"
+        Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
@@ -235,6 +238,7 @@ function Show-Tools {
             "15" { Run-Sub "utils/enable_dark_mode" }
             "16" { Run-Sub "utils/show_file_extensions" }
             "17" { Run-Sub "utils/hide_desktop_icons" }
+            "18" { Run-Sub "tools/criar_atalhos" }
             "0"  { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
