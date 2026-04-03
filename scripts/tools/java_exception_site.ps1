@@ -56,3 +56,5 @@ if ($javaPath) {
 }
 
 Write-Host ""
+Write-Host -NoNewline "  ${e}[38;2;80;100;140mPressione ENTER para continuar...${e}[0m"
+$null = $Host.UI.ReadLine()
