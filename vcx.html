@@ -71,11 +71,14 @@ a.card:hover { background: #eff6ff; }
       <div id="logo">M-AUTO<span>.online</span></div>
       <div id="tagline">Simply Digital &mdash; <span id="t-tagline">Diagnóstico Profissional</span></div>
     </div>
-    <div id="lang-bar">
-      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('fr')">FR</button>
-      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    <div style="display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;gap:8px;">
+      <div id="lang-bar">
+        <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('de')">DE</button>
+      </div>
+      <button onclick="location.reload(true)" title="Atualizar página" style="background:transparent;border:1px solid #475569;color:#94a3b8;font-size:15px;width:28px;height:28px;cursor:pointer;line-height:1;padding:0;">↻</button>
     </div>
   </div>
 </div>
