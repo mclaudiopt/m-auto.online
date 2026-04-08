@@ -288,13 +288,21 @@ function openUrl(url) {
 }
 var _titles = { pt:'Manual VCI', en:'VCI Manual', fr:'Manuel VCI', de:'VCI Handbuch' };
 function setLang(lang) {
-  document.getElementById('header-title').innerHTML = _titles[lang] || 'Manual VCI';
+  if (!_titles[lang]) return;
+  try { localStorage.setItem('vcx_lang', lang); } catch(e) {}
+  document.getElementById('header-title').innerHTML = _titles[lang];
   var btns = document.getElementById('header').getElementsByTagName('button');
   for (var i = 0; i < btns.length; i++) {
     if (btns[i].className.indexOf('lang-btn') >= 0)
       btns[i].className = btns[i].innerHTML === lang.toUpperCase() ? 'lang-btn active' : 'lang-btn';
   }
 }
+(function() {
+  var m = (location.search || '').match(/[?&]lang=([a-z]+)/);
+  var saved = m ? m[1] : '';
+  if (!saved) { try { saved = localStorage.getItem('vcx_lang') || ''; } catch(e) {} }
+  if (saved && _titles[saved]) setLang(saved);
+})();
 </script>
 </body>
 </html>
