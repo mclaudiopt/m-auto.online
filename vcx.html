@@ -21,58 +21,41 @@ body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #f
 button.lang-btn {
   background: transparent; border: 1px solid #475569;
   color: #94a3b8; font-size: 10px; font-weight: 700;
-  padding: 4px 9px; cursor: pointer; font-family: inherit;
-  letter-spacing: 0.5px;
+  padding: 4px 9px; cursor: pointer; font-family: inherit; letter-spacing: 0.5px;
 }
 button.lang-btn:hover { border-color: #2563eb; color: #60a5fa; }
 button.lang-btn.active { background: #2563eb; border-color: #2563eb; color: #fff; }
 
 /* MAIN */
 #main { padding: 24px 20px; }
-.section-label {
-  font-size: 10px; font-weight: 700; color: #94a3b8;
-  text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0;
-}
+.section-label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0; }
 
 /* GRID */
-.grid { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 12px; }
+.grid { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 14px; }
 
-/* CARD BASE — square-ish */
+/* CARD */
 a.card {
   display: -ms-flexbox; display: flex;
   -ms-flex-direction: column; flex-direction: column;
   -ms-flex-pack: center; justify-content: center;
   -ms-flex-align: center; align-items: center;
   text-align: center;
-  width: 180px; height: 180px;
+  width: 190px; height: 190px;
   text-decoration: none;
   padding: 20px 16px;
+  background: #fff;
   border: 1px solid #e2e8f0;
   border-top: 4px solid #2563eb;
-  background: #fff;
   color: #1e293b;
   -webkit-transition: box-shadow 0.15s, -webkit-transform 0.15s;
   transition: box-shadow 0.15s, transform 0.15s;
 }
-a.card:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.12); -webkit-transform: translateY(-2px); transform: translateY(-2px); }
-.card-icon { margin-bottom: 12px; }
-.card-icon svg { width: 44px; height: 44px; }
-.card-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 5px; line-height: 1.3; }
-.card-desc  { font-size: 10px; color: #64748b; line-height: 1.4; }
+a.card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.13); -webkit-transform: translateY(-2px); transform: translateY(-2px); }
 
-/* CARD — M-Auto brand (dark) */
-a.card-brand {
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-top: 4px solid #2563eb;
-  color: #f1f5f9;
-}
-a.card-brand:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.35); }
-a.card-brand .card-title { color: #f1f5f9; }
-a.card-brand .card-desc  { color: #64748b; }
-.brand-logo { font-size: 18px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px; }
-.brand-logo span { color: #f1f5f9; }
-.brand-sub { font-size: 9px; color: #475569; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+.card-icon { margin-bottom: 14px; }
+.card-icon svg { width: 48px; height: 48px; }
+.card-title { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 6px; line-height: 1.2; }
+.card-desc  { font-size: 11px; color: #64748b; line-height: 1.4; }
 
 /* FOOTER */
 #footer { border-top: 1px solid #e2e8f0; padding: 14px 20px; font-size: 11px; color: #94a3b8; background: #fff; }
@@ -100,35 +83,35 @@ a.card-brand .card-desc  { color: #64748b; }
   <div class="section-label" id="t-section">Software &amp; Documentação</div>
   <div class="grid">
 
-    <!-- GUIDE CARD -->
-    <a href="https://m-auto.online/vcx-se-explicacao.html" target="_blank" class="card">
+    <!-- GUIDE -->
+    <a href="vcx-help.html" target="_blank" class="card">
       <div class="card-icon">
-        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="7" y="4" width="24" height="32" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-          <rect x="13" y="10" width="12" height="2" rx="1" fill="#2563eb"/>
-          <rect x="13" y="15" width="12" height="2" rx="1" fill="#2563eb"/>
-          <rect x="13" y="20" width="8"  height="2" rx="1" fill="#93c5fd"/>
-          <circle cx="33" cy="33" r="8" fill="#2563eb"/>
-          <line x1="30" y1="33" x2="36" y2="33" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-          <line x1="33" y1="30" x2="33" y2="36" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="4" width="26" height="36" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <rect x="14" y="11" width="14" height="2.5" rx="1" fill="#2563eb"/>
+          <rect x="14" y="17" width="14" height="2.5" rx="1" fill="#2563eb"/>
+          <rect x="14" y="23" width="9"  height="2.5" rx="1" fill="#93c5fd"/>
+          <circle cx="37" cy="37" r="8" fill="#2563eb"/>
+          <line x1="34" y1="37" x2="40" y2="37" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="37" y1="34" x2="37" y2="40" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
         </svg>
       </div>
-      <div class="card-title" id="t-guide-title">M-Auto VCI — Guia</div>
+      <div class="card-title" id="t-guide-title">Manual VCI</div>
       <div class="card-desc"  id="t-guide-desc">Instalar, configurar e usar</div>
     </a>
 
-    <!-- M-AUTO BRAND CARD -->
-    <a href="https://m-auto.online" target="_blank" class="card card-brand">
+    <!-- M-AUTO PORTAL — white card -->
+    <a href="https://m-auto.online" target="_blank" class="card">
       <div class="card-icon">
-        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="22" cy="22" r="18" fill="#1e3a8a" stroke="#2563eb" stroke-width="2"/>
-          <circle cx="22" cy="22" r="10" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <text x="22" y="26" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="#2563eb" text-anchor="middle">M-A</text>
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="19" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <ellipse cx="24" cy="24" rx="8" ry="19" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+          <line x1="5" y1="24" x2="43" y2="24" stroke="#2563eb" stroke-width="1.5"/>
+          <path d="M24 5 Q32 14 32 24 Q32 34 24 43" fill="none" stroke="#93c5fd" stroke-width="1.2"/>
         </svg>
       </div>
-      <div class="brand-logo">M-AUTO<span>.online</span></div>
-      <div class="brand-sub">Simply Digital</div>
-      <div class="card-desc" id="t-portal-desc">Loja &amp; serviços</div>
+      <div class="card-title" id="t-portal-title">M-AUTO.online</div>
+      <div class="card-desc"  id="t-portal-desc">Loja &amp; serviços</div>
     </a>
 
   </div>
@@ -140,17 +123,18 @@ a.card-brand .card-desc  { color: #64748b; }
 
 <script>
 var i18n = {
-  pt: { tagline:'Diagn\u00f3stico Profissional', section:'Software &amp; Documenta\u00e7\u00e3o', guideTitle:'M-Auto VCI \u2014 Guia', guideDesc:'Instalar, configurar e usar', portalDesc:'Loja &amp; servi\u00e7os', footer:'Todos os direitos reservados' },
-  en: { tagline:'Professional Diagnostics',      section:'Software &amp; Documentation',       guideTitle:'M-Auto VCI \u2014 Guide', guideDesc:'Install, configure and use',      portalDesc:'Shop &amp; services',        footer:'All rights reserved' },
-  fr: { tagline:'Diagnostic Professionnel',      section:'Logiciels &amp; Documentation',      guideTitle:'M-Auto VCI \u2014 Guide', guideDesc:'Installer, configurer et utiliser', portalDesc:'Boutique &amp; services',    footer:'Tous droits r\u00e9serv\u00e9s' },
-  de: { tagline:'Professionelle Diagnose',       section:'Software &amp; Dokumentation',       guideTitle:'M-Auto VCI \u2014 Leitfaden', guideDesc:'Installieren, konfigurieren, nutzen', portalDesc:'Shop &amp; Dienste', footer:'Alle Rechte vorbehalten' }
+  pt: { tagline:'Diagn\u00f3stico Profissional', section:'Software &amp; Documenta\u00e7\u00e3o', guideTitle:'Manual VCI', guideDesc:'Instalar, configurar e usar', portalTitle:'M-AUTO.online', portalDesc:'Loja &amp; servi\u00e7os', footer:'Todos os direitos reservados' },
+  en: { tagline:'Professional Diagnostics',     section:'Software &amp; Documentation',       guideTitle:'VCI Manual',   guideDesc:'Install, configure and use',       portalTitle:'M-AUTO.online', portalDesc:'Shop &amp; services',        footer:'All rights reserved' },
+  fr: { tagline:'Diagnostic Professionnel',     section:'Logiciels &amp; Documentation',      guideTitle:'Manuel VCI',   guideDesc:'Installer, configurer et utiliser', portalTitle:'M-AUTO.online', portalDesc:'Boutique &amp; services',    footer:'Tous droits r\u00e9serv\u00e9s' },
+  de: { tagline:'Professionelle Diagnose',      section:'Software &amp; Dokumentation',       guideTitle:'VCI Handbuch', guideDesc:'Installieren, konfigurieren, nutzen', portalTitle:'M-AUTO.online', portalDesc:'Shop &amp; Dienste',       footer:'Alle Rechte vorbehalten' }
 };
 function setLang(lang) {
   var t = i18n[lang];
-  document.getElementById('t-tagline').innerHTML    = t.tagline;
-  document.getElementById('t-section').innerHTML    = t.section;
+  document.getElementById('t-tagline').innerHTML     = t.tagline;
+  document.getElementById('t-section').innerHTML     = t.section;
   document.getElementById('t-guide-title').innerHTML = t.guideTitle;
   document.getElementById('t-guide-desc').innerHTML  = t.guideDesc;
+  document.getElementById('t-portal-title').innerHTML = t.portalTitle;
   document.getElementById('t-portal-desc').innerHTML = t.portalDesc;
   document.getElementById('t-footer').innerHTML      = t.footer;
   var btns = document.getElementById('lang-bar').getElementsByTagName('button');
@@ -159,6 +143,5 @@ function setLang(lang) {
   }
 }
 </script>
-
 </body>
 </html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M-Auto VCI — Manual de Utilização</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #0f172a; color: #f1f5f9; line-height: 1.6; }
+
+/* HEADER */
+#header { background: #1e293b; padding: 14px 20px; border-bottom: 3px solid #2563eb; }
+#logo { font-size: 20px; font-weight: 700; color: #2563eb; }
+#logo span { color: #f1f5f9; }
+#tagline { font-size: 10px; color: #64748b; margin-top: 3px; letter-spacing: 2px; text-transform: uppercase; }
+#subtitle { font-size: 12px; color: #94a3b8; margin-top: 6px; }
+
+/* NAV BREADCRUMB */
+#breadcrumb { background: #1e293b; border-bottom: 1px solid #334155; padding: 8px 20px; font-size: 11px; color: #64748b; }
+#breadcrumb a { color: #2563eb; text-decoration: none; }
+#breadcrumb a:hover { text-decoration: underline; }
+
+/* LAYOUT */
+#wrap { display: -ms-flexbox; display: flex; max-width: 960px; }
+#sidebar { width: 200px; min-width: 200px; background: #1e293b; border-right: 1px solid #334155; padding: 16px 0; position: -webkit-sticky; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+#sidebar a { display: block; padding: 7px 16px; font-size: 11px; color: #94a3b8; text-decoration: none; border-left: 3px solid transparent; }
+#sidebar a:hover { color: #f1f5f9; background: #334155; }
+#sidebar a.active { color: #60a5fa; border-left-color: #2563eb; background: #1e3a8a22; }
+#sidebar .nav-section { padding: 10px 16px 4px; font-size: 9px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* CONTENT */
+#content { padding: 28px 32px; flex: 1; max-width: 720px; }
+
+h1 { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 6px; }
+h2 { font-size: 16px; font-weight: 700; color: #60a5fa; margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #334155; }
+h3 { font-size: 13px; font-weight: 700; color: #94a3b8; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+p  { color: #cbd5e1; margin-bottom: 10px; font-size: 13px; }
+
+/* FEATURE LIST */
+ul.feat { list-style: none; margin: 0 0 14px; padding: 0; }
+ul.feat li { padding: 5px 0 5px 18px; color: #cbd5e1; font-size: 13px; border-bottom: 1px solid #1e293b; position: relative; }
+ul.feat li:before { content: "›"; position: absolute; left: 0; color: #2563eb; font-weight: 700; }
+
+/* TABLE */
+table.specs { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+table.specs th { background: #1e3a8a; color: #93c5fd; font-size: 11px; font-weight: 700; padding: 8px 12px; text-align: left; text-transform: uppercase; letter-spacing: 0.5px; }
+table.specs td { padding: 7px 12px; border-bottom: 1px solid #334155; font-size: 12px; color: #cbd5e1; }
+table.specs td:first-child { color: #94a3b8; width: 35%; }
+table.specs tr:last-child td { border-bottom: none; }
+table.specs tr:nth-child(even) td { background: #1a2540; }
+
+/* COMPAT TABLE */
+table.compat { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 11px; }
+table.compat th { background: #1e3a8a; color: #93c5fd; padding: 7px 10px; text-align: left; }
+table.compat td { padding: 6px 10px; border-bottom: 1px solid #334155; color: #cbd5e1; }
+table.compat td:first-child { color: #64748b; width: 5%; text-align: center; }
+.badge-ok  { background: #166534; color: #4ade80; padding: 2px 7px; font-size: 10px; font-weight: 700; display: inline-block; }
+.badge-dev { background: #1e3a8a; color: #93c5fd; padding: 2px 7px; font-size: 10px; font-weight: 700; display: inline-block; }
+
+/* STEP BOX */
+.steps { counter-reset: step; margin-bottom: 14px; }
+.step  { display: -ms-flexbox; display: flex; -ms-flex-align: start; align-items: flex-start; margin-bottom: 10px; }
+.step-num { background: #2563eb; color: #fff; font-weight: 700; font-size: 11px; min-width: 24px; height: 24px; display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; margin-right: 12px; margin-top: 1px; flex-shrink: 0; }
+.step-text { color: #cbd5e1; font-size: 13px; padding-top: 2px; }
+
+/* CALLOUT */
+.callout { background: #1e3a8a22; border-left: 3px solid #2563eb; padding: 12px 16px; margin-bottom: 16px; color: #93c5fd; font-size: 12px; }
+.callout strong { color: #60a5fa; }
+
+/* PROTOCOL LIST */
+ul.proto { columns: 2; list-style: none; padding: 0; margin-bottom: 14px; }
+ul.proto li { font-size: 11px; color: #64748b; padding: 2px 0 2px 14px; position: relative; }
+ul.proto li:before { content: "·"; position: absolute; left: 0; color: #475569; }
+
+/* FOOTER */
+#footer { border-top: 1px solid #334155; padding: 14px 20px; font-size: 11px; color: #475569; text-align: center; }
+#footer a { color: #2563eb; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="logo">M-AUTO<span>.online</span></div>
+  <div id="tagline">Simply Digital — Diagnóstico Profissional</div>
+  <div id="subtitle">M-Auto VCI — Manual de Utilização</div>
+</div>
+
+<div id="breadcrumb">
+  <a href="vcx.html">← VCX Manager</a> &nbsp;/&nbsp; Manual de Utilização
+</div>
+
+<div id="wrap">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div class="nav-section">Conteúdo</div>
+    <a href="#intro" class="active">Introdução</a>
+    <a href="#features">Características</a>
+    <a href="#compat">Compatibilidade OEM</a>
+    <a href="#protocols">Protocolos</a>
+    <a href="#specs">Especificações</a>
+    <a href="#package">Conteúdo da embalagem</a>
+    <a href="#connection">Ligação ao veículo</a>
+    <a href="#vcimanager">VCI Manager</a>
+    <a href="#license">Licenças</a>
+    <a href="#diagnosis">Diagnóstico OEM</a>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content">
+
+    <h1>M-Auto VCI — Manual de Utilização</h1>
+    <p style="color:#64748b;font-size:12px;">Baseado no manual original. Versão adaptada M-Auto.online.</p>
+
+    <!-- INTRO -->
+    <h2 id="intro">Introdução</h2>
+    <p>Obrigado por adquirir o <strong>M-Auto VCI</strong>. Este manual descreve as informações do produto, ligação de hardware e utilização do software.</p>
+    <div class="callout">
+      <strong>Nota:</strong> Leia este manual antes de operar o dispositivo. O manual descreve o método de utilização operacional — o diagnóstico específico de veículos depende do software OEM instalado.
+    </div>
+    <p>O M-Auto VCI integra os três padrões da indústria automóvel, suporta todos os principais protocolos de barramento de veículos e oferece compatibilidade com diagnóstico ao nível OEM.</p>
+
+    <!-- FEATURES -->
+    <h2 id="features">Características</h2>
+    <h3>Um único dispositivo para múltiplos diagnósticos OEM</h3>
+    <ul class="feat">
+      <li>Suporta diagnóstico OEM das principais marcas mundiais — substitui equipamentos OEM individuais</li>
+      <li>Diagnóstico avançado totalmente compatível com ferramentas OEM originais</li>
+      <li>Instalação do driver OEM com um clique e atualização online</li>
+    </ul>
+
+    <h3>Interfaces de driver suportadas</h3>
+    <ul class="feat">
+      <li>SAE-J2534-1/2 Pass-Thru com EURO 5</li>
+      <li>ISO-22900-1/2 MVCI com D-PDU Driver</li>
+      <li>RP-1210A/B/C Heavy Duty VDA Driver</li>
+    </ul>
+
+    <h3>Reprogramação ECU via J2534</h3>
+    <ul class="feat">
+      <li>Atualização e calibração de software ECU</li>
+      <li>Flash e programação de substituição de ECU</li>
+    </ul>
+
+    <!-- COMPAT -->
+    <h2 id="compat">Compatibilidade OEM</h2>
+    <table class="compat">
+      <tr><th>#</th><th>Marca</th><th>Software</th><th>Estado</th></tr>
+      <tr><td>1</td><td>PASSTHRU</td><td>SAE-J2534-1/2 Pass-Thru</td><td><span class="badge-ok">Disponível</span></td></tr>
+      <tr><td>2</td><td>PORSCHE</td><td>PIWIS-II Tester</td><td><span class="badge-ok">Disponível</span></td></tr>
+      <tr><td>3</td><td>TOYOTA</td><td>Techstream TIS</td><td><span class="badge-ok">Disponível</span></td></tr>
+      <tr><td>4</td><td>HONDA</td><td>HDS — Honda Diagnostic System</td><td><span class="badge-ok">Disponível</span></td></tr>
+      <tr><td>5</td><td>SUBARU</td><td>Select Monitor SSM</td><td><span class="badge-ok">Disponível</span></td></tr>
+      <tr><td>6</td><td>VOLVO</td><td>VIDA</td><td><span class="badge-ok">Disponível</span></td></tr>
+      <tr><td>7</td><td>JLR</td><td>Jaguar &amp; Land Rover SDD</td><td><span class="badge-ok">Disponível</span></td></tr>
+      <tr><td>8</td><td>CHRYSLER</td><td>wiTECH Diagnostic</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>9</td><td>GM</td><td>GDS2 / Tech2Win</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>10</td><td>FORD</td><td>IDS</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>11</td><td>MAZDA</td><td>IDS / MDARS</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>12</td><td>KIA</td><td>GDS</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>13</td><td>HYUNDAI</td><td>GDS</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>14</td><td>MITSUBISHI</td><td>MUT-III</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>15</td><td>NISSAN</td><td>Consult-III Plus</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>16</td><td>VAG</td><td>VW &amp; Audi ODIS</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>17</td><td>BMW</td><td>RHEINGOLD ISTA/D</td><td><span class="badge-dev">Em dev.</span></td></tr>
+      <tr><td>18</td><td>MERCEDES</td><td>Xentry / DAS</td><td><span class="badge-dev">Em dev.</span></td></tr>
+    </table>
+
+    <!-- PROTOCOLS -->
+    <h2 id="protocols">Protocolos Suportados</h2>
+    <h3>Protocolos automóvel</h3>
+    <ul class="proto">
+      <li>ISO-9141 K-Line</li>
+      <li>ISO-14230 K-Line</li>
+      <li>ISO-15765 CAN</li>
+      <li>SAE-J1850-VPW (GM Class2)</li>
+      <li>SAE-J1850-PWM (Ford SCP)</li>
+      <li>ISO-11898-2 DWCAN</li>
+      <li>ISO-11898-3 DWFTCAN</li>
+      <li>SAE-J2411 Single Wire CAN (GMLAN)</li>
+      <li>VAG TP16 CAN</li>
+      <li>VAG TP20 CAN (SAE-J2819)</li>
+      <li>VAG KW81 (SAE J2818)</li>
+      <li>SAE-J2610 SCI (Chrysler)</li>
+      <li>SAE-J1567 CCD BUS (Chrysler)</li>
+      <li>SAE-J2740 GM ALDL</li>
+      <li>SAE-J2809 (Honda DIAG-H)</li>
+      <li>NISSAN DDL UART with CLOCK</li>
+      <li>BMW DS2</li>
+      <li>FORD UBP</li>
+    </ul>
+    <h3>Protocolos Heavy-Duty</h3>
+    <ul class="proto">
+      <li>CAN 125 / 250 / 500 / 1000</li>
+      <li>SAE-J1939 CAN</li>
+      <li>SAE-J1708/J1587 on RS485</li>
+      <li>CAT DATALINK (Caterpillar)</li>
+      <li>ATA DATALINK (Caterpillar)</li>
+    </ul>
+
+    <!-- SPECS -->
+    <h2 id="specs">Especificações Técnicas</h2>
+    <table class="specs">
+      <tr><th>Item</th><th>Descrição</th></tr>
+      <tr><td>Processador</td><td>32-bit 180MHz ARM</td></tr>
+      <tr><td>Memória</td><td>1 MB</td></tr>
+      <tr><td>Ligação PC — USB</td><td>USB 2.0</td></tr>
+      <tr><td>Ligação PC — LAN</td><td>10/100 Mbps Ethernet</td></tr>
+      <tr><td>Ligação PC — WiFi</td><td>802.11 b/g/n</td></tr>
+      <tr><td>Interface diagnóstico</td><td>24 PIN (adaptador OBD-II 16 PIN incluído)</td></tr>
+      <tr><td>Indicadores</td><td>4 LED: Power, Wireless, Host, Vehicle</td></tr>
+      <tr><td>Alimentação</td><td>Via veículo — DC 9V a 36V (12V e 24V)</td></tr>
+      <tr><td>Consumo</td><td>2W</td></tr>
+      <tr><td>Dimensões</td><td>175 × 110 × 45 mm</td></tr>
+      <tr><td>Peso (dispositivo)</td><td>0,6 Kg</td></tr>
+      <tr><td>Temp. de trabalho</td><td>−20°C a +70°C</td></tr>
+      <tr><td>Temp. de armazenamento</td><td>−40°C a +85°C</td></tr>
+      <tr><td>Certificações</td><td>CE (Europa) e FCC (EUA)</td></tr>
+    </table>
+
+    <!-- PACKAGE -->
+    <h2 id="package">Conteúdo da Embalagem</h2>
+    <ul class="feat">
+      <li>Dispositivo M-Auto VCI</li>
+      <li>Cabo USB / LAN</li>
+      <li>Cabo de diagnóstico OBD-II</li>
+      <li>Caixa e embalagem</li>
+    </ul>
+
+    <!-- CONNECTION -->
+    <h2 id="connection">Ligação ao Veículo</h2>
+    <div class="callout">
+      <strong>Antes de começar:</strong> Certifique-se que o software VCI Manager está instalado antes de ligar o dispositivo pela primeira vez.
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Ligue o cabo OBD-II à porta de diagnóstico de 16 pinos do veículo (normalmente sob o painel de instrumentos, lado esquerdo).</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Ligue o cabo USB ao computador — ou utilize WiFi/LAN para ligação sem fios.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Após o arranque do dispositivo, o LED de alimentação pisca e o buzzer emite um sinal sonoro de confirmação.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">No Windows, o driver USB é instalado automaticamente (Windows 7/8/10/11). O LED PC acende após a instalação bem-sucedida.</div>
+      </div>
+    </div>
+
+    <!-- VCI MANAGER -->
+    <h2 id="vcimanager">VCI Manager — Funções Básicas</h2>
+    <p>Após ligar o dispositivo, abra o <strong>VCI Manager</strong>. As informações do dispositivo aparecem em <em>Device Manager</em>.</p>
+    <table class="specs">
+      <tr><th>Função</th><th>Descrição</th></tr>
+      <tr><td>ReConnect</td><td>Restabelecer a ligação com o dispositivo</td></tr>
+      <tr><td>Firmware Upgrade</td><td>Atualizar o firmware do dispositivo a partir do servidor</td></tr>
+      <tr><td>License Update</td><td>Atualizar a licença do dispositivo a partir do servidor</td></tr>
+      <tr><td>Restart</td><td>Reiniciar o dispositivo</td></tr>
+      <tr><td>Self Test</td><td>Executar o programa de diagnóstico interno e gerar relatório</td></tr>
+      <tr><td>HW Test</td><td>Teste dos LED e buzzer do dispositivo</td></tr>
+    </table>
+
+    <!-- LICENSE -->
+    <h2 id="license">Licenças</h2>
+    <p>O estado das licenças pode ser consultado em <strong>Device License</strong> no VCI Manager. As licenças permitem acesso às funções de diagnóstico OEM de cada marca.</p>
+    <div class="callout">
+      Para adquirir ou renovar licenças, contacte <a href="https://m-auto.online" style="color:#60a5fa;">m-auto.online</a>. Indique o número de série do seu dispositivo (visível em <em>Device → Information</em>).
+    </div>
+
+    <!-- DIAGNOSIS -->
+    <h2 id="diagnosis">Diagnóstico OEM</h2>
+    <p>O VCI Manager gere as funções de diagnóstico de fábrica. Para utilizar as funções de diagnóstico originais é necessário instalar o driver correspondente a cada marca.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Clique na aplicação pretendida na janela de diagnóstico de veículos.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Instalar</strong> — o VCI Manager descarrega e instala o driver de diagnóstico mais recente do servidor.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Atualizar</strong> — atualiza o driver de diagnóstico já instalado.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Executar</strong> — abre a aplicação de diagnóstico OEM.</div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /wrap -->
+
+<div id="footer">
+  &copy; 2026 <a href="https://m-auto.online">M-Auto.online</a> — Todos os direitos reservados
+</div>
+
+<script>
+// Highlight active sidebar link on scroll
+(function() {
+  var links = document.getElementById('sidebar').getElementsByTagName('a');
+  var sections = [];
+  for (var i = 0; i < links.length; i++) {
+    var href = links[i].getAttribute('href');
+    if (href && href.charAt(0) === '#') {
+      var el = document.getElementById(href.substring(1));
+      if (el) sections.push({ link: links[i], el: el });
+    }
+  }
+  function onScroll() {
+    var scroll = window.pageYOffset || document.documentElement.scrollTop;
+    var active = sections[0];
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.offsetTop <= scroll + 80) active = sections[i];
+    }
+    for (var j = 0; j < sections.length; j++) {
+      sections[j].link.className = sections[j] === active ? 'active' : '';
+    }
+  }
+  if (window.addEventListener) window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
