@@ -103,7 +103,7 @@ table.compat td:first-child { color: #94a3b8; width: 5%; font-weight: 400; text-
 <div id="header">
   <div id="header-inner">
     <div id="header-left">
-      <a class="btn-back" href="vcx.html">&#8592; Menu</a>
+      <a class="btn-back" id="btn-back" href="vcx.html">&#8592; Menu</a>
     </div>
     <div id="header-mid">
       <div id="logo">M-AUTO<span>.online</span></div>
@@ -122,52 +122,55 @@ table.compat td:first-child { color: #94a3b8; width: 5%; font-weight: 400; text-
 <div id="wrap">
 
   <div id="sidebar">
-    <div class="nav-label">Conteúdo</div>
-    <a href="#intro">Introdução</a>
-    <a href="#features">Características</a>
-    <a href="#compat">Compatibilidade OEM</a>
-    <a href="#protocols">Protocolos</a>
-    <a href="#specs">Especificações</a>
-    <a href="#package">Embalagem</a>
-    <a href="#connection">Ligação ao veículo</a>
-    <a href="#vcimanager">VCI Manager</a>
-    <a href="#license">Licenças</a>
-    <a href="#diagnosis">Diagnóstico OEM</a>
+    <div class="nav-label" id="nav-label">Conteúdo</div>
+    <a href="#intro" id="nav-intro">Introdução</a>
+    <a href="#features" id="nav-features">Características</a>
+    <a href="#compat" id="nav-compat">Compatibilidade OEM</a>
+    <a href="#protocols" id="nav-protocols">Protocolos</a>
+    <a href="#specs" id="nav-specs">Especificações</a>
+    <a href="#package" id="nav-package">Embalagem</a>
+    <a href="#connection" id="nav-connection">Ligação ao veículo</a>
+    <a href="#vcimanager" id="nav-vcimanager">VCI Manager</a>
+    <a href="#license" id="nav-license">Licenças</a>
+    <a href="#diagnosis" id="nav-diagnosis">Diagnóstico OEM</a>
   </div>
 
   <div id="content">
 
-    <h1>M-Auto VCI</h1>
-    <p class="meta">Manual de Utilização &nbsp;·&nbsp; M-Auto.online &nbsp;·&nbsp; 2026</p>
+    <h1 id="h1-title">M-Auto VCI</h1>
+    <p class="meta" id="meta-line">Manual de Utilização &nbsp;·&nbsp; M-Auto.online &nbsp;·&nbsp; 2026</p>
 
-    <h2><a name="intro"></a>Introdução</h2>
-    <p>Obrigado por adquirir o <strong>M-Auto VCI</strong>. Este manual descreve as informações do produto, ligação de hardware e utilização do software.</p>
-    <div class="callout">Leia este manual antes de operar o dispositivo. O diagnóstico específico de veículos depende do software OEM instalado.</div>
-    <p>O M-Auto VCI integra os três padrões da indústria automóvel, suporta todos os principais protocolos de barramento e oferece compatibilidade com diagnóstico ao nível OEM para as principais marcas mundiais.</p>
+    <a name="intro"></a>
+    <h2 id="h2-intro">Introdução</h2>
+    <p id="p-intro1">Obrigado por adquirir o <strong>M-Auto VCI</strong>. Este manual descreve as informações do produto, ligação de hardware e utilização do software.</p>
+    <div class="callout" id="callout-intro">Leia este manual antes de operar o dispositivo. O diagnóstico específico de veículos depende do software OEM instalado.</div>
+    <p id="p-intro2">O M-Auto VCI integra os três padrões da indústria automóvel, suporta todos os principais protocolos de barramento e oferece compatibilidade com diagnóstico ao nível OEM para as principais marcas mundiais.</p>
 
-    <h2><a name="features"></a>Características</h2>
-    <h3>Um único dispositivo para múltiplos diagnósticos OEM</h3>
+    <a name="features"></a>
+    <h2 id="h2-features">Características</h2>
+    <h3 id="h3-feat1">Um único dispositivo para múltiplos diagnósticos OEM</h3>
     <ul class="feat">
-      <li>Suporta diagnóstico OEM das principais marcas — substitui equipamentos OEM individuais</li>
-      <li>Diagnóstico avançado totalmente compatível com ferramentas OEM originais</li>
-      <li>Instalação do driver OEM com um clique e atualização online</li>
+      <li id="feat-1a">Suporta diagnóstico OEM das principais marcas — substitui equipamentos OEM individuais</li>
+      <li id="feat-1b">Diagnóstico avançado totalmente compatível com ferramentas OEM originais</li>
+      <li id="feat-1c">Instalação do driver OEM com um clique e atualização online</li>
     </ul>
-    <h3>Interfaces de driver suportadas</h3>
+    <h3 id="h3-feat2">Interfaces de driver suportadas</h3>
     <ul class="feat">
-      <li>SAE-J2534-1/2 Pass-Thru com EURO 5</li>
-      <li>ISO-22900-1/2 MVCI com D-PDU Driver</li>
-      <li>RP-1210A/B/C Heavy Duty VDA Driver</li>
+      <li id="feat-2a">SAE-J2534-1/2 Pass-Thru com EURO 5</li>
+      <li id="feat-2b">ISO-22900-1/2 MVCI com D-PDU Driver</li>
+      <li id="feat-2c">RP-1210A/B/C Heavy Duty VDA Driver</li>
     </ul>
-    <h3>Reprogramação ECU via J2534</h3>
+    <h3 id="h3-feat3">Reprogramação ECU via J2534</h3>
     <ul class="feat">
-      <li>Atualização e calibração de software ECU</li>
-      <li>Flash e programação de substituição de ECU</li>
+      <li id="feat-3a">Atualização e calibração de software ECU</li>
+      <li id="feat-3b">Flash e programação de substituição de ECU</li>
     </ul>
 
-    <h2><a name="compat"></a>Compatibilidade OEM</h2>
-    <div class="highlight"><strong>Novidade:</strong> Suporte Mercedes-Benz / Daimler <strong>veículos pesados</strong> — Actros, Arocs, Atego, Antos via Xentry Heavy Duty.</div>
+    <a name="compat"></a>
+    <h2 id="h2-compat">Compatibilidade OEM</h2>
+    <div class="highlight" id="highlight-compat"><strong>Novidade:</strong> Suporte Mercedes-Benz / Daimler <strong>veículos pesados</strong> — Actros, Arocs, Atego, Antos via Xentry Heavy Duty.</div>
     <table class="compat">
-      <tr><th>#</th><th>Marca</th><th>Software</th><th>Estado</th></tr>
+      <tr><th>#</th><th id="th-brand">Marca</th><th>Software</th><th id="th-status">Estado</th></tr>
       <tr><td>1</td><td>PASSTHRU</td><td>SAE-J2534-1/2</td><td><span class="badge-ok">Disponível</span></td></tr>
       <tr><td>2</td><td>PORSCHE</td><td>PIWIS-II Tester</td><td><span class="badge-ok">Disponível</span></td></tr>
       <tr><td>3</td><td>TOYOTA</td><td>Techstream TIS</td><td><span class="badge-ok">Disponível</span></td></tr>
@@ -188,8 +191,9 @@ table.compat td:first-child { color: #94a3b8; width: 5%; font-weight: 400; text-
       <tr><td>18</td><td>MERCEDES</td><td>Xentry / DAS / Xentry Heavy Duty</td><td><span class="badge-new">Novidade</span></td></tr>
     </table>
 
-    <h2><a name="protocols"></a>Protocolos Suportados</h2>
-    <h3>Automóvel</h3>
+    <a name="protocols"></a>
+    <h2 id="h2-protocols">Protocolos Suportados</h2>
+    <h3 id="h3-auto">Automóvel</h3>
     <ul class="proto">
       <li>ISO-9141 K-Line</li><li>ISO-14230 K-Line</li>
       <li>ISO-15765 CAN</li><li>SAE-J1850-VPW (GM)</li>
@@ -199,74 +203,80 @@ table.compat td:first-child { color: #94a3b8; width: 5%; font-weight: 400; text-
       <li>SAE-J2610 SCI (Chrysler)</li><li>SAE-J1567 CCD BUS</li>
       <li>BMW DS2</li><li>FORD UBP</li>
     </ul>
-    <h3>Heavy-Duty</h3>
+    <h3 id="h3-heavy">Heavy-Duty</h3>
     <ul class="proto">
       <li>CAN 125/250/500/1000</li><li>SAE-J1939 CAN</li>
       <li>SAE-J1708/J1587 RS485</li><li>CAT DATALINK</li>
     </ul>
 
-    <h2><a name="specs"></a>Especificações Técnicas</h2>
+    <a name="specs"></a>
+    <h2 id="h2-specs">Especificações Técnicas</h2>
     <table>
-      <tr><th>Item</th><th>Descrição</th></tr>
-      <tr><td>Processador</td><td>32-bit 180 MHz ARM</td></tr>
-      <tr><td>Memória</td><td>1 MB</td></tr>
+      <tr><th id="th-spec-item">Item</th><th id="th-spec-desc">Descrição</th></tr>
+      <tr><td id="spec-proc">Processador</td><td>32-bit 180 MHz ARM</td></tr>
+      <tr><td id="spec-mem">Memória</td><td>1 MB</td></tr>
       <tr><td>USB</td><td>USB 2.0</td></tr>
-      <tr><td>LAN</td><td>Ethernet 10/100 Mbps</td></tr>
+      <tr><td id="spec-lan">LAN</td><td>Ethernet 10/100 Mbps</td></tr>
       <tr><td>WiFi</td><td>802.11 b/g/n</td></tr>
-      <tr><td>Interface diagnóstico</td><td>24 PIN com adaptador OBD-II 16 PIN</td></tr>
-      <tr><td>LED</td><td>Power · Wireless · Host · Vehicle</td></tr>
-      <tr><td>Alimentação</td><td>DC 9V–36V (12V e 24V)</td></tr>
-      <tr><td>Consumo</td><td>2 W</td></tr>
-      <tr><td>Dimensões</td><td>175 × 110 × 45 mm</td></tr>
-      <tr><td>Peso</td><td>0,6 Kg</td></tr>
-      <tr><td>Temp. trabalho</td><td>−20 °C a +70 °C</td></tr>
-      <tr><td>Certificações</td><td>CE · FCC</td></tr>
+      <tr><td id="spec-diag">Interface diagnóstico</td><td>24 PIN com adaptador OBD-II 16 PIN</td></tr>
+      <tr><td id="spec-led">LED</td><td>Power · Wireless · Host · Vehicle</td></tr>
+      <tr><td id="spec-power">Alimentação</td><td>DC 9V–36V (12V e 24V)</td></tr>
+      <tr><td id="spec-cons">Consumo</td><td>2 W</td></tr>
+      <tr><td id="spec-dim">Dimensões</td><td>175 × 110 × 45 mm</td></tr>
+      <tr><td id="spec-weight">Peso</td><td>0,6 Kg</td></tr>
+      <tr><td id="spec-temp">Temp. trabalho</td><td>−20 °C a +70 °C</td></tr>
+      <tr><td id="spec-cert">Certificações</td><td>CE · FCC</td></tr>
     </table>
 
-    <h2><a name="package"></a>Conteúdo da Embalagem</h2>
+    <a name="package"></a>
+    <h2 id="h2-package">Conteúdo da Embalagem</h2>
     <ul class="feat">
-      <li>Dispositivo M-Auto VCI</li>
-      <li>Cabo USB / LAN</li>
-      <li>Cabo de diagnóstico OBD-II</li>
-      <li>Caixa e embalagem</li>
+      <li id="pkg-1">Dispositivo M-Auto VCI</li>
+      <li id="pkg-2">Cabo USB / LAN</li>
+      <li id="pkg-3">Cabo de diagnóstico OBD-II</li>
+      <li id="pkg-4">Caixa e embalagem</li>
     </ul>
 
-    <h2><a name="connection"></a>Ligação ao Veículo</h2>
-    <div class="callout"><strong>Antes de começar:</strong> Certifique-se que o VCI Manager está instalado.</div>
-    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">1</div></div><div class="step-text">Ligue o cabo OBD-II à porta de diagnóstico de 16 pinos do veículo (sob o painel, lado esquerdo).</div></div></div>
-    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">2</div></div><div class="step-text">Ligue o cabo USB ao computador — ou utilize WiFi/LAN para ligação sem fios.</div></div></div>
-    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">3</div></div><div class="step-text">Após arranque, o LED Power pisca e o buzzer emite sinal de confirmação.</div></div></div>
-    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">4</div></div><div class="step-text">Driver USB instalado automaticamente (Windows 7/8/10/11). LED PC acende após instalação.</div></div></div>
+    <a name="connection"></a>
+    <h2 id="h2-connection">Ligação ao Veículo</h2>
+    <div class="callout" id="callout-conn"><strong>Antes de começar:</strong> Certifique-se que o VCI Manager está instalado.</div>
+    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">1</div></div><div class="step-text" id="conn-1">Ligue o cabo OBD-II à porta de diagnóstico de 16 pinos do veículo (sob o painel, lado esquerdo).</div></div></div>
+    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">2</div></div><div class="step-text" id="conn-2">Ligue o cabo USB ao computador — ou utilize WiFi/LAN para ligação sem fios.</div></div></div>
+    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">3</div></div><div class="step-text" id="conn-3">Após arranque, o LED Power pisca e o buzzer emite sinal de confirmação.</div></div></div>
+    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">4</div></div><div class="step-text" id="conn-4">Driver USB instalado automaticamente (Windows 7/8/10/11). LED PC acende após instalação.</div></div></div>
 
-    <h2><a name="vcimanager"></a>VCI Manager — Funções Básicas</h2>
-    <p>Abra o <strong>VCI Manager</strong> após ligar o dispositivo. As informações aparecem em <em>Device Manager</em>.</p>
+    <a name="vcimanager"></a>
+    <h2 id="h2-vcimanager">VCI Manager — Funções Básicas</h2>
+    <p id="p-vcimanager">Abra o <strong>VCI Manager</strong> após ligar o dispositivo. As informações aparecem em <em>Device Manager</em>.</p>
     <table>
-      <tr><th>Função</th><th>Descrição</th></tr>
-      <tr><td>ReConnect</td><td>Restabelecer ligação com o dispositivo</td></tr>
-      <tr><td>Firmware Upgrade</td><td>Atualizar firmware do servidor</td></tr>
-      <tr><td>License Update</td><td>Atualizar licença do servidor</td></tr>
-      <tr><td>Restart</td><td>Reiniciar o dispositivo</td></tr>
-      <tr><td>Self Test</td><td>Diagnóstico interno com relatório</td></tr>
-      <tr><td>HW Test</td><td>Teste dos LED e buzzer</td></tr>
-      <tr><td>OBD Voltage</td><td>Leitura da tensão da bateria via OBD-II</td></tr>
+      <tr><th id="th-vci-func">Função</th><th id="th-vci-desc">Descrição</th></tr>
+      <tr><td>ReConnect</td><td id="vci-reconnect">Restabelecer ligação com o dispositivo</td></tr>
+      <tr><td>Firmware Upgrade</td><td id="vci-firmware">Atualizar firmware do servidor</td></tr>
+      <tr><td>License Update</td><td id="vci-lic-upd">Atualizar licença do servidor</td></tr>
+      <tr><td>Restart</td><td id="vci-restart">Reiniciar o dispositivo</td></tr>
+      <tr><td>Self Test</td><td id="vci-selftest">Diagnóstico interno com relatório</td></tr>
+      <tr><td>HW Test</td><td id="vci-hwtest">Teste dos LED e buzzer</td></tr>
+      <tr><td>OBD Voltage</td><td id="vci-voltage">Leitura da tensão da bateria via OBD-II</td></tr>
     </table>
 
-    <h2><a name="license"></a>Licenças</h2>
-    <p>Consulte o estado das licenças em <strong>Device License</strong> no VCI Manager.</p>
-    <div class="callout">Para adquirir ou renovar licenças contacte <a onclick="openUrl('https://m-auto.online'); return false;" href="#">m-auto.online</a>. Indique o número de série — visível em <em>Device → Information</em>.</div>
+    <a name="license"></a>
+    <h2 id="h2-license">Licenças</h2>
+    <p id="p-license">Consulte o estado das licenças em <strong>Device License</strong> no VCI Manager.</p>
+    <div class="callout" id="callout-license">Para adquirir ou renovar licenças contacte <a onclick="openUrl('https://m-auto.online'); return false;" href="#">m-auto.online</a>. Indique o número de série — visível em <em>Device &rarr; Information</em>.</div>
 
-    <h2><a name="diagnosis"></a>Diagnóstico OEM</h2>
-    <p>O VCI Manager gere as funções de diagnóstico originais. Instale o driver correspondente a cada marca.</p>
-    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">1</div></div><div class="step-text">Clique na aplicação pretendida na janela de diagnóstico de veículos.</div></div></div>
-    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">2</div></div><div class="step-text"><strong>Instalar</strong> — descarrega e instala o driver mais recente do servidor.</div></div></div>
-    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">3</div></div><div class="step-text"><strong>Atualizar</strong> — atualiza o driver já instalado.</div></div></div>
-    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">4</div></div><div class="step-text"><strong>Executar</strong> — abre a aplicação de diagnóstico OEM.</div></div></div>
+    <a name="diagnosis"></a>
+    <h2 id="h2-diagnosis">Diagnóstico OEM</h2>
+    <p id="p-diagnosis">O VCI Manager gere as funções de diagnóstico originais. Instale o driver correspondente a cada marca.</p>
+    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">1</div></div><div class="step-text" id="diag-1">Clique na aplicação pretendida na janela de diagnóstico de veículos.</div></div></div>
+    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">2</div></div><div class="step-text" id="diag-2"><strong>Instalar</strong> — descarrega e instala o driver mais recente do servidor.</div></div></div>
+    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">3</div></div><div class="step-text" id="diag-3"><strong>Atualizar</strong> — atualiza o driver já instalado.</div></div></div>
+    <div class="step"><div class="step-row"><div class="step-num"><div class="step-num-box">4</div></div><div class="step-text" id="diag-4"><strong>Executar</strong> — abre a aplicação de diagnóstico OEM.</div></div></div>
 
   </div>
 </div>
 
 <div id="footer">
-  &copy; 2026 M-Auto.online &mdash; Todos os direitos reservados
+  <span id="footer-text">&copy; 2026 M-Auto.online &mdash; Todos os direitos reservados</span>
 </div>
 
 <script>
@@ -286,22 +296,339 @@ function openUrl(url) {
     }
   } catch(e) { window.location.href = url; }
 }
-var _titles = { pt:'Manual VCI', en:'VCI Manual', fr:'Manuel VCI', de:'VCI Handbuch' };
+
+var T = {
+  pt: {
+    back: '&#8592; Menu', title: 'Manual VCI',
+    navLabel: 'Conteúdo', navIntro: 'Introdução', navFeatures: 'Características',
+    navCompat: 'Compatibilidade OEM', navProtocols: 'Protocolos', navSpecs: 'Especificações',
+    navPackage: 'Embalagem', navConnection: 'Ligação ao veículo', navVcimanager: 'VCI Manager',
+    navLicense: 'Licenças', navDiagnosis: 'Diagnóstico OEM',
+    h1: 'M-Auto VCI', meta: 'Manual de Utilização &nbsp;·&nbsp; M-Auto.online &nbsp;·&nbsp; 2026',
+    h2Intro: 'Introdução',
+    pIntro1: 'Obrigado por adquirir o <strong>M-Auto VCI</strong>. Este manual descreve as informações do produto, ligação de hardware e utilização do software.',
+    calloutIntro: 'Leia este manual antes de operar o dispositivo. O diagnóstico específico de veículos depende do software OEM instalado.',
+    pIntro2: 'O M-Auto VCI integra os três padrões da indústria automóvel, suporta todos os principais protocolos de barramento e oferece compatibilidade com diagnóstico ao nível OEM para as principais marcas mundiais.',
+    h2Features: 'Características',
+    h3Feat1: 'Um único dispositivo para múltiplos diagnósticos OEM',
+    feat1a: 'Suporta diagnóstico OEM das principais marcas — substitui equipamentos OEM individuais',
+    feat1b: 'Diagnóstico avançado totalmente compatível com ferramentas OEM originais',
+    feat1c: 'Instalação do driver OEM com um clique e atualização online',
+    h3Feat2: 'Interfaces de driver suportadas',
+    feat2a: 'SAE-J2534-1/2 Pass-Thru com EURO 5', feat2b: 'ISO-22900-1/2 MVCI com D-PDU Driver', feat2c: 'RP-1210A/B/C Heavy Duty VDA Driver',
+    h3Feat3: 'Reprogramação ECU via J2534',
+    feat3a: 'Atualização e calibração de software ECU', feat3b: 'Flash e programação de substituição de ECU',
+    h2Compat: 'Compatibilidade OEM',
+    highlightCompat: '<strong>Novidade:</strong> Suporte Mercedes-Benz / Daimler <strong>veículos pesados</strong> — Actros, Arocs, Atego, Antos via Xentry Heavy Duty.',
+    thBrand: 'Marca', thStatus: 'Estado', badgeOk: 'Disponível', badgeNew: 'Novidade',
+    h2Protocols: 'Protocolos Suportados', h3Auto: 'Automóvel', h3Heavy: 'Heavy-Duty',
+    h2Specs: 'Especificações Técnicas', thSpecItem: 'Item', thSpecDesc: 'Descrição',
+    specProc: 'Processador', specMem: 'Memória', specLan: 'LAN',
+    specDiag: 'Interface diagnóstico', specLed: 'LED', specPower: 'Alimentação',
+    specCons: 'Consumo', specDim: 'Dimensões', specWeight: 'Peso',
+    specTemp: 'Temp. trabalho', specCert: 'Certificações',
+    h2Package: 'Conteúdo da Embalagem',
+    pkg1: 'Dispositivo M-Auto VCI', pkg2: 'Cabo USB / LAN', pkg3: 'Cabo de diagnóstico OBD-II', pkg4: 'Caixa e embalagem',
+    h2Connection: 'Ligação ao Veículo',
+    calloutConn: '<strong>Antes de começar:</strong> Certifique-se que o VCI Manager está instalado.',
+    conn1: 'Ligue o cabo OBD-II à porta de diagnóstico de 16 pinos do veículo (sob o painel, lado esquerdo).',
+    conn2: 'Ligue o cabo USB ao computador — ou utilize WiFi/LAN para ligação sem fios.',
+    conn3: 'Após arranque, o LED Power pisca e o buzzer emite sinal de confirmação.',
+    conn4: 'Driver USB instalado automaticamente (Windows 7/8/10/11). LED PC acende após instalação.',
+    h2Vcimanager: 'VCI Manager — Funções Básicas',
+    pVcimanager: 'Abra o <strong>VCI Manager</strong> após ligar o dispositivo. As informações aparecem em <em>Device Manager</em>.',
+    thVciFunc: 'Função', thVciDesc: 'Descrição',
+    vciReconnect: 'Restabelecer ligação com o dispositivo', vciFirmware: 'Atualizar firmware do servidor',
+    vciLicUpd: 'Atualizar licença do servidor', vciRestart: 'Reiniciar o dispositivo',
+    vciSelftest: 'Diagnóstico interno com relatório', vciHwtest: 'Teste dos LED e buzzer',
+    vciVoltage: 'Leitura da tensão da bateria via OBD-II',
+    h2License: 'Licenças',
+    pLicense: 'Consulte o estado das licenças em <strong>Device License</strong> no VCI Manager.',
+    calloutLicense: 'Para adquirir ou renovar licenças contacte <a onclick="openUrl(\'https://m-auto.online\'); return false;" href="#">m-auto.online</a>. Indique o número de série — visível em <em>Device &rarr; Information</em>.',
+    h2Diagnosis: 'Diagnóstico OEM',
+    pDiagnosis: 'O VCI Manager gere as funções de diagnóstico originais. Instale o driver correspondente a cada marca.',
+    diag1: 'Clique na aplicação pretendida na janela de diagnóstico de veículos.',
+    diag2: '<strong>Instalar</strong> — descarrega e instala o driver mais recente do servidor.',
+    diag3: '<strong>Atualizar</strong> — atualiza o driver já instalado.',
+    diag4: '<strong>Executar</strong> — abre a aplicação de diagnóstico OEM.',
+    footer: '&copy; 2026 M-Auto.online &mdash; Todos os direitos reservados'
+  },
+  en: {
+    back: '&#8592; Menu', title: 'VCI Manual',
+    navLabel: 'Contents', navIntro: 'Introduction', navFeatures: 'Features',
+    navCompat: 'OEM Compatibility', navProtocols: 'Protocols', navSpecs: 'Specifications',
+    navPackage: 'Package', navConnection: 'Vehicle Connection', navVcimanager: 'VCI Manager',
+    navLicense: 'Licenses', navDiagnosis: 'OEM Diagnosis',
+    h1: 'M-Auto VCI', meta: 'User Manual &nbsp;·&nbsp; M-Auto.online &nbsp;·&nbsp; 2026',
+    h2Intro: 'Introduction',
+    pIntro1: 'Thank you for purchasing the <strong>M-Auto VCI</strong>. This manual describes product information, hardware connection and software usage.',
+    calloutIntro: 'Read this manual before operating the device. Vehicle-specific diagnostics depends on the OEM software installed.',
+    pIntro2: 'The M-Auto VCI integrates the three automotive industry standards, supports all major bus protocols and offers OEM-level diagnostic compatibility for the world\'s leading brands.',
+    h2Features: 'Features',
+    h3Feat1: 'A single device for multiple OEM diagnostics',
+    feat1a: 'Supports OEM diagnostics for leading brands — replaces individual OEM equipment',
+    feat1b: 'Advanced diagnostics fully compatible with original OEM tools',
+    feat1c: 'One-click OEM driver installation and online update',
+    h3Feat2: 'Supported driver interfaces',
+    feat2a: 'SAE-J2534-1/2 Pass-Thru with EURO 5', feat2b: 'ISO-22900-1/2 MVCI with D-PDU Driver', feat2c: 'RP-1210A/B/C Heavy Duty VDA Driver',
+    h3Feat3: 'ECU Reprogramming via J2534',
+    feat3a: 'ECU software update and calibration', feat3b: 'ECU replacement flash and programming',
+    h2Compat: 'OEM Compatibility',
+    highlightCompat: '<strong>New:</strong> Mercedes-Benz / Daimler <strong>heavy vehicle</strong> support — Actros, Arocs, Atego, Antos via Xentry Heavy Duty.',
+    thBrand: 'Brand', thStatus: 'Status', badgeOk: 'Available', badgeNew: 'New',
+    h2Protocols: 'Supported Protocols', h3Auto: 'Automotive', h3Heavy: 'Heavy-Duty',
+    h2Specs: 'Technical Specifications', thSpecItem: 'Item', thSpecDesc: 'Description',
+    specProc: 'Processor', specMem: 'Memory', specLan: 'LAN',
+    specDiag: 'Diagnostic interface', specLed: 'LED', specPower: 'Power supply',
+    specCons: 'Consumption', specDim: 'Dimensions', specWeight: 'Weight',
+    specTemp: 'Working temp.', specCert: 'Certifications',
+    h2Package: 'Package Contents',
+    pkg1: 'M-Auto VCI device', pkg2: 'USB / LAN cable', pkg3: 'OBD-II diagnostic cable', pkg4: 'Box and packaging',
+    h2Connection: 'Vehicle Connection',
+    calloutConn: '<strong>Before starting:</strong> Make sure VCI Manager is installed.',
+    conn1: 'Connect the OBD-II cable to the vehicle\'s 16-pin diagnostic port (under the dashboard, left side).',
+    conn2: 'Connect the USB cable to the computer — or use WiFi/LAN for wireless connection.',
+    conn3: 'After startup, the Power LED flashes and the buzzer emits a confirmation signal.',
+    conn4: 'USB driver installed automatically (Windows 7/8/10/11). PC LED lights up after installation.',
+    h2Vcimanager: 'VCI Manager — Basic Functions',
+    pVcimanager: 'Open <strong>VCI Manager</strong> after connecting the device. Information appears in <em>Device Manager</em>.',
+    thVciFunc: 'Function', thVciDesc: 'Description',
+    vciReconnect: 'Re-establish connection with the device', vciFirmware: 'Update server firmware',
+    vciLicUpd: 'Update server license', vciRestart: 'Restart the device',
+    vciSelftest: 'Internal diagnostics with report', vciHwtest: 'LED and buzzer test',
+    vciVoltage: 'Battery voltage reading via OBD-II',
+    h2License: 'Licenses',
+    pLicense: 'Check license status in <strong>Device License</strong> in VCI Manager.',
+    calloutLicense: 'To purchase or renew licenses contact <a onclick="openUrl(\'https://m-auto.online\'); return false;" href="#">m-auto.online</a>. Provide the serial number — visible in <em>Device &rarr; Information</em>.',
+    h2Diagnosis: 'OEM Diagnosis',
+    pDiagnosis: 'VCI Manager manages the original diagnostic functions. Install the corresponding driver for each brand.',
+    diag1: 'Click on the desired application in the vehicle diagnostics window.',
+    diag2: '<strong>Install</strong> — downloads and installs the latest driver from the server.',
+    diag3: '<strong>Update</strong> — updates the already installed driver.',
+    diag4: '<strong>Run</strong> — opens the OEM diagnostic application.',
+    footer: '&copy; 2026 M-Auto.online &mdash; All rights reserved'
+  },
+  fr: {
+    back: '&#8592; Menu', title: 'Manuel VCI',
+    navLabel: 'Sommaire', navIntro: 'Introduction', navFeatures: 'Caractéristiques',
+    navCompat: 'Compatibilité OEM', navProtocols: 'Protocoles', navSpecs: 'Spécifications',
+    navPackage: 'Emballage', navConnection: 'Connexion au véhicule', navVcimanager: 'VCI Manager',
+    navLicense: 'Licences', navDiagnosis: 'Diagnostic OEM',
+    h1: 'M-Auto VCI', meta: 'Manuel d\'utilisation &nbsp;·&nbsp; M-Auto.online &nbsp;·&nbsp; 2026',
+    h2Intro: 'Introduction',
+    pIntro1: 'Merci d\'avoir acquis le <strong>M-Auto VCI</strong>. Ce manuel décrit les informations produit, la connexion matérielle et l\'utilisation du logiciel.',
+    calloutIntro: 'Lisez ce manuel avant d\'utiliser l\'appareil. Le diagnostic spécifique aux véhicules dépend du logiciel OEM installé.',
+    pIntro2: 'Le M-Auto VCI intègre les trois normes de l\'industrie automobile, prend en charge tous les principaux protocoles de bus et offre une compatibilité de diagnostic au niveau OEM pour les principales marques mondiales.',
+    h2Features: 'Caractéristiques',
+    h3Feat1: 'Un seul appareil pour plusieurs diagnostics OEM',
+    feat1a: 'Prend en charge le diagnostic OEM des principales marques — remplace les équipements OEM individuels',
+    feat1b: 'Diagnostic avancé entièrement compatible avec les outils OEM d\'origine',
+    feat1c: 'Installation du pilote OEM en un clic et mise à jour en ligne',
+    h3Feat2: 'Interfaces de pilote prises en charge',
+    feat2a: 'SAE-J2534-1/2 Pass-Thru avec EURO 5', feat2b: 'ISO-22900-1/2 MVCI avec D-PDU Driver', feat2c: 'RP-1210A/B/C Heavy Duty VDA Driver',
+    h3Feat3: 'Reprogrammation ECU via J2534',
+    feat3a: 'Mise à jour et calibration du logiciel ECU', feat3b: 'Flash et programmation de remplacement ECU',
+    h2Compat: 'Compatibilité OEM',
+    highlightCompat: '<strong>Nouveau :</strong> Support Mercedes-Benz / Daimler <strong>véhicules lourds</strong> — Actros, Arocs, Atego, Antos via Xentry Heavy Duty.',
+    thBrand: 'Marque', thStatus: 'Statut', badgeOk: 'Disponible', badgeNew: 'Nouveau',
+    h2Protocols: 'Protocoles pris en charge', h3Auto: 'Automobile', h3Heavy: 'Heavy-Duty',
+    h2Specs: 'Spécifications Techniques', thSpecItem: 'Élément', thSpecDesc: 'Description',
+    specProc: 'Processeur', specMem: 'Mémoire', specLan: 'LAN',
+    specDiag: 'Interface diagnostic', specLed: 'LED', specPower: 'Alimentation',
+    specCons: 'Consommation', specDim: 'Dimensions', specWeight: 'Poids',
+    specTemp: 'Temp. travail', specCert: 'Certifications',
+    h2Package: 'Contenu de l\'emballage',
+    pkg1: 'Appareil M-Auto VCI', pkg2: 'Câble USB / LAN', pkg3: 'Câble de diagnostic OBD-II', pkg4: 'Boîte et emballage',
+    h2Connection: 'Connexion au véhicule',
+    calloutConn: '<strong>Avant de commencer :</strong> Assurez-vous que VCI Manager est installé.',
+    conn1: 'Branchez le câble OBD-II sur le port de diagnostic 16 broches du véhicule (sous le tableau de bord, côté gauche).',
+    conn2: 'Connectez le câble USB à l\'ordinateur — ou utilisez WiFi/LAN pour une connexion sans fil.',
+    conn3: 'Après le démarrage, la LED Power clignote et le buzzer émet un signal de confirmation.',
+    conn4: 'Pilote USB installé automatiquement (Windows 7/8/10/11). La LED PC s\'allume après l\'installation.',
+    h2Vcimanager: 'VCI Manager — Fonctions de base',
+    pVcimanager: 'Ouvrez le <strong>VCI Manager</strong> après avoir connecté l\'appareil. Les informations apparaissent dans <em>Device Manager</em>.',
+    thVciFunc: 'Fonction', thVciDesc: 'Description',
+    vciReconnect: 'Rétablir la connexion avec l\'appareil', vciFirmware: 'Mettre à jour le firmware du serveur',
+    vciLicUpd: 'Mettre à jour la licence du serveur', vciRestart: 'Redémarrer l\'appareil',
+    vciSelftest: 'Diagnostic interne avec rapport', vciHwtest: 'Test des LED et du buzzer',
+    vciVoltage: 'Lecture de la tension de la batterie via OBD-II',
+    h2License: 'Licences',
+    pLicense: 'Consultez l\'état des licences dans <strong>Device License</strong> dans VCI Manager.',
+    calloutLicense: 'Pour acquérir ou renouveler des licences, contactez <a onclick="openUrl(\'https://m-auto.online\'); return false;" href="#">m-auto.online</a>. Indiquez le numéro de série — visible dans <em>Device &rarr; Information</em>.',
+    h2Diagnosis: 'Diagnostic OEM',
+    pDiagnosis: 'VCI Manager gère les fonctions de diagnostic d\'origine. Installez le pilote correspondant à chaque marque.',
+    diag1: 'Cliquez sur l\'application souhaitée dans la fenêtre de diagnostic du véhicule.',
+    diag2: '<strong>Installer</strong> — télécharge et installe le dernier pilote depuis le serveur.',
+    diag3: '<strong>Mettre à jour</strong> — met à jour le pilote déjà installé.',
+    diag4: '<strong>Exécuter</strong> — ouvre l\'application de diagnostic OEM.',
+    footer: '&copy; 2026 M-Auto.online &mdash; Tous droits réservés'
+  },
+  de: {
+    back: '&#8592; Men&#252;', title: 'VCI Handbuch',
+    navLabel: 'Inhalt', navIntro: 'Einleitung', navFeatures: 'Merkmale',
+    navCompat: 'OEM-Kompatibilit&#228;t', navProtocols: 'Protokolle', navSpecs: 'Spezifikationen',
+    navPackage: 'Lieferumfang', navConnection: 'Fahrzeuganschluss', navVcimanager: 'VCI Manager',
+    navLicense: 'Lizenzen', navDiagnosis: 'OEM-Diagnose',
+    h1: 'M-Auto VCI', meta: 'Benutzerhandbuch &nbsp;·&nbsp; M-Auto.online &nbsp;·&nbsp; 2026',
+    h2Intro: 'Einleitung',
+    pIntro1: 'Vielen Dank f&#252;r den Kauf des <strong>M-Auto VCI</strong>. Dieses Handbuch beschreibt Produktinformationen, Hardware-Anschluss und Softwarenutzung.',
+    calloutIntro: 'Lesen Sie dieses Handbuch vor der Inbetriebnahme. Die fahrzeugspezifische Diagnose h&#228;ngt von der installierten OEM-Software ab.',
+    pIntro2: 'Der M-Auto VCI integriert die drei Automobilindustriestandards, unterst&#252;tzt alle wichtigen Bus-Protokolle und bietet OEM-Diagnosekompatibilit&#228;t f&#252;r die f&#252;hrenden Weltmarken.',
+    h2Features: 'Merkmale',
+    h3Feat1: 'Ein einziges Ger&#228;t f&#252;r mehrere OEM-Diagnosen',
+    feat1a: 'Unterst&#252;tzt OEM-Diagnose f&#252;hrender Marken — ersetzt individuelle OEM-Ger&#228;te',
+    feat1b: 'Erweiterte Diagnose vollst&#228;ndig kompatibel mit Original-OEM-Werkzeugen',
+    feat1c: 'Ein-Klick OEM-Treiberinstallation und Online-Update',
+    h3Feat2: 'Unterst&#252;tzte Treiber-Schnittstellen',
+    feat2a: 'SAE-J2534-1/2 Pass-Thru mit EURO 5', feat2b: 'ISO-22900-1/2 MVCI mit D-PDU Driver', feat2c: 'RP-1210A/B/C Heavy Duty VDA Driver',
+    h3Feat3: 'ECU-Neuprogrammierung via J2534',
+    feat3a: 'ECU-Software-Update und -Kalibrierung', feat3b: 'ECU-Austausch-Flash und -Programmierung',
+    h2Compat: 'OEM-Kompatibilit&#228;t',
+    highlightCompat: '<strong>Neu:</strong> Mercedes-Benz / Daimler <strong>Schwerlastfahrzeuge</strong> — Actros, Arocs, Atego, Antos via Xentry Heavy Duty.',
+    thBrand: 'Marke', thStatus: 'Status', badgeOk: 'Verf&#252;gbar', badgeNew: 'Neu',
+    h2Protocols: 'Unterst&#252;tzte Protokolle', h3Auto: 'Automobil', h3Heavy: 'Heavy-Duty',
+    h2Specs: 'Technische Spezifikationen', thSpecItem: 'Element', thSpecDesc: 'Beschreibung',
+    specProc: 'Prozessor', specMem: 'Speicher', specLan: 'LAN',
+    specDiag: 'Diagnoseschnittstelle', specLed: 'LED', specPower: 'Stromversorgung',
+    specCons: 'Verbrauch', specDim: 'Abmessungen', specWeight: 'Gewicht',
+    specTemp: 'Betriebstemp.', specCert: 'Zertifizierungen',
+    h2Package: 'Lieferumfang',
+    pkg1: 'M-Auto VCI Ger&#228;t', pkg2: 'USB / LAN Kabel', pkg3: 'OBD-II Diagnosekabel', pkg4: 'Karton und Verpackung',
+    h2Connection: 'Fahrzeuganschluss',
+    calloutConn: '<strong>Vor dem Start:</strong> Stellen Sie sicher, dass VCI Manager installiert ist.',
+    conn1: 'Schlie&#223;en Sie das OBD-II-Kabel an den 16-poligen Diagnoseanschluss des Fahrzeugs an (unter dem Armaturenbrett, linke Seite).',
+    conn2: 'Verbinden Sie das USB-Kabel mit dem Computer — oder nutzen Sie WiFi/LAN f&#252;r eine kabellose Verbindung.',
+    conn3: 'Nach dem Start blinkt die Power-LED und der Summer gibt ein Best&#228;tigungssignal aus.',
+    conn4: 'USB-Treiber wird automatisch installiert (Windows 7/8/10/11). PC-LED leuchtet nach der Installation auf.',
+    h2Vcimanager: 'VCI Manager — Grundfunktionen',
+    pVcimanager: '&#214;ffnen Sie den <strong>VCI Manager</strong> nach dem Anschlie&#223;en des Ger&#228;ts. Informationen erscheinen im <em>Device Manager</em>.',
+    thVciFunc: 'Funktion', thVciDesc: 'Beschreibung',
+    vciReconnect: 'Verbindung mit dem Ger&#228;t wiederherstellen', vciFirmware: 'Server-Firmware aktualisieren',
+    vciLicUpd: 'Server-Lizenz aktualisieren', vciRestart: 'Ger&#228;t neu starten',
+    vciSelftest: 'Interne Diagnose mit Bericht', vciHwtest: 'LED- und Summer-Test',
+    vciVoltage: 'Batteriespannung &#252;ber OBD-II lesen',
+    h2License: 'Lizenzen',
+    pLicense: '&#220;berpr&#252;fen Sie den Lizenzstatus in <strong>Device License</strong> im VCI Manager.',
+    calloutLicense: 'Um Lizenzen zu erwerben oder zu erneuern, kontaktieren Sie <a onclick="openUrl(\'https://m-auto.online\'); return false;" href="#">m-auto.online</a>. Geben Sie die Seriennummer an — sichtbar unter <em>Device &rarr; Information</em>.',
+    h2Diagnosis: 'OEM-Diagnose',
+    pDiagnosis: 'VCI Manager verwaltet die originalen Diagnosefunktionen. Installieren Sie den entsprechenden Treiber f&#252;r jede Marke.',
+    diag1: 'Klicken Sie auf die gew&#252;nschte Anwendung im Fahrzeugdiagnosefenster.',
+    diag2: '<strong>Installieren</strong> — l&#228;dt den neuesten Treiber vom Server herunter und installiert ihn.',
+    diag3: '<strong>Aktualisieren</strong> — aktualisiert den bereits installierten Treiber.',
+    diag4: '<strong>Ausf&#252;hren</strong> — &#246;ffnet die OEM-Diagnoseanwendung.',
+    footer: '&copy; 2026 M-Auto.online &mdash; Alle Rechte vorbehalten'
+  }
+};
+
+var _lang = 'pt';
 function setLang(lang) {
-  if (!_titles[lang]) return;
+  if (!T[lang]) return;
+  _lang = lang;
   try { localStorage.setItem('vcx_lang', lang); } catch(e) {}
-  document.getElementById('header-title').innerHTML = _titles[lang];
+  var t = T[lang];
+  var g = function(id) { return document.getElementById(id); };
+
+  if (g('btn-back'))        g('btn-back').innerHTML = t.back;
+  if (g('header-title'))    g('header-title').innerHTML = t.title;
+  if (g('nav-label'))       g('nav-label').innerHTML = t.navLabel;
+  if (g('nav-intro'))       g('nav-intro').innerHTML = t.navIntro;
+  if (g('nav-features'))    g('nav-features').innerHTML = t.navFeatures;
+  if (g('nav-compat'))      g('nav-compat').innerHTML = t.navCompat;
+  if (g('nav-protocols'))   g('nav-protocols').innerHTML = t.navProtocols;
+  if (g('nav-specs'))       g('nav-specs').innerHTML = t.navSpecs;
+  if (g('nav-package'))     g('nav-package').innerHTML = t.navPackage;
+  if (g('nav-connection'))  g('nav-connection').innerHTML = t.navConnection;
+  if (g('nav-vcimanager'))  g('nav-vcimanager').innerHTML = t.navVcimanager;
+  if (g('nav-license'))     g('nav-license').innerHTML = t.navLicense;
+  if (g('nav-diagnosis'))   g('nav-diagnosis').innerHTML = t.navDiagnosis;
+  if (g('h1-title'))        g('h1-title').innerHTML = t.h1;
+  if (g('meta-line'))       g('meta-line').innerHTML = t.meta;
+  if (g('h2-intro'))        g('h2-intro').innerHTML = t.h2Intro;
+  if (g('p-intro1'))        g('p-intro1').innerHTML = t.pIntro1;
+  if (g('callout-intro'))   g('callout-intro').innerHTML = t.calloutIntro;
+  if (g('p-intro2'))        g('p-intro2').innerHTML = t.pIntro2;
+  if (g('h2-features'))     g('h2-features').innerHTML = t.h2Features;
+  if (g('h3-feat1'))        g('h3-feat1').innerHTML = t.h3Feat1;
+  if (g('feat-1a'))         g('feat-1a').innerHTML = t.feat1a;
+  if (g('feat-1b'))         g('feat-1b').innerHTML = t.feat1b;
+  if (g('feat-1c'))         g('feat-1c').innerHTML = t.feat1c;
+  if (g('h3-feat2'))        g('h3-feat2').innerHTML = t.h3Feat2;
+  if (g('feat-2a'))         g('feat-2a').innerHTML = t.feat2a;
+  if (g('feat-2b'))         g('feat-2b').innerHTML = t.feat2b;
+  if (g('feat-2c'))         g('feat-2c').innerHTML = t.feat2c;
+  if (g('h3-feat3'))        g('h3-feat3').innerHTML = t.h3Feat3;
+  if (g('feat-3a'))         g('feat-3a').innerHTML = t.feat3a;
+  if (g('feat-3b'))         g('feat-3b').innerHTML = t.feat3b;
+  if (g('h2-compat'))       g('h2-compat').innerHTML = t.h2Compat;
+  if (g('highlight-compat'))g('highlight-compat').innerHTML = t.highlightCompat;
+  if (g('th-brand'))        g('th-brand').innerHTML = t.thBrand;
+  if (g('th-status'))       g('th-status').innerHTML = t.thStatus;
+  var boks = document.getElementsByClassName('badge-ok');
+  for (var i = 0; i < boks.length; i++) boks[i].innerHTML = t.badgeOk;
+  var bnews = document.getElementsByClassName('badge-new');
+  for (var j = 0; j < bnews.length; j++) bnews[j].innerHTML = t.badgeNew;
+  if (g('h2-protocols'))    g('h2-protocols').innerHTML = t.h2Protocols;
+  if (g('h3-auto'))         g('h3-auto').innerHTML = t.h3Auto;
+  if (g('h3-heavy'))        g('h3-heavy').innerHTML = t.h3Heavy;
+  if (g('h2-specs'))        g('h2-specs').innerHTML = t.h2Specs;
+  if (g('th-spec-item'))    g('th-spec-item').innerHTML = t.thSpecItem;
+  if (g('th-spec-desc'))    g('th-spec-desc').innerHTML = t.thSpecDesc;
+  if (g('spec-proc'))       g('spec-proc').innerHTML = t.specProc;
+  if (g('spec-mem'))        g('spec-mem').innerHTML = t.specMem;
+  if (g('spec-lan'))        g('spec-lan').innerHTML = t.specLan;
+  if (g('spec-diag'))       g('spec-diag').innerHTML = t.specDiag;
+  if (g('spec-led'))        g('spec-led').innerHTML = t.specLed;
+  if (g('spec-power'))      g('spec-power').innerHTML = t.specPower;
+  if (g('spec-cons'))       g('spec-cons').innerHTML = t.specCons;
+  if (g('spec-dim'))        g('spec-dim').innerHTML = t.specDim;
+  if (g('spec-weight'))     g('spec-weight').innerHTML = t.specWeight;
+  if (g('spec-temp'))       g('spec-temp').innerHTML = t.specTemp;
+  if (g('spec-cert'))       g('spec-cert').innerHTML = t.specCert;
+  if (g('h2-package'))      g('h2-package').innerHTML = t.h2Package;
+  if (g('pkg-1'))           g('pkg-1').innerHTML = t.pkg1;
+  if (g('pkg-2'))           g('pkg-2').innerHTML = t.pkg2;
+  if (g('pkg-3'))           g('pkg-3').innerHTML = t.pkg3;
+  if (g('pkg-4'))           g('pkg-4').innerHTML = t.pkg4;
+  if (g('h2-connection'))   g('h2-connection').innerHTML = t.h2Connection;
+  if (g('callout-conn'))    g('callout-conn').innerHTML = t.calloutConn;
+  if (g('conn-1'))          g('conn-1').innerHTML = t.conn1;
+  if (g('conn-2'))          g('conn-2').innerHTML = t.conn2;
+  if (g('conn-3'))          g('conn-3').innerHTML = t.conn3;
+  if (g('conn-4'))          g('conn-4').innerHTML = t.conn4;
+  if (g('h2-vcimanager'))   g('h2-vcimanager').innerHTML = t.h2Vcimanager;
+  if (g('p-vcimanager'))    g('p-vcimanager').innerHTML = t.pVcimanager;
+  if (g('th-vci-func'))     g('th-vci-func').innerHTML = t.thVciFunc;
+  if (g('th-vci-desc'))     g('th-vci-desc').innerHTML = t.thVciDesc;
+  if (g('vci-reconnect'))   g('vci-reconnect').innerHTML = t.vciReconnect;
+  if (g('vci-firmware'))    g('vci-firmware').innerHTML = t.vciFirmware;
+  if (g('vci-lic-upd'))     g('vci-lic-upd').innerHTML = t.vciLicUpd;
+  if (g('vci-restart'))     g('vci-restart').innerHTML = t.vciRestart;
+  if (g('vci-selftest'))    g('vci-selftest').innerHTML = t.vciSelftest;
+  if (g('vci-hwtest'))      g('vci-hwtest').innerHTML = t.vciHwtest;
+  if (g('vci-voltage'))     g('vci-voltage').innerHTML = t.vciVoltage;
+  if (g('h2-license'))      g('h2-license').innerHTML = t.h2License;
+  if (g('p-license'))       g('p-license').innerHTML = t.pLicense;
+  if (g('callout-license')) g('callout-license').innerHTML = t.calloutLicense;
+  if (g('h2-diagnosis'))    g('h2-diagnosis').innerHTML = t.h2Diagnosis;
+  if (g('p-diagnosis'))     g('p-diagnosis').innerHTML = t.pDiagnosis;
+  if (g('diag-1'))          g('diag-1').innerHTML = t.diag1;
+  if (g('diag-2'))          g('diag-2').innerHTML = t.diag2;
+  if (g('diag-3'))          g('diag-3').innerHTML = t.diag3;
+  if (g('diag-4'))          g('diag-4').innerHTML = t.diag4;
+  if (g('footer-text'))     g('footer-text').innerHTML = t.footer;
+
   var btns = document.getElementById('header').getElementsByTagName('button');
-  for (var i = 0; i < btns.length; i++) {
-    if (btns[i].className.indexOf('lang-btn') >= 0)
-      btns[i].className = btns[i].innerHTML === lang.toUpperCase() ? 'lang-btn active' : 'lang-btn';
+  for (var k = 0; k < btns.length; k++) {
+    if (btns[k].className.indexOf('lang-btn') >= 0)
+      btns[k].className = btns[k].innerHTML === lang.toUpperCase() ? 'lang-btn active' : 'lang-btn';
   }
 }
+
 (function() {
   var m = (location.search || '').match(/[?&]lang=([a-z]+)/);
   var saved = m ? m[1] : '';
   if (!saved) { try { saved = localStorage.getItem('vcx_lang') || ''; } catch(e) {} }
-  if (saved && _titles[saved]) setLang(saved);
+  if (saved && T[saved]) setLang(saved);
 })();
 </script>
 </body>

@@ -35,19 +35,20 @@ button.refresh-btn {
 button.refresh-btn:hover { border-color: #2563eb; color: #2563eb; }
 
 /* MAIN */
-#main { padding: 0 16px 16px 16px; }
-.section-label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 12px 0; }
+#main { padding: 6px 14px 8px 14px; }
+.section-label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 8px 0; }
 
-/* GRID — table layout for IE */
-.grid { font-size: 0; }
-.grid a.card { display: inline-block; vertical-align: top; font-size: 13px; margin: 0 14px 14px 0; }
+/* GRID — single row, no wrap */
+.grid { font-size: 0; white-space: nowrap; }
+.grid a.card { display: inline-block; vertical-align: top; font-size: 13px; margin: 0 9px 0 0; white-space: normal; }
+.grid a.card:last-child { margin-right: 0; }
 
 /* CARD */
 a.card {
   text-align: center;
-  width: 175px; height: 175px;
+  width: 220px; height: 145px;
   text-decoration: none;
-  padding: 14px 12px;
+  padding: 8px 10px 6px;
   background: #fff;
   border: 1px solid #e2e8f0;
   border-top: 4px solid #2563eb;
@@ -58,28 +59,28 @@ a.card {
 a.card:hover { background: #eff6ff; }
 a.card.future { border-top-color: #cbd5e1; background: #f8fafc; cursor: default; opacity: .65; }
 a.card.future:hover { background: #f8fafc; }
-.card-badge { display: inline-block; font-size: 9px; font-weight: 700; background: #e2e8f0; color: #94a3b8; padding: 2px 7px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.card-icon { margin-bottom: 10px; padding-top: 10px; }
-.card-icon svg { width: 42px; height: 42px; }
-.card-title { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 4px; line-height: 1.2; }
-.card-desc  { font-size: 10px; color: #64748b; line-height: 1.4; }
+.card-badge { display: inline-block; font-size: 9px; font-weight: 700; background: #e2e8f0; color: #94a3b8; padding: 2px 6px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.card-icon { margin-bottom: 6px; padding-top: 4px; }
+.card-icon svg { width: 36px; height: 36px; }
+.card-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 3px; line-height: 1.2; }
+.card-desc  { font-size: 10px; color: #64748b; line-height: 1.3; }
 
-/* MERCEDES STRIP */
+/* MERCEDES STRIP — always 2 lines */
 #mercedes-strip {
   background: #fbbf24;
   border-top: 3px solid #f59e0b;
-  padding: 20px;
+  padding: 10px 20px;
   text-align: center;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   color: #78350f;
-  letter-spacing: 1px;
-  line-height: 1.5;
+  letter-spacing: 0.5px;
+  line-height: 1.55;
   text-transform: uppercase;
 }
 
 /* FOOTER */
-#footer { border-top: 1px solid #e2e8f0; padding: 10px 16px; font-size: 11px; color: #94a3b8; background: #fff; }
+#footer { border-top: 1px solid #e2e8f0; padding: 6px 14px; font-size: 11px; color: #94a3b8; background: #fff; }
 </style>
 </head>
 <body>
@@ -182,7 +183,7 @@ a.card.future:hover { background: #f8fafc; }
 </div>
 
 <div id="mercedes-strip">
-  <span id="t-trucks">NOVO: AGORA COM SUPORTE A Mercedes / Daimler PESADOS 12V/24V Euro 6</span>
+  <span id="t-trucks">NOVO: AGORA COM SUPORTE A VE&Iacute;CULOS PESADOS MERCEDES / DAIMLER<br>ACTROS &middot; AROCS &middot; ATEGO &middot; ANTOS &mdash; 12V/24V &middot; EURO 6</span>
 </div>
 
 <div id="footer">
@@ -218,7 +219,7 @@ var i18n = {
   pt: {
     tagline: 'Diagn\u00f3stico Profissional',
     section: 'Software &amp; Documenta\u00e7\u00e3o',
-    trucks: 'NOVO: AGORA COM SUPORTE A Mercedes / Daimler PESADOS 12V/24V Euro 6',
+    trucks: 'NOVO: AGORA COM SUPORTE A VE\u00cdCULOS PESADOS MERCEDES / DAIMLER<br>ACTROS &middot; AROCS &middot; ATEGO &middot; ANTOS &mdash; 12V/24V &middot; EURO 6',
     guideTitle: 'Manual VCI', guideDesc: 'Instalar, configurar e usar',
     explainTitle: 'Como Funciona', explainDesc: 'Licen\u00e7as, protocolos e liga\u00e7\u00e3o',
     portalTitle: 'M-AUTO.online', portalDesc: 'Loja &amp; servi\u00e7os',
@@ -228,7 +229,7 @@ var i18n = {
   en: {
     tagline: 'Professional Diagnostics',
     section: 'Software &amp; Documentation',
-    trucks: 'NEW: NOW WITH SUPPORT FOR Mercedes / Daimler HEAVY 12V/24V Euro 6',
+    trucks: 'NEW: SUPPORT FOR MERCEDES / DAIMLER HEAVY VEHICLES<br>ACTROS &middot; AROCS &middot; ATEGO &middot; ANTOS &mdash; 12V/24V &middot; EURO 6',
     guideTitle: 'VCI Manual', guideDesc: 'Install, configure and use',
     explainTitle: 'How It Works', explainDesc: 'Licenses, protocols and connection',
     portalTitle: 'M-AUTO.online', portalDesc: 'Shop &amp; services',
@@ -238,7 +239,7 @@ var i18n = {
   fr: {
     tagline: 'Diagnostic Professionnel',
     section: 'Logiciels &amp; Documentation',
-    trucks: 'NOUVEAU: MAINTENANT AVEC SUPPORT Mercedes / Daimler LOURDS 12V/24V Euro 6',
+    trucks: 'NOUVEAU: SUPPORT MERCEDES / DAIMLER POIDS LOURDS<br>ACTROS &middot; AROCS &middot; ATEGO &middot; ANTOS &mdash; 12V/24V &middot; EURO 6',
     guideTitle: 'Manuel VCI', guideDesc: 'Installer, configurer et utiliser',
     explainTitle: 'Comment \u00e7a marche', explainDesc: 'Licences, protocoles et connexion',
     portalTitle: 'M-AUTO.online', portalDesc: 'Boutique &amp; services',
@@ -248,7 +249,7 @@ var i18n = {
   de: {
     tagline: 'Professionelle Diagnose',
     section: 'Software &amp; Dokumentation',
-    trucks: 'NEU: JETZT MIT UNTERST\u00dcTZUNG F\u00dcR Mercedes / Daimler SCHWER 12V/24V Euro 6',
+    trucks: 'NEU: UNTERST\u00dcTZUNG F\u00dcR MERCEDES / DAIMLER NUTZFAHRZEUGE<br>ACTROS &middot; AROCS &middot; ATEGO &middot; ANTOS &mdash; 12V/24V &middot; EURO 6',
     guideTitle: 'VCI Handbuch', guideDesc: 'Installieren, konfigurieren, nutzen',
     explainTitle: 'So funktioniert es', explainDesc: 'Lizenzen, Protokolle und Verbindung',
     portalTitle: 'M-AUTO.online', portalDesc: 'Shop &amp; Dienste',

@@ -18,24 +18,12 @@ body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #f
 #logo { font-size: 17px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; text-decoration: none; }
 #logo span { color: #0f172a; }
 #header-title { font-size: 10px; color: #94a3b8; margin-top: 2px; letter-spacing: 0.5px; }
-a.btn-back {
-  display: inline-block; background: #2563eb; color: #fff;
-  font-size: 11px; font-weight: 700; padding: 5px 12px;
-  text-decoration: none; border: none; cursor: pointer; white-space: nowrap;
-}
+a.btn-back { display: inline-block; background: #2563eb; color: #fff; font-size: 11px; font-weight: 700; padding: 5px 12px; text-decoration: none; cursor: pointer; white-space: nowrap; }
 a.btn-back:hover { background: #1d4ed8; }
-button.lang-btn {
-  background: transparent; border: 1px solid #cbd5e1;
-  color: #64748b; font-size: 10px; font-weight: 700;
-  padding: 3px 8px; cursor: pointer; font-family: inherit; letter-spacing: 0.5px;
-}
+button.lang-btn { background: transparent; border: 1px solid #cbd5e1; color: #64748b; font-size: 10px; font-weight: 700; padding: 3px 8px; cursor: pointer; font-family: inherit; letter-spacing: 0.5px; }
 button.lang-btn:hover { border-color: #2563eb; color: #2563eb; }
 button.lang-btn.active { background: #2563eb; border-color: #2563eb; color: #fff; }
-button.refresh-btn {
-  background: transparent; border: 1px solid #cbd5e1; color: #94a3b8;
-  font-size: 14px; width: 26px; height: 26px; cursor: pointer; line-height: 1; padding: 0;
-  margin-left: 6px; vertical-align: middle;
-}
+button.refresh-btn { background: transparent; border: 1px solid #cbd5e1; color: #94a3b8; font-size: 14px; width: 26px; height: 26px; cursor: pointer; line-height: 1; padding: 0; margin-left: 6px; vertical-align: middle; }
 button.refresh-btn:hover { border-color: #2563eb; color: #2563eb; }
 
 /* ─── HERO ─── */
@@ -44,7 +32,7 @@ button.refresh-btn:hover { border-color: #2563eb; color: #2563eb; }
 .hero p  { font-size: 14px; color: #bfdbfe; max-width: 560px; margin: 0 auto; }
 
 /* ─── SECTIONS ─── */
-.section { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+.section { max-width: 900px; margin: 0 auto; padding: 36px 24px; }
 .section + .section { padding-top: 0; }
 hr.div { border: none; border-top: 1px solid #e2e8f0; }
 
@@ -62,26 +50,18 @@ p.sub { font-size: 13px; color: #64748b; margin-bottom: 24px; }
 .brand-row-label:first-child { margin-top: 0; }
 .brand-tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; white-space: nowrap; }
 
-/* ─── FLOW ROW (inline-block nodes + arrows) ─── */
+/* ─── FLOW ROW ─── */
 .flow-row { font-size: 0; margin-bottom: 16px; }
 .flow-row:last-child { margin-bottom: 0; }
-
 .node { display: inline-block; vertical-align: middle; text-align: center; min-width: 86px; font-size: 13px; }
-.node-box {
-  display: table; width: 76px; height: 64px;
-  border: 2px solid #e2e8f0; margin: 0 auto 5px auto;
-  font-size: 22px;
-}
+.node-box { display: table; width: 76px; height: 64px; border: 2px solid #e2e8f0; margin: 0 auto 5px auto; font-size: 22px; }
 .node-box-c { display: table-cell; vertical-align: middle; text-align: center; }
 .node-label { font-size: 11px; font-weight: 700; color: #475569; line-height: 1.3; }
 .node-sub   { font-size: 10px; color: #94a3b8; line-height: 1.3; }
-.arrow-h { display: inline-block; vertical-align: middle; font-size: 20px; color: #cbd5e1; padding: 0 6px; font-size: 13px; }
-
-/* Node color variants */
+.arrow-h { display: inline-block; vertical-align: middle; color: #cbd5e1; padding: 0 6px; font-size: 13px; }
 .n-car  { background: #f0fdf4; border-color: #86efac; }
 .n-hw   { background: #eff6ff; border-color: #93c5fd; }
 .n-sw   { background: #f0fdf4; border-color: #6ee7b7; }
-.n-vcx  { background: #1e40af; border-color: #1e40af; color: #fff; }
 .n-warn { background: #fef2f2; border-color: #fca5a5; }
 .n-ok   { background: #f0fdf4; border-color: #6ee7b7; }
 
@@ -99,7 +79,7 @@ p.sub { font-size: 13px; color: #64748b; margin-bottom: 24px; }
 .pc-out .pc-text { font-size: 13px; font-weight: 700; color: #065f46; }
 .pc-out .pc-sub  { font-size: 11px; color: #16a34a; }
 
-/* ─── 3 STEPS (table layout) ─── */
+/* ─── 3 STEPS ─── */
 .steps-tbl { width: 100%; border-collapse: separate; border-spacing: 0; }
 .step-td { vertical-align: top; padding: 24px 18px; }
 .step-arrow-td { vertical-align: middle; text-align: center; font-size: 22px; color: #cbd5e1; width: 28px; }
@@ -107,20 +87,17 @@ p.sub { font-size: 13px; color: #64748b; margin-bottom: 24px; }
 .step-icon { font-size: 34px; display: block; text-align: center; margin-bottom: 10px; }
 .step-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; text-align: center; }
 .step-body  { font-size: 12px; color: #64748b; line-height: 1.5; text-align: center; }
-
 .step-hw { background: #eff6ff; border: 2px solid #93c5fd; }
 .step-hw .step-num   { background: #2563eb; }
 .step-hw .step-title { color: #1e40af; }
-
 .step-key { background: #fffbeb; border: 2px solid #fcd34d; }
 .step-key .step-num   { background: #b45309; }
 .step-key .step-title { color: #92400e; }
-
 .step-sw { background: #f0fdf4; border: 2px solid #6ee7b7; }
 .step-sw .step-num   { background: #16a34a; }
 .step-sw .step-title { color: #15803d; }
 
-/* ─── CASE HEADER (table layout) ─── */
+/* ─── CASE HEADER ─── */
 .case-hdr { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
 .case-num-td { width: 36px; vertical-align: top; padding-right: 10px; }
 .case-num-circle { width: 32px; height: 32px; border-radius: 50%; line-height: 32px; text-align: center; font-size: 14px; font-weight: 700; color: #fff; }
@@ -128,7 +105,7 @@ p.sub { font-size: 13px; color: #64748b; margin-bottom: 24px; }
 .case-main-text { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
 .case-sub-text  { font-size: 12px; color: #64748b; }
 
-/* ─── WHAT YOU NEED CARDS ─── */
+/* ─── NEED CARDS ─── */
 .need-wrap { font-size: 0; }
 .need-card { display: inline-block; vertical-align: top; font-size: 13px; width: 48%; padding: 14px 16px; margin-right: 2%; }
 .need-card:last-child { margin-right: 0; }
@@ -155,20 +132,18 @@ td.brand { font-weight: 700; }
 .legend { font-size: 0; margin-top: 14px; }
 .legend-item { display: inline-block; vertical-align: middle; font-size: 12px; margin-right: 20px; margin-bottom: 6px; }
 
-/* ─── J2534 NOTE ─── */
+/* ─── J2534 ─── */
 .note-box { background: #eff6ff; border: 2px solid #93c5fd; padding: 14px 16px; margin-bottom: 14px; font-size: 13px; color: #1e40af; line-height: 1.6; }
 .warn-box  { background: #fef9c3; border: 1px solid #fde68a; padding: 10px 14px; font-size: 12px; color: #78350f; }
+.prob-schema { background: #fef2f2; border: 1px solid #fca5a5; }
+.prob-title  { color: #b91c1c; }
+.prob-nodes  { font-size: 0; text-align: center; }
+.prob-plus   { display: inline-block; vertical-align: middle; color: #fca5a5; padding: 0 6px; font-size: 13px; }
+.prob-result { display: inline-block; vertical-align: middle; background: #b91c1c; color: #fff; padding: 12px 16px; text-align: center; font-weight: 700; font-size: 13px; line-height: 1.5; margin: 4px; }
 
 /* ─── FOOTER ─── */
 #footer { text-align: center; padding: 22px; font-size: 12px; color: #94a3b8; border-top: 1px solid #e2e8f0; background: #fff; margin-top: 40px; }
 #footer strong { color: #2563eb; }
-
-/* ─── PROBLEM SCHEMA ─── */
-.prob-schema { background: #fef2f2; border: 1px solid #fca5a5; }
-.prob-title  { color: #b91c1c; }
-.prob-nodes  { font-size: 0; text-align: center; }
-.prob-plus   { display: inline-block; vertical-align: middle; font-size: 18px; color: #fca5a5; padding: 0 6px; font-size: 13px; }
-.prob-result { display: inline-block; vertical-align: middle; background: #b91c1c; color: #fff; padding: 12px 16px; text-align: center; font-weight: 700; font-size: 13px; line-height: 1.5; margin: 4px; }
 </style>
 </head>
 <body>
@@ -177,7 +152,7 @@ td.brand { font-weight: 700; }
 <div id="header">
   <div id="header-inner">
     <div id="header-left">
-      <a class="btn-back" href="vcx.html">&larr; Menu</a>
+      <a class="btn-back" id="btn-back" href="vcx.html">&larr; Menu</a>
     </div>
     <div id="header-mid">
       <div id="logo">M-AUTO<span>.online</span></div>
@@ -188,224 +163,111 @@ td.brand { font-weight: 700; }
       <button class="lang-btn" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('fr')">FR</button>
       <button class="lang-btn" onclick="setLang('de')">DE</button>
-      <button class="refresh-btn" onclick="location.reload(true)" title="Atualizar">&#8635;</button>
+      <button class="refresh-btn" onclick="location.reload(true)">&#8635;</button>
     </div>
   </div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Como funciona o diagnostico por marca?</h1>
-  <p>Explicacao visual simples &mdash; para perceber o que e a maquina, a licenca e o software</p>
+  <h1 id="h-hero-title">Como funciona o diagnostico por marca?</h1>
+  <p id="h-hero-sub">Explicacao visual simples &mdash; para perceber o que e a maquina, a licenca e o software</p>
 </div>
 
-
-<!-- ══════════════════════════════════════
-     PARTE 1 — SISTEMA TRADICIONAL
-═══════════════════════════════════════ -->
+<!-- PARTE 1 -->
 <div class="section">
-  <div class="chip">Parte 1 &mdash; Sistema tradicional</div>
-  <h2 class="st">Cada marca tem a sua propria maquina</h2>
-  <p class="sub">No sistema normal, para diagnosticar um VW precisas da maquina VW. Para Mercedes, a maquina Mercedes. E assim para cada marca &mdash; todas diferentes, todas com o seu cabo e software.</p>
+  <div class="chip" id="h-chip1">Parte 1 &mdash; Sistema tradicional</div>
+  <h2 class="st" id="h-p1-title">Cada marca tem a sua propria maquina</h2>
+  <p class="sub" id="h-p1-sub">No sistema normal, para diagnosticar um VW precisas da maquina VW. Para Mercedes, a maquina Mercedes. E assim para cada marca &mdash; todas diferentes, todas com o seu cabo e software.</p>
 
   <div class="schema">
-    <div class="schema-title">Carro &rarr; Cabo &rarr; Maquina de diagnostico &rarr; PC com software</div>
+    <div class="schema-title" id="h-flow-title">Carro &rarr; Cabo &rarr; Maquina de diagnostico &rarr; PC com software</div>
 
-    <!-- VW -->
-    <div class="brand-row-label">
-      <span class="brand-tag" style="background:#dbeafe;color:#1e40af;">VW &middot; Audi &middot; SEAT &middot; Skoda</span>
-    </div>
+    <div class="brand-row-label"><span class="brand-tag" style="background:#dbeafe;color:#1e40af;">VW &middot; Audi &middot; SEAT &middot; Skoda</span></div>
     <div class="flow-row">
-      <div class="node">
-        <div class="node-box n-car"><div class="node-box-c">&#128663;</div></div>
-        <div class="node-label">Carro VW</div>
-      </div>
+      <div class="node"><div class="node-box n-car"><div class="node-box-c">&#128663;</div></div><div class="node-label" id="h-car-vw">Carro VW</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:12px;font-weight:700;color:#1e40af;line-height:1.3;">VAS<br>6154</div></div>
-        <div class="node-label">Maquina VW</div>
-        <div class="node-sub">cabo incluido</div>
-      </div>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:12px;font-weight:700;color:#1e40af;line-height:1.3;">VAS<br>6154</div></div><div class="node-label" id="h-mach-vw">Maquina VW</div><div class="node-sub" id="h-cable-inc">cabo incluido</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div>
-        <div class="node-label">Software ODIS</div>
-        <div class="node-sub">instalado no PC</div>
-      </div>
+      <div class="node"><div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div><div class="node-label">Software ODIS</div><div class="node-sub" id="h-pc-installed">instalado no PC</div></div>
     </div>
 
-    <!-- MERCEDES -->
-    <div class="brand-row-label">
-      <span class="brand-tag" style="background:#f0fdf4;color:#166534;">Mercedes &middot; Smart</span>
-    </div>
+    <div class="brand-row-label" style="margin-top:18px;"><span class="brand-tag" style="background:#f0fdf4;color:#166534;">Mercedes &middot; Smart</span></div>
     <div class="flow-row">
-      <div class="node">
-        <div class="node-box n-car"><div class="node-box-c">&#128663;</div></div>
-        <div class="node-label">Carro MB</div>
-      </div>
+      <div class="node"><div class="node-box n-car"><div class="node-box-c">&#128663;</div></div><div class="node-label" id="h-car-mb">Carro MB</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:11px;font-weight:700;color:#1e40af;line-height:1.3;">C4 /<br>SDconn.</div></div>
-        <div class="node-label">Maquina MB</div>
-        <div class="node-sub">cabo incluido</div>
-      </div>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:11px;font-weight:700;color:#1e40af;line-height:1.3;">C4 /<br>SDconn.</div></div><div class="node-label" id="h-mach-mb">Maquina MB</div><div class="node-sub">cabo incluido</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div>
-        <div class="node-label">Software Xentry</div>
-        <div class="node-sub">instalado no PC</div>
-      </div>
+      <div class="node"><div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div><div class="node-label">Software Xentry</div><div class="node-sub">instalado no PC</div></div>
     </div>
 
-    <!-- BMW -->
-    <div class="brand-row-label">
-      <span class="brand-tag" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb;">BMW &middot; MINI</span>
-    </div>
+    <div class="brand-row-label" style="margin-top:18px;"><span class="brand-tag" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb;">BMW &middot; MINI</span></div>
     <div class="flow-row">
-      <div class="node">
-        <div class="node-box n-car"><div class="node-box-c">&#128663;</div></div>
-        <div class="node-label">Carro BMW</div>
-      </div>
+      <div class="node"><div class="node-box n-car"><div class="node-box-c">&#128663;</div></div><div class="node-label" id="h-car-bmw">Carro BMW</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:11px;font-weight:700;color:#1e40af;line-height:1.3;">ICOM<br>A2/Next</div></div>
-        <div class="node-label">Maquina BMW</div>
-        <div class="node-sub">cabo incluido</div>
-      </div>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:11px;font-weight:700;color:#1e40af;line-height:1.3;">ICOM<br>A2/Next</div></div><div class="node-label" id="h-mach-bmw">Maquina BMW</div><div class="node-sub">cabo incluido</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div>
-        <div class="node-label">Software ISTA</div>
-        <div class="node-sub">instalado no PC</div>
-      </div>
+      <div class="node"><div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div><div class="node-label">Software ISTA</div><div class="node-sub">instalado no PC</div></div>
     </div>
 
-    <!-- PSA -->
-    <div class="brand-row-label">
-      <span class="brand-tag" style="background:#fef9c3;color:#854d0e;">Peugeot &middot; Citroen &middot; DS &middot; Opel</span>
-    </div>
+    <div class="brand-row-label" style="margin-top:18px;"><span class="brand-tag" style="background:#fef9c3;color:#854d0e;">Peugeot &middot; Citroen &middot; DS &middot; Opel</span></div>
     <div class="flow-row">
-      <div class="node">
-        <div class="node-box n-car"><div class="node-box-c">&#128663;</div></div>
-        <div class="node-label">Carro PSA</div>
-      </div>
+      <div class="node"><div class="node-box n-car"><div class="node-box-c">&#128663;</div></div><div class="node-label" id="h-car-psa">Carro PSA</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:11px;font-weight:700;color:#1e40af;line-height:1.3;">Lexia 3<br>PP2000</div></div>
-        <div class="node-label">Maquina PSA</div>
-        <div class="node-sub">cabo incluido</div>
-      </div>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:11px;font-weight:700;color:#1e40af;line-height:1.3;">Lexia 3<br>PP2000</div></div><div class="node-label" id="h-mach-psa">Maquina PSA</div><div class="node-sub">cabo incluido</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div>
-        <div class="node-label">DiagBox</div>
-        <div class="node-sub">instalado no PC</div>
-      </div>
+      <div class="node"><div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div><div class="node-label">DiagBox</div><div class="node-sub">instalado no PC</div></div>
     </div>
 
-    <!-- RENAULT -->
-    <div class="brand-row-label">
-      <span class="brand-tag" style="background:#fff7ed;color:#c2410c;">Renault &middot; Dacia</span>
-    </div>
+    <div class="brand-row-label" style="margin-top:18px;"><span class="brand-tag" style="background:#fff7ed;color:#c2410c;">Renault &middot; Dacia</span></div>
     <div class="flow-row">
-      <div class="node">
-        <div class="node-box n-car"><div class="node-box-c">&#128663;</div></div>
-        <div class="node-label">Carro Renault</div>
-      </div>
+      <div class="node"><div class="node-box n-car"><div class="node-box-c">&#128663;</div></div><div class="node-label" id="h-car-ren">Carro Renault</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:12px;font-weight:700;color:#1e40af;line-height:1.3;">CAN<br>Clip</div></div>
-        <div class="node-label">Maquina Renault</div>
-        <div class="node-sub">cabo incluido</div>
-      </div>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:12px;font-weight:700;color:#1e40af;line-height:1.3;">CAN<br>Clip</div></div><div class="node-label" id="h-mach-ren">Maquina Renault</div><div class="node-sub">cabo incluido</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div>
-        <div class="node-label">Software Clip</div>
-        <div class="node-sub">instalado no PC</div>
-      </div>
+      <div class="node"><div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div><div class="node-label">Software Clip</div><div class="node-sub">instalado no PC</div></div>
     </div>
 
-    <!-- GM/Ford -->
-    <div class="brand-row-label">
-      <span class="brand-tag" style="background:#f0f9ff;color:#075985;">GM &middot; Chevrolet &middot; Ford</span>
-    </div>
+    <div class="brand-row-label" style="margin-top:18px;"><span class="brand-tag" style="background:#f0f9ff;color:#075985;">GM &middot; Chevrolet &middot; Ford</span></div>
     <div class="flow-row">
-      <div class="node">
-        <div class="node-box n-car"><div class="node-box-c">&#128663;</div></div>
-        <div class="node-label">Carro GM/Ford</div>
-      </div>
+      <div class="node"><div class="node-box n-car"><div class="node-box-c">&#128663;</div></div><div class="node-label" id="h-car-gm">Carro GM/Ford</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:11px;font-weight:700;color:#1e40af;line-height:1.3;">Tech2<br>MDI/VCM</div></div>
-        <div class="node-label">Maquina GM/Ford</div>
-        <div class="node-sub">cabo incluido</div>
-      </div>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:11px;font-weight:700;color:#1e40af;line-height:1.3;">Tech2<br>MDI/VCM</div></div><div class="node-label" id="h-mach-gm">Maquina GM/Ford</div><div class="node-sub">cabo incluido</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div>
-        <div class="node-label">GDS2 / IDS</div>
-        <div class="node-sub">instalado no PC</div>
-      </div>
-    </div>
-
-  </div><!-- /schema -->
-
-  <!-- PROBLEMA -->
-  <div class="schema prob-schema">
-    <div class="schema-title prob-title">O problema: 6 marcas = 6 maquinas diferentes</div>
-    <div class="prob-nodes">
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">VAS<br>6154</div></div>
-        <div class="node-label">VW Group</div>
-      </div>
-      <span class="prob-plus">+</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">C4 /<br>SDconn.</div></div>
-        <div class="node-label">Mercedes</div>
-      </div>
-      <span class="prob-plus">+</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">ICOM<br>A2</div></div>
-        <div class="node-label">BMW</div>
-      </div>
-      <span class="prob-plus">+</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">Lexia<br>3</div></div>
-        <div class="node-label">PSA</div>
-      </div>
-      <span class="prob-plus">+</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">CAN<br>Clip</div></div>
-        <div class="node-label">Renault</div>
-      </div>
-      <span class="prob-plus">+</span>
-      <div class="node">
-        <div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">Tech2<br>MDI</div></div>
-        <div class="node-label">GM/Ford</div>
-      </div>
-      <span class="prob-plus" style="font-size:20px;font-weight:900;">=</span>
-      <div class="prob-result">Muito dinheiro<br>Muito espaco<br>Muito caos</div>
+      <div class="node"><div class="node-box n-sw"><div class="node-box-c">&#128187;</div></div><div class="node-label">GDS2 / IDS</div><div class="node-sub">instalado no PC</div></div>
     </div>
   </div>
 
-</div><!-- /section -->
+  <div class="schema prob-schema">
+    <div class="schema-title prob-title" id="h-prob-title">O problema: 6 marcas = 6 maquinas diferentes</div>
+    <div class="prob-nodes">
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">VAS<br>6154</div></div><div class="node-label">VW Group</div></div>
+      <span class="prob-plus">+</span>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">C4 /<br>SDconn.</div></div><div class="node-label">Mercedes</div></div>
+      <span class="prob-plus">+</span>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">ICOM<br>A2</div></div><div class="node-label">BMW</div></div>
+      <span class="prob-plus">+</span>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">Lexia<br>3</div></div><div class="node-label">PSA</div></div>
+      <span class="prob-plus">+</span>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">CAN<br>Clip</div></div><div class="node-label">Renault</div></div>
+      <span class="prob-plus">+</span>
+      <div class="node"><div class="node-box n-hw"><div class="node-box-c" style="font-size:10px;font-weight:700;color:#1e40af;line-height:1.3;">Tech2<br>MDI</div></div><div class="node-label">GM/Ford</div></div>
+      <span class="prob-plus" style="font-size:20px;font-weight:900;">=</span>
+      <div class="prob-result" id="h-prob-result">Muito dinheiro<br>Muito espaco<br>Muito caos</div>
+    </div>
+  </div>
+</div>
 <hr class="div">
 
-
-<!-- ══════════════════════════════════════
-     PARTE 2 — M-Auto VCI
-═══════════════════════════════════════ -->
+<!-- PARTE 2 -->
 <div class="section">
-  <div class="chip">Parte 2 &mdash; A solucao M-Auto VCI</div>
-  <h2 class="st">Uma maquina para todas as marcas</h2>
-  <p class="sub">A M-Auto VCI substitui todas as maquinas acima. Um unico cabo OBD-II universal liga a qualquer carro. Mas ha 3 componentes que precisas de perceber.</p>
+  <div class="chip" id="h-chip2">Parte 2 &mdash; A solucao M-Auto VCI</div>
+  <h2 class="st" id="h-p2-title">Uma maquina para todas as marcas</h2>
+  <p class="sub" id="h-p2-sub">A M-Auto VCI substitui todas as maquinas acima. Um unico cabo OBD-II universal liga a qualquer carro. Mas ha 3 componentes que precisas de perceber.</p>
 
-  <!-- SCHEMA VCX CENTRAL -->
   <div class="schema">
-    <div class="schema-title">M-Auto VCI &mdash; todos os carros, uma unica maquina</div>
+    <div class="schema-title" id="h-vcx-schema-title">M-Auto VCI &mdash; todos os carros, uma unica maquina</div>
     <div class="vcx-center">
-
       <div class="brands-in">
         <span class="brand-bubble" style="background:#dbeafe;color:#1e40af;border-color:#93c5fd;">&#128663; VW/Audi</span>
         <span class="brand-bubble" style="background:#f0fdf4;color:#166534;border-color:#86efac;">&#128663; Mercedes</span>
@@ -414,262 +276,184 @@ td.brand { font-weight: 700; }
         <span class="brand-bubble" style="background:#fff7ed;color:#c2410c;border-color:#fed7aa;">&#128663; Renault</span>
         <span class="brand-bubble" style="background:#f0f9ff;color:#075985;border-color:#bae6fd;">&#128663; GM/Ford</span>
       </div>
-
       <div class="arrow-down">&#8595; &#8595; &#8595; &#8595; &#8595; &#8595;</div>
-      <div style="font-size:11px;color:#94a3b8;text-align:center;margin-bottom:8px;">mesmo cabo OBD-II para todos</div>
-
+      <div style="font-size:11px;color:#94a3b8;text-align:center;margin-bottom:8px;" id="h-obd-all">mesmo cabo OBD-II para todos</div>
       <div class="vcx-box-big">
         <div class="vb-icon">&#128268;</div>
         <div class="vb-name">M-Auto VCI</div>
-        <div class="vb-desc">Interface universal de diagnostico</div>
+        <div class="vb-desc" id="h-vcx-desc">Interface universal de diagnostico</div>
       </div>
-
       <div class="arrow-down">&#8595;</div>
-      <div style="font-size:11px;color:#94a3b8;text-align:center;margin-bottom:8px;">USB ou Wi-Fi</div>
-
+      <div style="font-size:11px;color:#94a3b8;text-align:center;margin-bottom:8px;" id="h-usb-wifi">USB ou Wi-Fi</div>
       <div class="pc-out">
         <span class="pc-icon">&#128187;</span>
-        <span class="pc-text">Software no PC</span><br>
+        <span class="pc-text" id="h-sw-pc">Software no PC</span><br>
         <span class="pc-sub">(ODIS / Xentry / ISTA / DiagBox / ...)</span>
       </div>
-
     </div>
   </div>
 
-  <!-- 3 COMPONENTES -->
   <div class="schema" style="border-color:#2563eb;">
-    <div class="schema-title" style="color:#2563eb;">MAS ATENCAO &mdash; sao sempre 3 componentes separados</div>
+    <div class="schema-title" style="color:#2563eb;" id="h-3comp-title">MAS ATENCAO &mdash; sao sempre 3 componentes separados</div>
     <table class="steps-tbl">
       <tr>
         <td class="step-td step-hw">
           <div class="step-num">1</div>
           <span class="step-icon">&#128268;</span>
-          <div class="step-title">Maquina M-Auto VCI</div>
-          <div class="step-body">O hardware fisico. O aparelho que tu compras. E o mesmo para todas as marcas. Fica ligado ao carro por OBD-II e ao PC por USB ou Wi-Fi.</div>
+          <div class="step-title" id="h-step1-title">Maquina M-Auto VCI</div>
+          <div class="step-body" id="h-step1-body">O hardware fisico. O aparelho que tu compras. E o mesmo para todas as marcas. Fica ligado ao carro por OBD-II e ao PC por USB ou Wi-Fi.</div>
         </td>
         <td class="step-arrow-td">&rarr;</td>
         <td class="step-td step-key">
           <div class="step-num">2</div>
           <span class="step-icon">&#128273;</span>
-          <div class="step-title">Licenca por marca</div>
-          <div class="step-body">Ativa o protocolo da marca na maquina. Sem ela, a VCX nao consegue "falar" com o carro. Compra-se separadamente para cada marca.</div>
+          <div class="step-title" id="h-step2-title">Licenca por marca</div>
+          <div class="step-body" id="h-step2-body">Ativa o protocolo da marca na maquina. Sem ela, a VCX nao consegue falar com o carro. Compra-se separadamente para cada marca.</div>
         </td>
         <td class="step-arrow-td">&rarr;</td>
         <td class="step-td step-sw">
           <div class="step-num">3</div>
           <span class="step-icon">&#128187;</span>
-          <div class="step-title">Software no PC</div>
-          <div class="step-body">O programa instalado no computador. Cada marca tem o seu proprio software. Tem de ser instalado separadamente &mdash; nao vem com a maquina.</div>
+          <div class="step-title" id="h-step3-title">Software no PC</div>
+          <div class="step-body" id="h-step3-body">O programa instalado no computador. Cada marca tem o seu proprio software. Tem de ser instalado separadamente &mdash; nao vem com a maquina.</div>
         </td>
       </tr>
     </table>
   </div>
-
-</div><!-- /section -->
+</div>
 <hr class="div">
 
-
-<!-- ══════════════════════════════════════
-     PARTE 3 — 3 CASOS REAIS
-═══════════════════════════════════════ -->
+<!-- PARTE 3 -->
 <div class="section">
-  <div class="chip">Parte 3 &mdash; Os 3 casos reais</div>
-  <h2 class="st">O que tens e o que falta?</h2>
-  <p class="sub">Identifica o teu caso e ve exactamente o que ainda precisas.</p>
+  <div class="chip" id="h-chip3">Parte 3 &mdash; Os 3 casos reais</div>
+  <h2 class="st" id="h-p3-title">O que tens e o que falta?</h2>
+  <p class="sub" id="h-p3-sub">Identifica o teu caso e ve exactamente o que ainda precisas.</p>
 
   <!-- CASO 1 -->
   <div class="schema" style="border-color:#fca5a5;margin-bottom:16px;">
-    <table class="case-hdr">
-      <tr>
-        <td class="case-num-td"><div class="case-num-circle" style="background:#dc2626;">1</div></td>
-        <td class="case-text-td">
-          <div class="case-main-text" style="color:#dc2626;">Tenho a maquina. Nao tenho licenca nem software.</div>
-          <div class="case-sub-text">Situacao de arranque &mdash; acabaste de receber a M-Auto VCI</div>
-        </td>
-      </tr>
-    </table>
-
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;">Estado actual</div>
+    <table class="case-hdr"><tr>
+      <td class="case-num-td"><div class="case-num-circle" style="background:#dc2626;">1</div></td>
+      <td class="case-text-td">
+        <div class="case-main-text" style="color:#dc2626;" id="h-c1-title">Tenho a maquina. Nao tenho licenca nem software.</div>
+        <div class="case-sub-text" id="h-c1-sub">Situacao de arranque &mdash; acabaste de receber a M-Auto VCI</div>
+      </td>
+    </tr></table>
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;" id="h-estado">Estado actual</div>
     <div class="flow-row" style="margin-bottom:16px;">
-      <div class="node">
-        <div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128268;</div></div>
-        <div class="node-label" style="color:#16a34a;">M-Auto VCI</div>
-        <div class="node-sub">tens</div>
-      </div>
+      <div class="node"><div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128268;</div></div><div class="node-label" style="color:#16a34a;">M-Auto VCI</div><div class="node-sub" id="h-have">tens</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-warn"><div class="node-box-c" style="font-size:11px;color:#dc2626;">&#10007;<br>&#128273;</div></div>
-        <div class="node-label" style="color:#dc2626;">Licenca</div>
-        <div class="node-sub">nao tens</div>
-      </div>
+      <div class="node"><div class="node-box n-warn"><div class="node-box-c" style="font-size:11px;color:#dc2626;">&#10007;<br>&#128273;</div></div><div class="node-label" style="color:#dc2626;" id="h-lic-lbl">Licenca</div><div class="node-sub" id="h-dont-have">nao tens</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-warn"><div class="node-box-c" style="font-size:11px;color:#dc2626;">&#10007;<br>&#128187;</div></div>
-        <div class="node-label" style="color:#dc2626;">Software</div>
-        <div class="node-sub">nao tens</div>
-      </div>
+      <div class="node"><div class="node-box n-warn"><div class="node-box-c" style="font-size:11px;color:#dc2626;">&#10007;<br>&#128187;</div></div><div class="node-label" style="color:#dc2626;" id="h-sw-lbl">Software</div><div class="node-sub">nao tens</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-warn"><div class="node-box-c" style="font-size:18px;">&#128683;</div></div>
-        <div class="node-label" style="color:#dc2626;">Nao funciona</div>
-      </div>
+      <div class="node"><div class="node-box n-warn"><div class="node-box-c" style="font-size:18px;">&#128683;</div></div><div class="node-label" style="color:#dc2626;" id="h-not-work">Nao funciona</div></div>
     </div>
-
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;">O que precisas de adquirir</div>
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;" id="h-need">O que precisas de adquirir</div>
     <div class="need-wrap">
       <div class="need-card" style="background:#fef9c3;border:2px solid #fcd34d;">
         <div class="need-icon">&#128273;</div>
-        <div class="need-title" style="color:#92400e;">Licenca da marca</div>
-        <div class="need-body">Comprada separadamente para cada marca (VW, BMW, Mercedes...)</div>
+        <div class="need-title" style="color:#92400e;" id="h-need-lic-title">Licenca da marca</div>
+        <div class="need-body" id="h-need-lic-body">Comprada separadamente para cada marca (VW, BMW, Mercedes...)</div>
       </div>
       <div class="need-card" style="background:#f0fdf4;border:2px solid #6ee7b7;">
         <div class="need-icon">&#128187;</div>
-        <div class="need-title" style="color:#166534;">Software no PC</div>
-        <div class="need-body">Instalar o software original da marca (ODIS, Xentry, ISTA...) no teu computador</div>
+        <div class="need-title" style="color:#166534;" id="h-need-sw-title">Software no PC</div>
+        <div class="need-body" id="h-need-sw-body">Instalar o software original da marca (ODIS, Xentry, ISTA...) no teu computador</div>
       </div>
     </div>
   </div>
 
   <!-- CASO 2 -->
   <div class="schema" style="border-color:#fcd34d;margin-bottom:16px;">
-    <table class="case-hdr">
-      <tr>
-        <td class="case-num-td"><div class="case-num-circle" style="background:#b45309;">2</div></td>
-        <td class="case-text-td">
-          <div class="case-main-text" style="color:#92400e;">Tenho a maquina e a licenca. Nao tenho o software.</div>
-          <div class="case-sub-text">Maquina preparada &mdash; falta apenas instalar o software no PC</div>
-        </td>
-      </tr>
-    </table>
-
+    <table class="case-hdr"><tr>
+      <td class="case-num-td"><div class="case-num-circle" style="background:#b45309;">2</div></td>
+      <td class="case-text-td">
+        <div class="case-main-text" style="color:#92400e;" id="h-c2-title">Tenho a maquina e a licenca. Nao tenho o software.</div>
+        <div class="case-sub-text" id="h-c2-sub">Maquina preparada &mdash; falta apenas instalar o software no PC</div>
+      </td>
+    </tr></table>
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;">Estado actual</div>
     <div class="flow-row" style="margin-bottom:16px;">
-      <div class="node">
-        <div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128268;</div></div>
-        <div class="node-label" style="color:#16a34a;">M-Auto VCI</div>
-        <div class="node-sub">tens</div>
-      </div>
+      <div class="node"><div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128268;</div></div><div class="node-label" style="color:#16a34a;">M-Auto VCI</div><div class="node-sub">tens</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128273;</div></div>
-        <div class="node-label" style="color:#16a34a;">Licenca</div>
-        <div class="node-sub">tens</div>
-      </div>
+      <div class="node"><div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128273;</div></div><div class="node-label" style="color:#16a34a;">Licenca</div><div class="node-sub">tens</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-warn"><div class="node-box-c" style="font-size:11px;color:#dc2626;">&#10007;<br>&#128187;</div></div>
-        <div class="node-label" style="color:#dc2626;">Software</div>
-        <div class="node-sub">nao tens</div>
-      </div>
+      <div class="node"><div class="node-box n-warn"><div class="node-box-c" style="font-size:11px;color:#dc2626;">&#10007;<br>&#128187;</div></div><div class="node-label" style="color:#dc2626;">Software</div><div class="node-sub">nao tens</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-warn"><div class="node-box-c" style="font-size:18px;">&#128683;</div></div>
-        <div class="node-label" style="color:#dc2626;">Ainda nao funciona</div>
-      </div>
+      <div class="node"><div class="node-box n-warn"><div class="node-box-c" style="font-size:18px;">&#128683;</div></div><div class="node-label" style="color:#dc2626;" id="h-still-not-work">Ainda nao funciona</div></div>
     </div>
-
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;">O que precisas de fazer</div>
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;" id="h-what-to-do">O que precisas de fazer</div>
     <div style="background:#f0fdf4;border:2px solid #6ee7b7;padding:14px 16px;">
       <div style="font-size:20px;margin-bottom:6px;">&#128187;</div>
-      <div style="font-size:13px;font-weight:700;color:#166534;margin-bottom:4px;">Instalar o software no PC &mdash; so isso</div>
-      <div style="font-size:12px;color:#4b5563;">A maquina ja esta preparada. Falta apenas instalar e configurar o software original da marca. Depois esta tudo pronto.</div>
+      <div style="font-size:13px;font-weight:700;color:#166534;margin-bottom:4px;" id="h-c2-action">Instalar o software no PC &mdash; so isso</div>
+      <div style="font-size:12px;color:#4b5563;" id="h-c2-action-body">A maquina ja esta preparada. Falta apenas instalar e configurar o software original da marca. Depois esta tudo pronto.</div>
     </div>
   </div>
 
   <!-- CASO 3 -->
   <div class="schema" style="border-color:#93c5fd;">
-    <table class="case-hdr">
-      <tr>
-        <td class="case-num-td"><div class="case-num-circle" style="background:#2563eb;">3</div></td>
-        <td class="case-text-td">
-          <div class="case-main-text" style="color:#1e40af;">Tenho maquina e software. Nao tenho licenca.</div>
-          <div class="case-sub-text">Caso especial &mdash; pode funcionar em modo J2534 (gratuito) em muitas marcas</div>
-        </td>
-      </tr>
-    </table>
-
+    <table class="case-hdr"><tr>
+      <td class="case-num-td"><div class="case-num-circle" style="background:#2563eb;">3</div></td>
+      <td class="case-text-td">
+        <div class="case-main-text" style="color:#1e40af;" id="h-c3-title">Tenho maquina e software. Nao tenho licenca.</div>
+        <div class="case-sub-text" id="h-c3-sub">Caso especial &mdash; pode funcionar em modo J2534 (gratuito) em muitas marcas</div>
+      </td>
+    </tr></table>
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;">Estado actual</div>
     <div class="flow-row" style="margin-bottom:16px;">
-      <div class="node">
-        <div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128268;</div></div>
-        <div class="node-label" style="color:#16a34a;">M-Auto VCI</div>
-        <div class="node-sub">tens</div>
-      </div>
+      <div class="node"><div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128268;</div></div><div class="node-label" style="color:#16a34a;">M-Auto VCI</div><div class="node-sub">tens</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-warn"><div class="node-box-c" style="font-size:11px;color:#dc2626;">&#10007;<br>&#128273;</div></div>
-        <div class="node-label" style="color:#dc2626;">Licenca</div>
-        <div class="node-sub">nao tens</div>
-      </div>
+      <div class="node"><div class="node-box n-warn"><div class="node-box-c" style="font-size:11px;color:#dc2626;">&#10007;<br>&#128273;</div></div><div class="node-label" style="color:#dc2626;">Licenca</div><div class="node-sub">nao tens</div></div>
       <span class="arrow-h">&rarr;</span>
-      <div class="node">
-        <div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128187;</div></div>
-        <div class="node-label" style="color:#16a34a;">Software</div>
-        <div class="node-sub">tens</div>
-      </div>
+      <div class="node"><div class="node-box n-ok"><div class="node-box-c" style="font-size:11px;color:#16a34a;">&#10003;<br>&#128187;</div></div><div class="node-label" style="color:#16a34a;">Software</div><div class="node-sub">tens</div></div>
     </div>
-
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;">Modo J2534 &mdash; o que e?</div>
-    <div class="note-box">
-      <strong>J2534</strong> e uma norma aberta que permite que a M-Auto VCI funcione como interface generica &mdash; sem precisar de licenca proprietaria.<br>
-      O software da marca comunica directamente com a maquina usando este protocolo padrao, gratuito.
-    </div>
-    <div class="warn-box">
-      <strong>Nota:</strong> Em modo J2534 algumas funcoes avancadas podem nao estar disponiveis (codificacoes, SCN, parametrizacoes). Para uso profissional completo, a licenca da marca e sempre recomendada.
-    </div>
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:8px;" id="h-j2534-what">Modo J2534 &mdash; o que e?</div>
+    <div class="note-box" id="h-j2534-body"><strong>J2534</strong> e uma norma aberta que permite que a M-Auto VCI funcione como interface generica &mdash; sem precisar de licenca proprietaria.<br>O software da marca comunica directamente com a maquina usando este protocolo padrao, gratuito.</div>
+    <div class="warn-box" id="h-j2534-note"><strong>Nota:</strong> Em modo J2534 algumas funcoes avancadas podem nao estar disponiveis (codificacoes, SCN, parametrizacoes). Para uso profissional completo, a licenca da marca e sempre recomendada.</div>
   </div>
-
-</div><!-- /section -->
+</div>
 <hr class="div">
 
-
-<!-- ══════════════════════════════════════
-     PARTE 4 — TABELA RESUMO
-═══════════════════════════════════════ -->
+<!-- PARTE 4 -->
 <div class="section">
-  <div class="chip">Parte 4 &mdash; Resumo por marca</div>
-  <h2 class="st">O que precisas para cada marca com M-Auto VCI</h2>
-  <p class="sub">Maquina = sempre a mesma. O que muda e a licenca e o software.</p>
+  <div class="chip" id="h-chip4">Parte 4 &mdash; Resumo por marca</div>
+  <h2 class="st" id="h-p4-title">O que precisas para cada marca com M-Auto VCI</h2>
+  <p class="sub" id="h-p4-sub">Maquina = sempre a mesma. O que muda e a licenca e o software.</p>
 
   <div class="tbl-wrap">
     <table class="summary">
       <thead>
         <tr>
-          <th>Marca / Grupo</th>
-          <th>Maquina</th>
-          <th>Licenca</th>
-          <th>Software no PC</th>
-          <th>Sistema substituido</th>
+          <th id="h-th-brand">Marca / Grupo</th>
+          <th id="h-th-hw">Maquina</th>
+          <th id="h-th-lic">Licenca</th>
+          <th id="h-th-sw">Software no PC</th>
+          <th id="h-th-rep">Sistema substituido</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td class="brand">VW &middot; Audi &middot; SEAT &middot; Skoda</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca VW</span></td><td><span class="pill pg">ODIS</span></td><td><span class="pill pb">VAS 6154</span></td></tr>
-        <tr><td class="brand">Mercedes &middot; Smart</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca MB</span></td><td><span class="pill pg">Xentry / DAS</span></td><td><span class="pill pb">C4 / SDconnect</span></td></tr>
-        <tr><td class="brand">BMW &middot; MINI</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca BMW</span></td><td><span class="pill pg">ISTA / E-sys</span></td><td><span class="pill pb">ICOM A2/Next</span></td></tr>
-        <tr><td class="brand">Peugeot &middot; Citroen &middot; DS &middot; Opel</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca PSA</span></td><td><span class="pill pg">DiagBox</span></td><td><span class="pill pb">Lexia 3 / PP2000</span></td></tr>
-        <tr><td class="brand">Renault &middot; Dacia</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca Renault</span></td><td><span class="pill pg">Clip</span></td><td><span class="pill pb">CAN Clip</span></td></tr>
-        <tr><td class="brand">Ford &middot; Lincoln</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca Ford</span></td><td><span class="pill pg">IDS / FDRS</span></td><td><span class="pill pb">VCM II</span></td></tr>
-        <tr><td class="brand">GM &middot; Chevrolet</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca GM</span></td><td><span class="pill pg">GDS2</span></td><td><span class="pill pb">Tech2 / MDI</span></td></tr>
-        <tr><td class="brand">Fiat &middot; Alfa &middot; Jeep</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca FCA</span></td><td><span class="pill pg">Witech 2.0</span></td><td><span class="pill pb">Examiner / MES</span></td></tr>
-        <tr><td class="brand">Toyota &middot; Lexus</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca Toyota</span></td><td><span class="pill pg">Techstream</span></td><td><span class="pill pb">IT2 / Techstream HW</span></td></tr>
-        <tr><td class="brand">Volvo</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py">Licenca Volvo</span></td><td><span class="pill pg">Vida</span></td><td><span class="pill pb">Vida HW</span></td></tr>
+        <tr><td class="brand">VW &middot; Audi &middot; SEAT &middot; Skoda</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-vw">Licenca VW</span></td><td><span class="pill pg">ODIS</span></td><td><span class="pill pb">VAS 6154</span></td></tr>
+        <tr><td class="brand">Mercedes &middot; Smart</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-mb">Licenca MB</span></td><td><span class="pill pg">Xentry / DAS</span></td><td><span class="pill pb">C4 / SDconnect</span></td></tr>
+        <tr><td class="brand">BMW &middot; MINI</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-bmw">Licenca BMW</span></td><td><span class="pill pg">ISTA / E-sys</span></td><td><span class="pill pb">ICOM A2/Next</span></td></tr>
+        <tr><td class="brand">Peugeot &middot; Citroen &middot; DS &middot; Opel</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-psa">Licenca PSA</span></td><td><span class="pill pg">DiagBox</span></td><td><span class="pill pb">Lexia 3 / PP2000</span></td></tr>
+        <tr><td class="brand">Renault &middot; Dacia</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-ren">Licenca Renault</span></td><td><span class="pill pg">Clip</span></td><td><span class="pill pb">CAN Clip</span></td></tr>
+        <tr><td class="brand">Ford &middot; Lincoln</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-ford">Licenca Ford</span></td><td><span class="pill pg">IDS / FDRS</span></td><td><span class="pill pb">VCM II</span></td></tr>
+        <tr><td class="brand">GM &middot; Chevrolet</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-gm">Licenca GM</span></td><td><span class="pill pg">GDS2</span></td><td><span class="pill pb">Tech2 / MDI</span></td></tr>
+        <tr><td class="brand">Fiat &middot; Alfa &middot; Jeep</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-fca">Licenca FCA</span></td><td><span class="pill pg">Witech 2.0</span></td><td><span class="pill pb">Examiner / MES</span></td></tr>
+        <tr><td class="brand">Toyota &middot; Lexus</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-toy">Licenca Toyota</span></td><td><span class="pill pg">Techstream</span></td><td><span class="pill pb">IT2 / Techstream HW</span></td></tr>
+        <tr><td class="brand">Volvo</td><td><span class="pill ps">M-Auto VCI</span></td><td><span class="pill py" id="h-lic-vol">Licenca Volvo</span></td><td><span class="pill pg">Vida</span></td><td><span class="pill pb">Vida HW</span></td></tr>
       </tbody>
     </table>
   </div>
-
   <div class="legend">
-    <span class="legend-item"><span class="pill ps">cinza</span> = sempre M-Auto VCI</span>
-    <span class="legend-item"><span class="pill py">amarelo</span> = compra por marca</span>
-    <span class="legend-item"><span class="pill pg">verde</span> = instalar no PC</span>
-    <span class="legend-item"><span class="pill pb">azul</span> = o que substitui</span>
+    <span class="legend-item"><span class="pill ps" id="h-leg1">cinza</span> = <span id="h-leg1t">sempre M-Auto VCI</span></span>
+    <span class="legend-item"><span class="pill py" id="h-leg2">amarelo</span> = <span id="h-leg2t">compra por marca</span></span>
+    <span class="legend-item"><span class="pill pg" id="h-leg3">verde</span> = <span id="h-leg3t">instalar no PC</span></span>
+    <span class="legend-item"><span class="pill pb" id="h-leg4">azul</span> = <span id="h-leg4t">o que substitui</span></span>
   </div>
-
-</div><!-- /section -->
-
-<!-- FOOTER -->
-<div id="footer">
-  Guia informativo <strong>m-auto.online</strong> &mdash; M-Auto VCI Diagnostico Universal
 </div>
+
+<div id="footer">Guia informativo <strong>m-auto.online</strong> &mdash; <span id="h-footer">M-Auto VCI Diagnostico Universal</span></div>
 
 <script>
 function openUrl(url) {
@@ -682,17 +466,352 @@ function openUrl(url) {
       try {
         var e64 = sh.ExpandEnvironmentStrings('%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe');
         sh.Run('"' + e64 + '" "' + url + '"', 0, false);
-      } catch(e2) {
-        sh.Run('cmd /c start "" "' + url + '"', 0, false);
-      }
+      } catch(e2) { sh.Run('cmd /c start "" "' + url + '"', 0, false); }
     }
   } catch(e) { window.location.href = url; }
 }
-var _titles = { pt:'Como Funciona', en:'How It Works', fr:'Comment \u00e7a marche', de:'So funktioniert es' };
+
+var T = {
+  pt: {
+    title:'Como Funciona', back:'\u2190 Menu',
+    heroTitle:'Como funciona o diagnostico por marca?',
+    heroSub:'Explica\u00e7ao visual simples \u2014 para perceber o que e a maquina, a licenca e o software',
+    chip1:'Parte 1 \u2014 Sistema tradicional',
+    p1title:'Cada marca tem a sua propria maquina',
+    p1sub:'No sistema normal, para diagnosticar um VW precisas da maquina VW. Para Mercedes, a maquina Mercedes. E assim para cada marca \u2014 todas diferentes, todas com o seu cabo e software.',
+    flowTitle:'Carro \u2192 Cabo \u2192 Maquina de diagnostico \u2192 PC com software',
+    carVw:'Carro VW', machVw:'Maquina VW', cableInc:'cabo incluido', pcInst:'instalado no PC',
+    carMb:'Carro MB', machMb:'Maquina MB', carBmw:'Carro BMW', machBmw:'Maquina BMW',
+    carPsa:'Carro PSA', machPsa:'Maquina PSA', carRen:'Carro Renault', machRen:'Maquina Renault',
+    carGm:'Carro GM/Ford', machGm:'Maquina GM/Ford',
+    probTitle:'O problema: 6 marcas = 6 maquinas diferentes',
+    probResult:'Muito dinheiro<br>Muito espa\u00e7o<br>Muito caos',
+    chip2:'Parte 2 \u2014 A solu\u00e7ao M-Auto VCI',
+    p2title:'Uma maquina para todas as marcas',
+    p2sub:'A M-Auto VCI substitui todas as maquinas acima. Um unico cabo OBD-II universal liga a qualquer carro. Mas ha 3 componentes que precisas de perceber.',
+    vcxSchemaTitle:'M-Auto VCI \u2014 todos os carros, uma unica maquina',
+    obdAll:'mesmo cabo OBD-II para todos', usbWifi:'USB ou Wi-Fi',
+    vcxDesc:'Interface universal de diagnostico', swPc:'Software no PC',
+    comp3title:'MAS ATEN\u00c7AO \u2014 sao sempre 3 componentes separados',
+    step1title:'Maquina M-Auto VCI',
+    step1body:'O hardware fisico. O aparelho que tu compras. E o mesmo para todas as marcas. Fica ligado ao carro por OBD-II e ao PC por USB ou Wi-Fi.',
+    step2title:'Licen\u00e7a por marca',
+    step2body:'Ativa o protocolo da marca na maquina. Sem ela, a VCX nao consegue falar com o carro. Compra-se separadamente para cada marca.',
+    step3title:'Software no PC',
+    step3body:'O programa instalado no computador. Cada marca tem o seu proprio software. Tem de ser instalado separadamente \u2014 nao vem com a maquina.',
+    chip3:'Parte 3 \u2014 Os 3 casos reais',
+    p3title:'O que tens e o que falta?',
+    p3sub:'Identifica o teu caso e ve exactamente o que ainda precisas.',
+    c1title:'Tenho a maquina. Nao tenho licenca nem software.',
+    c1sub:'Situa\u00e7ao de arranque \u2014 acabaste de receber a M-Auto VCI',
+    estado:'Estado actual', have:'tens', dontHave:'nao tens',
+    licLbl:'Licen\u00e7a', swLbl:'Software', notWork:'Nao funciona',
+    need:'O que precisas de adquirir',
+    needLicTitle:'Licen\u00e7a da marca',
+    needLicBody:'Comprada separadamente para cada marca (VW, BMW, Mercedes...)',
+    needSwTitle:'Software no PC',
+    needSwBody:'Instalar o software original da marca (ODIS, Xentry, ISTA...) no teu computador',
+    c2title:'Tenho a maquina e a licenca. Nao tenho o software.',
+    c2sub:'Maquina preparada \u2014 falta apenas instalar o software no PC',
+    stillNotWork:'Ainda nao funciona', whatToDo:'O que precisas de fazer',
+    c2action:'Instalar o software no PC \u2014 so isso',
+    c2actionBody:'A maquina ja esta preparada. Falta apenas instalar e configurar o software original da marca. Depois esta tudo pronto.',
+    c3title:'Tenho maquina e software. Nao tenho licenca.',
+    c3sub:'Caso especial \u2014 pode funcionar em modo J2534 (gratuito) em muitas marcas',
+    j2534what:'Modo J2534 \u2014 o que e?',
+    j2534body:'<strong>J2534</strong> e uma norma aberta que permite que a M-Auto VCI funcione como interface generica \u2014 sem precisar de licen\u00e7a proprietaria.<br>O software da marca comunica directamente com a maquina usando este protocolo padrao, gratuito.',
+    j2534note:'<strong>Nota:</strong> Em modo J2534 algumas fun\u00e7oes avan\u00e7adas podem nao estar disponiveis (codifica\u00e7oes, SCN, parametriza\u00e7oes). Para uso profissional completo, a licen\u00e7a da marca e sempre recomendada.',
+    chip4:'Parte 4 \u2014 Resumo por marca',
+    p4title:'O que precisas para cada marca com M-Auto VCI',
+    p4sub:'Maquina = sempre a mesma. O que muda e a licenca e o software.',
+    thBrand:'Marca / Grupo', thHw:'Maquina', thLic:'Licen\u00e7a', thSw:'Software no PC', thRep:'Sistema substituido',
+    licVw:'Licen\u00e7a VW', licMb:'Licen\u00e7a MB', licBmw:'Licen\u00e7a BMW', licPsa:'Licen\u00e7a PSA',
+    licRen:'Licen\u00e7a Renault', licFord:'Licen\u00e7a Ford', licGm:'Licen\u00e7a GM', licFca:'Licen\u00e7a FCA',
+    licToy:'Licen\u00e7a Toyota', licVol:'Licen\u00e7a Volvo',
+    leg1:'cinza', leg1t:'sempre M-Auto VCI', leg2:'amarelo', leg2t:'compra por marca',
+    leg3:'verde', leg3t:'instalar no PC', leg4:'azul', leg4t:'o que substitui',
+    footer:'M-Auto VCI Diagnostico Universal'
+  },
+  en: {
+    title:'How It Works', back:'\u2190 Menu',
+    heroTitle:'How does brand-specific diagnostics work?',
+    heroSub:'Simple visual explanation \u2014 to understand what the device, the license and the software are',
+    chip1:'Part 1 \u2014 Traditional system',
+    p1title:'Each brand has its own diagnostic tool',
+    p1sub:'In the traditional system, to diagnose a VW you need the VW tool. For Mercedes, the Mercedes tool. And so on for each brand \u2014 all different, all with their own cable and software.',
+    flowTitle:'Car \u2192 Cable \u2192 Diagnostic tool \u2192 PC with software',
+    carVw:'VW Car', machVw:'VW Tool', cableInc:'cable included', pcInst:'installed on PC',
+    carMb:'MB Car', machMb:'MB Tool', carBmw:'BMW Car', machBmw:'BMW Tool',
+    carPsa:'PSA Car', machPsa:'PSA Tool', carRen:'Renault Car', machRen:'Renault Tool',
+    carGm:'GM/Ford Car', machGm:'GM/Ford Tool',
+    probTitle:'The problem: 6 brands = 6 different tools',
+    probResult:'Too expensive<br>Too much space<br>Too complex',
+    chip2:'Part 2 \u2014 The M-Auto VCI solution',
+    p2title:'One device for all brands',
+    p2sub:'The M-Auto VCI replaces all the tools above. A single universal OBD-II cable connects to any car. But there are 3 components you need to understand.',
+    vcxSchemaTitle:'M-Auto VCI \u2014 all cars, one single device',
+    obdAll:'same OBD-II cable for all', usbWifi:'USB or Wi-Fi',
+    vcxDesc:'Universal diagnostic interface', swPc:'Software on PC',
+    comp3title:'IMPORTANT \u2014 there are always 3 separate components',
+    step1title:'M-Auto VCI Device',
+    step1body:'The physical hardware. The device you buy. It is the same for all brands. Connected to the car via OBD-II and to the PC via USB or Wi-Fi.',
+    step2title:'License per brand',
+    step2body:'Activates the brand protocol on the device. Without it, the VCX cannot communicate with the car. Purchased separately for each brand you want to use.',
+    step3title:'Software on PC',
+    step3body:'The program installed on the computer. Each brand has its own software. It must be installed separately \u2014 it does not come with the device.',
+    chip3:'Part 3 \u2014 3 real-world cases',
+    p3title:'What do you have and what is missing?',
+    p3sub:'Identify your case and see exactly what you still need.',
+    c1title:'I have the device. I have no license or software.',
+    c1sub:'Starting situation \u2014 you just received your M-Auto VCI',
+    estado:'Current status', have:'you have', dontHave:"you don't have",
+    licLbl:'License', swLbl:'Software', notWork:'Does not work',
+    need:'What you need to acquire',
+    needLicTitle:'Brand license',
+    needLicBody:'Purchased separately for each brand (VW, BMW, Mercedes...)',
+    needSwTitle:'Software on PC',
+    needSwBody:'Install the original brand software (ODIS, Xentry, ISTA...) on your computer',
+    c2title:'I have the device and the license. I have no software.',
+    c2sub:'Device ready \u2014 just need to install the software on the PC',
+    stillNotWork:'Still does not work', whatToDo:'What you need to do',
+    c2action:'Install the software on the PC \u2014 that is all',
+    c2actionBody:'The device is already set up. You just need to install and configure the original brand software. Then everything is ready.',
+    c3title:'I have the device and software. I have no license.',
+    c3sub:'Special case \u2014 may work in J2534 mode (free) for many brands',
+    j2534what:'J2534 mode \u2014 what is it?',
+    j2534body:'<strong>J2534</strong> is an open standard that allows the M-Auto VCI to work as a generic interface \u2014 without a proprietary license.<br>The brand software communicates directly with the device using this free standard protocol.',
+    j2534note:'<strong>Note:</strong> In J2534 mode, some advanced functions may not be available (coding, SCN, parametrization). For full professional use, the brand license is always recommended.',
+    chip4:'Part 4 \u2014 Summary by brand',
+    p4title:'What you need for each brand with M-Auto VCI',
+    p4sub:'Device = always the same. What changes is the license and the software.',
+    thBrand:'Brand / Group', thHw:'Device', thLic:'License', thSw:'Software on PC', thRep:'System replaced',
+    licVw:'VW License', licMb:'MB License', licBmw:'BMW License', licPsa:'PSA License',
+    licRen:'Renault License', licFord:'Ford License', licGm:'GM License', licFca:'FCA License',
+    licToy:'Toyota License', licVol:'Volvo License',
+    leg1:'grey', leg1t:'always M-Auto VCI', leg2:'yellow', leg2t:'buy per brand',
+    leg3:'green', leg3t:'install on PC', leg4:'blue', leg4t:'what it replaces',
+    footer:'M-Auto VCI Universal Diagnostics'
+  },
+  fr: {
+    title:'Comment \u00e7a marche', back:'\u2190 Menu',
+    heroTitle:'Comment fonctionne le diagnostic par marque\u00a0?',
+    heroSub:'Explication visuelle simple \u2014 pour comprendre ce qu\u2019est la machine, la licence et le logiciel',
+    chip1:'Partie 1 \u2014 Syst\u00e8me traditionnel',
+    p1title:'Chaque marque a sa propre machine',
+    p1sub:'Dans le syst\u00e8me traditionnel, pour diagnostiquer une VW il vous faut l\u2019outil VW. Pour Mercedes, l\u2019outil Mercedes. Et ainsi de suite \u2014 tous diff\u00e9rents, chacun avec son propre c\u00e2ble et logiciel.',
+    flowTitle:'Voiture \u2192 C\u00e2ble \u2192 Machine de diagnostic \u2192 PC avec logiciel',
+    carVw:'Voiture VW', machVw:'Machine VW', cableInc:'c\u00e2ble inclus', pcInst:'install\u00e9 sur PC',
+    carMb:'Voiture MB', machMb:'Machine MB', carBmw:'Voiture BMW', machBmw:'Machine BMW',
+    carPsa:'Voiture PSA', machPsa:'Machine PSA', carRen:'Voiture Renault', machRen:'Machine Renault',
+    carGm:'Voiture GM/Ford', machGm:'Machine GM/Ford',
+    probTitle:'Le probl\u00e8me\u00a0: 6 marques = 6 machines diff\u00e9rentes',
+    probResult:'Trop cher<br>Trop d\u2019espace<br>Trop compliqu\u00e9',
+    chip2:'Partie 2 \u2014 La solution M-Auto VCI',
+    p2title:'Une machine pour toutes les marques',
+    p2sub:'La M-Auto VCI remplace toutes les machines ci-dessus. Un seul c\u00e2ble OBD-II universel se connecte \u00e0 n\u2019importe quelle voiture. Mais il y a 3 composants \u00e0 comprendre.',
+    vcxSchemaTitle:'M-Auto VCI \u2014 toutes les voitures, une seule machine',
+    obdAll:'m\u00eame c\u00e2ble OBD-II pour tous', usbWifi:'USB ou Wi-Fi',
+    vcxDesc:'Interface de diagnostic universelle', swPc:'Logiciel sur PC',
+    comp3title:'ATTENTION \u2014 il y a toujours 3 composants s\u00e9par\u00e9s',
+    step1title:'Machine M-Auto VCI',
+    step1body:'Le mat\u00e9riel physique. L\u2019appareil que vous achetez. Il est identique pour toutes les marques. Reli\u00e9 \u00e0 la voiture par OBD-II et au PC par USB ou Wi-Fi.',
+    step2title:'Licence par marque',
+    step2body:'Active le protocole de la marque sur la machine. Sans elle, le VCX ne peut pas communiquer avec la voiture. S\u2019ach\u00e8te s\u00e9par\u00e9ment pour chaque marque.',
+    step3title:'Logiciel sur PC',
+    step3body:'Le programme install\u00e9 sur l\u2019ordinateur. Chaque marque a son propre logiciel. Il doit \u00eatre install\u00e9 s\u00e9par\u00e9ment \u2014 il ne vient pas avec la machine.',
+    chip3:'Partie 3 \u2014 3 cas r\u00e9els',
+    p3title:'Qu\u2019avez-vous et qu\u2019est-ce qui manque\u00a0?',
+    p3sub:'Identifiez votre cas et voyez exactement ce dont vous avez encore besoin.',
+    c1title:'J\u2019ai la machine. Je n\u2019ai pas de licence ni de logiciel.',
+    c1sub:'Situation de d\u00e9part \u2014 vous venez de recevoir votre M-Auto VCI',
+    estado:'Situation actuelle', have:'vous avez', dontHave:"vous n'avez pas",
+    licLbl:'Licence', swLbl:'Logiciel', notWork:'Ne fonctionne pas',
+    need:'Ce que vous devez acqu\u00e9rir',
+    needLicTitle:'Licence de marque',
+    needLicBody:'Achet\u00e9e s\u00e9par\u00e9ment pour chaque marque (VW, BMW, Mercedes...)',
+    needSwTitle:'Logiciel sur PC',
+    needSwBody:'Installer le logiciel original de la marque (ODIS, Xentry, ISTA...) sur votre ordinateur',
+    c2title:'J\u2019ai la machine et la licence. Je n\u2019ai pas le logiciel.',
+    c2sub:'Machine pr\u00eate \u2014 il suffit d\u2019installer le logiciel sur le PC',
+    stillNotWork:'Toujours pas op\u00e9rationnel', whatToDo:'Ce que vous devez faire',
+    c2action:'Installer le logiciel sur le PC \u2014 c\u2019est tout',
+    c2actionBody:'La machine est d\u00e9j\u00e0 pr\u00eate. Il suffit d\u2019installer et configurer le logiciel original de la marque. Ensuite tout est pr\u00eat.',
+    c3title:'J\u2019ai la machine et le logiciel. Je n\u2019ai pas de licence.',
+    c3sub:'Cas sp\u00e9cial \u2014 peut fonctionner en mode J2534 (gratuit) pour de nombreuses marques',
+    j2534what:'Mode J2534 \u2014 qu\u2019est-ce que c\u2019est\u00a0?',
+    j2534body:'<strong>J2534</strong> est une norme ouverte qui permet \u00e0 la M-Auto VCI de fonctionner comme interface g\u00e9n\u00e9rique \u2014 sans licence propri\u00e9taire.<br>Le logiciel de la marque communique directement avec la machine via ce protocole standard gratuit.',
+    j2534note:'<strong>Note\u00a0:</strong> En mode J2534, certaines fonctions avanc\u00e9es peuvent ne pas \u00eatre disponibles (codages, SCN, param\u00e9trisation). Pour un usage professionnel complet, la licence de marque est toujours recommand\u00e9e.',
+    chip4:'Partie 4 \u2014 R\u00e9sum\u00e9 par marque',
+    p4title:'Ce dont vous avez besoin pour chaque marque avec M-Auto VCI',
+    p4sub:'Machine = toujours la m\u00eame. Ce qui change, c\u2019est la licence et le logiciel.',
+    thBrand:'Marque / Groupe', thHw:'Machine', thLic:'Licence', thSw:'Logiciel sur PC', thRep:'Syst\u00e8me remplac\u00e9',
+    licVw:'Licence VW', licMb:'Licence MB', licBmw:'Licence BMW', licPsa:'Licence PSA',
+    licRen:'Licence Renault', licFord:'Licence Ford', licGm:'Licence GM', licFca:'Licence FCA',
+    licToy:'Licence Toyota', licVol:'Licence Volvo',
+    leg1:'gris', leg1t:'toujours M-Auto VCI', leg2:'jaune', leg2t:'achat par marque',
+    leg3:'vert', leg3t:'installer sur PC', leg4:'bleu', leg4t:'ce qu\u2019il remplace',
+    footer:'M-Auto VCI Diagnostic Universel'
+  },
+  de: {
+    title:'So funktioniert es', back:'\u2190 Men\u00fc',
+    heroTitle:'Wie funktioniert die markenspezifische Diagnose?',
+    heroSub:'Einfache visuelle Erkl\u00e4rung \u2014 um Ger\u00e4t, Lizenz und Software zu verstehen',
+    chip1:'Teil 1 \u2014 Traditionelles System',
+    p1title:'Jede Marke hat ihr eigenes Diagnoseger\u00e4t',
+    p1sub:'Im traditionellen System ben\u00f6tigen Sie f\u00fcr die Diagnose eines VW das VW-Ger\u00e4t. F\u00fcr Mercedes das Mercedes-Ger\u00e4t. Und so weiter \u2014 alle verschieden, alle mit eigenem Kabel und Software.',
+    flowTitle:'Auto \u2192 Kabel \u2192 Diagnoseger\u00e4t \u2192 PC mit Software',
+    carVw:'VW-Auto', machVw:'VW-Ger\u00e4t', cableInc:'Kabel inklusive', pcInst:'auf PC installiert',
+    carMb:'MB-Auto', machMb:'MB-Ger\u00e4t', carBmw:'BMW-Auto', machBmw:'BMW-Ger\u00e4t',
+    carPsa:'PSA-Auto', machPsa:'PSA-Ger\u00e4t', carRen:'Renault-Auto', machRen:'Renault-Ger\u00e4t',
+    carGm:'GM/Ford-Auto', machGm:'GM/Ford-Ger\u00e4t',
+    probTitle:'Das Problem: 6 Marken = 6 verschiedene Ger\u00e4te',
+    probResult:'Zu teuer<br>Zu viel Platz<br>Zu komplex',
+    chip2:'Teil 2 \u2014 Die M-Auto VCI L\u00f6sung',
+    p2title:'Ein Ger\u00e4t f\u00fcr alle Marken',
+    p2sub:'Die M-Auto VCI ersetzt alle oben genannten Ger\u00e4te. Ein einziges universelles OBD-II-Kabel verbindet sich mit jedem Auto. Es gibt jedoch 3 Komponenten zu verstehen.',
+    vcxSchemaTitle:'M-Auto VCI \u2014 alle Autos, ein einziges Ger\u00e4t',
+    obdAll:'gleiches OBD-II-Kabel f\u00fcr alle', usbWifi:'USB oder Wi-Fi',
+    vcxDesc:'Universelle Diagnoseschnittstelle', swPc:'Software auf PC',
+    comp3title:'WICHTIG \u2014 es gibt immer 3 separate Komponenten',
+    step1title:'M-Auto VCI Ger\u00e4t',
+    step1body:'Die physische Hardware. Das Ger\u00e4t, das Sie kaufen. Es ist f\u00fcr alle Marken identisch. Verbunden mit dem Auto \u00fcber OBD-II und mit dem PC \u00fcber USB oder Wi-Fi.',
+    step2title:'Lizenz pro Marke',
+    step2body:'Aktiviert das Markenprotokoll auf dem Ger\u00e4t. Ohne sie kann das VCX nicht mit dem Auto kommunizieren. Wird separat f\u00fcr jede Marke gekauft.',
+    step3title:'Software auf PC',
+    step3body:'Das auf dem Computer installierte Programm. Jede Marke hat ihre eigene Software. Sie muss separat installiert werden \u2014 sie wird nicht mit dem Ger\u00e4t geliefert.',
+    chip3:'Teil 3 \u2014 3 reale F\u00e4lle',
+    p3title:'Was haben Sie und was fehlt?',
+    p3sub:'Identifizieren Sie Ihren Fall und sehen Sie genau, was Sie noch ben\u00f6tigen.',
+    c1title:'Ich habe das Ger\u00e4t. Ich habe keine Lizenz oder Software.',
+    c1sub:'Startsituation \u2014 Sie haben Ihr M-Auto VCI gerade erhalten',
+    estado:'Aktueller Status', have:'Sie haben', dontHave:'Sie haben nicht',
+    licLbl:'Lizenz', swLbl:'Software', notWork:'Funktioniert nicht',
+    need:'Was Sie ben\u00f6tigen',
+    needLicTitle:'Markenlizenz',
+    needLicBody:'Separat f\u00fcr jede Marke gekauft (VW, BMW, Mercedes...)',
+    needSwTitle:'Software auf PC',
+    needSwBody:'Installieren Sie die Original-Markensoftware (ODIS, Xentry, ISTA...) auf Ihrem Computer',
+    c2title:'Ich habe Ger\u00e4t und Lizenz. Ich habe keine Software.',
+    c2sub:'Ger\u00e4t bereit \u2014 nur noch Software auf dem PC installieren',
+    stillNotWork:'Noch nicht betriebsbereit', whatToDo:'Was Sie tun m\u00fcssen',
+    c2action:'Software auf dem PC installieren \u2014 das ist alles',
+    c2actionBody:'Das Ger\u00e4t ist bereits eingerichtet. Sie m\u00fcssen nur die Original-Markensoftware installieren und konfigurieren. Dann ist alles bereit.',
+    c3title:'Ich habe Ger\u00e4t und Software. Ich habe keine Lizenz.',
+    c3sub:'Sonderfall \u2014 kann im J2534-Modus (kostenlos) f\u00fcr viele Marken funktionieren',
+    j2534what:'J2534-Modus \u2014 was ist das?',
+    j2534body:'<strong>J2534</strong> ist ein offener Standard, der es der M-Auto VCI erm\u00f6glicht, als generische Schnittstelle zu funktionieren \u2014 ohne propriet\u00e4re Lizenz.<br>Die Markensoftware kommuniziert direkt \u00fcber dieses kostenlose Standardprotokoll mit dem Ger\u00e4t.',
+    j2534note:'<strong>Hinweis:</strong> Im J2534-Modus sind einige erweiterte Funktionen m\u00f6glicherweise nicht verf\u00fcgbar (Codierungen, SCN, Parametrierung). F\u00fcr den vollst\u00e4ndigen professionellen Einsatz wird die Markenlizenz stets empfohlen.',
+    chip4:'Teil 4 \u2014 \u00dcbersicht nach Marke',
+    p4title:'Was Sie f\u00fcr jede Marke mit M-Auto VCI ben\u00f6tigen',
+    p4sub:'Ger\u00e4t = immer dasselbe. Was sich \u00e4ndert, ist Lizenz und Software.',
+    thBrand:'Marke / Gruppe', thHw:'Ger\u00e4t', thLic:'Lizenz', thSw:'Software auf PC', thRep:'Ersetztes System',
+    licVw:'VW-Lizenz', licMb:'MB-Lizenz', licBmw:'BMW-Lizenz', licPsa:'PSA-Lizenz',
+    licRen:'Renault-Lizenz', licFord:'Ford-Lizenz', licGm:'GM-Lizenz', licFca:'FCA-Lizenz',
+    licToy:'Toyota-Lizenz', licVol:'Volvo-Lizenz',
+    leg1:'grau', leg1t:'immer M-Auto VCI', leg2:'gelb', leg2t:'Kauf pro Marke',
+    leg3:'gr\u00fcn', leg3t:'auf PC installieren', leg4:'blau', leg4t:'was ersetzt wird',
+    footer:'M-Auto VCI Universaldiagnose'
+  }
+};
+
 function setLang(lang) {
-  if (!_titles[lang]) return;
+  if (!T[lang]) return;
   try { localStorage.setItem('vcx_lang', lang); } catch(e) {}
-  document.getElementById('header-title').innerHTML = _titles[lang];
+  var t = T[lang];
+  var g = function(id){ return document.getElementById(id); };
+  g('header-title').innerHTML  = t.title;
+  g('btn-back').innerHTML      = t.back;
+  g('h-hero-title').innerHTML  = t.heroTitle;
+  g('h-hero-sub').innerHTML    = t.heroSub;
+  g('h-chip1').innerHTML       = t.chip1;
+  g('h-p1-title').innerHTML    = t.p1title;
+  g('h-p1-sub').innerHTML      = t.p1sub;
+  g('h-flow-title').innerHTML  = t.flowTitle;
+  g('h-car-vw').innerHTML      = t.carVw;
+  g('h-mach-vw').innerHTML     = t.machVw;
+  g('h-cable-inc').innerHTML   = t.cableInc;
+  g('h-pc-installed').innerHTML= t.pcInst;
+  g('h-car-mb').innerHTML      = t.carMb;
+  g('h-mach-mb').innerHTML     = t.machMb;
+  g('h-car-bmw').innerHTML     = t.carBmw;
+  g('h-mach-bmw').innerHTML    = t.machBmw;
+  g('h-car-psa').innerHTML     = t.carPsa;
+  g('h-mach-psa').innerHTML    = t.machPsa;
+  g('h-car-ren').innerHTML     = t.carRen;
+  g('h-mach-ren').innerHTML    = t.machRen;
+  g('h-car-gm').innerHTML      = t.carGm;
+  g('h-mach-gm').innerHTML     = t.machGm;
+  g('h-prob-title').innerHTML  = t.probTitle;
+  g('h-prob-result').innerHTML = t.probResult;
+  g('h-chip2').innerHTML       = t.chip2;
+  g('h-p2-title').innerHTML    = t.p2title;
+  g('h-p2-sub').innerHTML      = t.p2sub;
+  g('h-vcx-schema-title').innerHTML = t.vcxSchemaTitle;
+  g('h-obd-all').innerHTML     = t.obdAll;
+  g('h-usb-wifi').innerHTML    = t.usbWifi;
+  g('h-vcx-desc').innerHTML    = t.vcxDesc;
+  g('h-sw-pc').innerHTML       = t.swPc;
+  g('h-3comp-title').innerHTML = t.comp3title;
+  g('h-step1-title').innerHTML = t.step1title;
+  g('h-step1-body').innerHTML  = t.step1body;
+  g('h-step2-title').innerHTML = t.step2title;
+  g('h-step2-body').innerHTML  = t.step2body;
+  g('h-step3-title').innerHTML = t.step3title;
+  g('h-step3-body').innerHTML  = t.step3body;
+  g('h-chip3').innerHTML       = t.chip3;
+  g('h-p3-title').innerHTML    = t.p3title;
+  g('h-p3-sub').innerHTML      = t.p3sub;
+  g('h-c1-title').innerHTML    = t.c1title;
+  g('h-c1-sub').innerHTML      = t.c1sub;
+  g('h-estado').innerHTML      = t.estado;
+  g('h-have').innerHTML        = t.have;
+  g('h-dont-have').innerHTML   = t.dontHave;
+  g('h-lic-lbl').innerHTML     = t.licLbl;
+  g('h-sw-lbl').innerHTML      = t.swLbl;
+  g('h-not-work').innerHTML    = t.notWork;
+  g('h-need').innerHTML        = t.need;
+  g('h-need-lic-title').innerHTML = t.needLicTitle;
+  g('h-need-lic-body').innerHTML  = t.needLicBody;
+  g('h-need-sw-title').innerHTML  = t.needSwTitle;
+  g('h-need-sw-body').innerHTML   = t.needSwBody;
+  g('h-c2-title').innerHTML    = t.c2title;
+  g('h-c2-sub').innerHTML      = t.c2sub;
+  g('h-still-not-work').innerHTML = t.stillNotWork;
+  g('h-what-to-do').innerHTML  = t.whatToDo;
+  g('h-c2-action').innerHTML   = t.c2action;
+  g('h-c2-action-body').innerHTML = t.c2actionBody;
+  g('h-c3-title').innerHTML    = t.c3title;
+  g('h-c3-sub').innerHTML      = t.c3sub;
+  g('h-j2534-what').innerHTML  = t.j2534what;
+  g('h-j2534-body').innerHTML  = t.j2534body;
+  g('h-j2534-note').innerHTML  = t.j2534note;
+  g('h-chip4').innerHTML       = t.chip4;
+  g('h-p4-title').innerHTML    = t.p4title;
+  g('h-p4-sub').innerHTML      = t.p4sub;
+  g('h-th-brand').innerHTML    = t.thBrand;
+  g('h-th-hw').innerHTML       = t.thHw;
+  g('h-th-lic').innerHTML      = t.thLic;
+  g('h-th-sw').innerHTML       = t.thSw;
+  g('h-th-rep').innerHTML      = t.thRep;
+  g('h-lic-vw').innerHTML      = t.licVw;
+  g('h-lic-mb').innerHTML      = t.licMb;
+  g('h-lic-bmw').innerHTML     = t.licBmw;
+  g('h-lic-psa').innerHTML     = t.licPsa;
+  g('h-lic-ren').innerHTML     = t.licRen;
+  g('h-lic-ford').innerHTML    = t.licFord;
+  g('h-lic-gm').innerHTML      = t.licGm;
+  g('h-lic-fca').innerHTML     = t.licFca;
+  g('h-lic-toy').innerHTML     = t.licToy;
+  g('h-lic-vol').innerHTML     = t.licVol;
+  g('h-leg1').innerHTML        = t.leg1;
+  g('h-leg1t').innerHTML       = t.leg1t;
+  g('h-leg2').innerHTML        = t.leg2;
+  g('h-leg2t').innerHTML       = t.leg2t;
+  g('h-leg3').innerHTML        = t.leg3;
+  g('h-leg3t').innerHTML       = t.leg3t;
+  g('h-leg4').innerHTML        = t.leg4;
+  g('h-leg4t').innerHTML       = t.leg4t;
+  g('h-footer').innerHTML      = t.footer;
   var btns = document.getElementById('header').getElementsByTagName('button');
   for (var i = 0; i < btns.length; i++) {
     if (btns[i].className.indexOf('lang-btn') >= 0)
@@ -703,7 +822,7 @@ function setLang(lang) {
   var m = (location.search || '').match(/[?&]lang=([a-z]+)/);
   var saved = m ? m[1] : '';
   if (!saved) { try { saved = localStorage.getItem('vcx_lang') || ''; } catch(e) {} }
-  if (saved && _titles[saved]) setLang(saved);
+  if (saved && T[saved]) setLang(saved);
 })();
 </script>
 </body>
