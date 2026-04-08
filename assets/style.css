@@ -1816,6 +1816,66 @@ body {
 }
 
 /* ── ABOUT LANDING PAGE ── */
+/* ── ABOUT NEWS CARD ─────────────────────────── */
+.about-news {
+  width: 100%;
+  max-width: 560px;
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+  border: 1px solid #3b82f6;
+  border-radius: 14px;
+  padding: 22px 28px;
+  margin-bottom: 36px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(37,99,235,.25);
+}
+.about-news-badge {
+  display: inline-block;
+  background: #fbbf24;
+  color: #78350f;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: 'Manrope', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 3px 11px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.about-news-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.about-news-sub {
+  font-size: 12px;
+  color: #93c5fd;
+  margin-bottom: 16px;
+  font-family: 'Manrope', sans-serif;
+}
+.about-news-btn {
+  display: inline-block;
+  background: #fff;
+  color: #1e40af;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: 'Syne', sans-serif;
+  padding: 9px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+.about-news-btn:hover {
+  background: #eff6ff;
+  transform: translateY(-1px);
+}
+[data-theme="dark"] .about-news {
+  background: linear-gradient(135deg, #0f2460, #1e3a8a);
+  border-color: #2563eb;
+}
+
 .about-landing {
   max-width: 700px;
   margin: 0 auto;

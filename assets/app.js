@@ -54,6 +54,10 @@ const TRANS = {
     about_feat_install: "Instalação remota profissional",
     about_feat_brands: "Mercedes · BMW · VAG · PSA · Toyota e mais",
     about_feat_support: "Suporte rápido e garantido",
+    news_badge: "★ NOVIDADE",
+    news_title: "Mercedes-Benz / Daimler — Veículos Pesados",
+    news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
+    news_btn: "Ver M-Auto VCI →",
     wa_interest: "Olá! Tenho interesse em:",
     wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico."
   },
@@ -103,6 +107,10 @@ const TRANS = {
     about_feat_install: "Professional remote installation",
     about_feat_brands: "Mercedes · BMW · VAG · PSA · Toyota and more",
     about_feat_support: "Fast and guaranteed support",
+    news_badge: "★ NEW",
+    news_title: "Mercedes-Benz / Daimler — Heavy Trucks",
+    news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
+    news_btn: "See M-Auto VCI →",
     wa_interest: "Hello! I'm interested in:",
     wa_general: "Hello! I would like more information about your diagnostic software."
   },
@@ -152,6 +160,10 @@ const TRANS = {
     about_feat_install: "Installation à distance professionnelle",
     about_feat_brands: "Mercedes · BMW · VAG · PSA · Toyota et plus",
     about_feat_support: "Support rapide et garanti",
+    news_badge: "★ NOUVEAU",
+    news_title: "Mercedes-Benz / Daimler — Poids Lourds",
+    news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
+    news_btn: "Voir M-Auto VCI →",
     wa_interest: "Bonjour ! Je suis intéressé par :",
     wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic."
   }
@@ -836,6 +848,12 @@ function renderAbout() {
       <p class="section-hero-meta">Simply Digital · Diagnóstico Profissional</p>
     </div>
     <div class="about-landing">
+      <div class="about-news">
+        <span class="about-news-badge">${t('news_badge')}</span>
+        <div class="about-news-title">${t('news_title')}</div>
+        <div class="about-news-sub">${t('news_sub')}</div>
+        <a href="vcx.html" class="about-news-btn">${t('news_btn')}</a>
+      </div>
       <p class="about-body">${t('about_text')}</p>
       <button class="about-cta" onclick="selectBrandFromNav('mercedes')">${t('about_cta')}</button>
     </div>
