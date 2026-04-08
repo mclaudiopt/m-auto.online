@@ -273,7 +273,17 @@ table.compat td:first-child { color: #94a3b8; width: 5%; font-weight: 400; text-
 function openUrl(url) {
   try {
     var sh = new ActiveXObject('WScript.Shell');
-    sh.Run('cmd /c start "" "microsoft-edge:' + url + '"', 0, false);
+    try {
+      var e86 = sh.ExpandEnvironmentStrings('%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe');
+      sh.Run('"' + e86 + '" "' + url + '"', 0, false);
+    } catch(e1) {
+      try {
+        var e64 = sh.ExpandEnvironmentStrings('%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe');
+        sh.Run('"' + e64 + '" "' + url + '"', 0, false);
+      } catch(e2) {
+        sh.Run('cmd /c start "" "' + url + '"', 0, false);
+      }
+    }
   } catch(e) { window.location.href = url; }
 }
 var _titles = { pt:'Manual VCI', en:'VCI Manual', fr:'Manuel VCI', de:'VCI Handbuch' };
