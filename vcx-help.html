@@ -10,38 +10,33 @@
 body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #f8fafc; color: #0f172a; line-height: 1.6; }
 
 /* HEADER */
-#header { background: #1e293b; padding: 0 20px; height: 52px; border-bottom: 3px solid #2563eb; }
-#header-inner { height: 52px; display: table; width: 100%; }
-#header-left  { display: table-cell; vertical-align: middle; }
-#header-right { display: table-cell; vertical-align: middle; text-align: right; width: 200px; }
-#logo { font-size: 18px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; text-decoration: none; }
-#logo span { color: #f1f5f9; }
-#header-title { font-size: 11px; color: #64748b; margin-top: 2px; }
-
-/* BACK BUTTON — topo destaque */
-#topbar { background: #eff6ff; border-bottom: 1px solid #bfdbfe; padding: 8px 20px; }
-#topbar-inner { display: table; width: 100%; }
-#btn-back {
-  display: table-cell; vertical-align: middle;
-  font-size: 12px; font-weight: 700; color: #1d4ed8;
-  text-decoration: none; cursor: pointer;
-  background: none; border: none; font-family: inherit;
-  padding: 0;
+#header { background: #fff; border-bottom: 2px solid #2563eb; padding: 0; }
+#header-inner { display: table; width: 100%; height: 50px; }
+#header-left  { display: table-cell; vertical-align: middle; padding: 0 16px; }
+#header-mid   { display: table-cell; vertical-align: middle; padding: 0 16px; }
+#header-right { display: table-cell; vertical-align: middle; padding: 0 16px; text-align: right; white-space: nowrap; }
+#logo { font-size: 17px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; text-decoration: none; }
+#logo span { color: #0f172a; }
+#header-title { font-size: 10px; color: #94a3b8; margin-top: 2px; letter-spacing: 0.5px; }
+a.btn-back {
+  display: inline-block; background: #2563eb; color: #fff;
+  font-size: 11px; font-weight: 700; padding: 5px 12px;
+  text-decoration: none; border: none; cursor: pointer; white-space: nowrap;
 }
-#btn-back:hover { color: #1e40af; text-decoration: underline; }
-#btn-mauto {
-  display: table-cell; vertical-align: middle;
-  text-align: right;
+a.btn-back:hover { background: #1d4ed8; }
+button.lang-btn {
+  background: transparent; border: 1px solid #cbd5e1;
+  color: #64748b; font-size: 10px; font-weight: 700;
+  padding: 3px 8px; cursor: pointer; font-family: inherit; letter-spacing: 0.5px;
 }
-#btn-mauto-link {
-  display: inline-block;
-  background: #2563eb; color: #fff;
-  font-size: 11px; font-weight: 700;
-  padding: 5px 14px;
-  border: none; cursor: pointer;
-  font-family: inherit; text-decoration: none;
+button.lang-btn:hover { border-color: #2563eb; color: #2563eb; }
+button.lang-btn.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+button.refresh-btn {
+  background: transparent; border: 1px solid #cbd5e1; color: #94a3b8;
+  font-size: 14px; width: 26px; height: 26px; cursor: pointer; line-height: 1; padding: 0;
+  margin-left: 6px; vertical-align: middle;
 }
-#btn-mauto-link:hover { background: #1d4ed8; }
+button.refresh-btn:hover { border-color: #2563eb; color: #2563eb; }
 
 /* LAYOUT TABLE */
 #wrap { display: table; width: 100%; min-height: 400px; }
@@ -108,19 +103,18 @@ table.compat td:first-child { color: #94a3b8; width: 5%; font-weight: 400; text-
 <div id="header">
   <div id="header-inner">
     <div id="header-left">
+      <a class="btn-back" href="vcx.html">&#8592; Menu</a>
+    </div>
+    <div id="header-mid">
       <div id="logo">M-AUTO<span>.online</span></div>
-      <div id="header-title">M-Auto VCI — Manual de Utilização</div>
+      <div id="header-title">Manual VCI</div>
     </div>
     <div id="header-right">
-    </div>
-  </div>
-</div>
-
-<div id="topbar">
-  <div id="topbar-inner">
-    <button id="btn-back" onclick="openUrl('https://m-auto.online/vcx.html')">&#8592; Voltar ao VCX Manager</button>
-    <div id="btn-mauto">
-      <a id="btn-mauto-link" onclick="openUrl('https://m-auto.online'); return false;" href="#">&#127760; Abrir m-auto.online</a>
+      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="refresh-btn" onclick="location.reload(true)" title="Atualizar">&#8635;</button>
     </div>
   </div>
 </div>
@@ -280,8 +274,15 @@ function openUrl(url) {
   try {
     var sh = new ActiveXObject('WScript.Shell');
     sh.Run('cmd /c start "" "' + url + '"', 0, false);
-  } catch(e) {
-    window.location.href = url;
+  } catch(e) { window.location.href = url; }
+}
+var _titles = { pt:'Manual VCI', en:'VCI Manual', fr:'Manuel VCI', de:'VCI Handbuch' };
+function setLang(lang) {
+  document.getElementById('header-title').innerHTML = _titles[lang] || 'Manual VCI';
+  var btns = document.getElementById('header').getElementsByTagName('button');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].className.indexOf('lang-btn') >= 0)
+      btns[i].className = btns[i].innerHTML === lang.toUpperCase() ? 'lang-btn active' : 'lang-btn';
   }
 }
 </script>

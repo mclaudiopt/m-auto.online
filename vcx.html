@@ -9,12 +9,17 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #f1f5f9; color: #1e293b; }
 
-/* TOPBAR */
-#topbar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 8px 16px; }
-#topbar-inner { display: -ms-flexbox; display: flex; -ms-flex-pack: end; justify-content: flex-end; -ms-flex-align: center; align-items: center; gap: 6px; }
+/* HEADER */
+#header { background: #fff; border-bottom: 2px solid #2563eb; padding: 0; }
+#header-inner { display: table; width: 100%; height: 50px; }
+#header-left  { display: table-cell; vertical-align: middle; padding: 0 16px; }
+#header-right { display: table-cell; vertical-align: middle; padding: 0 16px; text-align: right; white-space: nowrap; }
+#logo  { font-size: 17px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; line-height: 1; }
+#logo span { color: #0f172a; }
+#tagline { font-size: 10px; color: #94a3b8; margin-top: 2px; letter-spacing: 0.5px; }
 
 /* LANG BUTTONS */
-#lang-bar { display: -ms-flexbox; display: flex; gap: 4px; }
+#lang-bar { display: inline-block; }
 button.lang-btn {
   background: transparent; border: 1px solid #cbd5e1;
   color: #64748b; font-size: 10px; font-weight: 700;
@@ -24,31 +29,21 @@ button.lang-btn:hover { border-color: #2563eb; color: #2563eb; }
 button.lang-btn.active { background: #2563eb; border-color: #2563eb; color: #fff; }
 button.refresh-btn {
   background: transparent; border: 1px solid #cbd5e1; color: #94a3b8;
-  font-size: 15px; width: 26px; height: 26px; cursor: pointer; line-height: 1; padding: 0;
+  font-size: 14px; width: 26px; height: 26px; cursor: pointer; line-height: 1; padding: 0;
+  margin-left: 6px; vertical-align: middle;
 }
 button.refresh-btn:hover { border-color: #2563eb; color: #2563eb; }
 
-/* NEWS CARD */
-#news-card {
-  background: #1e40af;
-  border-left: 5px solid #fbbf24;
-  padding: 16px 20px;
-  margin: 16px;
-  cursor: pointer;
-}
-#news-card:hover { background: #1e3a8a; }
-#news-badge { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #fbbf24; text-transform: uppercase; margin-bottom: 5px; }
-#news-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-#news-sub { font-size: 11px; color: #bfdbfe; margin-bottom: 12px; }
-#news-btn {
-  display: inline-block;
-  background: #fff;
-  color: #1e40af;
-  font-size: 11px;
+/* MERCEDES STRIP */
+#mercedes-strip {
+  background: #fbbf24;
+  border-top: 3px solid #f59e0b;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 12px;
   font-weight: 700;
-  padding: 5px 14px;
-  text-decoration: none;
-  letter-spacing: 0.5px;
+  color: #78350f;
+  letter-spacing: 0.3px;
 }
 
 /* MAIN */
@@ -84,23 +79,22 @@ a.card:hover { background: #eff6ff; }
 </head>
 <body>
 
-<div id="topbar">
-  <div id="topbar-inner">
-    <div id="lang-bar">
-      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('fr')">FR</button>
-      <button class="lang-btn" onclick="setLang('de')">DE</button>
+<div id="header">
+  <div id="header-inner">
+    <div id="header-left">
+      <div id="logo">M-AUTO<span>.online</span></div>
+      <div id="tagline" id="t-tagline">Diagn&oacute;stico Profissional</div>
     </div>
-    <button class="refresh-btn" onclick="location.reload(true)" title="Atualizar">&#8635;</button>
+    <div id="header-right">
+      <div id="lang-bar">
+        <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('de')">DE</button>
+      </div>
+      <button class="refresh-btn" onclick="location.reload(true)" title="Atualizar">&#8635;</button>
+    </div>
   </div>
-</div>
-
-<div id="news-card" onclick="openUrl('https://m-auto.online/vcx-help.html')">
-  <div id="news-badge" id="t-news-badge">&#9733; NOVIDADE</div>
-  <div id="news-title" id="t-news-title">Mercedes-Benz / Daimler &mdash; Ve&iacute;culos Pesados</div>
-  <div id="news-sub" id="t-news-sub">Actros &middot; Arocs &middot; Atego &middot; Antos &mdash; Xentry Heavy Duty</div>
-  <span id="news-btn" id="t-news-btn">Ver no Manual &rarr;</span>
 </div>
 
 <div id="main">
@@ -151,6 +145,10 @@ a.card:hover { background: #eff6ff; }
   </div>
 </div>
 
+<div id="mercedes-strip">
+  &#128667; &nbsp; <span id="t-trucks">agora com suporte a Ve&iacute;culos Pesados Mercedes / Daimler</span>
+</div>
+
 <div id="footer">
   &copy; 2026 M-Auto.online &mdash; <span id="t-footer">Todos os direitos reservados</span>
 </div>
@@ -167,44 +165,36 @@ function openUrl(url) {
 
 var i18n = {
   pt: {
+    tagline: 'Diagn\u00f3stico Profissional',
     section: 'Software &amp; Documenta\u00e7\u00e3o',
-    newsBadge: '\u2605 NOVIDADE',
-    newsTitle: 'Mercedes-Benz / Daimler \u2014 Ve\u00edculos Pesados',
-    newsSub: 'Actros \u00b7 Arocs \u00b7 Atego \u00b7 Antos \u2014 Xentry Heavy Duty',
-    newsBtn: 'Ver no Manual \u2192',
+    trucks: 'agora com suporte a Ve\u00edculos Pesados Mercedes / Daimler',
     guideTitle: 'Manual VCI', guideDesc: 'Instalar, configurar e usar',
     explainTitle: 'Como Funciona', explainDesc: 'Licen\u00e7as, protocolos e liga\u00e7\u00e3o',
     portalTitle: 'M-AUTO.online', portalDesc: 'Loja &amp; servi\u00e7os',
     footer: 'Todos os direitos reservados'
   },
   en: {
+    tagline: 'Professional Diagnostics',
     section: 'Software &amp; Documentation',
-    newsBadge: '\u2605 NEW',
-    newsTitle: 'Mercedes-Benz / Daimler \u2014 Heavy Trucks',
-    newsSub: 'Actros \u00b7 Arocs \u00b7 Atego \u00b7 Antos \u2014 Xentry Heavy Duty',
-    newsBtn: 'See in Manual \u2192',
+    trucks: 'now with Heavy Vehicle support Mercedes / Daimler',
     guideTitle: 'VCI Manual', guideDesc: 'Install, configure and use',
     explainTitle: 'How It Works', explainDesc: 'Licenses, protocols and connection',
     portalTitle: 'M-AUTO.online', portalDesc: 'Shop &amp; services',
     footer: 'All rights reserved'
   },
   fr: {
+    tagline: 'Diagnostic Professionnel',
     section: 'Logiciels &amp; Documentation',
-    newsBadge: '\u2605 NOUVEAU',
-    newsTitle: 'Mercedes-Benz / Daimler \u2014 Poids Lourds',
-    newsSub: 'Actros \u00b7 Arocs \u00b7 Atego \u00b7 Antos \u2014 Xentry Heavy Duty',
-    newsBtn: 'Voir dans le Manuel \u2192',
+    trucks: 'maintenant avec support Poids Lourds Mercedes / Daimler',
     guideTitle: 'Manuel VCI', guideDesc: 'Installer, configurer et utiliser',
     explainTitle: 'Comment \u00e7a marche', explainDesc: 'Licences, protocoles et connexion',
     portalTitle: 'M-AUTO.online', portalDesc: 'Boutique &amp; services',
     footer: 'Tous droits r\u00e9serv\u00e9s'
   },
   de: {
+    tagline: 'Professionelle Diagnose',
     section: 'Software &amp; Dokumentation',
-    newsBadge: '\u2605 NEU',
-    newsTitle: 'Mercedes-Benz / Daimler \u2014 Nutzfahrzeuge',
-    newsSub: 'Actros \u00b7 Arocs \u00b7 Atego \u00b7 Antos \u2014 Xentry Heavy Duty',
-    newsBtn: 'Im Handbuch ansehen \u2192',
+    trucks: 'jetzt mit Nutzfahrzeug-Unterst\u00fctzung Mercedes / Daimler',
     guideTitle: 'VCI Handbuch', guideDesc: 'Installieren, konfigurieren, nutzen',
     explainTitle: 'So funktioniert es', explainDesc: 'Lizenzen, Protokolle und Verbindung',
     portalTitle: 'M-AUTO.online', portalDesc: 'Shop &amp; Dienste',
@@ -214,11 +204,9 @@ var i18n = {
 
 function setLang(lang) {
   var t = i18n[lang];
+  document.getElementById('t-tagline').innerHTML      = t.tagline;
   document.getElementById('t-section').innerHTML      = t.section;
-  document.getElementById('news-badge').innerHTML     = t.newsBadge;
-  document.getElementById('news-title').innerHTML     = t.newsTitle;
-  document.getElementById('news-sub').innerHTML       = t.newsSub;
-  document.getElementById('news-btn').innerHTML       = t.newsBtn;
+  document.getElementById('t-trucks').innerHTML       = t.trucks;
   document.getElementById('t-guide-title').innerHTML  = t.guideTitle;
   document.getElementById('t-guide-desc').innerHTML   = t.guideDesc;
   document.getElementById('t-explain-title').innerHTML = t.explainTitle;

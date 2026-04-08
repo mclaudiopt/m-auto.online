@@ -9,16 +9,34 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #f8fafc; color: #0f172a; line-height: 1.5; }
 
-/* ─── TOPBAR ─── */
-#topbar { background: #fff; border-bottom: 2px solid #2563eb; padding: 0; }
-#topbar-inner { display: table; width: 100%; }
-#topbar-left  { display: table-cell; vertical-align: middle; padding: 10px 20px; }
-#topbar-right { display: table-cell; vertical-align: middle; padding: 10px 20px; text-align: right; white-space: nowrap; }
-#tb-logo { font-size: 18px; font-weight: 700; color: #2563eb; text-decoration: none; letter-spacing: -0.5px; }
-#tb-logo span { color: #0f172a; }
-#tb-title { font-size: 12px; color: #64748b; margin-top: 2px; }
-a.tb-back { display: inline-block; background: #2563eb; color: #fff; font-size: 11px; font-weight: 700; padding: 6px 14px; text-decoration: none; border: none; cursor: pointer; }
-a.tb-back:hover { background: #1d4ed8; }
+/* ─── HEADER ─── */
+#header { background: #fff; border-bottom: 2px solid #2563eb; padding: 0; }
+#header-inner { display: table; width: 100%; height: 50px; }
+#header-left  { display: table-cell; vertical-align: middle; padding: 0 16px; }
+#header-mid   { display: table-cell; vertical-align: middle; padding: 0 16px; }
+#header-right { display: table-cell; vertical-align: middle; padding: 0 16px; text-align: right; white-space: nowrap; }
+#logo { font-size: 17px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; text-decoration: none; }
+#logo span { color: #0f172a; }
+#header-title { font-size: 10px; color: #94a3b8; margin-top: 2px; letter-spacing: 0.5px; }
+a.btn-back {
+  display: inline-block; background: #2563eb; color: #fff;
+  font-size: 11px; font-weight: 700; padding: 5px 12px;
+  text-decoration: none; border: none; cursor: pointer; white-space: nowrap;
+}
+a.btn-back:hover { background: #1d4ed8; }
+button.lang-btn {
+  background: transparent; border: 1px solid #cbd5e1;
+  color: #64748b; font-size: 10px; font-weight: 700;
+  padding: 3px 8px; cursor: pointer; font-family: inherit; letter-spacing: 0.5px;
+}
+button.lang-btn:hover { border-color: #2563eb; color: #2563eb; }
+button.lang-btn.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+button.refresh-btn {
+  background: transparent; border: 1px solid #cbd5e1; color: #94a3b8;
+  font-size: 14px; width: 26px; height: 26px; cursor: pointer; line-height: 1; padding: 0;
+  margin-left: 6px; vertical-align: middle;
+}
+button.refresh-btn:hover { border-color: #2563eb; color: #2563eb; }
 
 /* ─── HERO ─── */
 .hero { background: #1e40af; color: #fff; text-align: center; padding: 40px 24px; border-bottom: 3px solid #1e3a8a; }
@@ -155,15 +173,22 @@ td.brand { font-weight: 700; }
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div id="topbar">
-  <div id="topbar-inner">
-    <div id="topbar-left">
-      <a href="vcx.html" id="tb-logo">M-AUTO<span>.online</span></a>
-      <div id="tb-title">M-Auto VCI &mdash; Como Funciona</div>
+<!-- HEADER -->
+<div id="header">
+  <div id="header-inner">
+    <div id="header-left">
+      <a class="btn-back" href="vcx.html">&larr; Menu</a>
     </div>
-    <div id="topbar-right">
-      <a href="vcx.html" class="tb-back">&larr; Voltar ao VCX Manager</a>
+    <div id="header-mid">
+      <div id="logo">M-AUTO<span>.online</span></div>
+      <div id="header-title">Como Funciona</div>
+    </div>
+    <div id="header-right">
+      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="refresh-btn" onclick="location.reload(true)" title="Atualizar">&#8635;</button>
     </div>
   </div>
 </div>
@@ -652,6 +677,15 @@ function openUrl(url) {
     var sh = new ActiveXObject('WScript.Shell');
     sh.Run('cmd /c start "" "' + url + '"', 0, false);
   } catch(e) { window.location.href = url; }
+}
+var _titles = { pt:'Como Funciona', en:'How It Works', fr:'Comment &ccedil;a marche', de:'So funktioniert es' };
+function setLang(lang) {
+  document.getElementById('header-title').innerHTML = _titles[lang] || 'Como Funciona';
+  var btns = document.getElementById('header').getElementsByTagName('button');
+  for (var i = 0; i < btns.length; i++) {
+    if (btns[i].className.indexOf('lang-btn') >= 0)
+      btns[i].className = btns[i].innerHTML === lang.toUpperCase() ? 'lang-btn active' : 'lang-btn';
+  }
 }
 </script>
 </body>
