@@ -9,10 +9,22 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #f1f5f9; color: #1e293b; }
 
-#header { background: #1e293b; padding: 14px 20px; border-bottom: 3px solid #2563eb; }
+#header { background: #1e293b; padding: 12px 20px; border-bottom: 3px solid #2563eb; }
+#header-top { display: -ms-flexbox; display: flex; -ms-flex-pack: justify; justify-content: space-between; -ms-flex-align: center; align-items: center; }
 #logo { font-size: 20px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; }
 #logo span { color: #f1f5f9; }
 #tagline { font-size: 10px; color: #64748b; margin-top: 2px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* LANG BUTTONS */
+#lang-bar { display: -ms-flexbox; display: flex; gap: 4px; }
+button.lang-btn {
+  background: transparent; border: 1px solid #475569;
+  color: #94a3b8; font-size: 10px; font-weight: 700;
+  padding: 3px 8px; cursor: pointer; font-family: inherit;
+  letter-spacing: 0.5px;
+}
+button.lang-btn:hover { border-color: #2563eb; color: #60a5fa; }
+button.lang-btn.active { background: #2563eb; border-color: #2563eb; color: #fff; }
 
 #main { padding: 24px 20px; }
 
@@ -40,12 +52,9 @@ a.btn-card {
   -webkit-transition: box-shadow 0.15s; transition: box-shadow 0.15s;
 }
 a.btn-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top-color: #1d4ed8; }
-.btn-card-icon { font-size: 22px; margin-bottom: 10px; }
+.btn-card-icon  { font-size: 22px; margin-bottom: 10px; }
 .btn-card-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
 .btn-card-desc  { font-size: 11px; color: #64748b; line-height: 1.4; }
-
-a.btn-card.green { border-top-color: #16a34a; }
-a.btn-card.green:hover { border-top-color: #15803d; }
 
 #footer { border-top: 1px solid #e2e8f0; padding: 14px 20px; font-size: 11px; color: #94a3b8; background: #fff; }
 #footer a { color: #2563eb; text-decoration: none; }
@@ -54,34 +63,93 @@ a.btn-card.green:hover { border-top-color: #15803d; }
 <body>
 
 <div id="header">
-  <div id="logo">M-AUTO<span>.online</span></div>
-  <div id="tagline">Simply Digital &mdash; Diagnóstico Profissional</div>
+  <div id="header-top">
+    <div>
+      <div id="logo">M-AUTO<span>.online</span></div>
+      <div id="tagline">Simply Digital &mdash; <span id="t-tagline">Diagnóstico Profissional</span></div>
+    </div>
+    <div id="lang-bar">
+      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    </div>
+  </div>
 </div>
 
 <div id="main">
-
-  <div class="section-label">Software &amp; Documentação</div>
+  <div class="section-label" id="t-section">Software &amp; Documentação</div>
   <div class="grid">
 
     <a href="https://m-auto.online/vcx-se-explicacao.html" target="_blank" class="btn-card">
       <div class="btn-card-icon">&#128196;</div>
-      <div class="btn-card-title">VCX SE — Guia completo</div>
-      <div class="btn-card-desc">Como instalar, configurar e usar o VCX SE</div>
+      <div class="btn-card-title" id="t-guide-title">M-Auto VCI — Guia completo</div>
+      <div class="btn-card-desc"  id="t-guide-desc">Como instalar, configurar e usar o M-Auto VCI</div>
     </a>
 
     <a href="https://m-auto.online" target="_blank" class="btn-card">
       <div class="btn-card-icon">&#127760;</div>
       <div class="btn-card-title">m-auto.online</div>
-      <div class="btn-card-desc">Portal principal — loja e serviços</div>
+      <div class="btn-card-desc" id="t-portal-desc">Portal principal — loja e serviços</div>
     </a>
 
   </div>
-
 </div>
 
 <div id="footer">
-  &copy; 2026 <a href="https://m-auto.online">M-Auto.online</a> &mdash; Todos os direitos reservados
+  &copy; 2026 <a href="https://m-auto.online">M-Auto.online</a> &mdash; <span id="t-footer">Todos os direitos reservados</span>
 </div>
+
+<script>
+var i18n = {
+  pt: {
+    tagline:     'Diagn\u00f3stico Profissional',
+    section:     'Software &amp; Documenta\u00e7\u00e3o',
+    guideTitle:  'M-Auto VCI \u2014 Guia completo',
+    guideDesc:   'Como instalar, configurar e usar o M-Auto VCI',
+    portalDesc:  'Portal principal \u2014 loja e servi\u00e7os',
+    footer:      'Todos os direitos reservados'
+  },
+  en: {
+    tagline:     'Professional Diagnostics',
+    section:     'Software &amp; Documentation',
+    guideTitle:  'M-Auto VCI \u2014 Complete Guide',
+    guideDesc:   'How to install, configure and use M-Auto VCI',
+    portalDesc:  'Main portal \u2014 shop and services',
+    footer:      'All rights reserved'
+  },
+  fr: {
+    tagline:     'Diagnostic Professionnel',
+    section:     'Logiciels &amp; Documentation',
+    guideTitle:  'M-Auto VCI \u2014 Guide complet',
+    guideDesc:   'Comment installer, configurer et utiliser M-Auto VCI',
+    portalDesc:  'Portail principal \u2014 boutique et services',
+    footer:      'Tous droits r\u00e9serv\u00e9s'
+  },
+  de: {
+    tagline:     'Professionelle Diagnose',
+    section:     'Software &amp; Dokumentation',
+    guideTitle:  'M-Auto VCI \u2014 Vollst\u00e4ndiger Leitfaden',
+    guideDesc:   'Installation, Konfiguration und Nutzung des M-Auto VCI',
+    portalDesc:  'Hauptportal \u2014 Shop und Dienste',
+    footer:      'Alle Rechte vorbehalten'
+  }
+};
+
+function setLang(lang) {
+  var t = i18n[lang];
+  document.getElementById('t-tagline').innerHTML    = t.tagline;
+  document.getElementById('t-section').innerHTML    = t.section;
+  document.getElementById('t-guide-title').innerHTML = t.guideTitle;
+  document.getElementById('t-guide-desc').innerHTML  = t.guideDesc;
+  document.getElementById('t-portal-desc').innerHTML = t.portalDesc;
+  document.getElementById('t-footer').innerHTML      = t.footer;
+  var btns = document.getElementById('lang-bar').getElementsByTagName('button');
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].className = btns[i].innerHTML === lang.toUpperCase() ? 'lang-btn active' : 'lang-btn';
+  }
+}
+</script>
 
 </body>
 </html>
