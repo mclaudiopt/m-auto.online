@@ -26,9 +26,13 @@ button.lang-btn {
 button.lang-btn:hover { border-color: #2563eb; color: #60a5fa; }
 button.lang-btn.active { background: #2563eb; border-color: #2563eb; color: #fff; }
 
+/* NOVIDADE STRIP */
+#news { background: #fef3c7; border-bottom: 1px solid #fcd34d; padding: 8px 20px; font-size: 11px; color: #92400e; }
+#news strong { color: #b45309; }
+
 /* MAIN */
-#main { padding: 24px 20px; }
-.section-label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0; }
+#main { padding: 20px; }
+.section-label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 14px 0; }
 
 /* GRID */
 .grid { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 14px; }
@@ -40,26 +44,23 @@ a.card {
   -ms-flex-pack: center; justify-content: center;
   -ms-flex-align: center; align-items: center;
   text-align: center;
-  width: 190px; height: 190px;
+  width: 175px; height: 175px;
   text-decoration: none;
-  padding: 20px 16px;
+  padding: 18px 14px;
   background: #fff;
   border: 1px solid #e2e8f0;
   border-top: 4px solid #2563eb;
   color: #1e293b;
-  -webkit-transition: box-shadow 0.15s, -webkit-transform 0.15s;
-  transition: box-shadow 0.15s, transform 0.15s;
+  cursor: pointer;
 }
-a.card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.13); -webkit-transform: translateY(-2px); transform: translateY(-2px); }
-
-.card-icon { margin-bottom: 14px; }
-.card-icon svg { width: 48px; height: 48px; }
-.card-title { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 6px; line-height: 1.2; }
-.card-desc  { font-size: 11px; color: #64748b; line-height: 1.4; }
+a.card:hover { background: #eff6ff; }
+.card-icon { margin-bottom: 12px; }
+.card-icon svg { width: 46px; height: 46px; }
+.card-title { font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 5px; line-height: 1.2; }
+.card-desc  { font-size: 10px; color: #64748b; line-height: 1.4; }
 
 /* FOOTER */
-#footer { border-top: 1px solid #e2e8f0; padding: 14px 20px; font-size: 11px; color: #94a3b8; background: #fff; }
-#footer a { color: #2563eb; text-decoration: none; }
+#footer { border-top: 1px solid #e2e8f0; padding: 12px 20px; font-size: 11px; color: #94a3b8; background: #fff; }
 </style>
 </head>
 <body>
@@ -79,12 +80,15 @@ a.card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.13); -webkit-transform: trans
   </div>
 </div>
 
+<div id="news">
+  <strong id="t-news-label">Novidade:</strong> <span id="t-news-text">Suporte Mercedes-Benz / Daimler veículos pesados — Actros, Arocs, Atego via Xentry Heavy Duty</span>
+</div>
+
 <div id="main">
   <div class="section-label" id="t-section">Software &amp; Documentação</div>
   <div class="grid">
 
-    <!-- GUIDE -->
-    <a href="vcx-help.html" target="_blank" class="card">
+    <a class="card" onclick="openUrl('https://m-auto.online/vcx-help.html')">
       <div class="card-icon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="8" y="4" width="26" height="36" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
@@ -100,8 +104,19 @@ a.card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.13); -webkit-transform: trans
       <div class="card-desc"  id="t-guide-desc">Instalar, configurar e usar</div>
     </a>
 
-    <!-- M-AUTO PORTAL — white card -->
-    <a href="https://m-auto.online" target="_blank" class="card">
+    <a class="card" onclick="openUrl('https://m-auto.online/vcx-se-explicacao.html')">
+      <div class="card-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <circle cx="24" cy="18" r="4" fill="#2563eb"/>
+          <rect x="21" y="24" width="6" height="12" rx="2" fill="#2563eb"/>
+        </svg>
+      </div>
+      <div class="card-title" id="t-explain-title">Como Funciona</div>
+      <div class="card-desc"  id="t-explain-desc">Licenças, protocolos e ligação</div>
+    </a>
+
+    <a class="card" onclick="openUrl('https://m-auto.online')">
       <div class="card-icon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="24" cy="24" r="19" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
@@ -118,25 +133,40 @@ a.card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.13); -webkit-transform: trans
 </div>
 
 <div id="footer">
-  &copy; 2026 <a href="https://m-auto.online">M-Auto.online</a> &mdash; <span id="t-footer">Todos os direitos reservados</span>
+  &copy; 2026 M-Auto.online &mdash; <span id="t-footer">Todos os direitos reservados</span>
 </div>
 
 <script>
+// Abre URL no browser predefinido via WScript.Shell (evita abrir no IE embutido)
+function openUrl(url) {
+  try {
+    var sh = new ActiveXObject('WScript.Shell');
+    sh.Run('cmd /c start "" "' + url + '"', 0, false);
+  } catch(e) {
+    window.location.href = url;
+  }
+}
+
 var i18n = {
-  pt: { tagline:'Diagn\u00f3stico Profissional', section:'Software &amp; Documenta\u00e7\u00e3o', guideTitle:'Manual VCI', guideDesc:'Instalar, configurar e usar', portalTitle:'M-AUTO.online', portalDesc:'Loja &amp; servi\u00e7os', footer:'Todos os direitos reservados' },
-  en: { tagline:'Professional Diagnostics',     section:'Software &amp; Documentation',       guideTitle:'VCI Manual',   guideDesc:'Install, configure and use',       portalTitle:'M-AUTO.online', portalDesc:'Shop &amp; services',        footer:'All rights reserved' },
-  fr: { tagline:'Diagnostic Professionnel',     section:'Logiciels &amp; Documentation',      guideTitle:'Manuel VCI',   guideDesc:'Installer, configurer et utiliser', portalTitle:'M-AUTO.online', portalDesc:'Boutique &amp; services',    footer:'Tous droits r\u00e9serv\u00e9s' },
-  de: { tagline:'Professionelle Diagnose',      section:'Software &amp; Dokumentation',       guideTitle:'VCI Handbuch', guideDesc:'Installieren, konfigurieren, nutzen', portalTitle:'M-AUTO.online', portalDesc:'Shop &amp; Dienste',       footer:'Alle Rechte vorbehalten' }
+  pt: { tagline:'Diagn\u00f3stico Profissional', section:'Software &amp; Documenta\u00e7\u00e3o', guideTitle:'Manual VCI', guideDesc:'Instalar, configurar e usar', explainTitle:'Como Funciona', explainDesc:'Licen\u00e7as, protocolos e liga\u00e7\u00e3o', portalTitle:'M-AUTO.online', portalDesc:'Loja &amp; servi\u00e7os', newsLabel:'Novidade:', newsText:'Suporte Mercedes-Benz / Daimler ve\u00edculos pesados \u2014 Actros, Arocs, Atego via Xentry Heavy Duty', footer:'Todos os direitos reservados' },
+  en: { tagline:'Professional Diagnostics', section:'Software &amp; Documentation', guideTitle:'VCI Manual', guideDesc:'Install, configure and use', explainTitle:'How It Works', explainDesc:'Licenses, protocols and connection', portalTitle:'M-AUTO.online', portalDesc:'Shop &amp; services', newsLabel:'New:', newsText:'Mercedes-Benz / Daimler heavy trucks \u2014 Actros, Arocs, Atego via Xentry Heavy Duty', footer:'All rights reserved' },
+  fr: { tagline:'Diagnostic Professionnel', section:'Logiciels &amp; Documentation', guideTitle:'Manuel VCI', guideDesc:'Installer, configurer et utiliser', explainTitle:'Comment \u00e7a marche', explainDesc:'Licences, protocoles et connexion', portalTitle:'M-AUTO.online', portalDesc:'Boutique &amp; services', newsLabel:'Nouveau:', newsText:'Support Mercedes-Benz / Daimler poids lourds \u2014 Actros, Arocs, Atego via Xentry Heavy Duty', footer:'Tous droits r\u00e9serv\u00e9s' },
+  de: { tagline:'Professionelle Diagnose', section:'Software &amp; Dokumentation', guideTitle:'VCI Handbuch', guideDesc:'Installieren, konfigurieren, nutzen', explainTitle:'So funktioniert es', explainDesc:'Lizenzen, Protokolle und Verbindung', portalTitle:'M-AUTO.online', portalDesc:'Shop &amp; Dienste', newsLabel:'Neu:', newsText:'Mercedes-Benz / Daimler Nutzfahrzeuge \u2014 Actros, Arocs, Atego via Xentry Heavy Duty', footer:'Alle Rechte vorbehalten' }
 };
+
 function setLang(lang) {
   var t = i18n[lang];
-  document.getElementById('t-tagline').innerHTML     = t.tagline;
-  document.getElementById('t-section').innerHTML     = t.section;
-  document.getElementById('t-guide-title').innerHTML = t.guideTitle;
-  document.getElementById('t-guide-desc').innerHTML  = t.guideDesc;
+  document.getElementById('t-tagline').innerHTML      = t.tagline;
+  document.getElementById('t-section').innerHTML      = t.section;
+  document.getElementById('t-guide-title').innerHTML  = t.guideTitle;
+  document.getElementById('t-guide-desc').innerHTML   = t.guideDesc;
+  document.getElementById('t-explain-title').innerHTML = t.explainTitle;
+  document.getElementById('t-explain-desc').innerHTML  = t.explainDesc;
   document.getElementById('t-portal-title').innerHTML = t.portalTitle;
-  document.getElementById('t-portal-desc').innerHTML = t.portalDesc;
-  document.getElementById('t-footer').innerHTML      = t.footer;
+  document.getElementById('t-portal-desc').innerHTML  = t.portalDesc;
+  document.getElementById('t-news-label').innerHTML   = t.newsLabel;
+  document.getElementById('t-news-text').innerHTML    = t.newsText;
+  document.getElementById('t-footer').innerHTML       = t.footer;
   var btns = document.getElementById('lang-bar').getElementsByTagName('button');
   for (var i = 0; i < btns.length; i++) {
     btns[i].className = btns[i].innerHTML === lang.toUpperCase() ? 'lang-btn active' : 'lang-btn';
