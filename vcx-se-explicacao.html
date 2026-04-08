@@ -675,7 +675,7 @@ td.brand { font-weight: 700; }
 function openUrl(url) {
   try {
     var sh = new ActiveXObject('WScript.Shell');
-    sh.Run('cmd /c start "" "' + url + '"', 0, false);
+    sh.Run('cmd /c start "" "microsoft-edge:' + url + '"', 0, false);
   } catch(e) { window.location.href = url; }
 }
 var _titles = { pt:'Como Funciona', en:'How It Works', fr:'Comment &ccedil;a marche', de:'So funktioniert es' };

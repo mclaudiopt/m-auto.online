@@ -273,7 +273,7 @@ table.compat td:first-child { color: #94a3b8; width: 5%; font-weight: 400; text-
 function openUrl(url) {
   try {
     var sh = new ActiveXObject('WScript.Shell');
-    sh.Run('cmd /c start "" "' + url + '"', 0, false);
+    sh.Run('cmd /c start "" "microsoft-edge:' + url + '"', 0, false);
   } catch(e) { window.location.href = url; }
 }
 var _titles = { pt:'Manual VCI', en:'VCI Manual', fr:'Manuel VCI', de:'VCI Handbuch' };
