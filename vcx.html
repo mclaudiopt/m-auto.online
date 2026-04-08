@@ -7,48 +7,47 @@
 <title>M-Auto.online — VCX Manager</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #0f172a; color: #f1f5f9; }
+body { font-family: Segoe UI, Arial, sans-serif; font-size: 13px; background: #f1f5f9; color: #1e293b; }
 
-/* HEADER */
-#header { background: #1e293b; border-bottom: 2px solid #2563eb; padding: 14px 20px; }
+#header { background: #1e293b; padding: 14px 20px; border-bottom: 3px solid #2563eb; }
 #logo { font-size: 20px; font-weight: 700; color: #2563eb; letter-spacing: -0.5px; }
 #logo span { color: #f1f5f9; }
-#tagline { font-size: 11px; color: #64748b; margin-top: 2px; letter-spacing: 2px; text-transform: uppercase; }
+#tagline { font-size: 10px; color: #64748b; margin-top: 2px; letter-spacing: 2px; text-transform: uppercase; }
 
-/* MAIN */
-#main { padding: 20px; max-width: 700px; }
+#main { padding: 24px 20px; }
 
-/* SECTION LABEL */
-.section-label { font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 8px 0; }
-.section-label:first-child { margin-top: 0; }
-
-/* BIG BUTTON */
-a.bigbtn {
-  display: block;
-  background: #1e3a8a;
-  color: #fff;
-  text-decoration: none;
-  padding: 18px 20px;
-  margin-bottom: 8px;
-  border-left: 4px solid #2563eb;
+.section-label {
+  font-size: 10px; font-weight: 700; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 2px;
+  margin: 0 0 14px 0;
 }
-a.bigbtn:hover { background: #1d4ed8; }
-a.bigbtn:active { background: #1e40af; }
-.bigbtn-title { font-size: 14px; font-weight: 700; color: #fff; }
-.bigbtn-desc  { font-size: 11px; color: #93c5fd; margin-top: 4px; }
 
-/* BIG BUTTON — variante verde */
-a.bigbtn-green { border-left-color: #16a34a; background: #14532d; }
-a.bigbtn-green:hover { background: #166534; }
-a.bigbtn-green .bigbtn-desc { color: #86efac; }
+.grid {
+  display: -ms-flexbox; display: flex;
+  -ms-flex-wrap: wrap; flex-wrap: wrap;
+  margin: 0 -6px;
+}
 
-/* BIG BUTTON — variante cinza (info) */
-a.bigbtn-gray { border-left-color: #475569; background: #1e293b; }
-a.bigbtn-gray:hover { background: #334155; }
-a.bigbtn-gray .bigbtn-desc { color: #94a3b8; }
+a.btn-card {
+  display: block;
+  width: 32%; margin: 0 0.66% 12px 0.66%;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-top: 3px solid #2563eb;
+  padding: 18px 16px;
+  text-decoration: none;
+  color: #1e293b;
+  -webkit-transition: box-shadow 0.15s; transition: box-shadow 0.15s;
+}
+a.btn-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top-color: #1d4ed8; }
+.btn-card-icon { font-size: 22px; margin-bottom: 10px; }
+.btn-card-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+.btn-card-desc  { font-size: 11px; color: #64748b; line-height: 1.4; }
 
-/* FOOTER */
-#footer { border-top: 1px solid #334155; padding: 14px 20px; font-size: 11px; color: #475569; }
+a.btn-card.green { border-top-color: #16a34a; }
+a.btn-card.green:hover { border-top-color: #15803d; }
+
+#footer { border-top: 1px solid #e2e8f0; padding: 14px 20px; font-size: 11px; color: #94a3b8; background: #fff; }
 #footer a { color: #2563eb; text-decoration: none; }
 </style>
 </head>
@@ -61,55 +60,24 @@ a.bigbtn-gray .bigbtn-desc { color: #94a3b8; }
 
 <div id="main">
 
-  <div class="section-label">Software</div>
+  <div class="section-label">Software &amp; Documentação</div>
+  <div class="grid">
 
-  <a href="https://m-auto.online/vcx-se-explicacao.html" class="bigbtn">
-    <div class="bigbtn-title">&#8659; VCX SE — Guia completo</div>
-    <div class="bigbtn-desc">Como instalar, configurar e usar o VCX SE</div>
-  </a>
+    <a href="https://m-auto.online/vcx-se-explicacao.html" target="_blank" class="btn-card">
+      <div class="btn-card-icon">&#128196;</div>
+      <div class="btn-card-title">VCX SE — Guia completo</div>
+      <div class="btn-card-desc">Como instalar, configurar e usar o VCX SE</div>
+    </a>
 
-  <div class="section-label">Tutoriais</div>
+    <a href="https://m-auto.online" target="_blank" class="btn-card">
+      <div class="btn-card-icon">&#127760;</div>
+      <div class="btn-card-title">m-auto.online</div>
+      <div class="btn-card-desc">Portal principal — loja e serviços</div>
+    </a>
 
-  <a href="https://m-auto.online" target="_blank" class="bigbtn">
-    <div class="bigbtn-title">&#9654; J2534 — Passthru API</div>
-    <div class="bigbtn-desc">Como usar o VCX com software J2534 de terceiros</div>
-  </a>
+  </div>
 
-  <a href="https://m-auto.online" target="_blank" class="bigbtn">
-    <div class="bigbtn-title">&#9654; DoNet — Diagnóstico Remoto</div>
-    <div class="bigbtn-desc">Configurar acesso remoto via DoNet</div>
-  </a>
-
-  <a href="https://m-auto.online" target="_blank" class="bigbtn">
-    <div class="bigbtn-title">&#9654; Atualização de Firmware</div>
-    <div class="bigbtn-desc">Como atualizar o firmware VCI e DoIP</div>
-  </a>
-
-  <a href="https://m-auto.online" target="_blank" class="bigbtn">
-    <div class="bigbtn-title">&#9654; Resolução de Problemas</div>
-    <div class="bigbtn-desc">Erros comuns e soluções</div>
-  </a>
-
-  <div class="section-label">Configuração</div>
-
-  <a href="https://m-auto.online" target="_blank" class="bigbtn bigbtn-gray">
-    <div class="bigbtn-title">&#9881; Alterar SSID da interface</div>
-    <div class="bigbtn-desc">Quer alterar o SSID do seu VCX? Contacte-nos em m-auto.online</div>
-  </a>
-
-  <div class="section-label">Licenças &amp; Suporte</div>
-
-  <a href="https://m-auto.online" target="_blank" class="bigbtn bigbtn-green">
-    <div class="bigbtn-title">&#128274; Licenças &amp; Ativação</div>
-    <div class="bigbtn-desc">Adquirir ou renovar licenças de diagnóstico — m-auto.online</div>
-  </a>
-
-  <a href="https://m-auto.online" target="_blank" class="bigbtn bigbtn-green">
-    <div class="bigbtn-title">&#9993; Suporte Técnico</div>
-    <div class="bigbtn-desc">Assistência e suporte disponível em m-auto.online</div>
-  </a>
-
-</div><!-- /main -->
+</div>
 
 <div id="footer">
   &copy; 2026 <a href="https://m-auto.online">M-Auto.online</a> &mdash; Todos os direitos reservados
