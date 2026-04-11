@@ -358,7 +358,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     dataLoaded = true;
   } catch(e) {
     console.error('Erro ao carregar dados:', e);
+    document.body.insertAdjacentHTML('beforeend',
+      '<div id="dataError" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#c0392b;color:#fff;padding:14px 20px;text-align:center;font:14px/1.5 Manrope,sans-serif;box-shadow:0 -2px 12px rgba(0,0,0,.4)">' +
+      '⚠️ Erro ao carregar dados — <a href="javascript:location.reload()" style="color:#fff;text-decoration:underline;font-weight:600">Recarregar página</a></div>');
   }
+
+  // Restaurar tema guardado
+  try { const _t = localStorage.getItem('mauto_theme'); if (_t !== null) document.documentElement.setAttribute('data-theme', _t); } catch(e) {}
 
   // Detectar língua: localStorage → browser → fallback pt
   let saved = null;
@@ -380,6 +386,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Fechar modal ao clicar fora
   document.getElementById('productModal')?.addEventListener('click', e => {
     if (e.target.id === 'productModal') closeProductModal();
+  });
+
+  // Fechar modal com Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('productModal')?.classList.contains('open')) closeProductModal();
+    }
   });
 });
 
@@ -945,6 +958,9 @@ function openProductModal(id) {
   modal.style.display = 'flex';
   requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('open')));
   showConsultPopup();
+  const d = prodData(item);
+  const imgUrl = item.img ? `https://m-auto.online/${item.img}` : null;
+  updateOGMeta(d.name || item.id, d.short || d.details || null, `https://m-auto.online/#soft/${item.brand || ''}`, imgUrl);
 }
 
 function renderModalContent(item) {
@@ -1148,6 +1164,12 @@ function applyLang() {
 /* ─────────────────────────────────────────────
    14. PESQUISA
 ───────────────────────────────────────────── */
+let _searchTimer = null;
+function filterProductsDebounced() {
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(filterProducts, 280);
+}
+
 function filterProducts() {
   const val = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
   const panel = document.getElementById('searchResultsPanel');
@@ -1357,9 +1379,13 @@ function startTypewriter() {
 ───────────────────────────────────────────── */
 let viewers = 5;
 let _popupTimer = null;
+let _viewersShownCount = 0;
+const _VIEWERS_MAX = 3; // máximo de vezes por sessão
 
 // Popup de visitantes — só contagem, espaçado, opaco, 7s
 function showViewersPopup() {
+  if (_viewersShownCount >= _VIEWERS_MAX) return; // limitar por sessão
+  _viewersShownCount++;
   viewers = Math.max(2, Math.min(15, viewers + Math.floor(Math.random() * 3) - 1));
   const el = document.getElementById('viewerText');
   if (el) el.innerHTML = `<span class="popup-viewers-line"><strong>${viewers}</strong> ${t('popup_viewers')}</span>`;
@@ -1370,7 +1396,9 @@ function showViewersPopup() {
   void popup.offsetWidth;
   popup.classList.add('active');
   _popupTimer = setTimeout(() => popup.classList.remove('active'), 7000);
-  setTimeout(showViewersPopup, Math.random() * 20000 + 20000);
+  if (_viewersShownCount < _VIEWERS_MAX) {
+    setTimeout(showViewersPopup, Math.random() * 20000 + 20000);
+  }
 }
 
 // Popup de consulta — só mensagem, transparente, 2.5s (trigger: mudar marca/secção)
@@ -1399,7 +1427,9 @@ function updateViewers(textOnly = false) {
 ───────────────────────────────────────────── */
 function toggleTheme() {
   const current = document.documentElement.getAttribute('data-theme');
-  document.documentElement.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
+  const newTheme = current === 'dark' ? '' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  try { localStorage.setItem('mauto_theme', newTheme); } catch(e) {}
 }
 
 /* ─────────────────────────────────────────────
@@ -1414,17 +1444,31 @@ if ('serviceWorker' in navigator) {
 /* ─────────────────────────────────────────────
    20. OG META DINÂMICOS
 ───────────────────────────────────────────── */
-function updateOGMeta(titleSuffix, desc, url) {
+function updateOGMeta(titleSuffix, desc, url, img) {
   const base = 'M-Auto Online';
   const fullTitle = titleSuffix ? `${base} · ${titleSuffix}` : base;
   document.title = fullTitle;
-  const set = (prop, val) => {
+  const setMeta = (prop, val) => {
     const el = document.querySelector(`meta[property="${prop}"]`);
     if (el) el.setAttribute('content', val);
   };
-  set('og:title', fullTitle);
-  set('og:description', desc || 'Software de diagnóstico automóvel — instalação remota profissional.');
-  set('og:url', url || 'https://m-auto.online/');
+  const setName = (name, val) => {
+    const el = document.querySelector(`meta[name="${name}"]`);
+    if (el) el.setAttribute('content', val);
+  };
+  const canonical = document.querySelector('link[rel="canonical"]');
+  const resolvedUrl = url || 'https://m-auto.online/';
+  const resolvedImg = img || 'https://m-auto.online/IMG/mauto/og.jpg';
+  const resolvedDesc = desc || 'Software de diagnóstico automóvel — instalação remota profissional.';
+  document.title = fullTitle;
+  setMeta('og:title', fullTitle);
+  setMeta('og:description', resolvedDesc);
+  setMeta('og:url', resolvedUrl);
+  setMeta('og:image', resolvedImg);
+  setName('twitter:title', fullTitle);
+  setName('twitter:description', resolvedDesc);
+  setName('twitter:image', resolvedImg);
+  if (canonical) canonical.setAttribute('href', resolvedUrl);
 }
 
 /* cursor personalizado removido */

@@ -170,7 +170,7 @@
     <div class="header-right">
       <div class="header-search">
         <input type="text" id="searchInput" class="search-input-header"
-          placeholder="🔍 Procurar..." oninput="filterProducts()" onkeydown="if(event.key==='Escape'){this.value='';filterProducts();this.blur()}">
+          placeholder="🔍 Procurar..." oninput="filterProductsDebounced()" onkeydown="if(event.key==='Escape'){this.value='';filterProducts();this.blur()}">
       </div>
       <div class="controls-wrapper">
         <button type="button" class="theme-btn" onclick="toggleTheme()" title="Tema">☀️</button>
