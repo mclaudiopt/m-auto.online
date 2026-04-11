@@ -997,7 +997,7 @@ function orderFromModal() {
 }
 
 function orderProduct(nameOrMsg, context = '') {
-  const phone = "351911157459";
+  const phone = "351938526930";
   let text;
   // Se nameOrMsg já é a mensagem completa (wa_general)
   if (!context && nameOrMsg === t('wa_general')) {
@@ -1011,7 +1011,7 @@ function orderProduct(nameOrMsg, context = '') {
 }
 
 function orderGeneral() {
-  const phone = "351911157459";
+  const phone = "351938526930";
   const text = t('wa_general');
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
 }
