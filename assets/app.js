@@ -469,6 +469,7 @@ function buildNav() {
       onclick="switchSection('about', this)"
       onmouseenter="scheduleNavHover('about', this)" onmouseleave="cancelNavHover()"
       data-nav-key="nav_about">${t('nav_about')}</button>
+    <a href="vcx.html" class="nav-pill nav-pill-vci" target="_blank" rel="noopener">M-Auto VCI ↗</a>
   `;
 
   mobNav.innerHTML = [
@@ -481,7 +482,11 @@ function buildNav() {
     onclick="${n.fn}" data-nav-key="${n.key}">
     <i class="${n.icon} mob-icon"></i>
     <span class="mob-label">${t(n.key)}</span>
-  </div>`).join('');
+  </div>`).join('') +
+  `<a href="vcx.html" class="mob-item mob-item-vci" target="_blank" rel="noopener">
+    <i class="fa-solid fa-plug mob-icon"></i>
+    <span class="mob-label">VCI</span>
+  </a>`;
 }
 
 /* ── MOBILE BRAND PICKER (bottom sheet) ── */
