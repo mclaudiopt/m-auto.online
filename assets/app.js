@@ -59,7 +59,10 @@ const TRANS = {
     news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
     news_btn: "Ver M-Auto VCI →",
     wa_interest: "Olá! Tenho interesse em:",
-    wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico."
+    wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico.",
+    stat1_num: "500+", stat1_lbl: "clientes",
+    stat2_num: "10+",  stat2_lbl: "marcas",
+    stat3_num: "5+",   stat3_lbl: "anos"
   },
   en: {
     nav_soft: "Software", nav_all: "All", nav_hard: "Hardware", nav_tools: "Downloads",
@@ -112,7 +115,10 @@ const TRANS = {
     news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
     news_btn: "See M-Auto VCI →",
     wa_interest: "Hello! I'm interested in:",
-    wa_general: "Hello! I would like more information about your diagnostic software."
+    wa_general: "Hello! I would like more information about your diagnostic software.",
+    stat1_num: "500+", stat1_lbl: "clients",
+    stat2_num: "10+",  stat2_lbl: "brands",
+    stat3_num: "5+",   stat3_lbl: "years"
   },
   fr: {
     nav_soft: "Logiciel", nav_all: "Tout", nav_hard: "Matériel", nav_tools: "Téléchargements",
@@ -165,7 +171,10 @@ const TRANS = {
     news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
     news_btn: "Voir M-Auto VCI →",
     wa_interest: "Bonjour ! Je suis intéressé par :",
-    wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic."
+    wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic.",
+    stat1_num: "500+", stat1_lbl: "clients",
+    stat2_num: "10+",  stat2_lbl: "marques",
+    stat3_num: "5+",   stat3_lbl: "ans"
   }
 };
 
@@ -872,6 +881,11 @@ function renderAbout() {
         <div class="about-news-sub">${t('news_sub')}</div>
         <a href="vcx.html" class="about-news-btn">${t('news_btn')}</a>
       </div>
+      <div class="about-stats">
+        <div class="about-stat"><span class="about-stat-num">${t('stat1_num')}</span><span class="about-stat-lbl">${t('stat1_lbl')}</span></div>
+        <div class="about-stat"><span class="about-stat-num">${t('stat2_num')}</span><span class="about-stat-lbl">${t('stat2_lbl')}</span></div>
+        <div class="about-stat"><span class="about-stat-num">${t('stat3_num')}</span><span class="about-stat-lbl">${t('stat3_lbl')}</span></div>
+      </div>
       <p class="about-body">${t('about_text')}</p>
       <button class="about-cta" onclick="selectBrandFromNav('mercedes')">${t('about_cta')}</button>
     </div>
@@ -966,6 +980,33 @@ function openProductModal(id) {
   const d = prodData(item);
   const imgUrl = item.img ? `https://m-auto.online/${item.img}` : null;
   updateOGMeta(d.name || item.id, d.short || d.details || null, `https://m-auto.online/#soft/${item.brand || ''}`, imgUrl);
+  updateProductSchema(item, d);
+}
+
+function updateProductSchema(item, d) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: d.name || item.id,
+    description: d.short || d.details || '',
+    brand: { '@type': 'Brand', name: 'M-Auto Online' },
+    url: `https://m-auto.online/#soft/${item.brand || ''}`,
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      seller: { '@type': 'Organization', name: 'M-Auto Online' },
+      url: `https://m-auto.online/#soft/${item.brand || ''}`
+    }
+  };
+  if (item.img) schema.image = `https://m-auto.online/${item.img}`;
+  let el = document.getElementById('product-schema');
+  if (!el) {
+    el = document.createElement('script');
+    el.id = 'product-schema';
+    el.type = 'application/ld+json';
+    document.head.appendChild(el);
+  }
+  el.textContent = JSON.stringify(schema);
 }
 
 function renderModalContent(item) {
