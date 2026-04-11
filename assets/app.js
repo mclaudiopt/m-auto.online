@@ -60,7 +60,7 @@ const TRANS = {
     news_btn: "Ver M-Auto VCI →",
     wa_interest: "Olá! Tenho interesse em:",
     wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico.",
-    stat1_num: "500+", stat1_lbl: "clientes",
+    stat1_num: "600+", stat1_lbl: "clientes",
     stat2_num: "10+",  stat2_lbl: "marcas",
     stat3_num: "5+",   stat3_lbl: "anos"
   },
@@ -116,7 +116,7 @@ const TRANS = {
     news_btn: "See M-Auto VCI →",
     wa_interest: "Hello! I'm interested in:",
     wa_general: "Hello! I would like more information about your diagnostic software.",
-    stat1_num: "500+", stat1_lbl: "clients",
+    stat1_num: "600+", stat1_lbl: "clients",
     stat2_num: "10+",  stat2_lbl: "brands",
     stat3_num: "5+",   stat3_lbl: "years"
   },
@@ -172,7 +172,7 @@ const TRANS = {
     news_btn: "Voir M-Auto VCI →",
     wa_interest: "Bonjour ! Je suis intéressé par :",
     wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic.",
-    stat1_num: "500+", stat1_lbl: "clients",
+    stat1_num: "600+", stat1_lbl: "clients",
     stat2_num: "10+",  stat2_lbl: "marques",
     stat3_num: "5+",   stat3_lbl: "ans"
   }
