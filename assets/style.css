@@ -1080,32 +1080,6 @@ footer {
 	font-size: 0.9rem;
 }
 
-.footer-links {
-	margin-top: 10px;
-	font-size: 0.85rem;
-}
-.footer-links a {
-	color: var(--accent);
-	text-decoration: none;
-	font-weight: 600;
-}
-.footer-links a:hover { text-decoration: underline; }
-.footer-sep { margin: 0 8px; opacity: 0.4; }
-
-/* Nav VCI link */
-.nav-pill-vci {
-	color: var(--accent) !important;
-	font-weight: 700 !important;
-	text-decoration: none;
-	letter-spacing: 0.01em;
-}
-.nav-pill-vci:hover { background: var(--bg-muted) !important; }
-
-/* Mobile nav VCI item */
-.mob-item-vci {
-	color: var(--accent);
-	text-decoration: none;
-}
 
 .mobile-nav {
 	display: none;

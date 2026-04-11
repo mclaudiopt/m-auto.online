@@ -175,9 +175,15 @@
       <div class="controls-wrapper">
         <button type="button" class="theme-btn" onclick="toggleTheme()" title="Tema">☀️</button>
         <div class="lang-group">
-          <button type="button" id="btn-pt" onclick="setLanguage('pt')" class="lang-btn active" aria-label="Português">🇵🇹</button>
-          <button type="button" id="btn-en" onclick="setLanguage('en')" class="lang-btn" aria-label="English">🇬🇧</button>
-          <button type="button" id="btn-fr" onclick="setLanguage('fr')" class="lang-btn" aria-label="Français">🇫🇷</button>
+          <button type="button" id="btn-pt" onclick="setLanguage('pt')" class="lang-btn active">
+            <img src="https://flagcdn.com/w40/pt.png" alt="PT">
+          </button>
+          <button type="button" id="btn-en" onclick="setLanguage('en')" class="lang-btn">
+            <img src="https://flagcdn.com/w40/gb.png" alt="EN">
+          </button>
+          <button type="button" id="btn-fr" onclick="setLanguage('fr')" class="lang-btn">
+            <img src="https://flagcdn.com/w40/fr.png" alt="FR">
+          </button>
         </div>
       </div>
     </div>
@@ -388,11 +394,6 @@
   <!-- ═══ FOOTER ═══ -->
   <footer id="contacto">
     <p class="footer-copyright">&copy; <script>document.write(new Date().getFullYear())</script> M-Auto Online — Simply Digital</p>
-    <p class="footer-links">
-      <a href="vcx.html" target="_blank" rel="noopener">M-Auto VCI</a>
-      <span class="footer-sep">·</span>
-      <a href="vcx-help.html" target="_blank" rel="noopener">Ajuda VCI</a>
-    </p>
   </footer>
 
   <!-- ── SPLASH SCREEN JS ── -->
