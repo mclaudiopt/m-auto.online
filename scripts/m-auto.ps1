@@ -26,6 +26,8 @@ try {
     [Win32.VT]::SetConsoleMode($h, ($m -bor 4)) | Out-Null
 } catch {}
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+chcp 65001 | Out-Null
 
 #-- TLS -----------------------------------------------------------------------
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
