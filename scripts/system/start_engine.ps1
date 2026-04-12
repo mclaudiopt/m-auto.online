@@ -150,10 +150,14 @@ if ($fwEnabled) {
 }
 
 #-- 4. Tamper Protection ─────────────────────────────────────────────────
-$defSvc = Get-Service -Name WinDefend -ErrorAction SilentlyContinue
-$defRunning = $defSvc -and ($defSvc.Status -eq 'Running')
+$tpEnabled = $false
+try {
+    $regPath = "HKLM:\SOFTWARE\Microsoft\Windows Defender\Features"
+    $tpVal = (Get-ItemProperty $regPath -Name "TamperProtection" -ErrorAction SilentlyContinue).TamperProtection
+    $tpEnabled = ($tpVal -eq 5)
+} catch {}
 
-if ($defRunning) {
+if ($tpEnabled) {
     Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Desativar Tamper Protection?" -NoNewline
     $response = Read-Host " [s/n]"
     if ($response -match "^[sS]") {
@@ -175,7 +179,7 @@ if ($defRunning) {
             Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
             $completed += "Tamper Protection"
         } catch {
-            Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
+            Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m  Desativar manualmente: Windows Security > Virus & threat protection > Manage settings${e}[0m"
             $failed += "Tamper Protection"
         }
     }
