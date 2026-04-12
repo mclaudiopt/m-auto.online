@@ -60,7 +60,7 @@ const TRANS = {
     news_btn: "Ver M-Auto VCI →",
     wa_interest: "Olá! Tenho interesse em:",
     wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico.",
-    stat1_num: "600+", stat1_lbl: "clientes",
+    stat1_num: "100+", stat1_lbl: "clientes",
     stat2_num: "10+",  stat2_lbl: "marcas",
     stat3_num: "5+",   stat3_lbl: "anos"
   },
@@ -116,7 +116,7 @@ const TRANS = {
     news_btn: "See M-Auto VCI →",
     wa_interest: "Hello! I'm interested in:",
     wa_general: "Hello! I would like more information about your diagnostic software.",
-    stat1_num: "600+", stat1_lbl: "clients",
+    stat1_num: "100+", stat1_lbl: "clients",
     stat2_num: "10+",  stat2_lbl: "brands",
     stat3_num: "5+",   stat3_lbl: "years"
   },
@@ -172,7 +172,7 @@ const TRANS = {
     news_btn: "Voir M-Auto VCI →",
     wa_interest: "Bonjour ! Je suis intéressé par :",
     wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic.",
-    stat1_num: "600+", stat1_lbl: "clients",
+    stat1_num: "100+", stat1_lbl: "clients",
     stat2_num: "10+",  stat2_lbl: "marques",
     stat3_num: "5+",   stat3_lbl: "ans"
   }
@@ -874,7 +874,7 @@ function renderAbout() {
         <span class="about-news-badge">${t('news_badge')}</span>
         <div class="about-news-title">${t('news_title')}</div>
         <div class="about-news-sub">${t('news_sub')}</div>
-        <a href="vcx.html" class="about-news-btn">${t('news_btn')}</a>
+        <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();var o=document.getElementById('vcxOverlay'),f=document.getElementById('vcxFrame');if(o&&f){f.src='vcx.html?lang=${lang}';o.style.display='flex';}})(event)">${t('news_btn')}</a>
       </div>
       <div class="about-stats">
         <div class="about-stat"><span class="about-stat-num">${t('stat1_num')}</span><span class="about-stat-lbl">${t('stat1_lbl')}</span></div>
@@ -882,7 +882,7 @@ function renderAbout() {
         <div class="about-stat"><span class="about-stat-num">${t('stat3_num')}</span><span class="about-stat-lbl">${t('stat3_lbl')}</span></div>
       </div>
       <p class="about-body">${t('about_text')}</p>
-      <button class="about-cta" onclick="selectBrandFromNav('mercedes')">${t('about_cta')}</button>
+      <button class="about-cta" onclick="selectAllBrands()">${t('about_cta')}</button>
     </div>
   `;
 }

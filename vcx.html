@@ -287,9 +287,13 @@ function setLang(lang) {
 }
 // Auto-apply saved language on load
 (function() {
+  var urlLang = new URLSearchParams(window.location.search).get('lang') || '';
   var saved = '';
   try { saved = localStorage.getItem('vcx_lang') || ''; } catch(e) {}
-  if (saved && i18n[saved]) setLang(saved);
+  var fallback = '';
+  try { fallback = localStorage.getItem('mauto_lang') || ''; } catch(e) {}
+  var chosen = (urlLang && i18n[urlLang]) ? urlLang : (saved && i18n[saved]) ? saved : (fallback && i18n[fallback]) ? fallback : '';
+  if (chosen) setLang(chosen);
 })();
 </script>
 </body>
