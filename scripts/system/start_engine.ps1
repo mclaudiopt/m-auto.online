@@ -24,8 +24,12 @@ Write-Host "  ${e}[97m$winVer | RAM: ${usado}GB/${ram}GB ($percUsado%)${e}[0m"
 $drives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -match "^[A-Z]$" }
 $driveStr = ""
 $drives | ForEach-Object {
-    $used = [math]::Round($_.Used / 1GB, 1)
-    $total = $used + [math]::Round($_.Free / 1GB, 1)
+    $usedRaw = $_.Used
+    $freeRaw = $_.Free
+    if ($usedRaw -eq $null -or $freeRaw -eq $null) { return }
+    $used = [math]::Round($usedRaw / 1GB, 1)
+    $total = $used + [math]::Round($freeRaw / 1GB, 1)
+    if ($total -eq 0) { return }
     $perc = [math]::Round(($used / $total) * 100, 1)
     if ($driveStr) { $driveStr += " | " }
     $driveStr += "$($_.Name): $perc%"
