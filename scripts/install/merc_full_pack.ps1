@@ -18,9 +18,25 @@ function Find-7Zip {
     foreach ($p in $paths) {
         if (Test-Path $p) { return $p }
     }
-    # fallback: search PATH
     $found = Get-Command "7z.exe" -ErrorAction SilentlyContinue
     if ($found) { return $found.Source }
+    return $null
+}
+
+function Resolve-Desktop {
+    # 1. Registo HKCU (fonte de verdade, funciona com redireccionamento)
+    try {
+        $reg = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" `
+            -Name "Desktop" -ErrorAction Stop).Desktop
+        $reg = [Environment]::ExpandEnvironmentVariables($reg)
+        if (Test-Path $reg) { return $reg }
+    } catch {}
+    # 2. OneDrive Desktop
+    $od = "$env:USERPROFILE\OneDrive\Desktop"
+    if (Test-Path $od) { return $od }
+    # 3. Fallback classico
+    $fb = "$env:USERPROFILE\Desktop"
+    if (Test-Path $fb) { return $fb }
     return $null
 }
 
@@ -33,9 +49,9 @@ Write-Host ""
 
 #-- Menu loop ----------------------------------------------------------------
 while ($true) {
-    Write-Host "  ${e}[38;2;100;149;237m[A]${e}[0m  Extrair EWA (ewa.7z)"
+    Write-Host "  ${e}[38;2;100;149;237m[A]${e}[0m  Extrair + Instalar EWA + Mover ficheiros"
     Write-Host "  ${e}[38;2;100;149;237m[B]${e}[0m  Mover atalhos para pasta Coding (Desktop)"
-    Write-Host "  ${e}[38;2;100;149;237m[C]${e}[0m  Instalar EWA (SETUP.EXE)"
+    Write-Host "  ${e}[38;2;100;149;237m[C]${e}[0m  Instalar Java (silent)"
     Write-Host ""
     Write-Host "  ${e}[38;2;80;100;140m[0]${e}[0m  Voltar"
     Write-Host ""
@@ -46,19 +62,23 @@ while ($true) {
     switch ($opcao) {
 
         "A" {
-            #-- Extrair ewa.7z ───────────────────────────────────────────
-            $source = "C:\M-auto\Temp\ewa.7z"
-            $dest   = "C:\M-auto\Temp\ewa"
-            $pass   = "Fiesta77"
+            #-- PASSO 1: Extrair ewa.7z ──────────────────────────────────
+            $source  = "C:\M-auto\Temp\ewa.7z"
+            $extract = "C:\M-auto\Temp\ewa"
+            $pass    = "Fiesta77"
+            $setup   = "C:\M-auto\Temp\ewa\EWA\EWA\SETUP.EXE"
+            $srcDir  = "C:\M-auto\Temp\ewa\EWA\Files\ewa"
+            $destDir = "C:\Program Files (x86)\ewa"
 
-            # Verificar se o ficheiro existe
+            Write-Host "  ${e}[38;2;100;149;237m-- Passo 1: Extrair EWA${e}[0m"
+            Write-Host ""
+
             if (-not (Test-Path $source)) {
                 Write-Err "Ficheiro nao encontrado: $source"
                 Write-Host ""
                 break
             }
 
-            # Verificar se 7-Zip esta instalado
             $szExe = Find-7Zip
             if (-not $szExe) {
                 Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
@@ -66,34 +86,86 @@ while ($true) {
                 break
             }
 
-            # Criar pasta destino
-            if (-not (Test-Path $dest)) {
-                New-Item -ItemType Directory -Path $dest -Force | Out-Null
+            if (-not (Test-Path $extract)) {
+                New-Item -ItemType Directory -Path $extract -Force | Out-Null
             }
 
-            Write-Step "A extrair $source para $dest ..."
+            Write-Step "A extrair $source ..."
             Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
             Write-Host ""
 
-            # Extrair com progresso visivel (-bsp1 = progress para stdout)
-            & $szExe x $source -o"$dest" -p"$pass" -bsp1 -y
+            & $szExe x $source -o"$extract" -p"$pass" -bsp1 -y
 
             Write-Host ""
             Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
 
-            if ($LASTEXITCODE -eq 0) {
-                Write-OK "Extracao concluida: $dest"
+            if ($LASTEXITCODE -ne 0) {
+                Write-Err "Erro na extracao (codigo $LASTEXITCODE). Verifique a password ou o ficheiro."
+                Write-Host ""
+                break
+            }
 
-                # Apagar o .7z original
-                Write-Step "A apagar $source ..."
-                try {
-                    Remove-Item $source -Force -ErrorAction Stop
-                    Write-OK "Ficheiro .7z apagado."
-                } catch {
-                    Write-Warn "Nao foi possivel apagar o .7z: $_"
+            Write-OK "Extracao concluida."
+            try {
+                Remove-Item $source -Force -ErrorAction Stop
+                Write-OK "Ficheiro .7z apagado."
+            } catch {
+                Write-Warn "Nao foi possivel apagar o .7z: $_"
+            }
+
+            Write-Host ""
+
+            #-- PASSO 2: Instalar EWA (SETUP.EXE) ────────────────────────
+            Write-Host "  ${e}[38;2;100;149;237m-- Passo 2: Instalar EWA${e}[0m"
+            Write-Host ""
+
+            if (-not (Test-Path $setup)) {
+                Write-Err "Ficheiro nao encontrado: $setup"
+                Write-Host ""
+                break
+            }
+
+            Write-Step "A lancar: $setup"
+            Write-Host ""
+            try {
+                Start-Process -FilePath $setup -Wait -ErrorAction Stop
+                Write-OK "Instalador fechado."
+            } catch {
+                Write-Err "Erro ao lancar o instalador: $_"
+                Write-Host ""
+                break
+            }
+
+            Write-Host ""
+            Write-Host -NoNewline "  ${e}[38;2;29;155;255m>${e}[0m  Prima ENTER para mover os ficheiros EWA..."
+            $null = $Host.UI.ReadLine()
+            Write-Host ""
+
+            #-- PASSO 3: Mover Files\ewa para Program Files (x86) ────────
+            Write-Host "  ${e}[38;2;100;149;237m-- Passo 3: Mover ficheiros EWA${e}[0m"
+            Write-Host ""
+
+            if (-not (Test-Path $srcDir)) {
+                Write-Err "Pasta nao encontrada: $srcDir"
+                Write-Host ""
+                break
+            }
+
+            Write-Step "De:   $srcDir"
+            Write-Step "Para: $destDir"
+            Write-Host ""
+
+            robocopy $srcDir $destDir /E /MOVE /IS /IT /NP /NDL
+            $rcExit = $LASTEXITCODE
+
+            Write-Host ""
+            if ($rcExit -le 7) {
+                Write-OK "Ficheiros movidos para: $destDir"
+                if (Test-Path $srcDir) {
+                    Remove-Item $srcDir -Recurse -Force -ErrorAction SilentlyContinue
                 }
             } else {
-                Write-Err "Erro na extracao (codigo $LASTEXITCODE). Verifique a password ou o ficheiro."
+                Write-Err "Robocopy terminou com erro (codigo $rcExit)."
             }
 
             Write-Host ""
@@ -101,57 +173,30 @@ while ($true) {
 
         "B" {
             #-- Mover atalhos para pasta Coding no Desktop ───────────────
-
-            # Resolver path real do Desktop: registo > OneDrive > fallback
-            $desktop = $null
-
-            # 1. Registo HKCU (fonte de verdade, funciona com redirecionamento)
-            try {
-                $regDesktop = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" `
-                    -Name "Desktop" -ErrorAction Stop).Desktop
-                # Expandir variaveis de ambiente (ex: %USERPROFILE%)
-                $regDesktop = [Environment]::ExpandEnvironmentVariables($regDesktop)
-                if (Test-Path $regDesktop) { $desktop = $regDesktop }
-            } catch {}
-
-            # 2. OneDrive Desktop (comum quando OneDrive redireciona)
-            if (-not $desktop) {
-                $odDesktop = "$env:USERPROFILE\OneDrive\Desktop"
-                if (Test-Path $odDesktop) { $desktop = $odDesktop }
-            }
-
-            # 3. Fallback classico
-            if (-not $desktop) {
-                $fbDesktop = "$env:USERPROFILE\Desktop"
-                if (Test-Path $fbDesktop) { $desktop = $fbDesktop }
-            }
+            $desktop = Resolve-Desktop
 
             if (-not $desktop) {
                 Write-Err "Nao foi possivel localizar o ambiente de trabalho."
-                Write-Warn "Paths tentadas:"
-                Write-Host "    HKCU Shell Folders, $env:USERPROFILE\OneDrive\Desktop, $env:USERPROFILE\Desktop"
+                Write-Warn "Paths tentadas: HKCU Shell Folders | $env:USERPROFILE\OneDrive\Desktop | $env:USERPROFILE\Desktop"
                 Write-Host ""
                 break
             }
 
             $coding = Join-Path $desktop "Coding"
 
-            Write-Step "Desktop encontrado: $desktop"
-            Write-Step "Destino:            $coding"
+            Write-Step "Desktop: $desktop"
+            Write-Step "Destino: $coding"
             Write-Host ""
 
-            # Criar pasta Coding se nao existir
             if (-not (Test-Path $coding)) {
                 New-Item -ItemType Directory -Path $coding -Force | Out-Null
                 Write-OK "Pasta Coding criada."
             }
 
-            # Listar todos os .lnk encontrados (ajuda a diagnosticar)
             $allLinks = Get-ChildItem -Path $desktop -Filter "*.lnk" -ErrorAction SilentlyContinue
             Write-Step "$($allLinks.Count) atalho(s) encontrado(s) no Desktop."
             Write-Host ""
 
-            # Padroes de nome dos atalhos a mover
             $targets = @(
                 "*Vediamo*Start*Center*",
                 "*Vediamo*",
@@ -165,7 +210,7 @@ while ($true) {
 
             $moved   = @()
             $missed  = @()
-            $matched = @()  # evitar mover o mesmo ficheiro duas vezes
+            $matched = @()
 
             foreach ($pattern in $targets) {
                 $hits = $allLinks | Where-Object { $_.Name -like $pattern -and $_.FullName -notin $matched }
@@ -197,62 +242,33 @@ while ($true) {
         }
 
         "C" {
-            #-- Correr EWA SETUP.EXE + mover Files\ewa ──────────────────
-            $setup   = "C:\M-auto\Temp\ewa\EWA\EWA\SETUP.EXE"
-            $srcDir  = "C:\M-auto\Temp\ewa\EWA\Files\ewa"
-            $destDir = "C:\Program Files (x86)\ewa"
+            #-- Instalar Java em silent ───────────────────────────────────
+            $jre = "C:\Program Files (x86)\EWA\clientapps\jre\JRE.EXE"
 
-            if (-not (Test-Path $setup)) {
-                Write-Err "Ficheiro nao encontrado: $setup"
-                Write-Warn "Corre primeiro a opcao A para extrair o EWA."
+            if (-not (Test-Path $jre)) {
+                Write-Err "Ficheiro nao encontrado: $jre"
+                Write-Warn "Verifica se o EWA foi instalado (opcao A)."
                 Write-Host ""
                 break
             }
 
-            Write-Step "A lancar: $setup"
+            Write-Step "A instalar Java (silent)..."
+            Write-Step "$jre"
             Write-Host ""
+
             try {
-                Start-Process -FilePath $setup -Wait -ErrorAction Stop
-                Write-OK "Instalador fechado."
+                $proc = Start-Process -FilePath $jre -ArgumentList "/s" -Wait -PassThru -ErrorAction Stop
+                Write-Host ""
+                if ($proc.ExitCode -eq 0) {
+                    Write-OK "Java instalado com sucesso."
+                } else {
+                    Write-Warn "Instalador terminou com codigo $($proc.ExitCode)."
+                    Write-Warn "Verifica se o Java foi instalado corretamente."
+                }
             } catch {
                 Write-Err "Erro ao lancar o instalador: $_"
-                Write-Host ""
-                break
             }
 
-            Write-Host ""
-            Write-Host -NoNewline "  ${e}[38;2;29;155;255m>${e}[0m  Prima ENTER para mover os ficheiros EWA..."
-            $null = $Host.UI.ReadLine()
-            Write-Host ""
-
-            if (-not (Test-Path $srcDir)) {
-                Write-Err "Pasta nao encontrada: $srcDir"
-                Write-Host ""
-                break
-            }
-
-            Write-Step "A mover: $srcDir"
-            Write-Step "Para:    $destDir"
-            Write-Host ""
-
-            # robocopy: /E=subdirs, /MOVE=apaga origem apos copiar,
-            #           /IS=sobrepoe ficheiros iguais, /IT=sobrepoe tweaked,
-            #           /NP=sem % por ficheiro (mais limpo), /NFL=sem lista ficheiros
-            #           exit codes 0-7 sao sucesso em robocopy
-            $rc = robocopy $srcDir $destDir /E /MOVE /IS /IT /NP /NDL
-            $exitCode = $LASTEXITCODE
-
-            Write-Host ""
-            if ($exitCode -le 7) {
-                Write-OK "Ficheiros movidos para: $destDir"
-
-                # Limpar pasta de origem vazia
-                if (Test-Path $srcDir) {
-                    Remove-Item $srcDir -Recurse -Force -ErrorAction SilentlyContinue
-                }
-            } else {
-                Write-Err "Robocopy terminou com erro (codigo $exitCode)."
-            }
             Write-Host ""
         }
 
