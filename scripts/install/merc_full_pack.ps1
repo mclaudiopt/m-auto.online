@@ -14,7 +14,8 @@ $LINKS = @{
 }
 
 $ARIA2   = "$env:TEMP\aria2c.exe"
-$DESTDIR = "$env:USERPROFILE\Downloads"
+$DESTDIR = "C:\M-AUTO\Temp"
+if (-not (Test-Path $DESTDIR)) { New-Item -ItemType Directory -Path $DESTDIR -Force | Out-Null }
 $RPC_URL = "http://localhost:6801/jsonrpc"
 $RPC_TOK = "mauto2026"
 $aria2Proc = $null
