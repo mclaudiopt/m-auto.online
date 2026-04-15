@@ -34,6 +34,7 @@ Write-Host ""
 #-- Menu loop ----------------------------------------------------------------
 while ($true) {
     Write-Host "  ${e}[38;2;100;149;237m[A]${e}[0m  Extrair EWA (ewa.7z)"
+    Write-Host "  ${e}[38;2;100;149;237m[B]${e}[0m  Mover atalhos para pasta Coding (Desktop)"
     Write-Host ""
     Write-Host "  ${e}[38;2;80;100;140m[0]${e}[0m  Voltar"
     Write-Host ""
@@ -94,6 +95,68 @@ while ($true) {
                 Write-Err "Erro na extracao (codigo $LASTEXITCODE). Verifique a password ou o ficheiro."
             }
 
+            Write-Host ""
+        }
+
+        "B" {
+            #-- Mover atalhos para pasta Coding no Desktop ───────────────
+            $desktop = [Environment]::GetFolderPath("Desktop")
+            $coding  = Join-Path $desktop "Coding"
+
+            # Padroes de nome dos atalhos a mover (sem extensao, com wildcards)
+            $targets = @(
+                "*Vediamo*Start*Center*",
+                "*Vediamo*",
+                "*DTS*Venice*",
+                "*DTS*Monaco*",
+                "*OTX*Studio*",
+                "*XENTRY*Special*Functions*",
+                "*DAS*FDOK*",
+                "*Keygens*"
+            )
+
+            Write-Step "Desktop: $desktop"
+            Write-Step "Destino: $coding"
+            Write-Host ""
+
+            # Criar pasta Coding se nao existir
+            if (-not (Test-Path $coding)) {
+                New-Item -ItemType Directory -Path $coding -Force | Out-Null
+                Write-OK "Pasta Coding criada."
+            }
+
+            # Encontrar todos os .lnk no Desktop
+            $allLinks = Get-ChildItem -Path $desktop -Filter "*.lnk" -ErrorAction SilentlyContinue
+
+            $moved  = @()
+            $missed = @()
+
+            foreach ($pattern in $targets) {
+                $matches = $allLinks | Where-Object { $_.Name -like $pattern }
+                if ($matches) {
+                    foreach ($lnk in $matches) {
+                        $dest = Join-Path $coding $lnk.Name
+                        try {
+                            Move-Item -Path $lnk.FullName -Destination $dest -Force -ErrorAction Stop
+                            Write-OK "Movido: $($lnk.Name)"
+                            $moved += $lnk.Name
+                        } catch {
+                            Write-Err "Erro ao mover: $($lnk.Name) — $_"
+                        }
+                    }
+                } else {
+                    # Guarda o padrao limpo para o relatorio
+                    $missed += ($pattern -replace '\*','').Trim()
+                }
+            }
+
+            Write-Host ""
+            if ($moved.Count -gt 0) {
+                Write-OK "$($moved.Count) atalho(s) movido(s) para Coding."
+            }
+            if ($missed.Count -gt 0) {
+                Write-Warn "Nao encontrados no Desktop: $($missed -join ', ')"
+            }
             Write-Host ""
         }
 
