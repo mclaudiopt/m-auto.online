@@ -101,10 +101,57 @@ while ($true) {
 
         "B" {
             #-- Mover atalhos para pasta Coding no Desktop ───────────────
-            $desktop = [Environment]::GetFolderPath("Desktop")
-            $coding  = Join-Path $desktop "Coding"
 
-            # Padroes de nome dos atalhos a mover (sem extensao, com wildcards)
+            # Resolver path real do Desktop: registo > OneDrive > fallback
+            $desktop = $null
+
+            # 1. Registo HKCU (fonte de verdade, funciona com redirecionamento)
+            try {
+                $regDesktop = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" `
+                    -Name "Desktop" -ErrorAction Stop).Desktop
+                # Expandir variaveis de ambiente (ex: %USERPROFILE%)
+                $regDesktop = [Environment]::ExpandEnvironmentVariables($regDesktop)
+                if (Test-Path $regDesktop) { $desktop = $regDesktop }
+            } catch {}
+
+            # 2. OneDrive Desktop (comum quando OneDrive redireciona)
+            if (-not $desktop) {
+                $odDesktop = "$env:USERPROFILE\OneDrive\Desktop"
+                if (Test-Path $odDesktop) { $desktop = $odDesktop }
+            }
+
+            # 3. Fallback classico
+            if (-not $desktop) {
+                $fbDesktop = "$env:USERPROFILE\Desktop"
+                if (Test-Path $fbDesktop) { $desktop = $fbDesktop }
+            }
+
+            if (-not $desktop) {
+                Write-Err "Nao foi possivel localizar o ambiente de trabalho."
+                Write-Warn "Paths tentadas:"
+                Write-Host "    HKCU Shell Folders, $env:USERPROFILE\OneDrive\Desktop, $env:USERPROFILE\Desktop"
+                Write-Host ""
+                break
+            }
+
+            $coding = Join-Path $desktop "Coding"
+
+            Write-Step "Desktop encontrado: $desktop"
+            Write-Step "Destino:            $coding"
+            Write-Host ""
+
+            # Criar pasta Coding se nao existir
+            if (-not (Test-Path $coding)) {
+                New-Item -ItemType Directory -Path $coding -Force | Out-Null
+                Write-OK "Pasta Coding criada."
+            }
+
+            # Listar todos os .lnk encontrados (ajuda a diagnosticar)
+            $allLinks = Get-ChildItem -Path $desktop -Filter "*.lnk" -ErrorAction SilentlyContinue
+            Write-Step "$($allLinks.Count) atalho(s) encontrado(s) no Desktop."
+            Write-Host ""
+
+            # Padroes de nome dos atalhos a mover
             $targets = @(
                 "*Vediamo*Start*Center*",
                 "*Vediamo*",
@@ -116,29 +163,18 @@ while ($true) {
                 "*Keygens*"
             )
 
-            Write-Step "Desktop: $desktop"
-            Write-Step "Destino: $coding"
-            Write-Host ""
-
-            # Criar pasta Coding se nao existir
-            if (-not (Test-Path $coding)) {
-                New-Item -ItemType Directory -Path $coding -Force | Out-Null
-                Write-OK "Pasta Coding criada."
-            }
-
-            # Encontrar todos os .lnk no Desktop
-            $allLinks = Get-ChildItem -Path $desktop -Filter "*.lnk" -ErrorAction SilentlyContinue
-
-            $moved  = @()
-            $missed = @()
+            $moved   = @()
+            $missed  = @()
+            $matched = @()  # evitar mover o mesmo ficheiro duas vezes
 
             foreach ($pattern in $targets) {
-                $matches = $allLinks | Where-Object { $_.Name -like $pattern }
-                if ($matches) {
-                    foreach ($lnk in $matches) {
-                        $dest = Join-Path $coding $lnk.Name
+                $hits = $allLinks | Where-Object { $_.Name -like $pattern -and $_.FullName -notin $matched }
+                if ($hits) {
+                    foreach ($lnk in $hits) {
+                        $matched += $lnk.FullName
+                        $destLnk = Join-Path $coding $lnk.Name
                         try {
-                            Move-Item -Path $lnk.FullName -Destination $dest -Force -ErrorAction Stop
+                            Move-Item -Path $lnk.FullName -Destination $destLnk -Force -ErrorAction Stop
                             Write-OK "Movido: $($lnk.Name)"
                             $moved += $lnk.Name
                         } catch {
@@ -146,7 +182,6 @@ while ($true) {
                         }
                     }
                 } else {
-                    # Guarda o padrao limpo para o relatorio
                     $missed += ($pattern -replace '\*','').Trim()
                 }
             }
@@ -156,7 +191,7 @@ while ($true) {
                 Write-OK "$($moved.Count) atalho(s) movido(s) para Coding."
             }
             if ($missed.Count -gt 0) {
-                Write-Warn "Nao encontrados no Desktop: $($missed -join ', ')"
+                Write-Warn "Nao encontrados: $($missed -join ' | ')"
             }
             Write-Host ""
         }
