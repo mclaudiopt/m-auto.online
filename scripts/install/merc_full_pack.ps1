@@ -24,19 +24,36 @@ function Find-7Zip {
 }
 
 function Resolve-Desktop {
-    # 1. Registo HKCU (fonte de verdade, funciona com redireccionamento)
+    $candidates = [System.Collections.Generic.List[string]]::new()
+
+    # 1. Utilizador com sessao activa (mesmo quando elevado como Admin)
+    try {
+        $loggedUser = (Get-CimInstance Win32_ComputerSystem -ErrorAction SilentlyContinue).UserName
+        if ($loggedUser -match '\\') {
+            $uname = $loggedUser.Split('\')[-1]
+            $uProfile = "C:\Users\$uname"
+            $candidates.Add("$uProfile\OneDrive\Desktop")
+            $candidates.Add("$uProfile\Desktop")
+        }
+    } catch {}
+
+    # 2. Registo HKCU do processo actual (pode ser Admin, mas vale tentar)
     try {
         $reg = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" `
             -Name "Desktop" -ErrorAction Stop).Desktop
         $reg = [Environment]::ExpandEnvironmentVariables($reg)
-        if (Test-Path $reg) { return $reg }
+        $candidates.Add($reg)
     } catch {}
-    # 2. OneDrive Desktop
-    $od = "$env:USERPROFILE\OneDrive\Desktop"
-    if (Test-Path $od) { return $od }
-    # 3. Fallback classico
-    $fb = "$env:USERPROFILE\Desktop"
-    if (Test-Path $fb) { return $fb }
+
+    # 3. Todos os perfis em C:\Users (varredura)
+    Get-ChildItem "C:\Users" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+        $candidates.Add("$($_.FullName)\OneDrive\Desktop")
+        $candidates.Add("$($_.FullName)\Desktop")
+    }
+
+    foreach ($path in $candidates) {
+        if ($path -and (Test-Path $path)) { return $path }
+    }
     return $null
 }
 
@@ -195,6 +212,9 @@ while ($true) {
 
             $allLinks = Get-ChildItem -Path $desktop -Filter "*.lnk" -ErrorAction SilentlyContinue
             Write-Step "$($allLinks.Count) atalho(s) encontrado(s) no Desktop."
+            if ($allLinks.Count -gt 0) {
+                $allLinks | ForEach-Object { Write-Host "    ${e}[38;2;80;100;140m- $($_.Name)${e}[0m" }
+            }
             Write-Host ""
 
             $targets = @(
