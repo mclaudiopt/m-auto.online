@@ -162,8 +162,10 @@ while ($true) {
         }
 
         "C" {
-            #-- Correr EWA SETUP.EXE ─────────────────────────────────────
-            $setup = "C:\M-auto\Temp\ewa\EWA\EWA\SETUP.EXE"
+            #-- Correr EWA SETUP.EXE + mover Files\ewa ──────────────────
+            $setup   = "C:\M-auto\Temp\ewa\EWA\EWA\SETUP.EXE"
+            $srcDir  = "C:\M-auto\Temp\ewa\EWA\Files\ewa"
+            $destDir = "C:\Program Files (x86)\ewa"
 
             if (-not (Test-Path $setup)) {
                 Write-Err "Ficheiro nao encontrado: $setup"
@@ -176,9 +178,45 @@ while ($true) {
             Write-Host ""
             try {
                 Start-Process -FilePath $setup -Wait -ErrorAction Stop
-                Write-OK "Instalacao concluida (ou janela fechada)."
+                Write-OK "Instalador fechado."
             } catch {
                 Write-Err "Erro ao lancar o instalador: $_"
+                Write-Host ""
+                break
+            }
+
+            Write-Host ""
+            Write-Host -NoNewline "  ${e}[38;2;29;155;255m>${e}[0m  Prima ENTER para mover os ficheiros EWA..."
+            $null = $Host.UI.ReadLine()
+            Write-Host ""
+
+            if (-not (Test-Path $srcDir)) {
+                Write-Err "Pasta nao encontrada: $srcDir"
+                Write-Host ""
+                break
+            }
+
+            Write-Step "A mover: $srcDir"
+            Write-Step "Para:    $destDir"
+            Write-Host ""
+
+            # robocopy: /E=subdirs, /MOVE=apaga origem apos copiar,
+            #           /IS=sobrepoe ficheiros iguais, /IT=sobrepoe tweaked,
+            #           /NP=sem % por ficheiro (mais limpo), /NFL=sem lista ficheiros
+            #           exit codes 0-7 sao sucesso em robocopy
+            $rc = robocopy $srcDir $destDir /E /MOVE /IS /IT /NP /NDL
+            $exitCode = $LASTEXITCODE
+
+            Write-Host ""
+            if ($exitCode -le 7) {
+                Write-OK "Ficheiros movidos para: $destDir"
+
+                # Limpar pasta de origem vazia
+                if (Test-Path $srcDir) {
+                    Remove-Item $srcDir -Recurse -Force -ErrorAction SilentlyContinue
+                }
+            } else {
+                Write-Err "Robocopy terminou com erro (codigo $exitCode)."
             }
             Write-Host ""
         }
