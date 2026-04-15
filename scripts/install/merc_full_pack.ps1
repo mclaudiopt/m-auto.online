@@ -178,8 +178,17 @@ while ($true) {
             Write-Host ""
             if ($rcExit -le 7) {
                 Write-OK "Ficheiros movidos para: $destDir"
-                if (Test-Path $srcDir) {
-                    Remove-Item $srcDir -Recurse -Force -ErrorAction SilentlyContinue
+
+                #-- PASSO 4: Apagar pasta temporaria completa ─────────────
+                Write-Host ""
+                Write-Host "  ${e}[38;2;100;149;237m-- Passo 4: Limpeza${e}[0m"
+                Write-Host ""
+                Write-Step "A apagar C:\M-auto\Temp\ewa ..."
+                try {
+                    Remove-Item "C:\M-auto\Temp\ewa" -Recurse -Force -ErrorAction Stop
+                    Write-OK "Pasta temporaria apagada."
+                } catch {
+                    Write-Warn "Nao foi possivel apagar a pasta: $_"
                 }
             } else {
                 Write-Err "Robocopy terminou com erro (codigo $rcExit)."
