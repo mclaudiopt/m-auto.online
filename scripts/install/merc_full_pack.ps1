@@ -35,6 +35,7 @@ Write-Host ""
 while ($true) {
     Write-Host "  ${e}[38;2;100;149;237m[A]${e}[0m  Extrair EWA (ewa.7z)"
     Write-Host "  ${e}[38;2;100;149;237m[B]${e}[0m  Mover atalhos para pasta Coding (Desktop)"
+    Write-Host "  ${e}[38;2;100;149;237m[C]${e}[0m  Instalar EWA (SETUP.EXE)"
     Write-Host ""
     Write-Host "  ${e}[38;2;80;100;140m[0]${e}[0m  Voltar"
     Write-Host ""
@@ -156,6 +157,28 @@ while ($true) {
             }
             if ($missed.Count -gt 0) {
                 Write-Warn "Nao encontrados no Desktop: $($missed -join ', ')"
+            }
+            Write-Host ""
+        }
+
+        "C" {
+            #-- Correr EWA SETUP.EXE ─────────────────────────────────────
+            $setup = "C:\M-auto\Temp\ewa\EWA\EWA\SETUP.EXE"
+
+            if (-not (Test-Path $setup)) {
+                Write-Err "Ficheiro nao encontrado: $setup"
+                Write-Warn "Corre primeiro a opcao A para extrair o EWA."
+                Write-Host ""
+                break
+            }
+
+            Write-Step "A lancar: $setup"
+            Write-Host ""
+            try {
+                Start-Process -FilePath $setup -Wait -ErrorAction Stop
+                Write-OK "Instalacao concluida (ou janela fechada)."
+            } catch {
+                Write-Err "Erro ao lancar o instalador: $_"
             }
             Write-Host ""
         }
