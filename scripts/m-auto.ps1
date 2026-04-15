@@ -314,6 +314,7 @@ while ($true) {
     Write-Opt 2  "Cliente"                    "Tesla..."
     Write-Opt 3  "Tools"                      "Utilitarios & Ferramentas"
     Write-Opt 4  "SOS"                        "Recuperacao de emergencia"
+    Write-Opt 5  "Software"                   "Mercedes / VAG / BMW / PSA..."
     Write-Opt 9  "Wallpaper M-Auto"
     Write-Host ""
     Write-Opt 0  "Sair"
@@ -323,6 +324,7 @@ while ($true) {
         "2" { Show-Clientes }
         "3" { Show-Tools }
         "4" { Show-SOS }
+        "5" { Show-Software }
         "9" { Run-Sub "utils/set_wallpaper" }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
