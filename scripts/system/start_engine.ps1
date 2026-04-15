@@ -10,16 +10,15 @@ Write-Host "  ${e}[1;97mStart Engine${e}[0m"
 Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
 Write-Host ""
 
-#-- SYSTEM INFO (mostra uma vez no topo) ─────────────────────────────────
+#-- SYSTEM INFO ──────────────────────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m[SISTEMA]${e}[0m"
 
 $os = Get-CimInstance Win32_OperatingSystem
-$comp = Get-CimInstance Win32_ComputerSystem
 $winVer = if ($os.Caption -match "11") { "Windows 11" } elseif ($os.Caption -match "10") { "Windows 10" } else { $os.Caption }
-$ram = [math]::Round($os.TotalVisibleMemorySize / 1MB, 1)
-$free = [math]::Round($os.FreePhysicalMemory / 1MB, 1)
-$usado = $ram - $free
-$percUsado = [math]::Round(($usado / $ram) * 100, 1)
+$ram    = [math]::Round($os.TotalVisibleMemorySize / 1MB, 1)
+$free   = [math]::Round($os.FreePhysicalMemory / 1MB, 1)
+$usado  = $ram - $free
+$percUsado = if ($ram -gt 0) { [math]::Round(($usado / $ram) * 100, 1) } else { 0 }
 
 Write-Host "  ${e}[97m$winVer | RAM: ${usado}GB/${ram}GB ($percUsado%)${e}[0m"
 
@@ -29,7 +28,7 @@ $drives | ForEach-Object {
     $usedRaw = $_.Used
     $freeRaw = $_.Free
     if ($usedRaw -eq $null -or $freeRaw -eq $null) { return }
-    $used = [math]::Round($usedRaw / 1GB, 1)
+    $used  = [math]::Round($usedRaw / 1GB, 1)
     $total = $used + [math]::Round($freeRaw / 1GB, 1)
     if ($total -eq 0) { return }
     $perc = [math]::Round(($used / $total) * 100, 1)
@@ -38,8 +37,8 @@ $drives | ForEach-Object {
 }
 Write-Host "  ${e}[97m$driveStr${e}[0m"
 
-# Security Status
-$blActive = $false
+# Security status
+$blActive  = $false
 $defActive = $false
 $fwEnabled = $false
 $secStatus = ""
@@ -75,12 +74,12 @@ try {
 Write-Host "  ${e}[97m$secStatus${e}[0m"
 Write-Host ""
 
-#-- ACOES (executam logo) ────────────────────────────────────────────────
+#-- ACOES ────────────────────────────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m[ACOES]${e}[0m"
 Write-Host ""
 
 $completed = @()
-$failed = @()
+$failed    = @()
 
 #-- 0. Wallpaper M-Auto ──────────────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Aplicar Wallpaper M-Auto?" -NoNewline
@@ -139,7 +138,6 @@ if ($fwEnabled) {
         Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A desativar..." -NoNewline
         try {
             Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -ErrorAction Stop
-            Remove-NetFirewallRule -All -ErrorAction SilentlyContinue
             Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
             $completed += "Firewall"
         } catch {
@@ -194,8 +192,10 @@ if ($response -match "^[sS]") {
         $inst = Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" `
             -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like "*7-Zip*" }
         if (-not $inst) {
+            $arch = $env:PROCESSOR_ARCHITECTURE
+            $exeName = if ($arch -eq "ARM64") { "7z2409-arm64.exe" } elseif ($arch -eq "x86") { "7z2409.exe" } else { "7z2409-x64.exe" }
             $tmp = "$env:TEMP\7z_setup.exe"
-            Invoke-WebRequest -Uri "https://www.7-zip.org/a/7z2600-x64.exe" `
+            Invoke-WebRequest -Uri "https://www.7-zip.org/a/$exeName" `
                 -OutFile $tmp -UseBasicParsing -ErrorAction Stop -TimeoutSec 30
             Start-Process -FilePath $tmp -ArgumentList "/S" -Wait -ErrorAction Stop
             Remove-Item $tmp -Force -ErrorAction SilentlyContinue
@@ -216,7 +216,7 @@ $response = Read-Host " [s/n]"
 if ($response -match "^[sS]") {
     Write-Host ""
     try {
-        irm https://get.activated.win | iex
+        irm https://get.activated.win -UseBasicParsing | iex
         $completed += "Windows Activation"
     } catch {
         Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
@@ -224,7 +224,7 @@ if ($response -match "^[sS]") {
     }
 }
 
-#-- 7. Cleanup ────────────────────────────────────────────────────────────
+#-- 7. Cleanup ───────────────────────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Limpar ficheiros temporarios?" -NoNewline
 $response = Read-Host " [s/n]"
 if ($response -match "^[sS]") {
@@ -239,19 +239,24 @@ if ($response -match "^[sS]") {
     }
 }
 
-#-- 9. Criar Restore Point ───────────────────────────────────────────────
+#-- 8. Criar Restore Point ───────────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Criar ponto de restauro?" -NoNewline
 $response = Read-Host " [s/n]"
 if ($response -match "^[sS]") {
     Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A criar..." -NoNewline
     try {
+        $srEnabled = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" `
+            -Name "RPSessionInterval" -ErrorAction SilentlyContinue).RPSessionInterval
         $vss = Get-Service VSS -ErrorAction SilentlyContinue
-        if ($vss) {
+        if ($vss -and ($srEnabled -ne 0)) {
             Checkpoint-Computer -Description "M-Auto Backup" -RestorePointType "MODIFY_SETTINGS" -ErrorAction Stop
             Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
             $completed += "Restore Point"
         } else {
-            Write-Host "  ${e}[38;2;148;163;184m[N/A]${e}[0m"
+            Enable-ComputerRestore -Drive "C:\" -ErrorAction SilentlyContinue
+            Checkpoint-Computer -Description "M-Auto Backup" -RestorePointType "MODIFY_SETTINGS" -ErrorAction Stop
+            Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
+            $completed += "Restore Point"
         }
     } catch {
         Write-Host "  ${e}[38;2;239;68;68m[ERRO]${e}[0m"
@@ -259,7 +264,7 @@ if ($response -match "^[sS]") {
     }
 }
 
-#-- 10. DNS Cloudflare ───────────────────────────────────────────────────
+#-- 9. DNS Cloudflare ────────────────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  Alterar DNS para Cloudflare?" -NoNewline
 $response = Read-Host " [s/n]"
 if ($response -match "^[sS]") {
@@ -273,7 +278,6 @@ if ($response -match "^[sS]") {
     }
 }
 
-
 #-- RESUMO ───────────────────────────────────────────────────────────────
 Write-Host ""
 Write-Host "  ${e}[38;2;100;149;237m>> Resumo${e}[0m"
@@ -281,12 +285,12 @@ Write-Host "  ${e}[38;2;50;60;80m-----------------------------------------------
 Write-Host ""
 
 if ($completed.Count -gt 0) {
-    Write-Host "  ${e}[38;2;34;197;94m✓ Concluido${e}[0m]: $($completed -join ', ')"
+    Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($completed -join ', ')"
 }
 
 if ($failed.Count -gt 0) {
-    Write-Host "  ${e}[38;2;239;68;68m✗ Falhou${e}[0m}: $($failed -join ', ')"
-    Write-Host "  ${e}[38;2;148;163;184mTente novamente em Tools > Backup${e}[0m"
+    Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $($failed -join ', ')"
+    Write-Host "  ${e}[38;2;148;163;184m      Tente novamente em Tools > Backup${e}[0m"
 }
 
 Write-Host ""
