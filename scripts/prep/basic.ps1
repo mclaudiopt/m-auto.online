@@ -140,7 +140,8 @@ $inst = Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninst
 if ($inst) {
     Write-Skip
 } else {
-    $tmp = "$env:TEMP\7z_setup.exe"
+    $dlDir = "C:\M-auto\Temp"; if (-not (Test-Path $dlDir)) { New-Item -ItemType Directory -Path $dlDir -Force | Out-Null }
+    $tmp = "$dlDir\7z_setup.exe"
     try {
         Invoke-WebRequest -Uri "https://www.7-zip.org/a/7z2600-x64.exe" `
             -OutFile $tmp -UseBasicParsing -ErrorAction Stop
