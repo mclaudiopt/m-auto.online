@@ -1,7 +1,40 @@
 # tools/criar_atalhos.ps1 - Criar atalhos no Ambiente de Trabalho
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+chcp 65001 | Out-Null
 $e = [char]27
-$desktop = [Environment]::GetFolderPath("Desktop")
+
+# Resolve Desktop real (funciona mesmo quando elevado como Admin)
+function Resolve-Desktop {
+    try {
+        $loggedUser = (Get-CimInstance Win32_ComputerSystem -ErrorAction SilentlyContinue).UserName
+        if ($loggedUser -match '\\') {
+            $uProfile = "C:\Users\$($loggedUser.Split('\')[-1])"
+            foreach ($p in @("$uProfile\OneDrive\Desktop", "$uProfile\Desktop")) {
+                if (Test-Path $p) { return $p }
+            }
+        }
+    } catch {}
+    try {
+        $reg = [Environment]::ExpandEnvironmentVariables(
+            (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" -Name "Desktop" -ErrorAction Stop).Desktop
+        )
+        if (Test-Path $reg) { return $reg }
+    } catch {}
+    Get-ChildItem "C:\Users" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+        foreach ($p in @("$($_.FullName)\OneDrive\Desktop", "$($_.FullName)\Desktop")) {
+            if (Test-Path $p) { return $p }
+        }
+    }
+    return $null
+}
+
+$desktop = Resolve-Desktop
+if (-not $desktop) {
+    Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   Nao foi possivel localizar o ambiente de trabalho."
+    Read-Host "  Pressione ENTER para voltar"
+    return
+}
 
 function New-LnkShortcut {
     param(
