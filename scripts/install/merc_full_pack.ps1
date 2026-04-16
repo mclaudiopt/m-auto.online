@@ -66,9 +66,13 @@ Write-Host ""
 
 #-- Menu loop ----------------------------------------------------------------
 while ($true) {
+    Write-Host "  ${e}[38;2;148;163;184m  -- EWA --${e}[0m"
     Write-Host "  ${e}[38;2;100;149;237m[A]${e}[0m  Extrair + Instalar EWA + Mover ficheiros"
     Write-Host "  ${e}[38;2;100;149;237m[B]${e}[0m  Mover atalhos para pasta Coding (Desktop)"
     Write-Host "  ${e}[38;2;100;149;237m[C]${e}[0m  Instalar Java (silent)"
+    Write-Host ""
+    Write-Host "  ${e}[38;2;148;163;184m  -- StarFinder --${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m[D]${e}[0m  Extrair StarFinder 2024"
     Write-Host ""
     Write-Host "  ${e}[38;2;80;100;140m[0]${e}[0m  Voltar"
     Write-Host ""
@@ -296,6 +300,53 @@ while ($true) {
                 }
             } catch {
                 Write-Err "Erro ao lancar o instalador: $_"
+            }
+
+            Write-Host ""
+        }
+
+        "D" {
+            #-- Extrair StarFinder 2024 ──────────────────────────────────
+            $source = "C:\M-auto\Temp\Startfifinder 2024.7z"
+            $dest   = "C:\M-auto"
+
+            if (-not (Test-Path $source)) {
+                Write-Err "Ficheiro nao encontrado: $source"
+                Write-Host ""
+                break
+            }
+
+            $szExe = Find-7Zip
+            if (-not $szExe) {
+                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
+                Write-Host ""
+                break
+            }
+
+            if (-not (Test-Path $dest)) {
+                New-Item -ItemType Directory -Path $dest -Force | Out-Null
+            }
+
+            Write-Step "A extrair StarFinder 2024..."
+            Write-Step "Para: $dest"
+            Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
+            Write-Host ""
+
+            & $szExe x $source -o"$dest" -bsp1 -y
+
+            Write-Host ""
+            Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
+
+            if ($LASTEXITCODE -eq 0) {
+                Write-OK "StarFinder 2024 extraido para: $dest"
+                try {
+                    Remove-Item $source -Force -ErrorAction Stop
+                    Write-OK "Ficheiro .7z apagado."
+                } catch {
+                    Write-Warn "Nao foi possivel apagar o .7z: $_"
+                }
+            } else {
+                Write-Err "Erro na extracao (codigo $LASTEXITCODE)."
             }
 
             Write-Host ""
