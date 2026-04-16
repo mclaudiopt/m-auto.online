@@ -10,6 +10,38 @@ function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $msg"
 function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $msg" }
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $msg" }
 
+function Invoke-Extract {
+    param([string]$szExe, [string]$Source, [string]$Dest, [string]$Pass = "")
+    Clear-Host
+    Write-Host ""
+    Write-Host "  ${e}[1;97mA extrair...${e}[0m"
+    Write-Host "  ${e}[38;2;148;163;184m  $(Split-Path $Source -Leaf)${e}[0m"
+    Write-Host ""
+
+    $xArgs = @("x", $Source, "-o$Dest", "-bsp1", "-y")
+    if ($Pass) { $xArgs += "-p$Pass" }
+
+    $lastP = -1
+    & $szExe @xArgs | ForEach-Object {
+        if ($_ -match '^\s*(\d+)%') {
+            $p = [int]$Matches[1]
+            if ($p -ne $lastP) {
+                $lastP = $p
+                $filled = [math]::Round($p / 100 * 50)
+                $bar    = ("#" * $filled).PadRight(50, '-')
+                Write-Host -NoNewline "`r  [${e}[38;2;100;149;237m$bar${e}[0m] $p%   "
+            }
+        }
+    }
+    $rc = $LASTEXITCODE
+    if ($rc -eq 0) {
+        $bar = "#" * 50
+        Write-Host "`r  [${e}[38;2;34;197;94m$bar${e}[0m] 100%"
+    }
+    Write-Host ""
+    return $rc
+}
+
 function Find-7Zip {
     $paths = @(
         "C:\Program Files\7-Zip\7z.exe",
@@ -111,17 +143,9 @@ while ($true) {
                 New-Item -ItemType Directory -Path $extract -Force | Out-Null
             }
 
-            Write-Step "A extrair $source ..."
-            Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
-            Write-Host ""
-
-            & $szExe x $source -o"$extract" -p"$pass" -bsp1 -y
-
-            Write-Host ""
-            Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
-
-            if ($LASTEXITCODE -ne 0) {
-                Write-Err "Erro na extracao (codigo $LASTEXITCODE). Verifique a password ou o ficheiro."
+            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $extract -Pass $pass
+            if ($rcExtract -ne 0) {
+                Write-Err "Erro na extracao (codigo $rcExtract). Verifique a password ou o ficheiro."
                 Write-Host ""
                 break
             }
@@ -331,18 +355,9 @@ while ($true) {
             }
 
             #-- Extrair ─────────────────────────────────────────────────
-            Write-Step "A extrair StarFinder 2024..."
-            Write-Step "Para: $dest"
-            Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
-            Write-Host ""
-
-            & $szExe x $source -o"$dest" -p"$pass" -bsp1 -y
-
-            Write-Host ""
-            Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
-
-            if ($LASTEXITCODE -ne 0) {
-                Write-Err "Erro na extracao (codigo $LASTEXITCODE)."
+            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $dest -Pass $pass
+            if ($rcExtract -ne 0) {
+                Write-Err "Erro na extracao (codigo $rcExtract)."
                 Write-Host ""
                 break
             }
