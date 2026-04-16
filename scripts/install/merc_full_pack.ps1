@@ -172,7 +172,7 @@ while ($true) {
             Write-Step "Para: $destDir"
             Write-Host ""
 
-            robocopy $srcDir $destDir /E /MOVE /IS /IT /NP /NDL
+            robocopy $srcDir $destDir /E /MOVE /IS /IT /NP /NFL /NDL /NJH /NJS /NC /NS | Out-Null
             $rcExit = $LASTEXITCODE
 
             Write-Host ""
