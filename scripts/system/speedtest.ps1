@@ -41,7 +41,7 @@ try {
 # ── Download Speedtest ────────────────────────────────────────────────────
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A transferir Speedtest..." -NoNewline
 
-$tempDir = "$env:TEMP\speedtest_m_auto"
+$tempDir = "C:\M-auto\Temp\speedtest"
 $zipPath = "$tempDir\speedtest.zip"
 $exePath = "$tempDir\speedtest.exe"
 

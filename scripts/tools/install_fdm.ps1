@@ -3,7 +3,9 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $e = [char]27
 $URL = "https://dn.freedownloadmanager.org/6/fdm_x64_setup.exe"
-$TMP = "$env:TEMP\fdm_setup.exe"
+$DL_DIR = "C:\M-auto\Temp"
+if (-not (Test-Path $DL_DIR)) { New-Item -ItemType Directory -Path $DL_DIR -Force | Out-Null }
+$TMP = "$DL_DIR\fdm_setup.exe"
 
 Write-Host ""
 Write-Host "  ${e}[1;97mInstalar Free Download Manager${e}[0m"

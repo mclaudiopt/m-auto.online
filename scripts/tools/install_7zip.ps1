@@ -1,7 +1,9 @@
 # tools/install_7zip.ps1
 $ESC = [char]27
 $URL = "https://www.7-zip.org/a/7z2600-x64.exe"
-$TMP = "$env:TEMP\7z_setup.exe"
+$DL_DIR = "C:\M-auto\Temp"
+if (-not (Test-Path $DL_DIR)) { New-Item -ItemType Directory -Path $DL_DIR -Force | Out-Null }
+$TMP = "$DL_DIR\7z_setup.exe"
 
 Write-Host ""
 Write-Host "  $ESC[1;97mInstalar 7-Zip$ESC[0m"

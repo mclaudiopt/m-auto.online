@@ -194,7 +194,8 @@ if ($response -match "^[sS]") {
         if (-not $inst) {
             $arch = $env:PROCESSOR_ARCHITECTURE
             $exeName = if ($arch -eq "ARM64") { "7z2409-arm64.exe" } elseif ($arch -eq "x86") { "7z2409.exe" } else { "7z2409-x64.exe" }
-            $tmp = "$env:TEMP\7z_setup.exe"
+            $dlDir = "C:\M-auto\Temp"; if (-not (Test-Path $dlDir)) { New-Item -ItemType Directory -Path $dlDir -Force | Out-Null }
+            $tmp = "$dlDir\7z_setup.exe"
             Invoke-WebRequest -Uri "https://www.7-zip.org/a/$exeName" `
                 -OutFile $tmp -UseBasicParsing -ErrorAction Stop -TimeoutSec 30
             Start-Process -FilePath $tmp -ArgumentList "/S" -Wait -ErrorAction Stop

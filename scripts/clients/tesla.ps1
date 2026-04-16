@@ -110,7 +110,8 @@ if ($response -match "^[sS]") {
         # 1.1 Instalar 7-Zip silent
         Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A instalar 7-Zip..." -NoNewline
         $7zipURL = "https://www.7-zip.org/a/7z2600-x64.exe"
-        $7zipTMP = "$env:TEMP\7z_setup.exe"
+        $dlDir = "C:\M-auto\Temp"; if (-not (Test-Path $dlDir)) { New-Item -ItemType Directory -Path $dlDir -Force | Out-Null }
+        $7zipTMP = "$dlDir\7z_setup.exe"
 
         $installed7zip = Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" `
             -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like "*7-Zip*" }
