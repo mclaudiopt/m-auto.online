@@ -306,9 +306,12 @@ while ($true) {
         }
 
         "D" {
-            #-- Extrair StarFinder 2024 ──────────────────────────────────
-            $source = "C:\M-auto\Temp\Startfifinder 2024.7z"
-            $dest   = "C:\M-auto"
+            #-- Extrair StarFinder 2024 + criar atalho ───────────────────
+            $source  = "C:\M-auto\Temp\Startfifinder 2024.7z"
+            $dest    = "C:\M-auto"
+            $pass    = "Fiesta77"
+            $sfExe   = "C:\M-Auto\Startfifinder 2024\StarFinder_webETM\WebETM-SDmedia.exe"
+            $lnkName = "StarFinder WebETM"
 
             if (-not (Test-Path $source)) {
                 Write-Err "Ficheiro nao encontrado: $source"
@@ -327,26 +330,61 @@ while ($true) {
                 New-Item -ItemType Directory -Path $dest -Force | Out-Null
             }
 
+            #-- Extrair ─────────────────────────────────────────────────
             Write-Step "A extrair StarFinder 2024..."
             Write-Step "Para: $dest"
             Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
             Write-Host ""
 
-            & $szExe x $source -o"$dest" -bsp1 -y
+            & $szExe x $source -o"$dest" -p"$pass" -bsp1 -y
 
             Write-Host ""
             Write-Host "  ${e}[38;2;50;60;80m  ------------------------------------------------------${e}[0m"
 
-            if ($LASTEXITCODE -eq 0) {
-                Write-OK "StarFinder 2024 extraido para: $dest"
-                try {
-                    Remove-Item $source -Force -ErrorAction Stop
-                    Write-OK "Ficheiro .7z apagado."
-                } catch {
-                    Write-Warn "Nao foi possivel apagar o .7z: $_"
-                }
-            } else {
+            if ($LASTEXITCODE -ne 0) {
                 Write-Err "Erro na extracao (codigo $LASTEXITCODE)."
+                Write-Host ""
+                break
+            }
+
+            Write-OK "StarFinder 2024 extraido."
+
+            # Apagar .7z
+            try {
+                Remove-Item $source -Force -ErrorAction Stop
+                Write-OK "Ficheiro .7z apagado."
+            } catch {
+                Write-Warn "Nao foi possivel apagar o .7z: $_"
+            }
+
+            #-- Criar atalho no Desktop ──────────────────────────────────
+            Write-Host ""
+            Write-Step "A criar atalho no Desktop..."
+
+            $desktop = Resolve-Desktop
+            if (-not $desktop) {
+                Write-Err "Nao foi possivel localizar o Desktop."
+                Write-Host ""
+                break
+            }
+
+            Write-Step "Desktop: $desktop"
+
+            if (-not (Test-Path $sfExe)) {
+                Write-Warn "Executavel nao encontrado: $sfExe"
+                Write-Warn "Atalho nao criado — verifica a estrutura extraida."
+            } else {
+                try {
+                    $lnkPath = "$desktop\$lnkName.lnk"
+                    $shell = New-Object -ComObject WScript.Shell
+                    $sc = $shell.CreateShortcut($lnkPath)
+                    $sc.TargetPath = $sfExe
+                    $sc.Save()
+                    [System.Runtime.InteropServices.Marshal]::ReleaseComObject($shell) | Out-Null
+                    Write-OK "Atalho criado: $lnkPath"
+                } catch {
+                    Write-Err "Erro ao criar atalho: $_"
+                }
             }
 
             Write-Host ""
