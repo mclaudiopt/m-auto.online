@@ -102,7 +102,8 @@ $ops = @(
     @{ Label = "StarFinder 2024"  ; File = "C:\M-auto\Temp\Startfifinder 2024.7z"      },
     @{ Label = "SDMEDIA"          ; File = "C:\M-auto\Temp\SDMEDIA.zip"                 },
     @{ Label = "Coding Tutorials" ; File = "C:\M-auto\Temp\Coding tutorials full.7z"   },
-    @{ Label = "Databases"        ; File = "C:\M-auto\Temp\Databases.7z"               }
+    @{ Label = "Databases"        ; File = "C:\M-auto\Temp\Databases.7z"               },
+    @{ Label = "WIS 2021"         ; File = "C:\M-auto\Temp\wis2021.rar"                }
 )
 
 #-- Header -------------------------------------------------------------------
@@ -338,6 +339,42 @@ while ($true) {
                 }
             } else {
                 Write-Skip "C:\M-auto\Databases\Programdata nao encontrado"
+            }
+        }
+    }
+
+    Write-Host ""
+
+    #==========================================================================
+    #  WIS 2021
+    #==========================================================================
+    Write-Host "  ${e}[38;2;100;149;237m>> WIS 2021${e}[0m"
+    Write-Sep
+    $wisRar  = "C:\M-auto\Temp\wis2021.rar"
+    $wisDest = "C:\M-auto\Temp\wis2021"
+    $wisExe  = "$wisDest\Mercedes-Benz.WIS.ASRA.Standalone.v10.2021.Anywhere_autogmt.com.exe"
+    if (-not (Test-Path $wisRar)) {
+        Write-Skip "wis2021.rar"
+    } else {
+        if (-not (Test-Path $wisDest)) { New-Item -ItemType Directory -Path $wisDest -Force | Out-Null }
+
+        $rc = Invoke-Extract -szExe $szExe -Source $wisRar -Dest $wisDest -Pass "autogmt.com"
+        if ($rc -ne 0) {
+            Write-Err "Erro na extracao do WIS 2021 (codigo $rc)."
+        } else {
+            Write-OK "WIS 2021 extraido."
+
+            if (-not (Test-Path $wisExe)) {
+                Write-Err "Instalador nao encontrado: $wisExe"
+            } else {
+                Write-Host ""
+                Write-Step "A lancar instalador WIS 2021..."
+                try {
+                    Start-Process -FilePath $wisExe -Wait -ErrorAction Stop
+                    Write-OK "Instalador WIS 2021 fechado."
+                } catch {
+                    Write-Err "Erro ao lancar o instalador: $_"
+                }
             }
         }
     }
