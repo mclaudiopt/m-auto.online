@@ -55,14 +55,6 @@ function New-LnkShortcut {
 $atalhos = @(
     @{
         Num   = "1"
-        Nome  = "SDMEDIA"
-        Label = "SDMEDIA"
-        Alvo  = "C:\M-Auto\SDMEDIA\index.html"
-        Icon  = "C:\M-Auto\SDMEDIA\icon.ico,0"
-        Desc  = "Abre SDMEDIA no browser"
-    },
-    @{
-        Num   = "2"
         Nome  = "StarFinder WebETM"
         Label = "StarFinder WebETM"
         Alvo  = "C:\M-Auto\Startfifinder 2024\StarFinder_webETM\WebETM-SDmedia.exe"
@@ -70,7 +62,7 @@ $atalhos = @(
         Desc  = "Usa icon do executavel"
     },
     @{
-        Num   = "3"
+        Num   = "2"
         Nome  = "Coding Tutorials"
         Label = "Coding Tutorials"
         Alvo  = "C:\M-Auto\Coding tutorials full"

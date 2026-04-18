@@ -42,6 +42,20 @@ function Invoke-Extract {
     return $rc
 }
 
+function New-DesktopShortcut {
+    param([string]$Desktop, [string]$Name, [string]$Target, [string]$Icon = "")
+    $lnkPath = "$Desktop\$Name.lnk"
+    try {
+        $shell = New-Object -ComObject WScript.Shell
+        $sc = $shell.CreateShortcut($lnkPath)
+        $sc.TargetPath = $Target
+        if ($Icon) { $sc.IconLocation = $Icon }
+        $sc.Save()
+        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($shell) | Out-Null
+        return $true
+    } catch { return $false }
+}
+
 function Find-7Zip {
     $paths = @(
         "C:\Program Files\7-Zip\7z.exe",
@@ -105,6 +119,12 @@ while ($true) {
     Write-Host ""
     Write-Host "  ${e}[38;2;148;163;184m  -- StarFinder --${e}[0m"
     Write-Host "  ${e}[38;2;100;149;237m[D]${e}[0m  Extrair StarFinder 2024"
+    Write-Host ""
+    Write-Host "  ${e}[38;2;148;163;184m  -- SDMEDIA --${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m[E]${e}[0m  Extrair SDMEDIA + atalho Desktop"
+    Write-Host ""
+    Write-Host "  ${e}[38;2;148;163;184m  -- Coding Tutorials --${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m[F]${e}[0m  Extrair Coding Tutorials"
     Write-Host ""
     Write-Host "  ${e}[38;2;80;100;140m[0]${e}[0m  Voltar"
     Write-Host ""
@@ -389,17 +409,109 @@ while ($true) {
                 Write-Warn "Executavel nao encontrado: $sfExe"
                 Write-Warn "Atalho nao criado — verifica a estrutura extraida."
             } else {
-                try {
-                    $lnkPath = "$desktop\$lnkName.lnk"
-                    $shell = New-Object -ComObject WScript.Shell
-                    $sc = $shell.CreateShortcut($lnkPath)
-                    $sc.TargetPath = $sfExe
-                    $sc.Save()
-                    [System.Runtime.InteropServices.Marshal]::ReleaseComObject($shell) | Out-Null
-                    Write-OK "Atalho criado: $lnkPath"
-                } catch {
-                    Write-Err "Erro ao criar atalho: $_"
+                if (New-DesktopShortcut -Desktop $desktop -Name $lnkName -Target $sfExe) {
+                    Write-OK "Atalho criado: $desktop\$lnkName.lnk"
+                } else {
+                    Write-Err "Erro ao criar atalho."
                 }
+            }
+
+            Write-Host ""
+        }
+
+        "E" {
+            #-- Extrair SDMEDIA + criar atalho ───────────────────────────
+            $source  = "C:\M-auto\Temp\SDMEDIA.zip"
+            $dest    = "C:\M-auto\SDmedia"
+            $pass    = "Fiesta77"
+            $lnkTarget = "C:\M-auto\SDMEDIA\index.html"
+            $lnkIcon   = "C:\M-auto\SDMEDIA\icon.ico,0"
+            $lnkName   = "SDMEDIA"
+
+            if (-not (Test-Path $source)) {
+                Write-Err "Ficheiro nao encontrado: $source"
+                Write-Host ""
+                break
+            }
+
+            $szExe = Find-7Zip
+            if (-not $szExe) {
+                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
+                Write-Host ""
+                break
+            }
+
+            if (-not (Test-Path $dest)) {
+                New-Item -ItemType Directory -Path $dest -Force | Out-Null
+            }
+
+            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $dest -Pass $pass
+            if ($rcExtract -ne 0) {
+                Write-Err "Erro na extracao (codigo $rcExtract)."
+                Write-Host ""
+                break
+            }
+
+            Write-OK "SDMEDIA extraido."
+
+            try {
+                Remove-Item $source -Force -ErrorAction Stop
+                Write-OK "Ficheiro .zip apagado."
+            } catch {
+                Write-Warn "Nao foi possivel apagar o .zip: $_"
+            }
+
+            # Atalho no Desktop
+            Write-Host ""
+            Write-Step "A criar atalho no Desktop..."
+            $desktop = Resolve-Desktop
+            if (-not $desktop) {
+                Write-Err "Nao foi possivel localizar o Desktop."
+            } else {
+                Write-Step "Desktop: $desktop"
+                if (New-DesktopShortcut -Desktop $desktop -Name $lnkName -Target $lnkTarget -Icon $lnkIcon) {
+                    Write-OK "Atalho criado: $desktop\$lnkName.lnk"
+                } else {
+                    Write-Err "Erro ao criar atalho."
+                }
+            }
+
+            Write-Host ""
+        }
+
+        "F" {
+            #-- Extrair Coding Tutorials ─────────────────────────────────
+            $source = "C:\M-auto\Temp\Coding tutorials full.7z"
+            $dest   = "C:\M-auto"
+            $pass   = "Fiesta77"
+
+            if (-not (Test-Path $source)) {
+                Write-Err "Ficheiro nao encontrado: $source"
+                Write-Host ""
+                break
+            }
+
+            $szExe = Find-7Zip
+            if (-not $szExe) {
+                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
+                Write-Host ""
+                break
+            }
+
+            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $dest -Pass $pass
+            if ($rcExtract -ne 0) {
+                Write-Err "Erro na extracao (codigo $rcExtract)."
+                Write-Host ""
+                break
+            }
+
+            Write-OK "Coding Tutorials extraido."
+
+            try {
+                Remove-Item $source -Force -ErrorAction Stop
+                Write-OK "Ficheiro .7z apagado."
+            } catch {
+                Write-Warn "Nao foi possivel apagar o .7z: $_"
             }
 
             Write-Host ""
