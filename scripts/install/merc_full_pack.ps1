@@ -324,6 +324,21 @@ while ($true) {
                     Write-OK "Atalho Databases criado."
                 } else { Write-Warn "Atalho nao criado." }
             }
+
+            # Mover ProgramData para C:\
+            $dbProgData = "C:\M-auto\Databases\Programdata"
+            if (Test-Path $dbProgData) {
+                Write-Step "A mover ProgramData para C:\..."
+                robocopy $dbProgData "C:\Programdata" /E /MOVE /IS /IT /NP /NFL /NDL /NJH /NJS /NC /NS | Out-Null
+                if ($LASTEXITCODE -le 7) {
+                    Write-OK "ProgramData movido para C:\."
+                    Remove-Item $dbProgData -Recurse -Force -ErrorAction SilentlyContinue
+                } else {
+                    Write-Err "Robocopy erro $LASTEXITCODE ao mover ProgramData."
+                }
+            } else {
+                Write-Skip "C:\M-auto\Databases\Programdata nao encontrado"
+            }
         }
     }
 
