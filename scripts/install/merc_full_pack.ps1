@@ -124,7 +124,10 @@ while ($true) {
     Write-Host "  ${e}[38;2;100;149;237m[E]${e}[0m  Extrair SDMEDIA + atalho Desktop"
     Write-Host ""
     Write-Host "  ${e}[38;2;148;163;184m  -- Coding Tutorials --${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m[F]${e}[0m  Extrair Coding Tutorials"
+    Write-Host "  ${e}[38;2;100;149;237m[F]${e}[0m  Extrair Coding Tutorials + atalho Desktop"
+    Write-Host ""
+    Write-Host "  ${e}[38;2;148;163;184m  -- Databases --${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m[G]${e}[0m  Extrair Databases + atalho Desktop"
     Write-Host ""
     Write-Host "  ${e}[38;2;80;100;140m[0]${e}[0m  Voltar"
     Write-Host ""
@@ -480,10 +483,12 @@ while ($true) {
         }
 
         "F" {
-            #-- Extrair Coding Tutorials ─────────────────────────────────
-            $source = "C:\M-auto\Temp\Coding tutorials full.7z"
-            $dest   = "C:\M-auto"
-            $pass   = "Fiesta77"
+            #-- Extrair Coding Tutorials + atalho ───────────────────────
+            $source    = "C:\M-auto\Temp\Coding tutorials full.7z"
+            $dest      = "C:\M-auto"
+            $pass      = "Fiesta77"
+            $lnkTarget = "C:\M-auto\Coding tutorials full"
+            $lnkName   = "Coding Tutorials"
 
             if (-not (Test-Path $source)) {
                 Write-Err "Ficheiro nao encontrado: $source"
@@ -512,6 +517,76 @@ while ($true) {
                 Write-OK "Ficheiro .7z apagado."
             } catch {
                 Write-Warn "Nao foi possivel apagar o .7z: $_"
+            }
+
+            # Atalho no Desktop
+            Write-Host ""
+            Write-Step "A criar atalho no Desktop..."
+            $desktop = Resolve-Desktop
+            if (-not $desktop) {
+                Write-Err "Nao foi possivel localizar o Desktop."
+            } else {
+                Write-Step "Desktop: $desktop"
+                if (New-DesktopShortcut -Desktop $desktop -Name $lnkName -Target $lnkTarget) {
+                    Write-OK "Atalho criado: $desktop\$lnkName.lnk"
+                } else {
+                    Write-Err "Erro ao criar atalho."
+                }
+            }
+
+            Write-Host ""
+        }
+
+        "G" {
+            #-- Extrair Databases + atalho ───────────────────────────────
+            $source    = "C:\M-auto\Temp\Databases.7z"
+            $dest      = "C:\M-auto"
+            $pass      = "Fiesta77"
+            $lnkTarget = "C:\M-auto\Databases"
+            $lnkName   = "Databases"
+
+            if (-not (Test-Path $source)) {
+                Write-Err "Ficheiro nao encontrado: $source"
+                Write-Host ""
+                break
+            }
+
+            $szExe = Find-7Zip
+            if (-not $szExe) {
+                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
+                Write-Host ""
+                break
+            }
+
+            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $dest -Pass $pass
+            if ($rcExtract -ne 0) {
+                Write-Err "Erro na extracao (codigo $rcExtract)."
+                Write-Host ""
+                break
+            }
+
+            Write-OK "Databases extraido."
+
+            try {
+                Remove-Item $source -Force -ErrorAction Stop
+                Write-OK "Ficheiro .7z apagado."
+            } catch {
+                Write-Warn "Nao foi possivel apagar o .7z: $_"
+            }
+
+            # Atalho no Desktop
+            Write-Host ""
+            Write-Step "A criar atalho no Desktop..."
+            $desktop = Resolve-Desktop
+            if (-not $desktop) {
+                Write-Err "Nao foi possivel localizar o Desktop."
+            } else {
+                Write-Step "Desktop: $desktop"
+                if (New-DesktopShortcut -Desktop $desktop -Name $lnkName -Target $lnkTarget) {
+                    Write-OK "Atalho criado: $desktop\$lnkName.lnk"
+                } else {
+                    Write-Err "Erro ao criar atalho."
+                }
             }
 
             Write-Host ""
