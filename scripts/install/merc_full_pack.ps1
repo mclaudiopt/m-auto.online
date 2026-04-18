@@ -9,6 +9,8 @@ function Write-Step($msg) { Write-Host "  ${e}[38;2;100;149;237m[..]${e}[0m  $ms
 function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $msg" }
 function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $msg" }
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $msg" }
+function Write-Skip($msg) { Write-Host "  ${e}[38;2;80;100;140m[--]${e}[0m  $msg  ${e}[38;2;80;100;140m(skip)${e}[0m" }
+function Write-Sep       { Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m" }
 
 function Invoke-Extract {
     param([string]$szExe, [string]$Source, [string]$Dest, [string]$Pass = "")
@@ -42,6 +44,44 @@ function Invoke-Extract {
     return $rc
 }
 
+function Find-7Zip {
+    $paths = @(
+        "C:\Program Files\7-Zip\7z.exe",
+        "C:\Program Files (x86)\7-Zip\7z.exe"
+    )
+    foreach ($p in $paths) { if (Test-Path $p) { return $p } }
+    $found = Get-Command "7z.exe" -ErrorAction SilentlyContinue
+    if ($found) { return $found.Source }
+    return $null
+}
+
+function Resolve-Desktop {
+    $candidates = [System.Collections.Generic.List[string]]::new()
+    try {
+        $loggedUser = (Get-CimInstance Win32_ComputerSystem -ErrorAction SilentlyContinue).UserName
+        if ($loggedUser -match '\\') {
+            $uname = $loggedUser.Split('\')[-1]
+            $uProfile = "C:\Users\$uname"
+            $candidates.Add("$uProfile\OneDrive\Desktop")
+            $candidates.Add("$uProfile\Desktop")
+        }
+    } catch {}
+    try {
+        $reg = [Environment]::ExpandEnvironmentVariables(
+            (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" `
+                -Name "Desktop" -ErrorAction Stop).Desktop)
+        $candidates.Add($reg)
+    } catch {}
+    Get-ChildItem "C:\Users" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+        $candidates.Add("$($_.FullName)\OneDrive\Desktop")
+        $candidates.Add("$($_.FullName)\Desktop")
+    }
+    foreach ($path in $candidates) {
+        if ($path -and (Test-Path $path)) { return $path }
+    }
+    return $null
+}
+
 function New-DesktopShortcut {
     param([string]$Desktop, [string]$Name, [string]$Target, [string]$Icon = "")
     $lnkPath = "$Desktop\$Name.lnk"
@@ -56,547 +96,275 @@ function New-DesktopShortcut {
     } catch { return $false }
 }
 
-function Find-7Zip {
-    $paths = @(
-        "C:\Program Files\7-Zip\7z.exe",
-        "C:\Program Files (x86)\7-Zip\7z.exe"
-    )
-    foreach ($p in $paths) {
-        if (Test-Path $p) { return $p }
-    }
-    $found = Get-Command "7z.exe" -ErrorAction SilentlyContinue
-    if ($found) { return $found.Source }
-    return $null
-}
-
-function Resolve-Desktop {
-    $candidates = [System.Collections.Generic.List[string]]::new()
-
-    # 1. Utilizador com sessao activa (mesmo quando elevado como Admin)
-    try {
-        $loggedUser = (Get-CimInstance Win32_ComputerSystem -ErrorAction SilentlyContinue).UserName
-        if ($loggedUser -match '\\') {
-            $uname = $loggedUser.Split('\')[-1]
-            $uProfile = "C:\Users\$uname"
-            $candidates.Add("$uProfile\OneDrive\Desktop")
-            $candidates.Add("$uProfile\Desktop")
-        }
-    } catch {}
-
-    # 2. Registo HKCU do processo actual (pode ser Admin, mas vale tentar)
-    try {
-        $reg = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" `
-            -Name "Desktop" -ErrorAction Stop).Desktop
-        $reg = [Environment]::ExpandEnvironmentVariables($reg)
-        $candidates.Add($reg)
-    } catch {}
-
-    # 3. Todos os perfis em C:\Users (varredura)
-    Get-ChildItem "C:\Users" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-        $candidates.Add("$($_.FullName)\OneDrive\Desktop")
-        $candidates.Add("$($_.FullName)\Desktop")
-    }
-
-    foreach ($path in $candidates) {
-        if ($path -and (Test-Path $path)) { return $path }
-    }
-    return $null
-}
+#-- Definicao das operacoes --------------------------------------------------
+$ops = @(
+    @{ Label = "EWA"              ; File = "C:\M-auto\Temp\ewa.7z"                     },
+    @{ Label = "StarFinder 2024"  ; File = "C:\M-auto\Temp\Startfifinder 2024.7z"      },
+    @{ Label = "SDMEDIA"          ; File = "C:\M-auto\Temp\SDMEDIA.zip"                 },
+    @{ Label = "Coding Tutorials" ; File = "C:\M-auto\Temp\Coding tutorials full.7z"   },
+    @{ Label = "Databases"        ; File = "C:\M-auto\Temp\Databases.7z"               }
+)
 
 #-- Header -------------------------------------------------------------------
-Write-Host ""
-Write-Host "  ${e}[1;97mMercedes Full Pack 2026${e}[0m"
-Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
-Write-Host "  ${e}[38;2;148;163;184m  Xentry + WIS + EPC + Vediamo${e}[0m"
-Write-Host ""
+function Show-Header {
+    Clear-Host
+    Write-Host ""
+    Write-Host "  ${e}[1;97mMercedes Full Pack 2026${e}[0m"
+    Write-Sep
+    Write-Host "  ${e}[38;2;148;163;184m  Xentry + WIS + EPC + Vediamo${e}[0m"
+    Write-Host ""
+}
 
 #-- Menu loop ----------------------------------------------------------------
 while ($true) {
-    Write-Host "  ${e}[38;2;148;163;184m  -- EWA --${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m[A]${e}[0m  Extrair + Instalar EWA + Mover ficheiros"
-    Write-Host "  ${e}[38;2;100;149;237m[B]${e}[0m  Mover atalhos para pasta Coding (Desktop)"
-    Write-Host "  ${e}[38;2;100;149;237m[C]${e}[0m  Instalar Java (silent)"
+    Show-Header
+
+    # Mostrar estado de cada ficheiro
+    foreach ($op in $ops) {
+        $exists = Test-Path $op.File
+        $tag    = if ($exists) { "${e}[38;2;34;197;94m OK ${e}[0m" } else { "${e}[38;2;80;100;140mN/A${e}[0m" }
+        Write-Host "  [$tag]  $($op.Label)"
+        Write-Host "         ${e}[38;2;50;60;80m$($op.File)${e}[0m"
+    }
+
     Write-Host ""
-    Write-Host "  ${e}[38;2;148;163;184m  -- StarFinder --${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m[D]${e}[0m  Extrair StarFinder 2024"
-    Write-Host ""
-    Write-Host "  ${e}[38;2;148;163;184m  -- SDMEDIA --${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m[E]${e}[0m  Extrair SDMEDIA + atalho Desktop"
-    Write-Host ""
-    Write-Host "  ${e}[38;2;148;163;184m  -- Coding Tutorials --${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m[F]${e}[0m  Extrair Coding Tutorials + atalho Desktop"
-    Write-Host ""
-    Write-Host "  ${e}[38;2;148;163;184m  -- Databases --${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m[G]${e}[0m  Extrair Databases + atalho Desktop"
-    Write-Host ""
+    Write-Sep
+    Write-Host "  ${e}[38;2;100;149;237m[1]${e}[0m  Instalar tudo (skip se ficheiro nao existir)"
     Write-Host "  ${e}[38;2;80;100;140m[0]${e}[0m  Voltar"
     Write-Host ""
     Write-Host -NoNewline "  ${e}[38;2;29;155;255m>${e}[0m  Opcao: "
-    $opcao = ($Host.UI.ReadLine()).Trim().ToUpper()
+    $opcao = ($Host.UI.ReadLine()).Trim()
     Write-Host ""
 
-    switch ($opcao) {
+    if ($opcao -eq "0") { return }
+    if ($opcao -ne "1") { continue }
 
-        "A" {
-            #-- PASSO 1: Extrair ewa.7z ──────────────────────────────────
-            $source  = "C:\M-auto\Temp\ewa.7z"
-            $extract = "C:\M-auto\Temp\ewa"
-            $pass    = "Fiesta77"
-            $setup   = "C:\M-auto\Temp\ewa\EWA\EWA\SETUP.EXE"
-            $srcDir  = "C:\M-auto\Temp\ewa\EWA\Files\ewa"
-            $destDir = "C:\Program Files (x86)\ewa"
+    $szExe = Find-7Zip
+    if (-not $szExe) {
+        Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
+        Write-Host ""
+        Read-Host "  Pressione ENTER para continuar"
+        continue
+    }
 
-            Write-Host "  ${e}[38;2;100;149;237m-- Passo 1: Extrair EWA${e}[0m"
-            Write-Host ""
+    $desktop = Resolve-Desktop
 
-            if (-not (Test-Path $source)) {
-                Write-Err "Ficheiro nao encontrado: $source"
+    #==========================================================================
+    #  EWA
+    #==========================================================================
+    Write-Host "  ${e}[38;2;100;149;237m>> EWA${e}[0m"
+    Write-Sep
+    $ewaZip = "C:\M-auto\Temp\ewa.7z"
+    if (-not (Test-Path $ewaZip)) {
+        Write-Skip "ewa.7z"
+    } else {
+        # Passo 1: Extrair
+        $extract = "C:\M-auto\Temp\ewa"
+        if (-not (Test-Path $extract)) { New-Item -ItemType Directory -Path $extract -Force | Out-Null }
+        $rc = Invoke-Extract -szExe $szExe -Source $ewaZip -Dest $extract -Pass "Fiesta77"
+        if ($rc -ne 0) {
+            Write-Err "Erro na extracao do EWA (codigo $rc)."
+        } else {
+            Write-OK "EWA extraido."
+            try { Remove-Item $ewaZip -Force -ErrorAction Stop; Write-OK "ewa.7z apagado." }
+            catch { Write-Warn "Nao foi possivel apagar ewa.7z: $_" }
+
+            # Passo 2: SETUP.EXE
+            $setup = "C:\M-auto\Temp\ewa\EWA\EWA\SETUP.EXE"
+            if (Test-Path $setup) {
                 Write-Host ""
-                break
-            }
-
-            $szExe = Find-7Zip
-            if (-not $szExe) {
-                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
-                Write-Host ""
-                break
-            }
-
-            if (-not (Test-Path $extract)) {
-                New-Item -ItemType Directory -Path $extract -Force | Out-Null
-            }
-
-            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $extract -Pass $pass
-            if ($rcExtract -ne 0) {
-                Write-Err "Erro na extracao (codigo $rcExtract). Verifique a password ou o ficheiro."
-                Write-Host ""
-                break
-            }
-
-            Write-OK "Extracao concluida."
-            try {
-                Remove-Item $source -Force -ErrorAction Stop
-                Write-OK "Ficheiro .7z apagado."
-            } catch {
-                Write-Warn "Nao foi possivel apagar o .7z: $_"
-            }
-
-            Write-Host ""
-
-            #-- PASSO 2: Instalar EWA (SETUP.EXE) ────────────────────────
-            Write-Host "  ${e}[38;2;100;149;237m-- Passo 2: Instalar EWA${e}[0m"
-            Write-Host ""
-
-            if (-not (Test-Path $setup)) {
-                Write-Err "Ficheiro nao encontrado: $setup"
-                Write-Host ""
-                break
-            }
-
-            Write-Step "A lancar: $setup"
-            Write-Host ""
-            try {
-                Start-Process -FilePath $setup -Wait -ErrorAction Stop
+                Write-Step "A lancar SETUP.EXE..."
+                Start-Process -FilePath $setup -Wait -ErrorAction SilentlyContinue
                 Write-OK "Instalador fechado."
-            } catch {
-                Write-Err "Erro ao lancar o instalador: $_"
                 Write-Host ""
-                break
-            }
-
-            Write-Host ""
-            Write-Host -NoNewline "  ${e}[38;2;29;155;255m>${e}[0m  Prima ENTER para mover os ficheiros EWA..."
-            $null = $Host.UI.ReadLine()
-            Write-Host ""
-
-            #-- PASSO 3: Mover Files\ewa para Program Files (x86) ────────
-            Write-Host "  ${e}[38;2;100;149;237m-- Passo 3: Mover ficheiros EWA${e}[0m"
-            Write-Host ""
-
-            if (-not (Test-Path $srcDir)) {
-                Write-Err "Pasta nao encontrada: $srcDir"
+                Write-Host -NoNewline "  ${e}[38;2;29;155;255m>${e}[0m  Prima ENTER para mover os ficheiros EWA..."
+                $null = $Host.UI.ReadLine()
                 Write-Host ""
-                break
-            }
 
-            Write-Step "De:   $srcDir"
-            Write-Step "Para: $destDir"
-            Write-Host ""
+                # Passo 3: Mover Files\ewa
+                $srcDir  = "C:\M-auto\Temp\ewa\EWA\Files\ewa"
+                $destDir = "C:\Program Files (x86)\ewa"
+                if (Test-Path $srcDir) {
+                    Write-Step "A mover Files\ewa para Program Files (x86)..."
+                    robocopy $srcDir $destDir /E /MOVE /IS /IT /NP /NFL /NDL /NJH /NJS /NC /NS | Out-Null
+                    if ($LASTEXITCODE -le 7) { Write-OK "Ficheiros movidos para $destDir." }
+                    else { Write-Err "Robocopy erro $LASTEXITCODE." }
+                }
 
-            robocopy $srcDir $destDir /E /MOVE /IS /IT /NP /NFL /NDL /NJH /NJS /NC /NS | Out-Null
-            $rcExit = $LASTEXITCODE
-
-            Write-Host ""
-            if ($rcExit -le 7) {
-                Write-OK "Ficheiros movidos para: $destDir"
-
-                #-- PASSO 4: Apagar pasta temporaria completa ─────────────
-                Write-Host ""
-                Write-Host "  ${e}[38;2;100;149;237m-- Passo 4: Limpeza${e}[0m"
-                Write-Host ""
-                Write-Step "A apagar C:\M-auto\Temp\ewa ..."
-                try {
-                    Remove-Item "C:\M-auto\Temp\ewa" -Recurse -Force -ErrorAction Stop
+                # Passo 4: Limpar pasta temp
+                if (Test-Path "C:\M-auto\Temp\ewa") {
+                    Write-Step "A apagar pasta temp EWA..."
+                    Remove-Item "C:\M-auto\Temp\ewa" -Recurse -Force -ErrorAction SilentlyContinue
                     Write-OK "Pasta temporaria apagada."
-                } catch {
-                    Write-Warn "Nao foi possivel apagar a pasta: $_"
                 }
             } else {
-                Write-Err "Robocopy terminou com erro (codigo $rcExit)."
+                Write-Warn "SETUP.EXE nao encontrado: $setup"
             }
 
-            Write-Host ""
-        }
-
-        "B" {
-            #-- Mover atalhos para pasta Coding no Desktop ───────────────
-            $desktop = Resolve-Desktop
-
-            if (-not $desktop) {
-                Write-Err "Nao foi possivel localizar o ambiente de trabalho."
-                Write-Warn "Paths tentadas: HKCU Shell Folders | $env:USERPROFILE\OneDrive\Desktop | $env:USERPROFILE\Desktop"
-                Write-Host ""
-                break
-            }
-
-            $coding = Join-Path $desktop "Coding"
-
-            Write-Step "Desktop: $desktop"
-            Write-Step "Destino: $coding"
-            Write-Host ""
-
-            if (-not (Test-Path $coding)) {
-                New-Item -ItemType Directory -Path $coding -Force | Out-Null
-                Write-OK "Pasta Coding criada."
-            }
-
-            $allLinks = Get-ChildItem -Path $desktop -Filter "*.lnk" -ErrorAction SilentlyContinue
-            Write-Step "$($allLinks.Count) atalho(s) encontrado(s) no Desktop."
-            if ($allLinks.Count -gt 0) {
-                $allLinks | ForEach-Object { Write-Host "    ${e}[38;2;80;100;140m- $($_.Name)${e}[0m" }
-            }
-            Write-Host ""
-
-            $targets = @(
-                "*Vediamo*Start*Center*",
-                "*Vediamo*",
-                "*DTS*Venice*",
-                "*DTS*Monaco*",
-                "*OTX*Studio*",
-                "*XENTRY*Special*Functions*",
-                "*DAS*FDOK*",
-                "*Keygens*"
-            )
-
-            $moved   = @()
-            $missed  = @()
-            $matched = @()
-
-            foreach ($pattern in $targets) {
-                $hits = $allLinks | Where-Object { $_.Name -like $pattern -and $_.FullName -notin $matched }
-                if ($hits) {
-                    foreach ($lnk in $hits) {
-                        $matched += $lnk.FullName
-                        $destLnk = Join-Path $coding $lnk.Name
-                        try {
-                            Move-Item -Path $lnk.FullName -Destination $destLnk -Force -ErrorAction Stop
-                            Write-OK "Movido: $($lnk.Name)"
-                            $moved += $lnk.Name
-                        } catch {
-                            Write-Err "Erro ao mover: $($lnk.Name) — $_"
-                        }
-                    }
-                } else {
-                    $missed += ($pattern -replace '\*','').Trim()
-                }
-            }
-
-            Write-Host ""
-            if ($moved.Count -gt 0) {
-                Write-OK "$($moved.Count) atalho(s) movido(s) para Coding."
-            }
-            if ($missed.Count -gt 0) {
-                Write-Warn "Nao encontrados: $($missed -join ' | ')"
-            }
-            Write-Host ""
-        }
-
-        "C" {
-            #-- Instalar Java em silent ───────────────────────────────────
+            # Java (logo apos EWA)
             $jre = "C:\Program Files (x86)\EWA\clientapps\jre\JRE.EXE"
-
-            if (-not (Test-Path $jre)) {
-                Write-Err "Ficheiro nao encontrado: $jre"
-                Write-Warn "Verifica se o EWA foi instalado (opcao A)."
+            if (Test-Path $jre) {
                 Write-Host ""
-                break
+                Write-Step "A instalar Java (silent)..."
+                $proc = Start-Process -FilePath $jre -ArgumentList "/s" -Wait -PassThru -ErrorAction SilentlyContinue
+                if ($proc.ExitCode -eq 0) { Write-OK "Java instalado." }
+                else { Write-Warn "Java terminou com codigo $($proc.ExitCode)." }
             }
-
-            Write-Step "A instalar Java (silent)..."
-            Write-Step "$jre"
-            Write-Host ""
-
-            try {
-                $proc = Start-Process -FilePath $jre -ArgumentList "/s" -Wait -PassThru -ErrorAction Stop
-                Write-Host ""
-                if ($proc.ExitCode -eq 0) {
-                    Write-OK "Java instalado com sucesso."
-                } else {
-                    Write-Warn "Instalador terminou com codigo $($proc.ExitCode)."
-                    Write-Warn "Verifica se o Java foi instalado corretamente."
-                }
-            } catch {
-                Write-Err "Erro ao lancar o instalador: $_"
-            }
-
-            Write-Host ""
-        }
-
-        "D" {
-            #-- Extrair StarFinder 2024 + criar atalho ───────────────────
-            $source  = "C:\M-auto\Temp\Startfifinder 2024.7z"
-            $dest    = "C:\M-auto"
-            $pass    = "Fiesta77"
-            $sfExe   = "C:\M-Auto\Startfifinder 2024\StarFinder_webETM\WebETM-SDmedia.exe"
-            $lnkName = "StarFinder WebETM"
-
-            if (-not (Test-Path $source)) {
-                Write-Err "Ficheiro nao encontrado: $source"
-                Write-Host ""
-                break
-            }
-
-            $szExe = Find-7Zip
-            if (-not $szExe) {
-                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
-                Write-Host ""
-                break
-            }
-
-            if (-not (Test-Path $dest)) {
-                New-Item -ItemType Directory -Path $dest -Force | Out-Null
-            }
-
-            #-- Extrair ─────────────────────────────────────────────────
-            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $dest -Pass $pass
-            if ($rcExtract -ne 0) {
-                Write-Err "Erro na extracao (codigo $rcExtract)."
-                Write-Host ""
-                break
-            }
-
-            Write-OK "StarFinder 2024 extraido."
-
-            # Apagar .7z
-            try {
-                Remove-Item $source -Force -ErrorAction Stop
-                Write-OK "Ficheiro .7z apagado."
-            } catch {
-                Write-Warn "Nao foi possivel apagar o .7z: $_"
-            }
-
-            #-- Criar atalho no Desktop ──────────────────────────────────
-            Write-Host ""
-            Write-Step "A criar atalho no Desktop..."
-
-            $desktop = Resolve-Desktop
-            if (-not $desktop) {
-                Write-Err "Nao foi possivel localizar o Desktop."
-                Write-Host ""
-                break
-            }
-
-            Write-Step "Desktop: $desktop"
-
-            if (-not (Test-Path $sfExe)) {
-                Write-Warn "Executavel nao encontrado: $sfExe"
-                Write-Warn "Atalho nao criado — verifica a estrutura extraida."
-            } else {
-                if (New-DesktopShortcut -Desktop $desktop -Name $lnkName -Target $sfExe) {
-                    Write-OK "Atalho criado: $desktop\$lnkName.lnk"
-                } else {
-                    Write-Err "Erro ao criar atalho."
-                }
-            }
-
-            Write-Host ""
-        }
-
-        "E" {
-            #-- Extrair SDMEDIA + criar atalho ───────────────────────────
-            $source  = "C:\M-auto\Temp\SDMEDIA.zip"
-            $dest    = "C:\M-auto\SDmedia"
-            $pass    = "Fiesta77"
-            $lnkTarget = "C:\M-auto\SDMEDIA\index.html"
-            $lnkIcon   = "C:\M-auto\SDMEDIA\icon.ico,0"
-            $lnkName   = "SDMEDIA"
-
-            if (-not (Test-Path $source)) {
-                Write-Err "Ficheiro nao encontrado: $source"
-                Write-Host ""
-                break
-            }
-
-            $szExe = Find-7Zip
-            if (-not $szExe) {
-                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
-                Write-Host ""
-                break
-            }
-
-            if (-not (Test-Path $dest)) {
-                New-Item -ItemType Directory -Path $dest -Force | Out-Null
-            }
-
-            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $dest -Pass $pass
-            if ($rcExtract -ne 0) {
-                Write-Err "Erro na extracao (codigo $rcExtract)."
-                Write-Host ""
-                break
-            }
-
-            Write-OK "SDMEDIA extraido."
-
-            try {
-                Remove-Item $source -Force -ErrorAction Stop
-                Write-OK "Ficheiro .zip apagado."
-            } catch {
-                Write-Warn "Nao foi possivel apagar o .zip: $_"
-            }
-
-            # Atalho no Desktop
-            Write-Host ""
-            Write-Step "A criar atalho no Desktop..."
-            $desktop = Resolve-Desktop
-            if (-not $desktop) {
-                Write-Err "Nao foi possivel localizar o Desktop."
-            } else {
-                Write-Step "Desktop: $desktop"
-                if (New-DesktopShortcut -Desktop $desktop -Name $lnkName -Target $lnkTarget -Icon $lnkIcon) {
-                    Write-OK "Atalho criado: $desktop\$lnkName.lnk"
-                } else {
-                    Write-Err "Erro ao criar atalho."
-                }
-            }
-
-            Write-Host ""
-        }
-
-        "F" {
-            #-- Extrair Coding Tutorials + atalho ───────────────────────
-            $source    = "C:\M-auto\Temp\Coding tutorials full.7z"
-            $dest      = "C:\M-auto"
-            $pass      = "Fiesta77"
-            $lnkTarget = "C:\M-auto\Coding tutorials full"
-            $lnkName   = "Coding Tutorials"
-
-            if (-not (Test-Path $source)) {
-                Write-Err "Ficheiro nao encontrado: $source"
-                Write-Host ""
-                break
-            }
-
-            $szExe = Find-7Zip
-            if (-not $szExe) {
-                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
-                Write-Host ""
-                break
-            }
-
-            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $dest -Pass $pass
-            if ($rcExtract -ne 0) {
-                Write-Err "Erro na extracao (codigo $rcExtract)."
-                Write-Host ""
-                break
-            }
-
-            Write-OK "Coding Tutorials extraido."
-
-            try {
-                Remove-Item $source -Force -ErrorAction Stop
-                Write-OK "Ficheiro .7z apagado."
-            } catch {
-                Write-Warn "Nao foi possivel apagar o .7z: $_"
-            }
-
-            # Atalho no Desktop
-            Write-Host ""
-            Write-Step "A criar atalho no Desktop..."
-            $desktop = Resolve-Desktop
-            if (-not $desktop) {
-                Write-Err "Nao foi possivel localizar o Desktop."
-            } else {
-                Write-Step "Desktop: $desktop"
-                if (New-DesktopShortcut -Desktop $desktop -Name $lnkName -Target $lnkTarget) {
-                    Write-OK "Atalho criado: $desktop\$lnkName.lnk"
-                } else {
-                    Write-Err "Erro ao criar atalho."
-                }
-            }
-
-            Write-Host ""
-        }
-
-        "G" {
-            #-- Extrair Databases + atalho ───────────────────────────────
-            $source    = "C:\M-auto\Temp\Databases.7z"
-            $dest      = "C:\M-auto"
-            $pass      = "Fiesta77"
-            $lnkTarget = "C:\M-auto\Databases"
-            $lnkName   = "Databases"
-
-            if (-not (Test-Path $source)) {
-                Write-Err "Ficheiro nao encontrado: $source"
-                Write-Host ""
-                break
-            }
-
-            $szExe = Find-7Zip
-            if (-not $szExe) {
-                Write-Err "7-Zip nao encontrado. Instale primeiro via Start Engine."
-                Write-Host ""
-                break
-            }
-
-            $rcExtract = Invoke-Extract -szExe $szExe -Source $source -Dest $dest -Pass $pass
-            if ($rcExtract -ne 0) {
-                Write-Err "Erro na extracao (codigo $rcExtract)."
-                Write-Host ""
-                break
-            }
-
-            Write-OK "Databases extraido."
-
-            try {
-                Remove-Item $source -Force -ErrorAction Stop
-                Write-OK "Ficheiro .7z apagado."
-            } catch {
-                Write-Warn "Nao foi possivel apagar o .7z: $_"
-            }
-
-            # Atalho no Desktop
-            Write-Host ""
-            Write-Step "A criar atalho no Desktop..."
-            $desktop = Resolve-Desktop
-            if (-not $desktop) {
-                Write-Err "Nao foi possivel localizar o Desktop."
-            } else {
-                Write-Step "Desktop: $desktop"
-                if (New-DesktopShortcut -Desktop $desktop -Name $lnkName -Target $lnkTarget) {
-                    Write-OK "Atalho criado: $desktop\$lnkName.lnk"
-                } else {
-                    Write-Err "Erro ao criar atalho."
-                }
-            }
-
-            Write-Host ""
-        }
-
-        "0" { return }
-
-        default {
-            Write-Warn "Opcao invalida."
-            Write-Host ""
         }
     }
+
+    Write-Host ""
+
+    #==========================================================================
+    #  StarFinder 2024
+    #==========================================================================
+    Write-Host "  ${e}[38;2;100;149;237m>> StarFinder 2024${e}[0m"
+    Write-Sep
+    $sfZip = "C:\M-auto\Temp\Startfifinder 2024.7z"
+    if (-not (Test-Path $sfZip)) {
+        Write-Skip "Startfifinder 2024.7z"
+    } else {
+        $rc = Invoke-Extract -szExe $szExe -Source $sfZip -Dest "C:\M-auto" -Pass "Fiesta77"
+        if ($rc -ne 0) {
+            Write-Err "Erro na extracao (codigo $rc)."
+        } else {
+            Write-OK "StarFinder 2024 extraido."
+            try { Remove-Item $sfZip -Force -ErrorAction Stop; Write-OK "Ficheiro .7z apagado." }
+            catch { Write-Warn "Nao foi possivel apagar: $_" }
+
+            if ($desktop) {
+                $sfExe = "C:\M-Auto\Startfifinder 2024\StarFinder_webETM\WebETM-SDmedia.exe"
+                if (New-DesktopShortcut -Desktop $desktop -Name "StarFinder WebETM" -Target $sfExe) {
+                    Write-OK "Atalho StarFinder criado."
+                } else { Write-Warn "Atalho nao criado (executavel ausente ou erro)." }
+            }
+        }
+    }
+
+    Write-Host ""
+
+    #==========================================================================
+    #  SDMEDIA
+    #==========================================================================
+    Write-Host "  ${e}[38;2;100;149;237m>> SDMEDIA${e}[0m"
+    Write-Sep
+    $sdZip = "C:\M-auto\Temp\SDMEDIA.zip"
+    if (-not (Test-Path $sdZip)) {
+        Write-Skip "SDMEDIA.zip"
+    } else {
+        $sdDest = "C:\M-auto\SDmedia"
+        if (-not (Test-Path $sdDest)) { New-Item -ItemType Directory -Path $sdDest -Force | Out-Null }
+        $rc = Invoke-Extract -szExe $szExe -Source $sdZip -Dest $sdDest -Pass "Fiesta77"
+        if ($rc -ne 0) {
+            Write-Err "Erro na extracao (codigo $rc)."
+        } else {
+            Write-OK "SDMEDIA extraido."
+            try { Remove-Item $sdZip -Force -ErrorAction Stop; Write-OK "Ficheiro .zip apagado." }
+            catch { Write-Warn "Nao foi possivel apagar: $_" }
+
+            if ($desktop) {
+                if (New-DesktopShortcut -Desktop $desktop -Name "SDMEDIA" `
+                    -Target "C:\M-auto\SDMEDIA\index.html" -Icon "C:\M-auto\SDMEDIA\icon.ico,0") {
+                    Write-OK "Atalho SDMEDIA criado."
+                } else { Write-Warn "Atalho nao criado." }
+            }
+        }
+    }
+
+    Write-Host ""
+
+    #==========================================================================
+    #  Coding Tutorials
+    #==========================================================================
+    Write-Host "  ${e}[38;2;100;149;237m>> Coding Tutorials${e}[0m"
+    Write-Sep
+    $ctZip = "C:\M-auto\Temp\Coding tutorials full.7z"
+    if (-not (Test-Path $ctZip)) {
+        Write-Skip "Coding tutorials full.7z"
+    } else {
+        $rc = Invoke-Extract -szExe $szExe -Source $ctZip -Dest "C:\M-auto" -Pass "Fiesta77"
+        if ($rc -ne 0) {
+            Write-Err "Erro na extracao (codigo $rc)."
+        } else {
+            Write-OK "Coding Tutorials extraido."
+            try { Remove-Item $ctZip -Force -ErrorAction Stop; Write-OK "Ficheiro .7z apagado." }
+            catch { Write-Warn "Nao foi possivel apagar: $_" }
+
+            if ($desktop) {
+                if (New-DesktopShortcut -Desktop $desktop -Name "Coding Tutorials" `
+                    -Target "C:\M-auto\Coding tutorials full") {
+                    Write-OK "Atalho Coding Tutorials criado."
+                } else { Write-Warn "Atalho nao criado." }
+            }
+        }
+    }
+
+    Write-Host ""
+
+    #==========================================================================
+    #  Databases
+    #==========================================================================
+    Write-Host "  ${e}[38;2;100;149;237m>> Databases${e}[0m"
+    Write-Sep
+    $dbZip = "C:\M-auto\Temp\Databases.7z"
+    if (-not (Test-Path $dbZip)) {
+        Write-Skip "Databases.7z"
+    } else {
+        $rc = Invoke-Extract -szExe $szExe -Source $dbZip -Dest "C:\M-auto" -Pass "Fiesta77"
+        if ($rc -ne 0) {
+            Write-Err "Erro na extracao (codigo $rc)."
+        } else {
+            Write-OK "Databases extraido."
+            try { Remove-Item $dbZip -Force -ErrorAction Stop; Write-OK "Ficheiro .7z apagado." }
+            catch { Write-Warn "Nao foi possivel apagar: $_" }
+
+            if ($desktop) {
+                if (New-DesktopShortcut -Desktop $desktop -Name "Databases" `
+                    -Target "C:\M-auto\Databases") {
+                    Write-OK "Atalho Databases criado."
+                } else { Write-Warn "Atalho nao criado." }
+            }
+        }
+    }
+
+    Write-Host ""
+
+    #==========================================================================
+    #  Mover atalhos para pasta Coding (sempre)
+    #==========================================================================
+    Write-Host "  ${e}[38;2;100;149;237m>> Atalhos para pasta Coding${e}[0m"
+    Write-Sep
+    if (-not $desktop) {
+        Write-Warn "Desktop nao encontrado — atalhos nao movidos."
+    } else {
+        $coding = Join-Path $desktop "Coding"
+        if (-not (Test-Path $coding)) { New-Item -ItemType Directory -Path $coding -Force | Out-Null }
+
+        $allLinks = Get-ChildItem -Path $desktop -Filter "*.lnk" -ErrorAction SilentlyContinue
+        $targets  = @(
+            "*Vediamo*Start*Center*", "*Vediamo*",
+            "*DTS*Venice*", "*DTS*Monaco*",
+            "*OTX*Studio*", "*XENTRY*Special*Functions*",
+            "*DAS*FDOK*", "*Keygens*"
+        )
+        $moved = @(); $matched = @()
+        foreach ($pattern in $targets) {
+            $hits = $allLinks | Where-Object { $_.Name -like $pattern -and $_.FullName -notin $matched }
+            foreach ($lnk in $hits) {
+                $matched += $lnk.FullName
+                try {
+                    Move-Item -Path $lnk.FullName -Destination (Join-Path $coding $lnk.Name) -Force -ErrorAction Stop
+                    $moved += $lnk.BaseName
+                } catch {}
+            }
+        }
+        if ($moved.Count -gt 0) { Write-OK "$($moved.Count) atalho(s) movido(s): $($moved -join ', ')" }
+        else { Write-Skip "Nenhum atalho de diagnostico encontrado no Desktop" }
+    }
+
+    Write-Host ""
+    Write-Sep
+    Write-Host "  ${e}[38;2;34;197;94m>> Concluido.${e}[0m  Recomenda-se reiniciar o PC."
+    Write-Host ""
+    Read-Host "  Pressione ENTER para voltar"
 }
