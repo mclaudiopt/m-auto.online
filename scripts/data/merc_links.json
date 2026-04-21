@@ -1,8 +1,38 @@
-[
-  { "label": "EWA",              "dest": "ewa.7z",                    "url": "", "expires": "" },
-  { "label": "StarFinder 2024",  "dest": "Startfifinder 2024.7z",     "url": "", "expires": "" },
-  { "label": "SDMEDIA",          "dest": "SDMEDIA.zip",                "url": "", "expires": "" },
-  { "label": "Coding Tutorials", "dest": "Coding tutorials full.7z",  "url": "", "expires": "" },
-  { "label": "Databases",        "dest": "Databases.7z",               "url": "", "expires": "" },
-  { "label": "WIS 2021",         "dest": "wis2021.rar",                "url": "", "expires": "" }
+﻿[
+  {
+    "label": "EWA",
+    "dest": "ewa.7z",
+    "url": "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EWA.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260421%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260421T180848Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=10565fc673aa7aec51ee4f674ce79ad89532ce676aa20042bbcc7aac124fd7f5",
+    "expires": "2026-04-21T21:08:48.1099885+01:00"
+  },
+  {
+    "label": "StarFinder 2024",
+    "dest": "Startfifinder 2024.7z",
+    "url": "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Startfifinder%202024.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260421%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260421T180848Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=54bd446738a85f175cd5fa387145be98c1c5806fc48273d223e39c617ec2361b",
+    "expires": "2026-04-21T21:08:48.1099885+01:00"
+  },
+  {
+    "label": "SDMEDIA",
+    "dest": "SDMEDIA.zip",
+    "url": "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/SDMEDIA.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260421%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260421T180848Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=55fe7c0511647df99345b94e95224655c00720296edfbad6dc67f7082ff23587",
+    "expires": "2026-04-21T21:08:48.1099885+01:00"
+  },
+  {
+    "label": "Coding Tutorials",
+    "dest": "Coding tutorials full.7z",
+    "url": "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Coding%20tutorials%20full.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260421%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260421T180848Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=0e0e186efd8045579c4bb4ee80e08c6666d9942e598684d3c8c5ca9c42ceac6a",
+    "expires": "2026-04-21T21:08:48.1099885+01:00"
+  },
+  {
+    "label": "Databases",
+    "dest": "Databases.7z",
+    "url": "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Databases.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260421%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260421T180848Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=dfb3e8cb7f736ee5e676ecbf5b98d836b88ee47e665186318f836397f4e01526",
+    "expires": "2026-04-21T21:08:48.1099885+01:00"
+  },
+  {
+    "label": "WIS 2021",
+    "dest": "wis2021.rar",
+    "url": "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/wis2021.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260421%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260421T180848Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=9bc2a54083083d0d889291e05f6bee414b252db0be39f76d6f6d886684c36402",
+    "expires": "2026-04-21T21:08:48.1099885+01:00"
+  }
 ]
