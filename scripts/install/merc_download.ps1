@@ -24,6 +24,31 @@ function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $msg"
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $msg" }
 function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $msg" }
 
+#-- Verificar permissoes de escrita ------------------------------------------
+function Test-WritePermissions {
+    try {
+        $testFile = Join-Path $DEST_DIR ".test"
+        "test" | Out-File $testFile -Force -ErrorAction Stop
+        Remove-Item $testFile -Force -ErrorAction SilentlyContinue
+        return $true
+    } catch {
+        Write-Err "Sem permissoes de escrita em $DEST_DIR"
+        Write-Err "Erro: $_"
+        return $false
+    }
+}
+
+#-- Detectar proxy corporativo -----------------------------------------------
+function Get-ProxyConfig {
+    try {
+        $reg = Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -EA Stop
+        if ($reg.ProxyEnable -eq 1 -and $reg.ProxyServer) {
+            return $reg.ProxyServer
+        }
+    } catch {}
+    return $null
+}
+
 #-- Verificar links ----------------------------------------------------------
 function Get-Links {
     try {
@@ -51,76 +76,107 @@ function Get-Links {
     }
 }
 
-#-- Download com barra de progresso ------------------------------------------
+#-- Download com retry e timeout --------------------------------------------
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
 
     $dest = Join-Path $DEST_DIR $Name
-    $barWidth = 36
+    $destDir = Split-Path $dest -Parent
+
+    # Criar subdiretorios se necessario
+    if (-not (Test-Path $destDir)) {
+        New-Item -ItemType Directory -Path $destDir -Force | Out-Null
+    }
 
     Write-Host "  ${e}[38;2;148;163;184mFicheiro:${e}[0m ${e}[97m$Name${e}[0m"
     Write-Host "  ${e}[38;2;148;163;184mDestino: ${e}[0m ${e}[97m$dest${e}[0m"
     Write-Host ""
 
-    $global:dlDone  = $false
-    $global:dlError = $null
-    $global:dlBytes = 0
-    $global:dlTotal = 0
+    # Retry com backoff exponencial
+    $maxRetries = 3
+    $retryDelay = 2
 
-    $wc = New-Object System.Net.WebClient
+    for ($attempt = 1; $attempt -le $maxRetries; $attempt++) {
+        try {
+            # Configurar proxy se necessario
+            $proxy = Get-ProxyConfig
+            $proxyArgs = @{}
+            if ($proxy) {
+                $proxyArgs['Proxy'] = "http://$proxy"
+                $proxyArgs['ProxyUseDefaultCredentials'] = $true
+            }
 
-    $wc.add_DownloadProgressChanged({
-        $global:dlBytes = $_.BytesReceived
-        $global:dlTotal = $_.TotalBytesToReceive
-    })
+            # Download com timeout de 300 segundos (5 min)
+            $job = Start-Job -ScriptBlock {
+                param($url, $dest, $proxyArgs)
+                Invoke-WebRequest -Uri $url -OutFile $dest -TimeoutSec 300 @proxyArgs
+            } -ArgumentList $Url, $dest, $proxyArgs
 
-    $wc.add_DownloadFileCompleted({
-        if ($_.Error) { $global:dlError = $_.Error.Message }
-        $global:dlDone = $true
-    })
+            # Monitorizar progresso
+            $startTime = Get-Date
+            while ($job.State -eq 'Running') {
+                Start-Sleep -Milliseconds 500
 
-    $startTime = Get-Date
-    $wc.DownloadFileAsync([uri]$Url, $dest)
+                if (Test-Path $dest) {
+                    $dlBytes = (Get-Item $dest).Length
+                    $elapsed = ((Get-Date) - $startTime).TotalSeconds
+                    $speed = if ($elapsed -gt 0.5) { $dlBytes / $elapsed / 1MB } else { 0 }
+                    $dlMB = [math]::Round($dlBytes / 1MB, 1)
+                    $spdStr = if ($speed -gt 0) { "{0:N1} MB/s" -f $speed } else { "-- MB/s" }
 
-    while (-not $global:dlDone) {
-        $dl   = $global:dlBytes
-        $tot  = $global:dlTotal
-        $perc = if ($tot -gt 0) { [math]::Round($dl / $tot * 100) } else { 0 }
+                    Write-Host -NoNewline "`r  ${e}[38;2;100;149;237m↓${e}[0m $dlMB MB  $spdStr  ${e}[38;2;148;163;184m[$Idx/$Total]${e}[0m  "
+                }
+            }
 
-        $elapsed = ((Get-Date) - $startTime).TotalSeconds
-        $speed   = if ($elapsed -gt 0.5) { $dl / $elapsed / 1KB } else { 0 }
-        $dlMB    = [math]::Round($dl  / 1MB, 1)
-        $totMB   = if ($tot -gt 0) { [math]::Round($tot / 1MB, 1) } else { "?" }
+            $result = Receive-Job -Job $job -Wait -ErrorAction Stop
+            Remove-Job -Job $job -Force
 
-        $eta = if ($speed -gt 0 -and $tot -gt $dl) {
-            $secs = [int](($tot - $dl) / ($speed * 1KB))
-            "{0}:{1:D2}" -f [int]($secs / 60), ($secs % 60)
-        } else { "--" }
+            Write-Host ""
+            Write-OK "$Name transferido."
+            return $true
 
-        $speedStr = if ($speed -gt 0) { "$([math]::Round($speed)) KB/s" } else { "-- KB/s" }
-        $filled   = [math]::Round($perc / 100 * $barWidth)
-        $bar      = ("$([char]0x2588)" * $filled).PadRight($barWidth, [char]0x2591)
+        } catch {
+            Remove-Job -Job $job -Force -ErrorAction SilentlyContinue
 
-        Write-Host -NoNewline "`r  [${e}[38;2;100;149;237m$bar${e}[0m] $perc%  $dlMB/$totMB MB  $speedStr  ETA $eta  CN:$Idx/$Total  "
-        Start-Sleep -Milliseconds 400
+            if ($attempt -lt $maxRetries) {
+                Write-Warn "Tentativa $attempt falhou. A tentar novamente em ${retryDelay}s..."
+                Start-Sleep -Seconds $retryDelay
+                $retryDelay *= 2
+
+                # Apagar ficheiro parcial
+                if (Test-Path $dest) {
+                    Remove-Item $dest -Force -ErrorAction SilentlyContinue
+                }
+            } else {
+                Write-Host ""
+                Write-Err "Erro apos $maxRetries tentativas: $_"
+                return $false
+            }
+        }
     }
 
-    Write-Host ""
-
-    if ($global:dlError) {
-        Write-Err "Erro: $($global:dlError)"
-        return $false
-    }
-
-    Write-OK "$Name transferido."
-    return $true
+    return $false
 }
 
 #-- Loop principal -----------------------------------------------------------
 Write-Header
 
+# Verificar permissoes de escrita
+if (-not (Test-WritePermissions)) {
+    Start-Sleep -Seconds 3
+    exit 1
+}
+
+# Detectar proxy
+$proxy = Get-ProxyConfig
+if ($proxy) {
+    Write-Info "Proxy detetado: $proxy"
+}
+
+$maxRetries = 60  # 5 minutos (60 * 5s)
 $retry = 0
-while ($true) {
+
+while ($retry -lt $maxRetries) {
     $links = Get-Links
 
     if ($links) {
@@ -166,14 +222,14 @@ while ($true) {
         if ($skip -gt 0) { Write-Info "$skip ficheiro(s) ja existiam — saltados." }
         if ($fail -gt 0) { Write-Err  "$fail ficheiro(s) falharam." }
         Write-Host ""
-        Read-Host "  Pressione ENTER para sair"
-        return
+        Start-Sleep -Seconds 2
+        exit 0
     }
 
     # Links expirados — aguardar
     if ($retry -eq 0) {
         Write-Warn "Links expirados. A aguardar renovacao pelo tecnico..."
-        Write-Info "A verificar de 5 em 5 segundos. Prima Ctrl+C para cancelar."
+        Write-Info "A verificar de 5 em 5 segundos (max 5 min). Prima Ctrl+C para cancelar."
         Write-Host ""
 
         # Mostrar o que foi lido do servidor para diagnostico
@@ -193,6 +249,11 @@ while ($true) {
 
     $retry++
     $ts = Get-Date -Format "HH:mm:ss"
-    Write-Host -NoNewline "`r  ${e}[38;2;80;100;140m[$ts]${e}[0m  A aguardar... (tentativa $retry)  "
+    Write-Host -NoNewline "`r  ${e}[38;2;80;100;140m[$ts]${e}[0m  A aguardar... (tentativa $retry/$maxRetries)  "
     Start-Sleep -Seconds 5
 }
+
+Write-Host ""
+Write-Err "Timeout: links nao renovados apos 5 minutos."
+Start-Sleep -Seconds 3
+exit 1

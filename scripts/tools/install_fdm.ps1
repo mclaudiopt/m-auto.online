@@ -2,7 +2,7 @@
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $e = [char]27
-$URL = "https://dn.freedownloadmanager.org/6/fdm_x64_setup.exe"
+$URL = "https://files2.freedownloadmanager.org/6/latest/fdm_x64_setup.exe"
 $DL_DIR = "C:\M-auto\Temp"
 if (-not (Test-Path $DL_DIR)) { New-Item -ItemType Directory -Path $DL_DIR -Force | Out-Null }
 $TMP = "$DL_DIR\fdm_setup.exe"
@@ -18,7 +18,7 @@ $installed = Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\U
 if ($installed) {
     Write-Host "  ${e}[38;2;34;197;94m✔${e}[0m  Free Download Manager ja esta instalado: $($installed.DisplayVersion)"
     Write-Host ""
-    Read-Host "  Pressione ENTER para voltar"
+    Start-Sleep -Seconds 2
     return
 }
 
@@ -41,7 +41,7 @@ try {
 
 if (-not $downloaded) {
     Write-Host ""
-    Read-Host "  Pressione ENTER para voltar"
+    Start-Sleep -Seconds 2
     return
 }
 
@@ -49,7 +49,7 @@ Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
 Write-Host "  ${e}[38;2;100;149;237m·${e}[0m  A instalar..." -NoNewline
 
 try {
-    Start-Process -FilePath $TMP -ArgumentList "/S" -Wait -ErrorAction Stop
+    Start-Process -FilePath $TMP -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-" -Wait -ErrorAction Stop
     Remove-Item $TMP -Force -ErrorAction SilentlyContinue
     Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m"
     Write-Host ""
@@ -60,4 +60,4 @@ try {
 }
 
 Write-Host ""
-Read-Host "  Pressione ENTER para voltar"
+Start-Sleep -Seconds 2
