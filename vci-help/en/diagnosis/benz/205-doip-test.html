@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DoIP Test — W205 — Benz — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">EN</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">PT</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../../en/index.html">&#127968; Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/product/index.html">VCX Product Selection</a>
+          <a class="nav-link" href="../../../en/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../../en/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../../en/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../../en/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">User Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/guide/quickstart.html">Quick Start Guide</a>
+          <a class="nav-link" href="../../../en/guide/connection.html">Device Connection</a>
+          <a class="nav-link" href="../../../en/guide/firmware.html">Firmware Update</a>
+          <a class="nav-link" href="../../../en/guide/license.html">License Management</a>
+          <a class="nav-link" href="../../../en/guide/diagnosis.html">Driver Management</a>
+          <a class="nav-link" href="../../../en/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../../en/guide/device-ip-change.html">Change Device IP</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Remote Diagnosis <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/donet/intro.html">Platform Introduction</a>
+          <a class="nav-link" href="../../../en/donet/hyper-remote.html">Hyper Remote Diagnosis</a>
+          <a class="nav-link" href="../../../en/donet/legacy-remote.html">Legacy Remote Diagnosis</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Passenger <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../../en/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../../en/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../../en/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../../en/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../../en/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../../en/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../../en/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../../en/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../../en/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../../en/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../../en/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../../en/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../../en/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../../en/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Commercial <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Releases <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/release/index.html">Updates</a>
+          <a class="nav-link" href="../../../en/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../../en/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../../en/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../../en/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Developer Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/developer/index.html">Developer Guide</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">OEM Diagnosis</span> <span class="sep">/</span> <span class="current">Benz</span> <span class="sep">/</span> <span class="current">DoIP Test W205</span></nav>
+      <div><h1 class="toc-header" id="id="h-205-hu5--doip-"">205 HU5 音响Host DoIP 网络测试</h1><div>
+</div><h1 class="toc-header" id="id="205hu5doipc6doip"">说明：本文介绍奔驰205音响HostHU5的(Ethernet通讯)DOIP网络测试，该Models的音响网关编程编码，要通过奔驰诊断设备C6的DOIP通讯才能Done。</h1><div>
+</div><h2 class="toc-header" id="id="h-1Open"">1.Open诊断软件，进入Models控制单元菜单；</h2><div>
+</div><p><img alt="xentry_edition.png" src="http://wiki.allscanner.com/diagnosis/benz/205-doip-test/xentry_edition.png"><br>
+<img alt="a26_17_hu5.png" src="http://wiki.allscanner.com/diagnosis/benz/205-doip-test/a26_17_hu5.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2a2617-comand"">2.SelectA26/17 在线COMAND（Host）；</h2><div>
+</div><p><img alt="control1.png" src="http://wiki.allscanner.com/diagnosis/benz/205-doip-test/control1.png"></p><div>
+</div><h2 class="toc-header" id="id="h-3doip"">3.进入“操纵”菜单，Select"Ethernet通讯（DOIP）执行"；</h2><div>
+</div><p><img alt="control2.png" src="http://wiki.allscanner.com/diagnosis/benz/205-doip-test/control2.png"></p><div>
+</div><h2 class="toc-header" id="id="h-4"">4.Click“自动检测”图标，Start测试通讯；</h2><div>
+</div><p><img alt="execute_doip1.png" src="http://wiki.allscanner.com/diagnosis/benz/205-doip-test/execute_doip1.png"><br>
+<img alt="execute_doip2.png" src="http://wiki.allscanner.com/diagnosis/benz/205-doip-test/execute_doip2.png"></p><div>
+</div><h2 class="toc-header" id="id="h-5doip"">5.Ethernet通讯DOIP测试通过.</h2><div>
+</div><p><img alt="doip_test_passed.png" src="http://wiki.allscanner.com/diagnosis/benz/205-doip-test/doip_test_passed.png"></p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/en/', '/pt/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

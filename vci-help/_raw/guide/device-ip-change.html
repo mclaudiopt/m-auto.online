@@ -1,0 +1,22 @@
+﻿<div><h1 class="toc-header" id="设备-ip-地址修改"><a href="#设备-ip-地址修改" class="toc-anchor">¶</a> 设备 IP 地址修改</h1><div>
+</div><p>VCX-DoIP 设备连接车辆后相当于一个车辆网关设备，设备本身的网关 IP 地址默认为 192.168.8.1。<br>
+在 DoNet 远程使用过程中设备需要连接到用户路由器，某些情况下路由器使用的 IP 地址与 VCX 设备可能相同产生冲突，此时可以修改 VCX 设备的网关 IP。本文档介绍修改设备 IP 地址的方法。</p><div>
+</div><blockquote class="is-info">
+<p>请先连正确连接设备和电脑。</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="h-1-登陆设备管理页面"><a href="#h-1-登陆设备管理页面" class="toc-anchor">¶</a> 1. 登陆设备管理页面</h2><div>
+</div><p>使用浏览器打开设备管理页面 192.168.8.1 并登录</p><div>
+</div><p><img alt="openwrt-login.png" src="/guide/device-ip-change/openwrt-login.png"></p><div>
+</div><h2 class="toc-header" id="h-2-打开网络设置"><a href="#h-2-打开网络设置" class="toc-anchor">¶</a> 2. 打开网络设置</h2><div>
+</div><p>进入 Network -&gt; Interface,  点击 LAN 的 [Edit]</p><div>
+</div><p><img alt="openwrt-interface.png" src="/guide/device-ip-change/openwrt-interface.png"></p><div>
+</div><h2 class="toc-header" id="h-3-修改网络-ip"><a href="#h-3-修改网络-ip" class="toc-anchor">¶</a> 3. 修改网络 IP</h2><div>
+</div><p>修改 IPv4 address, 点击 [Save &amp; Apply]</p><div>
+</div><p><img alt="openwrt-change-ip.png" src="/guide/device-ip-change/openwrt-change-ip.png"></p><div>
+</div><h2 class="toc-header" id="h-4-修改-vxmanager-配置"><a href="#h-4-修改-vxmanager-配置" class="toc-anchor">¶</a> 4. 修改 VXManager 配置</h2><div>
+</div><p>设备 IP 地址修改成功后，必须同时修改 VX Manager 客户端管理工具的连接配置，打开【设备配置】选择 [LAN] 同时修改 IP地址和设备IP一致，点击【保存】</p><div>
+</div><p><img alt="vxmanager-change-ip.png" src="/guide/device-ip-change/vxmanager-change-ip.png"></p><div>
+</div><blockquote class="is-info">
+<p>使用其他连接方式如 WLAN / USBLAN 时也需要修改对应的 IP 地址。</p>
+</blockquote><div>
+</div></div>

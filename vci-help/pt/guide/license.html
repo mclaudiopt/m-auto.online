@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Licenças — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Guia de Utilização</span> <span class="sep">/</span> <span class="current">Gestão de Licenças</span></nav>
+      <div><h1 class="toc-header" id="id=""">授权Suporte</h1><div>
+</div><p>VCX 设备通过授权 <strong>(LICENSE)</strong> 来管理设备Funções，用户购买的产品根据型号和配置可能包含多种授权。<br>
+VCX 系列产品可Suporte的授权Funções列表：</p><div>
+</div><table>
+<thead>
+<tr>
+<th></th>
+<th>LICENSE</th>
+<th style="text-align:center">VCX-FD</th>
+<th style="text-align:center">VCX-DoIP</th>
+<th style="text-align:center">VCX-SE</th>
+<th style="text-align:center">VCX-NANO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td style="text-align:center"><img height="80" alt="" src="http://wiki.allscanner.com/vcx-fd.png"></td>
+<td style="text-align:center"><img height="80" alt="" src="http://wiki.allscanner.com/vcx-doip.png"></td>
+<td style="text-align:center"><img height="80" alt="" src="http://wiki.allscanner.com/vcx-se.png"></td>
+<td style="text-align:center"><img height="80" alt="" src="http://wiki.allscanner.com/vcx-nano.png"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/donet.png"></td>
+<td>DONET</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/passthru.png"></td>
+<td>PASSTHRU</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/benz.png"></td>
+<td>BENZ</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/bmw.png"></td>
+<td>BMW</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/vw.png"></td>
+<td>VW/AUDI</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/jlr.png"></td>
+<td>JLR</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f518.svg" alt="🔘" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/porsche.png"></td>
+<td>PORSCHE</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/volvo.png"></td>
+<td>VOLVO</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/ford.png"></td>
+<td>FORD</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/mazda.png"></td>
+<td>MAZDA</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/gm.png"></td>
+<td>GM</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/toyota.png"></td>
+<td>TOYOTA</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/honda.png"></td>
+<td>HONDA</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/subaru.png"></td>
+<td>SUBARU</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/nissan.png"></td>
+<td>NISSAN</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/renault.png"></td>
+<td>RENAULT</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="32" alt="" src="http://wiki.allscanner.com/icon/psa.png"></td>
+<td>PSA</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table><div>
+</div><blockquote class="is-info">
+<p><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"> Suporte此项Funções且不受限<br>
+<img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"> Suporte单一Funções(硬件不可更改)<br>
+<img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f518.svg" alt="🔘" draggable="false" class="emoji"> SuporteFunções受限，JLR 只Suporte SDD</p>
+</blockquote><div>
+</div><h1 class="toc-header" id="id=""">查看授权</h1><div>
+</div><ul>
+<li><em>[Ligação VCX 设备与电脑。…]</em></li>
+<li><em>[运行 VX Manager 管理软件…]</em></li>
+<li>Abra <strong>[设备管理]-&gt;[Licença do Dispositivo]</strong> 页面可看到当前设备Suporte的所有授权列表。</li>
+</ul><div>
+</div><p><img class="align-center" width="800" alt="vxmanager-license-list.png" src="http://wiki.allscanner.com/guide/license/vxmanager-license-list.png"></p><div>
+</div><h1 class="toc-header" id="Actualizar Licença">Actualizar Licença</h1><div>
+</div><blockquote class="is-warning">
+<p>VCX Licença do Dispositivo必须定期在线更新，超过 60 天未更新则Licença do Dispositivo会过期，会影响授权Funções的使用。</p>
+</blockquote><div>
+</div><blockquote class="is-info">
+<p>Actualizar Licença需要电脑Ligação互联网。</p>
+</blockquote><div>
+</div><blockquote class="is-success">
+<p>VX Manager 管理软件启动时默认会自动Actualizar Licença（更新间隔24小时）。</p>
+</blockquote><div>
+</div><ul>
+<li><em>[Ligação VCX 设备与电脑。…]</em></li>
+<li><em>[运行 VX Manager 管理软件，软件启动时会自动Actualizar Licença。…]</em></li>
+<li>在 <strong>[设备管理]-&gt;[Informações do Dispositivo]</strong> 页面Clique em <strong>[Actualizar Licença]</strong> 可手动Actualizar Licença。</li>
+</ul><div>
+</div><p><img class="align-center" width="800" alt="vxmanager-license-update.png" src="http://wiki.allscanner.com/guide/license/vxmanager-license-update.png"></p><div>
+</div><h1 class="toc-header" id="id=""">Adicione新授权</h1><div>
+</div><p>如需增加新Funções授权，可以联系经销商购买授权，申请新授权需要提供以下信息：</p><div>
+</div><blockquote class="is-info">
+<p><strong>LICENSE 授权名称</strong><br>
+<strong>SN 设备Número de série</strong></p>
+</blockquote><div>
+</div><p>购买授权成功后，通过 VX Mananger Actualizar Licença，即可安装相应的原厂Driver de Diagnóstico程序，之后可以进行车辆诊断。</p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

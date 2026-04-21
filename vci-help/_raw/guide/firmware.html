@@ -1,0 +1,37 @@
+﻿<div><h1 class="toc-header" id="固件更新"><a href="#固件更新" class="toc-anchor">¶</a> 固件更新</h1><div>
+</div><blockquote class="is-info">
+<p>VCX 设备通过更新固件来不断优化设备和新增功能，请保持设备固件始终为最新！</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="连接设备"><a href="#连接设备" class="toc-anchor">¶</a> 连接设备</h2><div>
+</div><p>固件升级时推荐使用有线连接方式：USB 或 LAN，请参照 <a class="is-internal-link is-valid-page" href="/zh/guide/connection"><em>设备连接配置</em></a> 连接设备和电脑。</p><div>
+</div><p>USB 连接示意图：</p><div>
+</div><p><img class="align-center" width="800" alt="vcxdoip-usb-obd.jpg" src="/guide/connection/vcxdoip-usb-obd.jpg"></p><div>
+</div><blockquote class="is-info">
+<p>在无法连接车辆的情况下，设备可通过 USB 连接供电。</p>
+</blockquote><div>
+</div><blockquote class="is-warning">
+<p>部分电脑 USB 接口输出的电源功率可能不足，导致 VCX 设备无法稳定连接，此时必须通过 OBD 接口供电。</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="查看固件版本"><a href="#查看固件版本" class="toc-anchor">¶</a> 查看固件版本</h2><div>
+</div><p>启动 VX Manager 管理软件， <strong>【设备信息】</strong> 中显示当前固件版本，如果服务器包含新固件，则 <strong>【更新固件】</strong> 按钮右侧会显示 <strong>[+]</strong> 标记，并且自动弹出更新固件对话框。</p><div>
+</div><p><img class="align-center" width="960" alt="vxmanager-firmware-new.png" src="/guide/firmware/vxmanager-firmware-new.png"></p><div>
+</div><h2 class="toc-header" id="更新固件过程"><a href="#更新固件过程" class="toc-anchor">¶</a> 更新固件过程</h2><div>
+</div><p>在更新固件对话框中勾选需要更新的固件，单击 <strong>【开始更新】</strong>。此过程将持续数分钟，更新过程中请不要中断设备与电脑的连接。</p><div>
+</div><p><img class="align-center" width="600" alt="vxmanager-firmware-update.png" src="/guide/firmware/vxmanager-firmware-update.png"></p><div>
+</div><h2 class="toc-header" id="更新完成"><a href="#更新完成" class="toc-anchor">¶</a> 更新完成</h2><div>
+</div><p>更新完成关闭更新对话框后，VX Manager <strong>【设备信息】</strong> 中会显示更新后的固件版本。</p><div>
+</div><h1 class="toc-header" id="doip-固件恢复"><a href="#doip-固件恢复" class="toc-anchor">¶</a> DoIP 固件恢复</h1><div>
+</div><p>对于因异常原因造成的 DoIP 系统启动失败，可以尝试恢复 DoIP 固件。</p><div>
+</div><blockquote class="is-warning">
+<p>此过程只适用 VCX-DoIP 和 VCX-SE 等包含 DoIP 系统的设备。</p>
+</blockquote><div>
+</div><blockquote class="is-info">
+<p>判断 DOIP 系统异常的条件：<br>
+设备启动25秒后，没有听到第二次蜂鸣器 “哔哔” 声。<br>
+设备启动25秒后，无线 LED 指示灯没有亮或闪烁。<br>
+设备启动25秒后，搜索无线网络找不到设备: <strong>DoIP-VCI-XXXX</strong>。<br>
+设备启动25秒后，VX Manager 无法连接和读取到设备信息。</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="进入固件恢复模式"><a href="#进入固件恢复模式" class="toc-anchor">¶</a> 进入固件恢复模式</h2><div>
+</div><p>设备断开所有连接（不通电），按照以下步骤进入固件恢复模式：</p><div>
+</div><tabset><template v-slot:tabs=""><li>VCX-DoIP 进入恢固件复模式</li><li>VCX-SE 进入恢固件复模式</li>

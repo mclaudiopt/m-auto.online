@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Start Guide — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">EN</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">PT</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../en/index.html">&#127968; Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/product/index.html">VCX Product Selection</a>
+          <a class="nav-link" href="../../en/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../en/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../en/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../en/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">User Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/guide/quickstart.html">Quick Start Guide</a>
+          <a class="nav-link" href="../../en/guide/connection.html">Device Connection</a>
+          <a class="nav-link" href="../../en/guide/firmware.html">Firmware Update</a>
+          <a class="nav-link" href="../../en/guide/license.html">License Management</a>
+          <a class="nav-link" href="../../en/guide/diagnosis.html">Driver Management</a>
+          <a class="nav-link" href="../../en/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../en/guide/device-ip-change.html">Change Device IP</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Remote Diagnosis <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/donet/intro.html">Platform Introduction</a>
+          <a class="nav-link" href="../../en/donet/hyper-remote.html">Hyper Remote Diagnosis</a>
+          <a class="nav-link" href="../../en/donet/legacy-remote.html">Legacy Remote Diagnosis</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Passenger <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../en/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../en/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../en/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../en/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../en/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../en/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../en/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../en/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../en/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../en/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../en/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../en/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../en/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../en/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Commercial <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../en/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../en/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../en/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Releases <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/release/index.html">Updates</a>
+          <a class="nav-link" href="../../en/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../en/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../en/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Developer Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/developer/index.html">Developer Guide</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">User Guide</span> <span class="sep">/</span> <span class="current">Quick Start</span></nav>
+      <div><h1 class="toc-header" id="Get the Installer">Get the Installer</h1><div>
+</div><p>Before starting vehicle diagnosis, the PC must have VX Manager and drivers installed. The installer is included in the product CD-ROM or can be downloaded from these links:<br>
+<a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.allscanner.com">http://www.allscanner.com</a><br>
+<a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.vxdiag.net/#download">http://www.vxdiag.net/#download</a></p><div>
+</div><h1 class="toc-header" id="Software Requirements">Software Requirements</h1><div>
+</div><ul class="grid-list body-2">
+<li><strong>CPU:</strong> 1.6 GHz or faster.</li>
+<li><strong>RAM:</strong> DDR 4 GB or more.</li>
+<li><strong>HDD:</strong> 80 GB or more.</li>
+<li><strong>Network interface:</strong> LAN 100/1000 Mbps.</li>
+<li><strong>Communication interface:</strong> USB 2.0 or USB 3.0.</li>
+<li><strong>Wireless:</strong> 802.11a/b/g/n WiFi.</li>
+<li><strong>OS:</strong> Windows 10 / 8 / 7.</li>
+<li><strong>Browser:</strong> Internet Explorer 11 or newer.</li>
+</ul><div>
+</div><blockquote class="is-info">
+<p>The DoNet Remote Diagnosis component requires Internet Explorer 11 or newer.<br>
+Windows 7 requires upgrading IE to the latest version.<br>
+<a rel="noreferrer" target="_blank" class="is-external-link" href="https://go.microsoft.com/fwlink/?LinkId=324628">Download Internet Explorer 11 (32-bit)</a><br>
+<a rel="noreferrer" target="_blank" class="is-external-link" href="https://go.microsoft.com/fwlink/?LinkId=324629">Download Internet Explorer 11 (64-bit)</a></p>
+</blockquote><div>
+</div><blockquote class="is-warning">
+<p>Note: Windows XP is no longer supported!</p>
+</blockquote><div>
+</div><h1 class="toc-header" id="Installation Steps">Installation Steps</h1><div>
+</div><blockquote class="is-danger">
+<p>Disable Windows Defender or other antivirus software during installation!</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="h-1-Run the Installer">1. Run the Installer</h2><div>
+</div><p>Double-click to run the VX Manager installer.</p><div>
+</div><p><img class="align-center" alt="vxmanager-install-01.png" src="http://wiki.allscanner.com/guide/quickstart/vxmanager-install-01.png"></p><div>
+</div><h2 class="toc-header" id="h-2-Begin Installation">2. Begin Installation</h2><div>
+</div><p>Welcome screen — click [Next] to continue.</p><div>
+</div><p><img class="align-center" alt="vxmanager-install-02.png" src="http://wiki.allscanner.com/guide/quickstart/vxmanager-install-02.png"></p><div>
+</div><h2 class="toc-header" id="h-3-Select Components">3. Select Components</h2><div>
+</div><p>You can select which OEM diagnostic drivers to install，或者Installation Complete后使用 VX Mananger 自由安装需要的原厂驱动。</p><div>
+</div><p><img class="align-center" alt="vxmanager-install-03.png" src="http://wiki.allscanner.com/guide/quickstart/vxmanager-install-03.png"></p><div>
+</div><h2 class="toc-header" id="h-4-Installation in Progress">4. Installation in Progress</h2><div>
+</div><p>The installation may take several minutes. Please wait.</p><div>
+</div><p><img class="align-center" alt="vxmanager-install-04.png" src="http://wiki.allscanner.com/guide/quickstart/vxmanager-install-04.png"></p><div>
+</div><h2 class="toc-header" id="h-5-Installation Complete">5. Installation Complete</h2><div>
+</div><p>Completion screen — click [Finish] to close.</p><div>
+</div><p><img class="align-center" alt="vxmanager-install-05.png" src="http://wiki.allscanner.com/guide/quickstart/vxmanager-install-05.png"></p><div>
+</div><p>After installation, a VX Manager shortcut is created on the desktop and Start menu.</p><div>
+</div><p><img class="align-center" width="96" alt="vxmanager-desktop-lnk.png" src="http://wiki.allscanner.com/guide/quickstart/vxmanager-desktop-lnk.png"></p><div>
+</div><h1 class="toc-header" id="Connect Device and Vehicle">Connect Device and Vehicle</h1><div>
+</div><p>Using VCX-DoIP connected via USB as an example, ensure the connection is correct:</p><div>
+</div><ul>
+<li>Connect the DB26-OBD cable from the device to the vehicle.</li>
+<li>Connect the USB Type-B cable from the device to the PC.</li>
+</ul><div>
+</div><p><img class="align-center" width="960" alt="vcxdoip-usb-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxdoip-usb-obd.jpg"></p><div>
+</div><ul class="links-list">
+<li><a class="is-internal-link is-valid-page" href="../guide/connection.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f50d.svg" alt="🔍" draggable="false" class="emoji"> More connection methods <em>Learn about different connection methods for VCX series devices</em></a></li>
+</ul><div>
+</div><h1 class="toc-header" id="id="vcx-"">Using the VCX Manager Tool</h1><div>
+</div><p>Launch VX Manager. If the device is connected successfully, the following information will be displayed:</p><div>
+</div><p><img class="align-center" width="960" alt="vxmanager-start.png" src="http://wiki.allscanner.com/guide/quickstart/vxmanager-start.png"></p><div>
+</div><h2 class="toc-header" id="Basic Functions">Basic Functions</h2><div>
+</div><ul class="grid-list body-2">
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-reconnect.png"> <strong>[Reconnect]</strong> ── Reconnect device and refresh device information.</li>
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-hwtest.png"> <strong>[Device Test]</strong> ── Device self-test with LED flash and beep.</li>
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-reset.png"> <strong>[Restart Device]</strong> ── Reset and restart the device.</li>
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-upfw.png"> <strong>[Update Firmware]</strong> ── Download and update device firmware online.</li>
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-uplic.png"> <strong>[Update License]</strong> ── Download and update device license data online.</li>
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-doipconfig.png"> <strong>[DoIP Toggle]</strong> ── Activate or deactivate DoIP protocol to test vehicle DoIP communication.</li>
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-unlock.png"> <strong>[Release Device]</strong> ── 设备被占用后手动Release Device释放设备。</li>
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-report.png"> <strong>[Error Report]</strong> ── View and retrieve device error log.</li>
+<li><img width="32" alt="" src="http://wiki.allscanner.com/guide/quickstart/btn-download.png"> <strong>[Check for Updates]</strong> ── Check if VX Manager has updates available.</li>
+</ul><div>
+</div><h1 class="toc-header" id="Install OEM Diagnostic Driver">Install OEM Diagnostic Driver</h1><div>
+</div><p>Open <strong>[车辆诊断]-&gt;[我的应用]</strong> click the diagnostic application to install <strong>[JLR DoIP]</strong>，in the driver info screen, click <strong>[安装]</strong> to complete driver installation.</p><div>
+</div><p><img class="align-center" width="960" alt="diagnosis-install.png" src="http://wiki.allscanner.com/guide/quickstart/diagnosis-install.png"></p><div>
+</div><h1 class="toc-header" id="Start Diagnosis">Start Diagnosis</h1><div>
+</div><p>Open JLR Pathfinder software; it will automatically scan vehicle information. The diagnosis result is as follows:</p><div>
+</div><p><img class="align-center" alt="diagnosis-start.jpg" src="http://wiki.allscanner.com/guide/quickstart/diagnosis-start.jpg"></p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/en/', '/pt/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

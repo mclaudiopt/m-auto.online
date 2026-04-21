@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DoNet Introduction — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">EN</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">PT</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../en/index.html">&#127968; Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/product/index.html">VCX Product Selection</a>
+          <a class="nav-link" href="../../en/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../en/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../en/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../en/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">User Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/guide/quickstart.html">Quick Start Guide</a>
+          <a class="nav-link" href="../../en/guide/connection.html">Device Connection</a>
+          <a class="nav-link" href="../../en/guide/firmware.html">Firmware Update</a>
+          <a class="nav-link" href="../../en/guide/license.html">License Management</a>
+          <a class="nav-link" href="../../en/guide/diagnosis.html">Driver Management</a>
+          <a class="nav-link" href="../../en/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../en/guide/device-ip-change.html">Change Device IP</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Remote Diagnosis <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/donet/intro.html">Platform Introduction</a>
+          <a class="nav-link" href="../../en/donet/hyper-remote.html">Hyper Remote Diagnosis</a>
+          <a class="nav-link" href="../../en/donet/legacy-remote.html">Legacy Remote Diagnosis</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Passenger <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../en/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../en/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../en/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../en/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../en/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../en/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../en/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../en/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../en/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../en/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../en/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../en/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../en/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../en/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Commercial <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../en/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../en/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../en/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Releases <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/release/index.html">Updates</a>
+          <a class="nav-link" href="../../en/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../en/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../en/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Developer Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../en/developer/index.html">Developer Guide</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">DoNet</span> <span class="sep">/</span> <span class="current">Introduction</span></nav>
+      <div><h1 class="toc-header" id="id=""">远程诊断介绍</h1><div>
+</div><p><img class="align-center" alt="donet-client-in-car.jpg" src="http://wiki.allscanner.com/donet/donet-client-in-car.jpg"></p><div>
+</div><p>DoNet Remote Diagnosis，是基于云计算和5GCommunication技术的车辆远程实时诊断平台。用户使用 VCX 诊断设备，通过 DoNet 微信公众号平台，即可实现故障车辆(客户端 C) 与维修企业或技术专家(服务端 S)的互联互通。</p><div>
+</div><p>Through this platform, workshops and end-customers lacking technical skills or equipment can seek remote expert assistance. Repair companies and experts can offer diagnosis, coding and programming services to any customer, regardless of location.</p><div>
+</div><h1 class="toc-header" id="id=""">远程诊断组成</h1><div>
+</div><h2 class="toc-header" id="id=""">客户端和服务端</h2><div>
+</div><blockquote class="is-info">
+<p>The client (C) is the party seeking remote diagnosis for a faulty vehicle.</p>
+</blockquote><div>
+</div><blockquote class="is-success">
+<p>The server (S) is the party providing remote diagnosis service.</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="id="vcx-se-"">VCX-SE 远程诊断设备</h2><div>
+</div><p>The VCX-SE is ALLScanner's latest generation diagnostic device for the remote diagnosis platform.</p><div>
+</div><p><img class="align-center" alt="donet-vcx-se.jpg" src="http://wiki.allscanner.com/donet/donet-vcx-se.jpg"><br>
+Highly integrated hardware with KWP/CAN/DoIP bus protocols, WiFi/USB/LAN interfaces and mature J2534/PDU drivers for all OEM diagnostics. Supports local diagnosis and one-click remote platform access.<br>
+Both server (S) and client (C) can use the same VCX-SE. Existing VCX-DoIP devices can also be enabled for remote diagnosis.</p><div>
+</div><h2 class="toc-header" id="id="donet-"">DoNet Remote Diagnosis微信公众号</h2><div>
+</div><p><img class="align-center" alt="donet-wechat-app.png" src="http://wiki.allscanner.com/donet/donet-wechat-app.png"><br>
+The DoNet WeChat channel (DiagnosisOnNet) is an online remote diagnosis platform by ALLScanner. Users bind VCX devices, configure networking, check device status; client (C) users post requests, server (S) users accept remote service jobs.</p><div>
+</div><h1 class="toc-header" id="id=""">双模式远程诊断</h1><div>
+</div><p>DoNet innovatively supports two remote diagnosis modes: Hyper Remote Diagnosis and Legacy Remote Diagnosis.</p><div>
+</div><h2 class="toc-header" id="id=""">超级远程诊断</h2><div>
+</div><p><img class="align-center" alt="donet-hyper-remote.png" src="http://wiki.allscanner.com/donet/donet-hyper-remote.png"></p><div>
+</div><p>Hyper mode requires only a single client VCX device for multi-brand OEM software direct-connect remote diagnosis.<br>
+The client (C) connects the VCX to the faulty vehicle and configures networking via the WeChat channel.<br>
+The server (S) needs no device. With OEM software PC, load remote PDU/J2534 drivers to directly access the remote vehicle for OEM diagnosis, coding and programming.</p><div>
+</div><h3 class="toc-header" id="id=""">超级远程诊断特性</h3><div>
+</div><ul>
+<li><em>[Supports ~20 brands including Mercedes-Benz, BMW, Porsche, VW, Audi, Land Rover, GM, Ford, Toyota, Honda, Subaru, Volvo and more.…]</em></li>
+<li><em>[Deep OEM software support — remote diagnosis capabilities match local diagnosis.…]</em></li>
+<li><em>[Supports DoIP remote diagnosis with vehicle ethernet mapped directly to the server.…]</em></li>
+<li><em>[Server only needs account and certificate resources for remote online coding and programming for any client.…]</em></li>
+</ul><div>
+</div><h2 class="toc-header" id="id=""">兼容远程诊断</h2><div>
+</div><p><img class="align-center" alt="donet-legacy-remote.png" src="http://wiki.allscanner.com/donet/donet-legacy-remote.png"></p><div>
+</div><p>Legacy mode uses 1 VCX device on each side for remote diagnosis with any brand device.<br>
+The client (C) connects the VCX to the faulty vehicle, configures networking and initiates a diagnosis request via WeChat.<br>
+The server (S) powers the VCX via an OBD adapter and configures networking. It can use any OEM or third-party device via OBD to provide the service.</p><div>
+</div><h3 class="toc-header" id="id=""">兼容远程诊断特性</h3><div>
+</div><ul>
+<li><em>[Server can use any diagnostic device: OEM tools, generic scanners, immobilizer tools, TPMS, tuning tools, etc.…]</em></li>
+<li><em>[Legacy remote diagnosis currently supports CAN and DoIP protocols.…]</em></li>
+<li><em>[Supports all vehicles using CAN and DoIP.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="id=""">远程诊断使用指南</h1><div>
+</div><ul class="links-list">
+<li><a class="is-internal-link is-valid-page" href="../donet/hyper-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/26a1.svg" alt="⚡️" draggable="false" class="emoji"> Hyper Remote Diagnosis Guide</a></li>
+<li><a class="is-internal-link is-valid-page" href="../donet/legacy-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f517.svg" alt="🔗" draggable="false" class="emoji"> Legacy Remote Diagnosis Guide</a></li>
+</ul><div>
+</div><h1 class="toc-header" id="id=""">远程诊断案例</h1><div>
+</div><ul class="links-list">
+<li><a class="is-internal-link is-valid-page" href="../donet/legacy-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f4dd.svg" alt="📝" draggable="false" class="emoji"> Remote Diagnosis Programming Cases</a></li>
+</ul><div>
+</div><h1 class="toc-header" id="id=""">开放测试</h1><div>
+</div><p>目前 DoNet 超级远程诊断Features已经全面开放， 兼容远程诊断Features也已开放测试，Welcome！</p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/en/', '/pt/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ligação do Dispositivo — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Guia de Utilização</span> <span class="sep">/</span> <span class="current">Ligação do Dispositivo</span></nav>
+      <div><h1 class="toc-header" id="id=""">设备Ligação类型Suporte</h1><div>
+</div><p>VCX 系列设备与HostLigaçãoSuporte多种Interface de comunicação:</p><div>
+</div><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th style="text-align:center">LAN</th>
+<th style="text-align:center">WLAN</th>
+<th style="text-align:center">USBLAN</th>
+<th style="text-align:center">USB</th>
+<th style="text-align:center">WIFI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td style="text-align:center"><img height="48" alt="" src="http://wiki.allscanner.com/icon/hw-lan.png"></td>
+<td style="text-align:center"><img height="48" alt="" src="http://wiki.allscanner.com/icon/hw-wifi.png"></td>
+<td style="text-align:center"><img height="48" alt="" src="http://wiki.allscanner.com/icon/hw-usb.png"></td>
+<td style="text-align:center"><img height="48" alt="" src="http://wiki.allscanner.com/icon/hw-usb.png"></td>
+<td style="text-align:center"><img height="48" alt="" src="http://wiki.allscanner.com/icon/hw-wifi.png"></td>
+</tr>
+<tr>
+<td><img height="48" alt="" src="http://wiki.allscanner.com/icon/vcx-doip.png"></td>
+<td>VCX-DoIP</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="48" alt="" src="http://wiki.allscanner.com/icon/vcx-se.png"></td>
+<td>VCX-SE</td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="48" alt="" src="http://wiki.allscanner.com/icon/vcx-pro.png"></td>
+<td>VCX-PRO</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="48" alt="" src="http://wiki.allscanner.com/icon/vcx-nano2.png"></td>
+<td>VCX-NANO</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><img height="48" alt="" src="http://wiki.allscanner.com/icon/vcx-nano.png"></td>
+<td>VCX-NANO-WiFi</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+<td style="text-align:center"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/2b55.svg" alt="⭕️" draggable="false" class="emoji"></td>
+</tr>
+</tbody>
+</table><div>
+</div><h1 class="toc-header" id="id=""">设备Ligação方法</h1><div>
+</div><h2 class="toc-header" id="id="lan-"">LAN - 网线Ligação</h2><div>
+</div><blockquote class="is-info">
+<p>LAN Ligação方式适用产品：<strong>VCX-DOIP</strong> / <strong>VCX-SE</strong></p>
+</blockquote><div>
+</div><h3 class="toc-header" id="id="vcx-doip-"">VCX-DoIP 网线Ligação示意</h3><div>
+</div><p><img class="align-center" width="960" alt="vcxdoip-lan-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxdoip-lan-obd.jpg"></p><div>
+</div><h3 class="toc-header" id="id="vcx-se-"">VCX-SE 网线Ligação示意</h3><div>
+</div><p>通过 USB Type-C 转接 RJ45 网络Interface</p><div>
+</div><p><img class="align-center" width="960" alt="vcxse-lan-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxse-lan-obd.jpg"></p><div>
+</div><h2 class="toc-header" id="id="wlan-"">WLAN - Sem fios网络</h2><div>
+</div><blockquote class="is-info">
+<p>WLAN Ligação方式适用产品：<strong>VCX-DOIP</strong> / <strong>VCX-SE</strong></p>
+</blockquote><div>
+</div><h3 class="toc-header" id="id="vcx-doip-wlan-"">VCX-DOIP WLAN Ligação示意</h3><div>
+</div><p><img class="align-center" width="960" alt="vcxdoip-wlan-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxdoip-wlan-obd.jpg"></p><div>
+</div><h3 class="toc-header" id="id="vcx-se-wlan-"">VCX-SE WLAN Ligação示意</h3><div>
+</div><p><img class="align-center" width="960" alt="vcxse-wlan-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxse-wlan-obd.jpg"></p><div>
+</div><h3 class="toc-header" id="id="wlan-"">WLAN LigaçãoPasso</h3><div>
+</div><ul>
+<li>
+<p>设备Ligação车辆Alimentação且启动正常。</p>
+</li>
+<li>
+<p>电脑搜寻Rede sem fios:<strong>DoIP-VCI-XXXX</strong>，选中 <strong>自动Ligação</strong>，然后Clique em <strong>Ligação</strong>。</p>
+</li>
+</ul><div>
+</div><p><img class="align-center" alt="wlan-connect.png" src="http://wiki.allscanner.com/guide/connection/wlan-connect.png"></p><div>
+</div><ul>
+<li>IntroduzaSem fios网络密码：<strong>12345678</strong>，Clique em <strong>Seguinte</strong>。</li>
+</ul><div>
+</div><p><img class="align-center" alt="wlan-password.png" src="http://wiki.allscanner.com/guide/connection/wlan-password.png"></p><div>
+</div><ul>
+<li>Sem fios网络Ligação成功后，在 Windows <strong>网络Ligação</strong> 中可以看到Sem fios网络信息如下：</li>
+</ul><div>
+</div><p><img class="align-center" alt="wlan-network.png" src="http://wiki.allscanner.com/guide/connection/wlan-network.png"></p><div>
+</div><h2 class="toc-header" id="id="usblan-usb-"">USBLAN - USB 网卡</h2><div>
+</div><blockquote class="is-info">
+<p>USBLAN Ligação方式适用产品：<strong>VCX-DOIP</strong> / <strong>VCX-SE</strong></p>
+</blockquote><div>
+</div><h3 class="toc-header" id="id="vcx-doip-usblan-"">VCX-DoIP USBLAN Ligação示意</h3><div>
+</div><p><img class="align-center" width="960" alt="vcxdoip-usb-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxdoip-usb-obd.jpg"></p><div>
+</div><h3 class="toc-header" id="id="vcx-se-usblan-"">VCX-SE USBLAN Ligação示意</h3><div>
+</div><p><img class="align-center" width="960" alt="vcxse-usb-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxse-usb-obd.jpg"></p><div>
+</div><h3 class="toc-header" id="id=""">首次Ligação</h3><div>
+</div><ul>
+<li><em>[首次Ligação USBLAN 时，Windows 会自动安装驱动…]</em></li>
+</ul><div>
+</div><p><img class="align-center" alt="driver-usb-install.png" src="http://wiki.allscanner.com/guide/connection/driver-usb-install.png"><br>
+<img class="align-center" alt="driver-usb-lan-ok.png" src="http://wiki.allscanner.com/guide/connection/driver-usb-lan-ok.png"></p><div>
+</div><ul>
+<li>Instalação do Driver成功后可在设备管理器中看到网络适配器：<strong>Realtek USB FE Family Controller</strong>。</li>
+</ul><div>
+</div><p><img class="align-center" alt="device-usb-lan.png" src="http://wiki.allscanner.com/guide/connection/device-usb-lan.png"></p><div>
+</div><h2 class="toc-header" id="usb-vcx-nano">USB (VCX-NANO)</h2><div>
+</div><blockquote class="is-info">
+<p>USB Ligação方式只适用于 VCX-NANO 产品！</p>
+</blockquote><div>
+</div><h3 class="toc-header" id="id="usb-vcx-nano-"">USB VCX-NANO Ligação示意</h3><div>
+</div><p><img class="align-center" width="960" alt="vcxnano-usb-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxnano-usb-obd.jpg"></p><div>
+</div><h3 class="toc-header" id="id="-1"">首次Ligação</h3><div>
+</div><ul>
+<li><em>[首次Ligação USB 串口时， Windows 会自动安装驱动…]</em></li>
+</ul><div>
+</div><p><img class="align-center" alt="driver-usb-install.png" src="http://wiki.allscanner.com/guide/connection/driver-usb-install.png"><br>
+<img class="align-center" alt="driver-usb-lan-ok.png" src="http://wiki.allscanner.com/guide/connection/driver-usb-serial-ok.png"></p><div>
+</div><ul>
+<li>Instalação do Driver成功后可在设备管理器中看到端口：<strong>USB Serial Port (COMx)</strong>。</li>
+</ul><div>
+</div><p><img class="align-center" alt="device-usb-lan.png" src="http://wiki.allscanner.com/guide/connection/device-usb-serial.png"></p><div>
+</div><h2 class="toc-header" id="wifi-vcx-nano">WiFi (VCX-NANO)</h2><div>
+</div><blockquote class="is-info">
+<p>此Sem fiosLigação方式只适用于带Sem fiosFunções的 VCX-NANO 产品！</p>
+</blockquote><div>
+</div><h3 class="toc-header" id="id="wifi-vcx-nano-"">WiFi VCX-NANO Ligação示意</h3><div>
+</div><p><img class="align-center" width="960" alt="vcxnano-wifi-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxnano-wifi-obd.jpg"></p><div>
+</div><h3 class="toc-header" id="id="wifi-"">WiFi LigaçãoPasso</h3><div>
+</div><ul>
+<li><em>[设备Ligação启动正常。…]</em></li>
+<li>电脑搜寻Rede sem fios:<strong>VCX-WiFi</strong>，Clique em <strong>[Ligação]</strong>。</li>
+<li><em>[无需Introduza密码，Ligação成功。…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="id=""">设备Ligação检测</h1><div>
+</div><p>设备按照以上方法正确Ligação后，Inicie o VX Manager. A secção如能正确显示 VCX 设备的Número de série、Versão、名称等信息，则说明设备已正确Ligação上电脑</p><div>
+</div><p><img class="align-center" width="960" alt="vxmanager-ok.png" src="http://wiki.allscanner.com/guide/connection/vxmanager-ok.png"></p><div>
+</div><h1 class="toc-header" id="Configuração de Ligação do Dispositivo">Configuração de Ligação do Dispositivo</h1><div>
+</div><p>VX Manager 默认Ligação类型配置为: <strong>AUTO自动</strong>， 可以Suporte自动识别所有Ligação方式，一般无需修改。<br>
+如果您Confirme需要修改Ligação类型，可在 <strong>设备管理</strong> -&gt; <strong>设备配置</strong> 界面中修改。</p><div>
+</div><p><img class="align-center" width="960" alt="vxmanager-ok.png" src="http://wiki.allscanner.com/guide/connection/vxmanager-connection.png"></p><div>
+</div><h1 class="toc-header" id="id="-ip-"">Modificar Endereço IP do Dispositivo</h1><div>
+</div><ul class="links-list">
+<li><a class="is-internal-link is-valid-page" href="../guide/device-ip-change.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f527.svg" alt="🔧" draggable="false" class="emoji"> Modificar Endereço IP do Dispositivo <em>[descricao original]</em></a></li>
+</ul><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

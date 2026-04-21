@@ -1,0 +1,85 @@
+﻿<div><h1 class="toc-header" id="站内页面和图片路径结构"><a href="#站内页面和图片路径结构" class="toc-anchor">¶</a> 站内页面和图片路径结构</h1><div>
+</div><img class="uml-diagram prefetch-candidate" alt="uml diagram" src="https://plantuml.requarks.io/svg/LO_D3i8W48JlF0Ldaas83KPlF8DlWDaLIGhK0gdrwUMd1xrzCvkPpEgKpPgBdvdkv5r0RnOc-2t6p8JWjZYa2e8_pAiPw8mDCRdKpJk5JmF1tnJokWEQ13t3Xutvq4D6VvLdQ1r3dwI2Pr60qIsZq6_ZukeWmDyifVsloquNK9ESQVHfgjkF_OthLry0"><div>
+</div><h1 class="toc-header" id="页面创建"><a href="#页面创建" class="toc-anchor">¶</a> 页面创建</h1><div>
+</div><h2 class="toc-header" id="页面路径"><a href="#页面路径" class="toc-anchor">¶</a> 页面路径</h2><div>
+</div><ul>
+<li>页面路径需要按照车型位于 /diagnosis/benz/下</li>
+<li>页面路径名称使用有含义的英文, 多个词之间使用"-"连接,示例：
+<ul>
+<li><strong>dts-guide</strong>： DTS工程师软件指南</li>
+<li><strong>205-hu5-doip</strong>： 205 HU5 主机模块 DoIP 测试</li>
+<li><strong>om906-diag</strong>： OM906工业发动机诊断</li>
+<li><strong>177-doip-test</strong>: 177 DoIP 网络测试</li>
+</ul>
+</li>
+</ul><div>
+</div><p><img width="960" alt="page-path.png" src="/edit/page-path.png"></p><div>
+</div><h2 class="toc-header" id="页面属性"><a href="#页面属性" class="toc-anchor">¶</a> 页面属性</h2><div>
+</div><ul>
+<li>页面标题</li>
+<li>简短说明</li>
+<li>标签 (用于搜索)</li>
+</ul><div>
+</div><p><img width="960" alt="page-create.png" src="/edit/page-create.png"></p><div>
+</div><h2 class="toc-header" id="上传图片"><a href="#上传图片" class="toc-anchor">¶</a> 上传图片</h2><div>
+</div><ul>
+<li>图片在保证清晰度的前提下, 请尽量减小尺寸(小于1MB)</li>
+<li>图片分辨率不要高于 2560x1440, 推荐 1920x1080 jpg格式</li>
+<li>每个页面包含的图片上传到独立的文件夹，与页面名称路径一致</li>
+<li>图片文件使用有含义的英文, 多个词之间使用"-"连接：
+<ul>
+<li>适用多语言的图片名称不带语言后缀</li>
+<li>中文图片名称不带语言后缀</li>
+<li>特定语言图片名称带语言后缀，如:<br>
+device-en.png<br>
+select-car-en.png</li>
+</ul>
+</li>
+</ul><div>
+</div><p><img width="960" alt="page-image-path.png" src="/edit/page-image-path.png"></p><div>
+</div><h1 class="toc-header" id="内容编辑"><a href="#内容编辑" class="toc-anchor">¶</a> 内容编辑</h1><div>
+</div><p>页面格式使用 Markdown 语法, 也可通过鼠标点击编辑器按钮实现.</p><div>
+</div><h2 class="toc-header" id="如何写标题"><a href="#如何写标题" class="toc-anchor">¶</a> 如何写标题</h2><div>
+</div><ul>
+<li>利用多级标题划分好文章的章节</li>
+<li>标题尽量简短, 过长的标题会生成混乱的目录</li>
+</ul><div>
+</div><h2 class="toc-header" id="文字引用块"><a href="#文字引用块" class="toc-anchor">¶</a> 文字引用块</h2><div>
+</div><p>特殊的提示/警告/注意事项等情况推荐使用文字引用块.<br>
+引用块语法和效果如下:</p><div>
+</div><pre class="prismjs line-numbers"><code class="language-">&gt; 成功提示
+{.is-success}
+
+&gt; 警告提示
+&gt; 这是第二行
+{.is-warning}
+
+&gt; 错误提示
+{.is-danger}
+</code></pre><div>
+</div><blockquote class="is-success">
+<p>成功提示</p>
+</blockquote><div>
+</div><blockquote class="is-warning">
+<p>警告提示<br>
+这是第二行</p>
+</blockquote><div>
+</div><blockquote class="is-danger">
+<p>错误提示</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="链接列表"><a href="#链接列表" class="toc-anchor">¶</a> 链接列表</h2><div>
+</div><p>语法和效果如下:</p><div>
+</div><pre class="prismjs line-numbers"><code class="language-">- [链接标题1 *这个链接的简短描述和说明等等*](http://www.allscanner.com)
+- [链接标题2 *这个链接的简短描述和说明等等*](http://www.allscanner.com)
+- [:apple: 链接标题3 *这个链接前加了一个颜文字图标*](http://www.allscanner.com)
+{.links-list}
+</code></pre><div>
+</div><ul class="links-list">
+<li><a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.allscanner.com">链接标题1 <em>这个链接的简短描述和说明等等</em></a></li>
+<li><a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.allscanner.com">链接标题2 <em>这个链接的简短描述和说明等等</em></a></li>
+<li><a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.allscanner.com"><img src="/_assets/svg/twemoji/1f34e.svg" alt="🍎" draggable="false" class="emoji"> 链接标题3 <em>这个链接前加了一个颜文字图标</em></a></li>
+</ul><div>
+</div><h1 class="toc-header" id="markdown-指南"><a href="#markdown-指南" class="toc-anchor">¶</a> Markdown 指南</h1><div>
+</div><p><a rel="noreferrer" target="_blank" class="is-external-link" href="https://markdown.com.cn/">Markdown 语法教程</a></p><div>
+</div><p><a class="is-internal-link is-valid-page" href="/zh/edit/markdown">Markdown 高级用法(表格/流程图等)</a></p><div>
+</div></div>

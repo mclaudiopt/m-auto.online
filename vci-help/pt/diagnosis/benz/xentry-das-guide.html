@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia XENTRY/DAS — Benz — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">Benz</span> <span class="sep">/</span> <span class="current">Guia XENTRY/DAS</span></nav>
+      <div><h1 class="toc-header" id="id=""">软件Funções特性</h1><div>
+</div><p><a rel="noreferrer" target="_blank" class="is-external-link" href="https://service-parts.mercedes-benz.com/dcagportal/DCAGPortal/portal.action">信息来源</a></p><div>
+</div><h2 class="toc-header" id="xentry-diagnostics-xentry-das">XENTRY Diagnostics / XENTRY DAS</h2><div>
+</div><p><img alt="xentry-das.jpg" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/xentry-das.jpg"><br>
+XENTRY Diagnostics是诊断系统XENTRY DAS的下一代产品。C级轿车（204Modelos） 仅能通过XENTRY Diagnostics （DVD 06/2009以及之后的Versão）进行诊断。对于Veículos Comerciais辆部分，这种诊断系统的转换通过Actros或DVD 09/2011Versão之后实现了。XENTRY DAS仍旧适用于之前的Modelos。</p><div>
+</div><h3 class="toc-header" id="id="xentry-diagnostics"">XENTRY Diagnostics包含如下几个新的Funções：</h3><div>
+</div><ul>
+<li><em>[带指引的检测Passo…]</em></li>
+<li><em>[Funções视图…]</em></li>
+<li><em>[整合了更多的诊断Funções!…]</em></li>
+<li><em>[统一，友好的交互界面…]</em></li>
+<li><em>[与其他应用相互参照…]</em></li>
+<li><em>[通过规范化的故障症状来进行诊断…]</em></li>
+<li><em>[新的，改进的评估系统…]</em></li>
+</ul><div>
+</div><h2 class="toc-header" id="xentry-flash">XENTRY Flash</h2><div>
+</div><p><img alt="xentry-flash.jpg" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/xentry-flash.jpg"><br>
+通过在线的操作指引，XENTRY Flash让你能对控制单元进行编程，SCN/CVN设码，同时为改装或加装Adicione配置码。<br>
+XENTRY Flash适用于梅赛德斯-奔驰轿车（梅赛德斯-奔驰，smart，迈巴赫，SLR）以及梅赛德斯-奔驰厢式货车。<br>
+对于货车，我们通过在线操作的方式提供控制单元的Parâmetros程序。此方式加快了维修车间更换控制单元后取得控制单元数据的速度。</p><div>
+</div><h3 class="toc-header" id="id=""">给用户带来的附加值</h3><div>
+</div><p>此过程是完全集成在诊断软件中的（XENTRY Diagnostics, XENTRY DAS）。总体上来说，在程序的运行中，几乎不需要维修人员进行手动的操作或干预：</p><div>
+</div><ul>
+<li><strong>自动运行SCN设码以及VeDoc数据的更新</strong><br>
+每次Concluído控制单元编程后，SCN设码将自动运行（如果控制单元Suporte的话），同时，会在VeDoc系统中更新车辆数据。<br>
+对车辆以及控制单元所有的改变均会被更新至VeDoc的车辆数据卡中。</li>
+<li><strong>单次登陆操作（Single-Sign-On）</strong><br>
+当用户在售后服务应用网站登陆账号后（例如XENTRY Flash，WIS net等等），后续的操作不需要再次登陆中央在线系统。</li>
+</ul><div>
+</div><h2 class="toc-header" id="id="20206"">自2020年6月起的新诊断用户权限</h2><div>
+</div><p><a rel="noreferrer" target="_blank" class="is-external-link" href="https://service-parts.mercedes-benz.com/dcagportal/DCAGPortal/menu.action?pageId=41759&amp;market=Europe">信息来源</a></p><div>
+</div><p>随着E级改款和新S级的引入，一种新的安全概念正在引入，这也将对XENTRY诊断软件产生重大影响。<br>
+从2020年6月的数据发布Iniciar，当访问新的E-Class和S-Class时，将出现Introduza个性化用户名和密码的提示。如果不Introduza此信息，就无法诊断这些车辆。这意味着，未经诊断访问授权，这些车辆不能再进行维修/诊断。每一个用户都必须经过一个身份识别过程，才能获得E级及后续Modelos整容的相应用户权限。</p><div>
+</div><ul>
+<li><strong>可用的两种用户权限类型：</strong><br>
+XENTRY 标准诊断（适用于未经XENTRY Flash授权的诊断用户，例如用于读取和清除故障记忆）<br>
+XENTRY Flash权限（对应于当前XENTRY Flash用户）</li>
+</ul><div>
+</div><blockquote class="is-warning">
+<p>请注意，使用XENTRY Diagnosis Kit 2（C5)无法再诊断这些Modelos系列。<br>
+您至少需要一个XENTRY Diagnosis Kit 3（C6)。</p>
+</blockquote><div>
+</div><blockquote class="is-success">
+<p>VCX 设备可以实现完全替换 XENTRY Diagnosis VCI（C6)且Funções一致。</p>
+</blockquote><div>
+</div><h1 class="toc-header" id="id=""">Veículos Suportados</h1><div>
+</div><h1 class="toc-header" id="id=""">软件截图</h1><div>
+</div><p>XENTRY ModelosMarca<br>
+<img alt="xentry-car-brand.jpg" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/xentry-car-brand.jpg"></p><div>
+</div><p>DAS 快速测试界面<br>
+<img alt="das-quick-diagnostic.png" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/das-quick-diagnostic.png"></p><div>
+</div><h1 class="toc-header" id="id="vcx-"">VCX Instalação do Driver</h1><div>
+</div><blockquote>
+<p>安装 VCX BENZ 驱动前请确保：</p>
+<ul class="is-success">
+<li><em>[XENTRY Diagnosis 软件已经Instalação Concluída。…]</em></li>
+<li><em>[VX Manager 已经安装且 VCX 设备已经Ligação。…]</em></li>
+</ul>
+</blockquote><div>
+</div><p>Abra VX Manager 管理工具，Seleccione <strong>[Diagnóstico do Veículo]- BENZ</strong>，Clique em[Instalar]<br>
+<img alt="benz-driver-install1.png" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/benz-driver-install1.png"></p><div>
+</div><p>Instalação do Driver过程如下：<br>
+<img alt="benz-driver-install2.png" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/benz-driver-install2.png"></p><div>
+</div><h1 class="toc-header" id="id="vcx--xentry-"">VCX 设备Versão与 Xentry 同步</h1><div>
+</div><p>XENTRY Diagnosis 软件Versão必须与 VCX 设备Versão信息匹配一致才可正常工作。当您手动安装或Actualizado:  XENTRY 导致软件Versão与设备Versão信息不一致，则会出现如下警告提示：<br>
+<img alt="xentry-version-error.png" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/xentry-version-error.png"></p><div>
+</div><p>通过重新安装 VCX BENZ 驱动可自动匹配Versão信息， 也可运行 XDVCIUpdate 手动SeleccioneVersão信息并匹配。<br>
+<img alt="xentry-version-update.png" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/xentry-version-update.png"></p><div>
+</div><h1 class="toc-header" id="id="vcx-"">VCX 设备无授权或非法设备</h1><div>
+</div><p>以下情况下可能无法使用 XENTRY 2021.09/12 之后的Versão：</p><div>
+</div><blockquote class="is-warning">
+<p>❌ VCX 设备 VCI 固件未升级至 V1.9.0.0 之后Versão；<br>
+❌ VCX 设备为非法的克隆产品，无法升级固件；<br>
+❌ VCX 设备没有有效的 BENZ 授权</p>
+</blockquote><div>
+</div><p>如不满足以上条件，XENTRY 系统将显示无效的Número de série 00000000 且 VCI 不可用！</p><div>
+</div><p><img alt="xentry-vci-invalid.png" src="http://wiki.allscanner.com/diagnosis/benz/xentry-das-guide/xentry-vci-invalid.png"></p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

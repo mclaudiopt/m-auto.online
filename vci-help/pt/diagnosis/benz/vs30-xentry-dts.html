@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS30 XENTRY DTS — Benz — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">Benz</span> <span class="sep">/</span> <span class="current">VS30 XENTRY DTS</span></nav>
+      <div><blockquote class="is-info">
+<p>
+Experiência detalhada e tutorial do utilizador KrellyKryl do fórum Sprinter-Forum com o ALLScanner VCX-SE<br>
+
+<a rel="noreferrer" target="_blank" class="is-external-link" href="https://sprinter-source.com/forums/index.php?threads/129177/">https://sprinter-source.com/forums/index.php?threads/129177/</a></p>
+</blockquote><div>
+</div><p>I have been wanting to set up a proper diagnostic and variant coding system for my 2022 4x4 with the V6 Diesel engine over the last several months. I was new to the Sprinter/Mercedes platform, so I basically started from scratch - and, oh boy, has it been an adventure. By now, however, I have been able to get everything running regularly and can now use Xentry to diagnose my van, clear codes, see underlying data, and more. Further, I'm also able to do basic coding in DTS Monaco and given that training material in English is really lacking, I wanted to do a write-up that outlines what I did to get things working.</p><div>
+</div><h1 class="toc-header" id="id="disclaimer-"">Disclaimer  免责声明</h1><div>
+</div><p>Please note that this is not a comprehensive guide, nor do I consider myself an expert on any of this - it's simply a write-up of what has worked for me. If you do end up going down the same route, please note that using things like DTS Monaco has the risk of screwing up your car. So please don't blame me if your nice van goes up in flames 😉. I cannot guarantee that the information contained herein is completely without error or omission. Therefore, I accept no liability for any errors or omissions, or for the results obtained from the use of this information. Furthermore, the use of unlicensed software in conjunction with the instructions or hardware provided herein is the sole responsibility of the user to ensure that they comply with all licensing agreements and laws governing the use of such software.</p><div>
+</div><h1 class="toc-header" id="overview-of-the-mercedes-diagnosticcoding-ecosystem">Overview of the Mercedes diagnostic/coding ecosystem</h1><div>
+</div><div>
+</div><p>Xentry, Monaco, StarFinder, SDmedia, Vediamo, WIS, EPC, DAS, STAR, C4, C5, C6, and on and on it goes ad infinitum. There are so many acronyms associated with the Mercedes ecosystem that I honestly didn't even know where to start. Thing is, though, if you have a newer model (which is what I'll focus on - I don't know how this stuff works in older vans), you can ignore many of these. Below is a brief overview of the main software you need to know more about:</p><div>
+</div><h2 class="toc-header" id="mercedes-star-diagnostic-tool-star">Mercedes Star Diagnostic Tool (STAR)</h2><div>
+</div><p>This is the larger package as it comes to the entire diagnostic and programming system used by Mercedes-Benz for vehicle servicing, maintenance, and repairs. You don't really need to worry about the details, but the main thing to consider here is that it comes in different versions and the two you should consider is "Connect" C4 or C6. Most people seem to prefer C4, but IMO, don't overthink this and most people can probably ignore it. For a longer overview: <a rel="noreferrer" target="_blank" class="is-external-link" href="https://techroute66.com/mercedes-star-diagnostic-tool/">https://techroute66.com/mercedes-star-diagnostic-tool/</a>.<br>
+这是梅赛德斯-奔驰用于车辆保养、维护和维修的整套诊断和编程系统，是其中规模最大的一个。您无需担心细节，但主要需要考虑的是它有多个Versão，您应该考虑的是“Connect” C4 或 C6。大多数人似乎更喜欢 C4，但在我看来，不要想太多，大多数人可能都会忽略它。更详细的概述请访问： <a rel="noreferrer" target="_blank" class="is-external-link" href="https://techroute66.com/mercedes-star-diagnostic-tool/">https://techroute66.com/mercedes-star-diagnostic-tool/</a> 。</p><div>
+</div><h2 class="toc-header" id="xentry-and-das-u-hht">Xentry (and DAS U&amp; HHT)</h2><div>
+</div><p>This is the main tool for diagnosing your car, read and clear error codes, read out raw values from the various ECUs, make adaptations, initialize new sensors, etc. If you're currently using an OBD2 diagnostic tool for reading and clearing codes, Xentry will take it to the next level and IMO, is worth getting over (otherwise perfectly fine) devices from Foxwell, ThinkDiag, and others, if you're serious about your van. DAS is the older version of the diagnostic software that you likely don't need to consider (you might also come across “HHT” - another ignore).</p><div>
+</div><h2 class="toc-header" id="id="dts-monaco-and-vediamo-dts-monaco-vediamo"">DTS Monaco (and Vediamo)  DTS Monaco（和 Vediamo）</h2><div>
+</div><p>This is the main tool for variant coding / engineering of your van (DTS = Diagnostic and Test System... 🙄). Want to turn off lane keep assist? DTS can do that. Want to add a balance function to your audio? DTS can do that. Run cameras at any speed? You got it, DTS. And so much more. It can also diagnose and clear codes like Xentry, however, it's a more complicated piece of software, so if you're just interested in diagnostics and maintaining your van, stick to Xentry. If you want to take it to the next level, DTS Monaco it is. It comes in two main versions - 8 and 9. I have both and for my needs, both work perfectly fine and I don't really have a preference between the two. Vediamo is the older version of the coding/engineering software that you probably don't need to consider.</p><div>
+</div><h2 class="toc-header" id="wis-epc-and-starfinder-sdmedia">WIS &amp; EPC (and StarFinder &amp; SDmedia)</h2><div>
+</div><p>WIS is a comprehensive repair manual and information database and it provides information on repair procedures, technical service bulletins, wiring diagrams, and more. Add StarFinder to that mix and it'll show you photos of all the little components of your van and SDmedia if you want full video/animations of how to do stuff (I haven't found much use for either). EPC is part of the same system as WIS and is an online parts catalog. WIS and EPC have a VIN decoder built in, but for newer vans that doesn't seem to work because they're not up-to-date. As an example, my van is a W907 with the 642.899 engine and 722.902 transmission - use that type of information to find your van in WIS. If you need a VIN decoder to help you out, this is a really nice one: <a rel="noreferrer" target="_blank" class="is-external-link" href="https://mb.vin/">https://mb.vin/</a>. This one is okay too: <a rel="noreferrer" target="_blank" class="is-external-link" href="https://mercedesforum.com/forum/vindecoder.php">https://mercedesforum.com/forum/vindecoder.php</a>.<br>
+WIS 是一个综合性的维修手册和信息数据库，它提供有关维修程序、技术服务公告、接线图等信息。将 StarFinder Adicione到其中，它会向您显示您的货车所有小部件的照片，如果您想要完整的视频/动画来了解如何操作，则可以使用 SDmedia（我发现两者都没什么用）。EPC 与 WIS 属于同一个系统，是一个在线零件目录。WIS 和 EPC 内置有 VIN 解码器，但对于较新的货车来说，这似乎不起作用，因为它们不是最新的。例如，我的货车是 W907，配备 642.899 发动机和 722.902 变速箱 - 使用这类信息在 WIS 中找到您的货车。如果您需要 VIN 解码器来帮助您，这是一个非常好的解码器： <a rel="noreferrer" target="_blank" class="is-external-link" href="https://mb.vin/">https://mb.vin/</a> 。这个也可以： <a rel="noreferrer" target="_blank" class="is-external-link" href="https://mercedesforum.com/forum/vindecoder.php">https://mercedesforum.com/forum/vindecoder.php</a> 。</p><div>
+</div><h1 class="toc-header" id="id="hardware-and-software-"">Hardware and software  硬件和软件</h1><div>
+</div><p>The easiest way to get the entire ecosystem is to purchase the whole Mercedes Star Diagnostic Tool suite with all the hardware, multiplexer, software, etc. It's expensive, but it's the best option. Xentry PassThru is also available for an annual fee - if you’re serious about this, that’s the way to go.</p><div>
+</div><p>Other options also exist. You can obtain the various software packages as PassThru versions with devices such as the Tactrix OpenPort 2.0. For many (even most), this might be the best option, but I’m not going to go into such systems here, but it’s worth researching if you want to learn more about the whole ecosystem.</p><div>
+</div><p>Here, I will instead focus on the options from VXDIAG (no affiliation - I am merely using this for illustrative purposes). They make various multi-vehicle (including Benz) tools, such as the VCX SE and AllScanner devices and bundle up all the various software on ready-to-go SSDs, HDDs or used laptops - shipping takes about a week. If you are on a newer (2020+) laptop and want to boot from an external harddrive, you will likely need to convert the partition from MBR to GPT, which can be done with e.g., EaseUS. Once done, you can boot from the external hard drive using the loaded SSD and clone it to an internal hard drive, also using EaseUS.</p><div>
+</div><h2 class="toc-header" id="overview-of-the-vxdiag-vcx-se-device">Overview of the VXDIAG VCX SE device</h2><div>
+</div><h2 class="toc-header" id="id="vxdiag-vcx-se-"">VXDIAG VCX SE 设备概述</h2><div>
+</div><p>To use any of the supplied software, you need to connect your PC to your van via the OBD2 port using a “Vehicle Communication Interface”, or hardware VCI. As mentioned above, many different VCI devices can achieve that, but here I’ll focus on the VCX SE device. It is a pretty powerful little thing, which works across different car brands and supports all the main protocols, including DoIP, UDS, and DoNET. It also works with both PassThru and OpenShell (as a multiplexer) versions of Xentry. The device can be connected to your computer via ethernet, wifi, and a supplied USB-C to USB-A cable. All options work about the same, however, to maintain wifi connectivity to a network, I prefer to use the USB-C cable connection. The device comes with no instructions, but it’s pretty intuitive - plug it in, attach the cable to your computer, and then do the rest via software.<br>
+
+<img alt="" src="https://lh7-us.googleusercontent.com/4_R0YJYcQ6eOPYTdOtWDsyOsKipwFBVW0zwCarm5_xDsvB54QcQCK6-birOu8QJqEWtthmaGLtqVh0koES3zH9c1CW2-21XKgMwU5SSNjR-QuRZTHT6nkRQAh0Y1TwjpwG_VlSdiV2bNIKr4IDpeD9w"></p><div>
+</div><h2 class="toc-header" id="overview-of-vxdiag-software">Overview of VXDIAG software</h2><div>
+</div><h2 class="toc-header" id="id="vxdiag-"">VXDIAG 软件概述</h2><div>
+</div><p>If you get an SSD or used laptop pre-loaded with software from VXDIAG it’ll contain a boatload of stuff, most of which you don’t need. A lot of it will also be in Chinese, so the first thing you want to do is get all of that cleaned up by removing programs you likely don’t need (e.g., chat tools, email clients, browsers, and more). While this is a little daunting, you can ignore most of the software, shortcuts, and icons, because everything is pretty much set up to go and you mostly only need the following software packages:</p><div>
+</div><ol>
+<li>VCX Manager. This is the main software that will control the connection between your van, the VCI, and all downstream software.</li>
+<li>Xentry (Offline). This is the main software for diagnostics.</li>
+<li>Xentry Diagnosis Stop. Xentry is often not able to shut down properly, so you can run this little script to stop the session.</li>
+<li>DTS Monaco. This is the main software for coding. Version 8 comes pre-installed.<br>
+DTS Monaco。这是编码的主要软件。Versão 8 已预装。</li>
+<li>WIS, EPC, StarFinder, SDmedia, and other STAR tools. These come pre-installed too and might run via virtualization software. I don’t really use most of these, although WIS and EPC can be helpful.</li>
+</ol><div>
+</div><p>As mentioned above, a lot of unneeded stuff was installed and there are installers all over the place. Since everything is set up ready to go, you can get rid of most/all of that - I transferred installers, etc., to an external hard drive, just in case. For easy access, I dropped the programs I use into the Windows taskbar.</p><div>
+</div><h2 class="toc-header" id="how-to-use-vcx-manager">How to use VCX Manager</h2><div>
+</div><h2 class="toc-header" id="id="-vcx-"">如何使用 VCX 管理器</h2><div>
+</div><p>This tool is the main software communicating with your VCX SE device (VCI). Note, you don’t need to have the VCI connected to your van for any of this to work (notice the low OBD voltage in the images below). When you turn on your laptop without the VCI connected, you’ll get an error like this popping up:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/YGcxW6mV7bTPbIdpAyOMKP6IMt8IN9ouK6Se0WgkkEhAzt6UOs7aG4nmPU1aFlcncocvHqMZhPQHTlhQMPdeLn4Zu2nMp37GRXxYGAtNtd1nsmVXEFzxzcxPzqh1yxiqmhHRk8NWJufaC9T9fzVPJe8"></p><div>
+</div><p>You can ignore that. Once you connect the VCI e.g., via the supplied USB cable, you’ll get the following:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/tbrXoS1Ii-MqgAmPikJXaBKWwLXWNpEhy80qWjz9vLKZABPR5RtjSW7JKU5qhlnoRvHXOkCDJ3_6JedWvmDLkVcxIdI9DajKx_RmLTkFOgQ7knJg0DA1Ps3cikyQINfbLya-EEOPH1C2Xpb4DahGVkE"></p><div>
+</div><p>You’ll likely also see a “VCI-new” message pop up - minimize that window to the taskbar, but don’t close it. That means the VCX SE is now connected to your computer, so it’s time to open up the VCX Manager. When you do, it’s possible you might see the following at first:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/3AIZz6GA2UKf4MyzngOgMXhsMKcsBDza_1EFNQX5tkK89ld0SNVaMnMR134Gm441_LLMZ1Py00aIPdm3kHRG5XRk7RG8h7oRPljLi0i6CksfYa8gEtd1Kbgtu0fg-v_zv79Dlp5evTwQsXly1wCI-Pk"></p><div>
+</div><p>Wait a minute and your device should show up. If not, press the ReConnect button and you should hear a beep from the VCI. Once everything is connected, you should see this:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/316XgGf7gsoigBVndKNH2OF1HMkf_HNpREXB0-u-pcnJ5b1ZFWr-dtGVY9z8TeN-BmzE-PEcR7itHTxiPfc3qFhKB2W9fgmwmyZJ4aJ4efiYT5q0oDMj6qbuaiQ90mhxaNRbP5WBNbK3wv4Wq3gjUmc"></p><div>
+</div><p>Now, it’s time to ensure that all the required VCX software, firmware, licenses, etc. are up-to-date. I’m not really sure what the best sequence of events is here, so in semi-random order:</p><div>
+</div><p>Update your firmware in the “Device” tab:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/v_jBKqgEuJRsterYZz1y8qOt0KPGXBGUW2JB9AuabOl_enQUH-bBQfMS_eKgUVHYAkus8ZcXgxP_-2vuFV6CP86CR2FcPyy0CMKPqZKE3N0gI1Rto5YFb8a_ZcrqiG8yOAVW9ouqInQGrNzk--bQulU"></p><div>
+</div><p>Make sure the correct diagnostic software is installed under the “Diagnostic” tab - you likely want both PassThru (pre-installed) and Benz C6 (likely not pre-installed - click the icon and press install):</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/rPuymNaLfb9rqwi6zoUXzS-oR9eFqzw-bUG0MxTJPVz6_poMrU1qz8L_IdzW0HH36lH711oFgs6oPk9m8BdEQjjTFw7jYFFpfdLK-nR9Uyez6lGFInYt5qnjxjtkkjwqnLy4Owaj8cdgUgbTrW4lEa8"></p><div>
+</div><p>Finally, go back to the “Device” tab and update the licenses. Once done, everything should be ready to go.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/8f6dQxd_tNhXQSCubgbq7IqZ6FGW5060IUejQGiqGiR9hSIrzbdr5hqfa0CsEtxbPXUtnq7O6JgKC1H7e65q_-PJ-mPa2pzRUYFsZTLVTjUS6eYYwbJv5mp2QJR9--JxTOELTo8Ev3AHZWvZhAgZf9s"></p><div>
+</div><p>Now, it’s time to head out to your van and plug the VCI into your OBD2 port. Press the Start button twice, without pressing the brake pedal, so the car is on, but the engine isn’t running. To preserve battery, turn off A/C, head unit, etc. With the VCX Manager open and the VCI plugged into your van and the computer, press the “ReConnect” button to make sure everything is connected. If yes, you should be able to see the voltage of your starter battery under the “OBD Volt”, which should read ~12.6V. Is it &gt;13.5V? Turn off that engine, dammit, and try again 😉. Lower than expected? Go drive your van for a bit to recharge the battery (or, alternatively, connect to a trickle charger).</p><div>
+</div><p>To make everything work properly, press the “DoIP Switch” under the “Device” tab. Once the window opens, select “BENZ (ISO-13400)” and press the “DoIP ON” button. A “DoIP UDP Send” window should pop up. Press “OK” and minimize the DoIP Config window. You’re now ready to rock and roll!</p><div>
+</div><h1 class="toc-header" id="getting-started-with-xentry">Getting started with Xentry</h1><div>
+</div><h1 class="toc-header" id="id="xentry-"">Xentry 入门</h1><div>
+</div><p>Now the fun begins… The good news is that Xentry is quite easy to use and it’s more straight-forward than many of the OBD2 scanners out there, including those from Foxwell and ThinkDiag - although, as mentioned above, those are fine devices too (I have both. As well as a BlueDriver, OBDLink MX+, OBDeleven, and Carista, which only work as simple OBD2 scanners for Mercedes, but I digress..). In addition to being more user-friendly, it’s also faster, provides helpful diagnostic hints and instructions, and is overall, just much more powerful - as one would expect, since this is the OEM software.</p><div>
+</div><p>Before you start, make sure everything is connected, the VCI interface is active (check your taskbar), the DoIP switch is on, and the van is on, engine off. Boot up Xentry and it should automatically read your VIN if you’re using an “OpenShell” version. Wait a little and if everything is connected properly, Xentry should read your OBD voltage and status of the ignition:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/g4pIW4KmUtgXo0V0SOMW5ZOzw2U4lalM-Cy4WNFeYcap5i3CgZdH0OSoiI9vHuYK0cAM54LZ0ue1Yi35eKKachWplvShiITJJYfLPT8VxtGgPe_OF5OQ_sON1cD-s5BzNvXNdwxpy5wACTTYMoeo8G4"></p><div>
+</div><p>Once initial steps have completed, press the second tab on the left to go to the “diagnostics” portion of Xentry. Run a Quick Test and you will see the program running through all the various components (ECUs) in your van. These will be helpful for DTS Monaco too, so more about that later.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/ZyZbxc8OqQPplgs-BVCxrGYfTnCTWHpUDmcj9SAvNLPcavB7HSQ9aV3NEbby5lUPDsespVysQ66QD_X1qcOi6CPFrzEyYVJP0HN6Tesk07aPWJn3IYF_CO7YJsMJKwjw7o0n3uLTSohzrmkiuQHtGbU"></p><div>
+</div><p>Once the Quick Test has completed, you’ll get the results, including whatever error codes Xentry might have found. You can use the “Sequence/Filter” to just show error/event codes - otherwise all tested modules will be shown. On the right, you’ll see the following:</p><div>
+</div><p>F = fault that is stored and current. These can’t be cleared because of an underlying problem.</p><div>
+</div><p>f = older fault that was stored. You can clear these (but note, if the underlying cause is not fixed, they’ll come back).</p><div>
+</div><p>𝒾 = some sort of “event” has occurred, but it isn’t a fault. This simply means that additional information related to a specific test result is available, but it varies what that information is. Click through and Xentry will tell you. Typically, these can be ignored - for example, during my test it flagged the “Mobile phone cradle”, but that isn’t installed as an option in my van and Xentry, correctly, told me I could ignore the event. Typically (always?) these also cannot be cleared.</p><div>
+</div><p>✔︎ = test passed without issues.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/OvO-IjycXZNSpbAXOaPJH5uW3EosjcxPjKqzUVNqJyzW-JCfmYvWi_NkcYfmVD3ipvjcEKeYNMjeAHg_3zzPTJNV-PxercDscjEG2ZFlwDkGOvDH3lyEM-z5ZzWSvBw_WE-6G0hgMcTimKVQo5KM9pM"></p><div>
+</div><p>If you double-click a specific module, it will take you through to a screen with much more in-depth information about the fault/event/test, including listing part-codes and the relevant ECU.</p><div>
+</div><p>As mentioned above, the ECU information is required for setting up DTS Monaco correctly, so remember to come back to this. In the image below, I clicked through a stored and current fault in my 10” MBUX multimedia system and you’ll see the relevant ECU listed as “HU6_xx”. Note, the screenshot doesn’t actually show the code itself - that’s information underneath that I didn’t grab.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/kkzoUWMRmpcNXvzAFyvu5yr6TS3a0H9302BdtKIh92Ous0EMN-r_QD1fsh7TIZ86wLj1IJABn_8ntodH_bH_RhLBB0d4WSRhh1HJFbl5EawSGflqi0NdRJl1e_odza6cdygb9rOT5tL9Y2kdUHdQ9Fs"></p><div>
+</div><p>Once you have gone through and looked at the various codes, go back to the main “Diagnosis” screen where you can clear the codes (DTCs) by pressing the “Clear fault memory” button (see image on previous page). You’ll get the following:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/VTOacbxG6G1wmODOhKMXFAM-fGkA68l7ZV8iIRoGAA2hQAYVe7n58Xob5I8ZnihoXPMGBC3u6ijvJA-s_sMWOv211dRvV_3oldQKFBSDeDH-VXZMgzXkmuN7R03U2D8OJn1ob0gx1WtyVgZi_X70w1s"></p><div>
+</div><p>If you run a fresh quick test, you’ll see that the stored codes have been cleared:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/3UoTdYWK6xpr0zsTPmYCPBUH1yt6Zq3sLKCPFAhx6f13wIwwbszEAU5FtGQflNTg3-meVkTTdR46Gux1qRoe9hFwIJJJFBH9M3NiJ-XxwQ9H2Z-x2Bmr-hoTKzlDgD7F9fXOfPiEXF5NKcQcUI2IkA8"></p><div>
+</div><p>That’s all I’ll cover for Xentry. There are many other useful functions, but once this is up and running, spend some time familiarizing yourself with the software. Xentry can do much more than simply reading and clearing codes, and you can read out values from your sensors, run adaptations, install new sensors, and more. All of this is well-beyond this simple “getting started” writeup, but note that there’s a difference between “OpenShell” and “PassThru” versions of Xentry as it comes to these functionalities.</p><div>
+</div><h1 class="toc-header" id="getting-started-with-dts-monaco">Getting started with DTS Monaco</h1><div>
+</div><h1 class="toc-header" id="id="dts-monaco-"">DTS Monaco 入门</h1><div>
+</div><p>Once you’re comfortable with Xentry and the larger STAR ecosystem, chances are you’ll want to start fiddling with the various codings and engineering of your van. Before you do, though, remember that this is where things can start to go south if you screw up. That said, it really isn’t as scary as many make it out to be.</p><div>
+</div><p>DTS Monaco is a complicated and powerful piece of software that has many of the same functions as Xentry, but also allows you to change the engineering and coding of your van, including enabling you to turn off that pesky (and, frankly, dangerous!) lane keep assist for good! While I managed to get going with Xentry pretty quickly, DTS Monaco took longer, mostly because I didn’t really have a good understanding of what I was even looking at. Let me try to walk you through some of the main aspects of this useful and fun piece of software.</p><div>
+</div><h2 class="toc-header" id="ecus-and-smr-d-files-in-dts-monaco">ECUs and SMR-d files in DTS Monaco</h2><div>
+</div><h2 class="toc-header" id="id="dts-monaco--ecu--smr-d-"">DTS Monaco 中的 ECU 和 SMR-d 文件</h2><div>
+</div><p>DTS Monaco connects to your van via many different ECUs that control various functions. For example, your driver’s door has an ECU, your passenger door also has one, so does the MBUX, and on and on it goes. The important thing to understand here is that DTS Monaco needs files that tell the program everything about every single ECU - what it is, what the codings are, etc. This varies depending on exactly what van you have and what options it’s fitted with. For example, for the MBUX in the VS30, if you have the 10” screen, then the ECU is (likely…) “HU6”. If you have the 7” screen, then it’s (likely…) “CONNECT907”.</p><div>
+</div><p>For DTS Monaco to connect to these ECUs, it needs to know exactly what ECUs you have - which is where Xentry comes in again. In my van, I have 35 ECUs and I got the name of each ECU by clicking through the various units after running a quick test in Xentry - exactly what I showed a few pages up where I identified the “HU6” ECU as the one responsible for the MBUX system. I went through step by step and wrote down all these names and here’s what I got for my 2022 4x4 with the V6 Diesel:</p><div>
+</div><p><code>ASBM_HU; BCMFA2; CPC_NG; CR61NFZ; DISP6; DMFL222_MOPF; DMFR222_MOPF; DSM222; ESP907; EZS167; FCW177; FSCM_GEN5; HERMES; HLI_FL247; HLI_FR247; HU6; HVAC_F177; HVAC_F907; IBS177; IC907; IMRR177_R1; IMRR177_R3; MMPC213; OHCM907; ORC177; PARKMAN213; SCCM177; SWSP177; TM205; TPMMFA2; UDCM; VCS177; VG907; VGS4NAG2; WMI213MOPF; WMI213MOPFR</code></p><div>
+</div><p>The information DTS Monaco needs for each ECU is provided in “SMR-d” files (or, in earlier versions, CBF files, but you can likely ignore these). These can be found in the Xentry package:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/Vw6Kh6kr3p53OdWRnO_IhGqG-5NQZBv25lTICj_y_pGZ9AsT0jUlOIL62z2t-mhC9Dy7Dq9OCQ4zANVGlZoRv-XnAqlQTOAl9UQ5tvJn5dz_7-q_lGrCp3LdWmOw4du_ngkEEAGBLF1G4Goclbbj9es"></p><div>
+</div><p>Select the ones you need (for my van, that would be the 35 ECUs above), based on the naming, which will be identical between the ECU and the SMR-d file (for example, notice the “HU6” file in the image above). Once they’re all selected, copy (don’t move) them to a new folder e.g., on your desktop.</p><div>
+</div><h2 class="toc-header" id="organizing-ecu-information-in-dts-monaco-using-projects">Organizing ECU information in DTS Monaco using “Projects”</h2><div>
+</div><h2 class="toc-header" id="id="-dts-monaco--ecu-"">使用“项目”在 DTS Monaco 中组织 ECU 信息</h2><div>
+</div><p>Once you have the SMR-d files copied to a separate folder, it’s time to import them into DTS Monaco. The way in which the software is organized is via a set of “Projects”, which is essentially a collection of relevant SMR-d files, and “Workspaces”, which is the actual workspace you will be working in when using the program. Each workspace needs a Project to work. Note, in theory you could import (almost) all SMR-d files into a single Project, but because your van won’t have most of the ECUs linked in those SMR-d files, you wouldn’t be able to connect to the referenced ECUs. Also, the Project file size would be huge and the program slow. Similarly, you also don’t need to import all the SMR-d files into a single Project, but could have individual Projects for working on the MBUX system, the engine, the doors, etc. I prefer having a single Project with all the relevant ECUs though, so that is what I will focus on here.</p><div>
+</div><p>First, let’s boot up DTS Monaco v8:<br>
+首先，让我们启动 DTS Monaco v8：</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/hnQ3RMI6WhLDXrR7GMzd0Pvx0ai7sw6d3W5SMsPCsZ9fyhfVjJHgzc7r0DT_PGDKA1lUd0yfGDsH8RT5typWTV4K5WvYdGFvnc5UlHEi8H9PqZOgio1TSeZIyyn_2n7LK0leu2tZbpBjwpM1RFdzT0A"></p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/xr-pBwlw6ysPPEMa5XS0G4zSEh3JbasvYPH8Rt-LQZVj8Cfq6Gm3H0Vfvlz5jHpsuuMRzpN3LZwR4V--qYbnXFPETzHXiLHlm6JhUGnmUmPShuSrM_6k2Ttnw3fosaCw3xSYMRne7JKmd2syzz2m_rk"></p><div>
+</div><p>A few things to note here. In the box on the right you’ll see that I have my VCI connected to the computer “VCX (MODULE_xx)”. This is all controlled via “Interfaces”, but more on that later. The “Edit” mode is how we will get our “Workspace” set up, and the “Start” mode is the one we will use to actually run DTS Monaco. More on these later. For now, focus on “Administrate and manage DTS projects”, which is where we will get our SMR-d files imported, and a Project allowing us to connect to all the van’s ECU set up. Click the button and it will start up the System Configurator. In the “Project administration” tab, right click and select “New project”. In the next step, select the “Modular optimized databases” option, which will allow you to import the SMR-d files you previously copied to a new folder.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/Hnq3XFXisobK7fE2eBKIDdYrTmRd7Fotl4c56iDq3SdQAotyQMGZrfWeIPkpGZbHON3HZuiwZv7n6YYJlbTy-bzKNIQs90_3yFZaMFEFEltsOl9TvMcQtDA_jy4lxgp4xzNdGwUD8AwSUHzdX7N_hOY"></p><div>
+</div><p>In the following example, I only selected three SMR-d files to keep it simple, however, for the Project I use with my van, I selected all 35 mentioned above. Remember, these are the SMR-d files you previously copied into a new folder from the “MB_VAN/SMRX” subfolder in the Xentry folder (see above).</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/2b1Gm9Mlf83BrgqKHpsBNJ-H8hJ7HDs2eun5xfCCXlLNfclu1eaXXOy_1H4FmFk4ibzXFAP3l9CuyR2jQtCBQm-9IztGU9srAaii1CyTOwFkotETbpyjJeihtByXkUilMq0tmrFFkGDVbes81FtgP4U"></p><div>
+</div><p>Next, name your Project and click through to create it. I named mine “W907” to reflect the van ID. That’s it.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/dXE7Gkt-jPlVBd18ULegFh0CREWDjJHU6Ny2y2Mhq7EpgM9GC8qteEcWLUIPeQSTrcTD1HjenXKdf4FdJ2dTp4Bh0opeR9Pqdjvjj81YF9XuKfxf1VdAY3E-jSpA8bWbpsxlL5T2Be4X0kxHi-UiSOY"><br>
+<img alt="" src="https://lh7-us.googleusercontent.com/dMnNFEnoKAyPWNeg8mAU6dxj5gf7ofMu_6oN-CwUjTSYQQI64FyAkd0asDhOnVoeYn9L5VLKa7eJ2jb9XYLukFAfiyimTI5-kPMGZKSbyZaxX1NedAiCdXXn6Q53YnM3BHm7c5UcrT0oGjyVtrfA8nI"></p><div>
+</div><p>Once you’re back to the “Project administration” tab, you can see all the details about your new Project, including information about the imported SMR-d files, etc.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/FxG14gJT_D1_0z1O2vz4_9ZyDeUr_lWY9b7oDlXuj5u4tCRYEH_YVFO4fSvbuBf9TkD0GASElPKHvLyHKviRHFlL6s75nAsM220DojDwL-fXRx4lEuAVWsiDZxPT54iSUi3a2lsAf0dXQlOU3ZaJVoc"></p><div>
+</div><p>Once you have successfully created a Project, it’s on to creating a workspace. Note, in the above I created Projects from scratch. It is possible that a Project already exists within the DTS Monaco installation for your van, in which case you can just use that, instead of having to go through the steps of identifying ECUs, copying files, etc. For my van, there wasn’t a relevant Project already, plus, I wanted to figure out how this all works.</p><div>
+</div><h1 class="toc-header" id="creating-workspaces-in-dts-monaco">Creating “Workspaces” in DTS Monaco</h1><div>
+</div><h1 class="toc-header" id="id="-dts-monaco-"">在 DTS Monaco 中创建“工作区”</h1><div>
+</div><p>Once you have set up a relevant Project, it’s time to create a Workspace so you can start working on your van in DTS Monaco. Remember, Projects are a collection of imported SMR-d files that tells DTS Monaco how to communicate with the various ECUs, whereas Workspaces simply create a set of interfaces that allows you to perform various coding, diagnostic, and engineering tasks on your van.</p><div>
+</div><p>Go back to the main page of DTS Monaco and under the “Edit” mode, click the “Create a new workspace” button. DTS Monaco has several templates already built-in and we’re simply going to use one of those to get set up. Once set up, you can edit various aspects of your Workspace within DTS Monaco itself.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/2EyZSwX1-NCScilw2QLBT6APFNSNukYpAOjKPL185OjI-FnBsgMS3IAGTKGaJT_SECnnfh_sLCa0u0ghchOA86E21VRNLIyGqIznI3ZXoyxxgdXvqNeBFBoWCmI7zdEfW_YApLiBoSKvBtmEj6ijUgU"></p><div>
+</div><p>Select the Project you just created and the relevant template. Press “OK”. The main DTS Monaco program will open and as is always the case when you open up the program, it’ll ask you if you want to “Perform an ECU update”. Press “No” (don’t worry if you accidentally press “Yes” - it won’t actually work).</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/LVwK-vzkFquICQbntnyV4PM8Z-uhzNcspzB2q_xy3fxEw6FZCo2euf1sKgDMxvs9dWO_BuSIbxuDe-HDYeE-Zm3jaljTsTVU79OeyP_qa7Uob_ksubBtstNgjyrqSuJDvrpFYJw6tpj5wy9r1O7XtOA"></p><div>
+</div><p>Welcome to DTS Monaco! Once inside the program, press “Save” and give your Workspace a name:<br>
+Bem-vindo DTS Monaco！进入程序后，Clique em“Guarde”并为您的工作区命名：</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/9bcmPPohlulyd-8pJ7ZRosTAow62cosnsF6lq4Z5vFOj8rmE23THWsPTszPeXsQyqg6yRjjOWrp6KMrXATi6wedFJvadZ1fHW9XPLuCzHoxElo-NeMD-CqVmjn6CLYjHNGYPnOuvm6eq4b7kbIwSiHI"></p><div>
+</div><p>You’re now ready to start working on your van. But first, you need to make sure interfaces are connected.</p><div>
+</div><h2 class="toc-header" id="checking-interfaces-in-dts-monaco">Checking Interfaces in DTS Monaco</h2><div>
+</div><h2 class="toc-header" id="id="-dts-monaco-"">检查 DTS Monaco 中的Interface</h2><div>
+</div><p>To ensure that DTS Monaco can correctly communicate with your van, you need to make sure that your VCI has been set up correctly. In all likelihood, you don’t need to go through this, but in case you do. From the main screen of DTS Monaco, click the “Administrate and manage DTS projects” button again. This time, head over to “System settings”, where you will see the “Interfaces”. From here, click through to the various modules and make sure your VCI is listed. If you are using the VCX SE, then you need to have the following details, which will likely be similar / the same for other VCIs too:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/TVlXcXDXVR_GF8CmgDWUSo0emoKelOi4Vn2K1PSoqalDMzZ5GrZ8irmaklkNQaJMP_HpTn5ESx5U-a06DQd1PX4dOmLJoZ1ig_OYk2qXD6fAnCnvr1eMpwdMFINEuJ0DSaKu9cvIVNIw6ULk6_ki6Bo"></p><div>
+</div><p>The “tick” box is the currently active interface that’s being used (“VCI_SMR” in my case). Note, there’s also a “Simulation” module, which will allow you to start up DTS Monaco, play around with things, etc., without the need for an actual VCI to be connected. If you right-click on the left-hand side, you’ll see a menu to update your VCI information, allowing you to see what is currently connected to your computer and what is not. In my case, that would be “VCI_SMR, “VCX”, and “Simulation”. The latter will always be shown as connected, since it doesn’t need actual hardware, and the reason why my computer is showing both VCI_SMR and VCX, despite me only having the VCX SE connected, is because those two have identical information. DTS Monaco can only have one VCI connected at a time, so none of this is a problem - I simply created a duplicate for the purpose of writing this guide.</p><div>
+</div><p>In the “Interfaces CBF” tab, also make sure that the “eCOM_CBF” interface has been ticked off:<br>
+在“Interfaces CBF”选项卡中，还要确保“eCOM_CBF”Interface已被勾选：</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/KmNlEwaXJfS5_narnWDWJYYH2nEPuYso-GXhzYbUIMsF8k-uQGIRSGa2QWhsdw6dN-c9c0IxZl0UiNc-mShWFtSat4w_8rL68ehXb4-btj7xsHu_ayZhEMVc301twBWZS9eAiHIw3nzxvyeiGXZ65MA"></p><div>
+</div><p>Once all of this has been done, you are ready to get coding in DTS Monaco itself. Get excited!</p><div>
+</div><h1 class="toc-header" id="working-in-dts-monaco">Working in DTS Monaco</h1><div>
+</div><h1 class="toc-header" id="id="-dts-monaco-"">在 DTS Monaco 工作</h1><div>
+</div><p>With everything set up, you are now ready to start working on your van. Remember, you are now going to be fiddling with the brain(s?) of the van itself, so you do run the risk of messing things up. I have heard claims that you may be able to brick your van when you do variant coding, however, I’m not really sure that’s true for most things. But as a precaution, keep all of this in mind and carefully document your own steps, including backing up coding files. You can upload entirely new ECU software and perform flashes in DTS Monaco, and I’m sure if those things go wrong, you can badly mess up your car, however, presumably a reflash back to stock can reverse the process. I won’t cover any of that here, since I haven’t done any of that in DTS Monaco, although I have used KessV2 to install the absolutely fantastic Kerma tune - but only via their direct help and instructions.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/QwuEneDSVD-UMRZCNRh7ISGGatA8yBfLXvgCFLkRpT2hAOyREvhCViQK7Km-cgmxbqMXyPVCLPZneEgC_oIDNdL_g6A9bVmy0T1taG33UXdeNLWKc5Vn-EHhuSh6dD3WGXW-qNMOZkGtxyToa0XaJpE"></p><div>
+</div><p>In the main DTS Monaco window, click the “Open a workspace” button and select the Workspace you just created. In the following, I’ll be using the Workspace I have been using for my van.</p><div>
+</div><p>As per normal, it will ask you if you want to do an ECU update. Press NO. Wait for the program to load and you should now see your Workspace in DTS Monaco in all its glory. Remember those SMR-d files you imported as part of creating your Project? Those are the “Logical Links” on the left. Note, several versions are available because there are different interfaces that can connect - only the connected ones will work and be active. In the example below, you’ll see me having highlighted the “HU6” ECU that controls the MBUX.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/CBB4_qDbFVUs-Y63xctOzHfkSn_1lyX_zosEBdwqbxnVKccHhl4FCmT-4Izqmj2jtm1lYEhQQ_mCw-Z2yDm-zpKO1tGpiMwg8es4LUR-3JmzGjjCPuzVsLW9H7hg5Ley9lj2TfzG7ap1awodz3y8PHk"></p><div>
+</div><h2 class="toc-header" id="defeating-the-firewalls">Defeating the firewall(s)</h2><div>
+</div><div>
+</div><p>Before you can start doing any variant coding in DTS Monaco you need to defeat a firewall. Softing, who created DTS Monaco, presumably put these in place to ensure that only Real Professionals can work on your van. Right.</p><div>
+</div><p>What firewalls are in place varies based on model year, etc. For my W907, I can open up the firewall via the EZS167 ECU, but before I show you how to do that, let’s first log into the BCMFA2 ECU, since that’s the way to open up the firewall in older vans. In the list of logical links, right-click on EZS167 and select “New Tab for Logical Link”. When you do this, you keep the link to that ECU open and you can have multiple ECUs open at the same time. In contrast, if you were to click through to this ECU via one of the tabs on top, you’d lose the connection once you click through to another one where you might want to do some coding. By having a single tab just for this ECU, you can ensure the connection is kept alive throughout your session.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/9prq6M2SdhvGHQch4CGJwmQBadR9fqGitrU43gl2Iophr3XAQd9e3fktSJ9hayYWxzMGjK0kLt1J7c70g49lSxH8cRiW-Q0kwpxoSWqGDLYESrnam2m1E6EAzIPFlFl7NAqGCO7qxjxbN0Zl_284-FM"></p><div>
+</div><p>Once that link is created, a new tab will open. In the new tab, go to “Generic Jobs” and select “Security Access Level 37”. Press the “Transmit” button and you should see a bunch of text in the window below. Provided that you see no text in red, in an older van, you should now have turned off the firewall.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/bdhX9E7CoYMUi2B6CnXp4_bJ5YKP3LdafiHJA5He2FsD4t0OR04zLLfPvxI5NAz02MY0qnRiZ5rUqAx1CfQYkq5T5cPIRkJKktErIA5UpwqbcyAY9LNLwxHwHmeQ2sPNbZ-DQnBMqMtUj99QVKyG8zc"></p><div>
+</div><p>In a newer van, however, the process is a little different and, as mentioned above, done via the EZS167 ECU instead. Do the same process as described above, but this time it’s “Security Access Level 3B”.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/spOIj1cjesnsg27sSY9zV5XQBkZiI50-vQdNlw85XpdLzwWJR6VLekOLzNd3zwYRoEDob-sbA6KImloVMpSDjqOqPJ4BNDLt2ITu2_S2LwFPu0gV1sS5uMptciahwtsNd4cRa8M8aUhoenUIu1QGxkE"></p><div>
+</div><p>Click “Transmit” and provided that you see no red text and have “acknowledged” displayed under “Response State”, your firewall should now be deactivated.</p><div>
+</div><h2 class="toc-header" id="id="variant-coding-"">Variant coding  变体编码</h2><div>
+</div><p>Now, it is time to perform the actual variant coding. Open up the relevant ECU governing the features you want to change and open it in a new tab. In the example here, we open the MBUX’s “HU6” ECU. Once done, you first want to select the “Extended Start”and press Transmit in the new ECU tab you opened up:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/gLP9GRLKocCL-Wf6huLWUqT0yGcpqCN_stkWpU3szmcz9k2ENIi0cuXWoV43D_EsFkpsdTiW6QrLNBbs8b5uPBY8czk5SWGdEtS201fiEcI-g1l-CqbSU5hJXdUDeVVzDx28l2nuMXKU9-woIVWJprc"></p><div>
+</div><p>Provided that you correctly disabled your firewall and still have the relevant ECU (EZS167 and/or BCMFA2) open in a tab, you should see another “acknowledged'' Response State. The ECU is now ready for coding.</p><div>
+</div><p>Go to the “Variant Coding” tab and select your ECU. It should connect - if not, press “Connect”. Underneath the ECU you will see the “Domain” list. This is where the functions of the ECU can be accessed and is where you will actually find the values to change. In the example below I select “Audio Handle Write” to add a fader and balance to the MBUX (well, I already had it set to “ON”, so in this example I turn it back “OFF”):</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/Rgz4twViKPS89rRpJOhBH2o-tb02JrH4fWmDdZ9lRXZfTKbwTdad4brzPYSL5g4S9nwXhvJRpMj-S7ceISou4TLiOUfiSJdDi1kYCjEWF9S3TEAxPGSt8IA6cJjdfPSDmW9MZgVc_j7zINRYwh2UZfw"></p><div>
+</div><p>Find the relevant feature in the “Fragment” column - here, “Balance Fader Menue”. Double-click the value under “Meaning” (this is what you’ll change it to) and a dropdown menu will open up - select the new value you want. The original (or, rather, current) value is under “Original Meaning”:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/VntI1tjeOtLVtS_kXUNvgmhHovzrsvolLJ-r1WY04vYSe0cZdi_kg0_TXxRU5xUopxWazORRzIu4vCW87CrUSAZvOb7b4VH2DF1z_OP_p4FQWv7g4KRH-JTBhZKKeAe-smlsbhSv5txS9KgNxmZI1xc"></p><div>
+</div><p>Also, notice the binary coding string under “Read from ECU” (what the ECU is currently coded for) and “Current Coding” (what you just selected). Once everything looks good, press the “Do Coding”. Provided that you have done all previous steps correctly, you should see no pop-ups and the bar next to “Do Coding” go to 100% and the new value presented under the “Meaning” column and Current Coding == Read from ECU.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/J3wwhSZRrN77iE2qHVsRhzgPWDPiRErEoJXKHhF2ftUUTd7nnDvoU23AGKZ26_KuIAuNP6u9B2bphOgvyhofyLJGp32JqNlA3Mr8TAqBi4pfU5QCA_bAhgxJIWBVFssi8gvqqUP_6yF77AcChzhsaek"></p><div>
+</div><p>IF you get a pop-up, Google the error code - something went wrong in previous steps. I would suggest restarting the session again. Did you turn off the firewall? Turn on Extended Start? Those ECUs still connected?</p><div>
+</div><p>Provided that everything went as expected, your ECU should now have the new values. HOWEVER, they haven’t actually transferred yet, so you need to go through a few additional hoops. Last step.</p><div>
+</div><h2 class="toc-header" id="making-new-variant-coding-values-permanent">Making new variant coding values permanent</h2><div>
+</div><div>
+</div><p>In older vans, a “Hard Reset” of your ECU should be sufficient to make your coding changes permanent, however, for newer vans, you need to go through a few more steps, so let’s do that first.</p><div>
+</div><p>Click back to the open tab with the ECU you just changed variant coding for. In the “Diagnostic Services” search box, first find the “[31] Synchronize to Non-volatile Memory Start”. Click Transmit, and provided everything upstream was done correctly, you should get an “acknowledged” Response State and no red text.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/jw9a0ouQTCSs_hTT2qQmiUsfDwVSM80ZDyEpxf0tbi1vGzG_aPkCTJBaLj8WNjID64bAW6quOXZzp9V7b43JKFhNUoWzHzpNhN5kTDa3cD0M0TgRB8E9wQRNu_bqi5iAtlWIy9YcgksLmHln8X4T_J8"></p><div>
+</div><p>Next, click “[31] Synchronize to Non-volatile Memory Results”, followed by Transmit. Again, you should get an “acknowledged” Response State.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/ZGybZplqUgLRXVmenP2azSWWUk5zJG1bqmY0CqE1eP6GbBCclXZQmYIdkGSmdsLe18u7TFjo3l7bXejSjqzdQIyeXkl7yme39MtjXaaSABqvKNlPCCzwnVMafZ_sWtUm0gGcSNR6l4-kDmAv9dLWXk8"></p><div>
+</div><p>Now, it’s time to perform the Hard Reset of your ECU:</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/3CaRjeR9IS4eMJ2xE8LAGBQn4H_FbVeTRS1_JKwo7ovApxtR8Ve7BgfLWOUsjhWWW3VbXtgFp2oLMyz-qjUPfFDQlbgkvjXrNNLQKCORAilVpEEhGXDFzJxQACcuo0AUpZsDr6pSu55lEv_T-luXLb4"></p><div>
+</div><p>Do a Hail Mary, turn off the van, open the driver’s door, wait a few minutes, do another Hail Mary, and provided that your van did blow up in flames, the changes should now be permanent! You can check that by turning on the van (engine off), logging into the relevant ECU and then checking - here, you’ll see my “Balance Fader Menue” is once again “off”.</p><div>
+</div><p><img alt="" src="https://lh7-us.googleusercontent.com/Eq7j-YIOp7AhvkwL5abYh3jAyCSFJRqeykY9XPE7vSetbG5i26sjbvmgjZnC_j30uLzlmxP46NcpymULPWjXrq7pIxm1MCtAhIhNfir7nz5PtE4RUYaajR-l9PQT0k6aNlaWvthc01HU7xTuf5HSiwY"></p><div>
+</div><h1 class="toc-header" id="useful-posts-on-specific-variant-codings">Useful posts on specific variant codings</h1><div>
+</div><div>
+</div><p>As mentioned above, DTS Monaco is much more powerful than just variant coding, however, I think that is probably what most people will be using it for, so that has been my focus in this guide. What variants should you code and what features should you turn on and off? Well, that’s up to you - Google (and this forum) being your friends 😉. Below, a few links to get you started:</p><div>
+</div><p>Enable Fader and Balance menu<br>
+
+<a rel="noreferrer" target="_blank" class="is-external-link" href="https://sprinter-source.com/forums/index.php?threads/114180/">https://sprinter-source.com/forums/index.php?threads/114180/</a></p><div>
+</div><p>Enable Automatic Folding Mirrors on lock/unlock<br>
+
+<a rel="noreferrer" target="_blank" class="is-external-link" href="https://sprinter-source.com/forums/index.php?threads/116146/">https://sprinter-source.com/forums/index.php?threads/116146/</a></p><div>
+</div><p>Disable Lane Keep Assist<br>
+
+<a rel="noreferrer" target="_blank" class="is-external-link" href="https://sprinter-source.com/forums/index.php?threads/108445/">https://sprinter-source.com/forums/index.php?threads/108445/</a></p><div>
+</div><div>
+</div><p>If you prefer a PDF version of this guide, I have attached it here. I might update it, in which case I'll create a new reply to this thread and attach an updated PDF.<br>
+
+<a rel="noreferrer" target="_blank" class="is-external-link" href="https://sprinter-source.com/forums/index.php?attachments/293947/">https://sprinter-source.com/forums/index.php?attachments/293947/</a></p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

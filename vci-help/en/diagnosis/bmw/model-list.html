@@ -1,0 +1,490 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model List — BMW — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">EN</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">PT</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../../en/index.html">&#127968; Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/product/index.html">VCX Product Selection</a>
+          <a class="nav-link" href="../../../en/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../../en/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../../en/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../../en/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">User Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/guide/quickstart.html">Quick Start Guide</a>
+          <a class="nav-link" href="../../../en/guide/connection.html">Device Connection</a>
+          <a class="nav-link" href="../../../en/guide/firmware.html">Firmware Update</a>
+          <a class="nav-link" href="../../../en/guide/license.html">License Management</a>
+          <a class="nav-link" href="../../../en/guide/diagnosis.html">Driver Management</a>
+          <a class="nav-link" href="../../../en/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../../en/guide/device-ip-change.html">Change Device IP</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Remote Diagnosis <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/donet/intro.html">Platform Introduction</a>
+          <a class="nav-link" href="../../../en/donet/hyper-remote.html">Hyper Remote Diagnosis</a>
+          <a class="nav-link" href="../../../en/donet/legacy-remote.html">Legacy Remote Diagnosis</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Passenger <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../../en/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../../en/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../../en/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../../en/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../../en/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../../en/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../../en/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../../en/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../../en/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../../en/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../../en/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../../en/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../../en/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../../en/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Commercial <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Releases <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/release/index.html">Updates</a>
+          <a class="nav-link" href="../../../en/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../../en/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../../en/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../../en/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Developer Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/developer/index.html">Developer Guide</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">OEM Diagnosis</span> <span class="sep">/</span> <span class="current">BMW</span> <span class="sep">/</span> <span class="current">Model List</span></nav>
+      <div><h1 class="toc-header" id="bmw">BMW</h1><div>
+</div><h2 class="toc-header" id="id="compact-van"">Compact van(紧凑型厢式货车)</h2><div>
+</div><ul>
+<li>2nd
+<ul>
+<li>2-series F45 PHEV (from 12/2015)</li>
+<li>2-series F45 (from 09/2014)</li>
+<li>2-series F46 (from 06/2015)</li>
+</ul>
+</li>
+</ul><div>
+</div><h2 class="toc-header" id="id="convertible"">Convertible(敞篷车)</h2><div>
+</div><ul>
+<li>1-Series
+<ul>
+<li>1-Series E88 (since 12/2007)</li>
+</ul>
+</li>
+<li>2nd
+<ul>
+<li>2-series F23 (since 03/2015)</li>
+</ul>
+</li>
+<li>3-Series
+<ul>
+<li>3-Series E36 (09/1992 - 09/1999)</li>
+<li>3-Series E46 (12/1999 - 08/2006)</li>
+<li>3-Series E93 (12/2006 - 02/2014)</li>
+</ul>
+</li>
+<li>4 Series
+<ul>
+<li>4-Series G23 (from 11/2020)</li>
+<li>4-Series F33 (from 03/2014)</li>
+<li>4-Series F83 (from 09/2014)</li>
+</ul>
+</li>
+<li>6-Series
+<ul>
+<li>6-Series E64 (09/2004 - 09/2010)</li>
+<li>6-Series F12 (since 03/2011)</li>
+</ul>
+</li>
+<li>8-Series
+<ul>
+<li>8-series G14 (from 11/2018)</li>
+</ul>
+</li>
+<li>Z3
+<ul>
+<li>Z3 Roadster E36/7 (09/1995 - 06/2002)</li>
+</ul>
+</li>
+<li>Z4
+<ul>
+<li>BMW Z4 G29 (from - 11/2018)</li>
+<li>Z4 RoadsterE85 (09/2002 - 08/2008)</li>
+<li>Z4 RoadsterE89 (since 02/2009)</li>
+</ul>
+</li>
+<li>Z8
+<ul>
+<li>Z8 RoadsterE52 (01/2000 - 07/2003)</li>
+</ul>
+</li>
+</ul><div>
+</div><h2 class="toc-header" id="id="coupécompact"">Coupé/Compact(轿跑车/紧凑型车)</h2><div>
+</div><ul>
+<li>1-Series
+<ul>
+<li>1-series F40 (from 07/2019)</li>
+<li>BMW ActiveE (since 09/2011)</li>
+<li>1-Series E81 (03/2007 - 12/2011)</li>
+<li>1-Series E82 (since 09/2007)</li>
+<li>1-Series E87 (06/2004 - 08/2011)</li>
+<li>1-Series F20 (since 09/2011)</li>
+<li>1-Series F21 (since 07/2012)</li>
+</ul>
+</li>
+<li>2nd
+<ul>
+<li>2-Series F44 (from 11/2019)</li>
+<li>2-series F22 (from 03/2014)</li>
+<li>2-series F87 (from 11/2015)</li>
+</ul>
+</li>
+<li>3-Series
+<ul>
+<li>3-Series E36 Compact (01/1994 - 08/2000)</li>
+<li>3-Series E36 (11/1990 - 04/1999)</li>
+<li>3-Series E46 (12/1998 - 05/2006)</li>
+<li>3-Series E92 (since 06/2006)</li>
+<li>3-Series E46 Compact (04/2001 - 12/2004)</li>
+</ul>
+</li>
+<li>4 Series
+<ul>
+<li>4-Series G22 (since 07/2020)</li>
+<li>4-Series G23 (since 11/2020)</li>
+<li>4-Series G82 (since 11/2020)</li>
+<li>4-Series F32 (since 10/2013)</li>
+<li>4-Series F36 (since 06/2014)</li>
+<li>4-Series F82 (since 06/2014)</li>
+</ul>
+</li>
+<li>6-Series
+<ul>
+<li>6-Series E63 (09/2004 - 09/2011)</li>
+<li>6-Series F06 (since 07/2012)</li>
+<li>6-Series F13 (since 10/2011)</li>
+</ul>
+</li>
+<li>8-Series
+<ul>
+<li>8-series G15 (from 07/2018)</li>
+<li>8-Series E31 (07/1989 - 05/1999)</li>
+</ul>
+</li>
+<li>Z3
+<ul>
+<li>Z3 Coupé E36/7 (01/1998 - 06/2002)</li>
+</ul>
+</li>
+<li>Z4
+<ul>
+<li>Z4 CoupéE86 (04/2006 - 08/2008)</li>
+</ul>
+</li>
+</ul><div>
+</div><h2 class="toc-header" id="id="saloon"">Saloon(轿车)</h2><div>
+</div><ul>
+<li>3-Series
+<ul>
+<li>3-Series G20 PHEV (since 07/2019)</li>
+<li>3-Series G20 (from 11/2018)</li>
+<li>3-Series G80 (since 11/2020)</li>
+<li>3-Series ActiveHybrid 3 F30 (since 07/2012)</li>
+<li>3-Series E36 (07/1990 - 03/1999)</li>
+<li>3-Series E46 (12/1997 - 02/2005)</li>
+<li>3-Series E90 (03/2005 - 03/2012)</li>
+<li>3-Series F30 PHEV (since 12/2015)</li>
+<li>3-Series F30 (since 03/2012)</li>
+<li>3-Series F34 (since 06/2013)</li>
+<li>3-Series F80 (since 06/2014)</li>
+</ul>
+</li>
+<li>5-Series
+<ul>
+<li>5-Series G30 (from 11/2016)</li>
+<li>BMW 5 G30 PHEV (from 01/2017)</li>
+<li>5-series F10 (from 03/2010)</li>
+<li>5-Series G30 PHEV Left Hand Drive (from 01/2017)</li>
+<li>5-Series G30 PHEV Right Hand Drive (from 04/2017)</li>
+<li>5-series G38 CHN (from 05/2017)</li>
+<li>5-Series G38 PHEV (since 05/2017)</li>
+<li>M5 F90 (from 11/2017)</li>
+<li>5-Series ActiveHybrid 5 F10 (since 12/2011)</li>
+<li>5-Series E34 (11/1987 - 07/1996)</li>
+<li>5-Series E39 (09/1995 - 07/2003)</li>
+<li>5-Series E60 (03/2003 - 02/2010)</li>
+<li>5-Series F07 FCEV (since 09/2016)</li>
+<li>5-Series F18 PHEV (since 12/2014)</li>
+</ul>
+</li>
+<li>6-Series
+<ul>
+<li>6-series G32 (from 07/2017)</li>
+</ul>
+</li>
+<li>7-Series
+<ul>
+<li>7-series F01 (from 09/2008)</li>
+<li>7-series F02 (from 09/2008)</li>
+<li>7-Series G11/G12 Left Hand Drive (from 10/2015)</li>
+<li>7-Series G11/G12 Right Hand Drive (from 10/2015)</li>
+<li>7-Series G11/G12 PHEV Left Hand Drive (since 07/2016)</li>
+<li>7-Series G11/G12 PHEV Right Hand Drive (since 07/2016)</li>
+<li>7-Series ActiveHybrid 7 F01 / F02 (since 07/2012)</li>
+<li>7-Series ActiveHybrid 7 F04 (since 04/2010)</li>
+<li>7-Series E32 (06/1986 - 08/1994)</li>
+<li>7-Series E38 (07/1993 - 07/2001)</li>
+<li>7-Series E65/66 (07/2001 - 07/2008)</li>
+</ul>
+</li>
+<li>8-Series
+<ul>
+<li>BMW 8er G16(from 07/2019)</li>
+</ul>
+</li>
+</ul><div>
+</div><h2 class="toc-header" id="id="sav"">SAV(运动型多Features车)</h2><div>
+</div><ul>
+<li>X1
+<ul>
+<li>X1 F48PHEV (from 03/2020)</li>
+<li>X1 E84 (since 09/2009)</li>
+<li>X1 F48 (since 10/2015)</li>
+<li>X1 F49 (since 07/2016)</li>
+</ul>
+</li>
+<li>X2
+<ul>
+<li>X2 F39 PHEV (from 07/2020)</li>
+<li>X2 F39 (from 11/2017)</li>
+</ul>
+</li>
+<li>X3
+<ul>
+<li>X3 G08 (since 05/2018)</li>
+<li>X3 G01 PHEV (from 11/2019)</li>
+<li>X3M F97 (since 04/2019)</li>
+<li>X3 E83 (09/2003 - 08/2010)</li>
+<li>X3 F25 (since 09/2010)</li>
+<li>X3 G01 (since 08/2017)</li>
+</ul>
+</li>
+<li>X4
+<ul>
+<li>X4 G02 (since 04/2018)</li>
+<li>X4M F98 (since 04/2019)</li>
+<li>X4 F26 (since 07/2014)</li>
+</ul>
+</li>
+<li>X5
+<ul>
+<li>X5 G05 PHEV (from 08/2019)</li>
+<li>X5 E53 (09/1999 - 09/2006)</li>
+<li>X5 E70 (10/2006 - 09/2013)</li>
+<li>X5 ActiveHybrid F15 PHEV (since 10/2015)</li>
+<li>X5 F15 (since 11/2013)</li>
+<li>X5 F85 (since 04/2015)</li>
+<li>X5 G05 (from 08/2018)</li>
+<li>X5M F95 (from 12/2019)</li>
+</ul>
+</li>
+<li>X6
+<ul>
+<li>X6 G06 (from 08/2019)</li>
+<li>X6 ActiveHybrid E72 (since 10/2009)</li>
+<li>X6 E71 (01/2008 - 11/2014)</li>
+<li>X6 F16 (since 12/2014)</li>
+<li>X6 F86 (since 04/2015)</li>
+<li>X6M F96 (from 12/2019)</li>
+</ul>
+</li>
+<li>X7
+<ul>
+<li>X7 G07 (from 08/2018)</li>
+</ul>
+</li>
+</ul><div>
+</div><h2 class="toc-header" id="id="touring"">Touring(旅行车)</h2><div>
+</div><ul>
+<li>3-Series
+<ul>
+<li>3-Series G21 PHEV (from 07/2020)</li>
+<li>3-Series G21 (from 07/2019)</li>
+<li>3-Series E36 (11/1994 - 05/1999)</li>
+<li>3-Series E46 (06/1999 - 07/2005)</li>
+<li>3-Series E91 (03/2005 - 06/2012)</li>
+<li>3-Series F31 (since 07/2012)</li>
+</ul>
+</li>
+<li>5-Series
+<ul>
+<li>5-Series G31 PHEV (since 11/2020)</li>
+<li>5-Series G31 (since 03/2017)</li>
+<li>5-Series E34 (10/1990 - 06/1996)</li>
+<li>5-Series E39 (11/1996 - 12/2003)</li>
+<li>5-Series E61 (03/2004 - 05/2010)</li>
+<li>5-Series F11 (since 06/2010)</li>
+</ul>
+</li>
+</ul><div>
+</div><h1 class="toc-header" id="bmwi">BMWi</h1><div>
+</div><h2 class="toc-header" id="i3">i3</h2><div>
+</div><ul>
+<li>I01 (since 11/2015)</li>
+<li>I01 (11/2013 - 11/2015)</li>
+</ul><div>
+</div><h2 class="toc-header" id="ix3">iX3</h2><div>
+</div><ul>
+<li>G08 BEVE (from 07/2020)</li>
+</ul><div>
+</div><h2 class="toc-header" id="i8">i8</h2><div>
+</div><ul>
+<li>I15 (since 03/2018)</li>
+<li>I12 (since 11/2015)</li>
+<li>I12 (06/2014 - 11/2015)</li>
+</ul><div>
+</div><h1 class="toc-header" id="mini">MINI</h1><div>
+</div><h2 class="toc-header" id="clubman">Clubman</h2><div>
+</div><ul>
+<li>MINI Clubman F54 (since 10/2015)</li>
+<li>MINI Clubman R55 (since 08/2007)</li>
+</ul><div>
+</div><h2 class="toc-header" id="convertible">Convertible</h2><div>
+</div><ul>
+<li>MINI Convertible R52 (04/2004 - 07/2008)</li>
+<li>MINI Convertible R57 (since 12/2008)</li>
+<li>MINI Roadster R59 (since 11/2011)</li>
+<li>MINI Convertible F57 (from 11/2015)</li>
+</ul><div>
+</div><h2 class="toc-header" id="countryman">Countryman</h2><div>
+</div><ul>
+<li>MINI Countryman R60 (since 08/2010)</li>
+<li>MINI Countryman F60 PHEV (from 03/2017)</li>
+<li>MINI Countryman F60 (from 11/2016)</li>
+</ul><div>
+</div><h2 class="toc-header" id="coupé">Coupé</h2><div>
+</div><ul>
+<li>MINI R50 (04/2001 - 11/2006)</li>
+<li>MINI R53 (Cooper S) (12/2001 - 11/2006)</li>
+<li>F55 (from 10/2014)</li>
+<li>Mini Cooper SE F56 BEVE (from 11/2019)</li>
+<li>F56 (from 03/2014)</li>
+<li>MINI R56 (09/2006 – 02/2014)</li>
+<li>MINI Coupé R58 (since 10/2011)</li>
+<li>MINI Coupé E (06/2008 - 06/2009)</li>
+<li>MINI Paceman R61 (06/2008 - 06/2009)</li>
+</ul><div>
+</div><h1 class="toc-header" id="rolls-royce">Rolls-Royce</h1><div>
+</div><h2 class="toc-header" id="convertible-1">Convertible</h2><div>
+</div><ul>
+<li>Rolls-Royce Phantom Drophead Coupé (RR 2) (since 06/2007)</li>
+<li>Rolls-Royce Dawn Drophead Coupe (RR 6) (since 02/2016)</li>
+</ul><div>
+</div><h2 class="toc-header" id="coupé-1">Coupé</h2><div>
+</div><ul>
+<li>Rolls-Royce Dawn (RR 06) (since 02/2016)</li>
+<li>Rolls-Royce Phantom Coupé (RR 3) (since 06/2008)</li>
+<li>Rolls-Royce Wraith (RR 5) (since 11/2013)</li>
+</ul><div>
+</div><h2 class="toc-header" id="saloon">Saloon</h2><div>
+</div><ul>
+<li>Rolls Royce Cullinan (RR31) (from 08/2018)</li>
+<li>Rolls-Royce Phantom (RR11) (from 08/2017)</li>
+<li>Rolls-Royce Phantom (RR12) Extended Wheelbase (from 08/2017)</li>
+<li>Rolls Royce GHOST (RR21) (from 07/2020)</li>
+<li>Rolls Royce GHOST (RR22) Extended Wheelbase (from 07/2020)</li>
+<li>Rolls-Royce Phantom (RR 1) (since 01/2003)</li>
+<li>Rolls-Royce Ghost (RR 4) (since 12/2009)</li>
+</ul><div>
+</div><h1 class="toc-header" id="motorcycle">Motorcycle</h1><div>
+</div><h2 class="toc-header" id="e-scooter">E-Scooter</h2><div>
+</div><ul>
+<li>K17</li>
+</ul><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/en/', '/pt/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,593 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VCX-Nano — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Produtos</span> <span class="sep">/</span> <span class="current">VCX-Nano</span></nav>
+      <div><h1 class="toc-header" id="id=""">Descrição do Produto</h1><div>
+</div><p>VCX-NANO 是一款标准化的VCI车辆诊断Interface, 基于 SAE-J2534 和 ISO-22900 PDU 国际标准设计, 兼容大多数的车辆通讯协议，设计紧凑, 是一个超高性价比的原厂诊断Interface。VCX Nano被车辆制造商广泛用于ECU在线诊断和编程。它还Suporte第三方和Software OEM。</p><div>
+</div><h1 class="toc-header" id="id=""">Características do Produto</h1><div>
+</div><h2 class="toc-header" id="id=""">原厂诊断Funções</h2><div>
+</div><ul>
+<li><em>[可选Suporte各种MarcaModelos的原厂级诊断Funções，替代昂贵的OEM设备…]</em></li>
+<li><em>[各种高级诊断Funções与原厂完全一致，性能甚至超出原厂…]</em></li>
+<li><em>[一键安装原厂Suporte驱动和在线升级，易于使用…]</em></li>
+</ul><div>
+</div><h2 class="toc-header" id="id=""">兼容汽车工业标准设计</h2><div>
+</div><ul>
+<li>SAE-J2534-1/2 Pass-Thru with EURO 5</li>
+<li>ISO-22900 MVCI &amp; D-PDU</li>
+<li><em>[J2534原厂级别ECUActualize编程Funções…]</em></li>
+</ul><div>
+</div><h2 class="toc-header" id="id="pc"">PCComunicaçãoInterface</h2><div>
+</div><ul>
+<li><em>[SuporteUSB2.0高速Ligação…]</em></li>
+<li><em>[Suporte802.11b Wi-FiSem fiosLigação…]</em></li>
+<li><em>[提供的PC配置管理工具可以自动检测Ligação和Actualizar Firmware…]</em></li>
+</ul><div>
+</div><h2 class="toc-header" id="id=""">高性能的车辆诊断Interface</h2><div>
+</div><ul>
+<li><em>[搭载高速Processador的VCX-NANO是一个高性能的车辆网络Interface…]</em></li>
+<li><em>[可Suporte大部分标准化和原厂私有Protocolos de Barramento Veicular…]</em></li>
+<li><em>[最多可Suporte4路CAN：3路高速CAN和单线CAN…]</em></li>
+<li><em>[Suporte多通道同时工作，例如:Suporte2线CAN或者是K线同时工作。…]</em></li>
+<li><em>[可选Suporte编程电压输出: 5V~20V FEPs output(FORD)…]</em></li>
+<li><em>[集成OBD-IIInterface的紧凑型设计可直接与车辆Ligação…]</em></li>
+</ul><div>
+</div><h2 class="toc-header" id="id=""">Suporte的Protocolos de Barramento Veicular</h2><div>
+</div><table>
+<thead>
+<tr>
+<th><img width="64" alt="" src="http://wiki.allscanner.com/icon/icon-car.png"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISO-9141 K-Line</td>
+</tr>
+<tr>
+<td>ISO-14230 K-Line</td>
+</tr>
+<tr>
+<td>ISO-15765 CAN</td>
+</tr>
+<tr>
+<td>SAE-J1850-VPW (GM Class2)</td>
+</tr>
+<tr>
+<td>SAE-J1850-PWM (FORD SCP)</td>
+</tr>
+<tr>
+<td>SAE-J2411 SWCAN (GMLAN)</td>
+</tr>
+<tr>
+<td>VAG TP20 CAN (SAE-J2819)</td>
+</tr>
+<tr>
+<td>VAG TP16 CAN</td>
+</tr>
+<tr>
+<td>VAG KW81 (SAE J2818)</td>
+</tr>
+</tbody>
+</table><div>
+</div><h1 class="toc-header" id="id=""">可选Suporte的原厂车辆诊断Funções</h1><div>
+</div><table>
+<thead>
+<tr>
+<th>Marca</th>
+<th></th>
+<th>Modelos</th>
+<th>Software OEM</th>
+<th>Suporte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/vw.png"></td>
+<td>VW</td>
+<td>VW, SEAT, Skoda, Bentley, Lamborghini</td>
+<td>ODIS &amp; ODIS-Engineer</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/audi.png"></td>
+<td>AUDI</td>
+<td>Audi</td>
+<td>ODIS &amp; ODIS-Engineer</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/jlr.png"></td>
+<td>JLR</td>
+<td>Jaguar, Land Rover</td>
+<td>JLR SDD</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/volvo.png"></td>
+<td>VOLVO</td>
+<td>Volvo</td>
+<td>Volvo VIDA</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/gm.png"></td>
+<td>GM</td>
+<td>Chevrolet, Buick, Cadillac, Opel, Holden</td>
+<td>GM GDS2 &amp; Tech2Win &amp; RDS</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/ford.png"></td>
+<td>FORD</td>
+<td>福特</td>
+<td>FORD IDS</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/mazda.png"></td>
+<td>MAZDA</td>
+<td>Mazda</td>
+<td>MAZDA IDS</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/toyota.png"></td>
+<td>TOYOTA</td>
+<td>丰田、雷克萨斯、塞恩</td>
+<td>TOYOTA Techstream TIS</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+<tr>
+<td><img width="32" alt="" src="http://wiki.allscanner.com/icon/honda.png"></td>
+<td>HONDA</td>
+<td>Honda, Acura</td>
+<td>HONDA Diagnostic System HDS</td>
+<td><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f534.svg" alt="🔴" draggable="false" class="emoji"></td>
+</tr>
+</tbody>
+</table><div>
+</div><blockquote class="is-warning">
+<p><strong>原厂软件版权属于其所有者，请购买授权正版软件！</strong></p>
+</blockquote><div>
+</div><h1 class="toc-header" id="id=""">Especificações Técnicas</h1><div>
+</div><h2 class="toc-header" id="id=""">硬件Especificações</h2><div>
+</div><table>
+<thead>
+<tr>
+<th></th>
+<th>项目</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-cpu.png"></td>
+<td>Processador</td>
+<td>32bit 180MHz ARM<br>1MB FLASH</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-dlc.png"></td>
+<td>诊断Interface (车辆)</td>
+<td>SAE-J1962 标准 OBD-II 诊断Interface</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-usb.png"></td>
+<td>有线Interface (PC)</td>
+<td>USB Micro-B Interface</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-wifi.png"></td>
+<td>Sem fiosInterface (PC)</td>
+<td>WLAN 802.11 b/g/n Sem fios网络 <strong>（选配）</strong></td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-led.png"></td>
+<td>指示灯</td>
+<td>2个LED：<br>红色：设备状态<br>蓝色：Comunicação状态</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-power.png"></td>
+<td>Alimentação</td>
+<td>车辆Alimentação：DC 9V-36V (兼容12V和24V)</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-consum.png"></td>
+<td>功耗</td>
+<td>1W</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-size.png"></td>
+<td>Dimensões</td>
+<td>长 x 宽 x 高 = 140 x 50 x 25 (mm)</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-weight.png"></td>
+<td>Peso</td>
+<td>设备Peso：0.3Kg<br>产品+包装Peso：0.8Kg</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-case.png"></td>
+<td>外壳</td>
+<td>塑胶外壳</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-temp.png"></td>
+<td>工作Temperatura</td>
+<td>-20～+70 °C</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-temp.png"></td>
+<td>储存Temperatura</td>
+<td>-40～+85 °C</td>
+</tr>
+<tr>
+<td><img width="48" alt="" src="http://wiki.allscanner.com/icon/hw-cert.png"></td>
+<td>标准认证</td>
+<td>符合欧盟 CE 和美国 FCC</td>
+</tr>
+</tbody>
+</table><div>
+</div><h2 class="toc-header" id="id="obd-ii-"">OBD-II 引脚总线协议覆盖</h2><div>
+</div><table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">9</th>
+<th style="text-align:center">10</th>
+<th style="text-align:center">11</th>
+<th style="text-align:center">12</th>
+<th style="text-align:center">13</th>
+<th style="text-align:center">14</th>
+<th style="text-align:center">15</th>
+<th style="text-align:center">16</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">GND</td>
+<td style="text-align:center">GND</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">B+</td>
+</tr>
+<tr>
+<td>HSCAN</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">H</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">L</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>PSCAN</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">H</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">H</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">L</td>
+<td style="text-align:center">H</td>
+<td style="text-align:center">L</td>
+<td style="text-align:center">L</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>SWCAN</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>PWM</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">H</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">L</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>VPW</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>K-LINE</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>KL15</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table><div>
+</div><h1 class="toc-header" id="id=""">产品附件</h1><div>
+</div><table>
+<thead>
+<tr>
+<th></th>
+<th>描述</th>
+<th>Especificações</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img width="280" alt="" src="http://wiki.allscanner.com/product/vcx-nano/vcx-nano.png"></td>
+<td>VCX-NANO 设备</td>
+<td>140 x 50 x 25 (mm)</td>
+</tr>
+<tr>
+<td><img width="280" alt="" src="http://wiki.allscanner.com/product/vcx-nano/usb-micro.png"></td>
+<td>USB Comunicação电缆</td>
+<td>USB-MicroB，1.5米</td>
+</tr>
+<tr>
+<td><img width="280" alt="" src="http://wiki.allscanner.com/product/vcx-nano/cdrom.png"></td>
+<td>驱动光盘</td>
+<td>CD-ROM</td>
+</tr>
+<tr>
+<td><img width="280" alt="" src="http://wiki.allscanner.com/product/vcx-nano/card.png"></td>
+<td>保修卡</td>
+<td></td>
+</tr>
+<tr>
+<td><img width="280" alt="" src="http://wiki.allscanner.com/product/vcx-nano/manual.png"></td>
+<td>用户手册</td>
+<td></td>
+</tr>
+<tr>
+<td><img width="280" alt="" src="http://wiki.allscanner.com/product/vcx-nano/package.png"></td>
+<td>包装盒</td>
+<td>Dimensões</td>
+</tr>
+</tbody>
+</table><div>
+</div><h1 class="toc-header" id="id=""">产品图集</h1><div>
+</div><p><img alt="vcx-nano" src="http://wiki.allscanner.com/product/vcx-nano/vcx-nano-1.jpg"><br>
+<img alt="vcx-nano" src="http://wiki.allscanner.com/product/vcx-nano/vcx-nano-2.jpg"><br>
+<img alt="vcx-nano" src="http://wiki.allscanner.com/product/vcx-nano/vcx-nano-3.jpg"><br>
+<img alt="vcx-nano" src="http://wiki.allscanner.com/product/vcx-nano/vcx-nano-4.jpg"><br>
+<img alt="vcx-nano" src="http://wiki.allscanner.com/product/vcx-nano/vcx-nano-5.jpg"></p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

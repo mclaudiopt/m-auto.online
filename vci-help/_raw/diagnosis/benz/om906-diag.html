@@ -1,0 +1,40 @@
+﻿<div><h1 class="toc-header" id="h-1-说明"><a href="#h-1-说明" class="toc-anchor">¶</a> 1 说明</h1><div>
+</div><p>本文介绍傲世卡尔科技 VCX 诊断设备使用原厂诊断软件 XENTRY/DAS 对奔驰 OM906 工业发动机进行诊断。</p><div>
+</div><p>梅赛德斯-奔驰 OM906 是一款6.4升直列6缸直列六缸顶置凸轮轴柴油发动机。它于1996年推出，OM906 CNG 是使用天然气的版本。<br>
+<img alt="om906-engine.jpg" src="/diagnosis/benz/om906-diag/om906-engine.jpg"></p><div>
+</div><h1 class="toc-header" id="h-2-诊断座连接"><a href="#h-2-诊断座连接" class="toc-anchor">¶</a> 2 诊断座连接</h1><div>
+</div><p>此款车型使用 <strong>OBD转14P圆形插头</strong> 连接，实际通信引脚为OBD-15脚，对应14P-14脚。<br>
+在没有转接头的情况下可以将通信线跳线连接到 OBD-15脚。</p><div>
+</div><table>
+<thead>
+<tr>
+<th>DLC</th>
+<th>PIN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="/diagnosis/benz/om906-diag/xdvci-obd-14p-1.jpg"></td>
+<td><img alt="" src="/diagnosis/benz/om906-diag/xdvci-obd-14p-2.jpg"></td>
+</tr>
+</tbody>
+</table><div>
+</div><h1 class="toc-header" id="h-3-配置诊断座类型"><a href="#h-3-配置诊断座类型" class="toc-anchor">¶</a> 3 配置诊断座类型</h1><div>
+</div><p>由于原厂软件需要检测连接到 VCI 的诊断插头类型，使用VCX通过14P插头连接诊断座后，还需要通过此配置工具配置插头类型为 <strong>14P</strong>.<br>
+<img alt="xdvci-update-pin.png" src="/diagnosis/benz/om906-diag/xdvci-update-pin.png"></p><div>
+</div><p>下载配置工具 <a class="is-asset-link" href="/diagnosis/benz/om906-diag/xdvciupdatepin.zip">xdvciupdatepin.zip</a></p><div>
+</div><h1 class="toc-header" id="h-4-诊断步骤"><a href="#h-4-诊断步骤" class="toc-anchor">¶</a> 4 诊断步骤</h1><div>
+</div><h2 class="toc-header" id="h-41-车型选择"><a href="#h-41-车型选择" class="toc-anchor">¶</a> 4.1 车型选择</h2><div>
+</div><p>XENTRY 中选择 <strong>工业机组</strong> -&gt; <strong>OM 906 CNG</strong><br>
+<img alt="om906-diag-1.png" src="/diagnosis/benz/om906-diag/om906-diag-1.png"></p><div>
+</div><h2 class="toc-header" id="h-42-选择k线诊断"><a href="#h-42-选择k线诊断" class="toc-anchor">¶</a> 4.2 选择K线诊断</h2><div>
+</div><p>启动诊断后会进入 DAS 诊断界面， 选择 <strong>3.通过K线进行诊断</strong><br>
+<img alt="om906-diag-2.png" src="/diagnosis/benz/om906-diag/om906-diag-2.png"></p><div>
+</div><h2 class="toc-header" id="h-43-确认诊断插头提示"><a href="#h-43-确认诊断插头提示" class="toc-anchor">¶</a> 4.3 确认诊断插头提示</h2><div>
+</div><p>如图提示，软件显示 <strong>诊断插针14</strong>， 与实际使用的 14P 诊断头一致，如不一致请配置为 14P<br>
+<img alt="om906-diag-3.png" src="/diagnosis/benz/om906-diag/om906-diag-3.png"></p><div>
+</div><h2 class="toc-header" id="h-44-快速测试结果"><a href="#h-44-快速测试结果" class="toc-anchor">¶</a> 4.4 快速测试结果</h2><div>
+</div><p><img alt="om906-diag-4.png" src="/diagnosis/benz/om906-diag/om906-diag-4.png"></p><div>
+</div><h2 class="toc-header" id="h-45-mr-发动机控制单元信息"><a href="#h-45-mr-发动机控制单元信息" class="toc-anchor">¶</a> 4.5 MR 发动机控制单元信息</h2><div>
+</div><p><img alt="om906-diag-5.png" src="/diagnosis/benz/om906-diag/om906-diag-5.png"></p><div>
+</div></div>

@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E240LC Diagnosis — John Deere — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">EN</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">PT</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../../en/index.html">&#127968; Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/product/index.html">VCX Product Selection</a>
+          <a class="nav-link" href="../../../en/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../../en/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../../en/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../../en/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">User Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/guide/quickstart.html">Quick Start Guide</a>
+          <a class="nav-link" href="../../../en/guide/connection.html">Device Connection</a>
+          <a class="nav-link" href="../../../en/guide/firmware.html">Firmware Update</a>
+          <a class="nav-link" href="../../../en/guide/license.html">License Management</a>
+          <a class="nav-link" href="../../../en/guide/diagnosis.html">Driver Management</a>
+          <a class="nav-link" href="../../../en/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../../en/guide/device-ip-change.html">Change Device IP</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Remote Diagnosis <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/donet/intro.html">Platform Introduction</a>
+          <a class="nav-link" href="../../../en/donet/hyper-remote.html">Hyper Remote Diagnosis</a>
+          <a class="nav-link" href="../../../en/donet/legacy-remote.html">Legacy Remote Diagnosis</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Passenger <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../../en/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../../en/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../../en/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../../en/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../../en/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../../en/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../../en/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../../en/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../../en/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../../en/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../../en/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../../en/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../../en/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../../en/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Commercial <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../../en/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Releases <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/release/index.html">Updates</a>
+          <a class="nav-link" href="../../../en/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../../en/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../../en/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../../en/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Developer Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../en/developer/index.html">Developer Guide</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">OEM Diagnosis</span> <span class="sep">/</span> <span class="current">John Deere</span> <span class="sep">/</span> <span class="current">E240LC</span></nav>
+      <div><h1 class="toc-header" id="id="h-1-"">1 说明</h1><div>
+</div><p>本文介绍傲世卡尔科技 VCX 诊断设备使用OEM Software Service ADVISOR 对约翰迪尔 JOHN DEERE E240LC 挖掘机进行诊断。</p><div>
+</div><p><img alt="e240lc.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/e240lc.jpg"></p><div>
+</div><h1 class="toc-header" id="id="h-2-"">2 诊断要求</h1><div>
+</div><h2 class="toc-header" id="id="h-21-vci-"">2.1 VCI 固件</h2><div>
+</div><p>VCI 固件必须升级到 v1.6.6.1 或更新Version。<br>
+Download固件 <a class="is-asset-link" href="/diagnosis-cv/deere/update_v1.6.6.1_nxedl32.exe.zip">update_v1.6.6.1_nxedl32.exe.zip</a></p><div>
+</div><h2 class="toc-header" id="id="h-22-rp1210-"">2.2 RP1210 驱动</h2><div>
+</div><p>RP1210 驱动必须升级至 v3.0.210622 或更新Version。<br>
+Download驱动<a class="is-asset-link" href="/diagnosis-cv/deere/rp1210_v3.0.210622_nxedl32.exe.zip">rp1210_v3.0.210622_nxedl32.exe.zip</a></p><div>
+</div><h1 class="toc-header" id="id="h-3-"">3 诊断Step</h1><div>
+</div><h2 class="toc-header" id="id="h-31-Open"">3.1 Open软件</h2><div>
+</div><p>Open Service ADVISOR 软件，Select <strong>[离线]</strong> 方式。<br>
+<img alt="johndeere1-offline.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere1-offline.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-32-"">3.2 登陆</h2><div>
+</div><p>Enter离线登陆密码。<br>
+<img alt="johndeere2-login.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere2-login.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-33-"">3.3 Select作业</h2><div>
+</div><p>Select已有的作业，或者Start一个新作业。<br>
+<img alt="johndeere3-job.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere3-job.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-34-"">3.4 Start作业</h2><div>
+</div><p>Click [作业] 进入诊断主页。<br>
+<img alt="johndeere4-open.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere4-open.jpg"></p><div>
+</div><h2 class="toc-header" id="h-35-Start Diagnosis">3.5 Start Diagnosis</h2><div>
+</div><p>在主页中Click <strong>[诊断]</strong> Start Diagnosis。<br>
+<img alt="johndeere5-menu.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere5-menu.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-36-"">3.6 Connection设备</h2><div>
+</div><p>Select EDL V1/V2 并Click [Connection]。<br>
+<img alt="johndeere6-connect.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere6-connect.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-37-"">3.7 故障码</h2><div>
+</div><p>Connection成功后显示读取到的故障码信息。<br>
+<img alt="johndeere7-dtc.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere7-dtc.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-38-"">3.8 数据流</h2><div>
+</div><p>Click [读数] 进入数据流界面， 左侧Select需要读取的项目。<br>
+<img alt="johndeere8-data.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere8-data.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-39-"">3.9 控制单元</h2><div>
+</div><p>Click [控制单元] 显示扫描到的控制单元信息。<br>
+<img alt="johndeere9-ecu.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere9-ecu.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-310-"">3.10 标定</h2><div>
+</div><p>Click [标定] 进入标定界面。Select [EGR阀学习值复位] 进行测试。<br>
+<img alt="johndeere10-cal.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere10-cal.jpg"></p><div>
+</div><p>Click [Confirm] Start EGR 学习值复位。<br>
+<img alt="johndeere11-egr-reset.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere11-egr-reset.jpg"></p><div>
+</div><p>EGR 学习值复位测试Done。<br>
+<img alt="johndeere12-egr-ok.jpg" src="http://wiki.allscanner.com/diagnosis-cv/deere/e240lc/johndeere12-egr-ok.jpg"></p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/en/', '/pt/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

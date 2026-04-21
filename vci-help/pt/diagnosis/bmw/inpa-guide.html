@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia INPA — BMW — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">BMW</span> <span class="sep">/</span> <span class="current">Guia INPA</span></nav>
+      <div><h1 class="toc-header" id="id="bmw-inpa"">BMW INPA软件简介</h1><div>
+</div><h2 class="toc-header" id="id="inpaebmwebmwvcx"">INPA是较旧的诊断软件，它是E系列BMW车辆最简单的工具，使用该软件，您将能够读取/清除所有模块的错误代码，执行测试等，重置调整并查看实时发动机数据，E系列诊断所需的只是该软件和用于BMW编码编程的诊断设备（如VCX）。</h2><div>
+</div><p><img alt="vx.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/vx.png"></p><div>
+</div><h1 class="toc-header" id="id="inpa"">INPA说明：</h1><div>
+</div><p>Suporte工程、测试、生产和售后的所有ECU使用案例；</p><div>
+</div><p>ECU诊断数据说明；</p><div>
+</div><p>读取和清除错误故障码；</p><div>
+</div><p>FLASH数据上传Transferir；</p><div>
+</div><p>读取测量值；</p><div>
+</div><p>Introduza/输出控制；</p><div>
+</div><p>单个ECU变量的校准；</p><div>
+</div><p>CAN总线模式仿真；</p><div>
+</div><p>车载/非车载集成Solução；</p><div>
+</div><p>Suporte特定于客户的协议；</p><div>
+</div><p>通过Suporte广泛的ASAM标准长期应用；</p><div>
+</div><p>语言Seleccione：英语和德语。</p><div>
+</div><h1 class="toc-header" id="id="bmw-e46-ecu"">本文以BMW E46 发动机ECU为例，简单介绍如何进入控制单元</h1><div>
+</div><h2 class="toc-header" id="id="h-1ecueasyconnectitoolradar"">1.连上设备和ECU后，首先要锁定设备，有两种方法：EasyConnect或者IToolRadar,如图：</h2><div>
+</div><p><img alt="lock.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/lock.png"><br>
+<img alt="another_kind_of_locking.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/another_kind_of_locking.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2Abrainpa"">2.锁定设备后AbraINPA软件，进入主页SeleccioneModelos底盘号；</h2><div>
+</div><p><img alt="open_inpa.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/open_inpa.png"><img alt="select_chassis_number.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/select_chassis_number.png"><img alt="select_chassis_number_and_module.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/select_chassis_number_and_module.png"></p><div>
+</div><h2 class="toc-header" id="id="h-3"">3.进入模块菜单，Seleccione所需信息即可。</h2><div>
+</div><p><img alt="module_main_menu.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/module_main_menu.png"><br>
+<img alt="information.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/information.png"><img alt="codierdaten.png" src="http://wiki.allscanner.com/diagnosis/bmw/inpa-guide/codierdaten.png"></p><div>
+</div><h2 class="toc-header" id=""></h2><div>
+</div><p>F1:Information</p><div>
+</div><p>F2:Identifikation</p><div>
+</div><p>F3:codierung</p><div>
+</div><p>F4:fehlerspeicher</p><div>
+</div><p>F5:Status lesen</p><div>
+</div><p>F6:Ansteuern</p><div>
+</div><p>F7:Speicher lesen</p><div>
+</div><p>F8:Auswahl</p><div>
+</div><p>F9:Bildschirmdruck</p><div>
+</div><p>F10:Ende</p><div>
+</div><p>F1：ECU信息</p><div>
+</div><p>F2：识别</p><div>
+</div><p>F3: 编码数据</p><div>
+</div><p>F4: 故障码存储器</p><div>
+</div><p>F5: 读取状态</p><div>
+</div><p>F6: 控制</p><div>
+</div><p>F7：读存储器</p><div>
+</div><p>F8：Seleccione</p><div>
+</div><p>F9: 屏幕截图</p><div>
+</div><p>F10: 结束</p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

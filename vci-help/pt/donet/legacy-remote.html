@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico Remoto Compatível — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">DoNet</span> <span class="sep">/</span> <span class="current">Remoto Compatível</span></nav>
+      <div><h1 class="toc-header" id="id=""">说明</h1><div>
+</div><p><img class="align-center" alt="donet-legacy-remote.png" src="http://wiki.allscanner.com/donet/donet-legacy-remote.png"><br>
+DoNet 兼容远程诊断模式需要服务端和客户端各使用 1 个 VCX 设备，可实现任意Marca设备远程诊断。<br>
+本文档介绍兼容远程诊断使用Passo。</p><div>
+</div><h1 class="toc-header" id="id=""">必要需求</h1><div>
+</div><h2 class="toc-header" id="id=""">服务端</h2><div>
+</div><p>硬件Ligação方法如下：</p><div>
+</div><p><img class="align-center" alt="donet-server-connect.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-server-connect.jpg"></p><div>
+</div><ul>
+<li><em>[VCX设备通过 REMOTE-OBD 适配器外接AlimentaçãoAlimentação。…]</em></li>
+<li><em>[诊断设备通过 REMOTE-OBD 适配器Ligação。…]</em></li>
+<li><em>[Confirme设备有稳定快速的联网条件（推荐使用网线Ligação宽带路由器）。…]</em></li>
+</ul><div>
+</div><h2 class="toc-header" id="id=""">客户端</h2><div>
+</div><ul>
+<li><em>[VCX设备Ligação车辆。…]</em></li>
+<li><em>[Confirme车辆使用稳定的AlimentaçãoAlimentação。…]</em></li>
+<li><em>[Confirme设备有稳定快速的联网条件（推荐使用网线Ligação宽带路由器）。…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="id=""">准备阶段</h1><div>
+</div><p>服务端和客户端分别按照以下Passo配置设备联网</p><div>
+</div><h2 class="toc-header" id="id="h-1-"">1. 关注公众号</h2><div>
+</div><p>扫描二维码或微信Pesquise “DoNet Diagnóstico Remoto平台” 并关注。</p><div>
+</div><p><img class="align-center" width="80%" alt="donet-wechat-qrcode-green.png" src="http://wiki.allscanner.com/donet/donet-wechat-qrcode-green.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2-Abra"">2. Abra远程诊断平台</h2><div>
+</div><p>在 DoNet 公众号菜单中Clique em[智能诊断]进入远程诊断平台。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-wechat-menu.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-wechat-menu.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-3-"">3. 配置用户信息</h2><div>
+</div><p>首次使用需要配置用户信息，请填写手机号便于双方联系。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-config-user.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-user.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-4-"">4. 配置设备信息</h2><div>
+</div><p>首次使用需要绑定VCX设备Número de série。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-config-device.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-device.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-5-"">5. 配置设备联网</h2><div>
+</div><p>远程诊断需要将设备接入互联网，Clique em[配置设备联网]。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-device-unknow.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-device-unknow.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-6-"">6. Seleccione联网方式</h2><div>
+</div><p>Seleccione设备联网方式，按照向导Concluído配网。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-config-network.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-network.jpg"></p><div>
+</div><blockquote class="is-warning">
+<p>请确保互联网Ligação稳定快速，设备网速延迟小于100ms，建议优先Seleccione有线网络。</p>
+</blockquote><div>
+</div><tabset><template v-slot:tabs=""><li><em>[有线网络联网…]</em></li><li><em>[Sem fios网络联网…]</em></li><li><em>[手机热点联网…]</em></li>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

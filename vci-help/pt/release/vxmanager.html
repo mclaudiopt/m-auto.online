@@ -1,0 +1,562 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizações VX Manager — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Lançamentos</span> <span class="sep">/</span> <span class="current">VX Manager</span></nav>
+      <div><blockquote class="is-info">
+<h3 id="id=""" class="toc-header"><a class="toc-anchor" href="#软件Transferir链接">¶</a> 软件Transferir链接:</h3>
+<p><a href="http://www.vxdiag.net/managecenter/download/vxdiag.zip" class="is-external-link" target="_blank" rel="noreferrer">http://www.vxdiag.net/managecenter/download/vxdiag.zip</a></p>
+</blockquote>
+<hr>
+<h1 id="h-20260420v191" class="toc-header"><a class="toc-anchor" href="#h-20260420v191">¶</a> 2026.04.20	V1.9.1</h1>
+<ul>
+<li><em>[修复 VCI SDK Memória兼容性更新(ODIS java 环境闪退)…]</em></li>
+<li><em>[修复 License 授权更新可能失败(设置激活状态错误)…]</em></li>
+<li><em>[新增 WCH USBLAN 网络驱动 (WCHUSBNIC 1.7.2025.07)…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>FIX VCI SDK memory compatibility update (crash in ODIS Java environment)</li>
+<li>FIX License update failed sometimes (error when setting active state)</li>
+<li>ADD WCH USBLAN network driver (WCHUSBNIC 1.7.2025.07)</li>
+</ul>
+<hr>
+<h1 id="id="h-20240112v189-beta-"" class="toc-header"><a class="toc-anchor" href="#h-20240112v189-beta-预发布Versão">¶</a> 2024.01.12	V1.8.9 Beta (预发布Versão)</h1>
+<p><a href="http://www.vxdiag.net/managecenter/download/vxdiag_beta.zip" class="is-external-link" target="_blank" rel="noreferrer">http://www.vxdiag.net/managecenter/download/vxdiag_beta.zip</a></p>
+<ul>
+<li><em>[更新 集成更新 VCI SDK v2.0.0.0…]</em></li>
+<li><em>[新增 VCX-FD 设备 6821 端口 100M 网络Comunicação (4K收发测试可达35Mbps)…]</em></li>
+<li><em>[优化 全系列设备 6820 端口网络Comunicação (速度提升100%)…]</em></li>
+<li><em>[优化 用户修改设备IP地址后可自动Ligação无需配置…]</em></li>
+<li><em>[优化 为每个应用程序生成独立的日志文件 (名称示例: VCX.AppName.exe.log)…]</em></li>
+<li><em>[新增 SR9900A USB 网卡驱动 10/14/2019, 2.0.5.0…]</em></li>
+<li><em>[更新 WCH USBSER 驱动Versão 1.7.2023.02…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>UPD Update VCI SDK v2.0.0.0</li>
+<li>ADD Support 100M high speed on port 6821 for new VCX-FD device</li>
+<li>OPT Enhanced network speed on port 6820 for all series devices</li>
+<li>OPT Device auto discover when change IP address</li>
+<li>OPT Generate independent log file for each application</li>
+<li>ADD SR9900A USB network driver 10/14/2019, 2.0.5.0</li>
+<li>UPD Update WCH USBSER driver version 1.7.2023.02</li>
+</ul>
+<hr>
+<h1 id="h-20220601v1890601" class="toc-header"><a class="toc-anchor" href="#h-20220601v1890601">¶</a> 2022.06.01	V1.8.9.0601</h1>
+<ul>
+<li><em>[更新 集成更新 VCI SDK v1.8.9.0 (启动加载速度慢)…]</em></li>
+<li><em>[新增 Manager 程序日志.…]</em></li>
+<li><em>[新增 固件更新时检测 OBD Alimentação并提示.…]</em></li>
+<li><em>[优化 授权更新增强网络超时,失败重试,Actualizar Firmware后立即Actualizar Licença.…]</em></li>
+<li><em>[优化 Manager 自动更新流程.…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>UPD Update VCI SDK v1.8.9.0 (Slow startup loading speed)</li>
+<li>ADD Manager program log.</li>
+<li>ADD Detects OBD power and prompts when firmware updating.</li>
+<li>OPT Enhance License update network timeout, failure retry, and update license  immediately after updating firmware.</li>
+<li>OPT Manager automatic update process.</li>
+</ul>
+<hr>
+<h1 id="h-20220511v1880511" class="toc-header"><a class="toc-anchor" href="#h-20220511v1880511">¶</a> 2022.05.11	V1.8.8.0511</h1>
+<ul>
+<li><em>[更新 集成更新 VCI SDK v1.8.8.0 (设备断开检测)…]</em></li>
+<li><em>[新增 用户界面语言设置.…]</em></li>
+<li><em>[优化 授权更新时显示进度.…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>UPD Update new VCI SDK v1.8.7.0 (Device disconnect detect)</li>
+<li>ADD User interface language setting.</li>
+<li>OPT Show progress when license updating.</li>
+</ul>
+<hr>
+<h1 id="h-20220415v1870415" class="toc-header"><a class="toc-anchor" href="#h-20220415v1870415">¶</a> 2022.04.15	V1.8.7.0415</h1>
+<ul>
+<li><em>[更新 集成更新 VCI SDK v1.8.7.0…]</em></li>
+<li><em>[新增 WCH USB 设备驱动Suporte.…]</em></li>
+<li><em>[修复 DoIP 固件更新可能不成功.…]</em></li>
+<li><em>[修复 VCI 固件更新不提示.…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>UPD Update new VCI SDK v1.8.7.0</li>
+<li>ADD WCH USB device driver.</li>
+<li>FIX DoIP firmware update may not be successful.</li>
+<li>FIX VCI firmware update does not prompt.</li>
+</ul>
+<hr>
+<h1 id="h-20211224v1861224" class="toc-header"><a class="toc-anchor" href="#h-20211224v1861224">¶</a> 2021.12.24	V1.8.6.1224</h1>
+<ul>
+<li><em>[优化 客户端与服务器使用HTTPS安全Ligação, 增强Ligação稳定性.…]</em></li>
+<li><em>[优化 设备ComunicaçãoInterface动态获取(SuporteBENZ DoIP设备IP需求).…]</em></li>
+<li><em>[更新 集成更新 VCI SDK v1.8.6.0…]</em></li>
+<li><em>[新增 增加客户端自动更新Funções.…]</em></li>
+<li><em>[优化 Actualização do Driver相关流程和错误处理.…]</em></li>
+<li><em>[优化 授权更新相关流程和错误处理.…]</em></li>
+<li><em>[优化 VCI固件更新Suporte更多芯片型号.…]</em></li>
+<li><em>[优化 DoIP固件更新Suporte保留用户配置.…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>OPT Use https secure connection with server.</li>
+<li>OPT Get device interface automatic(support BENZ DoIP requirements).</li>
+<li>UPD Update new VCI SDK v1.8.6.0</li>
+<li>ADD Automatic update function.</li>
+<li>OPT Optimize driver update process.</li>
+<li>OPT Optimize license update process.</li>
+<li>OPT VCI firmware update support more chips.</li>
+<li>OPT DoIP firmware update reserve user configure.</li>
+</ul>
+<hr>
+<h1 id="h-20210315v1840315" class="toc-header"><a class="toc-anchor" href="#h-20210315v1840315">¶</a> 2021.03.15	V1.8.4.0315</h1>
+<ul>
+<li><em>[优化 离线(服务器Ligação不可用)时可使用本地固件文件更新设备.…]</em></li>
+<li><em>[新增 配置选项:自动解除设备锁定.…]</em></li>
+<li><em>[更新 集成更新 VCI SDK v1.8.3.0…]</em></li>
+<li><em>[优化 用户界面…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>OPT: Device update will use local firmware when offline.</li>
+<li>ADD: Configure option: Automatic unlock device.</li>
+<li>UPD: Update new VCI SDK v1.8.0.0</li>
+<li>OPT: Optimize user interface.</li>
+</ul>
+<hr>
+<h1 id="h-20200922v1810922" class="toc-header"><a class="toc-anchor" href="#h-20200922v1810922">¶</a> 2020.09.22	V1.8.1.0922</h1>
+<ul>
+<li><em>[优化 DoNET 远程诊断服务组件.…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>OPT: Optimize DoNet remote diagnosis components.</li>
+</ul>
+<hr>
+<h1 id="h-20200819v1800819" class="toc-header"><a class="toc-anchor" href="#h-20200819v1800819">¶</a> 2020.08.19	V1.8.0.0819</h1>
+<ul>
+<li><em>[更新 集成更新 VCI SDK v1.8.0.0…]</em></li>
+<li><em>[更新 适配更新设备 VCI 固件 v1.8.0.0…]</em></li>
+<li><em>[优化 用户界面…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>UPD: Update new VCI SDK v1.8.0.0</li>
+<li>UPD: Update VCI firmware v1.8.0.0</li>
+<li>OPT: Optimize user interface</li>
+</ul>
+<hr>
+<h1 id="h-20200522v1640522-beta" class="toc-header"><a class="toc-anchor" href="#h-20200522v1640522-beta">¶</a> 2020.05.22	V1.6.4.0522 beta</h1>
+<ul>
+<li><em>[优化 同一设备每次Ligação时断开之前占用Ligação.…]</em></li>
+<li><em>[优化 远程诊断服务后台运行图标和提示信息.…]</em></li>
+<li><em>[新增 远程诊断服务日志.…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>Optimize Clean previous connection before connect to remote.</li>
+<li>Optimize DoNet service backgroud tray icon and tray tips.</li>
+<li>Add DoNet service debug log.</li>
+</ul>
+<hr>
+<h1 id="h-20200317v1630317-beta" class="toc-header"><a class="toc-anchor" href="#h-20200317v1630317-beta">¶</a> 2020.03.17	V1.6.3.0317 beta</h1>
+<ul>
+<li><em>[更新 新版DoNet远程诊断Suporte.…]</em></li>
+<li><em>[优化 部分界面.…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>Update new DoNet remote diagnosis.</li>
+<li>Optimize some user interface.</li>
+</ul>
+<hr>
+<h1 id="h-20190902v1620902" class="toc-header"><a class="toc-anchor" href="#h-20190902v1620902">¶</a> 2019.09.02	V1.6.2.0902</h1>
+<ul>
+<li><em>[优化 DoIP 固件升级程序稳定性.…]</em></li>
+<li><em>[更新 离线时提示且不自动弹出固件升级.…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>Optimize the stability of the DoIP firmware upgrade program.</li>
+<li>Update Offline prompts and do not upgrades automatically.</li>
+</ul>
+<hr>
+<h1 id="h-20190625v1600625" class="toc-header"><a class="toc-anchor" href="#h-20190625v1600625">¶</a> 2019.06.25	V1.6.0.0625</h1>
+<ul>
+<li><em>[新增 客户端软件更新检测提示.…]</em></li>
+<li><em>[更新 日志管理工具 v1.2…]</em></li>
+<li><em>[更新 VCI SDK V1.6.6.0 (Registo de Alterações格式).…]</em></li>
+</ul>
+<hr>
+<ul>
+<li>Add update detection for client software.</li>
+<li>Update LogManager v1.2</li>
+<li>Update VCI SDK V1.6.6.0 (log output format).</li>
+</ul>
+<hr>
+<h1 id="h-20190428v1500428" class="toc-header"><a class="toc-anchor" href="#h-20190428v1500428">¶</a> 2019.04.28	V1.5.0.0428</h1>
+<ul>
+<li><em>[优化 DoIP 和 VCI 固件升级统一, 新固件可用时自动提示升级.…]</em></li>
+<li><em>[优化 客户端与服务器网络Ligação稳定性, 提升Ligação速度.…]</em></li>
+<li><em>[优化 车辆Driver de Diagnóstico安装界面更新, 修复异常情况下多处错误.…]</em></li>
+<li><em>[优化 Reiniciar Dispositivo时同时Reiniciar VCI 和 DoIP 系统.…]</em></li>
+<li><em>[优化 设备正在诊断时, 管理工具可正常Abra不影响设备使用.…]</em></li>
+<li><em>[新增 Relatório de Erros, 可上传错误日志到服务器.…]</em></li>
+<li>更新 VCI SDK V1.6.5.0, 修复以下问题:
+<ul>
+<li><em>[设备配置为自动Ligação时可能在特殊环境下LigaçãoVCI失败(WIN7 64bit Memória过低).…]</em></li>
+<li><em>[设备测车时诊断程序异常Feche, 再次LigaçãoVCI可能失败.…]</em></li>
+<li><em>[增加设备占用状态检测.…]</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Optimize DoIP &amp; VCI firmware update combine, automatically upgrade when new firmware is available.</li>
+<li>Optimize client-server network connection and improve connection speed.</li>
+<li>Optimize vehicle diagnostics app installation/update errors.</li>
+<li>Optimize Restart VCI and DoIP systems simultaneously when rebooting the device.</li>
+<li>Optimize The Manager can open device without affecting When the device is using by diagnose.</li>
+<li>Add Error report to upload error log to server.</li>
+<li>Update VCI SDK V1.6.5.0, fix the following issues:
+<ul>
+<li>Automatically connecting devices may fail in special environment(WIN7 64Bit with low memory).</li>
+<li>After diagnosis application crash, then connect VCI may fail.</li>
+<li>Add device using status detect.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="h-20170927v1420927" class="toc-header"><a class="toc-anchor" href="#h-20170927v1420927">¶</a> 2017.09.27	V1.4.2.0927</h1>
+<ol>
+<li><em>[新增设备ComunicaçãoInterface自动扫描Funções(VCISDK-V1.6.0.0)…]</em></li>
+<li><em>[新增 DoIP 扩展设备信息显示…]</em></li>
+<li><em>[整合 DoIP 更新工具…]</em></li>
+<li><em>[整合 DoIP 开关工具并更新Suporte路虎VIN发现…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Add device interface AUTO detect.</li>
+<li>Add DoIP Expasion device information.</li>
+<li>Add DoIP Update tool.</li>
+<li>Add DoIP Switch tool and support JLR VIN discovery.</li>
+</ol>
+<hr>
+<h1 id="h-20170620v1300620" class="toc-header"><a class="toc-anchor" href="#h-20170620v1300620">¶</a> 2017.06.20	V1.3.0.0620</h1>
+<ol>
+<li><em>[更新 PASSTHRU 和 BENZ PDU 驱动…]</em></li>
+</ol>
+<hr>
+<h1 id="h-20170605v1300605" class="toc-header"><a class="toc-anchor" href="#h-20170605v1300605">¶</a> 2017.06.05	V1.3.0.0605</h1>
+<p>更新SuporteBENZ XENTRY:</p>
+<ol>
+<li><em>[增加 BENZ Instalação do Driver选项…]</em></li>
+<li><em>[更新 VCXNetUpdate BENZ 固件升级…]</em></li>
+</ol>
+<hr>
+<h1 id="h-20170401v1300401" class="toc-header"><a class="toc-anchor" href="#h-20170401v1300401">¶</a> 2017.04.01	V1.3.0.0401</h1>
+<p>更新Suporte宝马带网卡新版硬件:</p>
+<ol>
+<li><em>[Configuração de Ligação do Dispositivo增加LAN…]</em></li>
+<li><em>[增加VCXNetUpdate固件升级工具…]</em></li>
+<li><em>[增加VCXNetActivar/Desactivar DoIP工具…]</em></li>
+<li><em>[增加VCXNetUSB远程共享工具(用于BMW云诊断)…]</em></li>
+</ol>
+<hr>
+<h1 id="h-20160929v1200929" class="toc-header"><a class="toc-anchor" href="#h-20160929v1200929">¶</a> 2016.09.29	V1.2.0.0929</h1>
+<ol>
+<li><em>[优化 云诊断Funções…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Optimize Cloud Diagnostic</li>
+</ol>
+<hr>
+<h1 id="h-20160902v1200902" class="toc-header"><a class="toc-anchor" href="#h-20160902v1200902">¶</a> 2016.09.02	V1.2.0.0902</h1>
+<ol>
+<li>Fix VCXSDK close error for ATEN UC232A</li>
+<li>Update Passthru Driver 04.04.160831</li>
+</ol>
+<hr>
+<h1 id="h-20160823v1200823" class="toc-header"><a class="toc-anchor" href="#h-20160823v1200823">¶</a> 2016.08.23	V1.2.0.0823</h1>
+<ol>
+<li><em>[优化 云诊断Funções…]</em></li>
+<li><em>[更新 Passthru驱动…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Optimize Cloud Diagnostic</li>
+<li>Update Passthru Driver</li>
+</ol>
+<hr>
+<h1 id="h-20160811v1200811" class="toc-header"><a class="toc-anchor" href="#h-20160811v1200811">¶</a> 2016.08.11	V1.2.0.0811</h1>
+<ol>
+<li><em>[发布 云诊断Funções Beta 测试版…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Release Cloud Diagnostic (Beta Version)</li>
+</ol>
+<hr>
+<h1 id="h-20160412v1200412" class="toc-header"><a class="toc-anchor" href="#h-20160412v1200412">¶</a> 2016.04.12	V1.2.0.0412</h1>
+<ol>
+<li><em>[完善 远程诊断Funções…]</em></li>
+<li><em>[优化 界面…]</em></li>
+<li><em>[更新 USB驱动v2.12.16(FT232-1550批号之后需使用新驱动)…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Optimize Remote Diagnostic Service</li>
+<li>Optimize UI</li>
+<li>Update USB driver v2.12.16(FT232-1550)</li>
+</ol>
+<hr>
+<h1 id="h-20160303v1100303" class="toc-header"><a class="toc-anchor" href="#h-20160303v1100303">¶</a> 2016.03.03	V1.1.0.0303</h1>
+<ol>
+<li><em>[更新 SUBURU 驱动…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Update SUBURU driver</li>
+</ol>
+<hr>
+<h1 id="h-20160201v1100201" class="toc-header"><a class="toc-anchor" href="#h-20160201v1100201">¶</a> 2016.02.01	V1.1.0.0201</h1>
+<ol>
+<li><em>[新增 远程诊断Funções…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Add Remote Diagnostic Service</li>
+</ol>
+<hr>
+<h1 id="h-20160112v1061312" class="toc-header"><a class="toc-anchor" href="#h-20160112v1061312">¶</a> 2016.01.12	V1.0.6.1312</h1>
+<ol>
+<li><em>[安装包增加 RP1210 和 HINO 选项.…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Add setup option for RP1210 and HINO.</li>
+</ol>
+<hr>
+<h1 id="h-20151218v1061218" class="toc-header"><a class="toc-anchor" href="#h-20151218v1061218">¶</a> 2015.12.18	V1.0.6.1218</h1>
+<ol>
+<li><em>[安装包Actualizado: Porsche驱动为16.200.151218…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Update Porsche driver to 16.200.151218</li>
+</ol>
+<hr>
+<h1 id="h-20151119v1061119" class="toc-header"><a class="toc-anchor" href="#h-20151119v1061119">¶</a> 2015.11.19	V1.0.6.1119</h1>
+<ol>
+<li><em>[管理工具Optimizado: 网络Ligação时间，提高程序启动速度…]</em></li>
+<li><em>[修改设备配置，增加标准串口和Bluetooth串口的配置选项…]</em></li>
+</ol>
+<hr>
+<ol>
+<li>Optimize VX Manager network connection, Startup is more faster.</li>
+<li>Change device configure, Add Standard COM and Bluetooth COM option.</li>
+</ol>
+<hr>
+<h1 id="h-20151112v1061112" class="toc-header"><a class="toc-anchor" href="#h-20151112v1061112">¶</a> 2015.11.12	V1.0.6.1112</h1>
+<ol>
+<li>User can select to install diagnostic driver when installation.</li>
+<li>Add Wifi Update tool.</li>
+</ol>
+<h1 id="h-20151110v1061110" class="toc-header"><a class="toc-anchor" href="#h-20151110v1061110">¶</a> 2015.11.10	V1.0.6.1110</h1>
+<ol>
+<li>VCX SDK surpport for WiFi.</li>
+<li>VX Manager UI optimize.</li>
+</ol>
+<h1 id="h-20150612v1050612" class="toc-header"><a class="toc-anchor" href="#h-20150612v1050612">¶</a> 2015.06.12	V1.0.5.0612</h1>
+<ol>
+<li>Add Offline App for HD: HINO &amp; RP1210.</li>
+<li>Fix VCX SDK Log.</li>
+</ol>
+<h1 id="h-20150427v1050427" class="toc-header"><a class="toc-anchor" href="#h-20150427v1050427">¶</a> 2015.04.27	V1.0.5.0427</h1>
+<ol>
+<li>VCX SDK Fix USB Discover method.</li>
+<li>VCX SDK Add Bluetooth serial discover method(VCX_OpenEx).</li>
+<li>Update VXManager config.ini for JLR_SDD_141(kill process).</li>
+</ol>
+<h1 id="h-20150331v1050331" class="toc-header"><a class="toc-anchor" href="#h-20150331v1050331">¶</a> 2015.03.31	V1.0.5.0331</h1>
+<ol>
+<li>Fix SDK USB ReOpen Connection Error in VMWARE.</li>
+<li>Update JLR App driver offline version to v_139.150319<br>
+Fix JLR registry install error in some WIN7 X64 OS</li>
+</ol>
+<h1 id="h-20150128v1050310" class="toc-header"><a class="toc-anchor" href="#h-20150128v1050310">¶</a> 2015.01.28	V1.0.5.0310</h1>
+<ol>
+<li>Fix license update error for some SN</li>
+</ol>
+<h1 id="h-20150128v105" class="toc-header"><a class="toc-anchor" href="#h-20150128v105">¶</a> 2015.01.28	V1.0.5</h1>
+<ol>
+<li>Add Status Bar: Version, Network, OBD Volt</li>
+<li>Add SDK Version info</li>
+<li>Add Administrator privilege</li>
+<li>Fix VCX.dll comm printf length to 256</li>
+<li>Fix Offline App： SUBARU for ABS(CAN) DTC crash error</li>
+</ol>
+<h1 id="h-20150117v104" class="toc-header"><a class="toc-anchor" href="#h-20150117v104">¶</a> 2015.01.17	V1.0.4</h1>
+<ol>
+<li><em>[修正JLR软件占用导致VCX.DLL运行库安装不上的问题…]</em></li>
+</ol>
+<h1 id="h-20141226v103" class="toc-header"><a class="toc-anchor" href="#h-20141226v103">¶</a> 2014.12.26	V1.0.3</h1>
+<ol>
+<li><em>[界面更新…]</em></li>
+<li><em>[诊断应用管理逻辑修改…]</em></li>
+<li><em>[VCX SDK Driver 更新（增加定时消息处理）…]</em></li>
+<li><em>[自带离线应用Actualização do Driver…]</em></li>
+<li><em>[安装包大小优化（精简了字体文件）…]</em></li>
+</ol>
+<h1 id="h-20141120v102" class="toc-header"><a class="toc-anchor" href="#h-20141120v102">¶</a> 2014.11.20	V1.0.2</h1>
+<ol>
+<li><em>[修正USB驱动导致设备PID为0000的问题…]</em></li>
+<li><em>[离线Apps增加Subaru…]</em></li>
+</ol>
+<h1 id="h-20141030v101" class="toc-header"><a class="toc-anchor" href="#h-20141030v101">¶</a> 2014.10.30	V1.0.1</h1>
+<ol>
+<li><em>[修正部分Número de série（V41XP00074等）License更新失败…]</em></li>
+<li><em>[安装 VCX Manager 后清除 Apps 和 Download 目录，以确保重新从服务器Transferir最新 Apps…]</em></li>
+</ol>
+<h1 id="h-20141027v100" class="toc-header"><a class="toc-anchor" href="#h-20141027v100">¶</a> 2014.10.27	V1.0.0</h1>
+<p>init release</p>
+</div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

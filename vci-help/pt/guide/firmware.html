@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualização de Firmware — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Guia de Utilização</span> <span class="sep">/</span> <span class="current">Actualização de Firmware</span></nav>
+      <div><h1 class="toc-header" id="id=""">固件更新</h1><div>
+</div><blockquote class="is-info">
+<p>VCX 设备通过Actualizar Firmware来不断优化设备和新增Funções，请保持设备固件始终为最新！</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="id=""">Ligação设备</h2><div>
+</div><p>Para actualização de firmware recomenda-se ligação com fio (USB ou LAN). Consulte <a class="is-internal-link is-valid-page" href="../guide/connection.html"><em>Configuração de Ligação do Dispositivo</em></a> para ligar o dispositivo ao computador.</p><div>
+</div><p>Diagrama de ligação USB:</p><div>
+</div><p><img class="align-center" width="800" alt="vcxdoip-usb-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxdoip-usb-obd.jpg"></p><div>
+</div><blockquote class="is-info">
+<p>Quando não for possível ligar ao veículo, o dispositivo pode ser alimentado via USB.</p>
+</blockquote><div>
+</div><blockquote class="is-warning">
+<p>Algumas portas USB de PC podem não fornecer potência suficiente. Nesse caso, alimente o dispositivo pela porta OBD.</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="id=""">查看固件Versão</h2><div>
+</div><p>Inicie o VX Manager. A secção <strong>[Informações do Dispositivo]</strong> mostra a versão actual do firmware. Se o servidor contiver novo firmware, <strong>[Actualizar Firmware]</strong> mostrará <strong>[+]</strong> 标记，并且自动弹出Actualizar Firmware对话框。</p><div>
+</div><p><img class="align-center" width="960" alt="vxmanager-firmware-new.png" src="http://wiki.allscanner.com/guide/firmware/vxmanager-firmware-new.png"></p><div>
+</div><h2 class="toc-header" id="id="Actualizar-Firmware"">Actualizar Firmware过程</h2><div>
+</div><p>在Actualizar Firmware对话框中勾选需要更新的固件，单击 <strong>[Iniciar Actualização]</strong>。O processo demora alguns minutos. Não interrompa a ligação durante a actualização.</p><div>
+</div><p><img class="align-center" width="600" alt="vxmanager-firmware-update.png" src="http://wiki.allscanner.com/guide/firmware/vxmanager-firmware-update.png"></p><div>
+</div><h2 class="toc-header" id="id=""">更新Concluído</h2><div>
+</div><p>Após fechar a janela de actualização, o VX Manager <strong>[Informações do Dispositivo]</strong> mostrará a versão de firmware actualizada.</p><div>
+</div><h1 class="toc-header" id="id="doip-"">DoIP 固件恢复</h1><div>
+</div><p>Para falhas de arranque do sistema DoIP por anomalias, tente recuperar o firmware DoIP.</p><div>
+</div><blockquote class="is-warning">
+<p>Este processo aplica-se apenas a dispositivos com sistema DoIP (VCX-DoIP, VCX-SE).</p>
+</blockquote><div>
+</div><blockquote class="is-info">
+<p>Critérios para detectar anomalia no sistema DoIP:<br>
+设备启动25秒后，没有听到第二次蜂鸣器 “哔哔” 声。<br>
+Após 25 segundos, o LED sem fios não acende nem pisca.<br>
+Após 25 segundos, a rede sem fios do dispositivo não é encontrada: <strong>DoIP-VCI-XXXX</strong>。<br>
+Após 25 segundos, o VX Manager não consegue ligar ou ler as informações do dispositivo.</p>
+</blockquote><div>
+</div><h2 class="toc-header" id="id=""">进入固件恢复模式</h2><div>
+</div><p>Desconecte o dispositivo de todas as ligações (sem alimentação) e siga os passos abaixo:</p><div>
+</div><tabset><template v-slot:tabs=""><li><em>[VCX-DoIP 进入恢固件复模式…]</em></li><li><em>[VCX-SE 进入恢固件复模式…]</em></li>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

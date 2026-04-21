@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Drivers de Diagnóstico — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Guia de Utilização</span> <span class="sep">/</span> <span class="current">Gestão de Drivers</span></nav>
+      <div><h1 class="toc-header" id="id=""">Instalação do Driver需求</h1><div>
+</div><p>VCX 设备通过Driver de Diagnóstico适配Software OEM，安装驱动后，VCX 即可被软件识别并实现原厂诊断Funções。</p><div>
+</div><blockquote>
+<p><strong>安装Driver de Diagnóstico必须条件：</strong></p>
+<ul class="is-success">
+<li><strong>Software OEM已经Instalação Concluída。</strong></li>
+<li><strong>VCX 设备必须包含有效的Funções授权。</strong></li>
+<li><strong>VCX 设备已经Ligação至电脑且可联网。</strong></li>
+</ul>
+</blockquote><div>
+</div><blockquote class="is-warning">
+<p>Software OEM版权属于其所有者，傲世卡尔不提供Software OEM，请购买授权正版软件！</p>
+</blockquote><div>
+</div><h1 class="toc-header" id="Gestão de Drivers de Diagnóstico">Gestão de Drivers de Diagnóstico</h1><div>
+</div><h2 class="toc-header" id="id=""">查看可用Driver de Diagnóstico</h2><div>
+</div><p>启动 VX Manager 设备管理软件， Abra <strong>[Diagnóstico do Veículo]</strong> 选项卡，然后单击页面左侧的 <strong>[As Minhas Aplicações]</strong> 选项，将显示已授权可用的Driver de Diagnóstico。</p><div>
+</div><p><img class="align-center" width="800" alt="app.png" src="http://wiki.allscanner.com/guide/diagnosis/app.png"></p><div>
+</div><h2 class="toc-header" id="id=""">安装Driver de Diagnóstico</h2><div>
+</div><p>Abra <strong>[Diagnóstico do Veículo]-&gt;[As Minhas Aplicações]</strong> clique na aplicação de diagnóstico a instalar如 <strong>[FORD IDS]</strong>，则会弹出驱动信息界面。Clique em <strong>[Instalar]</strong> Iniciar a Instalação驱动。</p><div>
+</div><p><img class="align-center" width="800" alt="app-install-1.png" src="http://wiki.allscanner.com/guide/diagnosis/app-install-1.png"></p><div>
+</div><p>Instalação do Driver过程：</p><div>
+</div><p><img class="align-center" width="600" alt="app-install-2.png" src="http://wiki.allscanner.com/guide/diagnosis/app-install-2.png"></p><div>
+</div><h2 class="toc-header" id="id=""">更新Driver de Diagnóstico</h2><div>
+</div><blockquote class="is-info">
+<p>随着原厂软件的升级，Driver de Diagnóstico持续优化更新，请始终保持最新！</p>
+</blockquote><div>
+</div><p>Abra <strong>[Diagnóstico do Veículo]-&gt;[As Minhas Aplicações]</strong> 页面，当某款Driver de Diagnóstico发布新Versão时，其右上角会显示 “+”，Abra驱动详情，Clique em <strong>[更新]</strong> Iniciar升级驱动。</p><div>
+</div><p><img class="align-center" width="800" alt="app-update.png" src="http://wiki.allscanner.com/guide/diagnosis/app-update.png"></p><div>
+</div><h2 class="toc-header" id="id=""">卸载Driver de Diagnóstico</h2><div>
+</div><blockquote class="is-info">
+<p>卸载 VCX Driver de Diagnóstico后， 原厂软件恢复为原始状态（可使用原厂设备）。</p>
+</blockquote><div>
+</div><p>Abra <strong>[Diagnóstico do Veículo]-&gt;[As Minhas Aplicações]</strong> 页面，Clique em要卸载的诊断应用， 例如 <strong>[FORD IDS]</strong>，则会弹出驱动信息界面。Clique em <strong>[卸载]</strong> Iniciar卸载驱动。</p><div>
+</div><p><img class="align-center" width="800" alt="app-uninstall.png" src="http://wiki.allscanner.com/guide/diagnosis/app-uninstall.png"></p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

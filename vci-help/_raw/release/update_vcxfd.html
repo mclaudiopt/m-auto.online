@@ -1,0 +1,92 @@
+﻿<div><blockquote class="is-warning">
+<p>请优先使用最新的 <a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.vxdiag.net/managecenter/download/vxdiag.zip"><em>设备管理软件</em></a> 进行 <a class="is-internal-link is-valid-page" href="/zh/guide/firmware"><em>在线固件更新</em></a>.<br>
+如果无法在线更新时，请使用 <a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.vxdiag.net/managecenter/fws/update_vcxfd.zip"><em>VCX-FD 离线固件更新工具</em></a></p>
+<h3 class="toc-header" id=""><a href="#" class="toc-anchor">¶</a> </h3>
+<p>Please use the latest <a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.vxdiag.net/managecenter/download/vxdiag.zip">VX Manager</a> for <a class="is-internal-link is-valid-page" href="/zh/guide/firmware"><em>online firmware updates</em></a>.<br>
+If online updates are not possible, Please use <a rel="noreferrer" target="_blank" class="is-external-link" href="http://www.vxdiag.net/managecenter/fws/update_vcxfd.zip"><em>VCX-FD offline update tool</em></a></p>
+</blockquote><div>
+</div><h1 class="toc-header" id="h-20240424-v2311"><a href="#h-20240424-v2311" class="toc-anchor">¶</a> 2024.04.24    ----    V2.3.1.1</h1><div>
+</div><ul>
+<li>优化: 优化 CAN 消息发送帧间隔延迟时等待发送完成</li>
+<li>优化: 优化 ISO15765 stmin 发送连续帧间隔时间处理</li>
+<li>修正: 修正 ISO15765 timer 定时消息与其他消息独立互不影响</li>
+<li>修改: 修改 ISO15765 p2max 默认时间 10ms</li>
+<li>修改: 所有协议过滤器默认开启(未配置过滤器时不接收任何消息)</li>
+<li>优化: 底层优化: shell(用户权限)</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20240403-v2302"><a href="#h-20240403-v2302" class="toc-anchor">¶</a> 2024.04.03    ----    V2.3.0.2</h1><div>
+</div><ul>
+<li>优化: 重构基于 UART 的 ISO9141,ISO14230,KW1281,KW82 和 LIN 等协议</li>
+<li>优化: 优化 ISO14230 协议 P3MIN 参数更新(丰田数据流中断)</li>
+<li>优化: 快速初始化/慢速初始化异步执行(不阻塞其他通信)</li>
+<li>优化: 主机通信命令可异步并发执行</li>
+<li>修正: ISO15765 协议空闲时定时消息强制发送</li>
+<li>修正: J1850VPW 协议消息过滤(匹配Node地址)</li>
+<li>优化: 增大 telnet 调试日志缓冲大小</li>
+<li>优化: 底层优化: shell, serial, timer等</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20240109-v2204"><a href="#h-20240109-v2204" class="toc-anchor">¶</a> 2024.01.09    ----    V2.2.0.4</h1><div>
+</div><ul>
+<li>修改: ISO15765 协议流控制参数处理(TX_STMIN)</li>
+<li>优化: ISO15765 协议长帧传输速度提升(多任务切换)</li>
+<li>优化: 固件异常情况智能处理</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20231212-v2202"><a href="#h-20231212-v2202" class="toc-anchor">¶</a> 2023.12.12    ----    V2.2.0.2</h1><div>
+</div><ul>
+<li>新增: ISO15765 协议支持在一个通道同时收发多个ID的长帧</li>
+<li>更新: CAN_PS 引脚切换规则定义</li>
+<li>优化: 底层优化: BKP, DWT, IRQ, LED, LOG, Boot 等</li>
+<li>优化: OS优化: 多任务, 延时</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20231120-v2200"><a href="#h-20231120-v2200" class="toc-anchor">¶</a> 2023.11.20    ----    V2.2.0.0</h1><div>
+</div><ul>
+<li>新增: J1850 PWM &amp; VPW 协议</li>
+<li>更新: flashFS 文件系统</li>
+<li>修正: K-Line 和 CAN 总线冲突</li>
+<li>修正: 协议时间戳微秒 32bit 溢出</li>
+<li>优化: 底层优化: ADC 读电压</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230821-v2041"><a href="#h-20230821-v2041" class="toc-anchor">¶</a> 2023.08.21    ----    V2.0.4.1</h1><div>
+</div><ul>
+<li>修正: 配置过滤器消息大小为 0 时出错</li>
+<li>修正: 总线开关驱动器不受 OBD 上电顺序影响</li>
+<li>修正: OBD 未连接时协议初始化将报错</li>
+<li>修正: OBD 重新连接时 5 Baud 慢速初始化错误</li>
+<li>修正: 多通道 CAN 协议使用同一物理资源时互不影响(引用计数)</li>
+<li>新增: 总线开关驱动器 POK 状态检测</li>
+<li>新增: 可调编程电压输出</li>
+<li>优化: 其他优化</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230711-v2030"><a href="#h-20230711-v2030" class="toc-anchor">¶</a> 2023.07.11    ----    V2.0.3.0</h1><div>
+</div><ul>
+<li>更新: TCP 协议栈更新 2.3.0</li>
+<li>优化: vcx net 网络通信速度提升 35Mbps(TX/RX)</li>
+<li>更新: vcx net 通信开启保持连接(KeepAlive)</li>
+<li>优化: vcx net 多客户端连接支持</li>
+<li>新增: 设备信息增加 vcx net 网络参数</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230609-v2021"><a href="#h-20230609-v2021" class="toc-anchor">¶</a> 2023.06.09    ----    V2.0.2.1</h1><div>
+</div><ul>
+<li>修正: 协议定时发送消息处理</li>
+<li>优化: CAN/CANFD 波特率配置(采样点80%)</li>
+<li>优化: CAN/CANFD 模式下 ISO15765 传输完善</li>
+<li>新增: CAN/CANFD 模式下 ISO15765 非标准乱序连续帧传输</li>
+<li>修改: CAN 终端电阻默认状态断开</li>
+<li>新增: telnet 调试信息接口</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230427-v2011"><a href="#h-20230427-v2011" class="toc-anchor">¶</a> 2023.04.27    ----    V2.0.1.1</h1><div>
+</div><ul>
+<li>修正: K-Line 通信</li>
+<li>优化: ip101 禁用自动网络协商</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230418-v2010"><a href="#h-20230418-v2010" class="toc-anchor">¶</a> 2023.04.18    ----    V2.0.1.0</h1><div>
+</div><ul>
+<li>新增: iperf 性能测试</li>
+<li>优化: vcx net 网络通信速度最高 24Mbps(TX/RX)</li>
+<li>优化: 其他</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230407-v2009"><a href="#h-20230407-v2009" class="toc-anchor">¶</a> 2023.04.07    ----    V2.0.0.9</h1><div>
+</div><ul>
+<li>初始发布</li>
+</ul><div>
+</div></div>

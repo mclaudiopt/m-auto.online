@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia HDS — Honda — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">Honda</span> <span class="sep">/</span> <span class="current">Guia HDS</span></nav>
+      <div><h1 class="toc-header" id="id=""">软件介绍</h1><div>
+</div><p>i-HDS (Honda Diagnostic System) software suite for the diagnosis and repair of electronic systems on Honda and Acura automobiles, and for the reprogramming of electronic control units (including, but not limited to, ECMs and PCMs). This software provides access to all Honda and Acura vehicle systems (access to the immobilizer security system requires a Security Professional level software subscription and Vehicle Security Professional [VSP] registration with NASTF).</p><div>
+</div><p>i-HDS(Honda Diagnostic System)本田诊断系统软件套件，用于本田(Honda)和讴歌(Acura)汽车上的电子系统的诊断和维修，以及电子控制单元的重新编程(包括但不限于ECMs和pcm)。该软件提供访问所有本田和讴歌车辆系统(访问防盗系统需要安全专业人员级别的软件订阅和车辆安全专业人员[VSP]向NASTF注册).</p><div>
+</div><p>The i-HDS software isfull of functions and features all while giving the user a layout somewhat familiar to the legacy HDS software. The second generation of HDS supported us well for a very long time.After 13 years in action, a new generation toolwas designed to work on new generation vehicles.i-HDS supports vehicle models starting from the 2017 model year, for all Full Model Changes and new models.</p><div>
+</div><p>i-HDS软件充满了Funções和特点，同时给用户一个布局有点熟悉的传统HDS软件。第二代HDS在很长一段时间里很好地Suporte了我们。经过13年的实践，新一代的工具被设计用于新一代的车辆。i-HDSSuporte从2017年Modelos年Iniciar所有完整的Modelos变化和新Modelos。</p><div>
+</div><h2 class="toc-header" id="id=""">Funções特性</h2><div>
+</div><ul>
+<li>Checks and clears diagnostic trouble codes (DTCs)</li>
+<li>Real-time data display (Data List)</li>
+<li>Data capture (snapshot)</li>
+<li>Vehicle and system specific function tests</li>
+<li>Reprogram ECUs with J2534 Rewrite application</li>
+</ul><div>
+</div><p><a rel="noreferrer" target="_blank" class="is-external-link" href="https://techinfo.honda.com/rjanisis/pubs/web/i-HDS_QuickStartGuide_%20IRF.pdf">i-HDS Quick Start Guide</a></p><div>
+</div><h2 class="toc-header" id="reprogramming-with-the-j2534-rewrite-application-in-i-hds">Reprogramming with the J2534 Rewrite Application in i-HDS</h2><div>
+</div><p>Included in the i-HDS software suite is a new reprogramming application called J2534 Rewrite. This application is made available to all subscribers of the i-HDS software suite and replaces the previous generation software, J2534 Honda Pass-thru Reprogramming Software.</p><div>
+</div><p><img alt="honda J2534" src="https://techinfo.honda.com/rjanisis/pubs/web/image001.jpg"></p><div>
+</div><h2 class="toc-header" id="vehicle-communication-interfaces-vci">Vehicle Communication Interfaces (VCI)</h2><div>
+</div><p>The i-HDS software supports the use of a generic pass-thru VCI that is compliant with SAE J2534-1 and J2534-2.</p><div>
+</div><p><a rel="noreferrer" target="_blank" class="is-external-link" href="https://techinfo.honda.com/rjanisis/pubs/web/DST-i%20Quick%20Start%20Guide_SX.pdf">DST-i Quick Start Guide</a><br>
+<a rel="noreferrer" target="_blank" class="is-external-link" href="https://techinfo.honda.com/rjanisis/pubs/web/DST-i%20Instruction_Manual_2862.pdf">DST-i Instruction Manual</a></p><div>
+</div><h2 class="toc-header" id="id="hds-"">HDS 安装要求</h2><div>
+</div><p>Note: : i-HDS requires Microsoft Windows 10 or higher.</p><div>
+</div><h2 class="toc-header" id="faq">FAQ</h2><div>
+</div><p><a rel="noreferrer" target="_blank" class="is-external-link" href="https://techinfo.honda.com/rjanisis/pubs/web/RJAAI001_FAQ.htm">https://techinfo.honda.com/rjanisis/pubs/web/RJAAI001_FAQ.htm</a></p><div>
+</div><p>Q. Can a J2534 compliant interface device and the Honda Pass-Thru Reprogramming (J2534) software be used to add a keyless entry transmitter/key?<br>
+A. No, J2534 devices and software cannot add keys. The J2534 software can only reprogram ECM/PMC/ECU's. Keys can only be added by certified locksmiths. Click here for more information.</p><div>
+</div><p>Q. I'm currently a certified locksmith. Can I reprogram keys with the i-HDS software subscription?<br>
+A. Yes, provided you are registered with ALOA and have a current SIS Security Professional subscription. click here to subscribe.</p><div>
+</div><p>Q. How do I get the software to initialize replacement modules and what is the charge?<br>
+A. A subscription to the i-HDS suite and an appropriate J2534 Pass-through device is needed. If your shop has a DST-i, the PCM Initialization software is included in the subscription.<br>
+NOTE: If you are trying to reprogram ECM/PCM/ECU's or replace lost keys, the appropriate credentials and type of subscription is required.</p><div>
+</div><p>Q. I currently have the Honda Pass-Thru Reprogramming (J2534) software. Will that allow me to replace the ECM/PCM?<br>
+A. No, the Honda Pass-Thru Reprogramming (J2534) software is for reprogramming (reflashing) only.</p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

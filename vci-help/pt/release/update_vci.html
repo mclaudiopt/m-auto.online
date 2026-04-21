@@ -1,0 +1,790 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizações VCI — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Lançamentos</span> <span class="sep">/</span> <span class="current">Actualizações VCI</span></nav>
+      <div><blockquote class="is-info">
+<h3 class="toc-header" id="id="firmware-update-guide-"">Firmware Update Guide (Guia de Actualização de Firmware):</h3>
+<p><a class="is-internal-link is-valid-page" href="../guide/firmware.html">http://wiki.allscanner.com/zh/guide/firmware</a></p>
+</blockquote><div>
+</div><h1 class="toc-header" id="h-20251121-v1960">2025.11.21    ----	V1.9.6.0</h1><div>
+</div><ul>
+<li>UPD: Update for BENZ Xentry Diagnosis Truck 2025.10</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Actualização: 更新Suporte BENZ Xentry Diagnosis Truck 2025.10…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20240827-v1960">2024.08.27    ----	V1.9.6.0</h1><div>
+</div><ul>
+<li>UPD: Update for BENZ Xentry Diagnosis 2024.09</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Actualização: 更新Suporte BENZ Xentry Diagnosis 2024.09…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20240521-v1950">2024.05.21    ----	V1.9.5.0</h1><div>
+</div><ul>
+<li>UPD: Update for BENZ Xentry Diagnosis 2024.06</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Actualização: 更新Suporte BENZ Xentry Diagnosis 2024.06…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230412-v1943">2023.04.12    ----	V1.9.4.3</h1><div>
+</div><ul>
+<li>FIX: Firmware v1.9.4.0 caused the K-Line failure on BENZ hardware.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: 固件 V1.9.4.0 引起的 BENZ 硬件 K-Line 失效.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230403-v1942">2023.04.03    ----	V1.9.4.2</h1><div>
+</div><ul>
+<li>FIX: TP20 protocol BS_ECU == 1 cause send data failure.</li>
+<li>ADD: Add MxxZB deive model support.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: TP20 协议 BS_ECU Parâmetros为1时导致发送数据失败.…]</em></li>
+<li><em>[Novo: 新增 MxxZB 设备型号Suporte.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230327-v1941">2023.03.27    ----	V1.9.4.1</h1><div>
+</div><ul>
+<li>FIX: TP20 protocol T3_ECU parameter must be verified.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: TP20 协议 T3_ECU 延时Parâmetros有效性检查.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230222-v1940">2023.02.22    ----	V1.9.4.0</h1><div>
+</div><ul>
+<li>FIX: CAN_PS and K-Line OBD7 pins can operate simultaneously.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: CAN_PS 和 K-Line OBD7 引脚可同时工作.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20230110-v1931">2023.01.10    ----	V1.9.3.1</h1><div>
+</div><ul>
+<li>ADD: Add H6M device model support.</li>
+<li>OPT: Optimize ISO15765 for receive unordered consecutive frame.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Novo: H6M 设备型号Suporte.…]</em></li>
+<li><em>[Optimização: ISO15765 协议接收乱序连续帧(长安非标准).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20221028-v1931">2022.10.28    ----	V1.9.3.1</h1><div>
+</div><ul>
+<li>FIX: Fix device license invalid when sometimes.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: Licença do Dispositivo获取某些时候存在异常.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20221020-v1930">2022.10.20    ----	V1.9.3.0</h1><div>
+</div><ul>
+<li>UPD: Update for BENZ Xentry Diagnosis 2022.09</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Actualização: 更新Suporte BENZ Xentry Diagnosis 2022.09…]</em></li>
+</ul><div>
+</div><hr><div>
+</div><blockquote class="is-warning">
+<p><strong>NOTE:</strong> If XENTRY VCI SN is 00000000 or invalid, Please update VCI firmware and reboot!<br>
+<strong>注意:</strong> 如果 XENTRY VCI 为无效Número de série 00000000 或无Ligação, 请更新 VCI 固件到此最新Versão并Reiniciar Dispositivo！</p>
+</blockquote><div>
+</div><h1 class="toc-header" id="h-20220928-v1920">2022.09.28    ----	V1.9.2.0</h1><div>
+</div><ul>
+<li>OPT: Optimize KL15 signal acquisition(fix KL15 unstable on some Hardware model).</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Optimização: 优化 KL15 点火开关信号采集(修正部分硬件型号KL15信号不稳定).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20220601-v1912">2022.06.01    ----	V1.9.1.2</h1><div>
+</div><ul>
+<li>FIX: TP20 protocol transmit segment data error process(programming interrupt).</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: TP20 协议发送长帧数据错误处理(编程中断).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20220414-v1910">2022.04.14    ----	V1.9.1.0</h1><div>
+</div><ul>
+<li>FIX: TP20 protocol receive segment data break with testconn ACK.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: TP20 协议接收分段数据时被 Ligação测试回应 打断.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20211213-v1900">2021.12.13    ----	V1.9.0.0</h1><div>
+</div><ul>
+<li>UPD: Update for BENZ Xentry Diagnosis 2021.09 和 2021.12<br>
+<strong>NOTE:</strong> If XENTRY VCI SN is 00000000 and invalid, Please update VCI firmware and reboot!</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li>Actualização: 更新Suporte BENZ Xentry Diagnosis 2021.09 和 2021.12<br>
+<strong>注意:</strong> 如果 XENTRY VCI 为无效Número de série 00000000, 请更新 VCI 固件到此最新Versão并Reiniciar Dispositivo！</li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20211116-v1860">2021.11.16    ----	V1.8.6.0</h1><div>
+</div><ul>
+<li>OPT: TP20 protocol support DoNet mode.</li>
+<li>OPT: TP16 protocol support DoNet mode.</li>
+<li>OPT: ISO9141/ISO14230 KLine idle wait process.</li>
+<li>FIX: J1939 protocol PGN receive process(John Deere EDL).</li>
+<li>ADD: DA device model support.</li>
+<li>ADD: MAX device model support.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Optimização: TP20 协议Suporte DoNet 模式.…]</em></li>
+<li><em>[Optimização: TP16 协议Suporte DoNet 模式.…]</em></li>
+<li><em>[Optimização: ISO9141/ISO14230 KLine 等待空闲处理.…]</em></li>
+<li><em>[Correcção: J1939 协议 PGN 接收不完整(John Deere EDL).…]</em></li>
+<li><em>[Novo: DA 设备型号Suporte.…]</em></li>
+<li><em>[Novo: MAX 设备型号Suporte.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20201120-v1850">2020.11.20    ----	V1.8.5.0</h1><div>
+</div><ul>
+<li>MOD: ISO15765 P2MAX.</li>
+<li>ADD: ISO14230 PID_FORCE_WAIT_IDLE force to wait idle when init.</li>
+<li>ADD: KT Device model support.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修改: ISO15765 P2MAX.…]</em></li>
+<li><em>[Novo: ISO14230 PID_FORCE_WAIT_IDLE 连续初始化时强制等待空闲.…]</em></li>
+<li><em>[Novo: KT设备型号Suporte.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20201024-v1840">2020.10.24    ----	V1.8.4.0</h1><div>
+</div><ul>
+<li>FIX: Fix J1850-PWM protocol for Ford IDS OBD mode diagnosis.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: J1850-PWM 协议 Ford IDS OBD 模式诊断.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20201019-v1830">2020.10.19    ----	V1.8.3.0</h1><div>
+</div><ul>
+<li>FIX: Fix VCI software may crash after soft reset.</li>
+<li>FIX: Fix license read error in some condition.</li>
+<li>OPT: Optimize remote diagnosis DoNet connection stability.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: 软复位后可能导致 VCI 软件崩溃无响应.…]</em></li>
+<li><em>[Correcção: 部分情况下读取授权失败.…]</em></li>
+<li><em>[Optimização: 定时消息发送失败时的处理.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20200915-v1820">2020.09.15    ----	V1.8.2.0</h1><div>
+</div><ul>
+<li>FIX: TP20 protocol programming failure.</li>
+<li>FIX: ISO15765 P2Max process (Ford mondeo test error).</li>
+<li>OPT: Optimize remote diagnosis DoNet connection stability.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[Correcção: TP20 协议编程失败.…]</em></li>
+<li><em>[Correcção: ISO15765 协议 P2Max 超时处理 (Ford Mondeo 测试错误).…]</em></li>
+<li><em>[Optimização: 优化远程诊断 DoNet Ligação稳定性.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20200821-v1800">2020.08.21    ----	V1.8.0.0</h1><div>
+</div><ul>
+<li>UPD: Update new platform with SDK v1.8.0.0</li>
+<li>ADD: LIN bus protocol.</li>
+<li>FIX: OBD IGSW Pin voltage read.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[更新 同步更新新平台 SDK v1.8.0.0…]</em></li>
+<li><em>[新增 LIN 总线协议.…]</em></li>
+<li><em>[优化 OBD 点火电压信号读取.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20200416-v1660">2020.04.16    ----	V1.6.6.0</h1><div>
+</div><ul>
+<li>FIX: TP20 protocol MNST repeat send process(ODIS engineering programming).</li>
+<li>FIX: ISO15765_EXT_BMW simulator send(DoNET remote diagnosis).</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修复 TP20 协议 MNTB 重发处理(ODIS工程师编程).…]</em></li>
+<li><em>[修复 ISO15765_EXT_BMW 模拟发送(DoNET远程模式).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20191215-v1650">2019.12.15    ----	V1.6.5.0</h1><div>
+</div><ul>
+<li>Add ISO11898 protocol multiple send mode (for DoNet).</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[新增 ISO11898 协议增加 MULTI 多帧发送模式 (远程诊断).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20191011-v1641">2019.10.11    ----	V1.6.4.1</h1><div>
+</div><ul>
+<li>Add hardware model NTG</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[新增 硬件型号NTG…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190826-v1640">2019.08.26    ----	V1.6.4.0</h1><div>
+</div><ul>
+<li>Fix ISO15765 protocol receive message with mixed ext address(PORSCHE 970)</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 ISO15765 协议接收时智能识别是否带扩展地址/两种模式混合(PROSCHE 970)…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190815-v1630">2019.08.15    ----	V1.6.3.0</h1><div>
+</div><ul>
+<li>Fix Some hardware (H6 serials) read iginition voltage</li>
+<li>Fix 5 Baud simulation receive</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 部分硬件(H6系列)读取点火电压…]</em></li>
+<li><em>[修正 5 Baud 模拟接收…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190802-v1620">2019.08.02    ----	V1.6.2.0</h1><div>
+</div><ul>
+<li>Add FACTORY SerialNumber</li>
+<li>Add Fast software reset</li>
+<li>Fix 29Bit CANID filter clear error(BENZ ACTORS 963)</li>
+<li>Fix J1939 protocol send long frame(CAT Flash)</li>
+<li>Imp Memory space</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[新增 FACTORY Número de sérieFunções…]</em></li>
+<li><em>[新增 快速软复位Funções…]</em></li>
+<li><em>[修正 29bit CANID 过滤器清除错误 (BENZ ACTROS 963)…]</em></li>
+<li><em>[修正 J1939 协议发送长帧 (CAT Flash)…]</em></li>
+<li><em>[优化 Memória空间…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190702-v1610">2019.07.02    ----	V1.6.1.0</h1><div>
+</div><ul>
+<li>Fix ISO14230/9194 compatible with BENZ KW2K2N MR OBD-9 bus.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 ISO14230/9141 兼容 BENZ KW2K2N MR OBD-9总线.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190626-v1600">2019.06.26    ----	V1.6.0.0</h1><div>
+</div><ul>
+<li>Imp J1939 protocol channel support multiple ECU network communication(CAT-C9).</li>
+<li>Imp Automatically identify the interface using the SN.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[优化 J1939 协议通道Suporte多个ECU网络节点Comunicação(CAT-C9).…]</em></li>
+<li><em>[优化 根据Número de sérieSN自动识别Interface.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190418-v1550">2019.04.18    ----	V1.5.5.0</h1><div>
+</div><ul>
+<li>Add Support new bus mux chip.</li>
+<li>Upd VCXBoot v1.5.1.0</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[新增 Suporte新的总线开关芯片.…]</em></li>
+<li><em>[更新 VCXBoot v1.5.1.0…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190409-v1540">2019.04.09    ----	V1.5.4.0</h1><div>
+</div><ul>
+<li>Fix IO Expasion chip identification.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 IO 扩展芯片识别(增加或减少).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190311-v1530">2019.03.11    ----	V1.5.3.0</h1><div>
+</div><ul>
+<li>Imp ISO15765 performance for receive 4KB message(BENZ DTS read all coding).</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[优化 ISO15765 接收 4KB 长帧处理性能(BENZ DTS工程师读取整车设码).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190302-v1520">2019.03.02    ----	V1.5.2.0</h1><div>
+</div><ul>
+<li>Fix ISO15765 FlowControl state 31 process(BENZ 205 SCN Error).</li>
+<li>Add Support H6P VCI interface identify.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 ISO15765 流控制状态31处理(BENZ 205 SCN设码错误).…]</em></li>
+<li><em>[新增 Suporte H6P VCI Interface自动识别.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20190221-v1500">2019.02.21    ----	V1.5.0.0</h1><div>
+</div><ul>
+<li>Upd VCXBoot v1.5.0.0 multiple app boot and update.</li>
+<li>Fix J1939 flow control process when broadcast mixed with normal message(CUMMINS-QSC8.3).</li>
+<li>Imp USB connection status and other etc.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[更新 VCXBoot v1.5.0.0 多分区引导和固件更新.…]</em></li>
+<li><em>[修正 J1939 多帧消息与广播消息混合时的流控制处理(CUMMINS-QSC8.3).…]</em></li>
+<li><em>[优化 USB Ligação状态和其他.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20181227-v14110">2018.12.27    ----	V1.4.11.0</h1><div>
+</div><ul>
+<li>Fix J1939 Filter PGN=00EF00 with connection management(CAT-320D2)</li>
+<li>Fix J1939 broadcast filter and broadcast mixed with normal message(CUMMINS-QSM11).</li>
+<li>Imp Host and device communiction performance (Fix communication CS error sometimes).</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 J1939 过滤器 PGN=00EF00 增加Ligação管理(CAT-320D2).…]</em></li>
+<li><em>[修正 J1939 广播消息过滤, 广播消息与普通多帧消息混合(CUMMINS-QSM11).…]</em></li>
+<li><em>[优化 Host和设备之间Comunicação效率(修复Comunicação校验CS可能出错).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20181130-v14100">2018.11.30    ----	V1.4.10.0</h1><div>
+</div><ul>
+<li>Fix ISO15765 flow control frame send error.</li>
+<li>Fix CAN2 driver control process.</li>
+<li>Add V83 new hardware bus switch(Read OBD Pin Voltage).</li>
+<li>Fix J1708 pin initiation.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 ISO15765 流控制帧发送错误.…]</em></li>
+<li><em>[修正 CAN2 驱动器控制信号逻辑顺序.…]</em></li>
+<li><em>[新增 V83 新Versão硬件总线开关切换(读OBD引脚电压).…]</em></li>
+<li><em>[修正 J1708 引脚初始化.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20180510-v1440">2018.05.10    ----	V1.4.4.0</h1><div>
+</div><ul>
+<li>Fix BENZ C6 CAN Bus KL15 signal filter</li>
+<li>Fix BENZ C6 MBISO 5BPS initialization</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 Suporte BENZ C6 CAN 总线点火信号过滤…]</em></li>
+<li><em>[修正 Suporte BENZ C6 MBISO 协议 5BPS 初始化…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20171204-v1420">2017.12.04    ----	V1.4.2.0</h1><div>
+</div><ul>
+<li>Fix HS-CAN error when multiple channel working (JLR).</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 CAN 多通道工作时 HS-CAN 可能Comunicação错误 (路虎第一路CAN不能测以及止动装置错误).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20171107-v1410">2017.11.07    ----	V1.4.1.0</h1><div>
+</div><ul>
+<li>Fix J1939 protocol error for CUMMINS CM850.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 J1939 协议测试 CUMMINS CM850 Ligação错误.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20170917-v1400">2017.09.17    ----	V1.4.0.0</h1><div>
+</div><ul>
+<li>Add Expasion DoIP device information sync with VCX.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[增加 扩展设备DOIP 与 VCX 同步扩展信息.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20170905-v1360">2017.09.05    ----	V1.3.6.0</h1><div>
+</div><ul>
+<li>Optimize CAN PS switch logic.</li>
+<li>Optimize TP20 protocol for J2534.</li>
+<li>Fix KW1281 reset to IDLE when tx error.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[优化 NANO 系列 CAN PS 引脚Seleccione逻辑.…]</em></li>
+<li><em>[优化 TP20 协议符合 J2534标准.…]</em></li>
+<li><em>[修正 KW1281 发送错误时恢复空闲状态.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20170826-v1350">2017.08.26    ----	V1.3.5.0</h1><div>
+</div><ul>
+<li>Fix v1.3.4.0 error for CAN OBD12/13.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 v1.3.4.0 固件引起的 CAN OBD12/13 错误.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20170823-v1340">2017.08.23    ----	V1.3.4.0</h1><div>
+</div><ul>
+<li>Fix CAN lost data in callback when multi channel scanning(PORSCHE).</li>
+<li>Fix CAN block filter do not set to hardware.</li>
+<li>Add J1850 VPW and PWM switch(PB3).</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 CAN 回掉处理丢失数据, 当多通道扫描时(PORSCHE).…]</em></li>
+<li><em>[修正 CAN 阻止过滤器不需要配置到硬件.…]</em></li>
+<li><em>[增加 J1850 VPM 和 PWM 切换开关(PB3).…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20170704-v1330">2017.07.04    ----	V1.3.3.0</h1><div>
+</div><h1 class="toc-header" id="h-20170701-v1320">2017.07.01	----    V1.3.2.0</h1><div>
+</div><ul>
+<li>Fix CAN frame queue crash when receive large amount data(BENZ).</li>
+<li>Optimize CAN rx handler and FIFO.</li>
+<li>Optimize CAN reinit.</li>
+<li>Optimize CAN filter overflow.</li>
+</ul><div>
+</div><hr><div>
+</div><ul>
+<li><em>[修正 CAN 接收海量数据时缓冲队列溢出设备死机(BENZ).…]</em></li>
+<li><em>[优化 CAN 接收中断和FIFO.…]</em></li>
+<li><em>[优化 CAN 重新初始化.…]</em></li>
+<li><em>[优化 CAN 过滤器溢出处理.…]</em></li>
+</ul><div>
+</div><h1 class="toc-header" id="h-20170607-v1310">2017.06.07    ----	V1.3.1.0</h1><div>
+</div><ol>
+<li>Fix SWCAN error for GM GDS2.</li>
+<li>Fix CAN filter clear.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20170522-v1300">2017.05.22    ----	V1.3.0.0</h1><div>
+</div><ol>
+<li>Modify CAN hardware filter for multiple channel(for BENZ).</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20170519-v12311">2017.05.19    ----	V1.2.3.11</h1><div>
+</div><ol>
+<li>Fix OBD pin voltage read for new VCX-PRO device.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20170418-v12310">2017.04.18    ----	V1.2.3.10</h1><div>
+</div><ol>
+<li>Fix ISO15765 standard extend addr error.</li>
+<li>Fix CAN baud 800k error.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20170210-v1236">2017.02.10    ----	V1.2.3.6</h1><div>
+</div><ol>
+<li>Fix TP20 Channel Setup ID dynamically alloc.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20170120-v1235">2017.01.20    ----	V1.2.3.5</h1><div>
+</div><ol>
+<li>Fix ISO15765 free protocol_buf after rx segment message break.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20161222-v1234">2016.12.22    ----	V1.2.3.4</h1><div>
+</div><ol>
+<li>Fix BMW_KCAN extend address update automatic.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20161206-v1233">2016.12.06    ----	V1.2.3.3</h1><div>
+</div><ol>
+<li>Remove IDE bit from CAN filter</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20161202-v1232">2016.12.02    ----	V1.2.3.2</h1><div>
+</div><ol>
+<li>Fix BMW_KCAN extend address(TX and RX different).</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20161017-v1231">2016.10.17    ----	V1.2.3.1</h1><div>
+</div><ol>
+<li>Fix OPEL KW82 protocol for GM Tech2Win.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20161013-v1230">2016.10.13    ----	V1.2.3.0</h1><div>
+</div><ol>
+<li>Fix ISO15765 recv error when RAW CAN message mixed.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160721-v1229">2016.07.21    ----	V1.2.2.9</h1><div>
+</div><ol>
+<li>Fix TP20 Channel request RX ID start from 0.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160708-v1228">2016.07.08    ----	V1.2.2.8</h1><div>
+</div><ol>
+<li>Add timer message PTIMER_FLAG_TX_INST.</li>
+<li>Fix 29bit CAN ID filter.</li>
+<li>Fix KW1281 protocol timer when idle.</li>
+<li>Add TP20 can bus loopback message.</li>
+<li>Fix some error.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160503-v1224">2016.05.03    ----	V1.2.2.4</h1><div>
+</div><ol>
+<li>Fix ISO15765 receive message as ISO15765 when Filter OFF.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160427-v1223">2016.04.27    ----	V1.2.2.3</h1><div>
+</div><ol>
+<li>Fix ISO15765 receive message as RAW when Filter do not set FlowControl.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160416-v1222">2016.04.16    ----	V1.2.2.2</h1><div>
+</div><ol>
+<li>Fix ISO15765 receive RX_START flag message.</li>
+<li>Fix DeviceInfo.HwName to be correct with SerialNo.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160119-v1221">2016.01.19    ----	V1.2.2.1</h1><div>
+</div><ol>
+<li>Fix ISO14230 receive KWP frame length process without P1MAX.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160115-v1220">2016.01.15    ----	V1.2.2.0</h1><div>
+</div><ol>
+<li>Fix ISO15765 extend addr process (Toyota IMMO).</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160112-v1210">2016.01.12    ----	V1.2.1.0</h1><div>
+</div><ol>
+<li>Fix Opel KW82 protocol.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20160105-v1210">2016.01.05    ----	V1.2.1.0</h1><div>
+</div><ol>
+<li>Add protocol ISO14230, KW82.</li>
+<li>Change protocol KW81 to KW1281.</li>
+<li>A lot of optimize.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20151104-v1106">2015.11.04    ----	V1.1.0.6</h1><div>
+</div><ol>
+<li>Optimize Protocol Timer Msg to surpport with TXFLAG(GM J2534 programming)</li>
+<li>Optimize Protocol Timer Msg size to 16 bytes</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20151103-v1106">2015.11.03    ----	V1.1.0.6</h1><div>
+</div><ol>
+<li>Optimize and correct J1850 VPW Bit timming issure(GM J2534 programming)</li>
+<li>Correct J1850 CRC Algorithm</li>
+<li>Correct J1850 VPW init state to IDLE</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20151028-v1105">2015.10.28    ----	V1.1.0.5</h1><div>
+</div><ol>
+<li>Optimize and correct J1850 PWM Bit timming issure(FORD J2534 progarmming)</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20151024-v1104">2015.10.24    ----	V1.1.0.4</h1><div>
+</div><ol>
+<li>Optimize VCX_GetDevInfo &amp; DecodeSerial</li>
+<li>Auto set hardware comm interface(BT,WIFI) by device serialNo</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20151016-v1104-beta">2015.10.16    ----	V1.1.0.4 BETA</h1><div>
+</div><ol>
+<li>Optimize for WiFi and BT communication process automatically</li>
+<li>Add shell AT command for BT</li>
+<li>Optimize other</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150928-v1103">2015.09.28    ----	V1.1.0.3</h1><div>
+</div><ol>
+<li>Fix J1939 AC, VCX will return the Address Claime message from net.</li>
+<li>Fix J1939 AC, When RX request AC, VCX will TX the Address After Address Claime done.</li>
+<li>Fix J1939 Network Manage, tx CTS Must after AC Done.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150924-v1102">2015.09.24    ----	V1.1.0.2</h1><div>
+</div><ol>
+<li>Fix J1850 PWM comm rx fault after VPW deinit(TIM DeInit not correct)</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150917-v1101">2015.09.17    ----	V1.1.0.1</h1><div>
+</div><ol>
+<li>Optimize ISO15756 add filter time delay.</li>
+<li>Optimize J1708 TX timing process.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150915-v1101">2015.09.15    ----	V1.1.0.1</h1><div>
+</div><ol>
+<li>Fix J1939 rx error for CTS &amp; EOMA (tx long message when calibration)</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150914-v1100">2015.09.14    ----	V1.1.0.0</h1><div>
+</div><ol>
+<li>VCX Boot and App update to v1.1.0.0</li>
+<li>Migrate to New VCX Secure Platform</li>
+<li>Fix some project and utils files</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150901-v10326">2015.09.01    ----	V1.0.3.26</h1><div>
+</div><ol>
+<li>Fix ISO15765 TXFLAG_CAN_PAD not effect the global param.</li>
+<li>Fix ISO15765 RX FlowCtrl timeout process.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150826-v10325">2015.08.26    ----	V1.0.3.25</h1><div>
+</div><ol>
+<li>Add TXFLAG_TX_IND to enable receive TX Indication (TX_DONE)</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150728-v10324">2015.07.28    ----	V1.0.3.24</h1><div>
+</div><ol>
+<li>Fix ISO15765 FlowCtrl RX msg restore to queue.</li>
+<li>Fix ISO15765 Default CAN Pad byte to 0x00.</li>
+<li>Go into DFU mode when secure error.</li>
+<li>Other optimize.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150721-v10323">2015.07.21    ----	V1.0.3.23</h1><div>
+</div><ol>
+<li>Fix TP16/TP20 T1 T3 time set to ECU</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150720-v10323">2015.07.20    ----	V1.0.3.23</h1><div>
+</div><ol>
+<li>Fix ISO15765 receive RAW CAN data packet 6A0/6A1</li>
+<li>Fix CAN2 filter lost when CAN1 init</li>
+<li>Optimize VCX ReqLicense time.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150627-v10322">2015.06.27    ----    V1.0.3.22</h1><div>
+</div><ol>
+<li>Optimize memory to 112KB for all protocol channel use.</li>
+<li>Fix CAN 29bit filter error for J1939</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150623-v10321">2015.06.23    ----    V1.0.3.21</h1><div>
+</div><ol>
+<li>Fix CAN Bus2 filter error for JLR.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150616-v10320">2015.06.16    ----    V1.0.3.20</h1><div>
+</div><ol>
+<li>Fix J1939 Protocol (bus filter not reg after init).</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150612-v10320">2015.06.12    ----    V1.0.3.20</h1><div>
+</div><ol>
+<li>Fix Ford PWM error (bus IDLE state).</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150603-v10320">2015.06.03    ----    V1.0.3.20</h1><div>
+</div><ol>
+<li>Fix CAN Bus2 filter error for JLR.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150601-v10320">2015.06.01    ----    V1.0.3.20</h1><div>
+</div><ol>
+<li>Add GM J1850VPW Protocol support for VCX-NANO.</li>
+<li>Optimize FORD J1850 PWM Protocol Check Bus Passive State Delay(2N3904)</li>
+<li>Optimize FORD J1850 PWM Protocol Tx Bus Collision Timeout (10*50ms)</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150530-v10319">2015.05.30    ----    V1.0.3.19</h1><div>
+</div><ol>
+<li>Ford J1850PWM Protocol Now support ALL Products of VCX Platform.</li>
+<li>Fix Hardware Verification Error(4 Led flashing) in some hardware.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150520-v10318">2015.05.20    ----    V1.0.3.18</h1><div>
+</div><ol>
+<li>Add J1850PWM Protocol for Ford.</li>
+<li>Fix CAN Filter to MAX 56 each channel.</li>
+<li>Other completed.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150427-v10317">2015.04.27    ----    V1.0.3.17</h1><div>
+</div><ol>
+<li>Add HD J1939/J1708 Support.</li>
+<li>Other completed.</li>
+</ol><div>
+</div><h1 class="toc-header" id="h-20150120-v10314">2015.01.20    ----    V1.0.3.14</h1><div>
+</div><ol>
+<li>Fix PIWIS-II scanning all system</li>
+<li>Fix PIWIS-II programming (ISO15765 tx_stmin delay)</li>
+</ol><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

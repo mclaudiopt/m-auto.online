@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ME97 DTS — Benz — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">PT</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">EN</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../../../pt/index.html">&#127968; Início</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos VCX</a>
+          <a class="nav-link" href="../../../pt/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../../../pt/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../../../pt/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../../../pt/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia de Utilização <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/guide/quickstart.html">Guia de Início Rápido</a>
+          <a class="nav-link" href="../../../pt/guide/connection.html">Ligação do Dispositivo</a>
+          <a class="nav-link" href="../../../pt/guide/firmware.html">Actualização de Firmware</a>
+          <a class="nav-link" href="../../../pt/guide/license.html">Gestão de Licenças</a>
+          <a class="nav-link" href="../../../pt/guide/diagnosis.html">Gestão de Drivers</a>
+          <a class="nav-link" href="../../../pt/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../../../pt/guide/device-ip-change.html">Alterar IP do Dispositivo</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Diagnóstico Remoto <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/donet/intro.html">Introdução à Plataforma</a>
+          <a class="nav-link" href="../../../pt/donet/hyper-remote.html">Super Diagnóstico Remoto</a>
+          <a class="nav-link" href="../../../pt/donet/legacy-remote.html">Diagnóstico Remoto Compatível</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Ligeiros <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../../../pt/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../../../pt/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../../../pt/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../../../pt/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../../../pt/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../../../pt/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../../../pt/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../../../pt/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../../../pt/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../../../pt/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../../../pt/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../../../pt/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Diagnostico OEM - Comerciais <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../../../pt/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Lançamentos <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/release/index.html">Actualizações</a>
+          <a class="nav-link" href="../../../pt/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../../../pt/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../../../pt/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Guia do Programador <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../../../pt/developer/index.html">Guia do Programador</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">Benz</span> <span class="sep">/</span> <span class="current">ME97 DTS</span></nav>
+      <div><h1 class="toc-header" id="id="benz-me97dtscbfcff"">BENZ ME97发动机DTS编程(CBF,CFF)</h1><div>
+</div><h1 class="toc-header" id="id="vcxdtscbfcff-ecu211me97"">说明：本文简单介绍VCX设备如何操作DTS进行奔驰ModelosCBF快速测试和CFF ECU编程（奔驰211的发动机ME97）</h1><div>
+</div><h2 class="toc-header" id="id="h-1Abravcxvx-manager"">1.设备连上电脑和车辆（或者模块平台），AbraVCX客户端VX MANAGER查看设备信息（固件和驱动是否最新，授权是否正常）</h2><div>
+</div><p><img alt="vx_manager.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/vx_manager.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2dtsAbra"">2.Clique emDTS软件，Abra一个工作组；</h2><div>
+</div><p><img alt="open_dts.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/open_dts.png"><br>
+<img alt="open_a_workspace.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/open_a_workspace.png"></p><div>
+</div><h2 class="toc-header" id="id="h-3no"">3.SeleccioneModelos和设备Ligação,提示升级的一律选NO；</h2><div>
+</div><p><img alt="211.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/211.png"><br>
+<img alt="no.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/no.png"></p><div>
+</div><h2 class="toc-header" id="id="h-4-start--me97ecucffcdtsprojects"">4.进入Modelos菜单点 start Iniciar全车扫描，扫描完后Seleccione要编程的控制单元 发动机ME97，点开后在右边的框框内查看ECU零件号，根据零件号准备好编程文件.CFF（编程文件有些在C盘DTSProjects文件夹内，没有的话得在诊断软件或者官方服务器Transferir）；</h2><div>
+</div><p><img alt="quick_test.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/quick_test.png"><br>
+<img alt="me97_number.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/me97_number.png"></p><div>
+</div><h2 class="toc-header" id="id="h-5me97cff"">5.进入编程菜单，Seleccione发动机ME97,Seleccione准备好的对应的CFF编程文件（全选一起刷）；</h2><div>
+</div><p><img alt="programming_menu.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/programming_menu.png"><br>
+<img alt="programming_menu2.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/programming_menu2.png"></p><div>
+</div><h2 class="toc-header" id="id="h-6"">6.勾上所有的文件，Iniciar刷写；</h2><div>
+</div><p><img alt="check_the_programming_file.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/check_the_programming_file.png"><br>
+<img alt="start_to_brush.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/start_to_brush.png"></p><div>
+</div><h2 class="toc-header" id="id="h-7"">7.刷写过程中，一个文件Concluído会自动Iniciar另一个刷写，都刷完后进度条下方会有提示，刷写Concluído。</h2><div>
+</div><p><img alt="end_of_programming.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/end_of_programming.png"></p><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/pt/', '/en/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+

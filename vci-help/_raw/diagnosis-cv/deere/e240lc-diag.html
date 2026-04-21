@@ -1,0 +1,46 @@
+﻿<div><h1 class="toc-header" id="h-1-说明"><a href="#h-1-说明" class="toc-anchor">¶</a> 1 说明</h1><div>
+</div><p>本文介绍傲世卡尔科技 VCX 诊断设备使用原厂诊断软件 Service ADVISOR 对约翰迪尔 JOHN DEERE E240LC 挖掘机进行诊断。</p><div>
+</div><p><img alt="e240lc.jpg" src="/diagnosis-cv/deere/e240lc/e240lc.jpg"></p><div>
+</div><h1 class="toc-header" id="h-2-诊断要求"><a href="#h-2-诊断要求" class="toc-anchor">¶</a> 2 诊断要求</h1><div>
+</div><h2 class="toc-header" id="h-21-vci-固件"><a href="#h-21-vci-固件" class="toc-anchor">¶</a> 2.1 VCI 固件</h2><div>
+</div><p>VCI 固件必须升级到 v1.6.6.1 或更新版本。<br>
+下载固件 <a class="is-asset-link" href="/diagnosis-cv/deere/update_v1.6.6.1_nxedl32.exe.zip">update_v1.6.6.1_nxedl32.exe.zip</a></p><div>
+</div><h2 class="toc-header" id="h-22-rp1210-驱动"><a href="#h-22-rp1210-驱动" class="toc-anchor">¶</a> 2.2 RP1210 驱动</h2><div>
+</div><p>RP1210 驱动必须升级至 v3.0.210622 或更新版本。<br>
+下载驱动<a class="is-asset-link" href="/diagnosis-cv/deere/rp1210_v3.0.210622_nxedl32.exe.zip">rp1210_v3.0.210622_nxedl32.exe.zip</a></p><div>
+</div><h1 class="toc-header" id="h-3-诊断步骤"><a href="#h-3-诊断步骤" class="toc-anchor">¶</a> 3 诊断步骤</h1><div>
+</div><h2 class="toc-header" id="h-31-打开软件"><a href="#h-31-打开软件" class="toc-anchor">¶</a> 3.1 打开软件</h2><div>
+</div><p>打开 Service ADVISOR 软件，选择 <strong>【离线】</strong> 方式。<br>
+<img alt="johndeere1-offline.jpg" src="/diagnosis-cv/deere/e240lc/johndeere1-offline.jpg"></p><div>
+</div><h2 class="toc-header" id="h-32-登陆"><a href="#h-32-登陆" class="toc-anchor">¶</a> 3.2 登陆</h2><div>
+</div><p>输入离线登陆密码。<br>
+<img alt="johndeere2-login.jpg" src="/diagnosis-cv/deere/e240lc/johndeere2-login.jpg"></p><div>
+</div><h2 class="toc-header" id="h-33-选择作业"><a href="#h-33-选择作业" class="toc-anchor">¶</a> 3.3 选择作业</h2><div>
+</div><p>选择已有的作业，或者开始一个新作业。<br>
+<img alt="johndeere3-job.jpg" src="/diagnosis-cv/deere/e240lc/johndeere3-job.jpg"></p><div>
+</div><h2 class="toc-header" id="h-34-开始作业"><a href="#h-34-开始作业" class="toc-anchor">¶</a> 3.4 开始作业</h2><div>
+</div><p>点击 【作业】 进入诊断主页。<br>
+<img alt="johndeere4-open.jpg" src="/diagnosis-cv/deere/e240lc/johndeere4-open.jpg"></p><div>
+</div><h2 class="toc-header" id="h-35-开始诊断"><a href="#h-35-开始诊断" class="toc-anchor">¶</a> 3.5 开始诊断</h2><div>
+</div><p>在主页中点击 <strong>【诊断】</strong> 开始诊断。<br>
+<img alt="johndeere5-menu.jpg" src="/diagnosis-cv/deere/e240lc/johndeere5-menu.jpg"></p><div>
+</div><h2 class="toc-header" id="h-36-连接设备"><a href="#h-36-连接设备" class="toc-anchor">¶</a> 3.6 连接设备</h2><div>
+</div><p>选择 EDL V1/V2 并点击 【连接】。<br>
+<img alt="johndeere6-connect.jpg" src="/diagnosis-cv/deere/e240lc/johndeere6-connect.jpg"></p><div>
+</div><h2 class="toc-header" id="h-37-故障码"><a href="#h-37-故障码" class="toc-anchor">¶</a> 3.7 故障码</h2><div>
+</div><p>连接成功后显示读取到的故障码信息。<br>
+<img alt="johndeere7-dtc.jpg" src="/diagnosis-cv/deere/e240lc/johndeere7-dtc.jpg"></p><div>
+</div><h2 class="toc-header" id="h-38-数据流"><a href="#h-38-数据流" class="toc-anchor">¶</a> 3.8 数据流</h2><div>
+</div><p>点击 【读数】 进入数据流界面， 左侧选择需要读取的项目。<br>
+<img alt="johndeere8-data.jpg" src="/diagnosis-cv/deere/e240lc/johndeere8-data.jpg"></p><div>
+</div><h2 class="toc-header" id="h-39-控制单元"><a href="#h-39-控制单元" class="toc-anchor">¶</a> 3.9 控制单元</h2><div>
+</div><p>点击 【控制单元】 显示扫描到的控制单元信息。<br>
+<img alt="johndeere9-ecu.jpg" src="/diagnosis-cv/deere/e240lc/johndeere9-ecu.jpg"></p><div>
+</div><h2 class="toc-header" id="h-310-标定"><a href="#h-310-标定" class="toc-anchor">¶</a> 3.10 标定</h2><div>
+</div><p>点击 【标定】 进入标定界面。选择 【EGR阀学习值复位】 进行测试。<br>
+<img alt="johndeere10-cal.jpg" src="/diagnosis-cv/deere/e240lc/johndeere10-cal.jpg"></p><div>
+</div><p>点击 【确认】 开始 EGR 学习值复位。<br>
+<img alt="johndeere11-egr-reset.jpg" src="/diagnosis-cv/deere/e240lc/johndeere11-egr-reset.jpg"></p><div>
+</div><p>EGR 学习值复位测试完成。<br>
+<img alt="johndeere12-egr-ok.jpg" src="/diagnosis-cv/deere/e240lc/johndeere12-egr-ok.jpg"></p><div>
+</div></div>

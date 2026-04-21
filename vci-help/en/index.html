@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — ALLScanner Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/wiki.css">
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <rect y="3" width="20" height="2" rx="1"/>
+        <rect y="9" width="20" height="2" rx="1"/>
+        <rect y="15" width="20" height="2" rx="1"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="../index.html">ALLScanner <span>Wiki</span></a>
+    <div class="topbar-sep"></div>
+    <div class="lang-switcher" id="lang-switcher">
+      <span class="lang-btn active">EN</span>
+      <a class="lang-btn" id="other-lang-btn" href="#">PT</a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+            <a class="nav-link-home" href="../en/index.html">&#127968; Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../en/product/index.html">VCX Product Selection</a>
+          <a class="nav-link" href="../en/product/vcx-fd.html">VCX-FD</a>
+          <a class="nav-link" href="../en/product/vcx-doip.html">VCX-DoIP</a>
+          <a class="nav-link" href="../en/product/vcx-se.html">VCX-SE</a>
+          <a class="nav-link" href="../en/product/vcx-nano.html">VCX-Nano</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">User Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../en/guide/quickstart.html">Quick Start Guide</a>
+          <a class="nav-link" href="../en/guide/connection.html">Device Connection</a>
+          <a class="nav-link" href="../en/guide/firmware.html">Firmware Update</a>
+          <a class="nav-link" href="../en/guide/license.html">License Management</a>
+          <a class="nav-link" href="../en/guide/diagnosis.html">Driver Management</a>
+          <a class="nav-link" href="../en/guide/faq.html">FAQ</a>
+          <a class="nav-link" href="../en/guide/device-ip-change.html">Change Device IP</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">DoNet Remote Diagnosis <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../en/donet/intro.html">Platform Introduction</a>
+          <a class="nav-link" href="../en/donet/hyper-remote.html">Hyper Remote Diagnosis</a>
+          <a class="nav-link" href="../en/donet/legacy-remote.html">Legacy Remote Diagnosis</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Passenger <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../en/diagnosis/index.html">Overview</a>
+          <a class="nav-link" href="../en/diagnosis/benz/index.html">Mercedes-Benz</a>
+          <a class="nav-link" href="../en/diagnosis/bmw/index.html">BMW</a>
+          <a class="nav-link" href="../en/diagnosis/ford.html">Ford</a>
+          <a class="nav-link" href="../en/diagnosis/gm.html">GM / Chevrolet</a>
+          <a class="nav-link" href="../en/diagnosis/honda/index.html">Honda</a>
+          <a class="nav-link" href="../en/diagnosis/jlr.html">Jaguar Land Rover</a>
+          <a class="nav-link" href="../en/diagnosis/porsche/index.html">Porsche</a>
+          <a class="nav-link" href="../en/diagnosis/rmi.html">RMI</a>
+          <a class="nav-link" href="../en/diagnosis/subaru.html">Subaru</a>
+          <a class="nav-link" href="../en/diagnosis/toyota/index.html">Toyota</a>
+          <a class="nav-link" href="../en/diagnosis/vag.html">VAG (VW/Audi/Seat/Skoda)</a>
+          <a class="nav-link" href="../en/diagnosis/volvo.html">Volvo</a>
+          <a class="nav-link" href="../en/diagnosis/vw.html">Volkswagen</a>
+          <a class="nav-link" href="../en/diagnosis/drive-update.html">DRIVE Update</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">OEM Diagnosis - Commercial <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../en/diagnosis-cv/index.html">Overview</a>
+          <a class="nav-link" href="../en/diagnosis-cv/deere/index.html">John Deere</a>
+          <a class="nav-link" href="../en/diagnosis-cv/deere/e240lc-diag.html">E240LC</a>
+          <a class="nav-link" href="../en/diagnosis-cv/deere/service-advisor-guide.html">Service ADVISOR</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Releases <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../en/release/index.html">Updates</a>
+          <a class="nav-link" href="../en/release/update_vci.html">Update VCI</a>
+          <a class="nav-link" href="../en/release/update_doip.html">Update DoIP</a>
+          <a class="nav-link" href="../en/release/update_vcxfd.html">Update VCX-FD</a>
+          <a class="nav-link" href="../en/release/vxmanager.html">VX Manager</a>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-header">Developer Guide <span class="chevron">&#9660;</span></div>
+        <div class="nav-items">
+          <a class="nav-link" href="../en/developer/index.html">Developer Guide</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <nav class="breadcrumb"><a href="../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Home</span></nav>
+      <div><h1 class="toc-header" id="Welcome">Welcome</h1><div>
+</div><blockquote class="is-success">
+<p>Welcome to ALLScanner products. This site contains the latest knowledge on device usage and vehicle diagnostics. Our goal is to make OEM vehicle diagnosis simpler!</p>
+</blockquote><div>
+</div><h1 class="toc-header" id="Product Information">Product Information</h1><div>
+</div><ul class="links-list">
+<li><a class="is-internal-link is-valid-page" href="product/index.html"><img width="112" alt="" src="http://wiki.allscanner.com/home/vcx-all.png"> ▶ VCX Series Product Selection Guide</a></li>
+<li><a class="is-internal-link is-valid-page" href="product/vcx-fd.html"><img width="112" alt="" src="http://wiki.allscanner.com/home/vcx-fd.png"> ▶ VCX-FD Next-Gen Smart Vehicle Diagnostic Interface</a></li>
+<li><a class="is-internal-link is-valid-page" href="product/vcx-doip.html"><img width="112" alt="" src="http://wiki.allscanner.com/home/vcx-doip.png"> ▶ VCX-DoIP Full-Featured DoIP Vehicle Diagnostic Device</a></li>
+<li><a class="is-internal-link is-valid-page" href="product/vcx-se.html"><img width="112" alt="" src="http://wiki.allscanner.com/home/vcx-se.png"> ▶ VCX-SE Remote Vehicle Diagnostic Interface</a></li>
+<li><a class="is-internal-link is-valid-page" href="product/vcx-nano.html"><img width="112" alt="" src="http://wiki.allscanner.com/home/vcx-nano.png"> ▶ VCX-Nano Dedicated Vehicle Diagnostic Interface</a></li>
+</ul><div>
+</div><h1 class="toc-header" id="Product User Guide">Product User Guide</h1><div>
+</div><p><img alt="deviceguide" src="http://wiki.allscanner.com/home/deviceguide.png"></p><div>
+</div><ul class="links-list">
+<li><a class="is-internal-link is-valid-page" href="guide/quickstart.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f4a1.svg" alt="💡" draggable="false" class="emoji"> Quick Start Guide <em>How to install software, connect the device and start diagnosing on first use.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="guide/connection.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f50d.svg" alt="🔍" draggable="false" class="emoji"> Device Connection <em>How to connect and configure WiFi, USB, LAN and other connection modes.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="guide/firmware.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f527.svg" alt="🔧" draggable="false" class="emoji"> Firmware Update <em>How to upgrade device firmware and recover from firmware issues.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="guide/license.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f513.svg" alt="🔓" draggable="false" class="emoji"> License Management <em>How to view, update and add device licenses.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="guide/diagnosis.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f4bb.svg" alt="💻" draggable="false" class="emoji"> Driver Management <em>How to install, update and manage OEM diagnostic drivers.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="guide/faq.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f4dd.svg" alt="📝" draggable="false" class="emoji"> FAQ <em>Common questions and solutions during product use.</em></a></li>
+</ul><div>
+</div><h1 class="toc-header" id="id="donet-"">DoNet Remote Diagnosis</h1><div>
+</div><p><img alt="donet" src="http://wiki.allscanner.com/home/donet.png"></p><div>
+</div><ul class="links-list">
+<li><a class="is-internal-link is-valid-page" href="donet/intro.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f310.svg" alt="🌐" draggable="false" class="emoji"> DoNet Platform Introduction <em>Real-time remote vehicle diagnosis platform based on cloud and 5G.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="donet/hyper-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/26a1.svg" alt="⚡️" draggable="false" class="emoji"> Hyper Remote Diagnosis <em>Server OEM software connects directly to client device for remote diagnosis.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="donet/legacy-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f517.svg" alt="🔗" draggable="false" class="emoji"> Legacy Remote Diagnosis <em>Server can use any device to connect to client for remote diagnosis.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="guide/device-ip-change.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f527.svg" alt="🔧" draggable="false" class="emoji"> Change Device IP <em>If device IP conflicts with router IP during remote diagnosis.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="donet/legacy-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f4dd.svg" alt="📝" draggable="false" class="emoji"> Remote Diagnosis Cases <em>Real vehicle remote diagnosis test cases.</em></a></li>
+</ul><div>
+</div><h1 class="toc-header" id="id="oem-"">OEM Vehicle Diagnosis</h1><div>
+</div><p><img alt="diagnosis" src="http://wiki.allscanner.com/home/diagnosis.png"></p><div>
+</div><ul class="links-list">
+<li><a class="is-internal-link is-valid-page" href="diagnosis/index.html"><img width="48" alt="" src="http://wiki.allscanner.com/icon/icon-car.png"> Passenger Vehicle <em>OEM diagnostic guide for passenger vehicles, with software overview and diagnostic cases.</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="diagnosis-cv/index.html"><img width="48" alt="" src="http://wiki.allscanner.com/icon/icon-hd.png"> Commercial Vehicle <em>OEM diagnostic guide for commercial vehicles, including software overview and diagnosis cases</em></a></li>
+</ul><div>
+</div></div>
+
+      <div class="page-footer">
+        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/nav.js"></script>
+  <script>
+    // Language switcher: swap /pt/ <-> /en/ in current URL
+    (function() {
+      var path = window.location.pathname;
+      var other = path.replace('/en/', '/pt/');
+      document.getElementById('other-lang-btn').href = other;
+    })();
+  </script>
+</body>
+</html>
+
