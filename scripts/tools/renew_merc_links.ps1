@@ -8,7 +8,7 @@ $BUCKET    = "r2-mauto:m-auto-software"
 $SCAN_DIR  = "Z:\Daimler\Pack\Installer"
 $R2_PREFIX = "Daimler/Pack/Installer"
 $REPO_DIR  = "D:\Tutorials\m-auto.online"
-$JSON_OUT  = "$REPO_DIR\scripts\data\merc_links.json"
+$JSON_OUT  = "$REPO_DIR\merc_links.json"
 $EXPIRES   = "2h"
 $e         = [char]27
 
@@ -80,8 +80,8 @@ $jobs = foreach ($f in $files) {
     @{ ps = $ps; handle = $ps.BeginInvoke(); f = $f }
 }
 
-$expires_dt = (Get-Date).AddHours(2).ToString("o")
-$results    = [System.Collections.Generic.List[object]]::new()
+$expires_dt = (Get-Date).AddHours(2).ToUniversalTime().ToString("o")
+$filesList  = [System.Collections.Generic.List[object]]::new()
 $errCount   = 0
 
 foreach ($job in $jobs) {
@@ -90,11 +90,10 @@ foreach ($job in $jobs) {
     $f   = $job.f
     if ($out.ok) {
         Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.label)"
-        $results.Add([PSCustomObject]@{ label = $f.label; dest = $f.dest; url = $out.url; expires = $expires_dt })
+        $filesList.Add([PSCustomObject]@{ name = $f.dest; url = $out.url })
     } else {
         Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $($f.label)"
         Write-Host "       ${e}[38;2;80;100;140m$($out.url)${e}[0m"
-        $results.Add([PSCustomObject]@{ label = $f.label; dest = $f.dest; url = ""; expires = "" })
         $errCount++
     }
 }
@@ -102,9 +101,10 @@ $pool.Close()
 
 Write-Host ""
 
-# Save JSON
-[System.IO.File]::WriteAllText($JSON_OUT, ($results | ConvertTo-Json -Depth 3), [System.Text.Encoding]::UTF8)
-Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  JSON guardado ($($results.Count) entradas)"
+# Save JSON — format: { expires, files: [ { name, url } ] }
+$jsonObj = [PSCustomObject]@{ expires = $expires_dt; files = $filesList.ToArray() }
+[System.IO.File]::WriteAllText($JSON_OUT, ($jsonObj | ConvertTo-Json -Depth 3), [System.Text.Encoding]::UTF8)
+Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  JSON guardado ($($filesList.Count) ficheiros)"
 
 # Git commit + push — capture stderr as string to avoid red output
 Write-Host ""
@@ -112,12 +112,12 @@ Write-Host "  ${e}[38;2;148;163;184m>> Git push...${e}[0m"
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
 Push-Location $REPO_DIR
 try {
-    $null = git add scripts/data/merc_links.json 2>&1
-    $commitOut = git commit -m "renew: merc_links.json $ts ($($results.Count) ficheiros)" 2>&1
+    $null = git add merc_links.json 2>&1
+    $commitOut = git commit -m "renew: merc_links.json $ts ($($filesList.Count) ficheiros)" 2>&1
     $commitOut | ForEach-Object { Write-Host "  ${e}[38;2;80;100;140m$([string]$_)${e}[0m" }
     $pushOut = git push 2>&1
     $pushOut | ForEach-Object { Write-Host "  ${e}[38;2;80;100;140m$([string]$_)${e}[0m" }
-    Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  Publicado em m-auto.online/scripts/data/merc_links.json"
+    Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  Publicado em m-auto.online/merc_links.json"
 } catch {
     Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   Git erro: $([string]$_)"
 } finally {
@@ -125,12 +125,12 @@ try {
 }
 
 Write-Host ""
-$ok = ($results | Where-Object { $_.url }).Count
+$ok = $filesList.Count
 if ($errCount -gt 0) {
-    Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $ok/$($results.Count) links gerados ($errCount falharam)"
+    Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $ok/$($ok + $errCount) links gerados ($errCount falharam)"
 } else {
     Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  Todos os $ok links gerados e publicados."
 }
-Write-Host "  ${e}[38;2;148;163;184m       Validos ate: $(([datetime]::Parse($expires_dt)).ToString('dd/MM/yyyy HH:mm'))${e}[0m"
+Write-Host "  ${e}[38;2;148;163;184m       Validos ate: $((([datetime]::Parse($expires_dt)).ToLocalTime()).ToString('dd/MM/yyyy HH:mm'))${e}[0m"
 Write-Host ""
 Read-Host "  Pressione ENTER para sair"
