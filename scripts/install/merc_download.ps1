@@ -76,7 +76,36 @@ function Get-Links {
     }
 }
 
-#-- Download com retry e timeout --------------------------------------------
+#-- Instalar aria2c se necessario -------------------------------------------
+function Install-Aria2c {
+    $aria2Path = "C:\M-auto\Tools\aria2c.exe"
+    if (Test-Path $aria2Path) { return $aria2Path }
+
+    Write-Info "A transferir aria2c..."
+    $aria2Url = "https://github.com/aria2/aria2/releases/download/release-1.37.0/aria2-1.37.0-win-64bit-build1.zip"
+    $tempZip = "$env:TEMP\aria2.zip"
+    $tempDir = "$env:TEMP\aria2_extract"
+
+    try {
+        Invoke-WebRequest -Uri $aria2Url -OutFile $tempZip -UseBasicParsing -TimeoutSec 60
+        Expand-Archive -Path $tempZip -DestinationPath $tempDir -Force
+        $aria2Exe = Get-ChildItem -Path $tempDir -Filter "aria2c.exe" -Recurse | Select-Object -First 1
+
+        $toolsDir = "C:\M-auto\Tools"
+        if (-not (Test-Path $toolsDir)) { New-Item -ItemType Directory -Path $toolsDir -Force | Out-Null }
+
+        Copy-Item $aria2Exe.FullName -Destination $aria2Path -Force
+        Remove-Item $tempZip, $tempDir -Recurse -Force -ErrorAction SilentlyContinue
+
+        Write-OK "aria2c instalado."
+        return $aria2Path
+    } catch {
+        Write-Err "Falha ao instalar aria2c: $_"
+        return $null
+    }
+}
+
+#-- Download com aria2c (16 conexoes) ----------------------------------------
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
 
@@ -92,70 +121,74 @@ function Invoke-Download {
     Write-Host "  ${e}[38;2;148;163;184mDestino: ${e}[0m ${e}[97m$dest${e}[0m"
     Write-Host ""
 
-    # Retry com backoff exponencial
-    $maxRetries = 3
-    $retryDelay = 2
+    # Instalar aria2c se necessario
+    $aria2 = Install-Aria2c
+    if (-not $aria2) {
+        Write-Err "aria2c nao disponivel. A usar metodo alternativo..."
+        return $false
+    }
 
-    for ($attempt = 1; $attempt -le $maxRetries; $attempt++) {
-        try {
-            # Configurar proxy se necessario
-            $proxy = Get-ProxyConfig
-            $proxyArgs = @{}
-            if ($proxy) {
-                $proxyArgs['Proxy'] = "http://$proxy"
-                $proxyArgs['ProxyUseDefaultCredentials'] = $true
-            }
+    # Configurar proxy
+    $proxy = Get-ProxyConfig
+    $proxyArg = if ($proxy) { "--all-proxy=http://$proxy" } else { "" }
 
-            # Download com timeout de 300 segundos (5 min)
-            $job = Start-Job -ScriptBlock {
-                param($url, $dest, $proxyArgs)
-                Invoke-WebRequest -Uri $url -OutFile $dest -TimeoutSec 300 @proxyArgs
-            } -ArgumentList $Url, $dest, $proxyArgs
+    # Argumentos aria2c: 16 conexoes, resume automatico, timeout 60s
+    $aria2Args = @(
+        "--max-connection-per-server=16",
+        "--split=16",
+        "--min-split-size=1M",
+        "--continue=true",
+        "--max-tries=3",
+        "--retry-wait=2",
+        "--timeout=60",
+        "--connect-timeout=30",
+        "--dir=$destDir",
+        "--out=$Name",
+        "--console-log-level=warn",
+        "--summary-interval=0"
+    )
+    if ($proxyArg) { $aria2Args += $proxyArg }
+    $aria2Args += $Url
 
-            # Monitorizar progresso
-            $startTime = Get-Date
-            while ($job.State -eq 'Running') {
-                Start-Sleep -Milliseconds 500
+    # Executar aria2c e monitorizar progresso
+    $logFile = "$env:TEMP\aria2_$([guid]::NewGuid().ToString('N').Substring(0,8)).log"
+    $aria2Args += "--log=$logFile"
+    $aria2Args += "--log-level=info"
 
-                if (Test-Path $dest) {
-                    $dlBytes = (Get-Item $dest).Length
-                    $elapsed = ((Get-Date) - $startTime).TotalSeconds
-                    $speed = if ($elapsed -gt 0.5) { $dlBytes / $elapsed / 1MB } else { 0 }
-                    $dlMB = [math]::Round($dlBytes / 1MB, 1)
-                    $spdStr = if ($speed -gt 0) { "{0:N1} MB/s" -f $speed } else { "-- MB/s" }
+    $process = Start-Process -FilePath $aria2 -ArgumentList $aria2Args -NoNewWindow -PassThru
 
-                    Write-Host -NoNewline "`r  ${e}[38;2;100;149;237m↓${e}[0m $dlMB MB  $spdStr  ${e}[38;2;148;163;184m[$Idx/$Total]${e}[0m  "
-                }
-            }
+    $startTime = Get-Date
+    $spinnerFrames = @('⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏')
+    $spinnerIdx = 0
 
-            $result = Receive-Job -Job $job -Wait -ErrorAction Stop
-            Remove-Job -Job $job -Force
+    while (-not $process.HasExited) {
+        Start-Sleep -Milliseconds 300
 
-            Write-Host ""
-            Write-OK "$Name transferido."
-            return $true
+        if (Test-Path $dest) {
+            $dlBytes = (Get-Item $dest).Length
+            $elapsed = ((Get-Date) - $startTime).TotalSeconds
+            $speed = if ($elapsed -gt 0.5) { $dlBytes / $elapsed / 1MB } else { 0 }
+            $dlMB = [math]::Round($dlBytes / 1MB, 1)
+            $spdStr = if ($speed -gt 0) { "{0:N1} MB/s" -f $speed } else { "-- MB/s" }
 
-        } catch {
-            Remove-Job -Job $job -Force -ErrorAction SilentlyContinue
+            $spinner = $spinnerFrames[$spinnerIdx % $spinnerFrames.Count]
+            $spinnerIdx++
 
-            if ($attempt -lt $maxRetries) {
-                Write-Warn "Tentativa $attempt falhou. A tentar novamente em ${retryDelay}s..."
-                Start-Sleep -Seconds $retryDelay
-                $retryDelay *= 2
-
-                # Apagar ficheiro parcial
-                if (Test-Path $dest) {
-                    Remove-Item $dest -Force -ErrorAction SilentlyContinue
-                }
-            } else {
-                Write-Host ""
-                Write-Err "Erro apos $maxRetries tentativas: $_"
-                return $false
-            }
+            Write-Host -NoNewline "`r  ${e}[38;2;100;149;237m$spinner${e}[0m $dlMB MB  $spdStr  ${e}[38;2;148;163;184m[CN:16] [$Idx/$Total]${e}[0m  "
         }
     }
 
-    return $false
+    Remove-Item $logFile -Force -ErrorAction SilentlyContinue
+
+    if ($process.ExitCode -eq 0) {
+        Write-Host ""
+        Write-OK "$Name transferido."
+        return $true
+    } else {
+        Write-Host ""
+        Write-Err "Erro no download (codigo: $($process.ExitCode))"
+        return $false
+    }
 }
 
 #-- Loop principal -----------------------------------------------------------
