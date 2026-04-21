@@ -4,7 +4,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
 
-$LINKS_URL = "https://m-auto.online/data/merc_links.json"
+$LINKS_URL = "https://m-auto.online/merc_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"
 
 if (-not (Test-Path $DEST_DIR)) { New-Item -ItemType Directory -Path $DEST_DIR -Force | Out-Null }
@@ -27,13 +27,28 @@ function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $ms
 #-- Verificar links ----------------------------------------------------------
 function Get-Links {
     try {
-        $json = irm $LINKS_URL -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
-        # Links validos: expires no futuro E files nao vazio
-        if (-not $json.expires -or -not $json.files -or $json.files.Count -eq 0) { return $null }
-        $exp = [datetime]::Parse($json.expires)
-        if ((Get-Date) -gt $exp) { return $null }
+        # Cache-bust: evita CDN do GitHub Pages devolver versao antiga
+        $url  = "$LINKS_URL`?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())"
+        $raw  = irm $url -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
+
+        # irm pode devolver string ou PSCustomObject consoante o Content-Type
+        $json = if ($raw -is [string]) { $raw | ConvertFrom-Json } else { $raw }
+
+        # Sem expires ou sem ficheiros
+        if ([string]::IsNullOrWhiteSpace($json.expires)) { return $null }
+        if (-not $json.files -or $json.files.Count -eq 0) { return $null }
+
+        # Parsing robusto da data (ISO 8601, invariant culture)
+        $exp = [datetime]::Parse($json.expires,
+            [System.Globalization.CultureInfo]::InvariantCulture,
+            [System.Globalization.DateTimeStyles]::RoundtripKind)
+
+        if ((Get-Date).ToUniversalTime() -gt $exp.ToUniversalTime()) { return $null }
+
         return $json.files
-    } catch { return $null }
+    } catch {
+        return $null
+    }
 }
 
 #-- Download com barra de progresso ------------------------------------------
@@ -135,6 +150,20 @@ while ($true) {
     if ($retry -eq 0) {
         Write-Warn "Links expirados. A aguardar renovacao pelo tecnico..."
         Write-Info "A verificar de 5 em 5 segundos. Prima Ctrl+C para cancelar."
+        Write-Host ""
+
+        # Mostrar o que foi lido do servidor para diagnostico
+        try {
+            $url  = "$LINKS_URL`?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())"
+            $raw  = irm $url -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
+            $json = if ($raw -is [string]) { $raw | ConvertFrom-Json } else { $raw }
+            $nf   = if ($json.files) { $json.files.Count } else { 0 }
+            Write-Host "  ${e}[38;2;50;60;80m  URL:     $LINKS_URL${e}[0m"
+            Write-Host "  ${e}[38;2;50;60;80m  expires: $($json.expires)${e}[0m"
+            Write-Host "  ${e}[38;2;50;60;80m  files:   $nf ficheiro(s)${e}[0m"
+        } catch {
+            Write-Host "  ${e}[38;2;239;68;68m  Erro ao ler JSON: $_${e}[0m"
+        }
         Write-Host ""
     }
 
