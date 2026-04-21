@@ -8,7 +8,7 @@ $BUCKET   = "r2-mauto:m-auto-software"
 $DRIVE    = "Z:"
 $REPO_DIR = "D:\Tutorials\m-auto.online"
 $JSON_OUT = "$REPO_DIR\scripts\data\merc_links.json"
-$EXPIRES  = "168h"
+$EXPIRES  = "2h"
 
 $e = [char]27
 
@@ -39,7 +39,7 @@ Write-Host "  ${e}[38;2;29;155;255m+--------------------------------------------
 Write-Host "  ${e}[38;2;29;155;255m|${e}[0m  ${e}[1;97mM-Auto${e}[0m  ${e}[38;2;100;149;237mRenew Mercedes Links${e}[0m"
 Write-Host "  ${e}[38;2;29;155;255m+--------------------------------------------------+${e}[0m"
 Write-Host ""
-Write-Host "  ${e}[38;2;148;163;184mValidade: 7 dias | Ficheiros: $($files.Count)${e}[0m"
+Write-Host "  ${e}[38;2;148;163;184mValidade: 2 horas | Ficheiros: $($files.Count)${e}[0m"
 Write-Host ""
 
 # Parallel URL generation via RunspacePool
@@ -65,7 +65,7 @@ $jobs = foreach ($f in $files) {
 
 # Collect results
 $results = [System.Collections.Generic.List[object]]::new()
-$expires_dt = (Get-Date).AddDays(7).ToString("o")
+$expires_dt = (Get-Date).AddHours(2).ToString("o")
 
 $i = 0
 foreach ($job in $jobs) {

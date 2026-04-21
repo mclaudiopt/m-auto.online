@@ -224,20 +224,17 @@ function Show-DownloadMenu {
 
         Write-Host ""
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
-        Write-Host "  ${e}[38;2;100;149;237m[A]${e}[0m  Descarregar tudo"
         Write-Host "  ${e}[38;2;80;100;140m[0]${e}[0m  Voltar"
         Write-Host ""
         Write-Host -NoNewline "  ${e}[38;2;29;155;255m>${e}[0m  Opcao: "
-        $opt = ($Host.UI.ReadLine()).Trim().ToUpper()
+        $opt = ($Host.UI.ReadLine()).Trim()
         Write-Host ""
 
         if ($opt -eq "0") { return }
 
-        # Collect targets
+        # One file at a time
         $targets = @()
-        if ($opt -eq "A") {
-            $targets = $links | Where-Object { $_.url }
-        } elseif ($opt -match '^\d+$') {
+        if ($opt -match '^\d+$') {
             $idx = [int]$opt - 1
             if ($idx -ge 0 -and $idx -lt $links.Count -and $links[$idx].url) {
                 $targets = @($links[$idx])
