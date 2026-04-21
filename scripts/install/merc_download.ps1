@@ -124,22 +124,46 @@ while ($true) {
     $links = Get-Links
 
     if ($links) {
-        # Links validos — iniciar downloads
+        # Links validos — mostrar checklist e iniciar downloads
         Write-Header
-        Write-OK "Links validos. A iniciar download de $($links.Count) ficheiro(s)..."
+        Write-OK "Links validos — $($links.Count) ficheiro(s) disponiveis."
         Write-Host ""
 
-        $ok = 0; $fail = 0
+        # Checklist de estado
+        foreach ($f in $links) {
+            $dest = Join-Path $DEST_DIR $f.name
+            if (Test-Path $dest) {
+                $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
+            } else {
+                Write-Host "  ${e}[38;2;250;204;21m[--]${e}[0m  $($f.name) ${e}[38;2;148;163;184m(por transferir)${e}[0m"
+            }
+        }
+        Write-Host ""
+        Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
+        Write-Host ""
+
+        $ok = 0; $fail = 0; $skip = 0
         for ($i = 0; $i -lt $links.Count; $i++) {
-            $f = $links[$i]
+            $f    = $links[$i]
+            $dest = Join-Path $DEST_DIR $f.name
+
             Write-Host "  ${e}[38;2;100;149;237m-- $($f.name) ($($i+1)/$($links.Count)) --${e}[0m"
-            $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($i+1) -Total $links.Count
-            if ($res) { $ok++ } else { $fail++ }
+
+            if (Test-Path $dest) {
+                $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+                Write-OK "$($f.name) ja existe ($sizeMB MB) — a saltar."
+                $skip++
+            } else {
+                $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($i+1) -Total $links.Count
+                if ($res) { $ok++ } else { $fail++ }
+            }
             Write-Host ""
         }
 
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
         if ($ok -gt 0)   { Write-OK   "$ok ficheiro(s) transferido(s) com sucesso." }
+        if ($skip -gt 0) { Write-Info "$skip ficheiro(s) ja existiam — saltados." }
         if ($fail -gt 0) { Write-Err  "$fail ficheiro(s) falharam." }
         Write-Host ""
         Read-Host "  Pressione ENTER para sair"
