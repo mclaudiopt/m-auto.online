@@ -180,50 +180,86 @@ while ($retry -lt $maxRetries) {
     $links = Get-Links
 
     if ($links) {
-        # Links validos — mostrar checklist e iniciar downloads
+        # Links validos — mostrar menu de selecao
         Write-Header
         Write-OK "Links validos — $($links.Count) ficheiro(s) disponiveis."
         Write-Host ""
 
-        # Checklist de estado
-        foreach ($f in $links) {
+        # Checklist de estado com numeracao
+        for ($i = 0; $i -lt $links.Count; $i++) {
+            $f = $links[$i]
             $dest = Join-Path $DEST_DIR $f.name
+            $num = $i + 1
             if (Test-Path $dest) {
                 $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
+                Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
             } else {
-                Write-Host "  ${e}[38;2;250;204;21m[--]${e}[0m  $($f.name) ${e}[38;2;148;163;184m(por transferir)${e}[0m"
+                Write-Host "  ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[38;2;250;204;21m[--]${e}[0m  $($f.name) ${e}[38;2;148;163;184m(por transferir)${e}[0m"
             }
         }
         Write-Host ""
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
         Write-Host ""
+        Write-Host "  ${e}[38;2;148;163;184mEscolha:${e}[0m"
+        Write-Host "    ${e}[38;2;100;149;237m[A]${e}[0m Transferir todos os ficheiros em falta"
+        Write-Host "    ${e}[38;2;100;149;237m[1-$($links.Count)]${e}[0m Transferir ficheiro especifico"
+        Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
+        Write-Host ""
+        $choice = Read-Host "  Opcao"
 
-        $ok = 0; $fail = 0; $skip = 0
-        for ($i = 0; $i -lt $links.Count; $i++) {
-            $f    = $links[$i]
+        if ($choice -eq "S" -or $choice -eq "s") {
+            Write-Info "Cancelado pelo utilizador."
+            exit 0
+        }
+
+        $toDownload = @()
+        if ($choice -eq "A" -or $choice -eq "a") {
+            # Transferir todos os ficheiros em falta
+            for ($i = 0; $i -lt $links.Count; $i++) {
+                $dest = Join-Path $DEST_DIR $links[$i].name
+                if (-not (Test-Path $dest)) {
+                    $toDownload += $i
+                }
+            }
+        } elseif ($choice -match '^\d+$' -and [int]$choice -ge 1 -and [int]$choice -le $links.Count) {
+            # Transferir ficheiro especifico
+            $toDownload += ([int]$choice - 1)
+        } else {
+            Write-Err "Opcao invalida."
+            Start-Sleep -Seconds 2
+            continue
+        }
+
+        if ($toDownload.Count -eq 0) {
+            Write-Info "Nenhum ficheiro para transferir."
+            Start-Sleep -Seconds 2
+            exit 0
+        }
+
+        # Iniciar downloads
+        Write-Header
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s)..."
+        Write-Host ""
+
+        $ok = 0; $fail = 0
+        foreach ($idx in $toDownload) {
+            $f = $links[$idx]
             $dest = Join-Path $DEST_DIR $f.name
 
-            Write-Host "  ${e}[38;2;100;149;237m-- $($f.name) ($($i+1)/$($links.Count)) --${e}[0m"
+            Write-Host "  ${e}[38;2;100;149;237m-- $($f.name) ($($ok+$fail+1)/$($toDownload.Count)) --${e}[0m"
 
-            if (Test-Path $dest) {
-                $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-                Write-OK "$($f.name) ja existe ($sizeMB MB) — a saltar."
-                $skip++
-            } else {
-                $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($i+1) -Total $links.Count
-                if ($res) { $ok++ } else { $fail++ }
-            }
+            $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($ok+$fail+1) -Total $toDownload.Count
+            if ($res) { $ok++ } else { $fail++ }
             Write-Host ""
         }
 
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
-        if ($ok -gt 0)   { Write-OK   "$ok ficheiro(s) transferido(s) com sucesso." }
-        if ($skip -gt 0) { Write-Info "$skip ficheiro(s) ja existiam — saltados." }
-        if ($fail -gt 0) { Write-Err  "$fail ficheiro(s) falharam." }
+        if ($ok -gt 0)   { Write-OK "$ok ficheiro(s) transferido(s) com sucesso." }
+        if ($fail -gt 0) { Write-Err "$fail ficheiro(s) falharam." }
         Write-Host ""
-        Start-Sleep -Seconds 2
-        exit 0
+        Read-Host "  Pressione ENTER para continuar"
+        $retry = 0
+        continue
     }
 
     # Links expirados — aguardar
