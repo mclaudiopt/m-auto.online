@@ -19,17 +19,6 @@ function Write-Header {
     Write-Host ""
 }
 
-function Write-AsciiArt {
-    Write-Host ""
-    Write-Host "  ${e}[38;2;29;155;255m███╗   ███╗      █████╗ ██╗   ██╗████████╗ ██████╗ ${e}[0m"
-    Write-Host "  ${e}[38;2;29;155;255m████╗ ████║     ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗${e}[0m"
-    Write-Host "  ${e}[38;2;29;155;255m██╔████╔██║     ███████║██║   ██║   ██║   ██║   ██║${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m██║╚██╔╝██║     ██╔══██║██║   ██║   ██║   ██║   ██║${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m██║ ╚═╝ ██║     ██║  ██║╚██████╔╝   ██║   ╚██████╔╝${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m╚═╝     ╚═╝     ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ${e}[0m"
-    Write-Host ""
-}
-
 function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $msg" }
 function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $msg" }
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $msg" }
@@ -38,219 +27,167 @@ function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $ms
 #-- Verificar links ----------------------------------------------------------
 function Get-Links {
     try {
+        # Cache-bust: evita CDN do GitHub Pages devolver versao antiga
         $url  = "$LINKS_URL`?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())"
         $raw  = irm $url -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
+
+        # irm pode devolver string ou PSCustomObject consoante o Content-Type
         $json = if ($raw -is [string]) { $raw | ConvertFrom-Json } else { $raw }
 
+        # Sem expires ou sem ficheiros
         if ([string]::IsNullOrWhiteSpace($json.expires)) { return $null }
         if (-not $json.files -or $json.files.Count -eq 0) { return $null }
 
+        # Parsing robusto da data (ISO 8601, invariant culture)
         $exp = [datetime]::Parse($json.expires,
             [System.Globalization.CultureInfo]::InvariantCulture,
             [System.Globalization.DateTimeStyles]::RoundtripKind)
 
         if ((Get-Date).ToUniversalTime() -gt $exp.ToUniversalTime()) { return $null }
 
-        return $json
+        return $json.files
     } catch {
         return $null
     }
 }
 
-#-- Download com aria2c ------------------------------------------------------
+#-- Download com barra de progresso ------------------------------------------
 function Invoke-Download {
-    param([string]$Url, [string]$Name)
+    param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
 
-    $ARIA = "$env:TEMP\aria2c.exe"
-    $RPC  = "http://localhost:6801/jsonrpc"
-    $TOK  = "mauto2026"
+    $dest = Join-Path $DEST_DIR $Name
+    $barWidth = 36
 
-    # Instalar aria2c se necessario
-    if (-not (Test-Path $ARIA)) {
-        Write-Info "A instalar aria2c..."
-        try {
-            $zip = "$env:TEMP\aria2.zip"
-            Invoke-WebRequest "https://github.com/aria2/aria2/releases/download/release-1.37.0/aria2-1.37.0-win-64bit-build1.zip" -OutFile $zip -UseBasicParsing
-            Expand-Archive $zip -DestinationPath "$env:TEMP\aria2x" -Force
-            Copy-Item "$env:TEMP\aria2x\aria2-1.37.0-win-64bit-build1\aria2c.exe" $ARIA -Force
-            Remove-Item $zip, "$env:TEMP\aria2x" -Recurse -Force -EA SilentlyContinue
-            Write-OK "aria2c pronto"
-            Write-Host ""
-        } catch {
-            Write-Err "Erro: $_"
-            Read-Host "ENTER"
-            return $false
-        }
+    Write-Host "  ${e}[38;2;148;163;184mFicheiro:${e}[0m ${e}[97m$Name${e}[0m"
+    Write-Host "  ${e}[38;2;148;163;184mDestino: ${e}[0m ${e}[97m$dest${e}[0m"
+    Write-Host ""
+
+    $global:dlDone  = $false
+    $global:dlError = $null
+    $global:dlBytes = 0
+    $global:dlTotal = 0
+
+    $wc = New-Object System.Net.WebClient
+
+    $wc.add_DownloadProgressChanged({
+        $global:dlBytes = $_.BytesReceived
+        $global:dlTotal = $_.TotalBytesToReceive
+    })
+
+    $wc.add_DownloadFileCompleted({
+        if ($_.Error) { $global:dlError = $_.Error.Message }
+        $global:dlDone = $true
+    })
+
+    $startTime = Get-Date
+    $wc.DownloadFileAsync([uri]$Url, $dest)
+
+    while (-not $global:dlDone) {
+        $dl   = $global:dlBytes
+        $tot  = $global:dlTotal
+        $perc = if ($tot -gt 0) { [math]::Round($dl / $tot * 100) } else { 0 }
+
+        $elapsed = ((Get-Date) - $startTime).TotalSeconds
+        $speed   = if ($elapsed -gt 0.5) { $dl / $elapsed / 1KB } else { 0 }
+        $dlMB    = [math]::Round($dl  / 1MB, 1)
+        $totMB   = if ($tot -gt 0) { [math]::Round($tot / 1MB, 1) } else { "?" }
+
+        $eta = if ($speed -gt 0 -and $tot -gt $dl) {
+            $secs = [int](($tot - $dl) / ($speed * 1KB))
+            "{0}:{1:D2}" -f [int]($secs / 60), ($secs % 60)
+        } else { "--" }
+
+        $speedStr = if ($speed -gt 0) { "$([math]::Round($speed)) KB/s" } else { "-- KB/s" }
+        $filled   = [math]::Round($perc / 100 * $barWidth)
+        $bar      = ("$([char]0x2588)" * $filled).PadRight($barWidth, [char]0x2591)
+
+        Write-Host -NoNewline "`r  [${e}[38;2;100;149;237m$bar${e}[0m] $perc%  $dlMB/$totMB MB  $speedStr  ETA $eta  CN:$Idx/$Total  "
+        Start-Sleep -Milliseconds 400
     }
 
-    # Detectar proxy
-    $proxyArg = ""
-    try {
-        $r = Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -EA Stop
-        if ($r.ProxyEnable -eq 1 -and $r.ProxyServer) {
-            $proxyArg = "--all-proxy=http://$($r.ProxyServer)"
-            Write-Info "Proxy detetado: $($r.ProxyServer)"
-        }
-    } catch {}
+    Write-Host ""
 
-    # Iniciar daemon aria2c
-    $aria2Proc = $null
-    try {
-        Invoke-RestMethod -Uri $RPC -Method Post -Body '{"jsonrpc":"2.0","id":"1","method":"aria2.getVersion","params":["token:mauto2026"]}' -ContentType "application/json" -TimeoutSec 2 -EA Stop | Out-Null
-    } catch {
-        if ($proxyArg) {
-            Get-Process -Name aria2c -EA SilentlyContinue | Stop-Process -Force -EA SilentlyContinue
-            Start-Sleep -Milliseconds 400
-        }
-        $aria2Proc = Start-Process -FilePath $ARIA -ArgumentList "--enable-rpc --rpc-listen-port=6801 --rpc-secret=$TOK --rpc-allow-origin-all --file-allocation=none --quiet=true --disable-ipv6=true $proxyArg" -PassThru -WindowStyle Hidden
-        Start-Sleep -Milliseconds 1200
-    }
-
-    # Adicionar download
-    try {
-        $opts = @{
-            dir = $DEST_DIR
-            out = $Name
-            split = "32"
-        }
-        $body = @{
-            jsonrpc = "2.0"
-            id = "1"
-            method = "aria2.addUri"
-            params = @("token:$TOK", @($Url), $opts)
-        } | ConvertTo-Json -Depth 5 -Compress
-
-        $gid = (Invoke-RestMethod -Uri $RPC -Method Post -Body $body -ContentType "application/json").result
-
-        # Limpar ecra e mostrar ASCII art
-        Clear-Host
-        Write-AsciiArt
-
-        # Monitorizar progresso
-        $barW = 36
-        $lastDown = 0
-        $lastTick = [DateTime]::Now
-        $spinnerFrames = @([char]0x280B, [char]0x2819, [char]0x2839, [char]0x2838, [char]0x283C, [char]0x2834, [char]0x2826, [char]0x2827, [char]0x2807, [char]0x280F)
-        $spinnerIdx = 0
-
-        do {
-            Start-Sleep -Milliseconds 800
-            $sb = @{jsonrpc="2.0";id="1";method="aria2.tellStatus";params=@("token:$TOK",$gid)} | ConvertTo-Json -Depth 3 -Compress
-            $s = (Invoke-RestMethod -Uri $RPC -Method Post -Body $sb -ContentType "application/json").result
-
-            $tot = [long]$s.totalLength
-            $down = [long]$s.completedLength
-            $cn = $s.connections
-
-            $dt = ([DateTime]::Now - $lastTick).TotalSeconds
-            $spd = if ($dt -gt 0) { ($down - $lastDown) / $dt } else { 0 }
-            $lastDown = $down
-            $lastTick = [DateTime]::Now
-
-            $pct = if ($tot -gt 0) { [int]($down / $tot * 100) } else { 0 }
-            $mb = "{0:N1}" -f ($down / 1MB)
-            $totMB = "{0:N1}" -f ($tot / 1MB)
-
-            $spdStr = if ($spd -gt 1MB) { "{0:N1} MB/s" -f ($spd / 1MB) } elseif ($spd -gt 1KB) { "{0:N0} KB/s" -f ($spd / 1KB) } else { "-- KB/s" }
-
-            $etaStr = if ($spd -gt 0 -and $tot -gt $down) {
-                $r = ($tot - $down) / $spd
-                if ($r -gt 3600) { "{0}h{1:D2}m" -f [int]($r / 3600), [int](($r % 3600) / 60) }
-                elseif ($r -gt 60) { "{0}m{1:D2}s" -f [int]($r / 60), [int]($r % 60) }
-                else { "{0}s" -f [int]$r }
-            } else { "--" }
-
-            # Barra com gradiente de cores
-            $filled = [int]($barW * $pct / 100)
-            $barChars = ""
-            for ($i = 0; $i -lt $barW; $i++) {
-                if ($i -lt $filled) {
-                    $r = 29 + [int](($i / $barW) * 70)
-                    $g = 155 + [int](($i / $barW) * 42)
-                    $b = 255
-                    $barChars += "${e}[38;2;${r};${g};${b}m$([char]9608)${e}[0m"
-                } else {
-                    $barChars += "${e}[38;2;40;50;70m$([char]9617)${e}[0m"
-                }
-            }
-
-            $spinner = $spinnerFrames[$spinnerIdx % $spinnerFrames.Count]
-            $spinnerIdx++
-
-            Write-Host -NoNewline ([char]13 + "  ${e}[38;2;29;155;255m$spinner${e}[0m [$barChars] ${e}[1;97m$pct%${e}[0m  ${e}[38;2;148;163;184m$mb/$totMB MB${e}[0m  ${e}[38;2;34;197;94m↓ $spdStr${e}[0m  ${e}[38;2;250;204;21m⏱ $etaStr${e}[0m  CN:$cn  ")
-
-        } while ($s.status -eq "active" -or $s.status -eq "waiting")
-
-        Write-Host ""
-        Write-Host ""
-
-        if ($s.status -eq "complete") {
-            Write-OK "Concluido: $DEST_DIR\$Name"
-            return $true
-        } else {
-            Write-Err "Erro: $($s.errorMessage)"
-            return $false
-        }
-    } catch {
-        Write-Err "Erro: $_"
+    if ($global:dlError) {
+        Write-Err "Erro: $($global:dlError)"
         return $false
-    } finally {
-        if ($aria2Proc) { $aria2Proc | Stop-Process -Force -EA SilentlyContinue }
     }
+
+    Write-OK "$Name transferido."
+    return $true
 }
 
-#-- Main ---------------------------------------------------------------------
+#-- Loop principal -----------------------------------------------------------
 Write-Header
 
 $retry = 0
 while ($true) {
-    $data = Get-Links
+    $links = Get-Links
 
-    if ($data) {
-        # Links validos — mostrar menu
-        $links = $data.files
-        $exp = [datetime]::Parse($data.expires,
-            [System.Globalization.CultureInfo]::InvariantCulture,
-            [System.Globalization.DateTimeStyles]::RoundtripKind)
+    if ($links) {
+        # Links validos — mostrar checklist e iniciar downloads
+        Write-Header
+        Write-OK "Links validos — $($links.Count) ficheiro(s) disponiveis."
+        Write-Host ""
 
-        Write-OK "Links validos ate: $($exp.ToLocalTime().ToString('dd/MM/yyyy HH:mm'))"
+        # Checklist de estado
+        foreach ($f in $links) {
+            $dest = Join-Path $DEST_DIR $f.name
+            if (Test-Path $dest) {
+                $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+                Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
+            } else {
+                Write-Host "  ${e}[38;2;250;204;21m[--]${e}[0m  $($f.name) ${e}[38;2;148;163;184m(por transferir)${e}[0m"
+            }
+        }
         Write-Host ""
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
+        Write-Host ""
 
+        $ok = 0; $fail = 0; $skip = 0
         for ($i = 0; $i -lt $links.Count; $i++) {
-            Write-Host "  ${e}[38;2;100;149;237m[$($i+1)]${e}[0m  $($links[$i].name)"
+            $f    = $links[$i]
+            $dest = Join-Path $DEST_DIR $f.name
+
+            Write-Host "  ${e}[38;2;100;149;237m-- $($f.name) ($($i+1)/$($links.Count)) --${e}[0m"
+
+            if (Test-Path $dest) {
+                $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+                Write-OK "$($f.name) ja existe ($sizeMB MB) — a saltar."
+                $skip++
+            } else {
+                $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($i+1) -Total $links.Count
+                if ($res) { $ok++ } else { $fail++ }
+            }
+            Write-Host ""
         }
 
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
-        Write-Host "  ${e}[38;2;100;149;237m[0]${e}[0m  Voltar"
+        if ($ok -gt 0)   { Write-OK   "$ok ficheiro(s) transferido(s) com sucesso." }
+        if ($skip -gt 0) { Write-Info "$skip ficheiro(s) ja existiam — saltados." }
+        if ($fail -gt 0) { Write-Err  "$fail ficheiro(s) falharam." }
         Write-Host ""
-
-        $choice = Read-Host "  Escolha"
-
-        if ($choice -eq "0") { return }
-
-        $idx = [int]$choice - 1
-        if ($idx -ge 0 -and $idx -lt $links.Count) {
-            $f = $links[$idx]
-            Write-Host ""
-            Write-Host "  ${e}[38;2;100;149;237m-- $($f.name) --${e}[0m"
-            Write-Host ""
-            Invoke-Download -Url $f.url -Name $f.name
-            Write-Host ""
-            Read-Host "  Pressione ENTER para continuar"
-            Write-Header
-        } else {
-            Write-Err "Opcao invalida"
-            Start-Sleep -Seconds 1
-            Write-Header
-        }
-        continue
+        Read-Host "  Pressione ENTER para sair"
+        return
     }
 
     # Links expirados — aguardar
     if ($retry -eq 0) {
         Write-Warn "Links expirados. A aguardar renovacao pelo tecnico..."
         Write-Info "A verificar de 5 em 5 segundos. Prima Ctrl+C para cancelar."
+        Write-Host ""
+
+        # Mostrar o que foi lido do servidor para diagnostico
+        try {
+            $url  = "$LINKS_URL`?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())"
+            $raw  = irm $url -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
+            $json = if ($raw -is [string]) { $raw | ConvertFrom-Json } else { $raw }
+            $nf   = if ($json.files) { $json.files.Count } else { 0 }
+            Write-Host "  ${e}[38;2;50;60;80m  URL:     $LINKS_URL${e}[0m"
+            Write-Host "  ${e}[38;2;50;60;80m  expires: $($json.expires)${e}[0m"
+            Write-Host "  ${e}[38;2;50;60;80m  files:   $nf ficheiro(s)${e}[0m"
+        } catch {
+            Write-Host "  ${e}[38;2;239;68;68m  Erro ao ler JSON: $_${e}[0m"
+        }
         Write-Host ""
     }
 
