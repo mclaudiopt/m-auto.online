@@ -5,6 +5,7 @@ $LINKS_JSON = "https://m-auto.online/scripts/data/merc_links.json"
 $ARIA        = "$env:TEMP\aria2c.exe"
 $RPC         = "http://localhost:6801/jsonrpc"
 $TOK         = "mauto2026"
+$DEST_ROOT   = "C:\M-AUTO\Temp"
 $e           = [char]27
 
 function Write-Step($m) { Write-Host "  ${e}[38;2;100;149;237m[..]${e}[0m  $m" }
@@ -56,10 +57,14 @@ function Start-Aria2cDaemon($proxyArg) {
     }
 }
 
-function Invoke-Aria2cDownload($url, $fileName) {
+function Invoke-Aria2cDownload($url, $dest) {
+    # dest may include subfolders, e.g. "EPC 2018-11/EPC_1118_1of4_a1.iso"
+    $destPath = Join-Path $DEST_ROOT $dest.Replace('/', '\')
+    $destDir  = Split-Path $destPath -Parent
+    if (-not (Test-Path $destDir)) { New-Item -ItemType Directory $destDir -Force | Out-Null }
+
     $barW = 36; $lastDown = 0; $lastTick = [DateTime]::Now
-    if (-not (Test-Path "C:\M-AUTO\Temp")) { New-Item -ItemType Directory "C:\M-AUTO\Temp" -Force | Out-Null }
-    $opts = @{ dir = "C:\M-AUTO\Temp"; out = $fileName; split = "32"; "max-connection-per-server" = "32"; "min-split-size" = "4M" }
+    $opts = @{ dir = $destDir.Replace('\','/'); out = (Split-Path $destPath -Leaf); split = "32"; "max-connection-per-server" = "32"; "min-split-size" = "4M" }
     $body = @{ jsonrpc="2.0"; id="1"; method="aria2.addUri"; params=@("token:$TOK",@("$url"),$opts) } | ConvertTo-Json -Depth 5 -Compress
     $gid  = (Invoke-RestMethod -Uri $RPC -Method Post -Body $body -ContentType "application/json").result
     do {
@@ -87,6 +92,44 @@ function Invoke-Aria2cDownload($url, $fileName) {
     return $s.status
 }
 
+function Fetch-Links {
+    # Returns links array, or $null on network error
+    # Retries every 5 seconds if all URLs are empty (links expired, waiting for renew)
+    $attempt = 0
+    while ($true) {
+        $attempt++
+        try {
+            $links = Invoke-RestMethod -Uri $LINKS_JSON -UseBasicParsing -TimeoutSec 15
+        } catch {
+            Write-Err "Nao foi possivel obter links: $([string]$_)"
+            Write-Host ""
+            Read-Host "  ENTER para voltar"
+            return $null
+        }
+
+        # Check if any link has a valid (non-expired) URL
+        $now   = Get-Date
+        $valid = $links | Where-Object {
+            $_.url -and
+            $_.expires -and
+            ([datetime]::Parse($_.expires)) -gt $now
+        }
+
+        if ($valid.Count -gt 0) { return $links }
+
+        # All expired — wait for renew
+        if ($attempt -eq 1) {
+            Write-Host ""
+            Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   Links expirados. A aguardar renovacao pelo tecnico..."
+            Write-Host "  ${e}[38;2;148;163;184m       A verificar de 5 em 5 segundos. Prima Ctrl+C para cancelar.${e}[0m"
+            Write-Host ""
+        }
+        $t = Get-Date -Format "HH:mm:ss"
+        Write-Host -NoNewline ([char]13 + "  ${e}[38;2;80;100;140m[$t]  A aguardar...${e}[0m        ")
+        Start-Sleep -Seconds 5
+    }
+}
+
 # ── Main loop ────────────────────────────────────────────────────────────────
 while ($true) {
     Clear-Host
@@ -96,46 +139,40 @@ while ($true) {
     Write-Host "  ${e}[38;2;29;155;255m+------------------------------------------------------+${e}[0m"
     Write-Host ""
 
-    # Fetch JSON
-    Write-Step "A obter links..."
-    try {
-        $links = Invoke-RestMethod -Uri $LINKS_JSON -UseBasicParsing -TimeoutSec 15
-        Write-Host ([char]13 + "  " + (" " * 40))   # clear line
-    } catch {
-        Write-Host ""
-        Write-Err "Nao foi possivel obter links de m-auto.online"
-        Write-Warn "Verifica a ligacao e tenta novamente."
-        Write-Host ""
-        Read-Host "  ENTER para voltar"
-        return
-    }
+    # Fetch JSON (with retry on expired)
+    $links = Fetch-Links
+    if ($null -eq $links) { return }
+
+    $now = Get-Date
 
     # Show file list
     $i = 0
     foreach ($lnk in $links) {
         $i++
-        $exists = Test-Path "C:\M-AUTO\Temp\$($lnk.dest)"
-        $tag    = if ($exists) { "${e}[38;2;34;197;94m OK ${e}[0m" } else { "${e}[38;2;80;100;140mN/A${e}[0m" }
+        $destPath = Join-Path $DEST_ROOT $lnk.dest.Replace('/', '\')
+        $exists   = Test-Path $destPath
+        $tag      = if ($exists) { "${e}[38;2;34;197;94m OK ${e}[0m" } else { "${e}[38;2;80;100;140mN/A${e}[0m" }
+
         $expStr = ""
-        if ($lnk.expires -and $lnk.url) {
+        if ($lnk.url -and $lnk.expires) {
             try {
                 $exp  = [datetime]::Parse($lnk.expires)
-                $left = ($exp - (Get-Date)).TotalHours
+                $left = ($exp - $now).TotalMinutes
                 $expStr = if ($left -lt 0) {
                     "  ${e}[38;2;239;68;68m[expirado]${e}[0m"
-                } elseif ($left -lt 6) {
-                    "  ${e}[38;2;250;204;21m[$([int]$left)h restantes]${e}[0m"
+                } elseif ($left -lt 30) {
+                    "  ${e}[38;2;250;204;21m[$([int]$left)min]${e}[0m"
                 } else {
-                    "  ${e}[38;2;80;100;140m[ate $(([datetime]::Parse($lnk.expires)).ToString('dd/MM HH:mm'))]${e}[0m"
+                    "  ${e}[38;2;80;100;140m[ate $(([datetime]::Parse($lnk.expires)).ToString('HH:mm'))]${e}[0m"
                 }
             } catch {}
         }
+
         if ($lnk.url) {
             Write-Host "  [$tag]  ${e}[38;2;100;149;237m[$i]${e}[0m  ${e}[97m$($lnk.label)${e}[0m$expStr"
         } else {
-            Write-Host "  [$tag]  ${e}[38;2;80;100;140m[$i]  $($lnk.label)  [link expirado — contacta M-Auto]${e}[0m"
+            Write-Host "  [$tag]  ${e}[38;2;80;100;140m[$i]  $($lnk.label)  [sem link]${e}[0m"
         }
-        Write-Host "         ${e}[38;2;50;60;80mC:\M-AUTO\Temp\$($lnk.dest)${e}[0m"
     }
 
     Write-Host ""
@@ -149,21 +186,15 @@ while ($true) {
     if ($opt -eq "0") { return }
 
     # Resolve target — one file at a time
-    $targets = @()
     if ($opt -match '^\d+$') {
         $idx = [int]$opt - 1
         if ($idx -ge 0 -and $idx -lt $links.Count -and $links[$idx].url) {
-            $targets = @($links[$idx])
+            $target = $links[$idx]
         } else {
             Write-Warn "Opcao invalida ou link nao disponivel."
             Start-Sleep -Seconds 1; continue
         }
     } else { continue }
-
-    if ($targets.Count -eq 0) {
-        Write-Warn "Nenhum link disponivel. Pede ao tecnico para renovar os links."
-        Start-Sleep -Seconds 2; continue
-    }
 
     # Ensure aria2c + start daemon
     if (-not (Ensure-Aria2c)) { Read-Host "  ENTER"; continue }
@@ -171,19 +202,15 @@ while ($true) {
     $aria2Proc = Start-Aria2cDaemon $proxyArg
 
     try {
-        foreach ($lnk in $targets) {
-            Write-Host ""
-            Write-Host "  ${e}[38;2;148;163;184mFicheiro:${e}[0m ${e}[1;97m$($lnk.label)${e}[0m"
-            Write-Host "  ${e}[38;2;148;163;184mDestino: ${e}[0m C:\M-AUTO\Temp\$($lnk.dest)"
-            Write-Host ""
-            try {
-                $status = Invoke-Aria2cDownload -url $lnk.url -fileName $lnk.dest
-                if ($status -eq "complete") { Write-OK "$($lnk.label) concluido." }
-                else { Write-Err "$($lnk.label) falhou." }
-            } catch {
-                Write-Err "Erro: $_"
-            }
-        }
+        Write-Host ""
+        Write-Host "  ${e}[38;2;148;163;184mFicheiro:${e}[0m ${e}[1;97m$($target.label)${e}[0m"
+        Write-Host "  ${e}[38;2;148;163;184mDestino: ${e}[0m $DEST_ROOT\$($target.dest.Replace('/','\'))"
+        Write-Host ""
+        $status = Invoke-Aria2cDownload -url $target.url -dest $target.dest
+        if ($status -eq "complete") { Write-OK "$($target.label) concluido." }
+        else { Write-Err "$($target.label) falhou." }
+    } catch {
+        Write-Err "Erro: $_"
     } finally {
         if ($aria2Proc) { $aria2Proc | Stop-Process -Force -EA SilentlyContinue }
     }

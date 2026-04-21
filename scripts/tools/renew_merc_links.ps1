@@ -1,26 +1,16 @@
-# renew_merc_links.ps1 - Generate presigned URLs for Mercedes Pack and save to JSON
+# renew_merc_links.ps1 - Generate presigned URLs for all files in Z:\Daimler\Pack\Installer
 # Place a shortcut to this script at Z:\Daimler\Pack\
 
 Add-Type -AssemblyName System.Windows.Forms
 
-$RCLONE   = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.73.4-windows-amd64\rclone.exe"
-$BUCKET   = "r2-mauto:m-auto-software"
-$DRIVE    = "Z:"
-$REPO_DIR = "D:\Tutorials\m-auto.online"
-$JSON_OUT = "$REPO_DIR\scripts\data\merc_links.json"
-$EXPIRES  = "2h"
-
-$e = [char]27
-
-# Files to link — R2 path relative to bucket root
-$files = @(
-    @{ label = "EWA";              r2 = "Daimler/Pack/Installer/EWA.7z";                     dest = "ewa.7z"                      },
-    @{ label = "StarFinder 2024";  r2 = "Daimler/Pack/Installer/Startfifinder 2024.7z";      dest = "Startfifinder 2024.7z"       },
-    @{ label = "SDMEDIA";          r2 = "Daimler/Pack/Installer/SDMEDIA.zip";                 dest = "SDMEDIA.zip"                  },
-    @{ label = "Coding Tutorials"; r2 = "Daimler/Pack/Installer/Coding tutorials full.7z";   dest = "Coding tutorials full.7z"    },
-    @{ label = "Databases";        r2 = "Daimler/Pack/Installer/Databases.7z";                dest = "Databases.7z"                 },
-    @{ label = "WIS 2021";         r2 = "Daimler/Pack/Installer/wis2021.rar";                 dest = "wis2021.rar"                  }
-)
+$RCLONE    = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.73.4-windows-amd64\rclone.exe"
+$BUCKET    = "r2-mauto:m-auto-software"
+$SCAN_DIR  = "Z:\Daimler\Pack\Installer"
+$R2_PREFIX = "Daimler/Pack/Installer"
+$REPO_DIR  = "D:\Tutorials\m-auto.online"
+$JSON_OUT  = "$REPO_DIR\scripts\data\merc_links.json"
+$EXPIRES   = "2h"
+$e         = [char]27
 
 # Check rclone
 if (-not (Test-Path $RCLONE)) {
@@ -31,7 +21,24 @@ if (-not (Test-Path $RCLONE)) {
     exit 1
 }
 
-# UI: show progress console
+# Check drive
+if (-not (Test-Path $SCAN_DIR)) {
+    [System.Windows.Forms.MessageBox]::Show(
+        "Pasta nao encontrada: $SCAN_DIR`n`nVerifica se o drive Z:\ esta mapeado.",
+        "Renew - Erro", [System.Windows.Forms.MessageBoxButtons]::OK,
+        [System.Windows.Forms.MessageBoxIcon]::Error) | Out-Null
+    exit 1
+}
+
+# Scan all files — exclude .@__thumb folders and .error files
+$allFiles = Get-ChildItem $SCAN_DIR -Recurse -File -ErrorAction SilentlyContinue |
+    Where-Object {
+        $_.FullName -notmatch '\\.@__thumb\\' -and
+        $_.FullName -notmatch '\\Vediamo DTS WIZ\\' -and
+        $_.Extension -ne '.error'
+    } |
+    Sort-Object FullName
+
 $Host.UI.RawUI.WindowTitle = "M-Auto - Renew Mercedes Links"
 Clear-Host
 Write-Host ""
@@ -39,10 +46,25 @@ Write-Host "  ${e}[38;2;29;155;255m+--------------------------------------------
 Write-Host "  ${e}[38;2;29;155;255m|${e}[0m  ${e}[1;97mM-Auto${e}[0m  ${e}[38;2;100;149;237mRenew Mercedes Links${e}[0m"
 Write-Host "  ${e}[38;2;29;155;255m+--------------------------------------------------+${e}[0m"
 Write-Host ""
-Write-Host "  ${e}[38;2;148;163;184mValidade: 2 horas | Ficheiros: $($files.Count)${e}[0m"
+Write-Host "  ${e}[38;2;148;163;184mPasta: $SCAN_DIR${e}[0m"
+Write-Host "  ${e}[38;2;148;163;184mValidade: 2 horas | Ficheiros encontrados: $($allFiles.Count)${e}[0m"
 Write-Host ""
 
-# Parallel URL generation via RunspacePool
+# Build file entries
+$files = foreach ($f in $allFiles) {
+    $relPath = $f.FullName.Substring($SCAN_DIR.Length).TrimStart('\').Replace('\', '/')
+    $label   = if ($f.DirectoryName -eq $SCAN_DIR) { $f.Name } else {
+        $subfolder = $f.DirectoryName.Substring($SCAN_DIR.Length).TrimStart('\')
+        "$subfolder\$($f.Name)"
+    }
+    [PSCustomObject]@{
+        label = $label
+        dest  = $relPath          # relative path with subfolders preserved
+        r2    = "$R2_PREFIX/$relPath"
+    }
+}
+
+# Parallel URL generation
 $pool = [System.Management.Automation.Runspaces.RunspaceFactory]::CreateRunspacePool(1, [Math]::Min($files.Count, 8))
 $pool.Open()
 
@@ -53,43 +75,27 @@ $jobs = foreach ($f in $files) {
         param($rclone, $bucket, $r2path, $expires)
         $remote = "$bucket/$r2path"
         $url = & $rclone link $remote --expire $expires 2>&1
-        return @{ ok = ($LASTEXITCODE -eq 0); url = "$url" }
-    }).AddParameters(@{
-        rclone  = $RCLONE
-        bucket  = $BUCKET
-        r2path  = $f.r2
-        expires = $EXPIRES
-    })
+        return @{ ok = ($LASTEXITCODE -eq 0); url = "$url".Trim() }
+    }).AddParameters(@{ rclone = $RCLONE; bucket = $BUCKET; r2path = $f.r2; expires = $EXPIRES })
     @{ ps = $ps; handle = $ps.BeginInvoke(); f = $f }
 }
 
-# Collect results
-$results = [System.Collections.Generic.List[object]]::new()
 $expires_dt = (Get-Date).AddHours(2).ToString("o")
+$results    = [System.Collections.Generic.List[object]]::new()
+$errCount   = 0
 
-$i = 0
 foreach ($job in $jobs) {
-    $i++
     $out = $job.ps.EndInvoke($job.handle)
     $job.ps.Dispose()
     $f   = $job.f
-
     if ($out.ok) {
         Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.label)"
-        $results.Add([PSCustomObject]@{
-            label   = $f.label
-            dest    = $f.dest
-            url     = $out.url.Trim()
-            expires = $expires_dt
-        })
+        $results.Add([PSCustomObject]@{ label = $f.label; dest = $f.dest; url = $out.url; expires = $expires_dt })
     } else {
-        Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $($f.label) — $($out.url)"
-        $results.Add([PSCustomObject]@{
-            label   = $f.label
-            dest    = $f.dest
-            url     = ""
-            expires = ""
-        })
+        Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $($f.label)"
+        Write-Host "       ${e}[38;2;80;100;140m$($out.url)${e}[0m"
+        $results.Add([PSCustomObject]@{ label = $f.label; dest = $f.dest; url = ""; expires = "" })
+        $errCount++
     }
 }
 $pool.Close()
@@ -97,31 +103,31 @@ $pool.Close()
 Write-Host ""
 
 # Save JSON
-$jsonContent = $results | ConvertTo-Json -Depth 3
-[System.IO.File]::WriteAllText($JSON_OUT, $jsonContent, [System.Text.Encoding]::UTF8)
-Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  JSON guardado: $JSON_OUT"
+[System.IO.File]::WriteAllText($JSON_OUT, ($results | ConvertTo-Json -Depth 3), [System.Text.Encoding]::UTF8)
+Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  JSON guardado ($($results.Count) entradas)"
 
-# Git commit + push
+# Git commit + push — capture stderr as string to avoid red output
 Write-Host ""
 Write-Host "  ${e}[38;2;148;163;184m>> Git push...${e}[0m"
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
 Push-Location $REPO_DIR
 try {
-    git add scripts/data/merc_links.json 2>&1 | Out-Null
-    git commit -m "renew: merc_links.json $ts" 2>&1 | ForEach-Object { Write-Host "  ${e}[38;2;80;100;140m$_${e}[0m" }
-    git push 2>&1 | ForEach-Object { Write-Host "  ${e}[38;2;80;100;140m$_${e}[0m" }
+    $null = git add scripts/data/merc_links.json 2>&1
+    $commitOut = git commit -m "renew: merc_links.json $ts ($($results.Count) ficheiros)" 2>&1
+    $commitOut | ForEach-Object { Write-Host "  ${e}[38;2;80;100;140m$([string]$_)${e}[0m" }
+    $pushOut = git push 2>&1
+    $pushOut | ForEach-Object { Write-Host "  ${e}[38;2;80;100;140m$([string]$_)${e}[0m" }
     Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  Publicado em m-auto.online/scripts/data/merc_links.json"
 } catch {
-    Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   Git erro: $_"
+    Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   Git erro: $([string]$_)"
 } finally {
     Pop-Location
 }
 
 Write-Host ""
 $ok = ($results | Where-Object { $_.url }).Count
-$failed = $results.Count - $ok
-if ($failed -gt 0) {
-    Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $ok/$($results.Count) links gerados ($failed falharam)"
+if ($errCount -gt 0) {
+    Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $ok/$($results.Count) links gerados ($errCount falharam)"
 } else {
     Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  Todos os $ok links gerados e publicados."
 }
