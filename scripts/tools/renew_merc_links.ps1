@@ -103,7 +103,8 @@ Write-Host ""
 
 # Save JSON — format: { expires, files: [ { name, url } ] }
 $jsonObj = [PSCustomObject]@{ expires = $expires_dt; files = $filesList.ToArray() }
-[System.IO.File]::WriteAllText($JSON_OUT, ($jsonObj | ConvertTo-Json -Depth 3), [System.Text.Encoding]::UTF8)
+$utf8NoBom = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllText($JSON_OUT, ($jsonObj | ConvertTo-Json -Depth 3), $utf8NoBom)
 Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  JSON guardado ($($filesList.Count) ficheiros)"
 
 # Git commit + push — capture stderr as string to avoid red output
