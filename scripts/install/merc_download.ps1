@@ -19,6 +19,17 @@ function Write-Header {
     Write-Host ""
 }
 
+function Write-AsciiArt {
+    Write-Host ""
+    Write-Host "  ${e}[38;2;29;155;255m███╗   ███╗      █████╗ ██╗   ██╗████████╗ ██████╗ ${e}[0m"
+    Write-Host "  ${e}[38;2;29;155;255m████╗ ████║     ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗${e}[0m"
+    Write-Host "  ${e}[38;2;29;155;255m██╔████╔██║     ███████║██║   ██║   ██║   ██║   ██║${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m██║╚██╔╝██║     ██╔══██║██║   ██║   ██║   ██║   ██║${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m██║ ╚═╝ ██║     ██║  ██║╚██████╔╝   ██║   ╚██████╔╝${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m╚═╝     ╚═╝     ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ${e}[0m"
+    Write-Host ""
+}
+
 function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $msg" }
 function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $msg" }
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $msg" }
@@ -111,10 +122,16 @@ function Invoke-Download {
 
         $gid = (Invoke-RestMethod -Uri $RPC -Method Post -Body $body -ContentType "application/json").result
 
+        # Limpar ecra e mostrar ASCII art
+        Clear-Host
+        Write-AsciiArt
+
         # Monitorizar progresso
         $barW = 36
         $lastDown = 0
         $lastTick = [DateTime]::Now
+        $spinnerFrames = @([char]0x280B, [char]0x2819, [char]0x2839, [char]0x2838, [char]0x283C, [char]0x2834, [char]0x2826, [char]0x2827, [char]0x2807, [char]0x280F)
+        $spinnerIdx = 0
 
         do {
             Start-Sleep -Milliseconds 800
@@ -143,10 +160,24 @@ function Invoke-Download {
                 else { "{0}s" -f [int]$r }
             } else { "--" }
 
+            # Barra com gradiente de cores
             $filled = [int]($barW * $pct / 100)
-            $bar = ("${e}[38;2;29;155;255m" + ([string][char]9608 * $filled)) + ("${e}[38;2;40;50;70m" + ([string][char]9617 * ($barW - $filled))) + "${e}[0m"
+            $barChars = ""
+            for ($i = 0; $i -lt $barW; $i++) {
+                if ($i -lt $filled) {
+                    $r = 29 + [int](($i / $barW) * 70)
+                    $g = 155 + [int](($i / $barW) * 42)
+                    $b = 255
+                    $barChars += "${e}[38;2;${r};${g};${b}m$([char]9608)${e}[0m"
+                } else {
+                    $barChars += "${e}[38;2;40;50;70m$([char]9617)${e}[0m"
+                }
+            }
 
-            Write-Host -NoNewline ([char]13 + "  [$bar] ${e}[1;97m$pct%${e}[0m  ${e}[38;2;148;163;184m$mb/$totMB MB${e}[0m  ${e}[38;2;34;197;94m$spdStr${e}[0m  ETA ${e}[38;2;250;204;21m$etaStr${e}[0m  CN:$cn  ")
+            $spinner = $spinnerFrames[$spinnerIdx % $spinnerFrames.Count]
+            $spinnerIdx++
+
+            Write-Host -NoNewline ([char]13 + "  ${e}[38;2;29;155;255m$spinner${e}[0m [$barChars] ${e}[1;97m$pct%${e}[0m  ${e}[38;2;148;163;184m$mb/$totMB MB${e}[0m  ${e}[38;2;34;197;94m↓ $spdStr${e}[0m  ${e}[38;2;250;204;21m⏱ $etaStr${e}[0m  CN:$cn  ")
 
         } while ($s.status -eq "active" -or $s.status -eq "waiting")
 
