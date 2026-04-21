@@ -1,0 +1,8 @@
+[
+  { "label": "EWA",              "dest": "ewa.7z",                    "url": "", "expires": "" },
+  { "label": "StarFinder 2024",  "dest": "Startfifinder 2024.7z",     "url": "", "expires": "" },
+  { "label": "SDMEDIA",          "dest": "SDMEDIA.zip",                "url": "", "expires": "" },
+  { "label": "Coding Tutorials", "dest": "Coding tutorials full.7z",  "url": "", "expires": "" },
+  { "label": "Databases",        "dest": "Databases.7z",               "url": "", "expires": "" },
+  { "label": "WIS 2021",         "dest": "wis2021.rar",                "url": "", "expires": "" }
+]
