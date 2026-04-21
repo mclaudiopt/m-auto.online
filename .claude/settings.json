@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s *)",
+      "Bash(wc -l *)",
+      "Bash(grep -n *)",
+      "Bash(test -d *)",
+      "Bash(test -f *)",
+      "Read(*.ps1)",
+      "Read(*.json)",
+      "Read(*.md)"
+    ]
+  }
+}
