@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Change Device IP — ALLScanner Wiki</title>
+  <title>Change Device IP — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">EN</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../en/product/index.html">VCX Product Selection</a>
-          <a class="nav-link" href="../../en/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../en/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../en/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../en/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../en/product/index.html">M-Auto VCI Product Selection</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../en/release/index.html">Updates</a>
           <a class="nav-link" href="../../en/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../en/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../en/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../en/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,32 +119,32 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">User Guide</span> <span class="sep">/</span> <span class="current">Change Device IP</span></nav>
+      <nav class="breadcrumb"><a href="../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">User Guide</span> <span class="sep">/</span> <span class="current">Change Device IP</span></nav>
       <div><h1 class="toc-header" id="id="-ip-"">Change Device IP Address</h1><div>
-</div><p>VCX-DoIP 设备Connection车辆后相当于一个车辆网关设备，设备本身的网关 IP 地址默认为 192.168.8.1。<br>
-在 DoNet 远程使用过程中设备需要Connection到用户路由器，某些情况下路由器使用的 IP 地址与 VCX 设备可能相同产生冲突，此时可以修改 VCX 设备的网关 IP。本文档介绍修改设备 IP 地址的方法。</p><div>
+</div><p>M-Auto VCI DoIP DeviceConnectionVehicleafterequivalentononeVehicleGatewayDevice，DeviceitselfGateway IP addressdefaultfor 192.168.8.1。<br>
+in DoNet remoteUsageprocesscenterDeviceneedneedConnectiontouseuserlinerouter，somecasebelowlinerouterUsage IP addresswith M-Auto VCI Devicecancansamesameconflict，thiswhencanModification M-Auto VCI DeviceGateway IP。this documentintroductionModificationDevice IP addressMethod。</p><div>
 </div><blockquote class="is-info">
-<p>请先连正确to connect the device to the PC.</p>
+<p>pleasefirstconnectcorrectto connect the device to the PC.</p>
 </blockquote><div>
-</div><h2 class="toc-header" id="id="h-1-"">1. 登陆设备管理页面</h2><div>
-</div><p>使用浏览器Open设备管理页面 192.168.8.1 并登录</p><div>
+</div><h2 class="toc-header" id="id="h-1-"">1. loginDevice ManagementPage</h2><div>
+</div><p>UsagebrowserOpenDevice ManagementPage 192.168.8.1 andlogin</p><div>
 </div><p><img alt="openwrt-login.png" src="http://wiki.allscanner.com/guide/device-ip-change/openwrt-login.png"></p><div>
-</div><h2 class="toc-header" id="id="h-2-Open"">2. Open网络设置</h2><div>
-</div><p>进入 Network -&gt; Interface,  Click LAN 的 [Edit]</p><div>
-</div><p><img alt="openwrt-interface.png" src="http://wiki.allscanner.com/guide/device-ip-change/openwrt-interface.png"></p><div>
-</div><h2 class="toc-header" id="id="h-3--ip"">3. 修改网络 IP</h2><div>
-</div><p>修改 IPv4 address, Click [Save &amp; Apply]</p><div>
-</div><p><img alt="openwrt-change-ip.png" src="http://wiki.allscanner.com/guide/device-ip-change/openwrt-change-ip.png"></p><div>
-</div><h2 class="toc-header" id="id="h-4--vxmanager-"">4. 修改 VXManager 配置</h2><div>
-</div><p>Change Device IP Address成功后，必须同时修改 VX Manager 客户端管理工具的Connection配置，Open[设备配置]Select [LAN] 同时修改 IP地址和设备IP一致，Click[Save]</p><div>
-</div><p><img alt="vxmanager-change-ip.png" src="http://wiki.allscanner.com/guide/device-ip-change/vxmanager-change-ip.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2-Open"">2. OpenNetworksettings</h2><div>
+</div><p>Enter Network -&gt; Interface,  Click LAN  [Edit]</p><div>
+</div><p><img alt="openwrt-interface.png" src="../../assets/images/guide/device-ip-change/openwrt-interface.png"></p><div>
+</div><h2 class="toc-header" id="id="h-3--ip"">3. ModificationNetwork IP</h2><div>
+</div><p>Modification IPv4 address, Click [Save &amp; Apply]</p><div>
+</div><p><img alt="openwrt-change-ip.png" src="../../assets/images/guide/device-ip-change/openwrt-change-ip.png"></p><div>
+</div><h2 class="toc-header" id="id="h-4--vci-manager-"">4. Modification VXManager configure</h2><div>
+</div><p>Change Device IP Addressafter success，mustsimultaneouslyModification VCI Manager ClientManagement ToolConnectionconfigure，Open[Device Configuration]Select [LAN] simultaneouslyModification IPaddressandDeviceIPconsistent，Click[Save]</p><div>
+</div><p><img alt="vci-manager-change-ip.png" src="../../assets/images/guide/device-ip-change/vxmanager-change-ip.png"></p><div>
 </div><blockquote class="is-info">
-<p>使用其他Connection方式如 WLAN / USBLAN 时也需要修改对应的 IP 地址。</p>
+<p>UsageotherConnectionModeas WLAN / USBLAN whenalsoneedneedModificationforshould IP address。</p>
 </blockquote><div>
 </div></div>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>

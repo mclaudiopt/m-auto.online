@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagnóstico OM906 — Benz — ALLScanner Wiki</title>
+  <title>Diagnóstico OM906 — Benz — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">PT</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos VCX</a>
-          <a class="nav-link" href="../../../pt/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../../pt/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../../pt/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../../pt/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos M-Auto VCI</a>
+          <a class="nav-link" href="../../../pt/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../../pt/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../../pt/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../../pt/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../../pt/release/index.html">Actualizações</a>
           <a class="nav-link" href="../../../pt/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../../pt/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../../pt/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../../pt/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,14 +119,14 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">Benz</span> <span class="sep">/</span> <span class="current">OM906</span></nav>
-      <div><h1 class="toc-header" id="id="h-1-"">1 说明</h1><div>
-</div><p>本文介绍傲世卡尔科技 VCX 诊断设备使用Software OEM XENTRY/DAS 对奔驰 OM906 工业发动机进行诊断。</p><div>
-</div><p>梅赛德斯-奔驰 OM906 是一款6.4升直列6缸直列六缸顶置凸轮轴柴油发动机。它于1996年推出，OM906 CNG 是使用天然气的Versão。<br>
-<img alt="om906-engine.jpg" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/om906-engine.jpg"></p><div>
-</div><h1 class="toc-header" id="id="h-2-"">2 诊断座Ligação</h1><div>
-</div><p>此款Modelos使用 <strong>OBD转14P圆形插头</strong> Ligação，实际Comunicação引脚为OBD-15脚，对应14P-14脚。<br>
-在没有转接头的情况下可以将Comunicação线跳线Ligação到 OBD-15脚。</p><div>
+      <nav class="breadcrumb"><a href="../../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">Benz</span> <span class="sep">/</span> <span class="current">OM906</span></nav>
+      <div><h1 class="toc-header" id="id="h-1-"">1 Nota</h1><div>
+</div><p>Este artigo apresentaM-Auto M-Auto VCI utilização do dispositivo de diagnósticoSoftware OEM XENTRY/DAS paraMercedes-Benz OM906 industrialMotorparaDiagnóstico。</p><div>
+</div><p>Mercedes-Mercedes-Benz OM906 éummodelo6.4L em linha6cilindros DOHC dieselMotor。foi1996anolançado，OM906 CNG éUtilizaçãogás naturalVersão。<br>
+<img alt="om906-engine.jpg" src="../../../assets/images/diagnosis/benz/om906-diag/om906-engine.jpg"></p><div>
+</div><h1 class="toc-header" id="id="h-2-"">2 DiagnósticoassentoLigação</h1><div>
+</div><p>estemodeloModelosUtilização <strong>OBDConverter14PredondoConector</strong> Ligação，realComunicaçãoconduzirpinoparaOBD-15pino，paradeve14P-14pino。<br>
+emsemConverterligarconectorcasoabaixopodeparaconverterComunicaçãocabo/linhajumpercabo/linhaLigaçãopara OBD-15pino。</p><div>
 </div><table>
 <thead>
 <tr>
@@ -136,33 +136,33 @@
 </thead>
 <tbody>
 <tr>
-<td><img alt="" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/xdvci-obd-14p-1.jpg"></td>
+<td><img alt="" src="../../../assets/images/diagnosis/benz/om906-diag/xdvci-obd-14p-1.jpg"></td>
 <td><img alt="" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/xdvci-obd-14p-2.jpg"></td>
 </tr>
 </tbody>
 </table><div>
-</div><h1 class="toc-header" id="id="h-3-"">3 配置诊断座类型</h1><div>
-</div><p>由于原厂软件需要检测Ligação到 VCI 的诊断插头类型，使用VCX通过14P插头Ligação诊断座后，还需要通过此配置工具配置插头类型为 <strong>14P</strong>.<br>
-<img alt="xdvci-update-pin.png" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/xdvci-update-pin.png"></p><div>
-</div><p>Transferir配置工具 <a class="is-asset-link" href="/diagnosis/benz/om906-diag/xdvciupdatepin.zip">xdvciupdatepin.zip</a></p><div>
-</div><h1 class="toc-header" id="id="h-4-"">4 诊断Passo</h1><div>
+</div><h1 class="toc-header" id="id="h-3-"">3 configurarDiagnósticoassentoTipo</h1><div>
+</div><p>porqueSoftware OEMnecessárionecessáriodetectarLigaçãopara VCI DiagnósticoConectorTipo，UtilizaçãoVCXatravés de14PConectorLigaçãoDiagnósticoassentoapós，tambémnecessárionecessárioatravés deesteconfigurarferramentaconfigurarConectorTipopara <strong>14P</strong>.<br>
+<img alt="xdvci-update-pin.png" src="../../../assets/images/diagnosis/benz/om906-diag/xdvci-update-pin.png"></p><div>
+</div><p>Transferirconfigurarferramenta <a class="is-asset-link" href="/diagnosis/benz/om906-diag/xdvciupdatepin.zip">xdvciupdatepin.zip</a></p><div>
+</div><h1 class="toc-header" id="id="h-4-"">4 DiagnósticoPasso</h1><div>
 </div><h2 class="toc-header" id="id="h-41-"">4.1 ModelosSeleccione</h2><div>
-</div><p>XENTRY 中Seleccione <strong>工业机组</strong> -&gt; <strong>OM 906 CNG</strong><br>
+</div><p>XENTRY centroSeleccione <strong>industrialmotor/máquinagrupo</strong> -&gt; <strong>OM 906 CNG</strong><br>
 <img alt="om906-diag-1.png" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/om906-diag-1.png"></p><div>
-</div><h2 class="toc-header" id="id="h-42-k"">4.2 SeleccioneK线诊断</h2><div>
-</div><p>启动诊断后会进入 DAS 诊断界面， Seleccione <strong>3.通过K线进行诊断</strong><br>
+</div><h2 class="toc-header" id="id="h-42-k"">4.2 SeleccioneKcabo/linhaDiagnóstico</h2><div>
+</div><p>iniciarDiagnósticoapósiráEntrar DAS Diagnósticointerface， Seleccione <strong>3.através deKcabo/linhaparaDiagnóstico</strong><br>
 <img alt="om906-diag-2.png" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/om906-diag-2.png"></p><div>
-</div><h2 class="toc-header" id="id="h-43-"">4.3 Confirme诊断插头提示</h2><div>
-</div><p>如图提示，软件显示 <strong>诊断插针14</strong>， 与实际使用的 14P 诊断头一致，如不一致请配置为 14P<br>
-<img alt="om906-diag-3.png" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/om906-diag-3.png"></p><div>
-</div><h2 class="toc-header" id="id="h-44-"">4.4 快速测试结果</h2><div>
-</div><p><img alt="om906-diag-4.png" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/om906-diag-4.png"></p><div>
-</div><h2 class="toc-header" id="id="h-45-mr-"">4.5 MR 发动机控制单元信息</h2><div>
-</div><p><img alt="om906-diag-5.png" src="http://wiki.allscanner.com/diagnosis/benz/om906-diag/om906-diag-5.png"></p><div>
+</div><h2 class="toc-header" id="id="h-43-"">4.3 ConfirmeDiagnósticoConectorindicação</h2><div>
+</div><p>Como mostradoindicação，Softwaremostrar <strong>Diagnósticopino14</strong>， comrealUtilização 14P Diagnósticoconectorconsistente，comonãoconsistentepleaseconfigurarpara 14P<br>
+<img alt="om906-diag-3.png" src="../../../assets/images/diagnosis/benz/om906-diag/om906-diag-3.png"></p><div>
+</div><h2 class="toc-header" id="id="h-44-"">4.4 rapidamenteTesteresultado</h2><div>
+</div><p><img alt="om906-diag-4.png" src="../../../assets/images/diagnosis/benz/om906-diag/om906-diag-4.png"></p><div>
+</div><h2 class="toc-header" id="id="h-45-mr-"">4.5 MR MotorUnidade de ControloInformação</h2><div>
+</div><p><img alt="om906-diag-5.png" src="../../../assets/images/diagnosis/benz/om906-diag/om906-diag-5.png"></p><div>
 </div></div>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>

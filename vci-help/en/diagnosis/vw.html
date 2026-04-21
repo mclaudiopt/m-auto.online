@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volkswagen — ALLScanner Wiki</title>
+  <title>Volkswagen — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">EN</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../en/product/index.html">VCX Product Selection</a>
-          <a class="nav-link" href="../../en/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../en/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../en/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../en/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../en/product/index.html">M-Auto VCI Product Selection</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../en/release/index.html">Updates</a>
           <a class="nav-link" href="../../en/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../en/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../en/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../en/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,29 +119,29 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">OEM Diagnosis</span> <span class="sep">/</span> <span class="current">VW</span></nav>
-      <div><h1 class="toc-header" id="id="-"">大众、Audi转向角传感器零位设定方法</h1><div>
-</div><h2 class="toc-header" id="id="absespabsepc0077837g8501286steeringangle-sender-g85-voltage-supply-term-30g8530"">正常行驶时ABS和ESP警报灯间歇性报警，如果ABS（EPC）电控系统中读取故障码00778/37，显示方向盘转角位置传感器G85信号不可靠，属偶发性故障；01286（Steeringangle sender G85 Voltage supply term. 30）方向盘转角度传感器G85的Power Supply电压30线故障。</h2><div>
-</div><h2 class="toc-header" id="id="g85abs"">该故障码是由蓄电池所至，G85并没有损坏，解决方法是对方向盘角度传感器进行校零和对ABS控制单元进行编码。</h2><div>
-</div><h2 class="toc-header" id="id="odisvehicle-self-diagnosis"">利用诊断设备和诊断软件ODIS自诊断Features（Vehicle Self-Diagnosis）进行基本设定，具体Step如下：</h2><div>
-</div><p>（1）启动发动机；<br>
-（2）将方向盘向右转1圈，再向左转1圈，然后停在中位；<br>
-（3）不要Close点火开关；<br>
-（4）Select03刹车系统；<br>
-（5）读码并清除故障码；<br>
-（6）Select系统设置；<br>
-（7）对5位pin码，Enter“40168”（Models不同，pin码可能不同），如果正确则显示“登录Features”；如果登录码错误，将显示“登录码失败”；<br>
-（8）Back主菜单；<br>
-（9）Select系统基本调整；<br>
-（10）Enter“001或060”；<br>
-（11）Close点火开关，退出软件。<br>
-注意<br>
-（1）在某些Models上，如用“001”代替了正确的“060”，该Step将进行制动系统排气操作<br>
-（2）对控制单元进行编码：（AudiA4）03刹车系统控制单元，执行11系统登录，Enter09399； 07模组编码，Enter04499。</p><div>
+      <nav class="breadcrumb"><a href="../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">OEM Diagnosis</span> <span class="sep">/</span> <span class="current">VW</span></nav>
+      <div><h1 class="toc-header" id="id="-"">Volkswagen、AudiSteering angle sensor zero calibration method</h1><div>
+</div><h2 class="toc-header" id="id="absespabsepc0077837g8501286steeringangle-sender-g85-voltage-supply-term-30g8530"">during normal drivingABSandESPintermittent warning light alert，IfABS（EPC）electronic controlSystemfault code read from00778/37，steering wheel displayConvertanglebitposition sensorG85signalnumbernotreliable，intermittent fault；01286（Steeringangle sender G85 Voltage supply term. 30）steering wheelConvertangle sensorG85Power Supplyvoltage30wire fault。</h2><div>
+</div><h2 class="toc-header" id="id="g85abs"">Thisfault codeiscaused by battery，G85andundamaged，SolutionMethodisforsteering wheelangle sensorto performzero calibrationandforABSControl Unitto performcoding。</h2><div>
+</div><h2 class="toc-header" id="id="odisvehicle-self-diagnosis"">usediagnostic deviceandDiagnostic SoftwareODISselfDiagnosisFeatures（Vehicle Self-Diagnosis）to performbasic settings，specificStepasbelow：</h2><div>
+</div><p>（1）startEngine；<br>
+（2）convertsteering wheeltowardsrightConvert1turn，then leftConvert1turn，thenstopincenterbit；<br>
+（3）Do notCloseIgnition switch；<br>
+（4）Select03brakeSystem；<br>
+（5）read codesandclearfault code；<br>
+（6）SelectSystemsettings；<br>
+（7）for5bitpincode，Enter“40168”（Modelsnotsame，pincodecancannotsame），Ifcorrect if shown“loginFeatures”；IflogincodeError，convertdisplay“logincodefailure”；<br>
+（8）BackmainMenu；<br>
+（9）SelectSystembasic adjustment；<br>
+（10）Enter“001or060”；<br>
+（11）CloseIgnition switch，exitSoftware。<br>
+Note<br>
+（1）insomeModelsabove，asuse“001”replaced correct“060”，ThisStepconvertto performbrakeSystembleeding operation<br>
+（2）forControl Unitto performcoding：（AudiA4）03brakeSystemControl Unit，Execute11Systemlogin，Enter09399； 07modulegroupcoding，Enter04499。</p><div>
 </div></div>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>

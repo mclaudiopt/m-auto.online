@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hyper Remote Diagnosis — ALLScanner Wiki</title>
+  <title>Hyper Remote Diagnosis — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">EN</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../en/product/index.html">VCX Product Selection</a>
-          <a class="nav-link" href="../../en/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../en/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../en/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../en/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../en/product/index.html">M-Auto VCI Product Selection</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../en/release/index.html">Updates</a>
           <a class="nav-link" href="../../en/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../en/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../en/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../en/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,50 +119,50 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">DoNet</span> <span class="sep">/</span> <span class="current">Hyper Remote</span></nav>
-      <div><h1 class="toc-header" id="id=""">说明</h1><div>
-</div><p><img class="align-center" alt="donet-hyper-remote.png" src="http://wiki.allscanner.com/donet/donet-hyper-remote.png"><br>
-DoNet 超级远程诊断模式只需要单客户端 VCX 设备即可实现多Brand原厂软件直连远程车辆诊断。<br>
-本文档介绍超级远程诊断使用Step。</p><div>
-</div><h1 class="toc-header" id="id=""">必要需求</h1><div>
-</div><h2 class="toc-header" id="id=""">服务端</h2><div>
+      <nav class="breadcrumb"><a href="../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">DoNet</span> <span class="sep">/</span> <span class="current">Hyper Remote</span></nav>
+      <div><h1 class="toc-header" id="id=""">Note</h1><div>
+</div><p><img class="align-center" alt="donet-hyper-remote.png" src="../../assets/images/donet/donet-hyper-remote.png"><br>
+DoNet Hyper remote mode requires only a single client M-Auto VCI device to achieve multipleBranddirect OEM software remote vehicle diagnosis。<br>
+This document describes Hyper Remote Diagnosis usageStep。</p><div>
+</div><h1 class="toc-header" id="id=""">Necessary requirements</h1><div>
+</div><h2 class="toc-header" id="id=""">Server</h2><div>
 </div><ul>
-<li><em>[准备好原厂软件电脑。…]</em></li>
-<li><em>[ConfirmInstalled好最新的 VXManager 客户端软件及原厂Diagnostic Driver程序。…]</em></li>
-<li><em>[Confirm电脑有稳定快速的网络Connection（推荐使用网线Connection宽带路由器）。…]</em></li>
+<li><em>[readyOEM Softwarecomputer。…]</em></li>
+<li><em>[ConfirmInstalledgoodlatestNew VXManager ClientSoftwareand OEMDiagnostic DriverProgram。…]</em></li>
+<li><em>[Confirmcomputeravailablestable and fastNetworkConnection（Ethernet cable recommendedConnectionBroadband Router）。…]</em></li>
 </ul><div>
-</div><h2 class="toc-header" id="id=""">客户端</h2><div>
+</div><h2 class="toc-header" id="id=""">Client</h2><div>
 </div><ul>
-<li><em>[VCX设备Connection车辆。…]</em></li>
-<li><em>[Confirm车辆使用稳定的PowerPower Supply。…]</em></li>
-<li><em>[Confirm设备有稳定快速的联网条件（推荐使用网线Connection宽带路由器）。…]</em></li>
+<li><em>[VCXDeviceConnectionVehicle。…]</em></li>
+<li><em>[ConfirmVehicle uses stable networkPowerPower Supply。…]</em></li>
+<li><em>[ConfirmDevice with stable fast internet connection（Ethernet cable recommendedConnectionBroadband Router）。…]</em></li>
 </ul><div>
-</div><h1 class="toc-header" id="id=""">客户端操作Step</h1><div>
-</div><h2 class="toc-header" id="id="h-1-"">1. 关注公众号</h2><div>
-</div><p>扫描二维码或微信Search “DoNet Remote Diagnosis平台” 并关注。</p><div>
-</div><p><img class="align-center" width="80%" alt="donet-wechat-qrcode-green.png" src="http://wiki.allscanner.com/donet/donet-wechat-qrcode-green.png"></p><div>
-</div><h2 class="toc-header" id="id="h-2-Open"">2. Open远程诊断平台</h2><div>
-</div><p>在 DoNet 公众号菜单中Click[智能诊断]进入远程诊断平台。</p><div>
+</div><h1 class="toc-header" id="id=""">ClientoperationStep</h1><div>
+</div><h2 class="toc-header" id="id="h-1-"">1. Follow on WeChat</h2><div>
+</div><p>Scan QR code or WeChatSearch “DoNet Remote DiagnosisPlatform” and follow。</p><div>
+</div><p><img class="align-center" width="80%" alt="donet-wechat-qrcode-green.png" src="../../assets/images/donet/donet-wechat-qrcode-green.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2-Open"">2. OpenRemote Diagnosis Platform</h2><div>
+</div><p>in DoNet in WeChat menuClick[Smart Diagnosis]Enter remote diagnosis platform。</p><div>
 </div><p><img class="align-center" height="720" alt="donet-wechat-menu.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-wechat-menu.jpg"></p><div>
-</div><h2 class="toc-header" id="id="h-3-"">3. 配置用户信息</h2><div>
-</div><p>首次使用需要配置用户信息，请填写手机号便于双方联系。</p><div>
+</div><h2 class="toc-header" id="id="h-3-"">3. Configure user information</h2><div>
+</div><p>First use requires configuring user information，Please enter phone number for contact。</p><div>
 </div><p><img class="align-center" height="720" alt="donet-config-user.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-user.jpg"></p><div>
-</div><h2 class="toc-header" id="id="h-4-"">4. 配置设备信息</h2><div>
-</div><p>首次使用需要绑定VCX设备Serial number。</p><div>
-</div><p><img class="align-center" height="720" alt="donet-config-device.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-device.jpg"></p><div>
-</div><h2 class="toc-header" id="id="h-5-"">5. 配置设备联网</h2><div>
-</div><p>远程诊断需要将设备接入互联网，Click[配置设备联网]。</p><div>
+</div><h2 class="toc-header" id="id="h-4-"">4. Configure device information</h2><div>
+</div><p>First use requires bindingVCXDeviceSerial number。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-config-device.jpg" src="../../assets/images/donet/donet-guide/donet-config-device.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-5-"">5. Configure Device Network</h2><div>
+</div><p>Remote diagnosis requires internet connection，Click[Configure Device Network]。</p><div>
 </div><p><img class="align-center" height="720" alt="donet-device-unknow.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-device-unknow.jpg"></p><div>
-</div><h2 class="toc-header" id="id="h-6-"">6. Select联网方式</h2><div>
-</div><p>Select设备联网方式，按照向导Done配网。</p><div>
-</div><p><img class="align-center" height="720" alt="donet-config-network.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-network.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-6-"">6. SelectInternet connection method</h2><div>
+</div><p>SelectDevice connection method，following the wizardDoneconfigure network。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-config-network.jpg" src="../../assets/images/donet/donet-guide/donet-config-network.jpg"></p><div>
 </div><blockquote class="is-warning">
-<p>请确保互联网Connection稳定快速，设备网速延迟小于100ms，建议优先Select有线网络。</p>
+<p>Ensure the internetConnectionstable and fast，device network latency less than100ms，Recommended firstSelectwired network。</p>
 </blockquote><div>
-</div><tabset><template v-slot:tabs=""><li><em>[有线网络联网…]</em></li><li><em>[Wireless网络联网…]</em></li><li><em>[手机热点联网…]</em></li>
+</div><tabset><template v-slot:tabs=""><li><em>[wired network connection…]</em></li><li><em>[Wirelessnetwork connection…]</em></li><li><em>[mobile hotspot connection…]</em></li>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>

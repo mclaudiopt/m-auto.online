@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagnóstico Remoto Compatível — ALLScanner Wiki</title>
+  <title>Diagnóstico Remoto Compatível — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">PT</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
-          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos M-Auto VCI</a>
+          <a class="nav-link" href="../../pt/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../pt/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../pt/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../pt/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
           <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,53 +119,53 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">DoNet</span> <span class="sep">/</span> <span class="current">Remoto Compatível</span></nav>
-      <div><h1 class="toc-header" id="id=""">说明</h1><div>
-</div><p><img class="align-center" alt="donet-legacy-remote.png" src="http://wiki.allscanner.com/donet/donet-legacy-remote.png"><br>
-DoNet 兼容远程诊断模式需要服务端和客户端各使用 1 个 VCX 设备，可实现任意Marca设备远程诊断。<br>
-本文档介绍兼容远程诊断使用Passo。</p><div>
-</div><h1 class="toc-header" id="id=""">必要需求</h1><div>
-</div><h2 class="toc-header" id="id=""">服务端</h2><div>
-</div><p>硬件Ligação方法如下：</p><div>
-</div><p><img class="align-center" alt="donet-server-connect.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-server-connect.jpg"></p><div>
+      <nav class="breadcrumb"><a href="../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">DoNet</span> <span class="sep">/</span> <span class="current">Remoto Compatível</span></nav>
+      <div><h1 class="toc-header" id="id=""">Nota</h1><div>
+</div><p><img class="align-center" alt="donet-legacy-remote.png" src="../../assets/images/donet/donet-legacy-remote.png"><br>
+DoNet O modo de Diagnóstico Remoto Compatível requer servidor e cliente cada um usando 1  M-Auto VCI Dispositivo，pode realizar qualquerMarcaDiagnóstico Remoto do Dispositivo。<br>
+este documentointroduçãoDiagnóstico Remoto CompatívelUtilizaçãoPasso。</p><div>
+</div><h1 class="toc-header" id="id=""">Requisitos necessários</h1><div>
+</div><h2 class="toc-header" id="id=""">Servidor</h2><div>
+</div><p>HardwareLigaçãoMétodocomoabaixo：</p><div>
+</div><p><img class="align-center" alt="donet-server-connect.jpg" src="../../assets/images/donet/donet-guide/donet-server-connect.jpg"></p><div>
 </div><ul>
-<li><em>[VCX设备通过 REMOTE-OBD 适配器外接AlimentaçãoAlimentação。…]</em></li>
-<li><em>[诊断设备通过 REMOTE-OBD 适配器Ligação。…]</em></li>
-<li><em>[Confirme设备有稳定快速的联网条件（推荐使用网线Ligação宽带路由器）。…]</em></li>
+<li><em>[VCXO dispositivo através de REMOTE-OBD AdaptadorexternoAlimentaçãoAlimentação。…]</em></li>
+<li><em>[DiagnósticoO dispositivo através de REMOTE-OBD AdaptadorLigação。…]</em></li>
+<li><em>[ConfirmeDispositivo com ligação estável e rápida à internet（Recomenda-se cabo de redeLigaçãoRouter de Banda Larga）。…]</em></li>
 </ul><div>
-</div><h2 class="toc-header" id="id=""">客户端</h2><div>
+</div><h2 class="toc-header" id="id=""">Cliente</h2><div>
 </div><ul>
-<li><em>[VCX设备Ligação车辆。…]</em></li>
-<li><em>[Confirme车辆使用稳定的AlimentaçãoAlimentação。…]</em></li>
-<li><em>[Confirme设备有稳定快速的联网条件（推荐使用网线Ligação宽带路由器）。…]</em></li>
+<li><em>[VCXDispositivoLigaçãoVeículo。…]</em></li>
+<li><em>[ConfirmeO veículo utiliza uma rede estávelAlimentaçãoAlimentação。…]</em></li>
+<li><em>[ConfirmeDispositivo com ligação estável e rápida à internet（Recomenda-se cabo de redeLigaçãoRouter de Banda Larga）。…]</em></li>
 </ul><div>
-</div><h1 class="toc-header" id="id=""">准备阶段</h1><div>
-</div><p>服务端和客户端分别按照以下Passo配置设备联网</p><div>
-</div><h2 class="toc-header" id="id="h-1-"">1. 关注公众号</h2><div>
-</div><p>扫描二维码或微信Pesquise “DoNet Diagnóstico Remoto平台” 并关注。</p><div>
-</div><p><img class="align-center" width="80%" alt="donet-wechat-qrcode-green.png" src="http://wiki.allscanner.com/donet/donet-wechat-qrcode-green.png"></p><div>
-</div><h2 class="toc-header" id="id="h-2-Abra"">2. Abra远程诊断平台</h2><div>
-</div><p>在 DoNet 公众号菜单中Clique em[智能诊断]进入远程诊断平台。</p><div>
+</div><h1 class="toc-header" id="id=""">fase de preparação</h1><div>
+</div><p>ServidoreClientedividido emdiferentesseguirabaixoPassoConfigurar Ligação à Internet</p><div>
+</div><h2 class="toc-header" id="id="h-1-"">1. Siga no WeChat</h2><div>
+</div><p>Digitalize o código QR ou WeChatPesquise “DoNet Diagnóstico RemotoPlataforma” e siga。</p><div>
+</div><p><img class="align-center" width="80%" alt="donet-wechat-qrcode-green.png" src="../../assets/images/donet/donet-wechat-qrcode-green.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2-Abra"">2. AbraPlataforma de Diagnóstico Remoto</h2><div>
+</div><p>em DoNet no menu do WeChatClique em[Diagnóstico Inteligente]Aceder à plataforma de diagnóstico remoto。</p><div>
 </div><p><img class="align-center" height="720" alt="donet-wechat-menu.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-wechat-menu.jpg"></p><div>
-</div><h2 class="toc-header" id="id="h-3-"">3. 配置用户信息</h2><div>
-</div><p>首次使用需要配置用户信息，请填写手机号便于双方联系。</p><div>
+</div><h2 class="toc-header" id="id="h-3-"">3. Configurar informações do utilizador</h2><div>
+</div><p>Na primeira utilização, configure as informações do utilizador，Indique o número de telemóvel para contacto。</p><div>
 </div><p><img class="align-center" height="720" alt="donet-config-user.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-user.jpg"></p><div>
-</div><h2 class="toc-header" id="id="h-4-"">4. 配置设备信息</h2><div>
-</div><p>首次使用需要绑定VCX设备Número de série。</p><div>
-</div><p><img class="align-center" height="720" alt="donet-config-device.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-device.jpg"></p><div>
-</div><h2 class="toc-header" id="id="h-5-"">5. 配置设备联网</h2><div>
-</div><p>远程诊断需要将设备接入互联网，Clique em[配置设备联网]。</p><div>
+</div><h2 class="toc-header" id="id="h-4-"">4. Configurar informações do dispositivo</h2><div>
+</div><p>Na primeira utilização, é necessário vincularVCXDispositivoNúmero de série。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-config-device.jpg" src="../../assets/images/donet/donet-guide/donet-config-device.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-5-"">5. Configurar Ligação à Internet</h2><div>
+</div><p>O diagnóstico remoto requer ligação à internet，Clique em[Configurar Ligação à Internet]。</p><div>
 </div><p><img class="align-center" height="720" alt="donet-device-unknow.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-device-unknow.jpg"></p><div>
-</div><h2 class="toc-header" id="id="h-6-"">6. Seleccione联网方式</h2><div>
-</div><p>Seleccione设备联网方式，按照向导Concluído配网。</p><div>
-</div><p><img class="align-center" height="720" alt="donet-config-network.jpg" src="http://wiki.allscanner.com/donet/donet-guide/donet-config-network.jpg"></p><div>
+</div><h2 class="toc-header" id="id="h-6-"">6. SeleccioneModo de ligação à internet</h2><div>
+</div><p>SeleccioneModo de ligação do dispositivo，seguindo o assistenteConcluídoconfigurar rede。</p><div>
+</div><p><img class="align-center" height="720" alt="donet-config-network.jpg" src="../../assets/images/donet/donet-guide/donet-config-network.jpg"></p><div>
 </div><blockquote class="is-warning">
-<p>请确保互联网Ligação稳定快速，设备网速延迟小于100ms，建议优先Seleccione有线网络。</p>
+<p>Certifique-se de que a internetLigaçãoestável e rápida，latência do dispositivo inferior a100ms，Recomenda-se prioritariamenteSeleccionerede com fio。</p>
 </blockquote><div>
-</div><tabset><template v-slot:tabs=""><li><em>[有线网络联网…]</em></li><li><em>[Sem fios网络联网…]</em></li><li><em>[手机热点联网…]</em></li>
+</div><tabset><template v-slot:tabs=""><li><em>[ligação por rede com fio…]</em></li><li><em>[Sem fiosligação à rede…]</em></li><li><em>[ligação por hotspot móvel…]</em></li>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>

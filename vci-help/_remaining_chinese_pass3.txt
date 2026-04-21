@@ -1,0 +1,335 @@
+Files still with Chinese after pass 3: 35
+
+en\diagnosis\bmw\esys-guide.html
+  禁
+
+en\diagnosis\gm\gds2-device-not-detected.html
+  放
+
+en\diagnosis\porsche\pt3g-engineer.html
+  现
+
+en\guide\faq.html
+  过
+  他
+
+en\guide\license.html
+  过
+
+en\product\vcx-se.html
+  度
+  便携式
+  即插即
+  加固
+  插拔
+  满足
+
+en\release\update_doip.html
+  直
+
+en\release\update_vcxfd.html
+  输
+  善
+  乱序
+  终端
+  阻
+  禁
+  商
+
+en\release\vxmanager.html
+  预
+  达
+  生
+  独立
+  加载
+  慢
+  强
+  试
+  立即
+  程
+  进度
+  动态
+  关
+  保留
+  本地
+  除
+  占
+  台
+  版
+  格式
+  环境
+  过
+  合
+  现
+  共享
+  善
+  批
+  包
+  提
+  精
+  字体
+
+pt\diagnosis\benz\211-zgw.html
+  必须
+
+pt\diagnosis\benz\me97-dts.html
+  所
+  过程
+
+pt\diagnosis\benz\om906-diag.html
+  请
+
+pt\diagnosis\benz\vs30-xentry-dts.html
+  您
+  担心细
+  但
+  考虑
+  来
+  都
+  详细概述请访问
+  维修
+  库
+  关维修
+  技术
+  告
+  所
+  视频
+  动画来
+  何
+  于
+  于较
+  这似乎
+  因
+  们
+  最
+  备
+  变速箱
+  这类
+  这
+  概述
+  已预装
+  首
+  区
+  检查
+  已
+
+pt\diagnosis\benz\xentry-das-guide.html
+  仅
+  于
+  辆
+  这
+  换
+  适
+  包
+  视
+  规范
+  症状来
+  进评估
+  你
+  装
+  加装
+  厢式
+  们
+  维修
+  取得
+  速度
+  来附加值
+  过程
+  完
+  集
+  乎
+  动
+  干预
+  话
+  所
+  至
+  续
+  月
+  权
+  随着
+  概念
+  产生
+  布
+  访问
+  出现
+  无
+  未
+  再
+  都必须
+  取
+  记忆
+  请
+  您至
+  已
+  必须
+  匹
+  才
+  您
+  致
+  告
+
+pt\diagnosis\bmw\esys-guide.html
+  禁
+  包括
+  最
+  于
+  首
+  取
+  远程
+
+pt\diagnosis\bmw\inpa-guide.html
+  您
+  所
+  取
+  集
+  何
+  首
+
+pt\diagnosis\gm\gds2-device-not-detected.html
+  确
+
+pt\diagnosis\honda\hds-guide.html
+  访问所
+
+pt\diagnosis\porsche\pt3g-engineer.html
+  换
+  现
+
+pt\diagnosis-cv\deere\e240lc-diag.html
+  必须
+  至
+  取
+
+pt\donet\intro.html
+  已
+
+pt\guide\connection.html
+  端口
+  确
+  所
+  您
+
+pt\guide\device-ip-change.html
+  于
+  远程
+  过程
+  请
+  确
+  必须
+
+pt\guide\diagnosis.html
+  已
+  至
+  过程
+  随着
+  布
+
+pt\guide\faq.html
+  确
+  请
+  都
+  话
+  这
+  已
+  过
+  他
+
+pt\guide\firmware.html
+  过程
+
+pt\guide\license.html
+  所
+  过
+  动
+
+pt\product\vcx-doip.html
+  最
+
+pt\product\vcx-fd.html
+  远程
+  换
+
+pt\product\vcx-nano.html
+  最
+  集
+
+pt\product\vcx-se.html
+  集
+  度
+  便携式
+  即插即
+  加固
+  插拔
+  满足
+
+pt\release\update_doip.html
+  直
+  取
+  未
+  但
+
+pt\release\update_vci.html
+  致
+  检查
+  续
+  无
+  请
+  最
+  取
+  远程
+  区
+
+pt\release\update_vcxfd.html
+  续
+  所
+  未
+  何
+  权
+  匹
+  速度
+  输完善
+  乱序
+  终端
+  阻
+  禁
+  商
+  速度最
+  布
+
+pt\release\vxmanager.html
+  预
+  布
+  端口
+  达
+  速度
+  生
+  独立
+  加载速度慢
+  强
+  试
+  立即
+  程
+  进度
+  动态
+  关
+  保留
+  本地
+  除
+  占
+  台
+  版
+  格式
+  环境
+  过低
+  合
+  现
+  远程共享
+  完善
+  批
+  包
+  提
+  致
+  精
+  字体
+  最
+

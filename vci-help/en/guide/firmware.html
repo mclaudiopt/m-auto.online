@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Firmware Update — ALLScanner Wiki</title>
+  <title>Firmware Update — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">EN</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../en/product/index.html">VCX Product Selection</a>
-          <a class="nav-link" href="../../en/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../en/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../en/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../en/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../en/product/index.html">M-Auto VCI Product Selection</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../en/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../en/release/index.html">Updates</a>
           <a class="nav-link" href="../../en/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../en/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../en/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../en/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../en/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,47 +119,47 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">User Guide</span> <span class="sep">/</span> <span class="current">Firmware Update</span></nav>
-      <div><h1 class="toc-header" id="id=""">固件更新</h1><div>
+      <nav class="breadcrumb"><a href="../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">User Guide</span> <span class="sep">/</span> <span class="current">Firmware Update</span></nav>
+      <div><h1 class="toc-header" id="id=""">Firmware Update</h1><div>
 </div><blockquote class="is-info">
-<p>VCX 设备通过Update Firmware来不断优化设备和新增Features，请保持设备固件始终为最新！</p>
+<p>M-Auto VCI The device viaUpdate Firmwareto continuously optimize and add featuresFeatures，keep device firmware always updated！</p>
 </blockquote><div>
-</div><h2 class="toc-header" id="id=""">Connection设备</h2><div>
+</div><h2 class="toc-header" id="id=""">ConnectionDevice</h2><div>
 </div><p>For firmware updates, wired connection (USB or LAN) is recommended. See <a class="is-internal-link is-valid-page" href="../guide/connection.html"><em>Device Connection Setup</em></a> to connect the device to the PC.</p><div>
 </div><p>USB connection diagram:</p><div>
-</div><p><img class="align-center" width="800" alt="vcxdoip-usb-obd.jpg" src="http://wiki.allscanner.com/guide/connection/vcxdoip-usb-obd.jpg"></p><div>
+</div><p><img class="align-center" width="800" alt="vcxdoip-usb-obd.jpg" src="../../assets/images/guide/connection/vcxdoip-usb-obd.jpg"></p><div>
 </div><blockquote class="is-info">
 <p>When unable to connect to a vehicle, the device can be powered via USB.</p>
 </blockquote><div>
 </div><blockquote class="is-warning">
 <p>Some PC USB ports may not supply sufficient power, causing instability. Power the device via the OBD port instead.</p>
 </blockquote><div>
-</div><h2 class="toc-header" id="id=""">查看固件Version</h2><div>
-</div><p>Launch VX Manager. The <strong>[设备信息]</strong> section shows the current firmware version. If new firmware is available on the server, <strong>[Update Firmware]</strong> will show <strong>[+]</strong> 标记，并且自动弹出Update Firmware对话框。</p><div>
-</div><p><img class="align-center" width="960" alt="vxmanager-firmware-new.png" src="http://wiki.allscanner.com/guide/firmware/vxmanager-firmware-new.png"></p><div>
-</div><h2 class="toc-header" id="id="Update-Firmware"">Update Firmware过程</h2><div>
-</div><p>在Update Firmware对话框中勾选需要更新的固件，单击 <strong>[Start更新]</strong>。This takes a few minutes. Do not disconnect the device during the update.</p><div>
-</div><p><img class="align-center" width="600" alt="vxmanager-firmware-update.png" src="http://wiki.allscanner.com/guide/firmware/vxmanager-firmware-update.png"></p><div>
-</div><h2 class="toc-header" id="id=""">更新Done</h2><div>
-</div><p>After closing the update dialog, VX Manager <strong>[设备信息]</strong> will display the updated firmware version.</p><div>
-</div><h1 class="toc-header" id="id="doip-"">DoIP 固件恢复</h1><div>
+</div><h2 class="toc-header" id="id=""">checkFirmwareVersion</h2><div>
+</div><p>Launch VCI Manager. The <strong>[DeviceInformation]</strong> section shows the current firmware version. If new firmware is available on the server, <strong>[Update Firmware]</strong> will show <strong>[+]</strong> mark，andandAutomaticpop-upUpdate Firmwareformeansdialog。</p><div>
+</div><p><img class="align-center" width="960" alt="vci-manager-firmware-new.png" src="../../assets/images/guide/firmware/vxmanager-firmware-new.png"></p><div>
+</div><h2 class="toc-header" id="id="Update-Firmware"">Update Firmwareprocess</h2><div>
+</div><p>inUpdate Firmwareformeansdialogcentercheck/selectneedneedUpdateFirmware，singleclick <strong>[StartUpdate]</strong>。This takes a few minutes. Do not disconnect the device during the update.</p><div>
+</div><p><img class="align-center" width="600" alt="vci-manager-firmware-update.png" src="http://wiki.allscanner.com/guide/firmware/vxmanager-firmware-update.png"></p><div>
+</div><h2 class="toc-header" id="id=""">UpdateDone</h2><div>
+</div><p>After closing the update dialog, VCI Manager <strong>[DeviceInformation]</strong> will display the updated firmware version.</p><div>
+</div><h1 class="toc-header" id="id="doip-"">DoIP Firmwarerestore</h1><div>
 </div><p>For DoIP system boot failures caused by abnormal conditions, try recovering the DoIP firmware.</p><div>
 </div><blockquote class="is-warning">
-<p>This procedure only applies to devices with a DoIP system (VCX-DoIP, VCX-SE).</p>
+<p>This procedure only applies to devices with a DoIP system (M-Auto VCI DoIP, M-Auto VCI SE).</p>
 </blockquote><div>
 </div><blockquote class="is-info">
 <p>Criteria for detecting DoIP system abnormality:<br>
-设备启动25秒后，没有听到第二次蜂鸣器 “哔哔” 声。<br>
+Devicestart25secondsafter，withoutheartosecond beep “beep” sound。<br>
 After 25 seconds, the wireless LED does not light or flash.<br>
 After 25 seconds, the device wireless network is not found: <strong>DoIP-VCI-XXXX</strong>。<br>
-After 25 seconds, VX Manager cannot connect or read device information.</p>
+After 25 seconds, VCI Manager cannot connect or read device information.</p>
 </blockquote><div>
-</div><h2 class="toc-header" id="id=""">进入固件恢复模式</h2><div>
+</div><h2 class="toc-header" id="id=""">EnterFirmwarerestoreMode</h2><div>
 </div><p>Disconnect all connections from the device (no power) and follow these steps:</p><div>
-</div><tabset><template v-slot:tabs=""><li><em>[VCX-DoIP 进入恢固件复模式…]</em></li><li><em>[VCX-SE 进入恢固件复模式…]</em></li>
+</div><tabset><template v-slot:tabs=""><li><em>[M-Auto VCI DoIP EnterrestoreFirmwarerecoveryMode…]</em></li><li><em>[M-Auto VCI SE EnterrestoreFirmwarerecoveryMode…]</em></li>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>

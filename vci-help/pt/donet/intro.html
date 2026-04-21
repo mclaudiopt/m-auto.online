@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Introdução ao DoNet — ALLScanner Wiki</title>
+  <title>Introdução ao DoNet — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">PT</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos VCX</a>
-          <a class="nav-link" href="../../pt/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../pt/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../pt/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../pt/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../pt/product/index.html">Selecção de Produtos M-Auto VCI</a>
+          <a class="nav-link" href="../../pt/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../pt/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../pt/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../pt/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../pt/release/index.html">Actualizações</a>
           <a class="nav-link" href="../../pt/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../pt/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../pt/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../pt/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../pt/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,67 +119,67 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">DoNet</span> <span class="sep">/</span> <span class="current">Introdução</span></nav>
-      <div><h1 class="toc-header" id="id=""">远程诊断介绍</h1><div>
-</div><p><img class="align-center" alt="donet-client-in-car.jpg" src="http://wiki.allscanner.com/donet/donet-client-in-car.jpg"></p><div>
-</div><p>DoNet Diagnóstico Remoto，是基于云计算和5GComunicação技术的车辆远程实时诊断平台。用户使用 VCX 诊断设备，通过 DoNet 微信公众号平台，即可实现故障车辆(客户端 C) 与维修企业或技术专家(服务端 S)的互联互通。</p><div>
+      <nav class="breadcrumb"><a href="../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">DoNet</span> <span class="sep">/</span> <span class="current">Introdução</span></nav>
+      <div><h1 class="toc-header" id="id=""">Introdução ao Diagnóstico Remoto</h1><div>
+</div><p><img class="align-center" alt="donet-client-in-car.jpg" src="../../assets/images/donet/donet-client-in-car.jpg"></p><div>
+</div><p>DoNet Diagnóstico Remoto，é baseado em computação em nuvem e5GComunicaçãoplataforma de diagnóstico remoto em tempo real。Os utilizadores usam M-Auto VCI dispositivo de diagnóstico，através de DoNet WeChatsinalMachopúbliconúmeroPlataforma，entãoalcançarfalhaVeículo(Cliente C) comempresa de reparaçãoouespecialistas técnicos(Servidor S)interligação。</p><div>
 </div><p>Através desta plataforma, oficinas e clientes finais sem competências técnicas ou equipamentos adequados podem pedir assistência remota. Os especialistas podem oferecer diagnóstico, codificação e programação a qualquer cliente, sem limitações geográficas.</p><div>
-</div><h1 class="toc-header" id="id=""">远程诊断组成</h1><div>
-</div><h2 class="toc-header" id="id=""">客户端和服务端</h2><div>
+</div><h1 class="toc-header" id="id=""">Diagnóstico Remotogrupocomposto</h1><div>
+</div><h2 class="toc-header" id="id=""">ClienteeServidor</h2><div>
 </div><blockquote class="is-info">
 <p>O cliente (C) é a parte que necessita de diagnóstico remoto para um veículo avariado.</p>
 </blockquote><div>
 </div><blockquote class="is-success">
 <p>O servidor (S) é a parte que fornece o serviço de diagnóstico remoto.</p>
 </blockquote><div>
-</div><h2 class="toc-header" id="id="vcx-se-"">VCX-SE 远程诊断设备</h2><div>
-</div><p>O VCX-SE é o dispositivo de diagnóstico de última geração da ALLScanner para a plataforma de diagnóstico remoto.</p><div>
-</div><p><img class="align-center" alt="donet-vcx-se.jpg" src="http://wiki.allscanner.com/donet/donet-vcx-se.jpg"><br>
+</div><h2 class="toc-header" id="id="m-auto-vci-se-"">M-Auto VCI SE Diagnóstico RemotoDispositivo</h2><div>
+</div><p>O M-Auto VCI SE é o dispositivo de diagnóstico de última geração da M-Auto para a plataforma de diagnóstico remoto.</p><div>
+</div><p><img class="align-center" alt="donet-M-Auto VCI SE.jpg" src="http://wiki.allscanner.com/donet/donet-vcx-se.jpg"><br>
 Design de hardware de alta integração com suporte KWP/CAN/DoIP, interfaces WiFi/USB/LAN e drivers J2534/PDU para diagnóstico OEM. Suporta diagnóstico local e ligação rápida à plataforma remota com um clique.<br>
-O servidor (S) e o cliente (C) podem usar o mesmo dispositivo VCX-SE. Os dispositivos VCX-DoIP existentes também podem ser activados para diagnóstico remoto.</p><div>
-</div><h2 class="toc-header" id="id="donet-"">DoNet Diagnóstico Remoto微信公众号</h2><div>
-</div><p><img class="align-center" alt="donet-wechat-app.png" src="http://wiki.allscanner.com/donet/donet-wechat-app.png"><br>
-O canal WeChat DoNet (DiagnosisOnNet) é uma plataforma online da ALLScanner para oficinas, especialistas e clientes. Após seguir o canal, pode associar o VCX, configurar a rede e verificar o estado; clientes (C) publicam pedidos e servidores (S) aceitam serviços de diagnóstico.</p><div>
-</div><h1 class="toc-header" id="id=""">双模式远程诊断</h1><div>
+O servidor (S) e o cliente (C) podem usar o mesmo dispositivo M-Auto VCI SE. Os dispositivos M-Auto VCI DoIP existentes também podem ser activados para diagnóstico remoto.</p><div>
+</div><h2 class="toc-header" id="id="donet-"">DoNet Diagnóstico RemotoWeChatsinalMachopúbliconúmero</h2><div>
+</div><p><img class="align-center" alt="donet-wechat-app.png" src="../../assets/images/donet/donet-wechat-app.png"><br>
+O canal WeChat DoNet (DiagnosisOnNet) é uma plataforma online da M-Auto para oficinas, especialistas e clientes. Após seguir o canal, pode associar o M-Auto VCI, configurar a rede e verificar o estado; clientes (C) publicam pedidos e servidores (S) aceitam serviços de diagnóstico.</p><div>
+</div><h1 class="toc-header" id="id=""">DuploModoDiagnóstico Remoto</h1><div>
 </div><p>O DoNet suporta de forma inovadora dois modos de diagnóstico remoto: Super Diagnóstico Remoto e Diagnóstico Remoto Compatível.</p><div>
-</div><h2 class="toc-header" id="id=""">超级远程诊断</h2><div>
-</div><p><img class="align-center" alt="donet-hyper-remote.png" src="http://wiki.allscanner.com/donet/donet-hyper-remote.png"></p><div>
-</div><p>O modo Super apenas requer um dispositivo VCX no cliente para diagnóstico remoto multi-marca com software OEM directo.<br>
-O cliente (C) liga o dispositivo VCX ao veículo avariado e configura a rede via WeChat.<br>
+</div><h2 class="toc-header" id="id=""">Super Diagnóstico Remoto</h2><div>
+</div><p><img class="align-center" alt="donet-hyper-remote.png" src="../../assets/images/donet/donet-hyper-remote.png"></p><div>
+</div><p>O modo Super apenas requer um dispositivo M-Auto VCI no cliente para diagnóstico remoto multi-marca com software OEM directo.<br>
+O cliente (C) liga o dispositivo M-Auto VCI ao veículo avariado e configura a rede via WeChat.<br>
 O servidor (S) não precisa de dispositivo. Com PC e software OEM, carrega drivers PDU/J2534 remotos para aceder directamente ao veículo remoto e prestar serviços OEM.</p><div>
-</div><h3 class="toc-header" id="id=""">超级远程诊断特性</h3><div>
+</div><h3 class="toc-header" id="id=""">Super Diagnóstico RemotoCaracterísticas</h3><div>
 </div><ul>
 <li><em>[Suporta ~20 marcas: Mercedes-Benz, BMW, Porsche, VW, Audi, Land Rover, GM, Ford, Toyota, Honda, Subaru, Volvo, entre outras.…]</em></li>
 <li><em>[Suporte profundo do software OEM — o diagnóstico remoto oferece as mesmas capacidades que o local.…]</em></li>
 <li><em>[Suporta diagnóstico remoto via DoIP, com ethernet do veículo mapeada directamente para o servidor.…]</em></li>
 <li><em>[O servidor apenas precisa de conta e certificados para codificação e programação remota em qualquer cliente.…]</em></li>
 </ul><div>
-</div><h2 class="toc-header" id="id=""">兼容远程诊断</h2><div>
-</div><p><img class="align-center" alt="donet-legacy-remote.png" src="http://wiki.allscanner.com/donet/donet-legacy-remote.png"></p><div>
-</div><p>O modo Compatível usa 1 dispositivo VCX em cada lado para diagnóstico remoto com qualquer marca.<br>
-O cliente (C) liga o VCX ao veículo, configura a rede e envia o pedido de diagnóstico via WeChat.<br>
-O servidor (S) alimenta o VCX via adaptador OBD e configura a rede. Pode usar qualquer dispositivo OEM ou de terceiros via OBD para prestar o serviço.</p><div>
-</div><h3 class="toc-header" id="id=""">兼容远程诊断特性</h3><div>
+</div><h2 class="toc-header" id="id=""">Diagnóstico Remoto Compatível</h2><div>
+</div><p><img class="align-center" alt="donet-legacy-remote.png" src="../../assets/images/donet/donet-legacy-remote.png"></p><div>
+</div><p>O modo Compatível usa 1 dispositivo M-Auto VCI em cada lado para diagnóstico remoto com qualquer marca.<br>
+O cliente (C) liga o M-Auto VCI ao veículo, configura a rede e envia o pedido de diagnóstico via WeChat.<br>
+O servidor (S) alimenta o M-Auto VCI via adaptador OBD e configura a rede. Pode usar qualquer dispositivo OEM ou de terceiros via OBD para prestar o serviço.</p><div>
+</div><h3 class="toc-header" id="id=""">Diagnóstico Remoto CompatívelCaracterísticas</h3><div>
 </div><ul>
 <li><em>[O servidor pode usar qualquer dispositivo: OEM, scanner genérico, ferramentas anti-roubo, TPMS, tuning, etc.…]</em></li>
 <li><em>[O diagnóstico remoto compatível suporta actualmente CAN e DoIP.…]</em></li>
 <li><em>[Suporta todos os modelos que usam CAN e DoIP.…]</em></li>
 </ul><div>
-</div><h1 class="toc-header" id="id=""">远程诊断使用指南</h1><div>
+</div><h1 class="toc-header" id="id=""">Diagnóstico RemotoUtilizaçãoGuia</h1><div>
 </div><ul class="links-list">
 <li><a class="is-internal-link is-valid-page" href="../donet/hyper-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/26a1.svg" alt="⚡️" draggable="false" class="emoji"> Guia de Super Diagnóstico Remoto <em>[descricao original]</em></a></li>
-<li><a class="is-internal-link is-valid-page" href="../donet/legacy-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f517.svg" alt="🔗" draggable="false" class="emoji"> Guia de Diagnóstico Remoto Compatível <em>[descricao original]</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="../donet/legacy-remote.html"><img src="../../assets/images/_assets/svg/twemoji/1f517.svg" alt="🔗" draggable="false" class="emoji"> Guia de Diagnóstico Remoto Compatível <em>[descricao original]</em></a></li>
 </ul><div>
-</div><h1 class="toc-header" id="id=""">远程诊断案例</h1><div>
+</div><h1 class="toc-header" id="id=""">Diagnóstico Remotocasos</h1><div>
 </div><ul class="links-list">
-<li><a class="is-internal-link is-valid-page" href="../donet/legacy-remote.html"><img src="http://wiki.allscanner.com/_assets/svg/twemoji/1f4dd.svg" alt="📝" draggable="false" class="emoji"> Casos de Programação por Diagnóstico Remoto <em>[descricao original]</em></a></li>
+<li><a class="is-internal-link is-valid-page" href="../donet/legacy-remote.html"><img src="../../assets/images/_assets/svg/twemoji/1f4dd.svg" alt="📝" draggable="false" class="emoji"> Casos de Programação por Diagnóstico Remoto <em>[descricao original]</em></a></li>
 </ul><div>
-</div><h1 class="toc-header" id="id=""">开放测试</h1><div>
-</div><p>目前 DoNet 超级远程诊断Funções已经全面开放， 兼容远程诊断Funções也已开放测试，Bem-vindo！</p><div>
+</div><h1 class="toc-header" id="id=""">abertoTeste</h1><div>
+</div><p>actualmente DoNet Super Diagnóstico RemotoFunçõesalreadyjáTotalcoberturaaberto， Diagnóstico Remoto CompatívelFunçõestambémalreadyabertoTeste，Bem-vindo！</p><div>
 </div></div>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>

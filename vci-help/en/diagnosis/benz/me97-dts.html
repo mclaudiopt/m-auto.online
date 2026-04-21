@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ME97 DTS — Benz — ALLScanner Wiki</title>
+  <title>ME97 DTS — Benz — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">EN</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Products <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../../en/product/index.html">VCX Product Selection</a>
-          <a class="nav-link" href="../../../en/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../../en/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../../en/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../../en/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../../en/product/index.html">M-Auto VCI Product Selection</a>
+          <a class="nav-link" href="../../../en/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../../en/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../../en/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../../en/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../../en/release/index.html">Updates</a>
           <a class="nav-link" href="../../../en/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../../en/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../../en/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../../en/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../../en/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../../en/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,32 +119,32 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">OEM Diagnosis</span> <span class="sep">/</span> <span class="current">Benz</span> <span class="sep">/</span> <span class="current">ME97 DTS</span></nav>
-      <div><h1 class="toc-header" id="id="benz-me97dtscbfcff"">BENZ ME97发动机DTS编程(CBF,CFF)</h1><div>
-</div><h1 class="toc-header" id="id="vcxdtscbfcff-ecu211me97"">说明：本文简单介绍VCX设备如何操作DTS进行奔驰ModelsCBF快速测试和CFF ECU编程（奔驰211的发动机ME97）</h1><div>
-</div><h2 class="toc-header" id="id="h-1Openvcxvx-manager"">1.设备连上电脑和车辆（或者模块平台），OpenVCX客户端VX MANAGER查看设备信息（固件和驱动是否最新，授权是否正常）</h2><div>
-</div><p><img alt="vx_manager.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/vx_manager.png"></p><div>
-</div><h2 class="toc-header" id="id="h-2dtsOpen"">2.ClickDTS软件，Open一个工作组；</h2><div>
+      <nav class="breadcrumb"><a href="../../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">OEM Diagnosis</span> <span class="sep">/</span> <span class="current">Benz</span> <span class="sep">/</span> <span class="current">ME97 DTS</span></nav>
+      <div><h1 class="toc-header" id="id="benz-me97dtscbfcff"">BENZ ME97EngineDTSProgramming(CBF,CFF)</h1><div>
+</div><h1 class="toc-header" id="id="m-auto-vcidtscbfcff-ecu211me97"">Note：This article briefly introducesVCXhow to operate the deviceDTSto performMercedes-BenzModelsCBFquicklyTestandCFF ECUProgramming（Mercedes-Benz211EngineME97）</h1><div>
+</div><h2 class="toc-header" id="id="h-1Openm-auto-vcivx-manager"">1.DeviceconnectabovecomputerandVehicle（ormodulePlatform），OpenVCXClientVCI ManagercheckDeviceInformation（FirmwareandDriverisif latestNew，Licenseisif normal）</h2><div>
+</div><p><img alt="vx_manager.png" src="../../../assets/images/diagnosis/benz/me97-dts/vx_manager.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2dtsOpen"">2.ClickDTSSoftware，OpenoneOperationgroup；</h2><div>
 </div><p><img alt="open_dts.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/open_dts.png"><br>
-<img alt="open_a_workspace.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/open_a_workspace.png"></p><div>
-</div><h2 class="toc-header" id="id="h-3no"">3.SelectModels和设备Connection,提示升级的一律选NO；</h2><div>
-</div><p><img alt="211.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/211.png"><br>
-<img alt="no.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/no.png"></p><div>
-</div><h2 class="toc-header" id="id="h-4-start--me97ecucffcdtsprojects"">4.进入Models菜单点 start Start全车扫描，扫描完后Select要编程的控制单元 发动机ME97，点开后在右边的框框内查看ECU零件号，根据零件号准备好编程文件.CFF（编程文件有些在C盘DTSProjects文件夹内，没有的话得在诊断软件或者官方服务器Download）；</h2><div>
-</div><p><img alt="quick_test.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/quick_test.png"><br>
-<img alt="me97_number.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/me97_number.png"></p><div>
-</div><h2 class="toc-header" id="id="h-5me97cff"">5.进入编程菜单，Select发动机ME97,Select准备好的对应的CFF编程文件（全选一起刷）；</h2><div>
-</div><p><img alt="programming_menu.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/programming_menu.png"><br>
-<img alt="programming_menu2.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/programming_menu2.png"></p><div>
-</div><h2 class="toc-header" id="id="h-6"">6.勾上所有的文件，Start刷写；</h2><div>
-</div><p><img alt="check_the_programming_file.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/check_the_programming_file.png"><br>
+<img alt="open_a_workspace.png" src="../../../assets/images/diagnosis/benz/me97-dts/open_a_workspace.png"></p><div>
+</div><h2 class="toc-header" id="id="h-3no"">3.SelectModelsandDeviceConnection,promptupgradeclassoneselect allNO；</h2><div>
+</div><p><img alt="211.png" src="../../../assets/images/diagnosis/benz/me97-dts/211.png"><br>
+<img alt="no.png" src="../../../assets/images/diagnosis/benz/me97-dts/no.png"></p><div>
+</div><h2 class="toc-header" id="id="h-4-start--me97ecucffcdtsprojects"">4.EnterModelsMenuclick start StartFullvehicle scan，scan completeafterSelectneedProgrammingControl Unit EngineME97，clickopenafterinrightpanelwithincheckECUpartsnumber，based onpartsnumberreadyProgrammingFile.CFF（ProgrammingFilesomeinCdiskDTSProjectsFilein folder，if not available, get frominDiagnostic Softwareorofficial serverDownload）；</h2><div>
+</div><p><img alt="quick_test.png" src="../../../assets/images/diagnosis/benz/me97-dts/quick_test.png"><br>
+<img alt="me97_number.png" src="../../../assets/images/diagnosis/benz/me97-dts/me97_number.png"></p><div>
+</div><h2 class="toc-header" id="id="h-5me97cff"">5.EnterProgrammingMenu，SelectEngineME97,SelectreadyforshouldCFFProgrammingFile（Fullselectoneflash all）；</h2><div>
+</div><p><img alt="programming_menu.png" src="../../../assets/images/diagnosis/benz/me97-dts/programming_menu.png"><br>
+<img alt="programming_menu2.png" src="../../../assets/images/diagnosis/benz/me97-dts/programming_menu2.png"></p><div>
+</div><h2 class="toc-header" id="id="h-6"">6.checkaboveallFile，StartFlash；</h2><div>
+</div><p><img alt="check_the_programming_file.png" src="../../../assets/images/diagnosis/benz/me97-dts/check_the_programming_file.png"><br>
 <img alt="start_to_brush.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/start_to_brush.png"></p><div>
-</div><h2 class="toc-header" id="id="h-7"">7.刷写过程中，一个文件Done会自动Start另一个刷写，都刷完后进度条下方会有提示，刷写Done。</h2><div>
-</div><p><img alt="end_of_programming.png" src="http://wiki.allscanner.com/diagnosis/benz/me97-dts/end_of_programming.png"></p><div>
+</div><h2 class="toc-header" id="id="h-7"">7.Flashprocesscenter，oneFileDonewillAutomaticStartanotheroneFlash，all flashedafterprogress barbelowbelowwillavailableprompt，FlashDone。</h2><div>
+</div><p><img alt="end_of_programming.png" src="../../../assets/images/diagnosis/benz/me97-dts/end_of_programming.png"></p><div>
 </div></div>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>

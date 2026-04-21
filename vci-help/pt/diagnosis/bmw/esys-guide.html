@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guia E-SYS — BMW — ALLScanner Wiki</title>
+  <title>Guia E-SYS — BMW — M-Auto VCI Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <rect y="15" width="20" height="2" rx="1"/>
       </svg>
     </button>
-    <a class="topbar-logo" href="../../../index.html">ALLScanner <span>Wiki</span></a>
+    <a class="topbar-logo" href="../../../index.html">M-Auto VCI <span>Help</span></a>
     <div class="topbar-sep"></div>
     <div class="lang-switcher" id="lang-switcher">
       <span class="lang-btn active">PT</span>
@@ -37,11 +37,11 @@
       <div class="nav-section">
         <div class="nav-section-header">Produtos <span class="chevron">&#9660;</span></div>
         <div class="nav-items">
-          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos VCX</a>
-          <a class="nav-link" href="../../../pt/product/vcx-fd.html">VCX-FD</a>
-          <a class="nav-link" href="../../../pt/product/vcx-doip.html">VCX-DoIP</a>
-          <a class="nav-link" href="../../../pt/product/vcx-se.html">VCX-SE</a>
-          <a class="nav-link" href="../../../pt/product/vcx-nano.html">VCX-Nano</a>
+          <a class="nav-link" href="../../../pt/product/index.html">Selecção de Produtos M-Auto VCI</a>
+          <a class="nav-link" href="../../../pt/product/M-Auto VCI FD.html">M-Auto VCI FD</a>
+          <a class="nav-link" href="../../../pt/product/M-Auto VCI DoIP.html">M-Auto VCI DoIP</a>
+          <a class="nav-link" href="../../../pt/product/M-Auto VCI SE.html">M-Auto VCI SE</a>
+          <a class="nav-link" href="../../../pt/product/M-Auto VCI Nano.html">M-Auto VCI Nano</a>
         </div>
       </div>
 
@@ -104,8 +104,8 @@
           <a class="nav-link" href="../../../pt/release/index.html">Actualizações</a>
           <a class="nav-link" href="../../../pt/release/update_vci.html">Update VCI</a>
           <a class="nav-link" href="../../../pt/release/update_doip.html">Update DoIP</a>
-          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update VCX-FD</a>
-          <a class="nav-link" href="../../../pt/release/vxmanager.html">VX Manager</a>
+          <a class="nav-link" href="../../../pt/release/update_vcxfd.html">Update M-Auto VCI FD</a>
+          <a class="nav-link" href="../../../pt/release/vxmanager.html">VCI Manager</a>
         </div>
       </div>
 
@@ -119,56 +119,56 @@
 
     <!-- MAIN -->
     <main class="main">
-      <nav class="breadcrumb"><a href="../../../index.html">Wiki</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">BMW</span> <span class="sep">/</span> <span class="current">Guia E-SYS</span></nav>
-      <div><h1 class="toc-header" id="id="e-sysvcx-bmw"">宝马E-sys工程师软件简介和VCX BMW设备Ligação操作介绍</h1><div>
-</div><h1 class="toc-header" id="id="bmw-e-sysbmwbmw-f-f"">BMW E-sys是BMW发行的用于BMW F系列车辆上编码和编程应用程序的软件。该软件允许用户禁用和激活其F系列车辆的某些Funções。</h1><div>
-</div><p>以下是其中一些可以使用BMW E-sys软件激活/禁用的Funções：</p><div>
-</div><p>1.锁定解锁声音Confirme<br>
-2.驾驶导航菜单，包括在驾驶时观看DVD。<br>
-3.显示发动机输出和扭矩计。<br>
-4.CanceleConfirme屏幕大屏幕启动延迟。<br>
-5.Abra语音识别Funções。<br>
-6.设置三种Bluetooth电话铃声。<br>
-7.将cicMemória地址增加到50。<br>
-8.最后Feche状态的空调Memória。<br>
-9.室内循环记忆最后一次引擎Feche时的状态。<br>
-10. A柱式电动后挡板按钮和遥控钥匙，用于FecheAlimentação后挡板。<br>
-11.增加换档拨片。<br>
-12.将小屏幕修改为大屏幕显示。<br>
-13. Pdc垂直和水平显示。<br>
-14.禁用安全带状态显示-乘客座椅。<br>
-15.禁用安全带状态显示-驾驶员座椅。<br>
-16.禁用安全带提醒Funções-乘客座椅。<br>
-17.禁用安全带提醒Funções-驾驶位置。<br>
-18.残疾人解开安全带语音提示-乘客座位。<br>
-19.残疾人解开安全带的语音提示-行驶位置。<br>
-20.交叉口车辆远光灯自动控制。<br>
-21.天使的眼睛Abra和CanceleFunções。<br>
-22.Feche发动机起停Funções-默认情况下处于Abra状态。<br>
-23. Gps时间同步。<br>
-24.脚Abra后盖</p><div>
-</div><h1 class="toc-header" id="id="bmw-f18caszgw"">本文以BMW-F18的CAS和ZGW模块测试平台来操作工程师的Ligação方法。</h1><div>
-</div><h2 class="toc-header" id="id="vcx-bmwbmw-e-sys"">用VCX BMW设备LigaçãoBMW E-sysPasso：</h2><div>
-</div><h2 class="toc-header" id="id="h-1Abravx-manager-doip"">1.宝马设备连上电脑和模块，AbraVX MANAGER设备管理客户端，首先查看设备固件授权是否最新，然后Clique em "DOIP开关"选项：</h2><div>
-</div><p><img alt="doip_switch.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/doip_switch.png"></p><div>
-</div><h2 class="toc-header" id="id="h-2bmwAbradoip-onbmwdoip"">2.SeleccioneBMW，AbraDOIP ON，就能读出BMW的DOIP数据，如图示：</h2><div>
-</div><p><img alt="open_bmw.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/open_bmw.png"><img alt="doip-on.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/doip-on.png"><img alt="doip_data.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/doip_data.png"></p><div>
-</div><h2 class="toc-header" id="id="h-3doip-configAbrae-sysconnect"">3.不要FecheDOIP Config菜单，直接AbraE-sys工程师软件，Clique em链接图标，根据ModelosSeleccione后，Clique emConnectLigação:</h2><div>
+      <nav class="breadcrumb"><a href="../../../index.html">M-Auto VCI Help</a> <span class="sep">/</span> <span class="current">Diagnóstico OEM</span> <span class="sep">/</span> <span class="current">BMW</span> <span class="sep">/</span> <span class="current">Guia E-SYS</span></nav>
+      <div><h1 class="toc-header" id="id="e-sysm-auto-vci-bmw"">BMWE-sysIntrodução ao Software de Engenharia eVCX BMWDispositivoLigaçãoIntrodução à Operação</h1><div>
+</div><h1 class="toc-header" id="id="bmw-e-sysbmwbmw-f-f"">BMW E-syséBMWversãoparaBMW FSérieVeículoacimacodificaçãoeProgramaçãodeveusarProgramaSoftware。EsteSoftwarepermiteusarutilizador desactivarusareactivarFSérieVeículoalgunsFunções。</h1><div>
+</div><p>paraabaixoéseucentroumestespodeparaUtilizaçãoBMW E-sysSoftwareactivar/disableusarFunções：</p><div>
+</div><p>1.som de bloqueio/desbloqueioConfirme<br>
+2.navegação de conduçãoMenu，includingemconduçãoquandoverDVD。<br>
+3.mostrarMotorsaídaemedidor de binário。<br>
+4.CanceleConfirmeecrãgrandeecrãiniciaratraso。<br>
+5.AbravozreconhecerFunções。<br>
+6.definiçõestrês tiposBluetoothtoque do telefone。<br>
+7.convertercicMemóriaendereçoAdicionadopara50。<br>
+8.latestapósFecheEstadoar condicionadoMemória。<br>
+9.memória de circulação interiorapósumvezconduzirmotorFechequandoEstado。<br>
+10. Acoluna eléctricaapósbotão da abaechave remota，paraFecheAlimentaçãoapósaba。<br>
+11.Adicionadopatilha de mudança。<br>
+12.converterecrã pequenoModificaçãoparagrandeecrãmostrar。<br>
+13. Pdcverticalehorizontalmostrar。<br>
+14.Desativar exibição do estado do cinto de segurança-Assento do passageiro。<br>
+15.Desativar exibição do estado do cinto de segurança-conduçãopessoaassentoassento。<br>
+16.Desativar aviso de cinto de segurançaFunções-Assento do passageiro。<br>
+17.Desativar aviso de cinto de segurançaFunções-conduçãobitposição。<br>
+18.cinto de segurança para deficientesTotalcomvozindicação-passageiroassentobit。<br>
+19.cinto de segurança para deficientesTotalcomvozindicação-conduçãobitposição。<br>
+20.cruzamentoVeículomáximosAutomáticocontrolo。<br>
+21.angel eyesAbraeCanceleFunções。<br>
+22.FecheMotorarranquepararFunções-padrãocasoabaixoemfor/atAbraEstado。<br>
+23. Gpsquandoperíodomesmosincronizar。<br>
+24.pinoAbraapóstampa</p><div>
+</div><h1 class="toc-header" id="id="bmw-f18caszgw"">Este artigo usaBMW-F18CASeZGWmóduloTestePlataformapara operar modo de engenheiroLigaçãoMétodo。</h1><div>
+</div><h2 class="toc-header" id="id="m-auto-vci-bmwbmw-e-sys"">usarVCX BMWDispositivoLigaçãoBMW E-sysPasso：</h2><div>
+</div><h2 class="toc-header" id="id="h-1Abravx-manager-doip"">1.BMWDispositivoligaracimacomputadoremódulo，AbraVCI ManagerGestão de DispositivosCliente，firstprimeiroverificarDispositivoFirmwareLicençaése mais recenteNovo，de seguidaClique em "DOIPinterruptor"Opção：</h2><div>
+</div><p><img alt="doip_switch.png" src="../../../assets/images/diagnosis/bmw/esys-guide/doip_switch.png"></p><div>
+</div><h2 class="toc-header" id="id="h-2bmwAbradoip-onbmwdoip"">2.SeleccioneBMW，AbraDOIP ON，pode lerBMWDOIPDados，Como mostradomostrado：</h2><div>
+</div><p><img alt="open_bmw.png" src="../../../assets/images/diagnosis/bmw/esys-guide/open_bmw.png"><img alt="doip-on.png" src="../../../assets/images/diagnosis/bmw/esys-guide/doip-on.png"><img alt="doip_data.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/doip_data.png"></p><div>
+</div><h2 class="toc-header" id="id="h-3doip-configAbrae-sysconnect"">3.NãoFecheDOIP ConfigMenu，directamenteAbraE-sysSoftware de Engenharia，Clique emLinkícone，com base emModelosSeleccioneapós，Clique emConnectLigação:</h2><div>
 </div><p><img alt="open_e-sys3.33.4.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/open_e-sys3.33.4.png"><br>
-<img alt="e-sys-choice.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/e-sys-choice.png"></p><div>
-</div><h2 class="toc-header" id="id="h-4"">4.确定好Modelos进入主菜单按图示操作：</h2><div>
+<img alt="e-sys-choice.png" src="../../../assets/images/diagnosis/bmw/esys-guide/e-sys-choice.png"></p><div>
+</div><h2 class="toc-header" id="id="h-4"">4.confirmarModelosEntrarprincipalMenuseguir diagramamostradooperação：</h2><div>
 </div><p><img alt="e-sys3.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/e-sys3.png"><img alt="tal-calculating.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/tal-calculating.png"></p><div>
-</div><h2 class="toc-header" id="id="h-5vcm"">5.读取VCM数据:</h2><div>
-</div><p><img alt="read_vcm.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/read_vcm.png"><br>
+</div><h2 class="toc-header" id="id="h-5vcm"">5.lerobtainVCMDados:</h2><div>
+</div><p><img alt="read_vcm.png" src="../../../assets/images/diagnosis/bmw/esys-guide/read_vcm.png"><br>
 <img alt="svt.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/svt.png"></p><div>
-</div><h2 class="toc-header" id="id=""">编码也是这样读取数据</h2><div>
+</div><h2 class="toc-header" id="id=""">codificaçãotambéméler desta formaDados</h2><div>
 </div><p><img alt="coding.png" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/coding.png"></p><div>
-</div><h1 class="toc-header" id="id="donete-sys"">注：超级远程DONETLigação的设备使用E-SYS连方式如下图：</h1><div>
+</div><h1 class="toc-header" id="id="donete-sys"">Nota：super/ultraclasseremoteDONETLigaçãoDispositivoUtilizaçãoE-SYSligarModocomoabaixofigura：</h1><div>
 </div><p><img alt="donent-doip-on.jpg" src="http://wiki.allscanner.com/diagnosis/bmw/esys-guide/donent-doip-on.jpg"></p><div>
 </div></div>
 
       <div class="page-footer">
-        ALLScanner Wiki &mdash; <a href="http://wiki.allscanner.com" target="_blank" rel="noopener">wiki.allscanner.com</a>
+        M-Auto Wiki &mdash; <a href="http://wiki.allscanner.com/a>
       </div>
     </main>
   </div>
