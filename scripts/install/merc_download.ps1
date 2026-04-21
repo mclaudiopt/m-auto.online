@@ -101,8 +101,6 @@ function Invoke-Download {
             dir = $DEST_DIR
             out = $Name
             split = "32"
-            "max-connection-per-server" = "32"
-            "min-split-size" = "4M"
         }
         $body = @{
             jsonrpc = "2.0"
