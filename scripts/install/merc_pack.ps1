@@ -3,6 +3,7 @@
 $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
+$BASE_URL = "https://m-auto.online/scripts"
 
 #-- Helpers ------------------------------------------------------------------
 function Write-Header {
@@ -19,6 +20,17 @@ function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $msg"
 function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $msg" }
 function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $msg" }
 
+function Run-Remote($script) {
+    try {
+        $code = irm "$BASE_URL/$script.ps1" -UseBasicParsing
+        Invoke-Expression $code
+    } catch {
+        Write-Err "Erro ao carregar: $script.ps1"
+        Write-Info $_.Exception.Message
+        Start-Sleep -Seconds 2
+    }
+}
+
 #-- Menu loop ----------------------------------------------------------------
 while ($true) {
     Write-Header
@@ -34,38 +46,18 @@ while ($true) {
 
     switch ($choice) {
         "1" {
-            $downloadScript = Join-Path $PSScriptRoot "merc_download.ps1"
-            if (Test-Path $downloadScript) {
-                & $downloadScript
-            } else {
-                Write-Err "Script nao encontrado: $downloadScript"
-                Start-Sleep -Seconds 2
-            }
+            Run-Remote "install/merc_download"
         }
         "2" {
-            $installScript = Join-Path $PSScriptRoot "merc_install.ps1"
-            if (Test-Path $installScript) {
-                & $installScript
-            } else {
-                Write-Err "Script nao encontrado: $installScript"
-                Start-Sleep -Seconds 2
-            }
+            Run-Remote "install/merc_install"
         }
         "3" {
             Write-Info "A iniciar download..."
-            $downloadScript = Join-Path $PSScriptRoot "merc_download.ps1"
-            if (Test-Path $downloadScript) {
-                & $downloadScript
-            }
-
+            Run-Remote "install/merc_download"
             Write-Host ""
             Write-Info "A iniciar instalacao..."
             Start-Sleep -Seconds 1
-
-            $installScript = Join-Path $PSScriptRoot "merc_install.ps1"
-            if (Test-Path $installScript) {
-                & $installScript
-            }
+            Run-Remote "install/merc_install"
         }
         "0" {
             return
