@@ -30,9 +30,26 @@ try {
         $pct   = $Event.SourceEventArgs.ProgressPercentage
         $recv  = [math]::Round($Event.SourceEventArgs.BytesReceived / 1KB, 0)
         $total = [math]::Round($Event.SourceEventArgs.TotalBytesToReceive / 1KB, 0)
-        $fill  = [math]::Floor($pct / 5)
-        $bar   = ("#" * $fill) + ("-" * (20 - $fill))
-        Write-Host -NoNewline "`r  [$bar] $pct%  ($recv KB / $total KB)   "
+
+        # Progress bar estilo AskUbuntu
+        $width = 50
+        $filled = [math]::Round($pct / 100 * $width)
+        $empty = $width - $filled
+
+        if ($pct -eq 100) {
+            $fillColor = "46;204;113"
+            $emptyColor = "52;73;94"
+        } else {
+            $fillColor = "52;152;219"
+            $emptyColor = "52;73;94"
+        }
+
+        $e = [char]27
+        $barFilled = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
+        $barEmpty = "${e}[48;2;${emptyColor}m" + (" " * $empty) + "${e}[0m"
+        $percentText = "${e}[1;97m$pct%${e}[0m".PadLeft(12)
+
+        Write-Host -NoNewline "`r  $percentText $barFilled$barEmpty  ${e}[90m$recv KB / $total KB${e}[0m   "
     }
 
     $completedSub = Register-ObjectEvent -InputObject $wc -EventName DownloadFileCompleted -Action {
