@@ -61,7 +61,7 @@ foreach ($file in $files) {
 $json = @{
     generated = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
     files = $links
-} | ConvertTo-Json -Depth 10
+} | ConvertTo-Json -Depth 10 -Compress
 
 Write-Host ""
 Write-Info "A guardar em: $OUTPUT_FILE"
