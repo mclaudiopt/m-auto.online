@@ -29,7 +29,7 @@ if (-not (Test-Path $SOURCE_DIR)) {
 }
 
 Write-Info "A procurar ficheiros em: $SOURCE_DIR"
-$files = Get-ChildItem -Path $SOURCE_DIR -File -Recurse | Sort-Object FullName
+$files = Get-ChildItem -Path $SOURCE_DIR -File -Recurse -Exclude "*.ps1" | Sort-Object FullName
 
 if ($files.Count -eq 0) {
     Write-Err "Nenhum ficheiro encontrado."
