@@ -50,13 +50,25 @@ function Remove-DTS816 {
     }
 }
 
+#-- Instalar downloads ------------------------------------------------------
+function Install-Downloads {
+    $installScript = Join-Path $PSScriptRoot "merc_full_pack.ps1"
+    if (Test-Path $installScript) {
+        & $installScript
+    } else {
+        Write-Err "Script de instalacao nao encontrado: $installScript"
+        Start-Sleep -Seconds 2
+    }
+}
+
 #-- Menu principal -----------------------------------------------------------
 function Show-Menu {
     Write-Header
-    Write-Host "  ${e}[38;2;148;163;184mOpcoes de limpeza:${e}[0m"
+    Write-Host "  ${e}[38;2;148;163;184mOpcoes:${e}[0m"
     Write-Host ""
-    Write-Host "    ${e}[38;2;100;149;237m[1]${e}[0m Apagar DTS8.16.exe"
-    Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
+    Write-Host "    ${e}[38;2;100;149;237m[1]${e}[0m Instalar downloads (descomprimir, atalhos, limpar)"
+    Write-Host "    ${e}[38;2;239;68;68m[2]${e}[0m Apagar DTS8.16.exe"
+    Write-Host "    ${e}[38;2;239;68;68m[0]${e}[0m Voltar"
     Write-Host ""
     $choice = Read-Host "  Opcao"
     return $choice
@@ -68,6 +80,9 @@ while ($true) {
 
     switch ($choice) {
         "1" {
+            Install-Downloads
+        }
+        "2" {
             Write-Header
             Write-Host "  ${e}[38;2;100;149;237m-- Apagar DTS8.16.exe --${e}[0m"
             Write-Host ""
@@ -79,9 +94,9 @@ while ($true) {
             Write-Host ""
             Read-Host "  Pressione ENTER para continuar"
         }
-        { $_ -eq "S" -or $_ -eq "s" } {
-            Write-Info "A sair..."
-            exit 0
+        "0" {
+            Write-Info "A voltar..."
+            return
         }
         default {
             Write-Err "Opcao invalida."
