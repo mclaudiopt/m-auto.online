@@ -183,32 +183,30 @@ function Show-Software {
         Write-Header
         Write-Title "Software de Diagnostico"
         Write-Host "  ${e}[38;2;100;149;237m[Mercedes]${e}[0m"
-        Write-Opt 1  "Mercedes Full Pack 2026"     "Instalar: Xentry + WIS + EPC + Vediamo"
-        Write-Opt 2  "Mercedes - Download Pack"    "Descarregar ficheiros via Internet (aria2c)"
+        Write-Opt 1  "Mercedes Pack 2026"          "Download + Instalar: Xentry + WIS + EPC + Vediamo"
         Write-Host ""
         Write-Host "  ${e}[38;2;100;149;237m[Outros]${e}[0m"
-        Write-Opt 3  "ODIS Service (VAG)"          "VW / Audi / Seat / Skoda"
-        Write-Opt 4  "ODIS Engineering (VAG)"
-        Write-Opt 5  "BMW ISTA+"
-        Write-Opt 6  "BMW ISTA-P"
-        Write-Opt 7  "PSA Diagbox"
-        Write-Opt 8  "Renault CAN Clip"
-        Write-Opt 9  "Toyota Techstream"
-        Write-Opt 10 "MultiecuScan / AlfaOBD"      "Fiat / Alfa Romeo / Lancia / Jeep"
+        Write-Opt 2  "ODIS Service (VAG)"          "VW / Audi / Seat / Skoda"
+        Write-Opt 3  "ODIS Engineering (VAG)"
+        Write-Opt 4  "BMW ISTA+"
+        Write-Opt 5  "BMW ISTA-P"
+        Write-Opt 6  "PSA Diagbox"
+        Write-Opt 7  "Renault CAN Clip"
+        Write-Opt 8  "Toyota Techstream"
+        Write-Opt 9  "MultiecuScan / AlfaOBD"      "Fiat / Alfa Romeo / Lancia / Jeep"
         Write-Host ""
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
-            "1"  { Run-Sub "install/merc_full_pack" }
-            "2"  { Run-Sub "install/merc_download" }
-            "3"  { Run-Sub "install/vag_odis_service" }
-            "4"  { Run-Sub "install/vag_odis_eng" }
-            "5"  { Run-Sub "install/bmw_ista_plus" }
-            "6"  { Run-Sub "install/bmw_ista_p" }
-            "7"  { Run-Sub "install/psa_diagbox" }
-            "8"  { Run-Sub "install/renault_clip" }
-            "9"  { Run-Sub "install/toyota_techstream" }
-            "10" { Run-Sub "install/fiat_multiecuscan" }
+            "1"  { Run-Sub "install/merc_pack" }
+            "2"  { Run-Sub "install/vag_odis_service" }
+            "3"  { Run-Sub "install/vag_odis_eng" }
+            "4"  { Run-Sub "install/bmw_ista_plus" }
+            "5"  { Run-Sub "install/bmw_ista_p" }
+            "6"  { Run-Sub "install/psa_diagbox" }
+            "7"  { Run-Sub "install/renault_clip" }
+            "8"  { Run-Sub "install/toyota_techstream" }
+            "9"  { Run-Sub "install/fiat_multiecuscan" }
             "0"  { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }

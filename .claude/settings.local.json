@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(du -sh \"//MYnas/M-Auto.online\")",
+      "Bash(cmd /c \"powershell -NonInteractive -File -\")"
+    ]
+  }
+}
