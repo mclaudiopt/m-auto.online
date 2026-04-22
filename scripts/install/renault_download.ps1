@@ -263,6 +263,7 @@ while ($retry -lt $maxRetries) {
         Write-Host "  ${e}[38;2;148;163;184mEscolha:${e}[0m"
         Write-Host "    ${e}[38;2;255;204;0m[A]${e}[0m Transferir todos os ficheiros em falta"
         Write-Host "    ${e}[38;2;255;204;0m[1-$($links.Count)]${e}[0m Transferir ficheiro especifico"
+        Write-Host "    ${e}[38;2;239;68;68m[C]${e}[0m Clean (limpeza)"
         Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
         Write-Host ""
         $choice = Read-Host "  Opcao"
@@ -270,6 +271,17 @@ while ($retry -lt $maxRetries) {
         if ($choice -eq "S" -or $choice -eq "s") {
             Write-Info "Cancelado pelo utilizador."
             exit 0
+        }
+
+        if ($choice -eq "C" -or $choice -eq "c") {
+            $cleanScript = Join-Path $PSScriptRoot "renault_clean.ps1"
+            if (Test-Path $cleanScript) {
+                & $cleanScript
+            } else {
+                Write-Err "Script de limpeza nao encontrado: $cleanScript"
+                Start-Sleep -Seconds 2
+            }
+            continue
         }
 
         $toDownload = @()
