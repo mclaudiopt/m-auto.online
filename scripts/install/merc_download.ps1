@@ -154,10 +154,6 @@ function Invoke-Download {
         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
     }
 
-    Write-Host "  ${e}[38;2;148;163;184mFicheiro:${e}[0m ${e}[97m$Name${e}[0m"
-    Write-Host "  ${e}[38;2;148;163;184mDestino: ${e}[0m ${e}[97m$dest${e}[0m"
-    Write-Host ""
-
     # Instalar aria2c se necessario
     $aria2 = Install-Aria2c
     if (-not $aria2) {
@@ -172,26 +168,18 @@ function Invoke-Download {
     # Argumentos aria2c: 16 conexoes, resume automatico, timeout 60s
     $logFile = "$env:TEMP\aria2_$([guid]::NewGuid().ToString('N').Substring(0,8)).log"
 
-    $aria2Args = @(
-        '--max-connection-per-server=16'
-        '--split=16'
-        '--min-split-size=1M'
-        '--continue=true'
-        '--max-tries=3'
-        '--retry-wait=2'
-        '--timeout=60'
-        '--connect-timeout=30'
-        '--console-log-level=warn'
-        '--summary-interval=0'
-        '--log-level=info'
-        "--dir=$destDir"
-        "--out=$Name"
-        "--log=$logFile"
-    )
-    if ($proxyArg) { $aria2Args += $proxyArg }
-    $aria2Args += $Url
+    # Criar ProcessStartInfo para controlar argumentos corretamente
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $aria2
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
 
-    $process = Start-Process -FilePath $aria2 -ArgumentList $aria2Args -NoNewWindow -PassThru -Wait
+    # Construir argumentos manualmente
+    $psi.Arguments = "--max-connection-per-server=16 --split=16 --min-split-size=1M --continue=true --max-tries=3 --retry-wait=2 --timeout=60 --connect-timeout=30 --console-log-level=warn --summary-interval=0 --log-level=info `"--dir=$destDir`" `"--out=$Name`" `"--log=$logFile`""
+    if ($proxyArg) { $psi.Arguments += " $proxyArg" }
+    $psi.Arguments += " `"$Url`""
+
+    $process = [System.Diagnostics.Process]::Start($psi)
 
     $startTime = Get-Date
     $spinnerFrames = @('⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏')
