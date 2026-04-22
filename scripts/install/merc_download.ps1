@@ -247,6 +247,8 @@ while ($retry -lt $maxRetries) {
         Write-Header
         Write-OK "Links validos — $($links.Count) ficheiro(s) disponiveis."
         Write-Host ""
+        Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
+        Write-Host ""
 
         # Checklist de estado com numeracao
         for ($i = 0; $i -lt $links.Count; $i++) {
