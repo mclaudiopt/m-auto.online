@@ -135,22 +135,32 @@ function Invoke-Download {
     # Argumentos aria2c: 16 conexoes, resume automatico, timeout 60s
     $logFile = "$env:TEMP\aria2_$([guid]::NewGuid().ToString('N').Substring(0,8)).log"
 
-    # Construir comando completo
-    $cmd = "& `"$aria2`" --max-connection-per-server=16 --split=16 --min-split-size=1M --continue=true --max-tries=3 --retry-wait=2 --timeout=60 --connect-timeout=30 --console-log-level=warn --summary-interval=0 --log-level=info --dir=`"$destDir`" --out=`"$Name`" --log=`"$logFile`""
-    if ($proxyArg) { $cmd += " $proxyArg" }
-    $cmd += " `"$Url`""
+    $aria2Args = @(
+        '--max-connection-per-server=16'
+        '--split=16'
+        '--min-split-size=1M'
+        '--continue=true'
+        '--max-tries=3'
+        '--retry-wait=2'
+        '--timeout=60'
+        '--connect-timeout=30'
+        '--console-log-level=warn'
+        '--summary-interval=0'
+        '--log-level=info'
+        "--dir=$destDir"
+        "--out=$Name"
+        "--log=$logFile"
+    )
+    if ($proxyArg) { $aria2Args += $proxyArg }
+    $aria2Args += $Url
 
-    # Executar em background job para monitorizar
-    $job = Start-Job -ScriptBlock {
-        param($command)
-        Invoke-Expression $command
-    } -ArgumentList $cmd
+    $process = Start-Process -FilePath $aria2 -ArgumentList $aria2Args -NoNewWindow -PassThru -Wait
 
     $startTime = Get-Date
     $spinnerFrames = @('⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏')
     $spinnerIdx = 0
 
-    while ($job.State -eq 'Running') {
+    while (-not $process.HasExited) {
         Start-Sleep -Milliseconds 300
 
         if (Test-Path $dest) {
@@ -167,17 +177,15 @@ function Invoke-Download {
         }
     }
 
-    $result = Receive-Job -Job $job -Wait -ErrorAction SilentlyContinue
-    Remove-Job -Job $job -Force
     Remove-Item $logFile -Force -ErrorAction SilentlyContinue
 
-    if (Test-Path $dest) {
+    if ($process.ExitCode -eq 0 -and (Test-Path $dest)) {
         Write-Host ""
         Write-OK "$Name transferido."
         return $true
     } else {
         Write-Host ""
-        Write-Err "Erro no download."
+        Write-Err "Erro no download (codigo: $($process.ExitCode))"
         return $false
     }
 }
