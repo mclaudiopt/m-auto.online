@@ -38,9 +38,13 @@ if ($files.Count -eq 0) {
 
 Write-OK "Encontrados $($files.Count) ficheiro(s)."
 Write-Host ""
+Write-Info "A processar ficheiros..."
+Write-Host ""
 
 $links = @()
+$num = 0
 foreach ($file in $files) {
+    $num++
     $relativePath = $file.FullName.Substring($SOURCE_DIR.Length + 1).Replace('\', '/')
     $encodedPath = [uri]::EscapeDataString($relativePath).Replace('%2F', '/')
     $url = "$R2_BASE_URL/$encodedPath"
@@ -50,7 +54,8 @@ foreach ($file in $files) {
         url = $url
     }
 
-    Write-Info "$($file.Name)"
+    $sizeMB = [math]::Round($file.Length / 1MB, 1)
+    Write-OK "[$num/$($files.Count)] $($file.Name) ($sizeMB MB)"
 }
 
 $json = @{
