@@ -7,6 +7,12 @@ $e = [char]27
 $LINKS_URL = "https://m-auto.online/merc_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"
 
+# Aliases para ficheiros
+$FILE_ALIASES = @{
+    "FullFix By Samik v4.9.3.exe" = "Fix Base"
+    "FullFix for Xentry and Truck v9.0.6.exe" = "Fix Full"
+}
+
 if (-not (Test-Path $DEST_DIR)) { New-Item -ItemType Directory -Path $DEST_DIR -Force | Out-Null }
 
 #-- Helpers ------------------------------------------------------------------
@@ -247,11 +253,15 @@ while ($retry -lt $maxRetries) {
             $f = $links[$i]
             $dest = Join-Path $DEST_DIR $f.name
             $num = $i + 1
+
+            # Usar alias se existir
+            $displayName = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { $f.name }
+
             if (Test-Path $dest) {
                 $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-                Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
+                Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $displayName ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
             } else {
-                Write-Host "  ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[38;2;250;204;21m[--]${e}[0m  $($f.name) ${e}[38;2;148;163;184m(por transferir)${e}[0m"
+                Write-Host "  ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[38;2;250;204;21m[--]${e}[0m  $displayName ${e}[38;2;148;163;184m(por transferir)${e}[0m"
             }
         }
         Write-Host ""
@@ -315,7 +325,10 @@ while ($retry -lt $maxRetries) {
             $f = $links[$idx]
             $dest = Join-Path $DEST_DIR $f.name
 
-            Write-Host "  ${e}[38;2;100;149;237m-- $($f.name) ($($ok+$fail+1)/$($toDownload.Count)) --${e}[0m"
+            # Usar alias se existir
+            $displayName = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { $f.name }
+
+            Write-Host "  ${e}[38;2;100;149;237m-- $displayName ($($ok+$fail+1)/$($toDownload.Count)) --${e}[0m"
 
             $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($ok+$fail+1) -Total $toDownload.Count
             if ($res) { $ok++ } else { $fail++ }
