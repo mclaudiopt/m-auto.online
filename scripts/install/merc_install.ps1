@@ -34,6 +34,33 @@ function Find-7Zip {
     return $null
 }
 
+#-- Progress bar helper -----------------------------------------------------
+function Show-Progress {
+    param([int]$Percent, [int]$Width = 50, [string]$Label = "")
+
+    $filled = [math]::Round($Percent / 100 * $Width)
+    $empty = $Width - $filled
+
+    # Cores: verde para completo, azul para progresso
+    if ($Percent -eq 100) {
+        $barColor = "42;157;143"  # Verde
+        $emptyColor = "38;70;83"  # Cinza escuro
+    } else {
+        $barColor = "233;196;106"  # Amarelo/dourado
+        $emptyColor = "38;70;83"   # Cinza escuro
+    }
+
+    $barFilled = "${e}[48;2;${barColor}m" + (" " * $filled) + "${e}[0m"
+    $barEmpty = "${e}[48;2;${emptyColor}m" + (" " * $empty) + "${e}[0m"
+
+    $percentText = "$Percent%".PadLeft(4)
+    $labelText = if ($Label) { " $Label" } else { "" }
+
+    Write-Host -NoNewline "`r  ${e}[97m${percentText}${e}[0m ${barFilled}${barEmpty}${labelText}"
+
+    if ($Percent -eq 100) { Write-Host "" }
+}
+
 #-- Extract with progress ----------------------------------------------------
 function Invoke-Extract {
     param([string]$szExe, [string]$Source, [string]$Dest, [string]$Pass = "")
@@ -49,16 +76,11 @@ function Invoke-Extract {
             $p = [int]$Matches[1]
             if ($p -ne $lastP) {
                 $lastP = $p
-                $filled = [math]::Round($p / 100 * 40)
-                $bar = ("#" * $filled).PadRight(40, '-')
-                Write-Host -NoNewline "`r  [${e}[38;2;100;149;237m$bar${e}[0m] $p%  "
+                Show-Progress -Percent $p
             }
         }
     }
-    if ($LASTEXITCODE -eq 0) {
-        $bar = "#" * 40
-        Write-Host "`r  [${e}[38;2;34;197;94m$bar${e}[0m] 100%"
-    }
+    if ($LASTEXITCODE -eq 0) { Show-Progress -Percent 100 }
     return $LASTEXITCODE
 }
 
