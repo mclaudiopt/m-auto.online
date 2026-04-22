@@ -28,7 +28,8 @@ function Invoke-Download($Url, $Name, $Idx, $Total) {
     }
 
     try {
-        $ProgressPreference = 'SilentlyContinue'
+        Write-Info "A transferir... (pode demorar alguns minutos)"
+        $ProgressPreference = 'Continue'
         Invoke-WebRequest -Uri $Url -OutFile $dest -UseBasicParsing
         $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
         Write-OK "Transferido: $Name ($sizeMB MB)"
@@ -67,7 +68,7 @@ if (-not $links -or $links.Count -eq 0) {
 }
 
 Write-Header
-Write-OK "Links validos — $($links.Count) ficheiro(s) disponiveis."
+Write-OK "Links validos - $($links.Count) ficheiro(s) disponiveis."
 Write-Host ""
 Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
 Write-Host ""
@@ -79,7 +80,7 @@ foreach ($f in $links) {
 
     if (Test-Path $dest) {
         $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-        Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
+        Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB - ja existe)${e}[0m"
     } else {
         Write-Host "  ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[38;2;250;204;21m[--]${e}[0m  $($f.name) ${e}[38;2;148;163;184m(por transferir)${e}[0m"
     }
