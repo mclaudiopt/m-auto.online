@@ -87,7 +87,44 @@ function Install-Aria2c {
     $tempDir = "$env:TEMP\aria2_extract"
 
     try {
-        Invoke-WebRequest -Uri $aria2Url -OutFile $tempZip -UseBasicParsing -TimeoutSec 60
+        # Download com progress bar
+        $wc = New-Object System.Net.WebClient
+        $global:wcDone = $false
+        $global:wcError = $null
+
+        $progressSub = Register-ObjectEvent -InputObject $wc -EventName DownloadProgressChanged -Action {
+            $pct = $Event.SourceEventArgs.ProgressPercentage
+            $recv = [math]::Round($Event.SourceEventArgs.BytesReceived / 1KB, 0)
+            $total = [math]::Round($Event.SourceEventArgs.TotalBytesToReceive / 1KB, 0)
+            $width = 50
+            $filled = [math]::Round($pct / 100 * $width)
+            $empty = $width - $filled
+            $fillColor = if ($pct -eq 100) { "46;204;113" } else { "52;152;219" }
+            $emptyColor = "52;73;94"
+            $e = [char]27
+            $barFilled = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
+            $barEmpty = "${e}[48;2;${emptyColor}m" + (" " * $empty) + "${e}[0m"
+            $percentText = "${e}[1;97m$pct%${e}[0m".PadLeft(12)
+            Write-Host -NoNewline "`r  $percentText $barFilled$barEmpty  ${e}[90m$recv KB / $total KB${e}[0m   "
+        }
+
+        $completedSub = Register-ObjectEvent -InputObject $wc -EventName DownloadFileCompleted -Action {
+            $global:wcDone = $true
+            $global:wcError = $Event.SourceEventArgs.Error
+        }
+
+        $wc.DownloadFileAsync([Uri]$aria2Url, $tempZip)
+        while (-not $global:wcDone) { Start-Sleep -Milliseconds 500 }
+
+        $wc.Dispose()
+        Unregister-Event -SourceIdentifier $progressSub.Name -ErrorAction SilentlyContinue
+        Unregister-Event -SourceIdentifier $completedSub.Name -ErrorAction SilentlyContinue
+        Remove-Job -Name $progressSub.Name -Force -ErrorAction SilentlyContinue
+        Remove-Job -Name $completedSub.Name -Force -ErrorAction SilentlyContinue
+        Write-Host ""
+
+        if ($global:wcError) { throw $global:wcError.Message }
+
         Expand-Archive -Path $tempZip -DestinationPath $tempDir -Force
         $aria2Exe = Get-ChildItem -Path $tempDir -Filter "aria2c.exe" -Recurse | Select-Object -First 1
 
@@ -335,5 +372,6 @@ while ($retry -lt $maxRetries) {
 
 Write-Host ""
 Write-Err "Timeout: links nao renovados apos 5 minutos."
-Start-Sleep -Seconds 3
+Write-Host ""
+Read-Host "  Pressione ENTER para voltar"
 exit 1
