@@ -133,27 +133,12 @@ function Invoke-Download {
     $proxyArg = if ($proxy) { "--all-proxy=http://$proxy" } else { "" }
 
     # Argumentos aria2c: 16 conexoes, resume automatico, timeout 60s
-    $aria2Args = @(
-        "--max-connection-per-server=16"
-        "--split=16"
-        "--min-split-size=1M"
-        "--continue=true"
-        "--max-tries=3"
-        "--retry-wait=2"
-        "--timeout=60"
-        "--connect-timeout=30"
-        "--dir=`"$destDir`""
-        "--out=`"$Name`""
-        "--console-log-level=warn"
-        "--summary-interval=0"
-    )
-    if ($proxyArg) { $aria2Args += $proxyArg }
-
-    # Executar aria2c e monitorizar progresso
     $logFile = "$env:TEMP\aria2_$([guid]::NewGuid().ToString('N').Substring(0,8)).log"
-    $aria2Args += "--log=`"$logFile`""
-    $aria2Args += "--log-level=info"
-    $aria2Args += "`"$Url`""
+
+    $aria2Args = "--max-connection-per-server=16 --split=16 --min-split-size=1M --continue=true --max-tries=3 --retry-wait=2 --timeout=60 --connect-timeout=30 --console-log-level=warn --summary-interval=0 --log-level=info"
+    $aria2Args += " --dir=`"$destDir`" --out=`"$Name`" --log=`"$logFile`""
+    if ($proxyArg) { $aria2Args += " $proxyArg" }
+    $aria2Args += " `"$Url`""
 
     $process = Start-Process -FilePath $aria2 -ArgumentList $aria2Args -NoNewWindow -PassThru
 
