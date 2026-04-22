@@ -4,7 +4,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
 
-$LINKS_URL = "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/renault_links.json"
+$LINKS_URL = "https://m-auto.online/renault_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"
 
 function Write-Header {
