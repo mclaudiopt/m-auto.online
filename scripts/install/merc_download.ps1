@@ -148,74 +148,100 @@ function Install-Aria2c {
     }
 }
 
+#-- Obter tamanho total do ficheiro via HEAD ---------------------------------
+function Get-RemoteFileSize {
+    param([string]$Url)
+    try {
+        $req = [System.Net.HttpWebRequest]::Create($Url)
+        $req.Method = "HEAD"
+        $req.Timeout = 10000
+        $req.AllowAutoRedirect = $true
+        $resp = $req.GetResponse()
+        $size = $resp.ContentLength
+        $resp.Close()
+        return $size
+    } catch {
+        return 0
+    }
+}
+
 #-- Download com aria2c (16 conexoes) ----------------------------------------
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
 
-    $dest = Join-Path $DEST_DIR $Name
+    $dest    = Join-Path $DEST_DIR $Name
     $destDir = Split-Path $dest -Parent
+    $barWidth = 40
 
     # Criar subdiretorios se necessario
     if (-not (Test-Path $destDir)) {
         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
     }
 
+    # Obter tamanho total antes de comecar
+    Write-Host -NoNewline "  ${e}[38;2;148;163;184m[.]${e}[0m   A obter informacao do ficheiro..."
+    $totalBytes = Get-RemoteFileSize -Url $Url
+    $totalMB    = if ($totalBytes -gt 0) { [math]::Round($totalBytes / 1MB, 1) } else { $null }
+    Write-Host "`r  ${e}[38;2;148;163;184m[.]${e}[0m   Tamanho: $(if ($totalMB) { "$totalMB MB" } else { "desconhecido" })                "
+
     # Instalar aria2c se necessario
     $aria2 = Install-Aria2c
     if (-not $aria2) {
-        Write-Err "aria2c nao disponivel. A usar metodo alternativo..."
+        Write-Err "aria2c nao disponivel."
         return $false
     }
 
     # Configurar proxy
-    $proxy = Get-ProxyConfig
+    $proxy    = Get-ProxyConfig
     $proxyArg = if ($proxy) { "--all-proxy=http://$proxy" } else { "" }
 
-    # Argumentos aria2c: 16 conexoes, resume automatico, timeout 60s
-    $logFile = "$env:TEMP\aria2_$([guid]::NewGuid().ToString('N').Substring(0,8)).log"
-
-    # Criar ProcessStartInfo para controlar argumentos corretamente
+    # Iniciar aria2c (sem janela, silencioso)
     $psi = New-Object System.Diagnostics.ProcessStartInfo
-    $psi.FileName = $aria2
+    $psi.FileName        = $aria2
     $psi.UseShellExecute = $false
-    $psi.CreateNoWindow = $true
-
-    # Construir argumentos manualmente
-    $psi.Arguments = "--max-connection-per-server=16 --split=16 --min-split-size=1M --continue=true --max-tries=3 --retry-wait=2 --timeout=60 --connect-timeout=30 --console-log-level=warn --summary-interval=0 --log-level=info `"--dir=$destDir`" `"--out=$Name`" `"--log=$logFile`""
+    $psi.CreateNoWindow  = $true
+    $psi.Arguments       = "--max-connection-per-server=16 --split=16 --min-split-size=1M --continue=true --max-tries=3 --retry-wait=2 --timeout=60 --connect-timeout=30 --console-log-level=error --summary-interval=0 `"--dir=$destDir`" `"--out=$Name`""
     if ($proxyArg) { $psi.Arguments += " $proxyArg" }
     $psi.Arguments += " `"$Url`""
 
-    $process = [System.Diagnostics.Process]::Start($psi)
-
+    $process   = [System.Diagnostics.Process]::Start($psi)
     $startTime = Get-Date
-    $spinnerFrames = @('⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏')
-    $spinnerIdx = 0
 
     while (-not $process.HasExited) {
-        Start-Sleep -Milliseconds 300
+        Start-Sleep -Milliseconds 400
 
-        if (Test-Path $dest) {
-            $dlBytes = (Get-Item $dest).Length
-            $elapsed = ((Get-Date) - $startTime).TotalSeconds
-            $speed = if ($elapsed -gt 0.5) { $dlBytes / $elapsed / 1MB } else { 0 }
-            $dlMB = [math]::Round($dlBytes / 1MB, 1)
-            $spdStr = if ($speed -gt 0) { "{0:N1} MB/s" -f $speed } else { "-- MB/s" }
+        $dlBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
+        $elapsed = ([math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds))
+        $speed   = $dlBytes / $elapsed / 1MB   # MB/s
 
-            $spinner = $spinnerFrames[$spinnerIdx % $spinnerFrames.Count]
-            $spinnerIdx++
+        $dlMB  = [math]::Round($dlBytes / 1MB, 1)
+        $spdStr = if ($speed -gt 0.01) { "{0:N1} MB/s" -f $speed } else { "-- MB/s" }
 
-            Write-Host -NoNewline "`r  ${e}[38;2;100;149;237m$spinner${e}[0m $dlMB MB  $spdStr  ${e}[38;2;148;163;184m[CN:16] [$Idx/$Total]${e}[0m  "
+        if ($totalBytes -gt 0) {
+            $perc   = [math]::Min(99, [math]::Round($dlBytes / $totalBytes * 100))
+            $filled = [math]::Round($perc / 100 * $barWidth)
+            $bar    = ("$([char]0x2588)" * $filled).PadRight($barWidth, [char]0x2591)
+
+            $eta = if ($speed -gt 0.01 -and $totalBytes -gt $dlBytes) {
+                $secs = [int](($totalBytes - $dlBytes) / ($speed * 1MB))
+                "{0}:{1:D2}" -f [int]($secs/60), ($secs%60)
+            } else { "--" }
+
+            Write-Host -NoNewline "`r  [${e}[38;2;100;149;237m$bar${e}[0m] ${e}[1;97m$perc%${e}[0m  $dlMB/$totalMB MB  $spdStr  ETA $eta  "
+        } else {
+            # Tamanho desconhecido — mostra so MB e velocidade
+            Write-Host -NoNewline "`r  ${e}[38;2;100;149;237m>>>>${e}[0m  $dlMB MB  $spdStr  (tamanho desconhecido)  "
         }
     }
 
-    Remove-Item $logFile -Force -ErrorAction SilentlyContinue
+    Write-Host ""
 
     if ($process.ExitCode -eq 0 -and (Test-Path $dest)) {
-        Write-Host ""
-        Write-OK "$Name transferido."
+        $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+        Write-OK "$Name transferido ($finalMB MB)."
         return $true
     } else {
-        Write-Host ""
+        # Tentar mostrar erro do aria2c
         Write-Err "Erro no download (codigo: $($process.ExitCode))"
         return $false
     }
