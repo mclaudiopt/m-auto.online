@@ -199,14 +199,16 @@ function Invoke-Download {
     if ($proxy) { $argList += "--all-proxy=http://$proxy" }
     $argList += $Url
 
-    # Iniciar aria2c em background (sem janela)
+    # Iniciar aria2c em background
     $job = Start-Job -ScriptBlock {
         param($exe, $args2)
         & $exe @args2
         $LASTEXITCODE
     } -ArgumentList $aria2, $argList
 
-    $startTime = Get-Date
+    $startTime  = Get-Date
+    $lastBytes  = 0
+    $staleSince = $null
 
     while ($job.State -eq 'Running') {
         Start-Sleep -Milliseconds 400
@@ -236,6 +238,22 @@ function Invoke-Download {
         $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
 
         Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totDisp  $spdStr  ETA $eta  [CN:16] [$Idx/$Total]${e}[0m  "
+
+        # Detetar aria2c parado: 0 bytes durante 15s → fallback para WebClient
+        if ($dlBytes -eq $lastBytes) {
+            if (-not $staleSince) { $staleSince = Get-Date }
+            if (((Get-Date) - $staleSince).TotalSeconds -gt 15) {
+                Stop-Job $job -ErrorAction SilentlyContinue
+                Remove-Job $job -Force -ErrorAction SilentlyContinue
+                Remove-Item $dest -Force -ErrorAction SilentlyContinue
+                Write-Host ""
+                Write-Warn "aria2c sem progresso. A usar metodo alternativo..."
+                return Invoke-DownloadWebClient -Url $Url -Name $Name -Idx $Idx -Total $Total
+            }
+        } else {
+            $staleSince = $null
+            $lastBytes  = $dlBytes
+        }
     }
 
     $exitCode = Receive-Job $job | Select-Object -Last 1
@@ -249,8 +267,73 @@ function Invoke-Download {
         return $true
     }
 
-    Write-Err "Erro no download (codigo: $exitCode)"
-    return $false
+    # Fallback para WebClient se aria2c falhou
+    Write-Warn "aria2c falhou (codigo $exitCode). A usar metodo alternativo..."
+    Remove-Item $dest -Force -ErrorAction SilentlyContinue
+    return Invoke-DownloadWebClient -Url $Url -Name $Name -Idx $Idx -Total $Total
+}
+
+#-- Fallback: WebClient com barra de progresso -------------------------------
+function Invoke-DownloadWebClient {
+    param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
+
+    $dest  = Join-Path $DEST_DIR $Name
+    $width = 50
+
+    $global:dlDone  = $false
+    $global:dlError = $null
+    $global:dlPct   = 0
+    $global:dlRecv  = 0
+    $global:dlTotal = 0
+
+    $wc   = New-Object System.Net.WebClient
+    $eSub = Register-ObjectEvent -InputObject $wc -EventName DownloadProgressChanged -Action {
+        $global:dlPct   = $Event.SourceEventArgs.ProgressPercentage
+        $global:dlRecv  = $Event.SourceEventArgs.BytesReceived
+        $global:dlTotal = $Event.SourceEventArgs.TotalBytesToReceive
+    }
+    $cSub = Register-ObjectEvent -InputObject $wc -EventName DownloadFileCompleted -Action {
+        if ($Event.SourceEventArgs.Error) { $global:dlError = $Event.SourceEventArgs.Error.Message }
+        $global:dlDone = $true
+    }
+
+    $startTime = Get-Date
+    $wc.DownloadFileAsync([uri]$Url, $dest)
+
+    while (-not $global:dlDone) {
+        Start-Sleep -Milliseconds 300
+        $pct     = $global:dlPct
+        $recv    = $global:dlRecv
+        $tot     = $global:dlTotal
+        $elapsed = [math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds)
+        $speedMB = [math]::Round($recv / $elapsed / 1MB, 1)
+        $recvMB  = [math]::Round($recv / 1MB, 1)
+        $totMB   = if ($tot -gt 0) { [math]::Round($tot / 1MB, 1) } else { "?" }
+        $spdStr  = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
+        $eta     = if ($speedMB -gt 0 -and $tot -gt $recv) {
+            $s = [int](($tot - $recv) / ($speedMB * 1MB))
+            "{0}:{1:D2}" -f [int]($s/60), ($s%60)
+        } else { "--" }
+
+        $filled    = [math]::Round($pct / 100 * $width)
+        $empty     = $width - $filled
+        $fillColor = if ($pct -ge 99) { "46;204;113" } else { "52;152;219" }
+        $barFill   = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
+        $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
+
+        Write-Host -NoNewline "`r  ${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m $barFill$barEmpty  ${e}[90m$recvMB/$totMB MB  $spdStr  ETA $eta  [$Idx/$Total]${e}[0m  "
+    }
+
+    $wc.Dispose()
+    Unregister-Event -SourceIdentifier $eSub.Name -EA SilentlyContinue
+    Unregister-Event -SourceIdentifier $cSub.Name -EA SilentlyContinue
+    Remove-Job -Name $eSub.Name,$cSub.Name -Force -EA SilentlyContinue
+    Write-Host ""
+
+    if ($global:dlError) { Write-Err "Erro: $($global:dlError)"; return $false }
+    $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+    Write-OK "$Name transferido ($finalMB MB)."
+    return $true
 }
 
 #-- Loop principal -----------------------------------------------------------
