@@ -148,103 +148,86 @@ function Install-Aria2c {
     }
 }
 
-#-- Obter tamanho total do ficheiro via HEAD ---------------------------------
-function Get-RemoteFileSize {
-    param([string]$Url)
-    try {
-        $req = [System.Net.HttpWebRequest]::Create($Url)
-        $req.Method = "HEAD"
-        $req.Timeout = 10000
-        $req.AllowAutoRedirect = $true
-        $resp = $req.GetResponse()
-        $size = $resp.ContentLength
-        $resp.Close()
-        return $size
-    } catch {
-        return 0
-    }
-}
-
-#-- Download com aria2c (16 conexoes) ----------------------------------------
+#-- Download com WebClient (barra de progresso identica ao aria2c) -----------
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
 
     $dest    = Join-Path $DEST_DIR $Name
     $destDir = Split-Path $dest -Parent
-    $barWidth = 40
+    $width   = 50
 
-    # Criar subdiretorios se necessario
     if (-not (Test-Path $destDir)) {
         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
     }
 
-    # Obter tamanho total antes de comecar
-    Write-Host -NoNewline "  ${e}[38;2;148;163;184m[.]${e}[0m   A obter informacao do ficheiro..."
-    $totalBytes = Get-RemoteFileSize -Url $Url
-    $totalMB    = if ($totalBytes -gt 0) { [math]::Round($totalBytes / 1MB, 1) } else { $null }
-    Write-Host "`r  ${e}[38;2;148;163;184m[.]${e}[0m   Tamanho: $(if ($totalMB) { "$totalMB MB" } else { "desconhecido" })                "
+    $global:dlDone  = $false
+    $global:dlError = $null
+    $global:dlPct   = 0
+    $global:dlRecv  = 0
+    $global:dlTotal = 0
 
-    # Instalar aria2c se necessario
-    $aria2 = Install-Aria2c
-    if (-not $aria2) {
-        Write-Err "aria2c nao disponivel."
-        return $false
+    $wc = New-Object System.Net.WebClient
+
+    $progressSub = Register-ObjectEvent -InputObject $wc -EventName DownloadProgressChanged -Action {
+        $global:dlPct   = $Event.SourceEventArgs.ProgressPercentage
+        $global:dlRecv  = $Event.SourceEventArgs.BytesReceived
+        $global:dlTotal = $Event.SourceEventArgs.TotalBytesToReceive
     }
 
-    # Configurar proxy
-    $proxy    = Get-ProxyConfig
-    $proxyArg = if ($proxy) { "--all-proxy=http://$proxy" } else { "" }
+    $completedSub = Register-ObjectEvent -InputObject $wc -EventName DownloadFileCompleted -Action {
+        if ($Event.SourceEventArgs.Error) { $global:dlError = $Event.SourceEventArgs.Error.Message }
+        $global:dlDone = $true
+    }
 
-    # Iniciar aria2c (sem janela, silencioso)
-    $psi = New-Object System.Diagnostics.ProcessStartInfo
-    $psi.FileName        = $aria2
-    $psi.UseShellExecute = $false
-    $psi.CreateNoWindow  = $true
-    $psi.Arguments       = "--max-connection-per-server=16 --split=16 --min-split-size=1M --continue=true --max-tries=3 --retry-wait=2 --timeout=60 --connect-timeout=30 --console-log-level=error --summary-interval=0 `"--dir=$destDir`" `"--out=$Name`""
-    if ($proxyArg) { $psi.Arguments += " $proxyArg" }
-    $psi.Arguments += " `"$Url`""
-
-    $process   = [System.Diagnostics.Process]::Start($psi)
     $startTime = Get-Date
+    $wc.DownloadFileAsync([uri]$Url, $dest)
 
-    while (-not $process.HasExited) {
-        Start-Sleep -Milliseconds 400
+    while (-not $global:dlDone) {
+        Start-Sleep -Milliseconds 300
 
-        $dlBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
-        $elapsed = ([math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds))
-        $speed   = $dlBytes / $elapsed / 1MB   # MB/s
+        $pct   = $global:dlPct
+        $recv  = $global:dlRecv
+        $tot   = $global:dlTotal
 
-        $dlMB  = [math]::Round($dlBytes / 1MB, 1)
-        $spdStr = if ($speed -gt 0.01) { "{0:N1} MB/s" -f $speed } else { "-- MB/s" }
+        $elapsed = [math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds)
+        $speedMB = $recv / $elapsed / 1MB
+        $recvMB  = [math]::Round($recv / 1MB, 1)
+        $totMB   = if ($tot -gt 0) { [math]::Round($tot / 1MB, 1) } else { "?" }
+        $spdStr  = if ($speedMB -gt 0.001) { "{0:N1} MB/s" -f $speedMB } else { "-- MB/s" }
 
-        if ($totalBytes -gt 0) {
-            $perc   = [math]::Min(99, [math]::Round($dlBytes / $totalBytes * 100))
-            $filled = [math]::Round($perc / 100 * $barWidth)
-            $bar    = ("$([char]0x2588)" * $filled).PadRight($barWidth, [char]0x2591)
+        $eta = if ($speedMB -gt 0.001 -and $tot -gt $recv) {
+            $secs = [int](($tot - $recv) / ($speedMB * 1MB))
+            "{0}:{1:D2}" -f [int]($secs/60), ($secs%60)
+        } else { "--" }
 
-            $eta = if ($speed -gt 0.01 -and $totalBytes -gt $dlBytes) {
-                $secs = [int](($totalBytes - $dlBytes) / ($speed * 1MB))
-                "{0}:{1:D2}" -f [int]($secs/60), ($secs%60)
-            } else { "--" }
+        # Barra de progresso colorida (identica ao Install-Aria2c)
+        $filled     = [math]::Round($pct / 100 * $width)
+        $empty      = $width - $filled
+        $fillColor  = if ($pct -eq 100) { "46;204;113" } else { "52;152;219" }
+        $emptyColor = "52;73;94"
+        $barFilled  = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
+        $barEmpty   = "${e}[48;2;${emptyColor}m" + (" " * $empty) + "${e}[0m"
+        $pctText    = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
 
-            Write-Host -NoNewline "`r  [${e}[38;2;100;149;237m$bar${e}[0m] ${e}[1;97m$perc%${e}[0m  $dlMB/$totalMB MB  $spdStr  ETA $eta  "
-        } else {
-            # Tamanho desconhecido — mostra so MB e velocidade
-            Write-Host -NoNewline "`r  ${e}[38;2;100;149;237m>>>>${e}[0m  $dlMB MB  $spdStr  (tamanho desconhecido)  "
-        }
+        Write-Host -NoNewline "`r  $pctText $barFilled$barEmpty  ${e}[90m$recvMB/$totMB MB  $spdStr  ETA $eta  [$Idx/$Total]${e}[0m  "
     }
+
+    $wc.Dispose()
+    Unregister-Event -SourceIdentifier $progressSub.Name -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier $completedSub.Name -ErrorAction SilentlyContinue
+    Remove-Job -Name $progressSub.Name -Force -ErrorAction SilentlyContinue
+    Remove-Job -Name $completedSub.Name -Force -ErrorAction SilentlyContinue
 
     Write-Host ""
 
-    if ($process.ExitCode -eq 0 -and (Test-Path $dest)) {
-        $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-        Write-OK "$Name transferido ($finalMB MB)."
-        return $true
-    } else {
-        # Tentar mostrar erro do aria2c
-        Write-Err "Erro no download (codigo: $($process.ExitCode))"
+    if ($global:dlError) {
+        Write-Err "Erro: $($global:dlError)"
         return $false
     }
+
+    $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+    Write-OK "$Name transferido ($finalMB MB)."
+    return $true
 }
 
 #-- Loop principal -----------------------------------------------------------
