@@ -148,62 +148,95 @@ function Install-Aria2c {
     }
 }
 
-#-- Download com WebClient (barra de progresso identica ao aria2c) -----------
+#-- Query aria2c RPC ---------------------------------------------------------
+function Invoke-Aria2Rpc {
+    param([string]$Method, [object[]]$Params = @(), [int]$Port = 6800)
+    try {
+        $body = @{ jsonrpc = "2.0"; id = "1"; method = $Method; params = $Params } | ConvertTo-Json -Compress
+        $resp = Invoke-RestMethod -Uri "http://127.0.0.1:$Port/jsonrpc" `
+            -Method Post -Body $body -ContentType "application/json" -TimeoutSec 3 -ErrorAction Stop
+        return $resp.result
+    } catch { return $null }
+}
+
+#-- Download com aria2c (16 slots) + RPC para progresso ----------------------
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
 
     $dest    = Join-Path $DEST_DIR $Name
     $destDir = Split-Path $dest -Parent
     $width   = 50
+    $rpcPort = 6800
 
     if (-not (Test-Path $destDir)) {
         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
     }
 
-    $global:dlDone  = $false
-    $global:dlError = $null
-    $global:dlPct   = 0
-    $global:dlRecv  = 0
-    $global:dlTotal = 0
+    # Instalar aria2c se necessario
+    $aria2 = Install-Aria2c
+    if (-not $aria2) { Write-Err "aria2c nao disponivel."; return $false }
 
-    $wc = New-Object System.Net.WebClient
+    # Configurar proxy
+    $proxy    = Get-ProxyConfig
+    $proxyArg = if ($proxy) { "--all-proxy=http://$proxy" } else { "" }
 
-    $progressSub = Register-ObjectEvent -InputObject $wc -EventName DownloadProgressChanged -Action {
-        $global:dlPct   = $Event.SourceEventArgs.ProgressPercentage
-        $global:dlRecv  = $Event.SourceEventArgs.BytesReceived
-        $global:dlTotal = $Event.SourceEventArgs.TotalBytesToReceive
-    }
+    # Iniciar aria2c com RPC activo
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName        = $aria2
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow  = $true
+    $psi.Arguments       = "--max-connection-per-server=16 --split=16 --min-split-size=1M" +
+                           " --continue=true --max-tries=3 --retry-wait=2 --timeout=60 --connect-timeout=30" +
+                           " --console-log-level=error --summary-interval=0" +
+                           " --enable-rpc=true --rpc-listen-port=$rpcPort --rpc-allow-origin-all=true" +
+                           " `"--dir=$destDir`" `"--out=$Name`""
+    if ($proxyArg) { $psi.Arguments += " $proxyArg" }
+    $psi.Arguments += " `"$Url`""
 
-    $completedSub = Register-ObjectEvent -InputObject $wc -EventName DownloadFileCompleted -Action {
-        if ($Event.SourceEventArgs.Error) { $global:dlError = $Event.SourceEventArgs.Error.Message }
-        $global:dlDone = $true
-    }
-
+    $process   = [System.Diagnostics.Process]::Start($psi)
     $startTime = Get-Date
-    $wc.DownloadFileAsync([uri]$Url, $dest)
 
-    while (-not $global:dlDone) {
+    # Aguardar RPC ficar disponivel (max 3s)
+    $rpcReady = $false
+    for ($w = 0; $w -lt 10; $w++) {
         Start-Sleep -Milliseconds 300
+        if ((Invoke-Aria2Rpc -Method "aria2.getVersion" -Port $rpcPort) -ne $null) { $rpcReady = $true; break }
+    }
 
-        $pct   = $global:dlPct
-        $recv  = $global:dlRecv
-        $tot   = $global:dlTotal
+    while (-not $process.HasExited) {
+        Start-Sleep -Milliseconds 400
 
-        $elapsed = [math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds)
-        $speedMB = $recv / $elapsed / 1MB
-        $recvMB  = [math]::Round($recv / 1MB, 1)
-        $totMB   = if ($tot -gt 0) { [math]::Round($tot / 1MB, 1) } else { "?" }
-        $spdStr  = if ($speedMB -gt 0.001) { "{0:N1} MB/s" -f $speedMB } else { "-- MB/s" }
+        $pct = 0; $recvMB = 0; $totMB = "?"; $speedMB = 0; $eta = "--"
 
-        $eta = if ($speedMB -gt 0.001 -and $tot -gt $recv) {
-            $secs = [int](($tot - $recv) / ($speedMB * 1MB))
-            "{0}:{1:D2}" -f [int]($secs/60), ($secs%60)
-        } else { "--" }
+        if ($rpcReady) {
+            $active = Invoke-Aria2Rpc -Method "aria2.tellActive" -Params @(, @("completedLength","totalLength","downloadSpeed")) -Port $rpcPort
+            if ($active -and $active.Count -gt 0) {
+                $dl    = [long]$active[0].completedLength
+                $tot   = [long]$active[0].totalLength
+                $spd   = [long]$active[0].downloadSpeed   # bytes/s
+                $recvMB  = [math]::Round($dl  / 1MB, 1)
+                $totMB   = if ($tot -gt 0) { [math]::Round($tot / 1MB, 1) } else { "?" }
+                $speedMB = [math]::Round($spd / 1MB, 1)
+                $pct     = if ($tot -gt 0) { [math]::Min(99, [math]::Round($dl / $tot * 100)) } else { 0 }
+                if ($spd -gt 0 -and $tot -gt $dl) {
+                    $secs = [int](($tot - $dl) / $spd)
+                    $eta  = "{0}:{1:D2}" -f [int]($secs/60), ($secs%60)
+                }
+            }
+        } else {
+            # Fallback: medir ficheiro no disco
+            if (Test-Path $dest) {
+                $dlBytes = (Get-Item $dest).Length
+                $elapsed = [math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds)
+                $recvMB  = [math]::Round($dlBytes / 1MB, 1)
+                $speedMB = [math]::Round($dlBytes / $elapsed / 1MB, 1)
+            }
+        }
 
-        # Barra de progresso colorida (identica ao Install-Aria2c)
+        $spdStr     = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
         $filled     = [math]::Round($pct / 100 * $width)
         $empty      = $width - $filled
-        $fillColor  = if ($pct -eq 100) { "46;204;113" } else { "52;152;219" }
+        $fillColor  = if ($pct -ge 99) { "46;204;113" } else { "52;152;219" }
         $emptyColor = "52;73;94"
         $barFilled  = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
         $barEmpty   = "${e}[48;2;${emptyColor}m" + (" " * $empty) + "${e}[0m"
@@ -212,22 +245,16 @@ function Invoke-Download {
         Write-Host -NoNewline "`r  $pctText $barFilled$barEmpty  ${e}[90m$recvMB/$totMB MB  $spdStr  ETA $eta  [$Idx/$Total]${e}[0m  "
     }
 
-    $wc.Dispose()
-    Unregister-Event -SourceIdentifier $progressSub.Name -ErrorAction SilentlyContinue
-    Unregister-Event -SourceIdentifier $completedSub.Name -ErrorAction SilentlyContinue
-    Remove-Job -Name $progressSub.Name -Force -ErrorAction SilentlyContinue
-    Remove-Job -Name $completedSub.Name -Force -ErrorAction SilentlyContinue
-
     Write-Host ""
 
-    if ($global:dlError) {
-        Write-Err "Erro: $($global:dlError)"
+    if ($process.ExitCode -eq 0 -and (Test-Path $dest)) {
+        $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+        Write-OK "$Name transferido ($finalMB MB)."
+        return $true
+    } else {
+        Write-Err "Erro no download (codigo: $($process.ExitCode))"
         return $false
     }
-
-    $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-    Write-OK "$Name transferido ($finalMB MB)."
-    return $true
 }
 
 #-- Loop principal -----------------------------------------------------------
