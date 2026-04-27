@@ -148,49 +148,85 @@ function Install-Aria2c {
     }
 }
 
-#-- Download com WebClient + barra de progresso ------------------------------
+#-- Obter tamanho do ficheiro via HEAD ---------------------------------------
+function Get-RemoteSize {
+    param([string]$Url)
+    try {
+        $req = [System.Net.HttpWebRequest]::Create($Url)
+        $req.Method = "HEAD"; $req.Timeout = 8000; $req.AllowAutoRedirect = $true
+        $resp = $req.GetResponse()
+        $len  = $resp.ContentLength
+        $resp.Close()
+        return $len
+    } catch { return 0 }
+}
+
+#-- Download com aria2c (16 slots) + progresso por ficheiro ------------------
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
 
-    $dest  = Join-Path $DEST_DIR $Name
-    $width = 50
+    $dest    = Join-Path $DEST_DIR $Name
+    $destDir = Split-Path $dest -Parent
+    $width   = 50
 
-    $global:dlDone  = $false
-    $global:dlError = $null
-    $global:dlPct   = 0
-    $global:dlRecv  = 0
-    $global:dlTotal = 0
+    if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
 
-    $wc = New-Object System.Net.WebClient
+    $aria2 = Install-Aria2c
+    if (-not $aria2) { Write-Err "aria2c nao disponivel."; return $false }
 
-    $eSub = Register-ObjectEvent -InputObject $wc -EventName DownloadProgressChanged -Action {
-        $global:dlPct   = $Event.SourceEventArgs.ProgressPercentage
-        $global:dlRecv  = $Event.SourceEventArgs.BytesReceived
-        $global:dlTotal = $Event.SourceEventArgs.TotalBytesToReceive
-    }
-    $cSub = Register-ObjectEvent -InputObject $wc -EventName DownloadFileCompleted -Action {
-        if ($Event.SourceEventArgs.Error) { $global:dlError = $Event.SourceEventArgs.Error.Message }
-        $global:dlDone = $true
-    }
+    # Tamanho total via HEAD
+    Write-Host -NoNewline "  ${e}[38;2;148;163;184m[.]${e}[0m   A verificar ficheiro...      "
+    $totalBytes = Get-RemoteSize -Url $Url
+    $totalMB    = if ($totalBytes -gt 0) { [math]::Round($totalBytes / 1MB, 1) } else { 0 }
+    Write-Host "`r  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })                    "
+
+    # Construir argumentos como array — PowerShell gere o quoting automaticamente
+    $proxy = Get-ProxyConfig
+    $argList = @(
+        "--max-connection-per-server=16",
+        "--split=16",
+        "--min-split-size=1M",
+        "--continue=true",
+        "--max-tries=3",
+        "--retry-wait=2",
+        "--timeout=60",
+        "--connect-timeout=30",
+        "--console-log-level=error",
+        "--summary-interval=0",
+        "--dir=$destDir",
+        "--out=$Name"
+    )
+    if ($proxy) { $argList += "--all-proxy=http://$proxy" }
+    $argList += $Url
+
+    # Iniciar aria2c em background (sem janela)
+    $job = Start-Job -ScriptBlock {
+        param($exe, $args2)
+        & $exe @args2
+        $LASTEXITCODE
+    } -ArgumentList $aria2, $argList
 
     $startTime = Get-Date
-    $wc.DownloadFileAsync([uri]$Url, $dest)
 
-    while (-not $global:dlDone) {
-        Start-Sleep -Milliseconds 300
+    while ($job.State -eq 'Running') {
+        Start-Sleep -Milliseconds 400
 
-        $pct     = $global:dlPct
-        $recv    = $global:dlRecv
-        $tot     = $global:dlTotal
+        $dlBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
         $elapsed = [math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds)
-        $speedMB = [math]::Round($recv / $elapsed / 1MB, 1)
-        $recvMB  = [math]::Round($recv / 1MB, 1)
-        $totMB   = if ($tot -gt 0) { [math]::Round($tot / 1MB, 1) } else { "?" }
-        $spdStr  = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
-        $eta     = if ($speedMB -gt 0 -and $tot -gt $recv) {
-            $s = [int](($tot - $recv) / ($speedMB * 1MB))
-            "{0}:{1:D2}" -f [int]($s/60), ($s%60)
-        } else { "--" }
+        $speedMB = [math]::Round($dlBytes / $elapsed / 1MB, 1)
+        $recvMB  = [math]::Round($dlBytes / 1MB, 1)
+        $spdStr  = if ($speedMB -gt 0.01) { "$speedMB MB/s" } else { "-- MB/s" }
+
+        if ($totalBytes -gt 0) {
+            $pct = [math]::Min(99, [math]::Round($dlBytes / $totalBytes * 100))
+            $eta = if ($speedMB -gt 0.01 -and $totalBytes -gt $dlBytes) {
+                $s = [int](($totalBytes - $dlBytes) / ($speedMB * 1MB))
+                "{0}:{1:D2}" -f [int]($s/60), ($s%60)
+            } else { "--" }
+            $totDisp = "$totalMB MB"
+        } else {
+            $pct = 0; $eta = "--"; $totDisp = "?"
+        }
 
         $filled    = [math]::Round($pct / 100 * $width)
         $empty     = $width - $filled
@@ -199,21 +235,22 @@ function Invoke-Download {
         $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
         $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
 
-        Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totMB MB  $spdStr  ETA $eta  [$Idx/$Total]${e}[0m  "
+        Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totDisp  $spdStr  ETA $eta  [CN:16] [$Idx/$Total]${e}[0m  "
     }
 
-    $wc.Dispose()
-    Unregister-Event -SourceIdentifier $eSub.Name -ErrorAction SilentlyContinue
-    Unregister-Event -SourceIdentifier $cSub.Name -ErrorAction SilentlyContinue
-    Remove-Job -Name $eSub.Name,$cSub.Name -Force -ErrorAction SilentlyContinue
+    $exitCode = Receive-Job $job | Select-Object -Last 1
+    Remove-Job $job -Force
 
     Write-Host ""
 
-    if ($global:dlError) { Write-Err "Erro: $($global:dlError)"; return $false }
+    if ($exitCode -eq 0 -and (Test-Path $dest)) {
+        $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+        Write-OK "$Name transferido ($finalMB MB)."
+        return $true
+    }
 
-    $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-    Write-OK "$Name transferido ($finalMB MB)."
-    return $true
+    Write-Err "Erro no download (codigo: $exitCode)"
+    return $false
 }
 
 #-- Loop principal -----------------------------------------------------------
