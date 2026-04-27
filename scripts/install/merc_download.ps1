@@ -174,26 +174,19 @@ function Invoke-Download {
     $psi.RedirectStandardOutput = $true
     $psi.RedirectStandardError  = $true
 
-    # Construir lista de argumentos sem quoting manual
-    $args2c = [System.Collections.Generic.List[string]]::new()
-    $args2c.Add("--max-connection-per-server=16")
-    $args2c.Add("--split=16")
-    $args2c.Add("--min-split-size=1M")
-    $args2c.Add("--continue=true")
-    $args2c.Add("--max-tries=3")
-    $args2c.Add("--retry-wait=2")
-    $args2c.Add("--timeout=60")
-    $args2c.Add("--connect-timeout=30")
-    $args2c.Add("--console-log-level=notice")
-    $args2c.Add("--summary-interval=1")
-    $args2c.Add("--dir=$destDir")
-    $args2c.Add("--out=$Name")
-    if ($proxyArg) { $args2c.Add($proxyArg) }
-    $args2c.Add($Url)
+    # Construir string de argumentos (compativel com PowerShell 5.1)
+    # Paths com espacos sao envolvidos em aspas duplas
+    $dirArg  = '"--dir=' + $destDir + '"'
+    $outArg  = '"--out=' + $Name    + '"'
+    $urlArg  = '"' + $Url           + '"'
 
-    # Passar argumentos via ArgumentList (evita quoting manual)
-    $psi.ArgumentList.Clear()
-    foreach ($a in $args2c) { $psi.ArgumentList.Add($a) }
+    $psi.Arguments = "--max-connection-per-server=16 --split=16 --min-split-size=1M" +
+                     " --continue=true --max-tries=3 --retry-wait=2" +
+                     " --timeout=60 --connect-timeout=30" +
+                     " --console-log-level=notice --summary-interval=1" +
+                     " $dirArg $outArg"
+    if ($proxyArg) { $psi.Arguments += " $proxyArg" }
+    $psi.Arguments += " $urlArg"
 
     $global:ariaLines = [System.Collections.Concurrent.ConcurrentQueue[string]]::new()
 
