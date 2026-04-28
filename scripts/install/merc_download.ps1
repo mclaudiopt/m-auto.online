@@ -198,24 +198,27 @@ function Invoke-Download {
     $argList.Add("--file-allocation=none")  # nao pre-alocar — Get-Item.Length reflete dl real
     $argList.Add("--dir=$destDir")
     $argList.Add("--out=$fileName")
+    # Log nativo do aria2c para ficheiro — captura erros sem risco de deadlock de pipes
+    $logFile = Join-Path $env:TEMP "aria2c_$PID.log"
+    Remove-Item $logFile -Force -ErrorAction SilentlyContinue
+    $argList.Add("--log=$logFile")
+    $argList.Add("--log-level=warn")
     if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
     $argList.Add($Url)
 
     # Apagar ficheiro de controlo de sessoes anteriores
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
-    # ProcessStartInfo: CreateNoWindow=true (janela invisivel) + stderr capturado
-    # (Start-Process com -RedirectStandardError nao garante CreateNoWindow)
+    # ProcessStartInfo: CreateNoWindow=true (janela invisivel)
     $argStr = ($argList.ToArray() | ForEach-Object {
         if ($_ -match ' ') { '"' + $_ + '"' } else { $_ }
     }) -join ' '
 
     $psi = New-Object System.Diagnostics.ProcessStartInfo
-    $psi.FileName              = $aria2
-    $psi.Arguments             = $argStr
-    $psi.UseShellExecute       = $false
-    $psi.CreateNoWindow        = $true
-    $psi.RedirectStandardError = $true
+    $psi.FileName        = $aria2
+    $psi.Arguments       = $argStr
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow  = $true
     $proc = [System.Diagnostics.Process]::Start($psi)
 
     $startTime  = Get-Date
@@ -277,8 +280,9 @@ function Invoke-Download {
         }
     }
 
-    # Ler stderr (ReadToEnd seguro aqui — processo ja terminou, sem risco de deadlock)
-    $errOutput = $proc.StandardError.ReadToEnd()
+    # Ler log do aria2c (escrito por --log)
+    $errOutput = if (Test-Path $logFile) { Get-Content $logFile -Raw -ErrorAction SilentlyContinue } else { "" }
+    Remove-Item $logFile -Force -ErrorAction SilentlyContinue
     Write-Host ""
 
     if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
