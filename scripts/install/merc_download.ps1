@@ -471,7 +471,12 @@ while ($retry -lt $maxRetries) {
         if ($ok -gt 0)   { Write-OK "$ok ficheiro(s) transferido(s) com sucesso." }
         if ($fail -gt 0) { Write-Err "$fail ficheiro(s) falharam." }
         Write-Host ""
-        Read-Host "  Pressione ENTER para continuar"
+        if ($fail -gt 0) {
+            Read-Host "  Pressione ENTER para continuar"
+        } else {
+            Write-Info "A voltar ao menu..."
+            Start-Sleep -Seconds 2
+        }
         $retry = 0
         continue
     }
