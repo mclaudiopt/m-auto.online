@@ -228,7 +228,7 @@ function Invoke-Download {
 
     $proc      = [System.Diagnostics.Process]::Start($psi)
     $startTime = Get-Date
-    $prevBytes = 0
+    $prevBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
     $spinIdx   = 0
     $spinChars = @('|','/','-','\')
 
