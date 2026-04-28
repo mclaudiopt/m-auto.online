@@ -163,7 +163,7 @@ function Get-RemoteSize {
 
 #-- Download com aria2c (16 slots) + progresso por ficheiro ------------------
 function Invoke-Download {
-    param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
+    param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
 
     $dest    = Join-Path $DEST_DIR $Name
     $destDir = Split-Path $dest -Parent
@@ -174,11 +174,11 @@ function Invoke-Download {
     $aria2 = Install-Aria2c
     if (-not $aria2) { Write-Err "aria2c nao disponivel."; return $false }
 
-    # Tamanho total via HEAD
-    Write-Host -NoNewline "  ${e}[38;2;148;163;184m[.]${e}[0m   A verificar ficheiro...      "
-    $totalBytes = Get-RemoteSize -Url $Url
+    # Tamanho total: do JSON se disponivel, senao HEAD request
+    $totalBytes = if ($Size -gt 0) { $Size } else { Get-RemoteSize -Url $Url }
     $totalMB    = if ($totalBytes -gt 0) { [math]::Round($totalBytes / 1MB, 1) } else { 0 }
-    Write-Host "`r  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })                    "
+    $sizeSource = if ($Size -gt 0) { "" } else { " (HEAD)" }
+    Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB$sizeSource" } else { "tamanho desconhecido" })"
 
     # Construir argumentos como array — PowerShell gere o quoting automaticamente
     $proxy = Get-ProxyConfig
@@ -461,7 +461,8 @@ while ($retry -lt $maxRetries) {
 
             Write-Host "  ${e}[38;2;100;149;237m-- $displayName ($($ok+$fail+1)/$($toDownload.Count)) --${e}[0m"
 
-            $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($ok+$fail+1) -Total $toDownload.Count
+            $fileSize = if ($f.size) { [long]$f.size } else { 0 }
+            $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($ok+$fail+1) -Total $toDownload.Count -Size $fileSize
             if ($res) { $ok++ } else { $fail++ }
             Write-Host ""
         }
