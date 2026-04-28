@@ -474,70 +474,78 @@ while ($retry -lt $maxRetries) {
         $maxParallel = 16
         $jobs = @()
         $ok = 0; $fail = 0
-        $jobResults = @{}
 
-        # Função para download com 16 conexões paralelas (split chunks)
+        # Função para download com suporte a chunks paralelos via Range headers
         $downloadScriptBlock = {
-            param($Url, $Name, $DestDir, $Idx, $Total, $TotalBytes)
+            param($Url, $Name, $DestDir, $Size)
             $dest = Join-Path $DestDir $Name
             $destDir = Split-Path $dest -Parent
             if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
 
             try {
-                if ($TotalBytes -gt 0 -and $TotalBytes -gt 10MB) {
-                    # Split em 16 chunks — descarregar em paralelo
-                    $numChunks = 16
-                    $chunkSize = [math]::Ceiling($TotalBytes / $numChunks)
-                    $jobs = @()
-
-                    for ($i = 0; $i -lt $numChunks; $i++) {
-                        $start = $i * $chunkSize
-                        $end = [math]::Min(($i + 1) * $chunkSize - 1, $TotalBytes - 1)
-
-                        $chunkJob = Start-Job -ScriptBlock {
-                            param($URL, $Start, $End, $ChunkIdx, $Dest)
-                            $wc = New-Object System.Net.WebClient
-                            $wc.Headers.Add("Range", "bytes=$Start-$End")
-                            try {
-                                $bytes = $wc.DownloadData($URL)
-                                [System.IO.File]::WriteAllBytes("$Dest.chunk$ChunkIdx", $bytes)
-                                return $true
-                            } catch {
-                                return $false
-                            } finally {
-                                $wc.Dispose()
-                            }
-                        } -ArgumentList $Url, $start, $end, $i, $dest
-
-                        $jobs += $chunkJob
-                    }
-
-                    # Aguardar todos os chunks
-                    $allOk = $true
-                    foreach ($job in $jobs) {
-                        $result = Receive-Job -Job $job -Wait
-                        if (-not $result) { $allOk = $false }
-                        Remove-Job -Job $job
-                    }
-
-                    if ($allOk) {
-                        # Juntar chunks
-                        $outStream = [System.IO.File]::Create($dest)
-                        for ($i = 0; $i -lt $numChunks; $i++) {
-                            $chunkData = [System.IO.File]::ReadAllBytes("$dest.chunk$i")
-                            $outStream.Write($chunkData, 0, $chunkData.Length)
-                            Remove-Item "$dest.chunk$i" -Force
-                        }
-                        $outStream.Close()
-                        return $true
-                    }
-                    return $false
-                } else {
-                    # Ficheiro pequeno — download direto
+                # Se ficheiro pequeno ou sem size info, download direto
+                if ($Size -le 0 -or $Size -lt 10MB) {
                     $wc = New-Object System.Net.WebClient
                     $wc.DownloadFile($Url, $dest)
                     $wc.Dispose()
                     return $true
+                }
+
+                # Download com 16 chunks paralelos via threads
+                $numChunks = 16
+                $chunkSize = [math]::Ceiling($Size / $numChunks)
+                $errors = [System.Collections.ArrayList]::new()
+
+                # Criar ficheiro vazio com tamanho total
+                $tempFile = $dest + ".tmp"
+                $fs = [System.IO.File]::Create($tempFile)
+                $fs.SetLength($Size)
+                $fs.Close()
+
+                # Download chunks em paralelo com threads
+                $runspaces = @()
+                for ($i = 0; $i -lt $numChunks; $i++) {
+                    $start = $i * $chunkSize
+                    $end = [math]::Min(($i + 1) * $chunkSize - 1, $Size - 1)
+
+                    $runspace = [powershell]::Create()
+                    [void]$runspace.AddScript({
+                        param($URL, $Start, $End, $ChunkIdx, $TempFile)
+                        try {
+                            $wc = New-Object System.Net.WebClient
+                            $wc.Headers.Add("Range", "bytes=$Start-$End")
+                            $bytes = $wc.DownloadData($URL)
+
+                            # Escrever chunk no ficheiro final
+                            $fs = [System.IO.File]::Open($TempFile, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Write, [System.IO.FileShare]::Write)
+                            $fs.Seek($Start, [System.IO.SeekOrigin]::Begin)
+                            $fs.Write($bytes, 0, $bytes.Length)
+                            $fs.Close()
+                            $wc.Dispose()
+                            return $true
+                        } catch {
+                            return $false
+                        }
+                    }).AddParameters(@{ URL = $Url; Start = $start; End = $end; ChunkIdx = $i; TempFile = $tempFile })
+
+                    $runspaces += @{ rs = $runspace; handle = $runspace.BeginInvoke() }
+                }
+
+                # Aguardar todos os chunks
+                $allOk = $true
+                foreach ($item in $runspaces) {
+                    $result = $item.rs.EndInvoke($item.handle)
+                    $item.rs.Dispose()
+                    if (-not $result) { $allOk = $false }
+                }
+
+                if ($allOk -and (Test-Path $tempFile)) {
+                    Remove-Item $dest -Force -ErrorAction SilentlyContinue
+                    Rename-Item $tempFile -NewName (Split-Path $dest -Leaf) -Force
+                    return $true
+                } else {
+                    Remove-Item $tempFile -Force -ErrorAction SilentlyContinue
+                    return $false
                 }
             } catch {
                 return $false
@@ -557,10 +565,9 @@ while ($retry -lt $maxRetries) {
             Write-Host "  ${e}[38;2;100;149;237m◇${e}[0m  $displayName (slot livre, iniciando...)"
 
             $job = Start-Job -ScriptBlock $downloadScriptBlock `
-                -ArgumentList $f.url, $f.name, $DEST_DIR, 0, 0, $f.size
+                -ArgumentList $f.url, $f.name, $DEST_DIR, $f.size
 
             $jobs += [PSCustomObject]@{ Job = $job; Name = $f.name; DisplayName = $displayName }
-            $jobResults[$job.Id] = $false
         }
 
         # Aguardar todos os jobs
