@@ -466,25 +466,67 @@ while ($retry -lt $maxRetries) {
             exit 0
         }
 
-        # Iniciar downloads
+        # Iniciar downloads — até 16 em paralelo
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s)..."
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — até 16 paralelo..."
         Write-Host ""
 
+        $maxParallel = 16
+        $jobs = @()
         $ok = 0; $fail = 0
+        $jobResults = @{}
+
+        # Função para download (usado em jobs)
+        $downloadScriptBlock = {
+            param($Url, $Name, $DestDir, $Idx, $Total)
+            $dest = Join-Path $DestDir $Name
+            $destDir = Split-Path $dest -Parent
+            if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
+
+            try {
+                $wc = New-Object System.Net.WebClient
+                $wc.DownloadFile($Url, $dest)
+                $wc.Dispose()
+                return $true
+            } catch {
+                return $false
+            }
+        }
+
+        # Lançar jobs paralelos
         foreach ($idx in $toDownload) {
             $f = $links[$idx]
-            $dest = Join-Path $DEST_DIR $f.name
-
-            # Usar alias se existir
             $displayName = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { $f.name }
 
-            Write-Host "  ${e}[38;2;100;149;237m-- $displayName ($($ok+$fail+1)/$($toDownload.Count)) --${e}[0m"
+            # Esperar se atingiu limite
+            while (@($jobs | Where-Object { $_.State -eq 'Running' }).Count -ge $maxParallel) {
+                Start-Sleep -Milliseconds 500
+            }
 
-            # Usar WebClient (aria2c HTTPS falha neste Windows)
-            $res = Invoke-DownloadWebClient -Url $f.url -Name $f.name -Idx ($ok+$fail+1) -Total $toDownload.Count
-            if ($res) { $ok++ } else { $fail++ }
-            Write-Host ""
+            Write-Host "  ${e}[38;2;100;149;237m◇${e}[0m  $displayName (slot livre, iniciando...)"
+
+            $job = Start-Job -ScriptBlock $downloadScriptBlock `
+                -ArgumentList $f.url, $f.name, $DEST_DIR, 0, 0
+
+            $jobs += [PSCustomObject]@{ Job = $job; Name = $f.name; DisplayName = $displayName }
+            $jobResults[$job.Id] = $false
+        }
+
+        # Aguardar todos os jobs
+        Write-Host ""
+        Write-Host "  ${e}[38;2;148;163;184m>> Aguardando conclusão...${e}[0m]"
+        Write-Host ""
+
+        foreach ($jobItem in $jobs) {
+            $result = Receive-Job -Job $jobItem.Job -Wait
+            if ($result) {
+                Write-OK "$($jobItem.DisplayName) (concluído)"
+                $ok++
+            } else {
+                Write-Err "$($jobItem.DisplayName) (falhou)"
+                $fail++
+            }
+            Remove-Job -Job $jobItem.Job
         }
 
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
