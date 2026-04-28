@@ -476,18 +476,69 @@ while ($retry -lt $maxRetries) {
         $ok = 0; $fail = 0
         $jobResults = @{}
 
-        # Função para download (usado em jobs)
+        # Função para download com 16 conexões paralelas (split chunks)
         $downloadScriptBlock = {
-            param($Url, $Name, $DestDir, $Idx, $Total)
+            param($Url, $Name, $DestDir, $Idx, $Total, $TotalBytes)
             $dest = Join-Path $DestDir $Name
             $destDir = Split-Path $dest -Parent
             if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
 
             try {
-                $wc = New-Object System.Net.WebClient
-                $wc.DownloadFile($Url, $dest)
-                $wc.Dispose()
-                return $true
+                if ($TotalBytes -gt 0 -and $TotalBytes -gt 10MB) {
+                    # Split em 16 chunks — descarregar em paralelo
+                    $numChunks = 16
+                    $chunkSize = [math]::Ceiling($TotalBytes / $numChunks)
+                    $jobs = @()
+
+                    for ($i = 0; $i -lt $numChunks; $i++) {
+                        $start = $i * $chunkSize
+                        $end = [math]::Min(($i + 1) * $chunkSize - 1, $TotalBytes - 1)
+
+                        $chunkJob = Start-Job -ScriptBlock {
+                            param($URL, $Start, $End, $ChunkIdx, $Dest)
+                            $wc = New-Object System.Net.WebClient
+                            $wc.Headers.Add("Range", "bytes=$Start-$End")
+                            try {
+                                $bytes = $wc.DownloadData($URL)
+                                [System.IO.File]::WriteAllBytes("$Dest.chunk$ChunkIdx", $bytes)
+                                return $true
+                            } catch {
+                                return $false
+                            } finally {
+                                $wc.Dispose()
+                            }
+                        } -ArgumentList $Url, $start, $end, $i, $dest
+
+                        $jobs += $chunkJob
+                    }
+
+                    # Aguardar todos os chunks
+                    $allOk = $true
+                    foreach ($job in $jobs) {
+                        $result = Receive-Job -Job $job -Wait
+                        if (-not $result) { $allOk = $false }
+                        Remove-Job -Job $job
+                    }
+
+                    if ($allOk) {
+                        # Juntar chunks
+                        $outStream = [System.IO.File]::Create($dest)
+                        for ($i = 0; $i -lt $numChunks; $i++) {
+                            $chunkData = [System.IO.File]::ReadAllBytes("$dest.chunk$i")
+                            $outStream.Write($chunkData, 0, $chunkData.Length)
+                            Remove-Item "$dest.chunk$i" -Force
+                        }
+                        $outStream.Close()
+                        return $true
+                    }
+                    return $false
+                } else {
+                    # Ficheiro pequeno — download direto
+                    $wc = New-Object System.Net.WebClient
+                    $wc.DownloadFile($Url, $dest)
+                    $wc.Dispose()
+                    return $true
+                }
             } catch {
                 return $false
             }
@@ -506,7 +557,7 @@ while ($retry -lt $maxRetries) {
             Write-Host "  ${e}[38;2;100;149;237m◇${e}[0m  $displayName (slot livre, iniciando...)"
 
             $job = Start-Job -ScriptBlock $downloadScriptBlock `
-                -ArgumentList $f.url, $f.name, $DEST_DIR, 0, 0
+                -ArgumentList $f.url, $f.name, $DEST_DIR, 0, 0, $f.size
 
             $jobs += [PSCustomObject]@{ Job = $job; Name = $f.name; DisplayName = $displayName }
             $jobResults[$job.Id] = $false
