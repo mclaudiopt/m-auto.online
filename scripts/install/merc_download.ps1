@@ -161,13 +161,13 @@ function Get-RemoteSize {
     } catch { return 0 }
 }
 
-#-- Download com aria2c (16 slots) + progresso por ficheiro ------------------
+#-- Download com aria2c via Start-Process (array args — mesmo que consola) ----
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
 
     $dest     = Join-Path $DEST_DIR $Name
     $destDir  = Split-Path $dest -Parent
-    $fileName = Split-Path $dest -Leaf   # apenas o nome do ficheiro (sem subdirectorios)
+    $fileName = Split-Path $dest -Leaf
     $width    = 50
 
     if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
@@ -175,62 +175,48 @@ function Invoke-Download {
     $aria2 = Install-Aria2c
     if (-not $aria2) { Write-Err "aria2c nao disponivel."; return $false }
 
-    # Tamanho total: do JSON se disponivel, senao HEAD request
+    # Tamanho do JSON ou HEAD como fallback
     $totalBytes = if ($Size -gt 0) { $Size } else { Get-RemoteSize -Url $Url }
     $totalMB    = if ($totalBytes -gt 0) { [math]::Round($totalBytes / 1MB, 1) } else { 0 }
-    $sizeSource = if ($Size -gt 0) { "" } else { " (HEAD)" }
-    Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB$sizeSource" } else { "tamanho desconhecido" })"
+    Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })"
 
-    # Construir argumentos como array — PowerShell gere o quoting automaticamente
     $proxy = Get-ProxyConfig
-    $argList = @(
-        "--max-connection-per-server=16",
-        "--split=16",
-        "--min-split-size=1M",
-        "--continue=true",
-        "--max-tries=3",
-        "--retry-wait=2",
-        "--timeout=60",
-        "--connect-timeout=30",
-        "--console-log-level=error",
-        "--summary-interval=0",
-        "--dir=$destDir",
-        "--out=$fileName"
-    )
-    if ($proxy) { $argList += "--all-proxy=http://$proxy" }
-    $argList += $Url
+    $cn    = if ($totalBytes -gt 0 -and $totalBytes -lt 50MB) { 1 } else { 16 }
 
-    # ProcessStartInfo com stderr redirecionado para capturar erro real
-    $psi = New-Object System.Diagnostics.ProcessStartInfo
-    $psi.FileName               = $aria2
-    $psi.UseShellExecute        = $false
-    $psi.CreateNoWindow         = $true
-    $psi.RedirectStandardError  = $true
+    # Construir lista de argumentos
+    $argList = [System.Collections.Generic.List[string]]::new()
+    $argList.Add("--max-connection-per-server=$cn")
+    $argList.Add("--split=$cn")
+    $argList.Add("--min-split-size=1M")
+    $argList.Add("--continue=true")
+    $argList.Add("--max-tries=3")
+    $argList.Add("--retry-wait=2")
+    $argList.Add("--timeout=60")
+    $argList.Add("--connect-timeout=30")
+    $argList.Add("--console-log-level=error")
+    $argList.Add("--summary-interval=0")
+    $argList.Add("--dir=$destDir")
+    $argList.Add("--out=$fileName")
+    if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
+    $argList.Add($Url)
 
-    # Construir argumento string com quoting correto para Windows CreateProcess
-    $parts = @(
-        "--max-connection-per-server=16",
-        "--split=16",
-        "--min-split-size=1M",
-        "--continue=true",
-        "--max-tries=3",
-        "--retry-wait=2",
-        "--timeout=60",
-        "--connect-timeout=30",
-        "--console-log-level=error",
-        "--summary-interval=0"
-    )
-    # Paths e URL entre aspas (suporta espacos e chars especiais)
-    $parts += "`"--dir=$destDir`""
-    $parts += "`"--out=$fileName`""
-    if ($proxy) { $parts += "--all-proxy=http://$proxy" }
-    $parts += "`"$Url`""
-    $psi.Arguments = $parts -join " "
-
-    # Limpar ficheiro de controlo aria2 de sessoes anteriores
+    # Apagar ficheiro de controlo de sessoes anteriores
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
-    $proc      = [System.Diagnostics.Process]::Start($psi)
+    # ProcessStartInfo: CreateNoWindow=true (janela invisivel) + stderr capturado
+    # (Start-Process com -RedirectStandardError nao garante CreateNoWindow)
+    $argStr = ($argList.ToArray() | ForEach-Object {
+        if ($_ -match ' ') { '"' + $_ + '"' } else { $_ }
+    }) -join ' '
+
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName              = $aria2
+    $psi.Arguments             = $argStr
+    $psi.UseShellExecute       = $false
+    $psi.CreateNoWindow        = $true
+    $psi.RedirectStandardError = $true
+    $proc = [System.Diagnostics.Process]::Start($psi)
+
     $startTime = Get-Date
     $prevBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
     $spinIdx   = 0
@@ -259,7 +245,7 @@ function Invoke-Download {
             $barFill   = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
             $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
             $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
-            Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $spdStr  ETA $eta  [CN:16] [$Idx/$Total]${e}[0m  "
+            Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $spdStr  ETA $eta  [CN:$cn] [$Idx/$Total]${e}[0m  "
         } else {
             # Tamanho desconhecido — barra animada com MB e velocidade
             $spin  = $spinChars[$spinIdx % $spinChars.Count]; $spinIdx++
@@ -267,12 +253,12 @@ function Invoke-Download {
             $pos   = if ($pulse -lt $width) { $pulse } else { $width * 2 - $pulse }
             $pos   = [math]::Max(0, [math]::Min($pos, $width - 2))
             $bar   = (" " * $pos) + "${e}[48;2;52;152;219m  ${e}[0m" + (" " * ($width - $pos - 2))
-            Write-Host -NoNewline "`r  ${e}[1;97m $spin ${e}[0m[$bar]  ${e}[90m$recvMB MB  $spdStr  [CN:16] [$Idx/$Total]${e}[0m  "
+            Write-Host -NoNewline "`r  ${e}[1;97m $spin ${e}[0m[$bar]  ${e}[90m$recvMB MB  $spdStr  [CN:$cn] [$Idx/$Total]${e}[0m  "
         }
     }
 
-    # Ler stderr depois de terminar (sem risco de deadlock)
-    $errOutput = $proc.StandardError.ReadToEnd().Trim()
+    # Ler stderr (ReadToEnd seguro aqui — processo ja terminou, sem risco de deadlock)
+    $errOutput = $proc.StandardError.ReadToEnd()
     Write-Host ""
 
     if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
@@ -283,9 +269,9 @@ function Invoke-Download {
 
     # Mostrar erro real do aria2c
     Write-Err "aria2c falhou (codigo $($proc.ExitCode))"
-    if ($errOutput) {
-        $errOutput -split "`n" | Where-Object { $_.Trim() } | ForEach-Object {
-            Write-Host "  ${e}[38;2;239;68;68m    $_${e}[0m"
+    if ($errOutput -and $errOutput.Trim()) {
+        $errOutput.Trim() -split "`n" | Where-Object { $_.Trim() } | ForEach-Object {
+            Write-Host "  ${e}[38;2;239;68;68m    $($_.Trim())${e}[0m"
         }
     }
     return $false
