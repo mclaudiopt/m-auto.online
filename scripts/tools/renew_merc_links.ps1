@@ -61,6 +61,7 @@ $files = foreach ($f in $allFiles) {
         label = $label
         dest  = $relPath          # relative path with subfolders preserved
         r2    = "$R2_PREFIX/$relPath"
+        size  = $f.Length         # tamanho em bytes para barra de progresso
     }
 }
 
@@ -90,7 +91,7 @@ foreach ($job in $jobs) {
     $f   = $job.f
     if ($out.ok) {
         Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.label)"
-        $filesList.Add([PSCustomObject]@{ name = $f.dest; url = $out.url })
+        $filesList.Add([PSCustomObject]@{ name = $f.dest; url = $out.url; size = $f.size })
     } else {
         Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $($f.label)"
         Write-Host "       ${e}[38;2;80;100;140m$($out.url)${e}[0m"
