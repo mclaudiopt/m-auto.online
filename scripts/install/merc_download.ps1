@@ -195,6 +195,7 @@ function Invoke-Download {
     $argList.Add("--connect-timeout=30")
     $argList.Add("--console-log-level=error")
     $argList.Add("--summary-interval=0")
+    $argList.Add("--file-allocation=none")  # nao pre-alocar — Get-Item.Length reflete dl real
     $argList.Add("--dir=$destDir")
     $argList.Add("--out=$fileName")
     if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
@@ -217,25 +218,44 @@ function Invoke-Download {
     $psi.RedirectStandardError = $true
     $proc = [System.Diagnostics.Process]::Start($psi)
 
-    $startTime = Get-Date
-    $prevBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
-    $spinIdx   = 0
-    $spinChars = @('|','/','-','\')
+    $startTime  = Get-Date
+    $startBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
+    $prevBytes  = $startBytes
+    $samples    = [System.Collections.Generic.Queue[object]]::new()  # rolling 3s window
+    $spinIdx    = 0
+    $spinChars  = @('|','/','-','\')
 
     while (-not $proc.HasExited) {
         Start-Sleep -Milliseconds 400
 
+        $now      = Get-Date
         $dlBytes  = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
-        # Velocidade real = delta desde o ultimo tick (400ms)
-        $speedMB  = [math]::Round(($dlBytes - $prevBytes) / 0.4 / 1MB, 1)
-        $prevBytes = $dlBytes
         $recvMB   = [math]::Round($dlBytes / 1MB, 1)
-        $spdStr   = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
+
+        # Janela rolante 3s — descartar samples velhos
+        $samples.Enqueue([PSCustomObject]@{ t = $now; b = $dlBytes })
+        while ($samples.Count -gt 0 -and ($now - $samples.Peek().t).TotalSeconds -gt 3) {
+            [void]$samples.Dequeue()
+        }
+        # Velocidade media sobre a janela (suaviza picos de buffer flush)
+        $speedMB = 0
+        if ($samples.Count -ge 2) {
+            $first = $samples.Peek()
+            $dt    = ($now - $first.t).TotalSeconds
+            if ($dt -gt 0.1) { $speedMB = [math]::Round(($dlBytes - $first.b) / $dt / 1MB, 1) }
+        }
+        $prevBytes = $dlBytes
+        $spdStr    = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
 
         if ($totalBytes -gt 0) {
             # Tamanho conhecido — barra com %
-            $pct = [math]::Min(99, [math]::Round($dlBytes / $totalBytes * 100))
-            $eta = if ($speedMB -gt 0.01 -and $totalBytes -gt $dlBytes) {
+            $rawPct = [math]::Round($dlBytes / $totalBytes * 100)
+            # Quando ficheiro completo mas processo ainda corre (aria2c a verificar)
+            $verifying = ($dlBytes -ge $totalBytes)
+            $pct = if ($verifying) { 100 } else { [math]::Min(99, $rawPct) }
+            $eta = if ($verifying) {
+                "verif"
+            } elseif ($speedMB -gt 0.01 -and $totalBytes -gt $dlBytes) {
                 $s = [int](($totalBytes - $dlBytes) / ($speedMB * 1MB))
                 "{0}:{1:D2}" -f [int]($s/60), ($s%60)
             } else { "--" }
