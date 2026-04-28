@@ -181,8 +181,8 @@ function Invoke-Download {
     Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })"
 
     $proxy = Get-ProxyConfig
-    # Temporario: forçar CN=1 para debug (algumas redes bloqueiam multiplas conexoes)
-    $cn    = 1  # if ($totalBytes -gt 0 -and $totalBytes -lt 50MB) { 1 } else { 16 }
+    # 16 conexoes por servidor para downloads rapidos
+    $cn    = if ($totalBytes -gt 0 -and $totalBytes -lt 5MB) { 4 } else { 16 }
 
     # Construir lista de argumentos
     $argList = [System.Collections.Generic.List[string]]::new()
@@ -197,6 +197,9 @@ function Invoke-Download {
     $argList.Add("--console-log-level=error")
     $argList.Add("--summary-interval=0")
     $argList.Add("--file-allocation=none")  # nao pre-alocar — Get-Item.Length reflete dl real
+    $argList.Add("--check-certificate=false")  # contorna TLS issues no Windows mingw build
+    $argList.Add("--auto-file-renaming=false")
+    $argList.Add("--allow-overwrite=true")
     $argList.Add("--dir=$destDir")
     $argList.Add("--out=$fileName")
     # Log nativo do aria2c para ficheiro — captura erros sem risco de deadlock de pipes
@@ -466,75 +469,28 @@ while ($retry -lt $maxRetries) {
             exit 0
         }
 
-        # Iniciar downloads — até 16 em paralelo
+        # Iniciar downloads — sequencial, com 16 conexoes por ficheiro via aria2c
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — até 16 paralelo..."
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — 16 conexoes por ficheiro (aria2c)..."
         Write-Host ""
 
-        $maxParallel = 16
-        $jobs = @()
         $ok = 0; $fail = 0
+        $total = $toDownload.Count
+        $current = 0
 
-        # Função para download com WebClient (robusto e simples)
-        $downloadScriptBlock = {
-            param($Url, $Name, $DestDir)
-            $dest = Join-Path $DestDir $Name
-            $destDir = Split-Path $dest -Parent
-            if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
-
-            try {
-                # Download direto e robusto com WebClient
-                $wc = New-Object System.Net.WebClient
-                $wc.Headers.Add("User-Agent", "Mozilla/5.0")
-                $wc.DownloadFile($Url, $dest)
-                $wc.Dispose()
-
-                # Verificar que ficheiro foi criado e tem tamanho
-                if (Test-Path $dest) {
-                    $size = (Get-Item $dest).Length
-                    return ($size -gt 0)
-                }
-                return $false
-            } catch {
-                # Retornar erro para logging
-                Write-Error "Download falhou para $Name : $_" -ErrorAction Continue
-                return $false
-            }
-        }
-
-        # Lançar jobs paralelos
         foreach ($idx in $toDownload) {
             $f = $links[$idx]
+            $current++
             $displayName = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { $f.name }
 
-            # Esperar se atingiu limite
-            while (@($jobs | Where-Object { $_.State -eq 'Running' }).Count -ge $maxParallel) {
-                Start-Sleep -Milliseconds 500
-            }
+            Write-Host ""
+            Write-Host "  ${e}[38;2;100;149;237m>> [$current/$total] $displayName${e}[0m"
+            Write-Host ""
 
-            Write-Host "  ${e}[38;2;100;149;237m◇${e}[0m  $displayName (slot livre, iniciando...)"
+            $size = if ($f.size) { [long]$f.size } else { 0 }
+            $result = Invoke-Download -Url $f.url -Name $f.name -Idx $current -Total $total -Size $size
 
-            $job = Start-Job -ScriptBlock $downloadScriptBlock `
-                -ArgumentList $f.url, $f.name, $DEST_DIR
-
-            $jobs += [PSCustomObject]@{ Job = $job; Name = $f.name; DisplayName = $displayName }
-        }
-
-        # Aguardar todos os jobs
-        Write-Host ""
-        Write-Host "  ${e}[38;2;148;163;184m>> Aguardando conclusão...${e}[0m]"
-        Write-Host ""
-
-        foreach ($jobItem in $jobs) {
-            $result = Receive-Job -Job $jobItem.Job -Wait
-            if ($result) {
-                Write-OK "$($jobItem.DisplayName) (concluído)"
-                $ok++
-            } else {
-                Write-Err "$($jobItem.DisplayName) (falhou)"
-                $fail++
-            }
-            Remove-Job -Job $jobItem.Job
+            if ($result) { $ok++ } else { $fail++ }
         }
 
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
