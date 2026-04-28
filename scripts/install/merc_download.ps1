@@ -199,13 +199,35 @@ function Invoke-Download {
     if ($proxy) { $argList += "--all-proxy=http://$proxy" }
     $argList += $Url
 
-    # Start-Process com array — mesmo mecanismo que "& $aria2 @argList" na consola
-    $proc = Start-Process -FilePath $aria2 -ArgumentList $argList `
-                          -NoNewWindow -PassThru -ErrorAction Stop
+    # ProcessStartInfo com stderr redirecionado para capturar erro real
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName               = $aria2
+    $psi.UseShellExecute        = $false
+    $psi.CreateNoWindow         = $true
+    $psi.RedirectStandardError  = $true
 
-    $startTime  = Get-Date
-    $lastBytes  = 0
-    $staleSince = $null
+    # Construir argumento string com quoting correto para Windows CreateProcess
+    $parts = @(
+        "--max-connection-per-server=16",
+        "--split=16",
+        "--min-split-size=1M",
+        "--continue=true",
+        "--max-tries=3",
+        "--retry-wait=2",
+        "--timeout=60",
+        "--connect-timeout=30",
+        "--console-log-level=error",
+        "--summary-interval=0"
+    )
+    # Paths e URL entre aspas (suporta espacos e chars especiais)
+    $parts += "`"--dir=$destDir`""
+    $parts += "`"--out=$Name`""
+    if ($proxy) { $parts += "--all-proxy=http://$proxy" }
+    $parts += "`"$Url`""
+    $psi.Arguments = $parts -join " "
+
+    $proc      = [System.Diagnostics.Process]::Start($psi)
+    $startTime = Get-Date
 
     while (-not $proc.HasExited) {
         Start-Sleep -Milliseconds 400
@@ -235,23 +257,10 @@ function Invoke-Download {
         $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
 
         Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totDisp  $spdStr  ETA $eta  [CN:16] [$Idx/$Total]${e}[0m  "
-
-        # Sem progresso durante 15s → fallback WebClient
-        if ($dlBytes -eq $lastBytes) {
-            if (-not $staleSince) { $staleSince = Get-Date }
-            if (((Get-Date) - $staleSince).TotalSeconds -gt 15) {
-                $proc.Kill()
-                Remove-Item $dest -Force -ErrorAction SilentlyContinue
-                Write-Host ""
-                Write-Warn "aria2c sem progresso. A usar metodo alternativo..."
-                return Invoke-DownloadWebClient -Url $Url -Name $Name -Idx $Idx -Total $Total
-            }
-        } else {
-            $staleSince = $null
-            $lastBytes  = $dlBytes
-        }
     }
 
+    # Ler stderr depois de terminar (sem risco de deadlock)
+    $errOutput = $proc.StandardError.ReadToEnd().Trim()
     Write-Host ""
 
     if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
@@ -260,9 +269,14 @@ function Invoke-Download {
         return $true
     }
 
-    Write-Warn "aria2c falhou (codigo $($proc.ExitCode)). A usar metodo alternativo..."
-    Remove-Item $dest -Force -ErrorAction SilentlyContinue
-    return Invoke-DownloadWebClient -Url $Url -Name $Name -Idx $Idx -Total $Total
+    # Mostrar erro real do aria2c
+    Write-Err "aria2c falhou (codigo $($proc.ExitCode))"
+    if ($errOutput) {
+        $errOutput -split "`n" | Where-Object { $_.Trim() } | ForEach-Object {
+            Write-Host "  ${e}[38;2;239;68;68m    $_${e}[0m"
+        }
+    }
+    return $false
 }
 
 #-- Fallback: WebClient com barra de progresso -------------------------------
