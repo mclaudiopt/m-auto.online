@@ -199,18 +199,15 @@ function Invoke-Download {
     if ($proxy) { $argList += "--all-proxy=http://$proxy" }
     $argList += $Url
 
-    # Iniciar aria2c em background
-    $job = Start-Job -ScriptBlock {
-        param($exe, $args2)
-        & $exe @args2
-        $LASTEXITCODE
-    } -ArgumentList $aria2, $argList
+    # Start-Process com array — mesmo mecanismo que "& $aria2 @argList" na consola
+    $proc = Start-Process -FilePath $aria2 -ArgumentList $argList `
+                          -NoNewWindow -PassThru -ErrorAction Stop
 
     $startTime  = Get-Date
     $lastBytes  = 0
     $staleSince = $null
 
-    while ($job.State -eq 'Running') {
+    while (-not $proc.HasExited) {
         Start-Sleep -Milliseconds 400
 
         $dlBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
@@ -239,12 +236,11 @@ function Invoke-Download {
 
         Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totDisp  $spdStr  ETA $eta  [CN:16] [$Idx/$Total]${e}[0m  "
 
-        # Detetar aria2c parado: 0 bytes durante 15s → fallback para WebClient
+        # Sem progresso durante 15s → fallback WebClient
         if ($dlBytes -eq $lastBytes) {
             if (-not $staleSince) { $staleSince = Get-Date }
             if (((Get-Date) - $staleSince).TotalSeconds -gt 15) {
-                Stop-Job $job -ErrorAction SilentlyContinue
-                Remove-Job $job -Force -ErrorAction SilentlyContinue
+                $proc.Kill()
                 Remove-Item $dest -Force -ErrorAction SilentlyContinue
                 Write-Host ""
                 Write-Warn "aria2c sem progresso. A usar metodo alternativo..."
@@ -256,19 +252,15 @@ function Invoke-Download {
         }
     }
 
-    $exitCode = Receive-Job $job | Select-Object -Last 1
-    Remove-Job $job -Force
-
     Write-Host ""
 
-    if ($exitCode -eq 0 -and (Test-Path $dest)) {
+    if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
         $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
         Write-OK "$Name transferido ($finalMB MB)."
         return $true
     }
 
-    # Fallback para WebClient se aria2c falhou
-    Write-Warn "aria2c falhou (codigo $exitCode). A usar metodo alternativo..."
+    Write-Warn "aria2c falhou (codigo $($proc.ExitCode)). A usar metodo alternativo..."
     Remove-Item $dest -Force -ErrorAction SilentlyContinue
     return Invoke-DownloadWebClient -Url $Url -Name $Name -Idx $Idx -Total $Total
 }
