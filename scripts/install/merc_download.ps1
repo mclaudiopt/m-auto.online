@@ -481,8 +481,8 @@ while ($retry -lt $maxRetries) {
 
             Write-Host "  ${e}[38;2;100;149;237m-- $displayName ($($ok+$fail+1)/$($toDownload.Count)) --${e}[0m"
 
-            $fileSize = if ($f.size) { [long]$f.size } else { 0 }
-            $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($ok+$fail+1) -Total $toDownload.Count -Size $fileSize
+            # Usar WebClient (aria2c HTTPS falha neste Windows)
+            $res = Invoke-DownloadWebClient -Url $f.url -Name $f.name -Idx ($ok+$fail+1) -Total $toDownload.Count
             if ($res) { $ok++ } else { $fail++ }
             Write-Host ""
         }
