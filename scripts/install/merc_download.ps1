@@ -226,6 +226,9 @@ function Invoke-Download {
     $parts += "`"$Url`""
     $psi.Arguments = $parts -join " "
 
+    # Limpar ficheiro de controlo aria2 de sessoes anteriores
+    Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
+
     $proc      = [System.Diagnostics.Process]::Start($psi)
     $startTime = Get-Date
     $prevBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
@@ -424,12 +427,17 @@ while ($retry -lt $maxRetries) {
 
         $toDownload = @()
         if ($choice -eq "A" -or $choice -eq "a") {
-            # Transferir todos os ficheiros em falta
+            # Transferir todos os ficheiros em falta ou incompletos
             for ($i = 0; $i -lt $links.Count; $i++) {
-                $dest = Join-Path $DEST_DIR $links[$i].name
-                if (-not (Test-Path $dest)) {
-                    $toDownload += $i
+                $f    = $links[$i]
+                $dest = Join-Path $DEST_DIR $f.name
+                $complete = $false
+                if (Test-Path $dest) {
+                    $localSize = (Get-Item $dest).Length
+                    $complete  = ($f.size -gt 0 -and $localSize -eq $f.size) -or
+                                 ($f.size -eq 0 -and $localSize -gt 0)
                 }
+                if (-not $complete) { $toDownload += $i }
             }
         } elseif ($choice -match '^\d+$' -and [int]$choice -ge 1 -and [int]$choice -le $links.Count) {
             # Transferir ficheiro especifico
