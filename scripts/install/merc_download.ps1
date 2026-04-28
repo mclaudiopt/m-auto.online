@@ -181,7 +181,8 @@ function Invoke-Download {
     Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })"
 
     $proxy = Get-ProxyConfig
-    $cn    = if ($totalBytes -gt 0 -and $totalBytes -lt 50MB) { 1 } else { 16 }
+    # Temporario: forçar CN=1 para debug (algumas redes bloqueiam multiplas conexoes)
+    $cn    = 1  # if ($totalBytes -gt 0 -and $totalBytes -lt 50MB) { 1 } else { 16 }
 
     # Construir lista de argumentos
     $argList = [System.Collections.Generic.List[string]]::new()
