@@ -261,6 +261,7 @@ function Invoke-Download {
             $spin  = $spinChars[$spinIdx % $spinChars.Count]; $spinIdx++
             $pulse = $spinIdx % ($width * 2)
             $pos   = if ($pulse -lt $width) { $pulse } else { $width * 2 - $pulse }
+            $pos   = [math]::Max(0, [math]::Min($pos, $width - 2))
             $bar   = (" " * $pos) + "${e}[48;2;52;152;219m  ${e}[0m" + (" " * ($width - $pos - 2))
             Write-Host -NoNewline "`r  ${e}[1;97m $spin ${e}[0m[$bar]  ${e}[90m$recvMB MB  $spdStr  [CN:16] [$Idx/$Total]${e}[0m  "
         }
