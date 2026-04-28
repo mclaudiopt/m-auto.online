@@ -165,9 +165,10 @@ function Get-RemoteSize {
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
 
-    $dest    = Join-Path $DEST_DIR $Name
-    $destDir = Split-Path $dest -Parent
-    $width   = 50
+    $dest     = Join-Path $DEST_DIR $Name
+    $destDir  = Split-Path $dest -Parent
+    $fileName = Split-Path $dest -Leaf   # apenas o nome do ficheiro (sem subdirectorios)
+    $width    = 50
 
     if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
 
@@ -194,7 +195,7 @@ function Invoke-Download {
         "--console-log-level=error",
         "--summary-interval=0",
         "--dir=$destDir",
-        "--out=$Name"
+        "--out=$fileName"
     )
     if ($proxy) { $argList += "--all-proxy=http://$proxy" }
     $argList += $Url
@@ -221,7 +222,7 @@ function Invoke-Download {
     )
     # Paths e URL entre aspas (suporta espacos e chars especiais)
     $parts += "`"--dir=$destDir`""
-    $parts += "`"--out=$Name`""
+    $parts += "`"--out=$fileName`""
     if ($proxy) { $parts += "--all-proxy=http://$proxy" }
     $parts += "`"$Url`""
     $psi.Arguments = $parts -join " "
