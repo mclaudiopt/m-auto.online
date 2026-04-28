@@ -161,7 +161,7 @@ function Get-RemoteSize {
     } catch { return 0 }
 }
 
-#-- Download com aria2c via Start-Process (array args — mesmo que consola) ----
+#-- Download PowerShell Invoke-WebRequest (aria2c HTTPS falha neste Windows)
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
 
@@ -466,25 +466,65 @@ while ($retry -lt $maxRetries) {
             exit 0
         }
 
-        # Iniciar downloads
+        # Iniciar downloads — até 16 em paralelo
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s)..."
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s) (máx 16 paralelo)..."
         Write-Host ""
 
+        $maxParallel = [math]::Min(16, $toDownload.Count)
+        $jobs = @()
         $ok = 0; $fail = 0
-        foreach ($idx in $toDownload) {
+
+        # Lançar downloads em paralelo (até 16)
+        foreach ($i = 0; $i -lt $toDownload.Count; $i++) {
+            $idx = $toDownload[$i]
             $f = $links[$idx]
-            $dest = Join-Path $DEST_DIR $f.name
-
-            # Usar alias se existir
-            $displayName = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { $f.name }
-
-            Write-Host "  ${e}[38;2;100;149;237m-- $displayName ($($ok+$fail+1)/$($toDownload.Count)) --${e}[0m"
-
             $fileSize = if ($f.size) { [long]$f.size } else { 0 }
-            $res = Invoke-Download -Url $f.url -Name $f.name -Idx ($ok+$fail+1) -Total $toDownload.Count -Size $fileSize
-            if ($res) { $ok++ } else { $fail++ }
-            Write-Host ""
+
+            $job = Start-Job -ScriptBlock {
+                param($Url, $Name, $DownloadIdx, $Total, $Size, $DestDir, $E)
+                . {
+                    function Write-OK($msg)   { Write-Host "  ${E}[38;2;34;197;94m[OK]${E}[0m  $msg" }
+                    function Write-Err($msg)  { Write-Host "  ${E}[38;2;239;68;68m[X]${E}[0m   $msg" }
+                    function Write-Info($msg) { Write-Host "  ${E}[38;2;148;163;184m[.]${E}[0m   $msg" }
+
+                    $dest = Join-Path $DestDir $Name
+                    $destDir = Split-Path $dest -Parent
+                    if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
+
+                    try {
+                        Invoke-WebRequest -Uri $Url -OutFile $dest -UseBasicParsing -TimeoutSec 3600 -ErrorAction Stop | Out-Null
+                        $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+                        Write-OK "$Name ($finalMB MB)"
+                        return $true
+                    } catch {
+                        Write-Err "$Name : $_"
+                        return $false
+                    }
+                }
+            } -ArgumentList $f.url, $f.name, ($i+1), $toDownload.Count, $fileSize, $DEST_DIR, $e
+
+            $jobs += $job
+
+            # Aguardar se atingiu limite de paralelo
+            if ($jobs.Count -ge $maxParallel) {
+                $completed = Get-Job | Where-Object { $_.State -eq "Completed" }
+                if ($completed.Count -gt 0) {
+                    foreach ($j in $completed) {
+                        $result = Receive-Job $j
+                        if ($j.PSChildJob[0].Output[-1] -eq $true) { $ok++ } else { $fail++ }
+                        Remove-Job $j
+                        $jobs = $jobs | Where-Object { $_.Id -ne $j.Id }
+                    }
+                }
+            }
+        }
+
+        # Aguardar todos os restantes
+        Get-Job -Id $jobs.Id | Wait-Job | ForEach-Object {
+            $result = Receive-Job $_
+            if ($_.PSChildJob[0].Output[-1] -eq $true) { $ok++ } else { $fail++ }
+            Remove-Job $_
         }
 
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
