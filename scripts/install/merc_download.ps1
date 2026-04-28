@@ -228,35 +228,42 @@ function Invoke-Download {
 
     $proc      = [System.Diagnostics.Process]::Start($psi)
     $startTime = Get-Date
+    $prevBytes = 0
+    $spinIdx   = 0
+    $spinChars = @('|','/','-','\')
 
     while (-not $proc.HasExited) {
         Start-Sleep -Milliseconds 400
 
-        $dlBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
-        $elapsed = [math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds)
-        $speedMB = [math]::Round($dlBytes / $elapsed / 1MB, 1)
-        $recvMB  = [math]::Round($dlBytes / 1MB, 1)
-        $spdStr  = if ($speedMB -gt 0.01) { "$speedMB MB/s" } else { "-- MB/s" }
+        $dlBytes  = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
+        # Velocidade real = delta desde o ultimo tick (400ms)
+        $speedMB  = [math]::Round(($dlBytes - $prevBytes) / 0.4 / 1MB, 1)
+        $prevBytes = $dlBytes
+        $recvMB   = [math]::Round($dlBytes / 1MB, 1)
+        $spdStr   = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
 
         if ($totalBytes -gt 0) {
+            # Tamanho conhecido — barra com %
             $pct = [math]::Min(99, [math]::Round($dlBytes / $totalBytes * 100))
             $eta = if ($speedMB -gt 0.01 -and $totalBytes -gt $dlBytes) {
                 $s = [int](($totalBytes - $dlBytes) / ($speedMB * 1MB))
                 "{0}:{1:D2}" -f [int]($s/60), ($s%60)
             } else { "--" }
-            $totDisp = "$totalMB MB"
+            $filled    = [math]::Round($pct / 100 * $width)
+            $empty     = $width - $filled
+            $fillColor = if ($pct -ge 99) { "46;204;113" } else { "52;152;219" }
+            $barFill   = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
+            $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
+            $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
+            Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $spdStr  ETA $eta  [CN:16] [$Idx/$Total]${e}[0m  "
         } else {
-            $pct = 0; $eta = "--"; $totDisp = "?"
+            # Tamanho desconhecido — barra animada com MB e velocidade
+            $spin  = $spinChars[$spinIdx % $spinChars.Count]; $spinIdx++
+            $pulse = $spinIdx % ($width * 2)
+            $pos   = if ($pulse -lt $width) { $pulse } else { $width * 2 - $pulse }
+            $bar   = (" " * $pos) + "${e}[48;2;52;152;219m  ${e}[0m" + (" " * ($width - $pos - 2))
+            Write-Host -NoNewline "`r  ${e}[1;97m $spin ${e}[0m[$bar]  ${e}[90m$recvMB MB  $spdStr  [CN:16] [$Idx/$Total]${e}[0m  "
         }
-
-        $filled    = [math]::Round($pct / 100 * $width)
-        $empty     = $width - $filled
-        $fillColor = if ($pct -ge 99) { "46;204;113" } else { "52;152;219" }
-        $barFill   = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
-        $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
-        $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
-
-        Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totDisp  $spdStr  ETA $eta  [CN:16] [$Idx/$Total]${e}[0m  "
     }
 
     # Ler stderr depois de terminar (sem risco de deadlock)
