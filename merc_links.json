@@ -1,139 +1,139 @@
 {
-    "expires":  "2026-04-28T21:22:17.1893137Z",
+    "expires":  "2026-04-29T11:01:00.5610353Z",
     "files":  [
                   {
                       "name":  "202608.7z",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/202608.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=000779a7438ce19e0f7144ed5510989a7b089cfc030646fc25fb5033ee564166",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/202608.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090100Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=1e2795ec2b36f0d354a197fb5cb99f0734dd7d5f8b9e6d23a5e9242b87b12fdd",
                       "size":  1525
                   },
                   {
                       "name":  "7z2501-x64.exe",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/7z2501-x64.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=e09225d152910643e23a1007d5e849bade3cc3615991c1770ce1d4a3e38d308d",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/7z2501-x64.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090100Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=c66931302c67c6f2e98239f0149ebb6e102dc847394f4d40cfa99c970497572e",
                       "size":  1643509
                   },
                   {
                       "name":  "Coding tutorials full.7z",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Coding%20tutorials%20full.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=565707c9483e232404661f3995c919b4cdd5c86e479ad0a344c31475ec9a7176",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Coding%20tutorials%20full.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090100Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=503c5233d1608e1f45ad77d9bb932442f50a8ee000a68c92979965fcaa72345c",
                       "size":  3721341698
                   },
                   {
                       "name":  "Databases.7z",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Databases.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192217Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=3e2b2077bccdff5c8f6b30e7b046bac854a9dcaaa19a81926d830ed7df81dfbe",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Databases.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=646e709da38f5c0d9f54b7e607379b5acc81d35b235f050295991af3fd719449",
                       "size":  11214205279
                   },
                   {
                       "name":  "DT 04-26.7z",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/DT%2004-26.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=e735ecf6be1b0e0eb41ec20cf4d866e013b6c8101bff9b2a5d109c4e8c97c66e",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/DT%2004-26.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=8ba9993631d95672febcfef19f64558f21a90e9db28c5fb84b2956ab00fadd46",
                       "size":  11061920260
                   },
                   {
                       "name":  "EPC 2018-11/EPC_1118_1of1_b1.iso",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_1of1_b1.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=cfbeb582d3cb2b6441752f93ccdb838acb7b6fd5a779c20493bec53dc58402d6",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_1of1_b1.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=f22fdceeb4d0c81102caf233556559d94f7fb0d7cd4b8dd3771a9651edb16e8d",
                       "size":  5667424256
                   },
                   {
                       "name":  "EPC 2018-11/EPC_1118_1of4_a1.iso",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_1of4_a1.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=d3ed883ca85a52b457e69c2b1735408b3de31df1030fc5135ab74c63d9813f66",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_1of4_a1.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=f282f73c85722f0f6558cf5ae021f7b2bf67cba36e368bbcdfa8e2ff1368f01e",
                       "size":  8017301504
                   },
                   {
                       "name":  "EPC 2018-11/EPC_1118_2of4_a2.iso",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_2of4_a2.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=010cf6fcccef782ad232aad682b9c00d91301ebb265aa6abecfc4eff8121929b",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_2of4_a2.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=97024d10250c09de40099b5977a15c38b4bfb7524d8219a55ba3c4785e2f9008",
                       "size":  7530717184
                   },
                   {
                       "name":  "EPC 2018-11/EPC_1118_3of4_a3.iso",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_3of4_a3.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=2c8c44ea541f4ba5d3e1f33cf78c93c618e942812c7a058764607175acaf40df",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_3of4_a3.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=32819878f7efb3a9f21d09a9a3a582b45f32e2f11b225c5453592730d2990995",
                       "size":  7031332864
                   },
                   {
                       "name":  "EPC 2018-11/EPC_1118_4of4_a4.iso",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_4of4_a4.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=54ac97f50db00acc80486819233021771486607b61bba6a095bfcdf9de12a99b",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_1118_4of4_a4.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=a246f9fed48d733f20e4089402777d3df17b0d29cc8a3e61651cbd46405ed022",
                       "size":  3821287424
                   },
                   {
                       "name":  "EPC 2018-11/EPC_112018_FULL.rar",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_112018_FULL.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=9c5d5a72963f62c677547c8d85867227e95b13ca076fa25abd4c3492b738292e",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EPC%202018-11/EPC_112018_FULL.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=ec3e4f96852dd0e31c110b479cd72f863b09a4c8fdcd9876db22b8e1cd155008",
                       "size":  154459
                   },
                   {
                       "name":  "EWA.7z",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EWA.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192218Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=5e2b526f37c423dac803619dfc4ee303eaa908a57739a2a96b78fc41c1ea7f41",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/EWA.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=f2c0ecc8c5c7d73c250a6d37040686e99d612bd4c981b488c5ca0745acc5a4d2",
                       "size":  494901184
                   },
                   {
                       "name":  "FullFix By Samik v4.9.3.exe",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/FullFix%20By%20Samik%20v4.9.3.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=5c31199ac29c78763310db16c3922daf4c725e5c6df2a2082d74c66c5ea91a2a",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/FullFix%20By%20Samik%20v4.9.3.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=f981cab21f4b30f6ad396ca8295e8a2471818b6c50ba94555d0d6363d44a4c50",
                       "size":  1694462456
                   },
                   {
                       "name":  "FullFix for Xentry and Truck v9.0.8.exe",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/FullFix%20for%20Xentry%20and%20Truck%20v9.0.8.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=8fb66dec617859f99e1eebbee2e951320244390b02e40eae5ebf10cb643d44fa",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/FullFix%20for%20Xentry%20and%20Truck%20v9.0.8.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=88e0d1def496a2f22b21837ff9fc3df0d782c3f9172e730a6a1b2ce258039655",
                       "size":  2736006844
                   },
                   {
                       "name":  "MB ECU CLEAR v1.67.zip",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/MB%20ECU%20CLEAR%20v1.67.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=3970021d17ff6271c162f44a28421ee22676e80c08245e2120ca2b1fd81c3536",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/MB%20ECU%20CLEAR%20v1.67.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=1b264a6d0c2e1516d55febcf82b6f2cb8f386e04dd7d25d4e4c2f2740d5aa8e6",
                       "size":  190353
                   },
                   {
                       "name":  "MB_VIN v3.0.3 D-PDU.rar",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/MB_VIN%20v3.0.3%20D-PDU.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=142272e7a02657760b836cdf679ff8a3aa9fd10ad5740546c3214d6c04315507",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/MB_VIN%20v3.0.3%20D-PDU.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=04c9ab92613e65cc4854334d6a315d10d111664db34b23c281cba7b3e2b7ec3b",
                       "size":  12558103
                   },
                   {
                       "name":  "MB_VIN v3.0.3 J2534.rar",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/MB_VIN%20v3.0.3%20J2534.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=e801c06819854729d169f2d39f8f83f41ee8a91cf8b570f1b4c98941056c51d5",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/MB_VIN%20v3.0.3%20J2534.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=ba284403591473d8ed8f4ee934f5256e8678bfc086cbc291f08c63b0c418447e",
                       "size":  12457005
                   },
                   {
                       "name":  "Mercedes Zenzefi Solution V1.80.0.10.7z",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Mercedes%20Zenzefi%20Solution%20V1.80.0.10.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=933dd25c653e64dd38615d77b26bb6cb255cda38ca02891df37631aea514004d",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Mercedes%20Zenzefi%20Solution%20V1.80.0.10.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=79c3354a09b136a23e6b24ed17d7412516c7c472562cb1a39be7abfcef724dc9",
                       "size":  249498800
                   },
                   {
                       "name":  "OfflineAccountTool.exe",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/OfflineAccountTool.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=33e359e6c51ab76978b57f5a7e1174012923889a88d2aaf4d13d077db38faf90",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/OfflineAccountTool.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=c1db5bc732b666f4c19976ae5b87505471fdccaee6cdbf25691188bd07a1db00",
                       "size":  7525888
                   },
                   {
                       "name":  "SDMEDIA.zip",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/SDMEDIA.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192219Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=3a0719d70ccdf60a30cec7a2d8e6c5bca7e8fee7a8e79238245545ec2e2aab14",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/SDMEDIA.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090101Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=d4582a3a340b3aeb68cdd7436372cca16cb25092fafa078a8329e32b9e42be5e",
                       "size":  10615512251
                   },
                   {
                       "name":  "sordum.rar",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/sordum.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192220Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=19af67ef2ec88f6e92e283a825b1aa2f85fd07886457d94da4e78392b13077ec",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/sordum.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090102Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=53df1dad3b5e53544f8d07a8449cf57b9c3b7bc86d69419609b759a7e974813e",
                       "size":  457390
                   },
                   {
                       "name":  "Startfifinder 2024.7z",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Startfifinder%202024.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192220Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=c7b2a5eeb2603e21bf28f7ed564babdf9364d04cb581430b45e28714eb29fe0c",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Startfifinder%202024.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090102Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=6763d59e7e79584658ecb9aaf2c160ee44c6d66cfa7febd659fc7fb782d4f6d5",
                       "size":  11131912544
                   },
                   {
                       "name":  "Synaptics Killer v6.zip",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Synaptics%20Killer%20v6.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192220Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=562f6aa4505fa4a585bc989ba9898e0c8b8c10166ca65a4088f64e4dacd1631f",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Synaptics%20Killer%20v6.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090102Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=bdb81d166f8f20dc1130ce6fe16c5e4a062d25995e0f0f22df133746c84a72ad",
                       "size":  1960374
                   },
                   {
                       "name":  "vediamo 5 passthru.zip",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/vediamo%205%20passthru.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192220Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=10272eb931c76692a608ad46adee1645407cdd429084204cca725b598fb44a2d",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/vediamo%205%20passthru.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090102Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=bf153d359242079a0dd9e52ae4f4c52d051eb154b2b90a5808a9115fcbb5ceaf",
                       "size":  640623
                   },
                   {
                       "name":  "Vediamo J2534.exe",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Vediamo%20J2534.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192220Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=074f62a720cacd25aad06a8a6d92991c25573187c73cc3f57cd21a183fbbd276",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/Vediamo%20J2534.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090102Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=cff742189cfa017c55bcee534364731843f8c58f3223ca15fcac309f9c84f53e",
                       "size":  151040
                   },
                   {
                       "name":  "wis2021.rar",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/wis2021.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192220Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=e3fcd85667853abb5554d0e5b5d5b39c599e8ef0af299e8e5d36b25a30c7d6d7",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/wis2021.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090102Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=833a7a420b6270e02e3361a179cc71e6f64535a8ed406c2ffefbc468f0ae4dcb",
                       "size":  15506091246
                   },
                   {
                       "name":  "WISConfigTool_7_21.rar",
-                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/WISConfigTool_7_21.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260428%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260428T192220Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=2d31befe38bdedb0535323bda0be8f83540c4ad92aa84547fb107b0c4c9b0266",
+                      "url":  "https://8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/m-auto-software/Daimler/Pack/Installer/WISConfigTool_7_21.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=59cb46144927b03a7dc575be0b734ff4%2F20260429%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20260429T090102Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026x-id=GetObject\u0026X-Amz-Signature=ed7411fc11c7e4180437c54b5f849a6358400da6fa78d97c164eaea7e25e3500",
                       "size":  795687
                   }
               ]
