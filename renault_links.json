@@ -1,0 +1,20 @@
+{
+  "expires": "2026-05-04T21:07:59.128Z",
+  "files": [
+    {
+      "name": "Renault.CLIP.v237.rar",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Renault/Renault.CLIP.v237.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T200759Z&X-Amz-Expires=3600&X-Amz-Signature=2d183a265ad06ec5de71bb168f451751df24d8d5b82f111a78174eacd58d79e6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 3091762718
+    },
+    {
+      "name": "generate_links.ps1",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Renault/generate_links.ps1?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T202141Z&X-Amz-Expires=3600&X-Amz-Signature=8b8ff3719257184dc3e014b9c8ff8a21bdbfa573a9f94f0b07575bd1dd8239bf&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 2242
+    },
+    {
+      "name": "Renew Renault Links.lnk",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Renault/Renew%20Renault%20Links.lnk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T202142Z&X-Amz-Expires=3600&X-Amz-Signature=f3dea972191c59fe96873bf316d959010f0b0f380dcb6ef44ec085edeca9ae8f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 1220
+    }
+  ]
+}
