@@ -12,6 +12,11 @@
       "size": 5667424256
     },
     {
+      "name": "EPC 2018-11/EPC_1118_1of4_a1.iso",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/EPC%202018-11/EPC_1118_1of4_a1.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T180512Z&X-Amz-Expires=3600&X-Amz-Signature=4ea1b8f76f65cbc542f5b327b2784dcf996e8840318591c4727bf30683ec1099&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 8017301504
+    },
+    {
       "name": "EPC 2018-11/EPC_1118_2of4_a2.iso",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/EPC%202018-11/EPC_1118_2of4_a2.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T180513Z&X-Amz-Expires=3600&X-Amz-Signature=79bd9d4d36bc0451e158c2e3e9e57978dd3a22bae436ef5692da1a763163299f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
       "size": 7530717184
