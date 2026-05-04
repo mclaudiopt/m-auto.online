@@ -63,6 +63,14 @@
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/EPC%202018-11/EPC_1118_3of4_a3.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T180514Z&X-Amz-Expires=3600&X-Amz-Signature=c2cb7f216c29d1cd210e0bd004f3a36f7f8482a8e3df4420e96ea7a5432a95ef&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
       "expiresAt": "2026-05-04T19:05:14.539Z",
       "createdAt": "2026-05-04T18:05:14.539Z"
+    },
+    {
+      "id": "link_1777913567017_gts11ay",
+      "fileName": "SDMEDIA.zip",
+      "category": "Daimler",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/SDMEDIA.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165247Z&X-Amz-Expires=604800&X-Amz-Signature=ff6d140d56f9efef3c880159288e67e28f81b8b3e7c4e4895195d5188a9e311d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "expiresAt": "2026-05-11T16:52:47.017Z",
+      "createdAt": "2026-05-04T16:52:47.017Z"
     }
   ]
 }
