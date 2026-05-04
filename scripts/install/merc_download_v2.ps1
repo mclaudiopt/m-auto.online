@@ -486,8 +486,10 @@ while ($retry -lt $maxRetries) {
         Write-Host ""
         Write-Host "  ${e}[38;2;148;163;184mOpcoes:${e}[0m"
         Write-Host "    ${e}[38;2;52;152;219m[A]${e}[0m Transferir todos os ficheiros em falta"
+        Write-Host "    ${e}[38;2;239;68;68m[0]${e}[0m Voltar ao menu anterior"
         Write-Host "    ${e}[38;2;52;152;219m[1-$($links.Count)]${e}[0m Transferir ficheiro especifico"
         Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
+        if ($choice -eq "0" -or $choice -eq "0") { Write-Info "A voltar ao menu..."; Start-Sleep -Seconds 1; return }
         Write-Host ""
         $choice = Read-Host "  Escolha"
 
