@@ -1,11 +1,6 @@
 {
-  "expires": "2026-05-04T19:45:23.103Z",
+  "expires": "2026-05-11T16:52:47.017Z",
   "files": [
-    {
-      "name": "EPC 2018-11/EWA.7z",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/EPC%202018-11/EWA.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T184523Z&X-Amz-Expires=3600&X-Amz-Signature=b4c05d7f1528e830dc8410e287a515b7a2715d2a76b022f3affed2c8ac5fb4a8&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "size": 494901184
-    },
     {
       "name": "SDMEDIA.zip",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/SDMEDIA.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165247Z&X-Amz-Expires=604800&X-Amz-Signature=ff6d140d56f9efef3c880159288e67e28f81b8b3e7c4e4895195d5188a9e311d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
