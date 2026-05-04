@@ -1,15 +1,11 @@
-# install/merc_download.ps1 v2.0 - Renault Pack Download (Enhanced)
-# Features: Checksums, Smart Retry, Resume, Windows Notifications
+# install/merc_download.ps1 - Mercedes Full Pack Download (IMPROVED)
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
 
-$LINKS_URL = "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/scripts/data/renault_links.json"
+$LINKS_URL = "https://m-auto.online/merc_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"
-$LOG_DIR   = "C:\M-auto\Logs"
-$MAX_RETRIES = 3
-$RETRY_DELAY = 5  # seconds
 
 # Aliases para ficheiros
 $FILE_ALIASES = @{
@@ -18,85 +14,75 @@ $FILE_ALIASES = @{
 }
 
 if (-not (Test-Path $DEST_DIR)) { New-Item -ItemType Directory -Path $DEST_DIR -Force | Out-Null }
-if (-not (Test-Path $LOG_DIR)) { New-Item -ItemType Directory -Path $LOG_DIR -Force | Out-Null }
-
-#-- Logging ------------------------------------------------------------------
-function Write-Log($msg, $level = "INFO") {
-    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    $logFile = Join-Path $LOG_DIR "download_$(Get-Date -Format 'yyyyMMdd').log"
-    "$timestamp [$level] $msg" | Out-File -FilePath $logFile -Append -Encoding UTF8
-}
 
 #-- Helpers com cores melhoradas ---------------------------------------------
 function Write-Header {
     Clear-Host
     Write-Host ""
     Write-Host "  ${e}[38;2;29;155;255m╔══════════════════════════════════════════════════════╗${e}[0m"
-    Write-Host "  ${e}[38;2;29;155;255m║${e}[0m  ${e}[1;97mRenault Pack 2026${e}[0m  ${e}[38;2;100;149;237m│  Enhanced Downloader${e}[0m      ${e}[38;2;29;155;255m║${e}[0m"
+    Write-Host "  ${e}[38;2;29;155;255m║${e}[0m  ${e}[1;97mMercedes Full Pack${e}[0m  ${e}[38;2;100;149;237m│  Download Manager${e}[0m           ${e}[38;2;29;155;255m║${e}[0m"
     Write-Host "  ${e}[38;2;29;155;255m╚══════════════════════════════════════════════════════╝${e}[0m"
-    Write-Host "  ${e}[38;2;148;163;184m  ✓ Checksums  ✓ Smart Retry  ✓ Resume  ✓ Notifications${e}[0m"
     Write-Host ""
 }
 
-function Write-OK($msg)   { Write-Host "  ${e}[38;2;46;204;113m✓${e}[0m  ${e}[38;2;46;204;113m$msg${e}[0m"; Write-Log $msg "OK" }
-function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m✗${e}[0m  ${e}[38;2;239;68;68m$msg${e}[0m"; Write-Log $msg "ERROR" }
-function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m⚠${e}[0m  ${e}[38;2;250;204;21m$msg${e}[0m"; Write-Log $msg "WARN" }
-function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m●${e}[0m  ${e}[38;2;148;163;184m$msg${e}[0m"; Write-Log $msg "INFO" }
+function Write-OK($msg)   { Write-Host "  ${e}[38;2;46;204;113m✓${e}[0m  ${e}[38;2;46;204;113m$msg${e}[0m" }
+function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m✗${e}[0m  ${e}[38;2;239;68;68m$msg${e}[0m" }
+function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m⚠${e}[0m  ${e}[38;2;250;204;21m$msg${e}[0m" }
+function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m●${e}[0m  ${e}[38;2;148;163;184m$msg${e}[0m" }
 function Write-Progress($msg) { Write-Host "  ${e}[38;2;52;152;219m▶${e}[0m  ${e}[38;2;52;152;219m$msg${e}[0m" }
 
-#-- Windows Toast Notification -----------------------------------------------
-function Show-Notification($title, $message, $sound = $true) {
-    try {
-        [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
-        [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
-
-        $template = @"
-<toast>
-    <visual>
-        <binding template="ToastGeneric">
-            <text>$title</text>
-            <text>$message</text>
-        </binding>
-    </visual>
-    $(if ($sound) { '<audio src="ms-winsoundevent:Notification.Default"/>' } else { '<audio silent="true"/>' })
-</toast>
-"@
-
-        $xml = New-Object Windows.Data.Xml.Dom.XmlDocument
-        $xml.LoadXml($template)
-        $toast = [Windows.UI.Notifications.ToastNotification]::new($xml)
-        $notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("M-Auto Downloader")
-        $notifier.Show($toast)
-    } catch {
-        Write-Log "Notification failed: $_" "WARN"
+#-- Box drawing para status --------------------------------------------------
+function Write-StatusBox($title, $items) {
+    $width = 54
+    Write-Host "  ${e}[38;2;100;149;237m┌$('─' * $width)┐${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[1;97m$title${e}[0m$(' ' * ($width - $title.Length - 1))${e}[38;2;100;149;237m│${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m├$('─' * $width)┤${e}[0m"
+    foreach ($item in $items) {
+        $text = "  $($item.icon) $($item.text)"
+        $padding = $width - ($text.Length - 20)  # Ajuste para ANSI codes
+        Write-Host "  ${e}[38;2;100;149;237m│${e}[0m$text$(' ' * $padding)${e}[38;2;100;149;237m│${e}[0m"
     }
+    Write-Host "  ${e}[38;2;100;149;237m└$('─' * $width)┘${e}[0m"
 }
 
-#-- Barra de progresso com gradiente -----------------------------------------
+#-- Barra de progresso melhorada com gradiente -------------------------------
 function Get-ProgressBar($percent, $width = 50) {
     $filled = [math]::Round($percent / 100 * $width)
     $empty = $width - $filled
 
-    $color = if ($percent -ge 100) { "46;204;113" }
-    elseif ($percent -ge 75) { "52;211;153" }
-    elseif ($percent -ge 50) { "59;130;246" }
-    elseif ($percent -ge 25) { "96;165;250" }
-    else { "148;163;184" }
+    # Gradiente de cores baseado no progresso
+    $color = if ($percent -ge 100) {
+        "46;204;113"  # Verde
+    } elseif ($percent -ge 75) {
+        "52;211;153"  # Verde claro
+    } elseif ($percent -ge 50) {
+        "59;130;246"  # Azul
+    } elseif ($percent -ge 25) {
+        "96;165;250"  # Azul claro
+    } else {
+        "148;163;184"  # Cinza
+    }
 
     $barFill = "${e}[48;2;${color}m" + ("█" * $filled) + "${e}[0m"
     $barEmpty = "${e}[48;2;30;41;59m" + ("░" * $empty) + "${e}[0m"
+
     return "$barFill$barEmpty"
 }
 
-#-- Formatar tamanho ---------------------------------------------------------
+#-- Formatar tamanho de ficheiro ---------------------------------------------
 function Format-FileSize($bytes) {
-    if ($bytes -ge 1GB) { return "{0:N2} GB" -f ($bytes / 1GB) }
-    elseif ($bytes -ge 1MB) { return "{0:N1} MB" -f ($bytes / 1MB) }
-    elseif ($bytes -ge 1KB) { return "{0:N0} KB" -f ($bytes / 1KB) }
-    else { return "$bytes B" }
+    if ($bytes -ge 1GB) {
+        return "{0:N2} GB" -f ($bytes / 1GB)
+    } elseif ($bytes -ge 1MB) {
+        return "{0:N1} MB" -f ($bytes / 1MB)
+    } elseif ($bytes -ge 1KB) {
+        return "{0:N0} KB" -f ($bytes / 1KB)
+    } else {
+        return "$bytes B"
+    }
 }
 
-#-- Formatar ETA -------------------------------------------------------------
+#-- Formatar tempo restante --------------------------------------------------
 function Format-ETA($seconds) {
     if ($seconds -lt 0) { return "--:--" }
     if ($seconds -ge 3600) {
@@ -112,38 +98,7 @@ function Format-ETA($seconds) {
     }
 }
 
-#-- Calcular SHA256 ----------------------------------------------------------
-function Get-FileSHA256($filePath) {
-    try {
-        $hash = Get-FileHash -Path $filePath -Algorithm SHA256 -ErrorAction Stop
-        return $hash.Hash.ToLower()
-    } catch {
-        Write-Log "SHA256 calculation failed for $filePath : $_" "ERROR"
-        return $null
-    }
-}
-
-#-- Verificar integridade ----------------------------------------------------
-function Test-FileIntegrity($filePath, $expectedSize) {
-    if (-not (Test-Path $filePath)) {
-        Write-Log "File not found: $filePath" "WARN"
-        return $false
-    }
-
-    $fileSize = (Get-Item $filePath).Length
-
-    # Verificar tamanho
-    if ($expectedSize -gt 0 -and $fileSize -ne $expectedSize) {
-        Write-Warn "Tamanho incorreto: $(Format-FileSize $fileSize) (esperado: $(Format-FileSize $expectedSize))"
-        Write-Log "Size mismatch: $filePath ($fileSize vs $expectedSize)" "WARN"
-        return $false
-    }
-
-    Write-OK "Ficheiro validado ($(Format-FileSize $fileSize))"
-    return $true
-}
-
-#-- Verificar permissoes -----------------------------------------------------
+#-- Verificar permissoes de escrita ------------------------------------------
 function Test-WritePermissions {
     try {
         $testFile = Join-Path $DEST_DIR ".test"
@@ -152,11 +107,12 @@ function Test-WritePermissions {
         return $true
     } catch {
         Write-Err "Sem permissoes de escrita em $DEST_DIR"
+        Write-Err "Erro: $_"
         return $false
     }
 }
 
-#-- Detectar proxy -----------------------------------------------------------
+#-- Detectar proxy corporativo -----------------------------------------------
 function Get-ProxyConfig {
     try {
         $reg = Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -EA Stop
@@ -167,7 +123,7 @@ function Get-ProxyConfig {
     return $null
 }
 
-#-- Verificar links ----------------------------------------------------------
+#-- Verificar links com melhor feedback --------------------------------------
 function Get-Links {
     Write-Progress "A verificar links disponiveis..."
     try {
@@ -202,7 +158,7 @@ function Get-Links {
     }
 }
 
-#-- Instalar aria2c ----------------------------------------------------------
+#-- Instalar aria2c com barra de progresso -----------------------------------
 function Install-Aria2c {
     $aria2Path = "C:\M-auto\Tools\aria2c.exe"
     if (Test-Path $aria2Path) { return $aria2Path }
@@ -221,6 +177,7 @@ function Install-Aria2c {
             $pct = $Event.SourceEventArgs.ProgressPercentage
             $recv = [math]::Round($Event.SourceEventArgs.BytesReceived / 1MB, 1)
             $total = [math]::Round($Event.SourceEventArgs.TotalBytesToReceive / 1MB, 1)
+
             $bar = Get-ProgressBar $pct 40
             Write-Host -NoNewline "`r  ${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m $bar  ${e}[90m$recv / $total MB${e}[0m   "
         }
@@ -260,58 +217,87 @@ function Install-Aria2c {
     }
 }
 
-#-- Download com aria2c ------------------------------------------------------
-function Invoke-Aria2Download {
-    param([string]$Url, [string]$Dest, [long]$Size, [int]$Idx, [int]$Total)
+#-- Obter tamanho do ficheiro via HEAD ---------------------------------------
+function Get-RemoteSize {
+    param([string]$Url)
+    try {
+        $req = [System.Net.HttpWebRequest]::Create($Url)
+        $req.Method = "HEAD"; $req.Timeout = 8000; $req.AllowAutoRedirect = $true
+        $resp = $req.GetResponse()
+        $len = $resp.ContentLength
+        $resp.Close()
+        return $len
+    } catch { return 0 }
+}
 
-    $destDir = Split-Path $Dest -Parent
-    $fileName = Split-Path $Dest -Leaf
+#-- Download com aria2c e barra melhorada ------------------------------------
+function Invoke-Download {
+    param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
+
+    $dest = Join-Path $DEST_DIR $Name
+    $destDir = Split-Path $dest -Parent
+    $fileName = Split-Path $dest -Leaf
     $width = 50
 
     if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
 
     $aria2 = Install-Aria2c
-    if (-not $aria2) { return $false }
+    if (-not $aria2) { Write-Err "aria2c nao disponivel"; return $false }
+
+    $totalBytes = if ($Size -gt 0) { $Size } else { Get-RemoteSize -Url $Url }
+    $totalSize = Format-FileSize $totalBytes
+
+    Write-Host ""
+    Write-Host "  ${e}[38;2;100;149;237m┌─ Download [$Idx/$Total] ─────────────────────────────────────┐${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[1;97m$Name${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[38;2;148;163;184mTamanho: $totalSize${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m└──────────────────────────────────────────────────────────────┘${e}[0m"
+    Write-Host ""
 
     $proxy = Get-ProxyConfig
-    $cn = if ($Size -gt 0 -and $Size -lt 5MB) { 4 } else { 16 }
+    $cn = if ($totalBytes -gt 0 -and $totalBytes -lt 5MB) { 4 } else { 16 }
 
-    $argList = @(
-        "--max-connection-per-server=$cn",
-        "--split=$cn",
-        "--min-split-size=1M",
-        "--continue=true",
-        "--max-tries=3",
-        "--retry-wait=2",
-        "--timeout=60",
-        "--connect-timeout=30",
-        "--console-log-level=error",
-        "--summary-interval=0",
-        "--file-allocation=none",
-        "--check-certificate=false",
-        "--auto-file-renaming=false",
-        "--allow-overwrite=true",
-        "--dir=$destDir",
-        "--out=$fileName"
-    )
+    $argList = [System.Collections.Generic.List[string]]::new()
+    $argList.Add("--max-connection-per-server=$cn")
+    $argList.Add("--split=$cn")
+    $argList.Add("--min-split-size=1M")
+    $argList.Add("--continue=true")
+    $argList.Add("--max-tries=3")
+    $argList.Add("--retry-wait=2")
+    $argList.Add("--timeout=60")
+    $argList.Add("--connect-timeout=30")
+    $argList.Add("--console-log-level=error")
+    $argList.Add("--summary-interval=0")
+    $argList.Add("--file-allocation=none")
+    $argList.Add("--check-certificate=false")
+    $argList.Add("--auto-file-renaming=false")
+    $argList.Add("--allow-overwrite=true")
+    $argList.Add("--dir=$destDir")
+    $argList.Add("--out=$fileName")
 
     $logFile = Join-Path $env:TEMP "aria2c_$PID.log"
     Remove-Item $logFile -Force -ErrorAction SilentlyContinue
-    $argList += "--log=$logFile"
-    $argList += "--log-level=warn"
-    if ($proxy) { $argList += "--all-proxy=http://$proxy" }
-    $argList += $Url
+    $argList.Add("--log=$logFile")
+    $argList.Add("--log-level=warn")
+    if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
+    $argList.Add($Url)
 
-    Remove-Item "$Dest.aria2" -Force -ErrorAction SilentlyContinue
+    Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
+
+    $argStr = ($argList.ToArray() | ForEach-Object {
+        if ($_ -match ' ') { '"' + $_ + '"' } else { $_ }
+    }) -join ' '
 
     $psi = New-Object System.Diagnostics.ProcessStartInfo
     $psi.FileName = $aria2
-    $psi.Arguments = $argList -join ' '
+    $psi.Arguments = $argStr
     $psi.UseShellExecute = $false
     $psi.CreateNoWindow = $true
     $proc = [System.Diagnostics.Process]::Start($psi)
 
     $startTime = Get-Date
+    $startBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
+    $prevBytes = $startBytes
     $samples = [System.Collections.Generic.Queue[object]]::new()
     $spinIdx = 0
     $spinChars = @('⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏')
@@ -320,7 +306,7 @@ function Invoke-Aria2Download {
         Start-Sleep -Milliseconds 400
 
         $now = Get-Date
-        $dlBytes = if (Test-Path $Dest) { (Get-Item $Dest).Length } else { 0 }
+        $dlBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
         $recvSize = Format-FileSize $dlBytes
 
         $samples.Enqueue([PSCustomObject]@{ t = $now; b = $dlBytes })
@@ -334,27 +320,31 @@ function Invoke-Aria2Download {
             $dt = ($now - $first.t).TotalSeconds
             if ($dt -gt 0.1) { $speedMB = [math]::Round(($dlBytes - $first.b) / $dt / 1MB, 1) }
         }
+        $prevBytes = $dlBytes
         $spdStr = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
 
-        if ($Size -gt 0) {
-            $rawPct = [math]::Round($dlBytes / $Size * 100)
-            $verifying = ($dlBytes -ge $Size)
+        if ($totalBytes -gt 0) {
+            $rawPct = [math]::Round($dlBytes / $totalBytes * 100)
+            $verifying = ($dlBytes -ge $totalBytes)
             $pct = if ($verifying) { 100 } else { [math]::Min(99, $rawPct) }
 
             $eta = if ($verifying) {
                 "verificando"
-            } elseif ($speedMB -gt 0.01 -and $Size -gt $dlBytes) {
-                $s = [int](($Size - $dlBytes) / ($speedMB * 1MB))
+            } elseif ($speedMB -gt 0.01 -and $totalBytes -gt $dlBytes) {
+                $s = [int](($totalBytes - $dlBytes) / ($speedMB * 1MB))
                 Format-ETA $s
             } else { "--:--" }
 
             $bar = Get-ProgressBar $pct $width
             $pctText = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
-            $totalSize = Format-FileSize $Size
-            Write-Host -NoNewline "`r  $pctText $bar ${e}[90m$recvSize/$totalSize  $spdStr  ETA $eta  [$Idx/$Total]${e}[0m  "
+            Write-Host -NoNewline "`r  $pctText $bar ${e}[90m$recvSize/$totalSize  $spdStr  ETA $eta${e}[0m  "
         } else {
             $spin = $spinChars[$spinIdx % $spinChars.Count]; $spinIdx++
-            Write-Host -NoNewline "`r  ${e}[1;97m$spin${e}[0m ${e}[90m$recvSize  $spdStr  [$Idx/$Total]${e}[0m  "
+            $pulse = $spinIdx % ($width * 2)
+            $pos = if ($pulse -lt $width) { $pulse } else { $width * 2 - $pulse }
+            $pos = [math]::Max(0, [math]::Min($pos, $width - 2))
+            $bar = (" " * $pos) + "${e}[48;2;52;152;219m██${e}[0m" + (" " * ($width - $pos - 2))
+            Write-Host -NoNewline "`r  ${e}[1;97m$spin${e}[0m [$bar] ${e}[90m$recvSize  $spdStr${e}[0m  "
         }
     }
 
@@ -362,90 +352,22 @@ function Invoke-Aria2Download {
     Remove-Item $logFile -Force -ErrorAction SilentlyContinue
     Write-Host ""
 
-    if ($proc.ExitCode -eq 0 -and (Test-Path $Dest)) {
+    if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
+        $finalSize = Format-FileSize (Get-Item $dest).Length
+        Write-OK "$Name transferido ($finalSize)"
         return $true
     }
 
     Write-Err "Download falhou (codigo $($proc.ExitCode))"
     if ($errOutput -and $errOutput.Trim()) {
-        $errOutput.Trim() -split "`n" | Where-Object { $_.Trim() } | Select-Object -First 3 | ForEach-Object {
+        $errOutput.Trim() -split "`n" | Where-Object { $_.Trim() } | ForEach-Object {
             Write-Host "  ${e}[38;2;239;68;68m    $($_.Trim())${e}[0m"
         }
     }
     return $false
 }
 
-#-- Download com retry inteligente -------------------------------------------
-function Invoke-DownloadWithRetry {
-    param(
-        [string]$Url,
-        [string]$Name,
-        [int]$Idx,
-        [int]$Total,
-        [long]$Size = 0
-    )
-
-    $dest = Join-Path $DEST_DIR $Name
-    $displayName = if ($FILE_ALIASES.ContainsKey($Name)) { $FILE_ALIASES[$Name] } else { $Name }
-
-    # Verificar se ja existe e esta correto
-    if (Test-Path $dest) {
-        Write-Info "Ficheiro ja existe, a verificar..."
-        if (Test-FileIntegrity $dest $Size) {
-            Write-OK "$displayName ja transferido e validado"
-            return $true
-        } else {
-            Write-Warn "Ficheiro corrompido, a recomecar download"
-            Remove-Item $dest -Force -ErrorAction SilentlyContinue
-        }
-    }
-
-    Write-Host ""
-    Write-Host "  ${e}[38;2;100;149;237m┌─ Download [$Idx/$Total] ─────────────────────────────────────┐${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[1;97m$displayName${e}[0m"
-    if ($Size -gt 0) {
-        Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[38;2;148;163;184mTamanho: $(Format-FileSize $Size)${e}[0m"
-    }
-    Write-Host "  ${e}[38;2;100;149;237m└──────────────────────────────────────────────────────────────┘${e}[0m"
-    Write-Host ""
-
-    $attempt = 0
-    $success = $false
-
-    while ($attempt -lt $MAX_RETRIES -and -not $success) {
-        $attempt++
-
-        if ($attempt -gt 1) {
-            Write-Warn "Tentativa $attempt de $MAX_RETRIES (aguardar ${RETRY_DELAY}s...)"
-            Start-Sleep -Seconds $RETRY_DELAY
-        }
-
-        $success = Invoke-Aria2Download -Url $Url -Dest $dest -Size $Size -Idx $Idx -Total $Total
-
-        if ($success) {
-            # Verificar integridade apos download
-            if (Test-FileIntegrity $dest $Size) {
-                $finalSize = Format-FileSize (Get-Item $dest).Length
-                Write-OK "$displayName transferido com sucesso ($finalSize)"
-                Write-Log "Downloaded: $Name ($finalSize)" "OK"
-                return $true
-            } else {
-                Write-Err "Ficheiro corrompido apos download"
-                Remove-Item $dest -Force -ErrorAction SilentlyContinue
-                $success = $false
-            }
-        }
-    }
-
-    if (-not $success) {
-        Write-Err "$displayName falhou apos $MAX_RETRIES tentativas"
-        Write-Log "Failed after $MAX_RETRIES attempts: $Name" "ERROR"
-    }
-
-    return $success
-}
-
-#-- Loop principal -----------------------------------------------------------
+#-- Loop principal com menu melhorado ----------------------------------------
 Write-Header
 
 if (-not (Test-WritePermissions)) {
@@ -467,8 +389,8 @@ while ($retry -lt $maxRetries) {
     if ($links) {
         Write-Header
 
-        # Status de ficheiros
-        Write-Host "  ${e}[38;2;100;149;237m┌─ Ficheiros Disponiveis ($($links.Count)) ────────────────────────┐${e}[0m"
+        # Criar lista de status
+        $statusItems = @()
         for ($i = 0; $i -lt $links.Count; $i++) {
             $f = $links[$i]
             $dest = Join-Path $DEST_DIR $f.name
@@ -477,12 +399,19 @@ while ($retry -lt $maxRetries) {
 
             if (Test-Path $dest) {
                 $size = Format-FileSize (Get-Item $dest).Length
-                Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[38;2;46;204;113m✓${e}[0m ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[97m$displayName${e}[0m ${e}[38;2;100;130;100m($size)${e}[0m"
+                $statusItems += @{
+                    icon = "${e}[38;2;46;204;113m✓${e}[0m"
+                    text = "${e}[38;2;148;163;184m[$num]${e}[0m ${e}[97m$displayName${e}[0m ${e}[38;2;100;130;100m($size)${e}[0m"
+                }
             } else {
-                Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[38;2;250;204;21m○${e}[0m ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[97m$displayName${e}[0m ${e}[38;2;148;163;184m(pendente)${e}[0m"
+                $statusItems += @{
+                    icon = "${e}[38;2;250;204;21m○${e}[0m"
+                    text = "${e}[38;2;148;163;184m[$num]${e}[0m ${e}[97m$displayName${e}[0m ${e}[38;2;148;163;184m(pendente)${e}[0m"
+                }
             }
         }
-        Write-Host "  ${e}[38;2;100;149;237m└──────────────────────────────────────────────────────────────┘${e}[0m"
+
+        Write-StatusBox "Ficheiros Disponiveis ($($links.Count))" $statusItems
         Write-Host ""
         Write-Host "  ${e}[38;2;148;163;184mOpcoes:${e}[0m"
         Write-Host "    ${e}[38;2;52;152;219m[A]${e}[0m Transferir todos os ficheiros em falta"
@@ -501,9 +430,12 @@ while ($retry -lt $maxRetries) {
             for ($i = 0; $i -lt $links.Count; $i++) {
                 $f = $links[$i]
                 $dest = Join-Path $DEST_DIR $f.name
-                if (-not (Test-Path $dest) -or -not (Test-FileIntegrity $dest $f.size)) {
-                    $toDownload += $i
+                $complete = $false
+                if (Test-Path $dest) {
+                    $localSize = (Get-Item $dest).Length
+                    $complete = ($f.size -gt 0 -and $localSize -eq $f.size) -or ($f.size -eq 0 -and $localSize -gt 0)
                 }
+                if (-not $complete) { $toDownload += $i }
             }
         } elseif ($choice -match '^\d+$' -and [int]$choice -ge 1 -and [int]$choice -le $links.Count) {
             $toDownload += ([int]$choice - 1)
@@ -526,30 +458,20 @@ while ($retry -lt $maxRetries) {
         $ok = 0; $fail = 0
         $total = $toDownload.Count
         $current = 0
-        $startTime = Get-Date
 
         foreach ($idx in $toDownload) {
             $f = $links[$idx]
             $current++
             $size = if ($f.size) { [long]$f.size } else { 0 }
-            $result = Invoke-DownloadWithRetry -Url $f.url -Name $f.name -Idx $current -Total $total -Size $size
+            $result = Invoke-Download -Url $f.url -Name $f.name -Idx $current -Total $total -Size $size
             if ($result) { $ok++ } else { $fail++ }
         }
-
-        $elapsed = ((Get-Date) - $startTime).TotalSeconds
-        $elapsedStr = Format-ETA $elapsed
 
         Write-Host ""
         Write-Host "  ${e}[38;2;100;149;237m═══════════════════════════════════════════════════════${e}[0m"
         if ($ok -gt 0) { Write-OK "$ok ficheiro(s) transferido(s) com sucesso" }
         if ($fail -gt 0) { Write-Err "$fail ficheiro(s) falharam" }
-        Write-Info "Tempo total: $elapsedStr"
         Write-Host ""
-
-        # Notificacao Windows
-        if ($ok -gt 0) {
-            Show-Notification "M-Auto Downloads" "$ok ficheiro(s) transferido(s) com sucesso" $true
-        }
 
         if ($fail -gt 0) {
             Read-Host "  Pressione ENTER para continuar"
@@ -570,7 +492,7 @@ while ($retry -lt $maxRetries) {
 
     $retry++
     $ts = Get-Date -Format "HH:mm:ss"
-    $remaining = ($maxRetries - $retry) * 5
+    $remaining = $maxRetries - $retry
     Write-Host -NoNewline "`r  ${e}[38;2;148;163;184m[$ts]${e}[0m A aguardar... (${remaining}s restantes)  "
     Start-Sleep -Seconds 5
 }
