@@ -5,7 +5,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
 
-$LINKS_URL = "https://m-auto.online/renault_links.json"
+$LINKS_URL = "https://m-auto.online/scripts/data/renault_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"
 $LOG_DIR   = "C:\M-auto\Logs"
 $MAX_RETRIES = 3

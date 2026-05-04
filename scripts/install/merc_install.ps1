@@ -34,29 +34,31 @@ function Find-7Zip {
     return $null
 }
 
-#-- Progress bar helper -----------------------------------------------------
+#-- Progress bar helper (estilo AskUbuntu) ----------------------------------
 function Show-Progress {
     param([int]$Percent, [int]$Width = 50, [string]$Label = "")
 
     $filled = [math]::Round($Percent / 100 * $Width)
     $empty = $Width - $filled
 
-    # Cores: verde para completo, azul para progresso
+    # Cores RGB exatas da imagem AskUbuntu
     if ($Percent -eq 100) {
-        $barColor = "42;157;143"  # Verde
-        $emptyColor = "38;70;83"  # Cinza escuro
+        $fillColor = "46;204;113"   # Verde (#2ecc71)
+        $emptyColor = "52;73;94"    # Cinza escuro (#34495e)
     } else {
-        $barColor = "233;196;106"  # Amarelo/dourado
-        $emptyColor = "38;70;83"   # Cinza escuro
+        $fillColor = "52;152;219"   # Azul (#3498db)
+        $emptyColor = "52;73;94"    # Cinza escuro (#34495e)
     }
 
-    $barFilled = "${e}[48;2;${barColor}m" + (" " * $filled) + "${e}[0m"
+    # Barra com background colors
+    $barFilled = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
     $barEmpty = "${e}[48;2;${emptyColor}m" + (" " * $empty) + "${e}[0m"
 
-    $percentText = "$Percent%".PadLeft(4)
-    $labelText = if ($Label) { " $Label" } else { "" }
+    # Percentagem em branco bold
+    $percentText = "${e}[1;97m$Percent%${e}[0m".PadLeft(12)
+    $labelText = if ($Label) { " ${e}[90m$Label${e}[0m" } else { "" }
 
-    Write-Host -NoNewline "`r  ${e}[97m${percentText}${e}[0m ${barFilled}${barEmpty}${labelText}"
+    Write-Host -NoNewline "`r  $percentText $barFilled$barEmpty$labelText"
 
     if ($Percent -eq 100) { Write-Host "" }
 }
