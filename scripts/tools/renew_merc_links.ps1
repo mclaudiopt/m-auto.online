@@ -1,12 +1,12 @@
-# renew_merc_links.ps1 - Generate presigned URLs for all files in Z:\Daimler\Pack\Installer
-# Place a shortcut to this script at Z:\Daimler\Pack\
+# renew_merc_links.ps1 - Generate presigned URLs for all files in Z:\Daimler
+# Place a shortcut to this script at Z:\
 
 Add-Type -AssemblyName System.Windows.Forms
 
 $RCLONE    = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.73.4-windows-amd64\rclone.exe"
 $BUCKET    = "r2-mauto:m-auto-software"
-$SCAN_DIR  = "Z:\Daimler\Pack\Installer"
-$R2_PREFIX = "Daimler/Pack/Installer"
+$SCAN_DIR  = "Z:\Daimler"
+$R2_PREFIX = "Daimler"
 $REPO_DIR  = "D:\Tutorials\m-auto.online"
 $JSON_OUT  = "$REPO_DIR\merc_links.json"
 $EXPIRES   = "2h"
@@ -102,10 +102,11 @@ $pool.Close()
 
 Write-Host ""
 
-# Save JSON — format: { expires, files: [ { name, url } ] }
-$jsonObj = [PSCustomObject]@{ expires = $expires_dt; files = $filesList.ToArray() }
-$utf8NoBom = New-Object System.Text.UTF8Encoding $false
-[System.IO.File]::WriteAllText($JSON_OUT, ($jsonObj | ConvertTo-Json -Depth 3), $utf8NoBom)
+# Save JSON — build manually to prevent ConvertTo-Json converting ISO 8601 to locale datetime
+$filesJson = ($filesList.ToArray() | ConvertTo-Json -Depth 2 -Compress)
+$jsonRaw    = "{`"expires`":`"$expires_dt`",`"files`":$filesJson}"
+$utf8NoBom  = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllText($JSON_OUT, $jsonRaw, $utf8NoBom)
 Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  JSON guardado ($($filesList.Count) ficheiros)"
 
 # Git commit + push — capture stderr as string to avoid red output
