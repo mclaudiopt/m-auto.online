@@ -15,14 +15,6 @@
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/wis2021.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T163805Z&X-Amz-Expires=7200&X-Amz-Signature=1dc29439684e78504115ac0c47a5ea4125ed7e65e7a313db87f278f764aa9562&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
       "expiresAt": "2026-05-04T18:38:04.950Z",
       "createdAt": "2026-05-04T16:38:05.182Z"
-    },
-    {
-      "id": "link_1777909096027_ysw229d",
-      "fileName": "202608.7z",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/202608.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T153816Z&X-Amz-Expires=599&X-Amz-Signature=b41e6b694d58d23f1ea515463c8975927ba3388fea5017be02eee98ded0ae198&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T15:48:15.688Z",
-      "createdAt": "2026-05-04T15:38:16.027Z"
     }
   ]
 }
