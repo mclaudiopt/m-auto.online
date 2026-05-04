@@ -34,27 +34,27 @@
     {
       "name": "Databases.7z",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Databases.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165223Z&X-Amz-Expires=604800&X-Amz-Signature=6645426605ec8366368f3383ffdfd813a0ca1473360e4dd9700d3b405c583010&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "size": 0
+      "size": 11214205279
     },
     {
       "name": "Startfifinder 2024.7z",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Startfifinder%202024.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165245Z&X-Amz-Expires=604800&X-Amz-Signature=8fb43fe90b40f444d0a6b7a6d16681f3fb71b5f31ec14f4d0f8bcfbb670e1339&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "size": 0
+      "size": 11131912544
     },
     {
       "name": "SDMEDIA.zip",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/SDMEDIA.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165247Z&X-Amz-Expires=604800&X-Amz-Signature=ff6d140d56f9efef3c880159288e67e28f81b8b3e7c4e4895195d5188a9e311d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "size": 0
+      "size": 10615512251
     },
     {
       "name": "Vin decoder.7z",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Vin%20decoder.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165253Z&X-Amz-Expires=604800&X-Amz-Signature=f32944811c0439211a1821a4b3ead805bd543e73704a985b359cc90fa9ee23d7&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "size": 0
+      "size": 12905970
     },
     {
       "name": "Coding tutorials full.7z",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Coding%20tutorials%20full.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T170550Z&X-Amz-Expires=604800&X-Amz-Signature=f51a2895016bfd17a74617a7c0524bea990ee071a53ac70323d0bf96b31a1b15&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "size": 0
+      "size": 3721341698
     }
   ]
 }
