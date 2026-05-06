@@ -5,6 +5,11 @@
       "name": "FullFix for Xentry and Truck v9.0.8.exe",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/FullFix%20for%20Xentry%20and%20Truck%20v9.0.8.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T141554Z&X-Amz-Expires=604800&X-Amz-Signature=5a3f0dec85771aee59e65529ac1a853fc2bfad84e363f0470075562bfc1c6b67&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
       "size": 2736006844
+    },
+    {
+      "name": "FullFix By Samik v4.9.3.exe",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/FullFix%20By%20Samik%20v4.9.3.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T142828Z&X-Amz-Expires=604800&X-Amz-Signature=ed562acae0d321068eef814700cf9d3bf18be42db767b649cef3a49ebe067842&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 1694462456
     }
   ]
 }
