@@ -5,6 +5,11 @@
       "name": "MB ECU CLEAR v1.67.zip",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/MB%20ECU%20CLEAR%20v1.67.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T090505Z&X-Amz-Expires=3600&X-Amz-Signature=b65179a9ea465a48fb02bc911f348eb954df853a7827bbcc7f204223d8ea2cd2&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
       "size": 190353
+    },
+    {
+      "name": "Databases.7z",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Databases.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165223Z&X-Amz-Expires=604800&X-Amz-Signature=6645426605ec8366368f3383ffdfd813a0ca1473360e4dd9700d3b405c583010&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 11214205279
     }
   ]
 }
