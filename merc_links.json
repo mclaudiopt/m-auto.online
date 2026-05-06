@@ -1,11 +1,6 @@
 {
-  "expires": "2026-05-13T14:53:41.692Z",
+  "expires": "2026-05-13T14:53:43.912Z",
   "files": [
-    {
-      "name": "DT 04-26.7z",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/DT%2004-26.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T145341Z&X-Amz-Expires=604800&X-Amz-Signature=87f4a1db0a830714420d6a753ab5013f3e36cd7408dfdf6322ab5f07835d8a37&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "size": 11061920260
-    },
     {
       "name": "MB ECU CLEAR v1.67.zip",
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/MB%20ECU%20CLEAR%20v1.67.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T145343Z&X-Amz-Expires=604800&X-Amz-Signature=1be6865d7738e2d88b6dfac7972ef9cb47c22510c60647da8691d4fb0d3c7882&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
