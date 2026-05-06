@@ -195,7 +195,7 @@ function Get-Links {
 
         $timeLeft = $exp.ToUniversalTime() - (Get-Date).ToUniversalTime()
         Write-OK "Links validos — expira em $(Format-ETA $timeLeft.TotalSeconds)"
-        return $json.files
+        return @($json.files)
     } catch {
         Write-Err "Erro ao verificar links: $_"
         return $null

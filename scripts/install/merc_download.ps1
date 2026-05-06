@@ -76,7 +76,7 @@ function Get-Links {
 
         if ((Get-Date).ToUniversalTime() -gt $exp.ToUniversalTime()) { return $null }
 
-        return $json.files
+        return @($json.files)
     } catch {
         return $null
     }
