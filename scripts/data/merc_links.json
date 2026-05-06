@@ -1,10 +1,20 @@
 {
-  "expires": "2026-05-13T14:45:59.929Z",
+  "expires": "2026-05-11T16:52:23.430Z",
   "files": [
     {
-      "name": "FullFix By Samik v4.9.3.exe",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/FullFix%20By%20Samik%20v4.9.3.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T144559Z&X-Amz-Expires=604800&X-Amz-Signature=c3e157dd734ac5d801478a97f5442a693ceb7404f31129c279174049d5d7cee6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "size": 1694462456
+      "name": "Databases.7z",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Databases.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165223Z&X-Amz-Expires=604800&X-Amz-Signature=6645426605ec8366368f3383ffdfd813a0ca1473360e4dd9700d3b405c583010&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 11214205279
+    },
+    {
+      "name": "MB ECU CLEAR v1.67.zip",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/MB%20ECU%20CLEAR%20v1.67.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T145343Z&X-Amz-Expires=604800&X-Amz-Signature=1be6865d7738e2d88b6dfac7972ef9cb47c22510c60647da8691d4fb0d3c7882&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 190353
+    },
+    {
+      "name": "FullFix for Xentry and Truck v9.0.8.exe",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/FullFix%20for%20Xentry%20and%20Truck%20v9.0.8.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T181300Z&X-Amz-Expires=604800&X-Amz-Signature=42a34356a572b65f998b9d5c7ae9844874b2bf09ba912892b08dbcb35b890ee9&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "size": 2736006844
     }
   ]
 }
