@@ -95,6 +95,14 @@
       "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Databases.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165223Z&X-Amz-Expires=604800&X-Amz-Signature=6645426605ec8366368f3383ffdfd813a0ca1473360e4dd9700d3b405c583010&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
       "expiresAt": "2026-05-11T16:52:23.430Z",
       "createdAt": "2026-05-04T16:52:23.430Z"
+    },
+    {
+      "id": "link_1777909963200_0v4rglo",
+      "fileName": "202608.7z",
+      "category": "Daimler",
+      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/202608.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T155239Z&X-Amz-Expires=600&X-Amz-Signature=0aa71503b5870b630b732f7b03cfd9d09cbe1d94347c5824ed06d64c366a7e36&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "expiresAt": "2026-05-04T16:02:42.994Z",
+      "createdAt": "2026-05-04T15:52:43.200Z"
     }
   ]
 }
