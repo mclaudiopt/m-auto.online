@@ -1,116 +1,327 @@
 {
   "links": [
     {
-      "id": "link_1777909963208_l4rt768",
-      "fileName": "Coding tutorials full.7z",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Coding%20tutorials%20full.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T155243Z&X-Amz-Expires=600&X-Amz-Signature=f43c6a7e7264fca377f059d61fd977733a79d136260812982bcb8316f0e75a3b&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T16:02:42.994Z",
-      "createdAt": "2026-05-04T15:52:43.208Z"
+      "key": "Autodata/AUTODATA 3.41 PT-PT.rar",
+      "brand": "Autodata",
+      "filename": "AUTODATA 3.41 PT-PT.rar",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777912720534_lxw1d9a",
-      "fileName": "Coding tutorials full.7z",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Coding%20tutorials%20full.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T163840Z&X-Amz-Expires=600&X-Amz-Signature=32aeece795fbce56c37f1bc4c257134f8dadbe95bfe7b7feaf90db062036e1ea&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T16:48:39.671Z",
-      "createdAt": "2026-05-04T16:38:40.534Z"
+      "key": "Daimler/202608.7z",
+      "brand": "Daimler",
+      "filename": "202608.7z",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777909096027_ysw229d",
-      "fileName": "202608.7z",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/202608.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T153816Z&X-Amz-Expires=599&X-Amz-Signature=b41e6b694d58d23f1ea515463c8975927ba3388fea5017be02eee98ded0ae198&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T15:48:15.688Z",
-      "createdAt": "2026-05-04T15:38:16.027Z"
+      "key": "Daimler/Coding tutorials full.7z",
+      "brand": "Daimler",
+      "filename": "Coding tutorials full.7z",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777909723071_h29h7rv",
-      "fileName": "202608.7z",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/202608.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T154843Z&X-Amz-Expires=600&X-Amz-Signature=8ee48534ea032360814d1576c420721c6393183b24470b144d95376a445bf444&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T15:58:42.831Z",
-      "createdAt": "2026-05-04T15:48:43.071Z"
+      "key": "Daimler/DT 04-26.7z",
+      "brand": "Daimler",
+      "filename": "DT 04-26.7z",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777912685182_tibitcc",
-      "fileName": "wis2021.rar",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/wis2021.rar?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T163805Z&X-Amz-Expires=7200&X-Amz-Signature=1dc29439684e78504115ac0c47a5ea4125ed7e65e7a313db87f278f764aa9562&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T18:38:04.950Z",
-      "createdAt": "2026-05-04T16:38:05.182Z"
+      "key": "Daimler/Databases.7z",
+      "brand": "Daimler",
+      "filename": "Databases.7z",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777909959372_cfd2epu",
-      "fileName": "202608.7z",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/202608.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T155239Z&X-Amz-Expires=600&X-Amz-Signature=0aa71503b5870b630b732f7b03cfd9d09cbe1d94347c5824ed06d64c366a7e36&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T16:02:39.090Z",
-      "createdAt": "2026-05-04T15:52:39.372Z"
+      "key": "Daimler/EPC 2018-11/EPC_1118_1of1_b1.iso",
+      "brand": "Daimler",
+      "filename": "EPC_1118_1of1_b1.iso",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777917913431_vednhvt",
-      "fileName": "EPC_1118_2of4_a2.iso",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/EPC%202018-11/EPC_1118_2of4_a2.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T180513Z&X-Amz-Expires=3600&X-Amz-Signature=79bd9d4d36bc0451e158c2e3e9e57978dd3a22bae436ef5692da1a763163299f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T19:05:13.431Z",
-      "createdAt": "2026-05-04T18:05:13.431Z"
+      "key": "Daimler/EPC 2018-11/EPC_1118_1of4_a1.iso",
+      "brand": "Daimler",
+      "filename": "EPC_1118_1of4_a1.iso",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777917914539_q3ztwic",
-      "fileName": "EPC_1118_3of4_a3.iso",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/EPC%202018-11/EPC_1118_3of4_a3.iso?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T180514Z&X-Amz-Expires=3600&X-Amz-Signature=c2cb7f216c29d1cd210e0bd004f3a36f7f8482a8e3df4420e96ea7a5432a95ef&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T19:05:14.539Z",
-      "createdAt": "2026-05-04T18:05:14.539Z"
+      "key": "Daimler/EPC 2018-11/EPC_1118_2of4_a2.iso",
+      "brand": "Daimler",
+      "filename": "EPC_1118_2of4_a2.iso",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777920323103_7hlriuf",
-      "fileName": "EWA.7z",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/EPC%202018-11/EWA.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T184523Z&X-Amz-Expires=3600&X-Amz-Signature=b4c05d7f1528e830dc8410e287a515b7a2715d2a76b022f3affed2c8ac5fb4a8&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T19:45:23.103Z",
-      "createdAt": "2026-05-04T18:45:23.103Z"
+      "key": "Daimler/EPC 2018-11/EPC_1118_3of4_a3.iso",
+      "brand": "Daimler",
+      "filename": "EPC_1118_3of4_a3.iso",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777925281447_8vfarjf",
-      "fileName": "setup-Register.exe",
-      "category": "Renault",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Renault/setup-Register.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T200801Z&X-Amz-Expires=3600&X-Amz-Signature=4fefacb54a6bcdee2c78f22e5660aa6a4ce7d16ce6afb55720acfea7fb28dd54&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T21:08:01.447Z",
-      "createdAt": "2026-05-04T20:08:01.447Z"
+      "key": "Daimler/EPC 2018-11/EPC_1118_4of4_a4.iso",
+      "brand": "Daimler",
+      "filename": "EPC_1118_4of4_a4.iso",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777926101450_1m7awfz",
-      "fileName": "generate_links.ps1",
-      "category": "Renault",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Renault/generate_links.ps1?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T202141Z&X-Amz-Expires=3600&X-Amz-Signature=8b8ff3719257184dc3e014b9c8ff8a21bdbfa573a9f94f0b07575bd1dd8239bf&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-04T21:21:41.450Z",
-      "createdAt": "2026-05-04T20:21:41.450Z"
+      "key": "Daimler/EPC 2018-11/EPC_112018_FULL.rar",
+      "brand": "Daimler",
+      "filename": "EPC_112018_FULL.rar",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1778079223912_fnbeh9p",
-      "fileName": "MB ECU CLEAR v1.67.zip",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/MB%20ECU%20CLEAR%20v1.67.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T145343Z&X-Amz-Expires=604800&X-Amz-Signature=1be6865d7738e2d88b6dfac7972ef9cb47c22510c60647da8691d4fb0d3c7882&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-13T14:53:43.912Z",
-      "createdAt": "2026-05-06T14:53:43.912Z"
+      "key": "Daimler/EPC 2018-11/EWA.7z",
+      "brand": "Daimler",
+      "filename": "EWA.7z",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777916162107_5cfcnbq",
-      "fileName": "FullFix for Xentry and Truck v9.0.8.exe",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/FullFix%20for%20Xentry%20and%20Truck%20v9.0.8.exe?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260506%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260506T141554Z&X-Amz-Expires=604800&X-Amz-Signature=5a3f0dec85771aee59e65529ac1a853fc2bfad84e363f0470075562bfc1c6b67&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-13T14:15:54.773Z",
-      "createdAt": "2026-05-04T17:36:02.107Z"
+      "key": "Daimler/FullFix By Samik v4.9.3.exe",
+      "brand": "Daimler",
+      "filename": "FullFix By Samik v4.9.3.exe",
+      "friendlyName": null,
+      "active": true
     },
     {
-      "id": "link_1777913543430_1ofyjte",
-      "fileName": "Databases.7z",
-      "category": "Daimler",
-      "url": "https://m-auto-software.8d2cf9429e3c19524a14a659e5a07183.r2.cloudflarestorage.com/Daimler/Databases.7z?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=7726b00a54b83c6ca96d1fafce83a933%2F20260504%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260504T165223Z&X-Amz-Expires=604800&X-Amz-Signature=6645426605ec8366368f3383ffdfd813a0ca1473360e4dd9700d3b405c583010&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-      "expiresAt": "2026-05-11T16:52:23.430Z",
-      "createdAt": "2026-05-04T16:52:23.430Z"
+      "key": "Daimler/FullFix for Xentry and Truck v9.0.8.exe",
+      "brand": "Daimler",
+      "filename": "FullFix for Xentry and Truck v9.0.8.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/MB ECU CLEAR v1.67.zip",
+      "brand": "Daimler",
+      "filename": "MB ECU CLEAR v1.67.zip",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/Mercedes Zenzefi Solution V1.80.0.10.7z",
+      "brand": "Daimler",
+      "filename": "Mercedes Zenzefi Solution V1.80.0.10.7z",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/SDMEDIA.zip",
+      "brand": "Daimler",
+      "filename": "SDMEDIA.zip",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/Startfifinder 2024.7z",
+      "brand": "Daimler",
+      "filename": "Startfifinder 2024.7z",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/Vediamo J2534.exe",
+      "brand": "Daimler",
+      "filename": "Vediamo J2534.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/Vin decoder.7z",
+      "brand": "Daimler",
+      "filename": "Vin decoder.7z",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/vediamo 5 passthru.zip",
+      "brand": "Daimler",
+      "filename": "vediamo 5 passthru.zip",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/wis2021.rar",
+      "brand": "Daimler",
+      "filename": "wis2021.rar",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Delphi/2022/Autocom_2020.23_Keygen.exe",
+      "brand": "Delphi",
+      "filename": "Autocom_2020.23_Keygen.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Delphi/2022/Delphi.2020.23.Update.2022.exe",
+      "brand": "Delphi",
+      "filename": "Delphi.2020.23.Update.2022.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Delphi/2022/Firmware_3201.7z",
+      "brand": "Delphi",
+      "filename": "Firmware_3201.7z",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Delphi/2022/autocom_update_firmware_1622.exe",
+      "brand": "Delphi",
+      "filename": "autocom_update_firmware_1622.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Delphi/2022/password.txt",
+      "brand": "Delphi",
+      "filename": "password.txt",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "GM/OPCM-1.95.rar",
+      "brand": "GM",
+      "filename": "OPCM-1.95.rar",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "PSA/Additional.Diagbox.Files.rar",
+      "brand": "PSA",
+      "filename": "Additional.Diagbox.Files.rar",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "PSA/Diagbox.v9.208.rar",
+      "brand": "PSA",
+      "filename": "Diagbox.v9.208.rar",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Renault/Renault.CLIP.v237.rar",
+      "brand": "Renault",
+      "filename": "Renault.CLIP.v237.rar",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Renault/Renew Renault Links.lnk",
+      "brand": "Renault",
+      "filename": "Renew Renault Links.lnk",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Renault/generate_links.ps1",
+      "brand": "Renault",
+      "filename": "generate_links.ps1",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Renault/setup-Register.exe",
+      "brand": "Renault",
+      "filename": "setup-Register.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Renew Mercedes Links.lnk",
+      "brand": "Renew Mercedes Links.lnk",
+      "filename": "Renew Mercedes Links.lnk",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "TESLA/DAS.FDOK.Keygen_autogmt.com.exe",
+      "brand": "TESLA",
+      "filename": "DAS.FDOK.Keygen_autogmt.com.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "TESLA/DC/Defender_Settings.vbs",
+      "brand": "TESLA",
+      "filename": "Defender_Settings.vbs",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "TESLA/DC/ReadMe.txt",
+      "brand": "TESLA",
+      "filename": "ReadMe.txt",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "TESLA/DC/dControl.exe",
+      "brand": "TESLA",
+      "filename": "dControl.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "TESLA/DC/dControl.ini",
+      "brand": "TESLA",
+      "filename": "dControl.ini",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "TESLA/XENTRY.Special.Functions.Keygen.v1.2_autogmt.com.exe",
+      "brand": "TESLA",
+      "filename": "XENTRY.Special.Functions.Keygen.v1.2_autogmt.com.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Tools/7z2501-x64.exe",
+      "brand": "Tools",
+      "filename": "7z2501-x64.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Tools/Synaptics Killer v6.zip",
+      "brand": "Tools",
+      "filename": "Synaptics Killer v6.zip",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Tools/sordum.rar",
+      "brand": "Tools",
+      "filename": "sordum.rar",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "VW/VCDS.v25.3.0.And.Kolimer.Loader.v9.2.7z",
+      "brand": "VW",
+      "filename": "VCDS.v25.3.0.And.Kolimer.Loader.v9.2.7z",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "hermes/reports/quatarly-report.html",
+      "brand": "hermes",
+      "filename": "quatarly-report.html",
+      "friendlyName": null,
+      "active": true
     }
-  ]
+  ],
+  "updatedAt": "2026-05-09T18:06:38.988Z"
 }
