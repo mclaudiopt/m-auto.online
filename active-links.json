@@ -183,13 +183,6 @@
       "active": true
     },
     {
-      "key": "VW/VCDS.v25.3.0.And.Kolimer.Loader.v9.2.7z",
-      "brand": "VW",
-      "filename": "VCDS.v25.3.0.And.Kolimer.Loader.v9.2.7z",
-      "friendlyName": "VCDS",
-      "active": true
-    },
-    {
       "key": "hermes/reports/quatarly-report.html",
       "brand": "hermes",
       "filename": "quatarly-report.html",
@@ -197,5 +190,5 @@
       "active": true
     }
   ],
-  "updatedAt": "2026-05-10T21:33:50.235Z"
+  "updatedAt": "2026-05-10T21:34:13.231Z"
 }
