@@ -8,9 +8,9 @@
       "active": true
     },
     {
-      "key": "Daimler/202608.7z",
+      "key": "Daimler/Certificate 2026.08.26.exe",
       "brand": "Daimler",
-      "filename": "202608.7z",
+      "filename": "Certificate 2026.08.26.exe",
       "friendlyName": null,
       "active": true
     },
@@ -85,14 +85,14 @@
       "active": true
     },
     {
-      "key": "Daimler/FullFix By Samik v4.9.3.exe",
+      "key": "Daimler/FIX/FullFix By Samik v4.9.3.exe",
       "brand": "Daimler",
       "filename": "FullFix By Samik v4.9.3.exe",
       "friendlyName": null,
       "active": true
     },
     {
-      "key": "Daimler/FullFix for Xentry and Truck v9.0.8.exe",
+      "key": "Daimler/FIX/FullFix for Xentry and Truck v9.0.8.exe",
       "brand": "Daimler",
       "filename": "FullFix for Xentry and Truck v9.0.8.exe",
       "friendlyName": null,
@@ -137,6 +137,13 @@
       "key": "Daimler/Vin decoder.7z",
       "brand": "Daimler",
       "filename": "Vin decoder.7z",
+      "friendlyName": null,
+      "active": true
+    },
+    {
+      "key": "Daimler/XENTRY.Diagnostics.OpenShell.v03.2026_26.3.4.rar",
+      "brand": "Daimler",
+      "filename": "XENTRY.Diagnostics.OpenShell.v03.2026_26.3.4.rar",
       "friendlyName": null,
       "active": true
     },
@@ -323,5 +330,5 @@
       "active": true
     }
   ],
-  "updatedAt": "2026-05-09T18:06:38.988Z"
+  "updatedAt": "2026-05-10T21:07:30.445Z"
 }
