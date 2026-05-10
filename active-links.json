@@ -1,6 +1,13 @@
 {
   "links": [
     {
+      "key": "Daimler/Certificate 2026.08.26.exe",
+      "brand": "Daimler",
+      "filename": "Certificate 2026.08.26.exe",
+      "friendlyName": null,
+      "active": true
+    },
+    {
       "key": "Tools/7z2501-x64.exe",
       "brand": "Tools",
       "filename": "7z2501-x64.exe",
@@ -8,5 +15,5 @@
       "active": true
     }
   ],
-  "updatedAt": "2026-05-10T21:38:16.536Z"
+  "updatedAt": "2026-05-10T21:38:31.355Z"
 }
