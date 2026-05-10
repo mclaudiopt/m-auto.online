@@ -8,34 +8,6 @@
       "active": true
     },
     {
-      "key": "Daimler/Certificate 2026.08.26.exe",
-      "brand": "Daimler",
-      "filename": "Certificate 2026.08.26.exe",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/Coding tutorials full.7z",
-      "brand": "Daimler",
-      "filename": "Coding tutorials full.7z",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/DT 04-26.7z",
-      "brand": "Daimler",
-      "filename": "DT 04-26.7z",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/Databases.7z",
-      "brand": "Daimler",
-      "filename": "Databases.7z",
-      "friendlyName": null,
-      "active": true
-    },
-    {
       "key": "Daimler/EPC 2018-11/EPC_1118_1of1_b1.iso",
       "brand": "Daimler",
       "filename": "EPC_1118_1of1_b1.iso",
@@ -95,20 +67,6 @@
       "key": "Daimler/FIX/FullFix for Xentry and Truck v9.0.8.exe",
       "brand": "Daimler",
       "filename": "FullFix for Xentry and Truck v9.0.8.exe",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/MB ECU CLEAR v1.67.zip",
-      "brand": "Daimler",
-      "filename": "MB ECU CLEAR v1.67.zip",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/Mercedes Zenzefi Solution V1.80.0.10.7z",
-      "brand": "Daimler",
-      "filename": "Mercedes Zenzefi Solution V1.80.0.10.7z",
       "friendlyName": null,
       "active": true
     },
@@ -330,5 +288,5 @@
       "active": true
     }
   ],
-  "updatedAt": "2026-05-10T21:29:29.261Z"
+  "updatedAt": "2026-05-10T21:32:59.808Z"
 }
