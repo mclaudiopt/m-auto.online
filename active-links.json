@@ -8,27 +8,6 @@
       "active": true
     },
     {
-      "key": "Daimler/EPC 2018-11/EPC_1118_1of1_b1.iso",
-      "brand": "Daimler",
-      "filename": "EPC_1118_1of1_b1.iso",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/EPC 2018-11/EPC_1118_1of4_a1.iso",
-      "brand": "Daimler",
-      "filename": "EPC_1118_1of4_a1.iso",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/EPC 2018-11/EPC_1118_2of4_a2.iso",
-      "brand": "Daimler",
-      "filename": "EPC_1118_2of4_a2.iso",
-      "friendlyName": null,
-      "active": true
-    },
-    {
       "key": "Daimler/EPC 2018-11/EPC_1118_3of4_a3.iso",
       "brand": "Daimler",
       "filename": "EPC_1118_3of4_a3.iso",
@@ -50,13 +29,6 @@
       "active": true
     },
     {
-      "key": "Daimler/EPC 2018-11/EWA.7z",
-      "brand": "Daimler",
-      "filename": "EWA.7z",
-      "friendlyName": null,
-      "active": true
-    },
-    {
       "key": "Daimler/FIX/FullFix By Samik v4.9.3.exe",
       "brand": "Daimler",
       "filename": "FullFix By Samik v4.9.3.exe",
@@ -67,55 +39,6 @@
       "key": "Daimler/FIX/FullFix for Xentry and Truck v9.0.8.exe",
       "brand": "Daimler",
       "filename": "FullFix for Xentry and Truck v9.0.8.exe",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/SDMEDIA.zip",
-      "brand": "Daimler",
-      "filename": "SDMEDIA.zip",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/Startfifinder 2024.7z",
-      "brand": "Daimler",
-      "filename": "Startfifinder 2024.7z",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/Vediamo J2534.exe",
-      "brand": "Daimler",
-      "filename": "Vediamo J2534.exe",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/Vin decoder.7z",
-      "brand": "Daimler",
-      "filename": "Vin decoder.7z",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/XENTRY.Diagnostics.OpenShell.v03.2026_26.3.4.rar",
-      "brand": "Daimler",
-      "filename": "XENTRY.Diagnostics.OpenShell.v03.2026_26.3.4.rar",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/vediamo 5 passthru.zip",
-      "brand": "Daimler",
-      "filename": "vediamo 5 passthru.zip",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/wis2021.rar",
-      "brand": "Daimler",
-      "filename": "wis2021.rar",
       "friendlyName": null,
       "active": true
     },
@@ -288,5 +211,5 @@
       "active": true
     }
   ],
-  "updatedAt": "2026-05-10T21:32:59.808Z"
+  "updatedAt": "2026-05-10T21:33:10.671Z"
 }
