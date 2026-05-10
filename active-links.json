@@ -8,20 +8,6 @@
       "active": true
     },
     {
-      "key": "Daimler/EPC 2018-11/EPC_1118_3of4_a3.iso",
-      "brand": "Daimler",
-      "filename": "EPC_1118_3of4_a3.iso",
-      "friendlyName": null,
-      "active": true
-    },
-    {
-      "key": "Daimler/EPC 2018-11/EPC_1118_4of4_a4.iso",
-      "brand": "Daimler",
-      "filename": "EPC_1118_4of4_a4.iso",
-      "friendlyName": null,
-      "active": true
-    },
-    {
       "key": "Daimler/EPC 2018-11/EPC_112018_FULL.rar",
       "brand": "Daimler",
       "filename": "EPC_112018_FULL.rar",
@@ -211,5 +197,5 @@
       "active": true
     }
   ],
-  "updatedAt": "2026-05-10T21:33:10.671Z"
+  "updatedAt": "2026-05-10T21:33:50.235Z"
 }
