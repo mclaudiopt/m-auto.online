@@ -319,7 +319,7 @@
       "key": "VW/VCDS.v25.3.0.And.Kolimer.Loader.v9.2.7z",
       "brand": "VW",
       "filename": "VCDS.v25.3.0.And.Kolimer.Loader.v9.2.7z",
-      "friendlyName": null,
+      "friendlyName": "VCDS",
       "active": true
     },
     {
@@ -330,5 +330,5 @@
       "active": true
     }
   ],
-  "updatedAt": "2026-05-10T21:07:30.445Z"
+  "updatedAt": "2026-05-10T21:29:29.261Z"
 }
