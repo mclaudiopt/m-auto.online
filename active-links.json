@@ -1,4 +1,12 @@
 {
-  "links": [],
-  "updatedAt": "2026-05-10T21:36:27.403Z"
+  "links": [
+    {
+      "key": "Tools/7z2501-x64.exe",
+      "brand": "Tools",
+      "filename": "7z2501-x64.exe",
+      "friendlyName": null,
+      "active": true
+    }
+  ],
+  "updatedAt": "2026-05-10T21:38:16.536Z"
 }
