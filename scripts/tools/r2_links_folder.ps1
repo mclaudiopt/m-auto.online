@@ -12,18 +12,8 @@ $BUCKET  = "r2-mauto:m-auto-software"
 $EXPIRES = "2h"
 $APP_ID  = "M-Auto.R2Link"
 
-# Mapping local roots → R2 prefix
-$ROOT_MAP = @{
-    "Z:\Daimler"  = "Daimler"
-    "Z:\Autodata" = "Autodata"
-    "Z:\Delphi"   = "Delphi"
-    "Z:\GM"       = "GM"
-    "Z:\PSA"      = "PSA"
-    "Z:\Renault"  = "Renault"
-    "Z:\Tools"    = "Tools"
-    "Z:\VW"       = "VW"
-    "Z:\hermes"   = "hermes"
-}
+# Local root drive — qualquer subpasta de Z:\ mapeia para o R2 com o mesmo nome
+$LOCAL_ROOT = "Z:\"
 
 #-- BalloonTip notification (no AppID registration needed) -------------------
 function Show-Toast {
@@ -51,18 +41,9 @@ if (-not (Test-Path $FolderPath -PathType Container)) {
     exit 1
 }
 
-# Resolver root mapeado
-$matchedRoot = $null
-$r2Prefix    = $null
-foreach ($k in $ROOT_MAP.Keys) {
-    if ($FolderPath -eq $k -or $FolderPath -like "$k\*") {
-        $matchedRoot = $k
-        $r2Prefix    = $ROOT_MAP[$k]
-        break
-    }
-}
-if (-not $matchedRoot) {
-    Show-Toast "R2 Links - Erro" "Pasta fora dos roots mapeados (Z:\Daimler, Z:\PSA, etc.)"
+# Validar que esta dentro de Z:\
+if ($FolderPath -notlike "$LOCAL_ROOT*" -and $FolderPath -ne $LOCAL_ROOT.TrimEnd('\')) {
+    Show-Toast "R2 Links - Erro" "Pasta fora de $LOCAL_ROOT"
     exit 1
 }
 
@@ -86,8 +67,8 @@ $pool = [System.Management.Automation.Runspaces.RunspaceFactory]::CreateRunspace
 $pool.Open()
 
 $jobs = foreach ($f in $files) {
-    $relPath = $f.FullName.Substring($matchedRoot.Length).TrimStart('\').Replace('\', '/')
-    $r2Path  = "$BUCKET/$r2Prefix/$relPath"
+    $relPath = $f.FullName.Substring($LOCAL_ROOT.Length).TrimStart('\').Replace('\', '/')
+    $r2Path  = "$BUCKET/$relPath"
 
     $ps = [PowerShell]::Create()
     $ps.RunspacePool = $pool
@@ -101,11 +82,13 @@ $jobs = foreach ($f in $files) {
 }
 
 #-- Construir output ---------------------------------------------------------
-$expiresAt = (Get-Date).AddHours(2).ToString("yyyy-MM-dd HH:mm")
+$expiresAt    = (Get-Date).AddHours(2)
+$expiresAtStr = $expiresAt.ToString("yyyy-MM-dd HH:mm:ss")
 $lines = New-Object System.Collections.Generic.List[string]
-$lines.Add("# R2 Presigned Links - $($matchedRoot)")
-$lines.Add("# Gerado: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  |  Expira: $expiresAt  ($EXPIRES)")
-$lines.Add("# Total: $($files.Count) ficheiro(s)")
+$lines.Add("# R2 Presigned Links - $FolderPath")
+$lines.Add("# Gerado: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')")
+$lines.Add("# Expira: $expiresAtStr  (validade: $EXPIRES)")
+$lines.Add("# Total:  $($files.Count) ficheiro(s)")
 $lines.Add("")
 
 $ok = 0; $fail = 0
@@ -135,4 +118,5 @@ $lines | Set-Content $tempFile -Encoding UTF8
 
 Start-Process notepad.exe -ArgumentList "`"$tempFile`""
 
-Show-Toast "R2 Links - Pronto" "$ok OK / $fail erros - aberto no Notepad"
+$expHour = $expiresAt.ToString("HH:mm")
+Show-Toast "R2 Links - Pronto (expira $expHour)" "$ok OK / $fail erros - aberto no Notepad"

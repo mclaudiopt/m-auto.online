@@ -12,18 +12,9 @@ $BUCKET  = "r2-mauto:m-auto-software"
 $EXPIRES = "2h"
 $APP_ID  = "M-Auto.R2Link"
 
-# Mapping local roots → R2 prefix
-$ROOT_MAP = @{
-    "Z:\Daimler"  = "Daimler"
-    "Z:\Autodata" = "Autodata"
-    "Z:\Delphi"   = "Delphi"
-    "Z:\GM"       = "GM"
-    "Z:\PSA"      = "PSA"
-    "Z:\Renault"  = "Renault"
-    "Z:\Tools"    = "Tools"
-    "Z:\VW"       = "VW"
-    "Z:\hermes"   = "hermes"
-}
+# Local root drive — qualquer subpasta de Z:\ mapeia para o R2 com o mesmo nome
+# Ex: Z:\Daimler\EPC\file.iso  ->  r2://m-auto-software/Daimler/EPC/file.iso
+$LOCAL_ROOT = "Z:\"
 
 #-- Notification via NotifyIcon BalloonTip (sem registo AppID) ---------------
 function Show-Toast {
@@ -59,24 +50,14 @@ if (-not (Test-Path $FilePath -PathType Leaf)) {
     exit 1
 }
 
-# Resolver root + caminho relativo
-$matchedRoot = $null
-$r2Prefix    = $null
-foreach ($k in $ROOT_MAP.Keys) {
-    if ($FilePath -like "$k\*") {
-        $matchedRoot = $k
-        $r2Prefix    = $ROOT_MAP[$k]
-        break
-    }
-}
-
-if (-not $matchedRoot) {
-    Show-Toast -Title "R2 Link - Erro" -Message "Ficheiro fora das pastas mapeadas (Z:\Daimler, Z:\PSA, etc.)" -Icon "Error"
+# Resolver caminho relativo a Z:\ (qualquer subpasta mapeia 1:1 para o R2)
+if ($FilePath -notlike "$LOCAL_ROOT*") {
+    Show-Toast -Title "R2 Link - Erro" -Message "Ficheiro fora de $LOCAL_ROOT" -Icon "Error"
     exit 1
 }
 
-$relPath = $FilePath.Substring($matchedRoot.Length).TrimStart('\').Replace('\', '/')
-$r2Path  = "$BUCKET/$r2Prefix/$relPath"
+$relPath = $FilePath.Substring($LOCAL_ROOT.Length).TrimStart('\').Replace('\', '/')
+$r2Path  = "$BUCKET/$relPath"
 
 #-- Gerar link ---------------------------------------------------------------
 $url = & $RCLONE link $r2Path --expire $EXPIRES 2>&1
@@ -92,4 +73,5 @@ Set-Clipboard -Value $url
 
 # Toast de sucesso
 $fileName = Split-Path $FilePath -Leaf
-Show-Toast -Title "R2 Link copiado ($EXPIRES)" -Message "$fileName`nClipboard: $($url.Substring(0, [Math]::Min(60, $url.Length)))..."
+$expiresAt = (Get-Date).AddHours(2).ToString("HH:mm")
+Show-Toast -Title "R2 Link copiado (expira $expiresAt)" -Message "$fileName`n`nValido $EXPIRES - URL no clipboard"
