@@ -25,47 +25,37 @@ $ROOT_MAP = @{
     "Z:\hermes"   = "hermes"
 }
 
-#-- Toast notification (Windows 10/11 native, no module needed) --------------
+#-- Notification via NotifyIcon BalloonTip (sem registo AppID) ---------------
 function Show-Toast {
     param(
         [string]$Title,
         [string]$Message,
-        [string]$Sound = "ms-winsoundevent:Notification.Default"
+        [string]$Icon = "Info"  # Info | Warning | Error
     )
-    try {
-        [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType=WindowsRuntime] | Out-Null
-        [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom, ContentType=WindowsRuntime] | Out-Null
+    Add-Type -AssemblyName System.Windows.Forms
+    Add-Type -AssemblyName System.Drawing
 
-        $xml = @"
-<toast>
-    <visual>
-        <binding template="ToastGeneric">
-            <text>$([System.Security.SecurityElement]::Escape($Title))</text>
-            <text>$([System.Security.SecurityElement]::Escape($Message))</text>
-        </binding>
-    </visual>
-    <audio src="$Sound"/>
-</toast>
-"@
-        $doc = New-Object Windows.Data.Xml.Dom.XmlDocument
-        $doc.LoadXml($xml)
-        $toast = [Windows.UI.Notifications.ToastNotification]::new($doc)
-        [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($APP_ID).Show($toast)
-    } catch {
-        # Fallback para MessageBox se toast falhar (PowerShell <5 ou erro)
-        Add-Type -AssemblyName System.Windows.Forms
-        [System.Windows.Forms.MessageBox]::Show($Message, $Title) | Out-Null
-    }
+    $ni = New-Object System.Windows.Forms.NotifyIcon
+    $ni.Icon = [System.Drawing.SystemIcons]::Information
+    $ni.BalloonTipTitle = $Title
+    $ni.BalloonTipText  = $Message
+    $ni.BalloonTipIcon  = [System.Windows.Forms.ToolTipIcon]::$Icon
+    $ni.Visible = $true
+    $ni.ShowBalloonTip(8000)
+
+    # Manter o icon vivo o tempo suficiente para o balao mostrar
+    Start-Sleep -Seconds 6
+    $ni.Dispose()
 }
 
 #-- Validacoes ---------------------------------------------------------------
 if (-not (Test-Path $RCLONE)) {
-    Show-Toast -Title "R2 Link - Erro" -Message "rclone nao encontrado." -Sound "ms-winsoundevent:Notification.Looping.Alarm"
+    Show-Toast -Title "R2 Link - Erro" -Message "rclone nao encontrado." -Icon "Error"
     exit 1
 }
 
 if (-not (Test-Path $FilePath -PathType Leaf)) {
-    Show-Toast -Title "R2 Link - Erro" -Message "Ficheiro nao encontrado: $FilePath" -Sound "ms-winsoundevent:Notification.Looping.Alarm"
+    Show-Toast -Title "R2 Link - Erro" -Message "Ficheiro nao encontrado: $FilePath" -Icon "Error"
     exit 1
 }
 
@@ -81,7 +71,7 @@ foreach ($k in $ROOT_MAP.Keys) {
 }
 
 if (-not $matchedRoot) {
-    Show-Toast -Title "R2 Link - Erro" -Message "Ficheiro fora das pastas mapeadas (Z:\Daimler, Z:\PSA, etc.)" -Sound "ms-winsoundevent:Notification.Looping.Alarm"
+    Show-Toast -Title "R2 Link - Erro" -Message "Ficheiro fora das pastas mapeadas (Z:\Daimler, Z:\PSA, etc.)" -Icon "Error"
     exit 1
 }
 

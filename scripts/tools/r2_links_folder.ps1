@@ -25,18 +25,20 @@ $ROOT_MAP = @{
     "Z:\hermes"   = "hermes"
 }
 
-#-- Toast helper -------------------------------------------------------------
+#-- BalloonTip notification (no AppID registration needed) -------------------
 function Show-Toast {
-    param([string]$Title, [string]$Message)
-    try {
-        [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType=WindowsRuntime] | Out-Null
-        [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom, ContentType=WindowsRuntime] | Out-Null
-        $xml = "<toast><visual><binding template='ToastGeneric'><text>$([System.Security.SecurityElement]::Escape($Title))</text><text>$([System.Security.SecurityElement]::Escape($Message))</text></binding></visual></toast>"
-        $doc = New-Object Windows.Data.Xml.Dom.XmlDocument
-        $doc.LoadXml($xml)
-        $toast = [Windows.UI.Notifications.ToastNotification]::new($doc)
-        [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($APP_ID).Show($toast)
-    } catch {}
+    param([string]$Title, [string]$Message, [string]$Icon = "Info")
+    Add-Type -AssemblyName System.Windows.Forms
+    Add-Type -AssemblyName System.Drawing
+    $ni = New-Object System.Windows.Forms.NotifyIcon
+    $ni.Icon = [System.Drawing.SystemIcons]::Information
+    $ni.BalloonTipTitle = $Title
+    $ni.BalloonTipText  = $Message
+    $ni.BalloonTipIcon  = [System.Windows.Forms.ToolTipIcon]::$Icon
+    $ni.Visible = $true
+    $ni.ShowBalloonTip(6000)
+    Start-Sleep -Seconds 4
+    $ni.Dispose()
 }
 
 #-- Validacoes ---------------------------------------------------------------
