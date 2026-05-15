@@ -2,6 +2,9 @@
 .claude/worktrees/
 .claude/settings.local.json
 
+# R2/S3 credentials (LOCAL ONLY - never commit)
+scripts/tools/.r2_credentials.ps1
+
 # Node modules
 node_modules/
 

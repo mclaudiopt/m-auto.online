@@ -7,13 +7,11 @@ param(
     [string]$FolderPath
 )
 
-$RCLONE  = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.73.4-windows-amd64\rclone.exe"
-$BUCKET  = "r2-mauto:m-auto-software"
-$EXPIRES = "2h"
-$APP_ID  = "M-Auto.R2Link"
+# Carrega Get-S3PresignedUrl + Get-S3Objects (sem rclone)
+. "$PSScriptRoot\r2_presign.ps1"
 
-# Local root drive — qualquer subpasta de Z:\ mapeia para o R2 com o mesmo nome
-$LOCAL_ROOT = "Z:\"
+$EXPIRES_SEC = 7200   # 2h
+$LOCAL_ROOT  = "Z:\"
 
 #-- BalloonTip notification with message pump (works under wscript hidden) ---
 function Show-Toast {
@@ -40,83 +38,63 @@ function Show-Toast {
 }
 
 #-- Validacoes ---------------------------------------------------------------
-if (-not (Test-Path $RCLONE)) {
-    Show-Toast "R2 Links - Erro" "rclone nao encontrado"
-    exit 1
-}
 if (-not (Test-Path $FolderPath -PathType Container)) {
     Show-Toast "R2 Links - Erro" "Pasta nao encontrada: $FolderPath"
     exit 1
 }
-
-# Validar que esta dentro de Z:\
 if ($FolderPath -notlike "$LOCAL_ROOT*" -and $FolderPath -ne $LOCAL_ROOT.TrimEnd('\')) {
     Show-Toast "R2 Links - Erro" "Pasta fora de $LOCAL_ROOT"
     exit 1
 }
 
-#-- Listar ficheiros (recursivo, exclui thumbs/error) ------------------------
-$files = Get-ChildItem $FolderPath -Recurse -File -ErrorAction SilentlyContinue |
-    Where-Object {
-        $_.FullName -notmatch '\\.@__thumb\\' -and
-        $_.Extension -ne '.error'
-    } |
-    Sort-Object FullName
+# Calcular prefix R2 (relativo a Z:\)
+$relFolder = $FolderPath.Substring($LOCAL_ROOT.Length).TrimStart('\').Replace('\', '/')
+$prefix    = if ($relFolder) { "$relFolder/" } else { "" }
+
+Show-Toast "R2 Links" "A listar ficheiros do R2..."
+
+#-- Listar ficheiros directamente do R2 (sem mount, sem cache) ---------------
+try {
+    $files = Get-S3Objects -Prefix $prefix |
+        Where-Object { -not $_.Key.EndsWith('/') } |
+        Sort-Object Key
+} catch {
+    Show-Toast "R2 Links - Erro" "Falha ao listar R2: $_" -Icon "Error"
+    exit 1
+}
 
 if ($files.Count -eq 0) {
-    Show-Toast "R2 Links" "Pasta vazia: $FolderPath"
+    Show-Toast "R2 Links" "Pasta vazia no R2: $prefix"
     exit 0
 }
 
-Show-Toast "R2 Links" "A gerar $($files.Count) link(s) em paralelo..."
+Show-Toast "R2 Links" "A gerar $($files.Count) link(s) presigned..."
 
-#-- Gerar links em paralelo (runspace pool) ----------------------------------
-$pool = [System.Management.Automation.Runspaces.RunspaceFactory]::CreateRunspacePool(1, [Math]::Min($files.Count, 8))
-$pool.Open()
-
-$jobs = foreach ($f in $files) {
-    $relPath = $f.FullName.Substring($LOCAL_ROOT.Length).TrimStart('\').Replace('\', '/')
-    $r2Path  = "$BUCKET/$relPath"
-
-    $ps = [PowerShell]::Create()
-    $ps.RunspacePool = $pool
-    [void]$ps.AddScript({
-        param($rclone, $r2path, $expires)
-        $url = & $rclone link $r2path --expire $expires 2>&1
-        return @{ ok = ($LASTEXITCODE -eq 0); url = "$url".Trim() }
-    }).AddParameters(@{ rclone = $RCLONE; r2path = $r2Path; expires = $EXPIRES })
-
-    @{ ps = $ps; handle = $ps.BeginInvoke(); file = $f; rel = $relPath }
-}
-
-#-- Construir output ---------------------------------------------------------
-$expiresAt    = (Get-Date).AddHours(2)
+#-- Gerar URLs (instantaneo, calculo local) ----------------------------------
+$expiresAt    = (Get-Date).AddSeconds($EXPIRES_SEC)
 $expiresAtStr = $expiresAt.ToString("yyyy-MM-dd HH:mm:ss")
 $lines = New-Object System.Collections.Generic.List[string]
 $lines.Add("# R2 Presigned Links - $FolderPath")
 $lines.Add("# Gerado: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')")
-$lines.Add("# Expira: $expiresAtStr  (validade: $EXPIRES)")
+$lines.Add("# Expira: $expiresAtStr  (validade: $($EXPIRES_SEC/3600)h)")
 $lines.Add("# Total:  $($files.Count) ficheiro(s)")
 $lines.Add("")
 
 $ok = 0; $fail = 0
-foreach ($job in $jobs) {
-    $out = $job.ps.EndInvoke($job.handle)
-    $job.ps.Dispose()
-    if ($out.ok) {
-        $sizeMB = [math]::Round($job.file.Length / 1MB, 1)
-        $lines.Add("# $($job.rel)  ($sizeMB MB)")
-        $lines.Add($out.url)
+foreach ($f in $files) {
+    try {
+        $url = Get-S3PresignedUrl -Key $f.Key -ExpiresSeconds $EXPIRES_SEC
+        $sizeMB = [math]::Round($f.Size / 1MB, 1)
+        $lines.Add("# $($f.Key)  ($sizeMB MB)")
+        $lines.Add($url)
         $lines.Add("")
         $ok++
-    } else {
-        $lines.Add("# $($job.rel)  -- ERRO")
-        $lines.Add("# $($out.url)")
+    } catch {
+        $lines.Add("# $($f.Key)  -- ERRO: $_")
         $lines.Add("")
         $fail++
     }
 }
-$pool.Close()
 
 #-- Guardar e abrir no Notepad ------------------------------------------------
 $folderName = Split-Path $FolderPath -Leaf
