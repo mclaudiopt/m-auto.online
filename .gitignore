@@ -5,6 +5,9 @@
 # R2/S3 credentials (LOCAL ONLY - never commit)
 scripts/tools/.r2_credentials.ps1
 
+# Local backups (registry exports + scripts copies)
+scripts/tools/_backup/
+
 # Node modules
 node_modules/
 
