@@ -4,13 +4,16 @@
 
 param(
     [Parameter(Mandatory=$true, Position=0)]
-    [string]$FolderPath
+    [string]$FolderPath,
+    [ValidateSet("HTTP","Aria")]
+    [string]$Mode = "HTTP"
 )
 
 # Carrega Get-S3PresignedUrl + Get-S3Objects (sem rclone)
 . "$PSScriptRoot\r2_presign.ps1"
 
-$EXPIRES_SEC = 7200   # 2h
+# HTTP=4h (uso rapido), Aria=24h (downloads longos)
+$EXPIRES_SEC = if ($Mode -eq "Aria") { 86400 } else { 14400 }
 $LOCAL_ROOT  = "Z:\"
 
 #-- BalloonTip notification with message pump (works under wscript hidden) ---

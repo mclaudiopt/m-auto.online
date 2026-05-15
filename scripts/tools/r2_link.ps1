@@ -4,14 +4,17 @@
 
 param(
     [Parameter(Mandatory=$true, Position=0)]
-    [string]$FilePath
+    [string]$FilePath,
+    [ValidateSet("HTTP","Aria")]
+    [string]$Mode = "HTTP"
 )
 
 # Carrega Get-S3PresignedUrl (sem dependencia de rclone)
 . "$PSScriptRoot\r2_presign.ps1"
 
-$EXPIRES_SEC = 7200   # 2h
-$LOCAL_ROOT  = "Z:\"  # mount usado APENAS para localizar caminhos via Explorer
+# HTTP=4h (uso rapido), Aria=24h (downloads longos)
+$EXPIRES_SEC = if ($Mode -eq "Aria") { 86400 } else { 14400 }
+$LOCAL_ROOT  = "Z:\"
 
 #-- Notification via NotifyIcon BalloonTip (com message pump) ----------------
 # Application.Run() e essencial quando lancado via wscript hidden
@@ -76,6 +79,7 @@ try {
 Set-Clipboard -Value $url
 
 # Toast de sucesso
-$fileName = Split-Path $FilePath -Leaf
+$fileName  = Split-Path $FilePath -Leaf
 $expiresAt = (Get-Date).AddSeconds($EXPIRES_SEC).ToString("HH:mm")
-Show-Toast -Title "R2 Link copiado (expira $expiresAt)" -Message "$fileName`n`nURL no clipboard"
+$validHrs  = $EXPIRES_SEC / 3600
+Show-Toast -Title "Link $Mode copiado (expira $expiresAt, ${validHrs}h)" -Message "$fileName`n`nURL no clipboard"
