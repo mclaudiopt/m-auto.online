@@ -15,20 +15,28 @@ $APP_ID  = "M-Auto.R2Link"
 # Local root drive — qualquer subpasta de Z:\ mapeia para o R2 com o mesmo nome
 $LOCAL_ROOT = "Z:\"
 
-#-- BalloonTip notification (no AppID registration needed) -------------------
+#-- BalloonTip notification with message pump (works under wscript hidden) ---
 function Show-Toast {
-    param([string]$Title, [string]$Message, [string]$Icon = "Info")
+    param([string]$Title, [string]$Message, [string]$Icon = "Info", [int]$DurationMs = 6000)
     Add-Type -AssemblyName System.Windows.Forms
     Add-Type -AssemblyName System.Drawing
+    $ctx = New-Object System.Windows.Forms.ApplicationContext
     $ni = New-Object System.Windows.Forms.NotifyIcon
     $ni.Icon = [System.Drawing.SystemIcons]::Information
     $ni.BalloonTipTitle = $Title
     $ni.BalloonTipText  = $Message
     $ni.BalloonTipIcon  = [System.Windows.Forms.ToolTipIcon]::$Icon
     $ni.Visible = $true
-    $ni.ShowBalloonTip(6000)
-    Start-Sleep -Seconds 4
-    $ni.Dispose()
+    $ni.add_BalloonTipClosed( { $ctx.ExitThread() })
+    $ni.add_BalloonTipClicked({ $ctx.ExitThread() })
+    $timer = New-Object System.Windows.Forms.Timer
+    $timer.Interval = $DurationMs + 1500
+    $timer.Add_Tick({ $timer.Stop(); $ctx.ExitThread() })
+    $timer.Start()
+    $ni.ShowBalloonTip($DurationMs)
+    [System.Windows.Forms.Application]::Run($ctx)
+    $timer.Stop(); $timer.Dispose()
+    $ni.Visible = $false; $ni.Dispose()
 }
 
 #-- Validacoes ---------------------------------------------------------------

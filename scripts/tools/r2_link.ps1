@@ -16,26 +16,41 @@ $APP_ID  = "M-Auto.R2Link"
 # Ex: Z:\Daimler\EPC\file.iso  ->  r2://m-auto-software/Daimler/EPC/file.iso
 $LOCAL_ROOT = "Z:\"
 
-#-- Notification via NotifyIcon BalloonTip (sem registo AppID) ---------------
+#-- Notification via NotifyIcon BalloonTip (com message pump) ----------------
+# Application.Run() e essencial quando lancado via wscript hidden
 function Show-Toast {
     param(
         [string]$Title,
         [string]$Message,
-        [string]$Icon = "Info"  # Info | Warning | Error
+        [string]$Icon = "Info",  # Info | Warning | Error
+        [int]$DurationMs = 7000
     )
     Add-Type -AssemblyName System.Windows.Forms
     Add-Type -AssemblyName System.Drawing
 
-    $ni = New-Object System.Windows.Forms.NotifyIcon
+    $ctx = New-Object System.Windows.Forms.ApplicationContext
+    $ni  = New-Object System.Windows.Forms.NotifyIcon
     $ni.Icon = [System.Drawing.SystemIcons]::Information
     $ni.BalloonTipTitle = $Title
     $ni.BalloonTipText  = $Message
     $ni.BalloonTipIcon  = [System.Windows.Forms.ToolTipIcon]::$Icon
     $ni.Visible = $true
-    $ni.ShowBalloonTip(8000)
 
-    # Manter o icon vivo o tempo suficiente para o balao mostrar
-    Start-Sleep -Seconds 6
+    $ni.add_BalloonTipClosed( { $ctx.ExitThread() })
+    $ni.add_BalloonTipClicked({ $ctx.ExitThread() })
+
+    # Timer de seguranca para sair se o balao nao disparar evento de close
+    $timer = New-Object System.Windows.Forms.Timer
+    $timer.Interval = $DurationMs + 1500
+    $timer.Add_Tick({ $timer.Stop(); $ctx.ExitThread() })
+    $timer.Start()
+
+    $ni.ShowBalloonTip($DurationMs)
+    [System.Windows.Forms.Application]::Run($ctx)
+
+    $timer.Stop()
+    $timer.Dispose()
+    $ni.Visible = $false
     $ni.Dispose()
 }
 
