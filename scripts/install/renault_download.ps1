@@ -402,7 +402,7 @@ while ($retry -lt $maxRetries) {
             }
         } else {
             # MELHORIA: multi-select
-            $parsed = Parse-Selection -input $choice -maxNum $links.Count
+            $parsed = Parse-Selection -selection $choice -maxNum $links.Count
             if ($parsed) {
                 $toDownload = $parsed
             } else {
