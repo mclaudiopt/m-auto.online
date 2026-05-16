@@ -326,6 +326,7 @@ function Invoke-Aria2Download {
         "--retry-wait=2",
         "--timeout=300",
         "--connect-timeout=60",
+        "--disable-ipv6=true",
         "--console-log-level=error",
         "--summary-interval=0",
         "--file-allocation=prealloc",

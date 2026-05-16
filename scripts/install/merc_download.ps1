@@ -228,6 +228,7 @@ function Invoke-Download {
     $argList.Add("--retry-wait=3")
     $argList.Add("--timeout=300")
     $argList.Add("--connect-timeout=60")
+    $argList.Add("--disable-ipv6=true")
     $argList.Add("--console-log-level=error")
     $argList.Add("--summary-interval=0")
     $argList.Add("--file-allocation=prealloc")
