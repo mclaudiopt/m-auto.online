@@ -45,10 +45,10 @@ function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $ms
 
 #-- Parsear multi-select: "1,3,5" ou "1-3" ou "2" ---------------------------
 function Parse-Selection {
-    param([string]$input, [int]$maxNum)
+    param([string]$selection, [int]$maxNum)
     $selected = @()
 
-    $parts = $input -split ','
+    $parts = $selection -split ','
     foreach ($part in $parts) {
         $part = $part.Trim()
         if ($part -match '^(\d+)-(\d+)$') {

@@ -18,9 +18,9 @@ try {
 
 #-- Parse-Selection: Suporta "1", "1,3,5", "1-3" --------------------------
 function Parse-Selection {
-    param([string]$input, [int]$maxNum)
+    param([string]$selection, [int]$maxNum)
     $selected = @()
-    $parts = $input -split ','
+    $parts = $selection -split ','
     foreach ($part in $parts) {
         $part = $part.Trim()
         if ($part -match '^(\d+)-(\d+)$') {
