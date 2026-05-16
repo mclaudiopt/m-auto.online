@@ -1,14 +1,9 @@
-﻿# install/renault_download_v2.ps1 v2.0 - Renault Pack Download (Enhanced)
-# Features: Checksums, Smart Retry, Resume, Windows Notifications, History Cleanup
+# install/merc_download.ps1 v2.0 - PSA Pack Download (Enhanced)
+# Features: Checksums, Smart Retry, Resume, Windows Notifications
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
-
-#-- Import shared functions ---------------------------------------------------
-. ".\shared-functions.ps1"
-
-$LOG_DIR = "C:\M-auto\Logs"
 
 #-- Parse-Selection: Suporta "1", "1,3,5", "1-3" --------------------------
 function Parse-Selection {
@@ -38,7 +33,7 @@ function Parse-Selection {
     return @($selected | Sort-Object -Unique)
 }
 
-$LINKS_URL = "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/scripts/data/renault_links.json"
+$LINKS_URL = "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/scripts/data/psa_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"
 $LOG_DIR   = "C:\M-auto\Logs"
 $MAX_RETRIES = 3
@@ -64,18 +59,18 @@ function Write-Log($msg, $level = "INFO") {
 function Write-Header {
     Clear-Host
     Write-Host ""
-    Write-Host "  ${e}[38;2;29;155;255mâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—${e}[0m"
-    Write-Host "  ${e}[38;2;29;155;255mâ•‘${e}[0m  ${e}[1;97mRenault Pack 2026${e}[0m  ${e}[38;2;100;149;237mâ”‚  Enhanced Downloader${e}[0m      ${e}[38;2;29;155;255mâ•‘${e}[0m"
-    Write-Host "  ${e}[38;2;29;155;255mâ•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•${e}[0m"
-    Write-Host "  ${e}[38;2;148;163;184m  âœ“ Checksums  âœ“ Smart Retry  âœ“ Resume  âœ“ Notifications${e}[0m"
+    Write-Host "  ${e}[38;2;29;155;255m╔══════════════════════════════════════════════════════╗${e}[0m"
+    Write-Host "  ${e}[38;2;29;155;255m║${e}[0m  ${e}[1;97mPSA Pack 2026${e}[0m  ${e}[38;2;100;149;237m│  Enhanced Downloader${e}[0m      ${e}[38;2;29;155;255m║${e}[0m"
+    Write-Host "  ${e}[38;2;29;155;255m╚══════════════════════════════════════════════════════╝${e}[0m"
+    Write-Host "  ${e}[38;2;148;163;184m  ✓ Checksums  ✓ Smart Retry  ✓ Resume  ✓ Notifications${e}[0m"
     Write-Host ""
 }
 
-function Write-OK($msg)   { Write-Host "  ${e}[38;2;46;204;113mâœ“${e}[0m  ${e}[38;2;46;204;113m$msg${e}[0m"; Write-Log $msg "OK" }
-function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68mâœ—${e}[0m  ${e}[38;2;239;68;68m$msg${e}[0m"; Write-Log $msg "ERROR" }
-function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21mâš ${e}[0m  ${e}[38;2;250;204;21m$msg${e}[0m"; Write-Log $msg "WARN" }
-function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184mâ—${e}[0m  ${e}[38;2;148;163;184m$msg${e}[0m"; Write-Log $msg "INFO" }
-function Write-Progress($msg) { Write-Host "  ${e}[38;2;52;152;219mâ–¶${e}[0m  ${e}[38;2;52;152;219m$msg${e}[0m" }
+function Write-OK($msg)   { Write-Host "  ${e}[38;2;46;204;113m✓${e}[0m  ${e}[38;2;46;204;113m$msg${e}[0m"; Write-Log $msg "OK" }
+function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m✗${e}[0m  ${e}[38;2;239;68;68m$msg${e}[0m"; Write-Log $msg "ERROR" }
+function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m⚠${e}[0m  ${e}[38;2;250;204;21m$msg${e}[0m"; Write-Log $msg "WARN" }
+function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m●${e}[0m  ${e}[38;2;148;163;184m$msg${e}[0m"; Write-Log $msg "INFO" }
+function Write-Progress($msg) { Write-Host "  ${e}[38;2;52;152;219m▶${e}[0m  ${e}[38;2;52;152;219m$msg${e}[0m" }
 
 #-- Windows Toast Notification -----------------------------------------------
 function Show-Notification($title, $message, $sound = $true) {
@@ -116,8 +111,8 @@ function Get-ProgressBar($percent, $width = 50) {
     elseif ($percent -ge 25) { "96;165;250" }
     else { "148;163;184" }
 
-    $barFill = "${e}[48;2;${color}m" + ("â–ˆ" * $filled) + "${e}[0m"
-    $barEmpty = "${e}[48;2;30;41;59m" + ("â–‘" * $empty) + "${e}[0m"
+    $barFill = "${e}[48;2;${color}m" + ("█" * $filled) + "${e}[0m"
+    $barEmpty = "${e}[48;2;30;41;59m" + ("░" * $empty) + "${e}[0m"
     return "$barFill$barEmpty"
 }
 
@@ -227,7 +222,7 @@ function Get-Links {
         }
 
         $timeLeft = $exp.ToUniversalTime() - (Get-Date).ToUniversalTime()
-        Write-OK "Links validos â€” expira em $(Format-ETA $timeLeft.TotalSeconds)"
+        Write-OK "Links validos — expira em $(Format-ETA $timeLeft.TotalSeconds)"
         return $json.files
     } catch {
         Write-Err "Erro ao verificar links: $_"
@@ -312,7 +307,7 @@ function Invoke-Aria2Download {
     $argList = @(
         "--max-connection-per-server=$cn",
         "--split=$cn",
-        "--min-split-size=256K",  # Chunks pequenos = rebalanceamento dinÃ¢mico = fim rÃ¡pido
+        "--min-split-size=256K",  # Chunks pequenos = rebalanceamento dinâmico = fim rápido
         "--continue=true",
         "--max-tries=3",
         "--retry-wait=2",
@@ -347,7 +342,7 @@ function Invoke-Aria2Download {
     $startTime = Get-Date
     $samples = [System.Collections.Generic.Queue[object]]::new()
     $spinIdx = 0
-    $spinChars = @('â ‹','â ™','â ¹','â ¸','â ¼','â ´','â ¦','â §','â ‡','â ')
+    $spinChars = @('⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏')
 
     while (-not $proc.HasExited) {
         Start-Sleep -Milliseconds 400
@@ -434,12 +429,12 @@ function Invoke-DownloadWithRetry {
     }
 
     Write-Host ""
-    Write-Host "  ${e}[38;2;100;149;237mâ”Œâ”€ Download [$Idx/$Total] â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”${e}[0m"
-    Write-Host "  ${e}[38;2;100;149;237mâ”‚${e}[0m ${e}[1;97m$displayName${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m┌─ Download [$Idx/$Total] ─────────────────────────────────────┐${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[1;97m$displayName${e}[0m"
     if ($Size -gt 0) {
-        Write-Host "  ${e}[38;2;100;149;237mâ”‚${e}[0m ${e}[38;2;148;163;184mTamanho: $(Format-FileSize $Size)${e}[0m"
+        Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[38;2;148;163;184mTamanho: $(Format-FileSize $Size)${e}[0m"
     }
-    Write-Host "  ${e}[38;2;100;149;237mâ””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜${e}[0m"
+    Write-Host "  ${e}[38;2;100;149;237m└──────────────────────────────────────────────────────────────┘${e}[0m"
     Write-Host ""
 
     $attempt = 0
@@ -483,7 +478,7 @@ Write-Header
 
 if (-not (Test-WritePermissions)) {
     Start-Sleep -Seconds 3
-    Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
+    exit 1
 }
 
 $proxy = Get-ProxyConfig
@@ -501,7 +496,7 @@ while ($retry -lt $maxRetries) {
         Write-Header
 
         # Status de ficheiros
-        Write-Host "  ${e}[38;2;100;149;237mâ”Œâ”€ Ficheiros Disponiveis ($($links.Count)) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”${e}[0m"
+        Write-Host "  ${e}[38;2;100;149;237m┌─ Ficheiros Disponiveis ($($links.Count)) ────────────────────────┐${e}[0m"
         for ($i = 0; $i -lt $links.Count; $i++) {
             $f = $links[$i]
             $dest = Join-Path $DEST_DIR $f.name
@@ -510,17 +505,17 @@ while ($retry -lt $maxRetries) {
 
             if (Test-Path $dest) {
                 $size = Format-FileSize (Get-Item $dest).Length
-                Write-Host "  ${e}[38;2;100;149;237mâ”‚${e}[0m ${e}[38;2;46;204;113mâœ“${e}[0m ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[97m$displayName${e}[0m ${e}[38;2;100;130;100m($size)${e}[0m"
+                Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[38;2;46;204;113m✓${e}[0m ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[97m$displayName${e}[0m ${e}[38;2;100;130;100m($size)${e}[0m"
             } else {
-                Write-Host "  ${e}[38;2;100;149;237mâ”‚${e}[0m ${e}[38;2;250;204;21mâ—‹${e}[0m ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[97m$displayName${e}[0m ${e}[38;2;148;163;184m(pendente)${e}[0m"
+                Write-Host "  ${e}[38;2;100;149;237m│${e}[0m ${e}[38;2;250;204;21m○${e}[0m ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[97m$displayName${e}[0m ${e}[38;2;148;163;184m(pendente)${e}[0m"
             }
         }
-        Write-Host "  ${e}[38;2;100;149;237mâ””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜${e}[0m"
+        Write-Host "  ${e}[38;2;100;149;237m└──────────────────────────────────────────────────────────────┘${e}[0m"
         Write-Host ""
         Write-Host "  ${e}[38;2;148;163;184mOpcoes:${e}[0m"
         Write-Host "    ${e}[38;2;52;152;219m[A]${e}[0m Transferir todos os ficheiros em falta"
         Write-Host "    ${e}[38;2;239;68;68m[0]${e}[0m Voltar ao menu anterior"
-        Write-Host "    ${e}[38;2;52;152;219m[1-$($links.Count)]${e}[0m Transferir ficheiro(s) â€” multi-select: [1,3,5] ou [1-3]"
+        Write-Host "    ${e}[38;2;52;152;219m[1-$($links.Count)]${e}[0m Transferir ficheiro(s) — multi-select: [1,3,5] ou [1-3]"
         Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
         if ($choice -eq "0" -or $choice -eq "0") { Write-Info "A voltar ao menu..."; Start-Sleep -Seconds 1; return }
         Write-Host ""
@@ -528,7 +523,7 @@ while ($retry -lt $maxRetries) {
 
         if ($choice -eq "S" -or $choice -eq "s") {
             Write-Info "Cancelado pelo utilizador"
-            Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 0
+            exit 0
         }
 
         $toDownload = @()
@@ -545,7 +540,7 @@ while ($retry -lt $maxRetries) {
             if ($parsed -ne $null) {
                 $toDownload = $parsed
             } else {
-                Write-Err "Opcao invalida â€” use [1], [1,3], [1-3], [A], [0] ou [S]"
+                Write-Err "Opcao invalida — use [1], [1,3], [1-3], [A], [0] ou [S]"
                 Start-Sleep -Seconds 2
                 continue
             }
@@ -554,7 +549,7 @@ while ($retry -lt $maxRetries) {
         if ($toDownload.Count -eq 0) {
             Write-OK "Todos os ficheiros ja foram transferidos"
             Start-Sleep -Seconds 2
-            Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 0
+            exit 0
         }
 
         Write-Header
@@ -578,7 +573,7 @@ while ($retry -lt $maxRetries) {
         $elapsedStr = Format-ETA $elapsed
 
         Write-Host ""
-        Write-Host "  ${e}[38;2;100;149;237mâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•${e}[0m"
+        Write-Host "  ${e}[38;2;100;149;237m═══════════════════════════════════════════════════════${e}[0m"
         if ($ok -gt 0) { Write-OK "$ok ficheiro(s) transferido(s) com sucesso" }
         if ($fail -gt 0) { Write-Err "$fail ficheiro(s) falharam" }
         Write-Info "Tempo total: $elapsedStr"
@@ -617,5 +612,4 @@ Write-Host ""
 Write-Err "Timeout: links nao renovados apos 5 minutos"
 Write-Host ""
 Read-Host "  Pressione ENTER para sair"
-Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
-
+exit 1

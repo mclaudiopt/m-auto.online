@@ -1,16 +1,12 @@
-# install/merc_download.ps1 - Mercedes Full Pack Download (ENHANCED)
-# v4.0: SHA256, Smart Retry, Notifications, Cache, History Cleanup
+# install/merc_download.ps1 - Mercedes Full Pack Download (IMPROVED)
+# v3.0: Multi-select files + realistic progress bar
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
 
-#-- Import shared functions ---------------------------------------------------
-. ".\shared-functions.ps1"
-
 $LINKS_URL = "https://m-auto.online/merc_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"
-$LOG_DIR   = "C:\M-auto\Logs"
 
 # Aliases para ficheiros
 $FILE_ALIASES = @{
@@ -188,7 +184,7 @@ function Get-RemoteSize {
     } catch { return 0 }
 }
 
-#-- Download com aria2c + SHA256 + Smart Retry + Notifications ----
+#-- Download com aria2c (MELHORADO: conexoes dinamicas, progresso mais realista) ----
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
 
@@ -196,8 +192,6 @@ function Invoke-Download {
     $destDir  = Split-Path $dest -Parent
     $fileName = Split-Path $dest -Leaf
     $width    = 50
-    $downloadName = if ($FILE_ALIASES.ContainsKey($Name)) { $FILE_ALIASES[$Name] } else { $Name }
-    $firedThresholds = @()
 
     if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
 
@@ -209,12 +203,14 @@ function Invoke-Download {
     Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })"
 
     $proxy = Get-ProxyConfig
+    # MELHORIA: usar menos conexoes paralelas para progresso mais realista
+    # 4 conexoes: mais estavel, progresso linear
     $cn = 4
 
     $argList = [System.Collections.Generic.List[string]]::new()
     $argList.Add("--max-connection-per-server=$cn")
     $argList.Add("--split=$cn")
-    $argList.Add("--min-split-size=256K")
+    $argList.Add("--min-split-size=256K")  # Chunks pequenos = rebalanceamento dinâmico = fim rápido
     $argList.Add("--continue=true")
     $argList.Add("--max-tries=3")
     $argList.Add("--retry-wait=2")
@@ -222,7 +218,7 @@ function Invoke-Download {
     $argList.Add("--connect-timeout=30")
     $argList.Add("--console-log-level=error")
     $argList.Add("--summary-interval=0")
-    $argList.Add("--file-allocation=prealloc")
+    $argList.Add("--file-allocation=prealloc")  # pre-alocar para melhor estimativa
     $argList.Add("--check-certificate=false")
     $argList.Add("--auto-file-renaming=false")
     $argList.Add("--allow-overwrite=true")
@@ -289,9 +285,6 @@ function Invoke-Download {
             $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
             $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
             Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $speedMB MB/s  ETA $eta  [$Idx/$Total]${e}[0m  "
-
-            # Fire progress notifications at 25%, 50%, 75%, 100%
-            $firedThresholds = Show-ProgressNotification -percent $pct -downloadName $downloadName -etaSeconds ([int]$eta.Split(':')[0] * 60) -firedThresholds $firedThresholds
         } else {
             $spin  = $spinChars[$spinIdx % $spinChars.Count]; $spinIdx++
             $pulse = $spinIdx % ($width * 2)
@@ -308,20 +301,7 @@ function Invoke-Download {
 
     if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
         $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-        $fileSize = (Get-Item $dest).Length
-        $sha256 = Get-FileSHA256 -filePath $dest
-
         Write-OK "$Name transferido ($finalMB MB)."
-
-        # Update SHA256 manifest
-        if ($sha256) {
-            Update-DownloadManifest -filename $Name -size $fileSize -sha256 $sha256 -status "success" -logDir $LOG_DIR
-            Write-Host "  ${e}[38;2;100;149;237m[SHA256]${e}[0m $sha256"
-        }
-
-        # Fire 100% notification
-        $firedThresholds = Show-ProgressNotification -percent 100 -downloadName $downloadName -firedThresholds $firedThresholds
-
         return $true
     }
 
@@ -387,16 +367,11 @@ while ($retry -lt $maxRetries) {
         if ($choice -eq "0") {
             Write-Info "A voltar ao menu..."
             Start-Sleep -Seconds 1
-            # Clear history before returning
-            Clear-History -ErrorAction SilentlyContinue
             return
         }
 
         if ($choice -eq "S" -or $choice -eq "s") {
             Write-Info "Cancelado pelo utilizador."
-            # Clear history before exit
-            Clear-History -ErrorAction SilentlyContinue
-            Write-Info "Local history cleared for security"
             exit 0
         }
 
@@ -428,8 +403,6 @@ while ($retry -lt $maxRetries) {
         if ($toDownload.Count -eq 0) {
             Write-Info "Nenhum ficheiro para transferir."
             Start-Sleep -Seconds 2
-            Clear-History -ErrorAction SilentlyContinue
-            Write-Info "Local history cleared for security"
             exit 0
         }
 
@@ -499,9 +472,4 @@ Write-Host ""
 Write-Err "Timeout: links nao renovados apos 5 minutos."
 Write-Host ""
 Read-Host "  Pressione ENTER para voltar"
-
-# Clear PowerShell history (transparent cleanup for security)
-Clear-History -ErrorAction SilentlyContinue
-Write-Info "Local history cleared for security"
-
 exit 1

@@ -1,9 +1,14 @@
-# install/renault_download.ps1 - Renault CLIP Download (IMPROVED)
-# v2.0: Multi-select files + linear progress bar
+﻿# install/renault_download.ps1 - Renault CLIP Download (ENHANCED)
+# v3.0: SHA256, Smart Retry, Notifications, Cache, History Cleanup
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
+
+#-- Import shared functions ---------------------------------------------------
+. ".\shared-functions.ps1"
+
+$LOG_DIR = "C:\M-auto\Logs"
 
 #-- Parse-Selection: Suporta "1", "1,3,5", "1-3" --------------------------
 function Parse-Selection {
@@ -210,7 +215,7 @@ function Invoke-Download {
     $argList = [System.Collections.Generic.List[string]]::new()
     $argList.Add("--max-connection-per-server=$cn")
     $argList.Add("--split=$cn")
-    $argList.Add("--min-split-size=256K")  # Chunks pequenos = rebalanceamento dinâmico = fim rápido
+    $argList.Add("--min-split-size=256K")  # Chunks pequenos = rebalanceamento dinÃ¢mico = fim rÃ¡pido
     $argList.Add("--continue=true")
     $argList.Add("--max-tries=3")
     $argList.Add("--retry-wait=2")
@@ -319,7 +324,7 @@ Write-Header
 
 if (-not (Test-WritePermissions)) {
     Start-Sleep -Seconds 3
-    exit 1
+    Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
 }
 
 $proxy = Get-ProxyConfig
@@ -333,7 +338,7 @@ while ($retry -lt $maxRetries) {
 
     if ($links) {
         Write-Header
-        Write-OK "Links validos — $($links.Count) ficheiro(s) disponiveis."
+        Write-OK "Links validos â€” $($links.Count) ficheiro(s) disponiveis."
         Write-Host ""
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
         Write-Host ""
@@ -345,7 +350,7 @@ while ($retry -lt $maxRetries) {
 
             if (Test-Path $dest) {
                 $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-                Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
+                Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB â€” ja existe)${e}[0m"
             } else {
                 Write-Host "  ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[38;2;250;204;21m[--]${e}[0m  $($f.name) ${e}[38;2;148;163;184m(por transferir)${e}[0m"
             }
@@ -371,7 +376,7 @@ while ($retry -lt $maxRetries) {
 
         if ($choice -eq "S" -or $choice -eq "s") {
             Write-Info "Cancelado pelo utilizador."
-            exit 0
+            Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 0
         }
 
         $toDownload = @()
@@ -402,11 +407,11 @@ while ($retry -lt $maxRetries) {
         if ($toDownload.Count -eq 0) {
             Write-Info "Nenhum ficheiro para transferir."
             Start-Sleep -Seconds 2
-            exit 0
+            Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 0
         }
 
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — 4 conexoes por ficheiro..."
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s) â€” 4 conexoes por ficheiro..."
         Write-Host ""
 
         $ok = 0; $fail = 0
@@ -470,4 +475,5 @@ Write-Host ""
 Write-Err "Timeout: links nao renovados apos 5 minutos."
 Write-Host ""
 Read-Host "  Pressione ENTER para voltar"
-exit 1
+Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
+
