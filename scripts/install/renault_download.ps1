@@ -223,7 +223,7 @@ function Invoke-Download {
     $argList = [System.Collections.Generic.List[string]]::new()
     $argList.Add("--max-connection-per-server=$cn")
     $argList.Add("--split=$cn")
-    $argList.Add("--min-split-size=256K")  # Chunks pequenos = rebalanceamento dinÃ¢mico = fim rÃ¡pido
+    $argList.Add("--min-split-size=1M")  # Chunks pequenos = rebalanceamento dinÃ¢mico = fim rÃ¡pido
     $argList.Add("--continue=true")
     $argList.Add("--max-tries=3")
     $argList.Add("--retry-wait=2")

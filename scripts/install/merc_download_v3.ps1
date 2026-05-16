@@ -222,7 +222,7 @@ function Invoke-Download {
     $argList = [System.Collections.Generic.List[string]]::new()
     $argList.Add("--max-connection-per-server=$cn")
     $argList.Add("--split=$cn")
-    $argList.Add("--min-split-size=256K")
+    $argList.Add("--min-split-size=1M")
     $argList.Add("--continue=true")
     $argList.Add("--max-tries=5")
     $argList.Add("--retry-wait=3")

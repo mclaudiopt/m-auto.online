@@ -320,7 +320,7 @@ function Invoke-Aria2Download {
     $argList = @(
         "--max-connection-per-server=$cn",
         "--split=$cn",
-        "--min-split-size=256K",  # Chunks pequenos = rebalanceamento dinÃ¢mico = fim rÃ¡pido
+        "--min-split-size=1M",  # Chunks pequenos = rebalanceamento dinÃ¢mico = fim rÃ¡pido
         "--continue=true",
         "--max-tries=3",
         "--retry-wait=2",
