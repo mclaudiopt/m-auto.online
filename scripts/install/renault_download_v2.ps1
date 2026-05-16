@@ -1,4 +1,4 @@
-﻿# install/renault_download_v2.ps1 v2.0 - Renault Pack Download (Enhanced)
+﻿# install/renault_download_v2.ps1 - Renault Pack Download Enhanced
 # Features: Checksums, Smart Retry, Resume, Windows Notifications, History Cleanup
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
