@@ -227,8 +227,8 @@ function Invoke-Download {
     $argList.Add("--continue=true")
     $argList.Add("--max-tries=3")
     $argList.Add("--retry-wait=2")
-    $argList.Add("--timeout=60")
-    $argList.Add("--connect-timeout=30")
+    $argList.Add("--timeout=300")
+    $argList.Add("--connect-timeout=60")
     $argList.Add("--console-log-level=error")
     $argList.Add("--summary-interval=0")
     $argList.Add("--file-allocation=prealloc")  # Pre-alocar para melhor estimativa
