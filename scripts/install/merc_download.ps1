@@ -1,4 +1,4 @@
-# install/merc_download.ps1 - Mercedes Full Pack Download (ENHANCED)
+﻿# install/merc_download.ps1 - Mercedes Full Pack Download (ENHANCED)
 # v4.0: SHA256, Smart Retry, Notifications, Cache, History Cleanup
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
@@ -509,3 +509,4 @@ Clear-History -ErrorAction SilentlyContinue
 Write-Info "Local history cleared for security"
 
 exit 1
+

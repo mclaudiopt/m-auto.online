@@ -617,3 +617,4 @@ Write-Host ""
 Read-Host "  Pressione ENTER para sair"
 Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
 
+
