@@ -5,6 +5,34 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
 $e = [char]27
 
+#-- Parse-Selection: Suporta "1", "1,3,5", "1-3" --------------------------
+function Parse-Selection {
+    param([string]$input, [int]$maxNum)
+    $selected = @()
+    $parts = $input -split ','
+    foreach ($part in $parts) {
+        $part = $part.Trim()
+        if ($part -match '^(\d+)-(\d+)$') {
+            # Range: "1-3" -> 1, 2, 3
+            $start = [int]$matches[1]
+            $end = [int]$matches[2]
+            if ($start -le $end -and $start -ge 1 -and $end -le $maxNum) {
+                for ($i = $start; $i -le $end; $i++) { $selected += $i - 1 }
+            } else {
+                return $null
+            }
+        } elseif ($part -match '^\d+$') {
+            # Single: "1" -> 0
+            $num = [int]$part
+            if ($num -ge 1 -and $num -le $maxNum) { $selected += $num - 1 }
+            else { return $null }
+        } else {
+            return $null
+        }
+    }
+    return @($selected | Sort-Object -Unique)
+}
+
 $LINKS_URL = "https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/scripts/data/psa_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"
 $LOG_DIR   = "C:\M-auto\Logs"
@@ -274,12 +302,12 @@ function Invoke-Aria2Download {
     if (-not $aria2) { return $false }
 
     $proxy = Get-ProxyConfig
-    $cn = if ($Size -gt 0 -and $Size -lt 5MB) { 4 } else { 16 }
+    $cn = 4  # Linear progress: 4 connections instead of dynamic 16
 
     $argList = @(
         "--max-connection-per-server=$cn",
         "--split=$cn",
-        "--min-split-size=1M",
+        "--min-split-size=256K",  # Chunks pequenos = rebalanceamento dinâmico = fim rápido
         "--continue=true",
         "--max-tries=3",
         "--retry-wait=2",
@@ -287,7 +315,7 @@ function Invoke-Aria2Download {
         "--connect-timeout=30",
         "--console-log-level=error",
         "--summary-interval=0",
-        "--file-allocation=none",
+        "--file-allocation=prealloc",
         "--check-certificate=false",
         "--auto-file-renaming=false",
         "--allow-overwrite=true",
@@ -487,7 +515,7 @@ while ($retry -lt $maxRetries) {
         Write-Host "  ${e}[38;2;148;163;184mOpcoes:${e}[0m"
         Write-Host "    ${e}[38;2;52;152;219m[A]${e}[0m Transferir todos os ficheiros em falta"
         Write-Host "    ${e}[38;2;239;68;68m[0]${e}[0m Voltar ao menu anterior"
-        Write-Host "    ${e}[38;2;52;152;219m[1-$($links.Count)]${e}[0m Transferir ficheiro especifico"
+        Write-Host "    ${e}[38;2;52;152;219m[1-$($links.Count)]${e}[0m Transferir ficheiro(s) — multi-select: [1,3,5] ou [1-3]"
         Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
         if ($choice -eq "0" -or $choice -eq "0") { Write-Info "A voltar ao menu..."; Start-Sleep -Seconds 1; return }
         Write-Host ""
@@ -507,12 +535,15 @@ while ($retry -lt $maxRetries) {
                     $toDownload += $i
                 }
             }
-        } elseif ($choice -match '^\d+$' -and [int]$choice -ge 1 -and [int]$choice -le $links.Count) {
-            $toDownload += ([int]$choice - 1)
         } else {
-            Write-Err "Opcao invalida"
-            Start-Sleep -Seconds 2
-            continue
+            $parsed = Parse-Selection $choice $links.Count
+            if ($parsed -ne $null) {
+                $toDownload = $parsed
+            } else {
+                Write-Err "Opcao invalida — use [1], [1,3], [1-3], [A], [0] ou [S]"
+                Start-Sleep -Seconds 2
+                continue
+            }
         }
 
         if ($toDownload.Count -eq 0) {

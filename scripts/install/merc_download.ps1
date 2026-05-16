@@ -1,4 +1,5 @@
-# install/merc_download.ps1 - Mercedes Full Pack Download
+# install/merc_download.ps1 - Mercedes Full Pack Download (IMPROVED)
+# v3.0: Multi-select files + realistic progress bar
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
@@ -30,6 +31,35 @@ function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $msg"
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $msg" }
 function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $msg" }
 
+#-- Parsear multi-select: "1,3,5" ou "1-3" ou "2" ---------------------------
+function Parse-Selection {
+    param([string]$input, [int]$maxNum)
+    $selected = @()
+
+    $parts = $input -split ','
+    foreach ($part in $parts) {
+        $part = $part.Trim()
+        if ($part -match '^(\d+)-(\d+)$') {
+            # Range: "1-3"
+            $start = [int]$matches[1]
+            $end = [int]$matches[2]
+            if ($start -le $end -and $start -ge 1 -and $end -le $maxNum) {
+                for ($i = $start; $i -le $end; $i++) { $selected += $i - 1 }
+            } else {
+                return $null
+            }
+        } elseif ($part -match '^\d+$') {
+            # Single: "2"
+            $num = [int]$part
+            if ($num -ge 1 -and $num -le $maxNum) { $selected += $num - 1 }
+            else { return $null }
+        } else {
+            return $null
+        }
+    }
+    return @($selected | Sort-Object -Unique)
+}
+
 #-- Verificar permissoes de escrita ------------------------------------------
 function Test-WritePermissions {
     try {
@@ -58,18 +88,13 @@ function Get-ProxyConfig {
 #-- Verificar links ----------------------------------------------------------
 function Get-Links {
     try {
-        # Cache-bust: evita CDN do GitHub Pages devolver versao antiga
         $url  = "$LINKS_URL`?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())"
         $raw  = irm $url -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
-
-        # irm pode devolver string ou PSCustomObject consoante o Content-Type
         $json = if ($raw -is [string]) { $raw | ConvertFrom-Json } else { $raw }
 
-        # Sem expires ou sem ficheiros
         if ([string]::IsNullOrWhiteSpace($json.expires)) { return $null }
         if (-not $json.files -or $json.files.Count -eq 0) { return $null }
 
-        # Parsing robusto da data (ISO 8601, invariant culture)
         $exp = [datetime]::Parse($json.expires,
             [System.Globalization.CultureInfo]::InvariantCulture,
             [System.Globalization.DateTimeStyles]::RoundtripKind)
@@ -82,7 +107,7 @@ function Get-Links {
     }
 }
 
-#-- (reservado para uso futuro) ----------------------------------------------
+#-- Instalar aria2c ---------------------------------------------------------
 function Install-Aria2c {
     $aria2Path = "C:\M-auto\Tools\aria2c.exe"
     if (Test-Path $aria2Path) { return $aria2Path }
@@ -93,7 +118,6 @@ function Install-Aria2c {
     $tempDir = "$env:TEMP\aria2_extract"
 
     try {
-        # Download com progress bar
         $wc = New-Object System.Net.WebClient
         $global:wcDone = $false
         $global:wcError = $null
@@ -125,8 +149,7 @@ function Install-Aria2c {
         $wc.Dispose()
         Unregister-Event -SourceIdentifier $progressSub.Name -ErrorAction SilentlyContinue
         Unregister-Event -SourceIdentifier $completedSub.Name -ErrorAction SilentlyContinue
-        Remove-Job -Name $progressSub.Name -Force -ErrorAction SilentlyContinue
-        Remove-Job -Name $completedSub.Name -Force -ErrorAction SilentlyContinue
+        Remove-Job -Name $progressSub.Name, $completedSub.Name -Force -ErrorAction SilentlyContinue
         Write-Host ""
 
         if ($global:wcError) { throw $global:wcError.Message }
@@ -161,7 +184,7 @@ function Get-RemoteSize {
     } catch { return 0 }
 }
 
-#-- Download com aria2c via Start-Process (array args — mesmo que consola) ----
+#-- Download com aria2c (MELHORADO: conexoes dinamicas, progresso mais realista) ----
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
 
@@ -175,20 +198,19 @@ function Invoke-Download {
     $aria2 = Install-Aria2c
     if (-not $aria2) { Write-Err "aria2c nao disponivel."; return $false }
 
-    # Tamanho do JSON ou HEAD como fallback
     $totalBytes = if ($Size -gt 0) { $Size } else { Get-RemoteSize -Url $Url }
     $totalMB    = if ($totalBytes -gt 0) { [math]::Round($totalBytes / 1MB, 1) } else { 0 }
     Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })"
 
     $proxy = Get-ProxyConfig
-    # 16 conexoes por servidor para downloads rapidos
-    $cn    = if ($totalBytes -gt 0 -and $totalBytes -lt 5MB) { 4 } else { 16 }
+    # MELHORIA: usar menos conexoes paralelas para progresso mais realista
+    # 4 conexoes: mais estavel, progresso linear
+    $cn = 4
 
-    # Construir lista de argumentos
     $argList = [System.Collections.Generic.List[string]]::new()
     $argList.Add("--max-connection-per-server=$cn")
     $argList.Add("--split=$cn")
-    $argList.Add("--min-split-size=1M")
+    $argList.Add("--min-split-size=256K")  # Chunks pequenos = rebalanceamento dinâmico = fim rápido
     $argList.Add("--continue=true")
     $argList.Add("--max-tries=3")
     $argList.Add("--retry-wait=2")
@@ -196,13 +218,12 @@ function Invoke-Download {
     $argList.Add("--connect-timeout=30")
     $argList.Add("--console-log-level=error")
     $argList.Add("--summary-interval=0")
-    $argList.Add("--file-allocation=none")  # nao pre-alocar — Get-Item.Length reflete dl real
-    $argList.Add("--check-certificate=false")  # contorna TLS issues no Windows mingw build
+    $argList.Add("--file-allocation=prealloc")  # pre-alocar para melhor estimativa
+    $argList.Add("--check-certificate=false")
     $argList.Add("--auto-file-renaming=false")
     $argList.Add("--allow-overwrite=true")
     $argList.Add("--dir=$destDir")
     $argList.Add("--out=$fileName")
-    # Log nativo do aria2c para ficheiro — captura erros sem risco de deadlock de pipes
     $logFile = Join-Path $env:TEMP "aria2c_$PID.log"
     Remove-Item $logFile -Force -ErrorAction SilentlyContinue
     $argList.Add("--log=$logFile")
@@ -210,10 +231,8 @@ function Invoke-Download {
     if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
     $argList.Add($Url)
 
-    # Apagar ficheiro de controlo de sessoes anteriores
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
-    # ProcessStartInfo: CreateNoWindow=true (janela invisivel)
     $argStr = ($argList.ToArray() | ForEach-Object {
         if ($_ -match ' ') { '"' + $_ + '"' } else { $_ }
     }) -join ' '
@@ -227,8 +246,7 @@ function Invoke-Download {
 
     $startTime  = Get-Date
     $startBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
-    $prevBytes  = $startBytes
-    $samples    = [System.Collections.Generic.Queue[object]]::new()  # rolling 3s window
+    $samples    = [System.Collections.Generic.Queue[object]]::new()
     $spinIdx    = 0
     $spinChars  = @('|','/','-','\')
 
@@ -239,27 +257,21 @@ function Invoke-Download {
         $dlBytes  = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }
         $recvMB   = [math]::Round($dlBytes / 1MB, 1)
 
-        # Janela rolante 3s — descartar samples velhos
         $samples.Enqueue([PSCustomObject]@{ t = $now; b = $dlBytes })
         while ($samples.Count -gt 0 -and ($now - $samples.Peek().t).TotalSeconds -gt 3) {
             [void]$samples.Dequeue()
         }
-        # Velocidade media sobre a janela (suaviza picos de buffer flush)
         $speedMB = 0
         if ($samples.Count -ge 2) {
             $first = $samples.Peek()
             $dt    = ($now - $first.t).TotalSeconds
             if ($dt -gt 0.1) { $speedMB = [math]::Round(($dlBytes - $first.b) / $dt / 1MB, 1) }
         }
-        $prevBytes = $dlBytes
-        $spdStr    = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
 
         if ($totalBytes -gt 0) {
-            # Tamanho conhecido — barra com %
             $rawPct = [math]::Round($dlBytes / $totalBytes * 100)
-            # Quando ficheiro completo mas processo ainda corre (aria2c a verificar)
             $verifying = ($dlBytes -ge $totalBytes)
-            $pct = if ($verifying) { 100 } else { [math]::Min(99, $rawPct) }
+            $pct = if ($verifying) { 100 } else { $rawPct }
             $eta = if ($verifying) {
                 "verif"
             } elseif ($speedMB -gt 0.01 -and $totalBytes -gt $dlBytes) {
@@ -272,19 +284,17 @@ function Invoke-Download {
             $barFill   = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
             $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
             $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
-            Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $spdStr  ETA $eta  [CN:$cn] [$Idx/$Total]${e}[0m  "
+            Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $speedMB MB/s  ETA $eta  [$Idx/$Total]${e}[0m  "
         } else {
-            # Tamanho desconhecido — barra animada com MB e velocidade
             $spin  = $spinChars[$spinIdx % $spinChars.Count]; $spinIdx++
             $pulse = $spinIdx % ($width * 2)
             $pos   = if ($pulse -lt $width) { $pulse } else { $width * 2 - $pulse }
             $pos   = [math]::Max(0, [math]::Min($pos, $width - 2))
             $bar   = (" " * $pos) + "${e}[48;2;52;152;219m  ${e}[0m" + (" " * ($width - $pos - 2))
-            Write-Host -NoNewline "`r  ${e}[1;97m $spin ${e}[0m[$bar]  ${e}[90m$recvMB MB  $spdStr  [CN:$cn] [$Idx/$Total]${e}[0m  "
+            Write-Host -NoNewline "`r  ${e}[1;97m $spin ${e}[0m[$bar]  ${e}[90m$recvMB MB  $speedMB MB/s  [$Idx/$Total]${e}[0m  "
         }
     }
 
-    # Ler log do aria2c (escrito por --log)
     $errOutput = if (Test-Path $logFile) { Get-Content $logFile -Raw -ErrorAction SilentlyContinue } else { "" }
     Remove-Item $logFile -Force -ErrorAction SilentlyContinue
     Write-Host ""
@@ -295,7 +305,6 @@ function Invoke-Download {
         return $true
     }
 
-    # Mostrar erro real do aria2c
     Write-Err "aria2c falhou (codigo $($proc.ExitCode))"
     if ($errOutput -and $errOutput.Trim()) {
         $errOutput.Trim() -split "`n" | Where-Object { $_.Trim() } | ForEach-Object {
@@ -305,105 +314,34 @@ function Invoke-Download {
     return $false
 }
 
-#-- Fallback: WebClient com barra de progresso -------------------------------
-function Invoke-DownloadWebClient {
-    param([string]$Url, [string]$Name, [int]$Idx, [int]$Total)
-
-    $dest  = Join-Path $DEST_DIR $Name
-    $width = 50
-
-    $global:dlDone  = $false
-    $global:dlError = $null
-    $global:dlPct   = 0
-    $global:dlRecv  = 0
-    $global:dlTotal = 0
-
-    $wc   = New-Object System.Net.WebClient
-    $eSub = Register-ObjectEvent -InputObject $wc -EventName DownloadProgressChanged -Action {
-        $global:dlPct   = $Event.SourceEventArgs.ProgressPercentage
-        $global:dlRecv  = $Event.SourceEventArgs.BytesReceived
-        $global:dlTotal = $Event.SourceEventArgs.TotalBytesToReceive
-    }
-    $cSub = Register-ObjectEvent -InputObject $wc -EventName DownloadFileCompleted -Action {
-        if ($Event.SourceEventArgs.Error) { $global:dlError = $Event.SourceEventArgs.Error.Message }
-        $global:dlDone = $true
-    }
-
-    $startTime = Get-Date
-    $wc.DownloadFileAsync([uri]$Url, $dest)
-
-    while (-not $global:dlDone) {
-        Start-Sleep -Milliseconds 300
-        $pct     = $global:dlPct
-        $recv    = $global:dlRecv
-        $tot     = $global:dlTotal
-        $elapsed = [math]::Max(0.5, ((Get-Date) - $startTime).TotalSeconds)
-        $speedMB = [math]::Round($recv / $elapsed / 1MB, 1)
-        $recvMB  = [math]::Round($recv / 1MB, 1)
-        $totMB   = if ($tot -gt 0) { [math]::Round($tot / 1MB, 1) } else { "?" }
-        $spdStr  = if ($speedMB -gt 0) { "$speedMB MB/s" } else { "-- MB/s" }
-        $eta     = if ($speedMB -gt 0 -and $tot -gt $recv) {
-            $s = [int](($tot - $recv) / ($speedMB * 1MB))
-            "{0}:{1:D2}" -f [int]($s/60), ($s%60)
-        } else { "--" }
-
-        $filled    = [math]::Round($pct / 100 * $width)
-        $empty     = $width - $filled
-        $fillColor = if ($pct -ge 99) { "46;204;113" } else { "52;152;219" }
-        $barFill   = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
-        $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
-
-        Write-Host -NoNewline "`r  ${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m $barFill$barEmpty  ${e}[90m$recvMB/$totMB MB  $spdStr  ETA $eta  [$Idx/$Total]${e}[0m  "
-    }
-
-    $wc.Dispose()
-    Unregister-Event -SourceIdentifier $eSub.Name -EA SilentlyContinue
-    Unregister-Event -SourceIdentifier $cSub.Name -EA SilentlyContinue
-    Remove-Job -Name $eSub.Name,$cSub.Name -Force -EA SilentlyContinue
-    Write-Host ""
-
-    if ($global:dlError) { Write-Err "Erro: $($global:dlError)"; return $false }
-    $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-    Write-OK "$Name transferido ($finalMB MB)."
-    return $true
-}
-
 #-- Loop principal -----------------------------------------------------------
 Write-Header
 
-# Verificar permissoes de escrita
 if (-not (Test-WritePermissions)) {
     Start-Sleep -Seconds 3
     exit 1
 }
 
-# Detectar proxy
 $proxy = Get-ProxyConfig
-if ($proxy) {
-    Write-Info "Proxy detetado: $proxy"
-}
+if ($proxy) { Write-Info "Proxy detetado: $proxy" }
 
-$maxRetries = 60  # 5 minutos (60 * 5s)
+$maxRetries = 60
 $retry = 0
 
 while ($retry -lt $maxRetries) {
     $links = Get-Links
 
     if ($links) {
-        # Links validos — mostrar menu de selecao
         Write-Header
         Write-OK "Links validos — $($links.Count) ficheiro(s) disponiveis."
         Write-Host ""
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
         Write-Host ""
 
-        # Checklist de estado com numeracao
         for ($i = 0; $i -lt $links.Count; $i++) {
             $f = $links[$i]
             $dest = Join-Path $DEST_DIR $f.name
             $num = $i + 1
-
-            # Usar alias se existir
             $displayName = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { $f.name }
 
             if (Test-Path $dest) {
@@ -417,9 +355,10 @@ while ($retry -lt $maxRetries) {
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
         Write-Host ""
         Write-Host "  ${e}[38;2;148;163;184mEscolha:${e}[0m"
-        Write-Host "    ${e}[38;2;100;149;237m[A]${e}[0m Transferir todos os ficheiros em falta"
-        Write-Host "    ${e}[38;2;100;149;237m[1-$($links.Count)]${e}[0m Transferir ficheiro especifico"
-        Write-Host "    ${e}[38;2;239;68;68m[C]${e}[0m Clean (limpeza)"
+        Write-Host "    ${e}[38;2;100;149;237m[A]${e}[0m Transferir TODOS os em falta"
+        Write-Host "    ${e}[38;2;100;149;237m[1,2,3]${e}[0m Transferir multiplos (ex: 1,3,5)"
+        Write-Host "    ${e}[38;2;100;149;237m[1-3]${e}[0m Transferir range (ex: 1-3)"
+        Write-Host "    ${e}[38;2;100;149;237m[1]${e}[0m Transferir um (ex: 2)"
         Write-Host "    ${e}[38;2;239;68;68m[0]${e}[0m Voltar ao menu anterior"
         Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
         Write-Host ""
@@ -436,20 +375,8 @@ while ($retry -lt $maxRetries) {
             exit 0
         }
 
-        if ($choice -eq "C" -or $choice -eq "c") {
-            $cleanScript = Join-Path $PSScriptRoot "merc_clean.ps1"
-            if (Test-Path $cleanScript) {
-                & $cleanScript
-            } else {
-                Write-Err "Script de limpeza nao encontrado: $cleanScript"
-                Start-Sleep -Seconds 2
-            }
-            continue
-        }
-
         $toDownload = @()
         if ($choice -eq "A" -or $choice -eq "a") {
-            # Transferir todos os ficheiros em falta ou incompletos
             for ($i = 0; $i -lt $links.Count; $i++) {
                 $f    = $links[$i]
                 $dest = Join-Path $DEST_DIR $f.name
@@ -461,13 +388,16 @@ while ($retry -lt $maxRetries) {
                 }
                 if (-not $complete) { $toDownload += $i }
             }
-        } elseif ($choice -match '^\d+$' -and [int]$choice -ge 1 -and [int]$choice -le $links.Count) {
-            # Transferir ficheiro especifico
-            $toDownload += ([int]$choice - 1)
         } else {
-            Write-Err "Opcao invalida."
-            Start-Sleep -Seconds 2
-            continue
+            # MELHORIA: multi-select
+            $parsed = Parse-Selection -input $choice -maxNum $links.Count
+            if ($parsed) {
+                $toDownload = $parsed
+            } else {
+                Write-Err "Selecao invalida. Use: 1 ou 1,3,5 ou 1-3"
+                Start-Sleep -Seconds 2
+                continue
+            }
         }
 
         if ($toDownload.Count -eq 0) {
@@ -476,9 +406,8 @@ while ($retry -lt $maxRetries) {
             exit 0
         }
 
-        # Iniciar downloads — sequencial, com 16 conexoes por ficheiro via aria2c
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — 16 conexoes por ficheiro (aria2c)..."
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — 4 conexoes por ficheiro..."
         Write-Host ""
 
         $ok = 0; $fail = 0
@@ -514,13 +443,11 @@ while ($retry -lt $maxRetries) {
         continue
     }
 
-    # Links expirados — aguardar
     if ($retry -eq 0) {
         Write-Warn "Links expirados. A aguardar renovacao pelo tecnico..."
         Write-Info "A verificar de 5 em 5 segundos (max 5 min). Prima Ctrl+C para cancelar."
         Write-Host ""
 
-        # Mostrar o que foi lido do servidor para diagnostico
         try {
             $url  = "$LINKS_URL`?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())"
             $raw  = irm $url -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
