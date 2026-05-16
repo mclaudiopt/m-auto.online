@@ -242,7 +242,11 @@ function Invoke-Download {
     $argList.Add("--log=$logFile")
     $argList.Add("--log-level=warn")
     if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
-    $argList.Add($Url)
+
+    # Create temporary input file for URL (avoids issues with spaces in filenames)
+    $inputFile = Join-Path $env:TEMP "aria2c_input_$PID.txt"
+    $Url | Out-File $inputFile -Encoding UTF8 -Force
+    $argList.Add("--input-file=$inputFile")
 
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
@@ -310,6 +314,12 @@ function Invoke-Download {
 
     $errOutput = if (Test-Path $logFile) { Get-Content $logFile -Raw -ErrorAction SilentlyContinue } else { "" }
     Remove-Item $logFile -Force -ErrorAction SilentlyContinue
+
+    # Clean up temporary input file
+    if ($null -ne $inputFile -and (Test-Path $inputFile)) {
+        Remove-Item $inputFile -Force -ErrorAction SilentlyContinue
+    }
+
     Write-Host ""
 
     if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
