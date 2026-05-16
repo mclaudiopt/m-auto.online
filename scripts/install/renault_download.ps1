@@ -247,8 +247,8 @@ function Invoke-Download {
 
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
-    # Invoke aria2c directly with argument array (handles complex URLs properly)
-    $proc = & $aria2 $argList.ToArray()
+    # Start aria2c process and capture it for monitoring
+    $proc = Start-Process -FilePath $aria2 -ArgumentList $argList.ToArray() -NoNewWindow -PassThru
     Start-Sleep -Milliseconds 200
 
     $startTime  = Get-Date
