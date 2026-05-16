@@ -1,5 +1,5 @@
-﻿# install/merc_download_v3.ps1 - Mercedes Full Pack Download (ENHANCED)
-# v4.0: SHA256, Smart Retry, Notifications, Cache, History Cleanup
+# install/merc_download.ps1 - Mercedes Full Pack v3 Download (ENHANCED)
+# v4.0: SHA256 (v3 variant), Smart Retry, Notifications, Cache, History Cleanup
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 chcp 65001 | Out-Null
@@ -25,7 +25,7 @@ function Write-Header {
     Clear-Host
     Write-Host ""
     Write-Host "  ${e}[38;2;29;155;255m+------------------------------------------------------+${e}[0m"
-    Write-Host "  ${e}[38;2;29;155;255m|${e}[0m  ${e}[1;97mMercedes Full Pack${e}[0m  ${e}[38;2;100;149;237mDownload v3${e}[0m"
+    Write-Host "  ${e}[38;2;29;155;255m|${e}[0m  ${e}[1;97mMercedes Full Pack v3${e}[0m  ${e}[38;2;100;149;237mDownload${e}[0m"
     Write-Host "  ${e}[38;2;29;155;255m+------------------------------------------------------+${e}[0m"
     Write-Host ""
 }
@@ -188,7 +188,7 @@ function Get-RemoteSize {
     } catch { return 0 }
 }
 
-#-- Download com aria2c (MELHORADO: conexoes dinamicas, progresso mais realista) ----
+#-- Download com aria2c + SHA256 + Smart Retry + Notifications ----
 function Invoke-Download {
     param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
 
@@ -196,6 +196,8 @@ function Invoke-Download {
     $destDir  = Split-Path $dest -Parent
     $fileName = Split-Path $dest -Leaf
     $width    = 50
+    $downloadName = if ($FILE_ALIASES.ContainsKey($Name)) { $FILE_ALIASES[$Name] } else { $Name }
+    $firedThresholds = @()
 
     if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
 
@@ -207,14 +209,12 @@ function Invoke-Download {
     Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })"
 
     $proxy = Get-ProxyConfig
-    # MELHORIA: usar menos conexoes paralelas para progresso mais realista
-    # 4 conexoes: mais estavel, progresso linear
     $cn = 4
 
     $argList = [System.Collections.Generic.List[string]]::new()
     $argList.Add("--max-connection-per-server=$cn")
     $argList.Add("--split=$cn")
-    $argList.Add("--min-split-size=256K")  # Chunks pequenos = rebalanceamento dinÃ¢mico = fim rÃ¡pido
+    $argList.Add("--min-split-size=256K")
     $argList.Add("--continue=true")
     $argList.Add("--max-tries=3")
     $argList.Add("--retry-wait=2")
@@ -222,7 +222,7 @@ function Invoke-Download {
     $argList.Add("--connect-timeout=30")
     $argList.Add("--console-log-level=error")
     $argList.Add("--summary-interval=0")
-    $argList.Add("--file-allocation=prealloc")  # pre-alocar para melhor estimativa
+    $argList.Add("--file-allocation=prealloc")
     $argList.Add("--check-certificate=false")
     $argList.Add("--auto-file-renaming=false")
     $argList.Add("--allow-overwrite=true")
@@ -288,14 +288,21 @@ function Invoke-Download {
             $barFill   = "${e}[48;2;${fillColor}m" + (" " * $filled) + "${e}[0m"
             $barEmpty  = "${e}[48;2;52;73;94m"     + (" " * $empty)  + "${e}[0m"
             $pctText   = "${e}[1;97m$($pct.ToString().PadLeft(3))%${e}[0m"
-            Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $spdStr  ETA $eta  [CN:$cn] [$Idx/$Total]${e}[0m  "
+            Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $speedMB MB/s  ETA $eta  [$Idx/$Total]${e}[0m  "
+
+            # Fire progress notifications at 25%, 50%, 75%, 100%
+            $etaSecs = 0
+            if ($eta -match '(\d+):(\d+)') {
+                $etaSecs = [int]$matches[1] * 60 + [int]$matches[2]
+            }
+            $firedThresholds = Show-ProgressNotification -percent $pct -downloadName $downloadName -etaSeconds $etaSecs -firedThresholds $firedThresholds
         } else {
             $spin  = $spinChars[$spinIdx % $spinChars.Count]; $spinIdx++
             $pulse = $spinIdx % ($width * 2)
             $pos   = if ($pulse -lt $width) { $pulse } else { $width * 2 - $pulse }
             $pos   = [math]::Max(0, [math]::Min($pos, $width - 2))
             $bar   = (" " * $pos) + "${e}[48;2;52;152;219m  ${e}[0m" + (" " * ($width - $pos - 2))
-            Write-Host -NoNewline "`r  ${e}[1;97m $spin ${e}[0m[$bar]  ${e}[90m$recvMB MB  $spdStr  [CN:$cn] [$Idx/$Total]${e}[0m  "
+            Write-Host -NoNewline "`r  ${e}[1;97m $spin ${e}[0m[$bar]  ${e}[90m$recvMB MB  $speedMB MB/s  [$Idx/$Total]${e}[0m  "
         }
     }
 
@@ -305,7 +312,20 @@ function Invoke-Download {
 
     if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
         $finalMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
+        $fileSize = (Get-Item $dest).Length
+        $sha256 = Get-FileSHA256 -filePath $dest
+
         Write-OK "$Name transferido ($finalMB MB)."
+
+        # Update SHA256 manifest
+        if ($sha256) {
+            Update-DownloadManifest -filename $Name -size $fileSize -sha256 $sha256 -status "success" -logDir $LOG_DIR
+            Write-Host "  ${e}[38;2;100;149;237m[SHA256]${e}[0m $sha256"
+        }
+
+        # Fire 100% notification
+        $firedThresholds = Show-ProgressNotification -percent 100 -downloadName $downloadName -firedThresholds $firedThresholds
+
         return $true
     }
 
@@ -323,7 +343,7 @@ Write-Header
 
 if (-not (Test-WritePermissions)) {
     Start-Sleep -Seconds 3
-    Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
+    exit 1
 }
 
 $proxy = Get-ProxyConfig
@@ -337,7 +357,7 @@ while ($retry -lt $maxRetries) {
 
     if ($links) {
         Write-Header
-        Write-OK "Links validos â€” $($links.Count) ficheiro(s) disponiveis."
+        Write-OK "Links validos — $($links.Count) ficheiro(s) disponiveis."
         Write-Host ""
         Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
         Write-Host ""
@@ -350,7 +370,7 @@ while ($retry -lt $maxRetries) {
 
             if (Test-Path $dest) {
                 $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-                Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $displayName ${e}[38;2;100;130;100m($sizeMB MB â€” ja existe)${e}[0m"
+                Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $displayName ${e}[38;2;100;130;100m($sizeMB MB — ja existe)${e}[0m"
             } else {
                 Write-Host "  ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[38;2;250;204;21m[--]${e}[0m  $displayName ${e}[38;2;148;163;184m(por transferir)${e}[0m"
             }
@@ -363,7 +383,6 @@ while ($retry -lt $maxRetries) {
         Write-Host "    ${e}[38;2;100;149;237m[1,2,3]${e}[0m Transferir multiplos (ex: 1,3,5)"
         Write-Host "    ${e}[38;2;100;149;237m[1-3]${e}[0m Transferir range (ex: 1-3)"
         Write-Host "    ${e}[38;2;100;149;237m[1]${e}[0m Transferir um (ex: 2)"
-        Write-Host "    ${e}[38;2;239;68;68m[C]${e}[0m Clean (limpeza)"
         Write-Host "    ${e}[38;2;239;68;68m[0]${e}[0m Voltar ao menu anterior"
         Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
         Write-Host ""
@@ -372,23 +391,17 @@ while ($retry -lt $maxRetries) {
         if ($choice -eq "0") {
             Write-Info "A voltar ao menu..."
             Start-Sleep -Seconds 1
+            # Clear history before returning
+            Clear-History -ErrorAction SilentlyContinue
             return
         }
 
         if ($choice -eq "S" -or $choice -eq "s") {
             Write-Info "Cancelado pelo utilizador."
-            Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 0
-        }
-
-        if ($choice -eq "C" -or $choice -eq "c") {
-            $cleanScript = Join-Path $PSScriptRoot "merc_clean.ps1"
-            if (Test-Path $cleanScript) {
-                & $cleanScript
-            } else {
-                Write-Err "Script de limpeza nao encontrado: $cleanScript"
-                Start-Sleep -Seconds 2
-            }
-            continue
+            # Clear history before exit
+            Clear-History -ErrorAction SilentlyContinue
+            Write-Info "Local history cleared for security"
+            exit 0
         }
 
         $toDownload = @()
@@ -419,11 +432,13 @@ while ($retry -lt $maxRetries) {
         if ($toDownload.Count -eq 0) {
             Write-Info "Nenhum ficheiro para transferir."
             Start-Sleep -Seconds 2
-            Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 0
+            Clear-History -ErrorAction SilentlyContinue
+            Write-Info "Local history cleared for security"
+            exit 0
         }
 
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s) â€” 4 conexoes por ficheiro..."
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — 4 conexoes por ficheiro..."
         Write-Host ""
 
         $ok = 0; $fail = 0
@@ -488,5 +503,9 @@ Write-Host ""
 Write-Err "Timeout: links nao renovados apos 5 minutos."
 Write-Host ""
 Read-Host "  Pressione ENTER para voltar"
-Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
 
+# Clear PowerShell history (transparent cleanup for security)
+Clear-History -ErrorAction SilentlyContinue
+Write-Info "Local history cleared for security"
+
+exit 1

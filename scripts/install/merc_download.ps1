@@ -291,7 +291,11 @@ function Invoke-Download {
             Write-Host -NoNewline "`r  $pctText $barFill$barEmpty  ${e}[90m$recvMB/$totalMB MB  $speedMB MB/s  ETA $eta  [$Idx/$Total]${e}[0m  "
 
             # Fire progress notifications at 25%, 50%, 75%, 100%
-            $firedThresholds = Show-ProgressNotification -percent $pct -downloadName $downloadName -etaSeconds ([int]$eta.Split(':')[0] * 60) -firedThresholds $firedThresholds
+            $etaSecs = 0
+            if ($eta -match '(\d+):(\d+)') {
+                $etaSecs = [int]$matches[1] * 60 + [int]$matches[2]
+            }
+            $firedThresholds = Show-ProgressNotification -percent $pct -downloadName $downloadName -etaSeconds $etaSecs -firedThresholds $firedThresholds
         } else {
             $spin  = $spinChars[$spinIdx % $spinChars.Count]; $spinIdx++
             $pulse = $spinIdx % ($width * 2)
