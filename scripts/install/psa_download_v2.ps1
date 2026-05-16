@@ -315,10 +315,23 @@ function Invoke-Aria2Download {
     $proxy = Get-ProxyConfig
     $cn = 4  # Linear progress: 4 connections instead of dynamic 16
 
+    $logFile  = Join-Path $env:TEMP "aria2c_$PID.log"
+    $inputFile = Join-Path $env:TEMP "aria2c_input_$PID.txt"
+    Remove-Item $logFile   -Force -ErrorAction SilentlyContinue
+    Remove-Item $inputFile -Force -ErrorAction SilentlyContinue
+
+    # aria2c input file: URL + per-download options (handles spaces in paths natively)
+    $nl = [System.Environment]::NewLine
+    $inputContent  = "$Url$nl"
+    $inputContent += " out=$fileName$nl"
+    $inputContent += " dir=$destDir$nl"
+    [System.IO.File]::WriteAllText($inputFile, $inputContent, [System.Text.UTF8Encoding]::new($false))
+
+    # Global args (no --dir/--out here - those are in the input file)
     $argList = @(
         "--max-connection-per-server=$cn",
         "--split=$cn",
-        "--min-split-size=1M",  # Chunks pequenos = rebalanceamento dinÃ¢mico = fim rÃ¡pido
+        "--min-split-size=1M",
         "--continue=true",
         "--max-tries=3",
         "--retry-wait=2",
@@ -331,20 +344,11 @@ function Invoke-Aria2Download {
         "--check-certificate=false",
         "--auto-file-renaming=false",
         "--allow-overwrite=true",
-        "--dir=$destDir",
-        "--out=$fileName"
+        "--log=$logFile",
+        "--log-level=warn",
+        "--input-file=$inputFile"
     )
-
-    $logFile = Join-Path $env:TEMP "aria2c_$PID.log"
-    Remove-Item $logFile -Force -ErrorAction SilentlyContinue
-    $argList += "--log=$logFile"
-    $argList += "--log-level=warn"
     if ($proxy) { $argList += "--all-proxy=http://$proxy" }
-
-    # Create temporary input file for URL (avoids issues with spaces in filenames)
-    $inputFile = Join-Path $env:TEMP "aria2c_input_$PID.txt"
-    $Url | Out-File $inputFile -Encoding UTF8 -Force
-    $argList += "--input-file=$inputFile"
 
     Remove-Item "$Dest.aria2" -Force -ErrorAction SilentlyContinue
 

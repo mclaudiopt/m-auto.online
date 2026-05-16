@@ -219,6 +219,19 @@ function Invoke-Download {
     $proxy = Get-ProxyConfig
     $cn = 4
 
+    $logFile  = Join-Path $env:TEMP "aria2c_$PID.log"
+    $inputFile = Join-Path $env:TEMP "aria2c_input_$PID.txt"
+    Remove-Item $logFile   -Force -ErrorAction SilentlyContinue
+    Remove-Item $inputFile -Force -ErrorAction SilentlyContinue
+
+    # aria2c input file: URL + per-download options (handles spaces in paths natively)
+    $nl = [System.Environment]::NewLine
+    $inputContent  = "$Url$nl"
+    $inputContent += " out=$fileName$nl"
+    $inputContent += " dir=$destDir$nl"
+    [System.IO.File]::WriteAllText($inputFile, $inputContent, [System.Text.UTF8Encoding]::new($false))
+
+    # Global args (no --dir/--out here - those are in the input file)
     $argList = [System.Collections.Generic.List[string]]::new()
     $argList.Add("--max-connection-per-server=$cn")
     $argList.Add("--split=$cn")
@@ -235,18 +248,10 @@ function Invoke-Download {
     $argList.Add("--check-certificate=false")
     $argList.Add("--auto-file-renaming=false")
     $argList.Add("--allow-overwrite=true")
-    $argList.Add("--dir=$destDir")
-    $argList.Add("--out=$fileName")
-    $logFile = Join-Path $env:TEMP "aria2c_$PID.log"
-    Remove-Item $logFile -Force -ErrorAction SilentlyContinue
     $argList.Add("--log=$logFile")
     $argList.Add("--log-level=warn")
-    if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
-
-    # Create temporary input file for URL (avoids issues with spaces in filenames)
-    $inputFile = Join-Path $env:TEMP "aria2c_input_$PID.txt"
-    $Url | Out-File $inputFile -Encoding UTF8 -Force
     $argList.Add("--input-file=$inputFile")
+    if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
 
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
