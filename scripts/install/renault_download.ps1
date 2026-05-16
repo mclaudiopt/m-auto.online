@@ -55,16 +55,15 @@ if (-not (Test-Path $DEST_DIR)) { New-Item -ItemType Directory -Path $DEST_DIR -
 function Write-Header {
     Clear-Host
     Write-Host ""
-    Write-Host "  ${e}[38;2;255;204;0m+------------------------------------------------------+${e}[0m"
-    Write-Host "  ${e}[38;2;255;204;0m|${e}[0m  ${e}[1;97mRenault CLIP${e}[0m  ${e}[38;2;255;204;0mDownload${e}[0m"
-    Write-Host "  ${e}[38;2;255;204;0m+------------------------------------------------------+${e}[0m"
+    Write-Host "  ${e}[38;2;255;195;0m${e}[1mRenault CLIP${e}[0m  ${e}[38;2;180;140;0mDownload${e}[0m"
+    Write-Host "  ${e}[38;2;100;80;0m$(([string][char]0x2500) * 54)${e}[0m"
     Write-Host ""
 }
 
-function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $msg" }
-function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $msg" }
-function Write-Warn($msg) { Write-Host "  ${e}[38;2;250;204;21m[!]${e}[0m   $msg" }
-function Write-Info($msg) { Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $msg" }
+function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m✓${e}[0m  $msg" }
+function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m✗${e}[0m  $msg" }
+function Write-Warn($msg) { Write-Host "  ${e}[38;2;255;195;0m!${e}[0m  $msg" }
+function Write-Info($msg) { Write-Host "  ${e}[38;2;120;100;40m·${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m" }
 
 #-- Verificar permissoes de escrita ------------------------------------------
 function Test-WritePermissions {
@@ -342,7 +341,9 @@ Write-Header
 
 if (-not (Test-WritePermissions)) {
     Start-Sleep -Seconds 3
-    Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
+    Clear-History -ErrorAction SilentlyContinue
+    Write-Info "Local history cleared for security"
+    exit 1
 }
 
 $proxy = Get-ProxyConfig
@@ -356,35 +357,49 @@ while ($retry -lt $maxRetries) {
 
     if ($links) {
         Write-Header
-        Write-OK "Links validos â€” $($links.Count) ficheiro(s) disponiveis."
-        Write-Host ""
-        Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
-        Write-Host ""
+
+        # Column widths (no aliases in renault_download — use f.name directly)
+        $maxName = ($links | ForEach-Object { $_.name.Length } | Measure-Object -Maximum).Maximum
+        $nameW = [math]::Max($maxName, 10)
+
+        # Table header
+        $numCol  = “  Nr”.PadRight(5)
+        $nameCol = “Ficheiro”.PadRight($nameW + 2)
+        $sizeCol = “Tamanho “.PadLeft(10)
+        $statCol = “Estado”
+        $sep     = ([string][char]0x2500)
+        Write-Host “  ${e}[38;2;255;195;0m${e}[1m$numCol $nameCol $sizeCol  $statCol${e}[0m”
+        Write-Host “  ${e}[38;2;100;80;0m$($sep * 4)  $($sep * ($nameW + 2))  $($sep * 9)  $($sep * 12)${e}[0m”
 
         for ($i = 0; $i -lt $links.Count; $i++) {
-            $f = $links[$i]
+            $f    = $links[$i]
             $dest = Join-Path $DEST_DIR $f.name
-            $num = $i + 1
+            $num  = ($i + 1).ToString().PadLeft(3)
+            $sizeMB = if ($f.size -gt 0) { “$([math]::Round($f.size/1MB,1)) MB”.PadLeft(9) } else { “  ? MB”.PadLeft(9) }
 
             if (Test-Path $dest) {
-                $sizeMB = [math]::Round((Get-Item $dest).Length / 1MB, 1)
-                Write-Host "  ${e}[38;2;100;130;100m[$num]${e}[0m ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.name) ${e}[38;2;100;130;100m($sizeMB MB â€” ja existe)${e}[0m"
+                $localMB = “$([math]::Round((Get-Item $dest).Length/1MB,1)) MB”.PadLeft(9)
+                $nameStr = $f.name.PadRight($nameW + 2)
+                Write-Host “  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$nameStr${e}[0m $localMB  ${e}[38;2;34;197;94m✓ local${e}[0m”
             } else {
-                Write-Host "  ${e}[38;2;148;163;184m[$num]${e}[0m ${e}[38;2;250;204;21m[--]${e}[0m  $($f.name) ${e}[38;2;148;163;184m(por transferir)${e}[0m"
+                $nameStr = $f.name.PadRight($nameW + 2)
+                Write-Host “  ${e}[38;2;255;195;0m$num${e}[0m  ${e}[38;2;220;180;60m$nameStr${e}[0m $sizeMB  ${e}[38;2;100;80;0m– pendente${e}[0m”
             }
         }
-        Write-Host ""
-        Write-Host "  ${e}[38;2;50;60;80m------------------------------------------------------${e}[0m"
-        Write-Host ""
-        Write-Host "  ${e}[38;2;148;163;184mEscolha:${e}[0m"
-        Write-Host "    ${e}[38;2;255;204;0m[A]${e}[0m Transferir TODOS os em falta"
-        Write-Host "    ${e}[38;2;255;204;0m[1,2,3]${e}[0m Transferir multiplos (ex: 1,3,5)"
-        Write-Host "    ${e}[38;2;255;204;0m[1-3]${e}[0m Transferir range (ex: 1-3)"
-        Write-Host "    ${e}[38;2;255;204;0m[1]${e}[0m Transferir um (ex: 2)"
-        Write-Host "    ${e}[38;2;239;68;68m[0]${e}[0m Voltar ao menu anterior"
-        Write-Host "    ${e}[38;2;239;68;68m[S]${e}[0m Sair"
-        Write-Host ""
-        $choice = Read-Host "  Opcao"
+
+        Write-Host “  ${e}[38;2;100;80;0m$($sep * ($nameW + 30))${e}[0m”
+        Write-Host “”
+        Write-Host “  ${e}[38;2;180;140;0mSelecao${e}[0m”
+        Write-Host “  ${e}[38;2;100;80;0m$($sep * 40)${e}[0m”
+        Write-Host “  ${e}[38;2;255;195;0mA${e}[0m   Transferir todos em falta”
+        Write-Host “  ${e}[38;2;255;195;0m1${e}[0m   Transferir um ficheiro”
+        Write-Host “  ${e}[38;2;255;195;0m1,3${e}[0m Transferir multiplos  ${e}[38;2;100;80;0m(ex: 1,3,5)${e}[0m”
+        Write-Host “  ${e}[38;2;255;195;0m1-3${e}[0m Transferir range      ${e}[38;2;100;80;0m(ex: 2-5)${e}[0m”
+        Write-Host “  ${e}[38;2;239;68;68m0${e}[0m   Voltar”
+        Write-Host “  ${e}[38;2;239;68;68m S${e}[0m  Sair”
+        Write-Host “”
+        Write-Host -NoNewline “  ${e}[38;2;255;195;0m›${e}[0m  Opcao: “
+        $choice = $Host.UI.ReadLine()
 
         if ($choice -eq "0") {
             Write-Info "A voltar ao menu..."
@@ -394,7 +409,9 @@ while ($retry -lt $maxRetries) {
 
         if ($choice -eq "S" -or $choice -eq "s") {
             Write-Info "Cancelado pelo utilizador."
-            Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 0
+            Clear-History -ErrorAction SilentlyContinue
+            Write-Info "Local history cleared for security"
+            exit 0
         }
 
         $toDownload = @()
@@ -425,11 +442,13 @@ while ($retry -lt $maxRetries) {
         if ($toDownload.Count -eq 0) {
             Write-Info "Nenhum ficheiro para transferir."
             Start-Sleep -Seconds 2
-            Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 0
+            Clear-History -ErrorAction SilentlyContinue
+            Write-Info “Local history cleared for security”
+            exit 0
         }
 
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s) â€” 4 conexoes por ficheiro..."
+        Write-OK “A transferir $($toDownload.Count) ficheiro(s) — 4 conexoes por ficheiro...”
         Write-Host ""
 
         $ok = 0; $fail = 0
@@ -441,7 +460,7 @@ while ($retry -lt $maxRetries) {
             $current++
 
             Write-Host ""
-            Write-Host "  ${e}[38;2;255;204;0m>> [$current/$total] $($f.name)${e}[0m"
+            Write-Host "  ${e}[38;2;255;195;0m>> [$current/$total]${e}[0m  ${e}[38;2;220;180;60m$($f.name)${e}[0m"
             Write-Host ""
 
             $size = if ($f.size) { [long]$f.size } else { 0 }
@@ -493,6 +512,8 @@ Write-Host ""
 Write-Err "Timeout: links nao renovados apos 5 minutos."
 Write-Host ""
 Read-Host "  Pressione ENTER para voltar"
-Clear-History -ErrorAction SilentlyContinue`nWrite-Info "Local history cleared for security"`nexit 1
+Clear-History -ErrorAction SilentlyContinue
+Write-Info "Local history cleared for security"
+exit 1
 
 
