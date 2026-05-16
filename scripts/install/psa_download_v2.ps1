@@ -1,4 +1,4 @@
-﻿# install/psa_download_v2.ps1 - PSA Pack Download Enhanced
+# install/psa_download_v2.ps1 - PSA Pack Download Enhanced
 # Features: Checksums, Smart Retry, Resume, Windows Notifications, History Cleanup
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8

@@ -1,4 +1,4 @@
-﻿# install/renault_download.ps1 - Renault CLIP Download Enhanced
+# install/renault_download.ps1 - Renault CLIP Download Enhanced
 # v3.0: SHA256, Smart Retry, Notifications, Cache, History Cleanup
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
