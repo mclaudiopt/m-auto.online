@@ -6,7 +6,15 @@ chcp 65001 | Out-Null
 $e = [char]27
 
 #-- Import shared functions ---------------------------------------------------
-. (Join-Path $PSScriptRoot "shared-functions.ps1")
+# Note: When executed via irm | iex, $PSScriptRoot is empty, so we fetch remotely
+$BASE_URL = "https://m-auto.online/scripts"
+try {
+    $sharedFuncs = irm "$BASE_URL/install/shared-functions.ps1" -UseBasicParsing
+    Invoke-Expression $sharedFuncs
+} catch {
+    Write-Host "Erro ao carregar shared-functions.ps1: $_"
+    exit 1
+}
 
 #-- Parse-Selection: Suporta "1", "1,3,5", "1-3" --------------------------
 function Parse-Selection {
