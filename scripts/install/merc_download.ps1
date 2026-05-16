@@ -247,7 +247,7 @@ function Invoke-Download {
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
     # SOLUÇÃO: Usar & operator com array de argumentos (muito mais seguro que ProcessStartInfo)
-    $proc = & $aria2 @argList.ToArray()
+    $proc = & $aria2 $argList.ToArray()
     Start-Sleep -Milliseconds 200
 
     $startTime  = Get-Date
