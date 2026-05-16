@@ -86,7 +86,9 @@ function Run-Sub($name) {
     Write-Header
     Write-Info "A carregar $name..."
     try {
-        $s = (irm "$BASE_URL/$name.ps1" -UseBasicParsing)
+        # Add cache-bust query parameter to ensure fresh downloads
+        $url = "$BASE_URL/$name.ps1?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())"
+        $s = (irm $url -UseBasicParsing)
         Invoke-Expression $s
     } catch {
         Write-Err "Nao foi possivel carregar: $name.ps1"
