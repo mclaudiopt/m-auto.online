@@ -216,7 +216,7 @@ function Invoke-Download {
     Write-Host "  ${e}[38;2;148;163;184m[.]${e}[0m   $(if ($totalMB -gt 0) { "$totalMB MB" } else { "tamanho desconhecido" })"
 
     $proxy = Get-ProxyConfig
-    $cn = 4
+    $cn = 16
 
     $logFile  = Join-Path $env:TEMP "aria2c_$PID.log"
     $inputFile = Join-Path $env:TEMP "aria2c_input_$PID.txt"
@@ -410,17 +410,14 @@ while ($retry -lt $maxRetries) {
 
         Write-Host "  ${e}[38;2;100;80;0m$($sep * ($nameW + 30))${e}[0m"
         Write-Host ""
-        Write-Host "  ${e}[38;2;180;140;0mSelecao${e}[0m"
-        Write-Host "  ${e}[38;2;100;80;0m$($sep * 40)${e}[0m"
-        Write-Host "  ${e}[38;2;255;195;0mA${e}[0m   Transferir todos em falta"
-        Write-Host "  ${e}[38;2;255;195;0m1${e}[0m   Transferir um ficheiro"
-        Write-Host "  ${e}[38;2;255;195;0m1,3${e}[0m Transferir multiplos  ${e}[38;2;100;80;0m(ex: 1,3,5)${e}[0m"
-        Write-Host "  ${e}[38;2;255;195;0m1-3${e}[0m Transferir range      ${e}[38;2;100;80;0m(ex: 2-5)${e}[0m"
-        Write-Host "  ${e}[38;2;239;68;68m0${e}[0m   Voltar"
-        Write-Host "  ${e}[38;2;239;68;68m S${e}[0m  Sair"
+        Write-Host "  ${e}[38;2;100;80;0m$($sep * 54)${e}[0m"
+        Write-Host "  ${e}[38;2;255;195;0m[ENTER]${e}[0m  Iniciar todos os downloads em falta  ${e}[38;2;100;80;0m(16 conexoes)${e}[0m"
+        Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s)               ${e}[38;2;100;80;0m(ex: 2  ou  1,3  ou  2-4)${e}[0m"
+        Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Voltar"
         Write-Host ""
-        Write-Host -NoNewline "  ${e}[38;2;255;195;0m›${e}[0m  Opcao: "
+        Write-Host -NoNewline "  ${e}[38;2;255;195;0m›${e}[0m  Opcao [ENTER=todos / 0=voltar]: "
         $choice = $Host.UI.ReadLine()
+        if ([string]::IsNullOrWhiteSpace($choice)) { $choice = "A" }
 
         if ($choice -eq "0") {
             Write-Info "A voltar ao menu..."
@@ -472,7 +469,7 @@ while ($retry -lt $maxRetries) {
         }
 
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — 4 conexoes por ficheiro..."
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — 16 conexoes por ficheiro..."
         Write-Host ""
 
         $ok = 0; $fail = 0
