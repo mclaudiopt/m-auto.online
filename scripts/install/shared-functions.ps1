@@ -304,18 +304,5 @@ function Show-ProgressNotification {
     return $firedThresholds
 }
 
-#-- EXPORT FUNCTIONS (explicit exports for scripts) ---------------------------
-Export-ModuleMember -Function @(
-    'Write-Log',
-    'Show-Notification',
-    'Format-FileSize',
-    'Format-ETA',
-    'Get-FileSHA256',
-    'Test-FileIntegrity',
-    'Get-DownloadManifest',
-    'Update-DownloadManifest',
-    'Get-CacheFile',
-    'Update-CacheFile',
-    'Invoke-SmartRetry',
-    'Show-ProgressNotification'
-) -ErrorAction SilentlyContinue
+# Note: All functions are available when dot-sourced into download scripts.
+# Export-ModuleMember is not needed for dot-sourcing scenarios.
