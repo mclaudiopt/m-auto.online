@@ -247,16 +247,9 @@ function Invoke-Download {
 
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
-    $argStr = ($argList.ToArray() | ForEach-Object {
-        if ($_ -match ' ') { '"' + $_ + '"' } else { $_ }
-    }) -join ' '
-
-    $psi = New-Object System.Diagnostics.ProcessStartInfo
-    $psi.FileName        = $aria2
-    $psi.Arguments       = $argStr
-    $psi.UseShellExecute = $false
-    $psi.CreateNoWindow  = $true
-    $proc = [System.Diagnostics.Process]::Start($psi)
+    # Invoke aria2c directly with argument array (handles complex URLs properly)
+    $proc = & $aria2 @argList.ToArray()
+    Start-Sleep -Milliseconds 200
 
     $startTime  = Get-Date
     $startBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }

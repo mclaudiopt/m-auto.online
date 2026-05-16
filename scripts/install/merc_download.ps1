@@ -246,16 +246,11 @@ function Invoke-Download {
 
     Remove-Item "$dest.aria2" -Force -ErrorAction SilentlyContinue
 
-    $argStr = ($argList.ToArray() | ForEach-Object {
-        if ($_ -match ' ') { '"' + $_ + '"' } else { $_ }
-    }) -join ' '
+    # SOLUÇÃO: Usar & operator com array de argumentos (muito mais seguro que ProcessStartInfo)
+    $proc = & $aria2 @argList.ToArray() &
 
-    $psi = New-Object System.Diagnostics.ProcessStartInfo
-    $psi.FileName        = $aria2
-    $psi.Arguments       = $argStr
-    $psi.UseShellExecute = $false
-    $psi.CreateNoWindow  = $true
-    $proc = [System.Diagnostics.Process]::Start($psi)
+    # Aguardar um pouco para que o processo se inicialize
+    Start-Sleep -Milliseconds 200
 
     $startTime  = Get-Date
     $startBytes = if (Test-Path $dest) { (Get-Item $dest).Length } else { 0 }

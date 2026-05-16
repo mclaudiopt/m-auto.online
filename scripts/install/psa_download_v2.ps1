@@ -344,12 +344,9 @@ function Invoke-Aria2Download {
 
     Remove-Item "$Dest.aria2" -Force -ErrorAction SilentlyContinue
 
-    $psi = New-Object System.Diagnostics.ProcessStartInfo
-    $psi.FileName = $aria2
-    $psi.Arguments = $argList -join ' '
-    $psi.UseShellExecute = $false
-    $psi.CreateNoWindow = $true
-    $proc = [System.Diagnostics.Process]::Start($psi)
+    # Invoke aria2c directly with argument array (handles complex URLs properly)
+    $proc = & $aria2 @argList
+    Start-Sleep -Milliseconds 200
 
     $startTime = Get-Date
     $samples = [System.Collections.Generic.Queue[object]]::new()
