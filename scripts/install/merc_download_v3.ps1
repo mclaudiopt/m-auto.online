@@ -6,7 +6,7 @@ chcp 65001 | Out-Null
 $e = [char]27
 
 #-- Import shared functions ---------------------------------------------------
-. ".\shared-functions.ps1"
+. (Join-Path $PSScriptRoot "shared-functions.ps1")
 
 $LINKS_URL = "https://m-auto.online/merc_links.json"
 $DEST_DIR  = "C:\M-auto\Temp"

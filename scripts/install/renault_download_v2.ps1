@@ -6,7 +6,7 @@ chcp 65001 | Out-Null
 $e = [char]27
 
 #-- Import shared functions ---------------------------------------------------
-. ".\shared-functions.ps1"
+. (Join-Path $PSScriptRoot "shared-functions.ps1")
 
 $LOG_DIR = "C:\M-auto\Logs"
 
