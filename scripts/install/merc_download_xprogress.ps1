@@ -1,4 +1,4 @@
-# install/merc_download_xprogress.ps1 - Mercedes Download TEST (xProgress + aria2c RPC)
+﻿# install/merc_download_xprogress.ps1 - Mercedes Download TEST (xProgress + aria2c RPC)
 # Tests: xProgress module + aria2c JSON-RPC for real connection count and speed
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
@@ -23,30 +23,38 @@ if (-not (Test-Path $LOG_DIR))  { New-Item -ItemType Directory -Path $LOG_DIR  -
 function Write-Header {
     Clear-Host
     Write-Host ""
-    Write-Host "  ${e}[38;2;255;195;0m${e}[1mMercedes Full Pack${e}[0m  ${e}[38;2;180;140;0mDownload${e}[0m  ${e}[38;2;100;80;0m[TEST — xProgress + RPC]${e}[0m"
+    Write-Host "  ${e}[38;2;255;195;0m${e}[1mMercedes Full Pack${e}[0m  ${e}[38;2;180;140;0mDownload${e}[0m  ${e}[38;2;100;80;0m[TEST $([char]0x2014) xProgress + RPC]${e}[0m"
     Write-Host "  ${e}[38;2;100;80;0m$(([string][char]0x2500) * 62)${e}[0m"
     Write-Host ""
 }
-function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m✓${e}[0m  $msg" }
-function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m✗${e}[0m  $msg" }
+function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m$([char]0x2713)${e}[0m  $msg" }
+function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m$([char]0x2717)${e}[0m  $msg" }
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;255;195;0m!${e}[0m  $msg" }
-function Write-Info($msg) { Write-Host "  ${e}[38;2;120;100;40m·${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m" }
+function Write-Info($msg) { Write-Host "  ${e}[38;2;120;100;40m$([char]0x00B7)${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m" }
 
 #-- Instalar/importar xProgress ----------------------------------------------
 function Import-XProgress {
+    # Already loaded?
     if (Get-Module -Name xProgress -ErrorAction SilentlyContinue) { return $true }
+    # Installed but not loaded?
     if (Get-Module -ListAvailable -Name xProgress -ErrorAction SilentlyContinue) {
-        Import-Module xProgress -ErrorAction SilentlyContinue
-        return $true
+        try {
+            Import-Module xProgress -ErrorAction Stop
+            return $true
+        } catch {
+            Write-Warn "xProgress instalado mas nao pode ser carregado (execution policy?). A usar fallback."
+            return $false
+        }
     }
-    Write-Info "Modulo xProgress nao instalado — a instalar..."
+    # Not installed — try to install
+    Write-Info "Modulo xProgress nao instalado $([char]0x2014) a instalar..."
     try {
         $null = Install-Module -Name xProgress -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
         Import-Module xProgress -ErrorAction Stop
         Write-OK "xProgress instalado e importado."
         return $true
     } catch {
-        Write-Warn "Falha ao instalar xProgress: $_"
+        Write-Warn "Falha ao instalar/carregar xProgress: $_"
         Write-Info "A usar Write-Progress nativo como fallback."
         return $false
     }
@@ -161,51 +169,57 @@ function Invoke-Download {
         if ($reg.ProxyEnable -eq 1) { $proxy = $reg.ProxyServer }
     } catch {}
 
-    # Build argument list
-    $args = [System.Collections.Generic.List[string]]::new()
-    $args.Add("--max-connection-per-server=$CONNECTIONS")
-    $args.Add("--split=$CONNECTIONS")
-    $args.Add("--min-split-size=1M")
-    $args.Add("--continue=true")
-    $args.Add("--max-tries=5")
-    $args.Add("--retry-wait=3")
-    $args.Add("--timeout=300")
-    $args.Add("--connect-timeout=60")
-    $args.Add("--disable-ipv6=true")
-    $args.Add("--quiet=true")
-    $args.Add("--file-allocation=none")
-    $args.Add("--check-certificate=false")
-    $args.Add("--auto-file-renaming=false")
-    $args.Add("--allow-overwrite=true")
-    $args.Add("--log=$logFile")
-    $args.Add("--log-level=warn")
+    # Build argument list ($argList $([char]0x2014) never use $args, it's a PS automatic variable)
+    $argList = [System.Collections.Generic.List[string]]::new()
+    $argList.Add("--max-connection-per-server=$CONNECTIONS")
+    $argList.Add("--split=$CONNECTIONS")
+    $argList.Add("--min-split-size=1M")
+    $argList.Add("--continue=true")
+    $argList.Add("--max-tries=5")
+    $argList.Add("--retry-wait=3")
+    $argList.Add("--timeout=300")
+    $argList.Add("--connect-timeout=60")
+    $argList.Add("--disable-ipv6=true")
+    $argList.Add("--quiet=true")
+    $argList.Add("--file-allocation=none")
+    $argList.Add("--check-certificate=false")
+    $argList.Add("--auto-file-renaming=false")
+    $argList.Add("--allow-overwrite=true")
+    $argList.Add("--log=$logFile")
+    $argList.Add("--log-level=warn")
     # Enable RPC for real-time stats
-    $args.Add("--enable-rpc=true")
-    $args.Add("--rpc-listen-port=$RPC_PORT")
-    $args.Add("--rpc-allow-origin-all=true")
-    $args.Add("--input-file=$inputFile")
-    if ($proxy) { $args.Add("--all-proxy=http://$proxy") }
+    $argList.Add("--enable-rpc=true")
+    $argList.Add("--rpc-listen-port=$RPC_PORT")
+    $argList.Add("--rpc-allow-origin-all=true")
+    $argList.Add("--input-file=$inputFile")
+    if ($proxy) { $argList.Add("--all-proxy=http://$proxy") }
 
     Remove-Item "$dest.aria2" -Force -EA SilentlyContinue
 
-    $proc = Start-Process -FilePath $aria2 -ArgumentList $args.ToArray() -NoNewWindow -PassThru
-    Start-Sleep -Milliseconds 600  # give RPC time to start
+    Write-Info "A iniciar aria2c ($CONNECTIONS CN, RPC :$RPC_PORT)..."
+    $proc = Start-Process -FilePath $aria2 -ArgumentList $argList.ToArray() -NoNewWindow -PassThru
+    if (-not $proc) { Write-Err "Falha ao iniciar aria2c."; return $false }
+    Start-Sleep -Milliseconds 800  # give RPC time to start
 
-    # Get GID for this download
+    # Get GID (max 3s wait)
     $gid   = $null
     $rpcOk = $false
 
-    for ($i = 0; $i -lt 10; $i++) {
+    for ($i = 0; $i -lt 6; $i++) {
         $active = Invoke-Aria2RPC "aria2.tellActive" @(@("gid"))
         if ($active -and $active.Count -gt 0) {
             $gid   = $active[0].gid
             $rpcOk = $true
             break
         }
-        Start-Sleep -Milliseconds 200
+        Start-Sleep -Milliseconds 500
     }
 
-    Write-Info "aria2c RPC: $(if ($rpcOk) { "OK (GID: $gid)" } else { "indisponivel — fallback a polling de ficheiro" })"
+    if ($rpcOk) {
+        Write-Info "RPC ligado  GID=$gid"
+    } else {
+        Write-Warn "RPC indisponivel $([char]0x2014) a usar polling de ficheiro"
+    }
     Write-Host ""
 
     # xProgress setup
@@ -260,9 +274,9 @@ function Invoke-Download {
 
         $cnLabel  = if ($lastCN -gt 0) { "$lastCN CN" } else { "-- CN" }
         $src      = if ($rpcUsed) { "RPC" } else { "poll" }
-        $status   = "$recvMB/$totalMB MB  |  $speedMB MB/s  |  ${e}[38;2;255;195;0m$cnLabel${e}[0m  |  $src"
+        $status   = "$recvMB/$totalMB MB  |  $speedMB MB/s  |  $cnLabel  |  $src"
 
-        # --- Display progress ---
+        # --- Display progress (Write-Progress for title bar + ANSI bar in console body) ---
         if ($xp -and $UseXProgress) {
             try {
                 $xp.CurrentCount = $pct
@@ -275,9 +289,23 @@ function Invoke-Download {
             Write-Progress -Activity "[$Idx/$Total] $dispName" -Status $status `
                 -PercentComplete $pct -SecondsRemaining $etaSecs
         }
+
+        # ANSI inline bar $([char]0x2014) always visible in console body regardless of terminal
+        $filled   = [math]::Max(0, [math]::Min(40, [math]::Round($pct / 100 * 40)))
+        $empty    = 40 - $filled
+        $barFill  = "${e}[48;2;255;195;0m" + (" " * $filled) + "${e}[0m"
+        $barEmpty = "${e}[48;2;52;40;0m"  + (" " * $empty)  + "${e}[0m"
+        $pctStr   = "$pct%".PadLeft(4)
+        $etaStr   = if ($etaSecs -gt 0) {
+            if ($etaSecs -ge 3600) { "$([math]::Round($etaSecs/3600,1))h" }
+            elseif ($etaSecs -ge 60) { "$([math]::Round($etaSecs/60))m" }
+            else { "${etaSecs}s" }
+        } else { "  " }
+        Write-Host -NoNewline "`r  ${e}[1;38;2;255;195;0m$pctStr${e}[0m $barFill$barEmpty  ${e}[38;2;180;160;80m$speedMB MB/s${e}[0m  ${e}[38;2;120;100;40m$cnLabel${e}[0m  ${e}[38;2;100;80;0m$etaStr${e}[0m   "
     }
 
-    # Complete progress
+    # Complete progress $([char]0x2014) move past the ANSI bar line first
+    Write-Host ""
     if ($xp -and $UseXProgress) {
         try { Complete-xProgress -xProgress $xp } catch {}
     }
@@ -292,7 +320,7 @@ function Invoke-Download {
         $avgSpeed = if ($elapsed -gt 0 -and $finalMB -gt 0) { [math]::Round($finalMB / $elapsed, 1) } else { 0 }
         $sha256   = (Get-FileHash $dest -Algorithm SHA256).Hash.ToLower()
 
-        Write-OK "$dispName — $finalMB MB em ${elapsed}s (media $avgSpeed MB/s, max $CONNECTIONS CN)"
+        Write-OK "$dispName $([char]0x2014) $finalMB MB em ${elapsed}s (media $avgSpeed MB/s, max $CONNECTIONS CN)"
         Write-Host "  ${e}[38;2;100;149;237m[SHA256]${e}[0m $sha256"
 
         # Log to manifest
@@ -368,7 +396,7 @@ for ($i = 0; $i -lt $links.Count; $i++) {
 
     if (Test-Path $dest) {
         $lMB = "$([math]::Round((Get-Item $dest).Length/1MB,1)) MB".PadLeft(9)
-        Write-Host "  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$($dn.PadRight($nameW+2))${e}[0m $lMB  ${e}[38;2;34;197;94m✓ local${e}[0m"
+        Write-Host "  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$($dn.PadRight($nameW+2))${e}[0m $lMB  ${e}[38;2;34;197;94m$([char]0x2713) local${e}[0m"
     } else {
         Write-Host "  ${e}[38;2;255;195;0m$num${e}[0m  ${e}[38;2;220;180;60m$($dn.PadRight($nameW+2))${e}[0m $szMB  ${e}[38;2;100;80;0m– pendente${e}[0m"
     }
@@ -381,7 +409,7 @@ Write-Host "  ${e}[38;2;255;195;0m[ENTER]${e}[0m  Iniciar todos os downloads em 
 Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s)               ${e}[38;2;100;80;0m(ex: 2  ou  1,3  ou  2-4)${e}[0m"
 Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Voltar"
 Write-Host ""
-Write-Host -NoNewline "  ${e}[38;2;255;195;0m›${e}[0m  Opcao [ENTER=todos / 0=voltar]: "
+Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao [ENTER=todos / 0=voltar]: "
 $choice = $Host.UI.ReadLine()
 if ([string]::IsNullOrWhiteSpace($choice)) { $choice = "A" }
 
@@ -429,7 +457,7 @@ if ($toDownload.Count -eq 0) {
 }
 
 Write-Header
-Write-OK "A iniciar $($toDownload.Count) download(s) — $CONNECTIONS conexoes + aria2c RPC"
+Write-OK "A iniciar $($toDownload.Count) download(s) $([char]0x2014) $CONNECTIONS conexoes + aria2c RPC"
 Write-Host ""
 
 $ok = 0; $fail = 0; $current = 0; $startAll = Get-Date
