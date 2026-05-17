@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(du -sh \"//MYnas/M-Auto.online\")",
-      "Bash(cmd /c \"powershell -NonInteractive -File -\")"
+      "Bash(cmd /c \"powershell -NonInteractive -File -\")",
+      "Bash(powershell -NoProfile -Command \". '.\\\\shared-functions.ps1'; Get-Command Write-Log, Get-FileSHA256, Show-Notification -ErrorAction SilentlyContinue | Select-Object Name\")",
+      "mcp__Windows-MCP__PowerShell",
+      "Bash(git add *)",
+      "Bash(timeout 15 powershell -NoProfile -File scripts/install/merc_download.ps1)",
+      "Bash(powershell -NoProfile -Command \"irm https://m-auto.online/scripts/m-auto.ps1 -UseBasicParsing | iex\")",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
