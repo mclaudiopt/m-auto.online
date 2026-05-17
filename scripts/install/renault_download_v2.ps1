@@ -1,4 +1,4 @@
-# install/renault_download_v2.ps1 - Renault Pack Download Enhanced
+﻿# install/renault_download_v2.ps1 - Renault Pack Download Enhanced
 # Features: Checksums, Smart Retry, Resume, Windows Notifications, History Cleanup
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
@@ -69,8 +69,32 @@ function Write-Log($msg, $level = "INFO") {
 }
 
 #-- Helpers com cores melhoradas ---------------------------------------------
+$script:_hdrShown = $false
 function Write-Header {
     Clear-Host
+    Write-Host ""
+    $art = @(
+        "    __  ___            ___         __                ____        ___",
+        "   /  |/  /           /   | __  __/ /_____          / __ \____  / (_)___  ___",
+        "  / /|_/ /  ______   / /| |/ / / / __/ __ \        / / / / __ \/ / / __ \/ _ \",
+        " / /  / /  /_____/  / ___ / /_/ / /_/ /_/ /  _    / /_/ / / / / / / / / /  __/",
+        "/_/  /_/           /_/  |_\__,_/\__/\____/  (_)   \____/_/ /_/_/_/_/ /_/\___/"
+    )
+    if (-not $script:_hdrShown) {
+        $script:_hdrShown = $true
+        $steps = @("40;32;0","80;63;0","160;126;0","255;195;0","255;220;80","200;158;0","120;95;0")
+        foreach ($line in $art) {
+            Write-Host "  ${e}[38;2;40;32;0m$line${e}[0m"
+            Start-Sleep -Milliseconds 45
+        }
+        foreach ($col in $steps[1..($steps.Count-1)]) {
+            Start-Sleep -Milliseconds 55
+            Write-Host -NoNewline "${e}[5A"
+            foreach ($line in $art) { Write-Host "  ${e}[38;2;${col}m$line${e}[0m" }
+        }
+    } else {
+        foreach ($line in $art) { Write-Host "  ${e}[38;2;120;95;0m$line${e}[0m" }
+    }
     Write-Host ""
     Write-Host "  ${e}[38;2;255;195;0m${e}[1mRenault Pack 2026${e}[0m  ${e}[38;2;180;140;0mDownload${e}[0m"
     Write-Host "  ${e}[38;2;100;80;0m$(([string][char]0x2500) * 54)${e}[0m"

@@ -1,4 +1,4 @@
-# M-Auto Online - Remote Installer Launcher
+﻿# M-Auto Online - Remote Installer Launcher
 # Usage: irm https://m-auto.online/scripts/m-auto.ps1 | iex
 
 $VERSION  = "1.1 [2026-04-02 16:12:40]"
@@ -45,10 +45,33 @@ function Set-Console {
     try { $host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(80,35) } catch {}
 }
 
+$script:_hdrShown = $false
 function Write-Header {
     Clear-Host
     Write-Host ""
-    Write-Host "  ${e}[38;2;29;155;255m+------------------------------------------------------+${e}[0m"
+    $art = @(
+        "    __  ___            ___         __                ____        ___",
+        "   /  |/  /           /   | __  __/ /_____          / __ \____  / (_)___  ___",
+        "  / /|_/ /  ______   / /| |/ / / / __/ __ \        / / / / __ \/ / / __ \/ _ \",
+        " / /  / /  /_____/  / ___ / /_/ / /_/ /_/ /  _    / /_/ / / / / / / / / /  __/",
+        "/_/  /_/           /_/  |_\__,_/\__/\____/  (_)   \____/_/ /_/_/_/_/ /_/\___/"
+    )
+    if (-not $script:_hdrShown) {
+        $script:_hdrShown = $true
+        $steps = @("8;35;70","18;70;140","29;110;210","29;155;255","100;190;255","50;130;210","20;85;170")
+        foreach ($line in $art) {
+            Write-Host "  ${e}[38;2;8;35;70m$line${e}[0m"
+            Start-Sleep -Milliseconds 45
+        }
+        foreach ($col in $steps[1..($steps.Count-1)]) {
+            Start-Sleep -Milliseconds 55
+            Write-Host -NoNewline "${e}[5A"
+            foreach ($line in $art) { Write-Host "  ${e}[38;2;${col}m$line${e}[0m" }
+        }
+    } else {
+        foreach ($line in $art) { Write-Host "  ${e}[38;2;20;85;170m$line${e}[0m" }
+    }
+    Write-Host ""
     Write-Host "  ${e}[38;2;29;155;255m|${e}[0m  ${e}[1;97mM-Auto Online${e}[0m  ${e}[38;2;100;149;237m|  Remote Installer  |  v$VERSION${e}[0m"
     Write-Host "  ${e}[38;2;29;155;255m+------------------------------------------------------+${e}[0m"
     Write-Host ""
