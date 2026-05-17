@@ -356,19 +356,124 @@ function Invoke-Download {
     return $false
 }
 
+
 # =============================================================================
-# Main
+# Main — tree navigation (root files + folder entries)
 # =============================================================================
+$sep = ([string][char]0x2500)
+
+function Show-FileTable {
+    param([array]$Items, [bool]$InFolder = $false, [string]$FolderName = "")
+    $nameW = [math]::Max(($Items | ForEach-Object {
+        if ($_.type -eq 'folder') { $_.label.Length + 1 }
+        else {
+            $n = if ($FILE_ALIASES.ContainsKey($_.data.name)) { $FILE_ALIASES[$_.data.name] }
+                 elseif ($InFolder) { ($_.data.name -split '/')[-1] }
+                 else { $_.data.name }
+            $n.Length
+        }
+    } | Measure-Object -Maximum).Maximum, 10)
+    $nameW = [math]::Min($nameW, 52)
+    Write-Host "  ${e}[38;2;255;195;0m${e}[1m$("  Nr".PadRight(5)) $("Ficheiro".PadRight($nameW+2)) $("Tamanho".PadLeft(10))  Estado${e}[0m"
+    Write-Host "  ${e}[38;2;100;80;0m$($sep*4)  $($sep*($nameW+2))  $($sep*9)  $($sep*12)${e}[0m"
+    for ($i = 0; $i -lt $Items.Count; $i++) {
+        $item = $Items[$i]
+        $num  = ($i+1).ToString().PadLeft(3)
+        if ($item.type -eq 'folder') {
+            $fk     = $item.label
+            $fFiles = $script:folderMap[$fk]
+            $fCount = $fFiles.Count
+            $fSize  = ($fFiles | ForEach-Object { if ($_.size) { [long]$_.size } else { 0L } } | Measure-Object -Sum).Sum
+            $fSzMB  = if ($fSize -gt 0) { "$([math]::Round($fSize/1MB,1)) MB".PadLeft(9) } else { "  ? MB".PadLeft(9) }
+            $fLocal = ($fFiles | Where-Object { Test-Path (Join-Path $DEST_DIR $_.name) }).Count
+            $fStat  = if ($fLocal -eq $fCount) { "${e}[38;2;34;197;94m$([char]0x2713) completo${e}[0m" } `
+                      elseif ($fLocal -gt 0)    { "${e}[38;2;255;195;0m$fLocal/$fCount local${e}[0m" } `
+                      else                       { "${e}[38;2;100;80;0m$([char]0x2014) $fCount fich.${e}[0m" }
+            $lbl = "$fk/".PadRight($nameW+2)
+            Write-Host "  ${e}[38;2;255;195;0m$num${e}[0m  ${e}[38;2;255;195;0m$([char]0x25BA)${e}[0m ${e}[38;2;255;195;0m$lbl${e}[0m $fSzMB  $fStat"
+        } else {
+            $f    = $item.data
+            $dest = Join-Path $DEST_DIR $f.name
+            $disp = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] }
+                    elseif ($InFolder) { ($f.name -split '/')[-1] }
+                    else { $f.name }
+            $dn   = if ($disp.Length -gt $nameW) { $disp.Substring(0,$nameW-1) + [char]0x2026 } else { $disp }
+            $szMB = if ($f.size -gt 0) { "$([math]::Round($f.size/1MB,1)) MB".PadLeft(9) } else { "  ? MB".PadLeft(9) }
+            if (Test-Path $dest) {
+                $lMB = "$([math]::Round((Get-Item $dest).Length/1MB,1)) MB".PadLeft(9)
+                Write-Host "  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$($dn.PadRight($nameW+2))${e}[0m $lMB  ${e}[38;2;34;197;94m$([char]0x2713) local${e}[0m"
+            } else {
+                Write-Host "  ${e}[38;2;255;195;0m$num${e}[0m  ${e}[38;2;220;180;60m$($dn.PadRight($nameW+2))${e}[0m $szMB  ${e}[38;2;100;80;0m$([char]0x2014) pendente${e}[0m"
+            }
+        }
+    }
+    Write-Host "  ${e}[38;2;100;80;0m$($sep*($nameW+32))${e}[0m"
+}
+
+function ConvertTo-DownloadList {
+    param([array]$Files)
+    $r = @()
+    foreach ($f in $Files) {
+        $dest = Join-Path $DEST_DIR $f.name
+        $ok = $false
+        if (Test-Path $dest) {
+            $lsz = (Get-Item $dest).Length
+            $ok  = ($f.size -gt 0 -and $lsz -eq $f.size) -or ($f.size -eq 0 -and $lsz -gt 0)
+        }
+        if (-not $ok) { $r += $f }
+    }
+    return $r
+}
+
+function Invoke-Downloads {
+    param([array]$Files)
+    if ($Files.Count -eq 0) { Write-OK "Todos os ficheiros ja existem."; Start-Sleep -Seconds 2; return }
+    Write-Header
+    Write-OK "A iniciar $($Files.Count) download(s) $([char]0x2014) $CONNECTIONS conexoes + aria2c RPC"
+    Write-Host ""
+    $ok = 0; $fail = 0; $cur = 0; $t0 = Get-Date
+    foreach ($f in $Files) {
+        $cur++
+        $dn   = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { ($f.name -split '/')[-1] }
+        $size = if ($f.size) { [long]$f.size } else { 0 }
+        Write-Host "  ${e}[38;2;255;195;0m>> [$cur/$($Files.Count)]${e}[0m  ${e}[38;2;220;180;60m$dn${e}[0m"
+        Write-Host ""
+        $r = Invoke-Download -Url $f.url -Name $f.name -Idx $cur -Total $Files.Count -Size $size -UseXProgress $script:useXP
+        if ($r) { $ok++ } else { $fail++ }
+        Write-Host ""
+    }
+    $elapsed = [math]::Round(((Get-Date) - $t0).TotalSeconds)
+    Write-Host "  ${e}[38;2;100;80;0m$($sep*62)${e}[0m"
+    if ($ok   -gt 0) { Write-OK  "$ok ficheiro(s) transferido(s)  (${elapsed}s total)" }
+    if ($fail -gt 0) { Write-Err "$fail ficheiro(s) falharam" }
+    Write-Host ""
+    if ($fail -gt 0) { Read-Host "  Pressione ENTER para continuar" }
+    else { Write-Info "Concluido. A voltar em 3s..."; Start-Sleep -Seconds 3 }
+}
+
+function Resolve-Selection {
+    param([string]$Choice, [int]$Max)
+    $sel = [System.Collections.Generic.List[int]]::new()
+    foreach ($part in ($Choice -split ',')) {
+        $part = $part.Trim()
+        if ($part -match '^(\d+)-(\d+)$') {
+            for ($x = [int]$Matches[1]; $x -le [int]$Matches[2]; $x++) {
+                if ($x -ge 1 -and $x -le $Max) { [void]$sel.Add($x - 1) }
+            }
+        } elseif ($part -match '^\d+$') {
+            $n = [int]$part; if ($n -ge 1 -and $n -le $Max) { [void]$sel.Add($n - 1) }
+        }
+    }
+    return @($sel | Sort-Object -Unique)
+}
+
+# --- Boot ---
 Write-Header
 Write-Info "Script de teste: xProgress + aria2c JSON-RPC"
 Write-Host ""
-
-# Import xProgress
 $useXP = Import-XProgress
 Write-Info "Modo de progresso: $(if ($useXP) { 'xProgress (modulo)' } else { 'Write-Progress (nativo)' })"
 Write-Host ""
-
-# Get links
 $links = Get-Links
 if (-not $links) {
     Write-Err "Links expirados ou indisponiveis."
@@ -376,119 +481,76 @@ if (-not $links) {
     exit 1
 }
 
-# File table
-$maxName = ($links | ForEach-Object {
-    $n = if ($FILE_ALIASES.ContainsKey($_.name)) { $FILE_ALIASES[$_.name] } else { $_.name }
-    $n.Length
-} | Measure-Object -Maximum).Maximum
-$nameW  = [math]::Max($maxName, 10)
-$sep    = ([string][char]0x2500)
-
-Write-Host "  ${e}[38;2;255;195;0m${e}[1m$("  Nr".PadRight(5)) $("Ficheiro".PadRight($nameW+2)) $("Tamanho".PadLeft(10))  Estado${e}[0m"
-Write-Host "  ${e}[38;2;100;80;0m$($sep*4)  $($sep*($nameW+2))  $($sep*9)  $($sep*12)${e}[0m"
-
-for ($i = 0; $i -lt $links.Count; $i++) {
-    $f    = $links[$i]
-    $dest = Join-Path $DEST_DIR $f.name
-    $dn   = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { $f.name }
-    $num  = ($i+1).ToString().PadLeft(3)
-    $szMB = if ($f.size -gt 0) { "$([math]::Round($f.size/1MB,1)) MB".PadLeft(9) } else { "  ? MB".PadLeft(9) }
-
-    if (Test-Path $dest) {
-        $lMB = "$([math]::Round((Get-Item $dest).Length/1MB,1)) MB".PadLeft(9)
-        Write-Host "  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$($dn.PadRight($nameW+2))${e}[0m $lMB  ${e}[38;2;34;197;94m$([char]0x2713) local${e}[0m"
-    } else {
-        Write-Host "  ${e}[38;2;255;195;0m$num${e}[0m  ${e}[38;2;220;180;60m$($dn.PadRight($nameW+2))${e}[0m $szMB  ${e}[38;2;100;80;0m– pendente${e}[0m"
-    }
+# Build file tree
+$rootFiles = @($links | Where-Object { $_.name -notmatch '/' })
+$folderMap  = [ordered]@{}
+foreach ($f in ($links | Where-Object { $_.name -match '/' })) {
+    $fk = ($f.name -split '/')[0]
+    if (-not $folderMap.ContainsKey($fk)) { $folderMap[$fk] = @() }
+    $folderMap[$fk] += $f
 }
+$folderKeys = @($folderMap.Keys | Sort-Object)
 
-Write-Host "  ${e}[38;2;100;80;0m$($sep*($nameW+30))${e}[0m"
-Write-Host ""
-Write-Host "  ${e}[38;2;100;80;0m$($sep*62)${e}[0m"
-Write-Host "  ${e}[38;2;255;195;0m[ENTER]${e}[0m  Iniciar todos os downloads em falta  ${e}[38;2;100;80;0m($CONNECTIONS conexoes + RPC)${e}[0m"
-Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s)               ${e}[38;2;100;80;0m(ex: 2  ou  1,3  ou  2-4)${e}[0m"
-Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Voltar"
-Write-Host ""
-Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao [ENTER=todos / 0=voltar]: "
-$choice = $Host.UI.ReadLine()
-if ([string]::IsNullOrWhiteSpace($choice)) { $choice = "A" }
-
-if ($choice -eq "0") {
-    Write-Info "A voltar..."
-    Clear-History -EA SilentlyContinue
-    return
-}
-
-# Build download list
-$toDownload = @()
-if ($choice -eq "A" -or $choice -eq "a") {
-    for ($i = 0; $i -lt $links.Count; $i++) {
-        $dest = Join-Path $DEST_DIR $links[$i].name
-        $ok   = $false
-        if (Test-Path $dest) {
-            $lsz = (Get-Item $dest).Length
-            $ok  = ($links[$i].size -gt 0 -and $lsz -eq $links[$i].size) -or
-                   ($links[$i].size -eq 0 -and $lsz -gt 0)
-        }
-        if (-not $ok) { $toDownload += $i }
-    }
-} else {
-    # Parse selection
-    $selected = @()
-    foreach ($part in ($choice -split ',')) {
-        $part = $part.Trim()
-        if ($part -match '^(\d+)-(\d+)$') {
-            for ($x = [int]$Matches[1]; $x -le [int]$Matches[2]; $x++) {
-                if ($x -ge 1 -and $x -le $links.Count) { $selected += $x - 1 }
-            }
-        } elseif ($part -match '^\d+$') {
-            $n = [int]$part
-            if ($n -ge 1 -and $n -le $links.Count) { $selected += $n - 1 }
-        }
-    }
-    $toDownload = @($selected | Sort-Object -Unique)
-}
-
-if ($toDownload.Count -eq 0) {
-    Write-OK "Todos os ficheiros ja existem."
-    Start-Sleep -Seconds 2
-    Clear-History -EA SilentlyContinue
-    exit 0
-}
-
-Write-Header
-Write-OK "A iniciar $($toDownload.Count) download(s) $([char]0x2014) $CONNECTIONS conexoes + aria2c RPC"
-Write-Host ""
-
-$ok = 0; $fail = 0; $current = 0; $startAll = Get-Date
-
-foreach ($idx in $toDownload) {
-    $f = $links[$idx]
-    $current++
-    $dn   = if ($FILE_ALIASES.ContainsKey($f.name)) { $FILE_ALIASES[$f.name] } else { $f.name }
-    $size = if ($f.size) { [long]$f.size } else { 0 }
-
-    Write-Host "  ${e}[38;2;255;195;0m>> [$current/$($toDownload.Count)]${e}[0m  ${e}[38;2;220;180;60m$dn${e}[0m"
+# ---- Main navigation loop ----
+:mainloop while ($true) {
+    Write-Header
+    Write-Info "Modo: $(if ($useXP) { 'xProgress' } else { 'Write-Progress (nativo)' })"
     Write-Host ""
-
-    $result = Invoke-Download -Url $f.url -Name $f.name -Idx $current `
-        -Total $toDownload.Count -Size $size -UseXProgress $useXP
-
-    if ($result) { $ok++ } else { $fail++ }
+    $topItems = [System.Collections.Generic.List[object]]::new()
+    foreach ($f  in $rootFiles ) { [void]$topItems.Add([PSCustomObject]@{ type='file';   data=$f;   label=$f.name }) }
+    foreach ($fk in $folderKeys) { [void]$topItems.Add([PSCustomObject]@{ type='folder'; data=$null; label=$fk    }) }
+    Show-FileTable -Items $topItems.ToArray()
     Write-Host ""
-}
+    Write-Host "  ${e}[38;2;100;80;0m$($sep*62)${e}[0m"
+    Write-Host "  ${e}[38;2;255;195;0m[ENTER]${e}[0m  Todos os downloads em falta  ${e}[38;2;100;80;0m($CONNECTIONS CN)${e}[0m"
+    Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Ficheiro(s) ou entrar pasta  ${e}[38;2;100;80;0m(ex: 2  1,3  2-4)${e}[0m"
+    Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Sair"
+    Write-Host ""
+    Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao: "
+    $ch = $Host.UI.ReadLine()
+    if ([string]::IsNullOrWhiteSpace($ch)) { $ch = "A" }
+    if ($ch -eq "0") { Write-Info "A sair..."; Clear-History -EA SilentlyContinue; break mainloop }
+    if ($ch -eq "A") { Invoke-Downloads -Files (ConvertTo-DownloadList -Files $links); continue mainloop }
 
-$elapsed = [math]::Round(((Get-Date) - $startAll).TotalSeconds)
-Write-Host "  ${e}[38;2;100;80;0m$($sep * 62)${e}[0m"
-if ($ok   -gt 0) { Write-OK   "$ok ficheiro(s) transferido(s) com sucesso  (${elapsed}s total)" }
-if ($fail -gt 0) { Write-Err  "$fail ficheiro(s) falharam" }
-Write-Host ""
+    $sel = Resolve-Selection -Choice $ch -Max $topItems.Count
+    if ($sel.Count -eq 0) { Write-Warn "Seleccao invalida."; Start-Sleep -Seconds 1; continue mainloop }
 
-if ($fail -gt 0) {
-    Read-Host "  Pressione ENTER para continuar"
-} else {
-    Write-Info "Concluido. A voltar em 3s..."
-    Start-Sleep -Seconds 3
+    # Single folder -> navigate into it
+    if ($sel.Count -eq 1 -and $topItems[$sel[0]].type -eq 'folder') {
+        $fk = $topItems[$sel[0]].label
+        :folderloop while ($true) {
+            Write-Header
+            Write-Host "  ${e}[38;2;255;195;0m$([char]0x25BA)${e}[0m  ${e}[38;2;220;180;60m$fk/${e}[0m"
+            Write-Host ""
+            $fFiles = $folderMap[$fk]
+            $fItems = @($fFiles | ForEach-Object { [PSCustomObject]@{ type='file'; data=$_; label=$_.name } })
+            Show-FileTable -Items $fItems -InFolder $true -FolderName $fk
+            Write-Host ""
+            Write-Host "  ${e}[38;2;100;80;0m$($sep*62)${e}[0m"
+            Write-Host "  ${e}[38;2;255;195;0m[ENTER]${e}[0m  Todos em falta nesta pasta"
+            Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s)  ${e}[38;2;100;80;0m(ex: 2  1,3  2-4)${e}[0m"
+            Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Voltar"
+            Write-Host ""
+            Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao: "
+            $fc = $Host.UI.ReadLine()
+            if ([string]::IsNullOrWhiteSpace($fc)) { $fc = "A" }
+            if ($fc -eq "0") { break folderloop }
+            if ($fc -eq "A") { Invoke-Downloads -Files (ConvertTo-DownloadList -Files $fFiles); continue folderloop }
+            $fsel = Resolve-Selection -Choice $fc -Max $fItems.Count
+            if ($fsel.Count -eq 0) { Write-Warn "Seleccao invalida."; Start-Sleep -Seconds 1; continue folderloop }
+            Invoke-Downloads -Files @($fsel | ForEach-Object { $fItems[$_].data })
+        }
+        continue mainloop
+    }
+
+    # Mixed/multiple — collect all files
+    $toDownload = @()
+    foreach ($idx in $sel) {
+        $item = $topItems[$idx]
+        if ($item.type -eq 'folder') { $toDownload += ConvertTo-DownloadList -Files $folderMap[$item.label] }
+        else                          { $toDownload += $item.data }
+    }
+    Invoke-Downloads -Files @($toDownload | Sort-Object name -Unique)
 }
 
 Clear-History -EA SilentlyContinue
