@@ -23,6 +23,12 @@ if (-not (Test-Path $LOG_DIR))  { New-Item -ItemType Directory -Path $LOG_DIR  -
 function Write-Header {
     Clear-Host
     Write-Host ""
+    Write-Host "  ${e}[38;2;120;95;0m    __  ___            ___         __                ____        ___${e}[0m"
+    Write-Host "  ${e}[38;2;120;95;0m   /  |/  /           /   | __  __/ /_____          / __ \____  / (_)___  ___${e}[0m"
+    Write-Host "  ${e}[38;2;150;118;0m  / /|_/ /  ______   / /| |/ / / / __/ __ \        / / / / __ \/ / / __ \/ _ \${e}[0m"
+    Write-Host "  ${e}[38;2;120;95;0m / /  / /  /_____/  / ___ / /_/ / /_/ /_/ /  _    / /_/ / / / / / / / / /  __/${e}[0m"
+    Write-Host "  ${e}[38;2;120;95;0m/_/  /_/           /_/  |_\__,_/\__/\____/  (_)   \____/_/ /_/_/_/_/ /_/\___/${e}[0m"
+    Write-Host ""
     Write-Host "  ${e}[38;2;255;195;0m${e}[1mMercedes Full Pack${e}[0m  ${e}[38;2;180;140;0mDownload${e}[0m  ${e}[38;2;100;80;0m[TEST $([char]0x2014) xProgress + RPC]${e}[0m"
     Write-Host "  ${e}[38;2;100;80;0m$(([string][char]0x2500) * 62)${e}[0m"
     Write-Host ""
