@@ -266,7 +266,7 @@ function Invoke-Download {
     $rpcFails   = 0
     $smoothPct  = 0.0   # smoothed display percentage (speed-driven, linear feel)
     # Safety timeout: at least 5 min, or 1s per 50KB (generous for slow connections)
-    $maxWaitSec = [int][math]::Max(300, if ($Size -gt 0) { $Size / 50000 } else { 300 })
+    $maxWaitSec = if ($Size -gt 0) { [int][math]::Max(300, $Size / 50000) } else { 300 }
 
     while ($true) {
         # Check process exit (natural completion — but aria2c RPC mode may not exit)
