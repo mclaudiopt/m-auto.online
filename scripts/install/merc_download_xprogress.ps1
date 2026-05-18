@@ -144,7 +144,7 @@ function Invoke-Aria2RPC {
     try {
         $body = @{ jsonrpc = "2.0"; id = "1"; method = $Method; params = $Params } | ConvertTo-Json -Depth 5
         $resp = Invoke-RestMethod -Uri "http://localhost:$RPC_PORT/jsonrpc" `
-            -Method POST -Body $body -ContentType "application/json" -UseBasicParsing -TimeoutSec 2
+            -Method POST -Body $body -ContentType "application/json" -UseBasicParsing -TimeoutSec 1
         return $resp.result
     } catch { return $null }
 }
@@ -251,9 +251,10 @@ function Invoke-Download {
         } catch { $xp = $null }
     }
 
-    $samples   = [System.Collections.Generic.Queue[object]]::new()
-    $startTime = Get-Date
-    $lastCN    = 0
+    $samples    = [System.Collections.Generic.Queue[object]]::new()
+    $startTime  = Get-Date
+    $lastCN     = 0
+    $rpcFails   = 0
 
     while (-not $proc.HasExited) {
         Start-Sleep -Milliseconds 400
@@ -269,7 +270,11 @@ function Invoke-Download {
                 $speedBps = [long]$stat.downloadSpeed
                 $cnCount  = [int]$stat.connections
                 $rpcUsed  = $true
+                $rpcFails = 0
                 if ($cnCount -gt 0) { $lastCN = $cnCount }
+            } else {
+                $rpcFails++
+                if ($rpcFails -ge 3) { $rpcOk = $false }  # stop retrying RPC
             }
         }
 
