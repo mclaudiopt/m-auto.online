@@ -49,7 +49,7 @@ function Write-Header {
         foreach ($line in $art) { Write-Host "  ${e}[38;2;120;95;0m$line${e}[0m" }
     }
     Write-Host ""
-    Write-Host "  ${e}[38;2;255;195;0m${e}[1mMercedes Full Pack${e}[0m  ${e}[38;2;180;140;0mDownload${e}[0m  ${e}[38;2;100;80;0m[TEST $([char]0x2014) xProgress + RPC]${e}[0m"
+    Write-Host "  ${e}[38;2;255;195;0m${e}[1mMercedes Full Pack${e}[0m  ${e}[38;2;180;140;0mDownload${e}[0m  ${e}[38;2;100;80;0m[aria2c $CONNECTIONS CN + RPC]${e}[0m"
     Write-Host "  ${e}[38;2;100;80;0m$(([string][char]0x2500) * 62)${e}[0m"
     Write-Host ""
 }
@@ -58,33 +58,6 @@ function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m$([char]0x2717)${e
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;255;195;0m!${e}[0m  $msg" }
 function Write-Info($msg) { Write-Host "  ${e}[38;2;120;100;40m$([char]0x00B7)${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m" }
 
-#-- Instalar/importar xProgress ----------------------------------------------
-function Import-XProgress {
-    # Already loaded?
-    if (Get-Module -Name xProgress -ErrorAction SilentlyContinue) { return $true }
-    # Installed but not loaded?
-    if (Get-Module -ListAvailable -Name xProgress -ErrorAction SilentlyContinue) {
-        try {
-            Import-Module xProgress -ErrorAction Stop
-            return $true
-        } catch {
-            Write-Warn "xProgress instalado mas nao pode ser carregado (execution policy?). A usar fallback."
-            return $false
-        }
-    }
-    # Not installed — try to install
-    Write-Info "Modulo xProgress nao instalado $([char]0x2014) a instalar..."
-    try {
-        $null = Install-Module -Name xProgress -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
-        Import-Module xProgress -ErrorAction Stop
-        Write-OK "xProgress instalado e importado."
-        return $true
-    } catch {
-        Write-Warn "Falha ao instalar/carregar xProgress: $_"
-        Write-Info "A usar Write-Progress nativo como fallback."
-        return $false
-    }
-}
 
 #-- Obter links --------------------------------------------------------------
 function Get-Links {
@@ -154,10 +127,9 @@ function Invoke-Aria2RPC {
     } catch { return $null }
 }
 
-#-- Download com aria2c + RPC + xProgress ------------------------------------
+#-- Download com aria2c + RPC ------------------------------------------------
 function Invoke-Download {
-    param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0,
-          [bool]$UseXProgress = $false)
+    param([string]$Url, [string]$Name, [int]$Idx, [int]$Total, [long]$Size = 0)
 
     $dest      = Join-Path $DEST_DIR $Name
     $destDir   = Split-Path $dest -Parent
@@ -252,19 +224,10 @@ function Invoke-Download {
     }
     Write-Host ""
 
-    # xProgress setup
-    $xp = $null
-    if ($UseXProgress) {
-        try {
-            $xp = New-xProgress -Activity "[$Idx/$Total] $dispName" -TotalCount 100 -Id $Idx
-        } catch { $xp = $null }
-    }
-
     $samples    = [System.Collections.Generic.Queue[object]]::new()
     $startTime  = Get-Date
     $lastCN     = 0
     $rpcFails   = 0
-    $smoothPct  = 0.0   # smoothed display percentage (speed-driven, linear feel)
     # Safety timeout: at least 5 min, or 1s per 50KB (generous for slow connections)
     $maxWaitSec = if ($Size -gt 0) { [int][math]::Max(300, $Size / 50000) } else { 300 }
 
@@ -320,16 +283,7 @@ function Invoke-Download {
 
         $speedMB  = [math]::Round($speedBps / 1MB, 1)
         $recvMB   = [math]::Round($dlBytes / 1MB, 1)
-        $actualPct = if ($Size -gt 0) { [math]::Min(100.0, $dlBytes / $Size * 100) } else { 0.0 }
-
-        # Smooth percentage: advance by current speed each tick (400ms)
-        # This gives a linear feel instead of fast-then-stuck
-        if ($speedBps -gt 0 -and $Size -gt 0) {
-            $smoothPct += ($speedBps * 0.4 / $Size) * 100
-        }
-        # Clamp: never show more than actual, never go back, cap at 99 until done
-        if ($smoothPct -gt $actualPct) { $smoothPct = $actualPct }
-        $pct = [int][math]::Min(99, $smoothPct)
+        $pct      = if ($Size -gt 0) { [int][math]::Min(99, $dlBytes / $Size * 100) } else { 0 }
 
         $etaSecs  = if ($speedBps -gt 100 -and $Size -gt $dlBytes) {
             [int](($Size - $dlBytes) / $speedBps)
@@ -358,12 +312,10 @@ function Invoke-Download {
     if (-not $proc.HasExited) { $proc.WaitForExit(3000) }
     if (-not $proc.HasExited) { try { $proc.Kill() } catch {} }
 
-    # Complete progress — show 100% bar, clear any Write-Progress overlay
+    # Complete progress — show 100% bar
     $filled100 = "${e}[48;2;255;195;0m" + (" " * 40) + "${e}[0m"
     Write-Host -NoNewline "`r  ${e}[1;38;2;255;195;0m 100%${e}[0m $filled100  ${e}[38;2;34;197;94mConcluido!${e}[0m                    "
     Write-Host ""
-    # Dismiss any lingering Write-Progress / xProgress overlays
-    Write-Progress -Activity " " -Completed -EA SilentlyContinue
 
     $errOutput = if (Test-Path $logFile) { Get-Content $logFile -Raw -EA SilentlyContinue } else { "" }
     Remove-Item $logFile, $inputFile -Force -EA SilentlyContinue
@@ -479,7 +431,7 @@ function Invoke-Downloads {
         $size = if ($f.size) { [long]$f.size } else { 0 }
         Write-Host "  ${e}[38;2;255;195;0m>> [$cur/$($Files.Count)]${e}[0m  ${e}[38;2;220;180;60m$dn${e}[0m"
         Write-Host ""
-        $r = Invoke-Download -Url $f.url -Name $f.name -Idx $cur -Total $Files.Count -Size $size -UseXProgress $script:useXP
+        $r = Invoke-Download -Url $f.url -Name $f.name -Idx $cur -Total $Files.Count -Size $size
         if ($r) { $ok++ } else { $fail++ }
         Write-Host ""
     }
@@ -541,10 +493,7 @@ function Resolve-Selection {
 
 # --- Boot ---
 Write-Header
-Write-Info "Script de teste: xProgress + aria2c JSON-RPC"
-Write-Host ""
-$useXP = Import-XProgress
-Write-Info "Modo de progresso: $(if ($useXP) { 'xProgress (modulo)' } else { 'Write-Progress (nativo)' })"
+Write-Info "Script de teste: aria2c $CONNECTIONS CN + JSON-RPC"
 Write-Host ""
 $links = Get-Links
 if (-not $links) {
@@ -566,7 +515,6 @@ $folderKeys = @($folderMap.Keys | Sort-Object)
 # ---- Main navigation loop ----
 :mainloop while ($true) {
     Write-Header
-    Write-Info "Modo: $(if ($useXP) { 'xProgress' } else { 'Write-Progress (nativo)' })"
     Write-Host ""
     $topItems = [System.Collections.Generic.List[object]]::new()
     foreach ($f  in $rootFiles ) { [void]$topItems.Add([PSCustomObject]@{ type='file';   data=$f;   label=$f.name }) }
