@@ -492,6 +492,37 @@ function Invoke-Downloads {
     else { Write-Info "Concluido. A voltar em 3s..."; Start-Sleep -Seconds 3 }
 }
 
+$EXTERNAL_LINKS = @(
+    [PSCustomObject]@{ label = "DTS 9";        url = "https://disk.yandex.com/d/ioxOx2YVwIQjMA" }
+    [PSCustomObject]@{ label = "DTS 9 Keygen"; url = "https://disk.yandex.com/d/6QxxYtdb5Cml5Q" }
+)
+
+function Show-Links {
+    Write-Header
+    Write-Host "  ${e}[38;2;255;195;0m${e}[1mLinks externos $([char]0x2014) Mercedes${e}[0m"
+    Write-Host "  ${e}[38;2;100;80;0m$(([string][char]0x2500) * 62)${e}[0m"
+    Write-Host ""
+    for ($i = 0; $i -lt $EXTERNAL_LINKS.Count; $i++) {
+        $lnk = $EXTERNAL_LINKS[$i]
+        $num = ($i+1).ToString().PadLeft(3)
+        Write-Host "  ${e}[38;2;255;195;0m$num${e}[0m  ${e}[38;2;220;180;60m$($lnk.label.PadRight(20))${e}[0m  ${e}[38;2;100;80;0m$($lnk.url)${e}[0m"
+    }
+    Write-Host ""
+    Write-Host "  ${e}[38;2;100;80;0m$(([string][char]0x2500) * 62)${e}[0m"
+    Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m  Abrir no browser    ${e}[38;2;239;68;68m[0]${e}[0m  Voltar"
+    Write-Host ""
+    Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao: "
+    $lc = $Host.UI.ReadLine()
+    if ($lc -match '^\d+$') {
+        $li = [int]$lc - 1
+        if ($li -ge 0 -and $li -lt $EXTERNAL_LINKS.Count) {
+            Start-Process $EXTERNAL_LINKS[$li].url
+            Write-OK "A abrir: $($EXTERNAL_LINKS[$li].label)"
+            Start-Sleep -Seconds 1
+        }
+    }
+}
+
 function Resolve-Selection {
     param([string]$Choice, [int]$Max)
     $sel = [System.Collections.Generic.List[int]]::new()
@@ -544,12 +575,14 @@ $folderKeys = @($folderMap.Keys | Sort-Object)
     Write-Host ""
     Write-Host "  ${e}[38;2;100;80;0m$($sep*62)${e}[0m"
     Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s) ou entrar pasta  ${e}[38;2;100;80;0m(ex: 2  1,3  2-4)${e}[0m"
+    Write-Host "  ${e}[38;2;180;160;80m[L]${e}[0m      Links externos (Yandex, etc.)"
     Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Sair"
     Write-Host ""
     Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao: "
     $ch = $Host.UI.ReadLine()
     if ([string]::IsNullOrWhiteSpace($ch)) { Write-Warn "Selecione um ficheiro ou pasta."; Start-Sleep -Seconds 1; continue mainloop }
     if ($ch -eq "0") { Write-Info "A sair..."; Clear-History -EA SilentlyContinue; break mainloop }
+    if ($ch -eq "L" -or $ch -eq "l") { Show-Links; continue mainloop }
 
     $sel = Resolve-Selection -Choice $ch -Max $topItems.Count
     if ($sel.Count -eq 0) { Write-Warn "Seleccao invalida."; Start-Sleep -Seconds 1; continue mainloop }
