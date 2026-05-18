@@ -255,6 +255,7 @@ function Invoke-Download {
     $startTime  = Get-Date
     $lastCN     = 0
     $rpcFails   = 0
+    $smoothPct  = 0.0   # smoothed display percentage (speed-driven, linear feel)
 
     while (-not $proc.HasExited) {
         Start-Sleep -Milliseconds 400
@@ -293,7 +294,17 @@ function Invoke-Download {
 
         $speedMB  = [math]::Round($speedBps / 1MB, 1)
         $recvMB   = [math]::Round($dlBytes / 1MB, 1)
-        $pct      = if ($Size -gt 0) { [math]::Min(99, [math]::Round($dlBytes / $Size * 100)) } else { 0 }
+        $actualPct = if ($Size -gt 0) { [math]::Min(100.0, $dlBytes / $Size * 100) } else { 0.0 }
+
+        # Smooth percentage: advance by current speed each tick (400ms)
+        # This gives a linear feel instead of fast-then-stuck
+        if ($speedBps -gt 0 -and $Size -gt 0) {
+            $smoothPct += ($speedBps * 0.4 / $Size) * 100
+        }
+        # Clamp: never show more than actual, never go back, cap at 99 until done
+        if ($smoothPct -gt $actualPct) { $smoothPct = $actualPct }
+        $pct = [int][math]::Min(99, $smoothPct)
+
         $etaSecs  = if ($speedBps -gt 100 -and $Size -gt $dlBytes) {
             [int](($Size - $dlBytes) / $speedBps)
         } else { -1 }
