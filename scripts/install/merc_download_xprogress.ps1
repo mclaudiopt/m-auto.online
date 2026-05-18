@@ -337,23 +337,8 @@ function Invoke-Download {
 
         $cnLabel  = if ($lastCN -gt 0) { "$lastCN CN" } else { "-- CN" }
         $src      = if ($rpcUsed) { "RPC" } else { "poll" }
-        $status   = "$recvMB/$totalMB MB  |  $speedMB MB/s  |  $cnLabel  |  $src"
 
-        # --- Display progress (Write-Progress for title bar + ANSI bar in console body) ---
-        if ($xp -and $UseXProgress) {
-            try {
-                $xp.CurrentCount = $pct
-                Write-xProgress -xProgress $xp -Status $status -SecondsRemaining $etaSecs
-            } catch {
-                Write-Progress -Activity "[$Idx/$Total] $dispName" -Status $status `
-                    -PercentComplete $pct -SecondsRemaining $etaSecs
-            }
-        } else {
-            Write-Progress -Activity "[$Idx/$Total] $dispName" -Status $status `
-                -PercentComplete $pct -SecondsRemaining $etaSecs
-        }
-
-        # ANSI inline bar $([char]0x2014) always visible in console body regardless of terminal
+        # ANSI inline bar — sole progress display (no Write-Progress overlay)
         $filled   = [math]::Max(0, [math]::Min(40, [math]::Round($pct / 100 * 40)))
         $empty    = 40 - $filled
         $barFill  = "${e}[48;2;255;195;0m" + (" " * $filled) + "${e}[0m"
@@ -363,8 +348,9 @@ function Invoke-Download {
             if ($etaSecs -ge 3600) { "$([math]::Round($etaSecs/3600,1))h" }
             elseif ($etaSecs -ge 60) { "$([math]::Round($etaSecs/60))m" }
             else { "${etaSecs}s" }
-        } else { "  " }
-        Write-Host -NoNewline "`r  ${e}[1;38;2;255;195;0m$pctStr${e}[0m $barFill$barEmpty  ${e}[38;2;180;160;80m$speedMB MB/s${e}[0m  ${e}[38;2;120;100;40m$cnLabel${e}[0m  ${e}[38;2;100;80;0m$etaStr${e}[0m   "
+        } else { "    " }
+        $recvStr  = "$recvMB/$totalMB MB"
+        Write-Host -NoNewline "`r  ${e}[1;38;2;255;195;0m$pctStr${e}[0m $barFill$barEmpty  ${e}[38;2;180;160;80m$speedMB MB/s${e}[0m  ${e}[38;2;120;100;40m$cnLabel${e}[0m  ${e}[38;2;100;80;0m$etaStr${e}[0m  ${e}[38;2;80;65;0m$recvStr${e}[0m   "
     }
 
     # Shut down aria2c (RPC mode keeps it alive; forceShutdown is immediate)
@@ -372,14 +358,12 @@ function Invoke-Download {
     if (-not $proc.HasExited) { $proc.WaitForExit(3000) }
     if (-not $proc.HasExited) { try { $proc.Kill() } catch {} }
 
-    # Complete progress — show 100% bar then move past
+    # Complete progress — show 100% bar, clear any Write-Progress overlay
     $filled100 = "${e}[48;2;255;195;0m" + (" " * 40) + "${e}[0m"
-    Write-Host -NoNewline "`r  ${e}[1;38;2;255;195;0m 100%${e}[0m $filled100  ${e}[38;2;34;197;94mConcluido!${e}[0m   "
+    Write-Host -NoNewline "`r  ${e}[1;38;2;255;195;0m 100%${e}[0m $filled100  ${e}[38;2;34;197;94mConcluido!${e}[0m                    "
     Write-Host ""
-    if ($xp -and $UseXProgress) {
-        try { Complete-xProgress -xProgress $xp } catch {}
-    }
-    Write-Progress -Activity "[$Idx/$Total] $dispName" -Completed
+    # Dismiss any lingering Write-Progress / xProgress overlays
+    Write-Progress -Activity " " -Completed -EA SilentlyContinue
 
     $errOutput = if (Test-Path $logFile) { Get-Content $logFile -Raw -EA SilentlyContinue } else { "" }
     Remove-Item $logFile, $inputFile -Force -EA SilentlyContinue
