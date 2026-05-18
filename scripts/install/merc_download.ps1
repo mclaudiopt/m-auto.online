@@ -1,4 +1,4 @@
-﻿# install/merc_download.ps1 - Mercedes Full Pack Download Enhanced
+# install/merc_download.ps1 - Mercedes Full Pack Download Enhanced
 # v4.0 - SHA256, Smart Retry, Notifications, Cache, History Cleanup
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8

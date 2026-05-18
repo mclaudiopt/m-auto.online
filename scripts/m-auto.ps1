@@ -112,6 +112,8 @@ function Run-Sub($name) {
         # Add cache-bust query parameter to ensure fresh downloads
         $url = "$BASE_URL/$name.ps1?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())"
         $s = (irm $url -UseBasicParsing)
+        # Strip UTF-8 BOM (ï»¿ / U+FEFF) if present
+        if ($s.Length -gt 0 -and [int][char]$s[0] -eq 0xFEFF) { $s = $s.Substring(1) }
         Invoke-Expression $s
     } catch {
         Write-Err "Nao foi possivel carregar: $name.ps1"
