@@ -101,11 +101,11 @@ function Write-Header {
     Write-Host ""
 }
 
-function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m✓${e}[0m  $msg"; Write-Log $msg "OK" }
-function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m✗${e}[0m  $msg"; Write-Log $msg "ERROR" }
+function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m$([char]0x2713)${e}[0m  $msg"; Write-Log $msg "OK" }
+function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m$([char]0x2717)${e}[0m  $msg"; Write-Log $msg "ERROR" }
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;255;195;0m!${e}[0m  $msg"; Write-Log $msg "WARN" }
-function Write-Info($msg) { Write-Host "  ${e}[38;2;120;100;40m·${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m"; Write-Log $msg "INFO" }
-function Write-Progress($msg) { Write-Host "  ${e}[38;2;255;195;0m›${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m" }
+function Write-Info($msg) { Write-Host "  ${e}[38;2;120;100;40m$([char]0x00B7)${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m"; Write-Log $msg "INFO" }
+function Write-Progress($msg) { Write-Host "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m" }
 #-- Windows Toast Notification -----------------------------------------------
 function Show-Notification($title, $message, $sound = $true) {
     try {
@@ -570,7 +570,7 @@ while ($retry -lt $maxRetries) {
             if (Test-Path $dest) {
                 $localMB = "$([math]::Round((Get-Item $dest).Length/1MB,1)) MB".PadLeft(9)
                 $nameStr = $displayName.PadRight($nameW + 2)
-                Write-Host "  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$nameStr${e}[0m $localMB  ${e}[38;2;34;197;94m✓ local${e}[0m"
+                Write-Host "  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$nameStr${e}[0m $localMB  ${e}[38;2;34;197;94m$([char]0x2713) local${e}[0m"
             } else {
                 $nameStr = $displayName.PadRight($nameW + 2)
                 Write-Host "  ${e}[38;2;255;195;0m$num${e}[0m  ${e}[38;2;220;180;60m$nameStr${e}[0m $sizeMB  ${e}[38;2;100;80;0m– pendente${e}[0m"
@@ -584,7 +584,7 @@ while ($retry -lt $maxRetries) {
         Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s)               ${e}[38;2;100;80;0m(ex: 2  ou  1,3  ou  2-4)${e}[0m"
         Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Voltar"
         Write-Host ""
-        Write-Host -NoNewline "  ${e}[38;2;255;195;0m›${e}[0m  Opcao [ENTER=todos / 0=voltar]: "
+        Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao [ENTER=todos / 0=voltar]: "
         $choice = $Host.UI.ReadLine()
         if ([string]::IsNullOrWhiteSpace($choice)) { $choice = "A" }
 

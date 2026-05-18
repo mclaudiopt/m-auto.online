@@ -84,10 +84,10 @@ function Write-Header {
     Write-Host ""
 }
 
-function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m✓${e}[0m  $msg" }
-function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m✗${e}[0m  $msg" }
+function Write-OK($msg)   { Write-Host "  ${e}[38;2;34;197;94m$([char]0x2713)${e}[0m  $msg" }
+function Write-Err($msg)  { Write-Host "  ${e}[38;2;239;68;68m$([char]0x2717)${e}[0m  $msg" }
 function Write-Warn($msg) { Write-Host "  ${e}[38;2;255;195;0m!${e}[0m  $msg" }
-function Write-Info($msg) { Write-Host "  ${e}[38;2;120;100;40m·${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m" }
+function Write-Info($msg) { Write-Host "  ${e}[38;2;120;100;40m$([char]0x00B7)${e}[0m  ${e}[38;2;180;160;80m$msg${e}[0m" }
 
 #-- Verificar permissoes de escrita ------------------------------------------
 function Test-WritePermissions {
@@ -382,7 +382,7 @@ while ($retry -lt $maxRetries) {
     if ($links) {
         Write-Header
 
-        # Column widths (no aliases in renault_download — use f.name directly)
+        # Column widths (no aliases in renault_download $([char]0x2014) use f.name directly)
         $maxName = ($links | ForEach-Object { $_.name.Length } | Measure-Object -Maximum).Maximum
         $nameW = [math]::Max($maxName, 10)
 
@@ -404,7 +404,7 @@ while ($retry -lt $maxRetries) {
             if (Test-Path $dest) {
                 $localMB = "$([math]::Round((Get-Item $dest).Length/1MB,1)) MB".PadLeft(9)
                 $nameStr = $f.name.PadRight($nameW + 2)
-                Write-Host "  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$nameStr${e}[0m $localMB  ${e}[38;2;34;197;94m✓ local${e}[0m"
+                Write-Host "  ${e}[38;2;100;80;20m$num${e}[0m  ${e}[38;2;160;130;40m$nameStr${e}[0m $localMB  ${e}[38;2;34;197;94m$([char]0x2713) local${e}[0m"
             } else {
                 $nameStr = $f.name.PadRight($nameW + 2)
                 Write-Host "  ${e}[38;2;255;195;0m$num${e}[0m  ${e}[38;2;220;180;60m$nameStr${e}[0m $sizeMB  ${e}[38;2;100;80;0m– pendente${e}[0m"
@@ -418,7 +418,7 @@ while ($retry -lt $maxRetries) {
         Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s)               ${e}[38;2;100;80;0m(ex: 2  ou  1,3  ou  2-4)${e}[0m"
         Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Voltar"
         Write-Host ""
-        Write-Host -NoNewline "  ${e}[38;2;255;195;0m›${e}[0m  Opcao [ENTER=todos / 0=voltar]: "
+        Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao [ENTER=todos / 0=voltar]: "
         $choice = $Host.UI.ReadLine()
         if ([string]::IsNullOrWhiteSpace($choice)) { $choice = "A" }
 
@@ -469,7 +469,7 @@ while ($retry -lt $maxRetries) {
         }
 
         Write-Header
-        Write-OK "A transferir $($toDownload.Count) ficheiro(s) — 4 conexoes por ficheiro..."
+        Write-OK "A transferir $($toDownload.Count) ficheiro(s) $([char]0x2014) 4 conexoes por ficheiro..."
         Write-Host ""
 
         $ok = 0; $fail = 0
