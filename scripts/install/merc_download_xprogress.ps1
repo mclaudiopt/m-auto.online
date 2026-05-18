@@ -444,21 +444,6 @@ function Show-FileTable {
     Write-Host "  ${e}[38;2;100;80;0m$($sep*($nameW+32))${e}[0m"
 }
 
-function ConvertTo-DownloadList {
-    param([array]$Files)
-    $r = @()
-    foreach ($f in $Files) {
-        $dest = Join-Path $DEST_DIR $f.name
-        $ok = $false
-        if (Test-Path $dest) {
-            $lsz = (Get-Item $dest).Length
-            $ok  = ($f.size -gt 0 -and $lsz -eq $f.size) -or ($f.size -eq 0 -and $lsz -gt 0)
-        }
-        if (-not $ok) { $r += $f }
-    }
-    return $r
-}
-
 function Invoke-Downloads {
     param([array]$Files)
     if ($Files.Count -eq 0) { Write-OK "Todos os ficheiros ja existem."; Start-Sleep -Seconds 2; return }
@@ -536,15 +521,13 @@ $folderKeys = @($folderMap.Keys | Sort-Object)
     Show-FileTable -Items $topItems.ToArray()
     Write-Host ""
     Write-Host "  ${e}[38;2;100;80;0m$($sep*62)${e}[0m"
-    Write-Host "  ${e}[38;2;255;195;0m[ENTER]${e}[0m  Todos os downloads em falta  ${e}[38;2;100;80;0m($CONNECTIONS CN)${e}[0m"
-    Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Ficheiro(s) ou entrar pasta  ${e}[38;2;100;80;0m(ex: 2  1,3  2-4)${e}[0m"
+    Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s) ou entrar pasta  ${e}[38;2;100;80;0m(ex: 2  1,3  2-4)${e}[0m"
     Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Sair"
     Write-Host ""
     Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao: "
     $ch = $Host.UI.ReadLine()
-    if ([string]::IsNullOrWhiteSpace($ch)) { $ch = "A" }
+    if ([string]::IsNullOrWhiteSpace($ch)) { Write-Warn "Selecione um ficheiro ou pasta."; Start-Sleep -Seconds 1; continue mainloop }
     if ($ch -eq "0") { Write-Info "A sair..."; Clear-History -EA SilentlyContinue; break mainloop }
-    if ($ch -eq "A") { Invoke-Downloads -Files (ConvertTo-DownloadList -Files $links); continue mainloop }
 
     $sel = Resolve-Selection -Choice $ch -Max $topItems.Count
     if ($sel.Count -eq 0) { Write-Warn "Seleccao invalida."; Start-Sleep -Seconds 1; continue mainloop }
@@ -561,15 +544,13 @@ $folderKeys = @($folderMap.Keys | Sort-Object)
             Show-FileTable -Items $fItems -InFolder $true -FolderName $fk
             Write-Host ""
             Write-Host "  ${e}[38;2;100;80;0m$($sep*62)${e}[0m"
-            Write-Host "  ${e}[38;2;255;195;0m[ENTER]${e}[0m  Todos em falta nesta pasta"
             Write-Host "  ${e}[38;2;180;160;80m[1-N]${e}[0m    Selecionar ficheiro(s)  ${e}[38;2;100;80;0m(ex: 2  1,3  2-4)${e}[0m"
             Write-Host "  ${e}[38;2;239;68;68m[0]${e}[0m      Voltar"
             Write-Host ""
             Write-Host -NoNewline "  ${e}[38;2;255;195;0m$([char]0x203A)${e}[0m  Opcao: "
             $fc = $Host.UI.ReadLine()
-            if ([string]::IsNullOrWhiteSpace($fc)) { $fc = "A" }
+            if ([string]::IsNullOrWhiteSpace($fc)) { Write-Warn "Selecione um ficheiro."; Start-Sleep -Seconds 1; continue folderloop }
             if ($fc -eq "0") { break folderloop }
-            if ($fc -eq "A") { Invoke-Downloads -Files (ConvertTo-DownloadList -Files $fFiles); continue folderloop }
             $fsel = Resolve-Selection -Choice $fc -Max $fItems.Count
             if ($fsel.Count -eq 0) { Write-Warn "Seleccao invalida."; Start-Sleep -Seconds 1; continue folderloop }
             Invoke-Downloads -Files @($fsel | ForEach-Object { $fItems[$_].data })
@@ -581,7 +562,7 @@ $folderKeys = @($folderMap.Keys | Sort-Object)
     $toDownload = @()
     foreach ($idx in $sel) {
         $item = $topItems[$idx]
-        if ($item.type -eq 'folder') { $toDownload += ConvertTo-DownloadList -Files $folderMap[$item.label] }
+        if ($item.type -eq 'folder') { $toDownload += $folderMap[$item.label] }
         else                          { $toDownload += $item.data }
     }
     Invoke-Downloads -Files @($toDownload | Sort-Object name -Unique)
