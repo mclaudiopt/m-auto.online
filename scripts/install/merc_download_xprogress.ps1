@@ -344,17 +344,14 @@ function Invoke-Download {
         $finalMB  = [math]::Round((Get-Item $dest).Length / 1MB, 1)
         $elapsed  = [math]::Round(((Get-Date) - $startTime).TotalSeconds)
         $avgSpeed = if ($elapsed -gt 0 -and $finalMB -gt 0) { [math]::Round($finalMB / $elapsed, 1) } else { 0 }
-        $sha256   = (Get-FileHash $dest -Algorithm SHA256).Hash.ToLower()
 
         Write-OK "$dispName $([char]0x2014) $finalMB MB em ${elapsed}s (media $avgSpeed MB/s, max $CONNECTIONS CN)"
-        Write-Host "  ${e}[38;2;100;149;237m[SHA256]${e}[0m $sha256"
 
         # Log to manifest
         $manifest = Join-Path $LOG_DIR "download_manifest.json"
         $entry = [ordered]@{
             filename  = $Name
             size      = (Get-Item $dest).Length
-            sha256    = $sha256
             timestamp = (Get-Date -Format "o")
             avgSpeedMBs = $avgSpeed
             connections = $lastCN
