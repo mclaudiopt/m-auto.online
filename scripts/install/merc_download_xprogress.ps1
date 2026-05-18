@@ -265,10 +265,23 @@ function Invoke-Download {
     $lastCN     = 0
     $rpcFails   = 0
     $smoothPct  = 0.0   # smoothed display percentage (speed-driven, linear feel)
+    # Safety timeout: at least 5 min, or 1s per 50KB (generous for slow connections)
+    $maxWaitSec = [int][math]::Max(300, if ($Size -gt 0) { $Size / 50000 } else { 300 })
 
-    while (-not $proc.HasExited) {
+    while ($true) {
+        # Check process exit (natural completion — but aria2c RPC mode may not exit)
+        if ($proc.HasExited) { break }
+
         Start-Sleep -Milliseconds 400
-        $now = Get-Date
+        $now     = Get-Date
+        $elapsed = ($now - $startTime).TotalSeconds
+
+        # Safety timeout — kill aria2c if running too long
+        if ($elapsed -gt $maxWaitSec) {
+            Write-Warn "Timeout (${maxWaitSec}s) $([char]0x2014) a interromper aria2c"
+            try { $proc.Kill() } catch {}
+            break
+        }
 
         # --- Get stats: try RPC first, fall back to file polling ---
         $dlBytes = 0; $speedBps = 0; $cnCount = 0; $rpcUsed = $false
@@ -282,6 +295,8 @@ function Invoke-Download {
                 $rpcUsed  = $true
                 $rpcFails = 0
                 if ($cnCount -gt 0) { $lastCN = $cnCount }
+                # aria2c RPC mode stays alive after download — detect completion via status
+                if ($stat.status -eq 'complete' -or $stat.status -eq 'error') { break }
             } else {
                 $rpcFails++
                 if ($rpcFails -ge 3) { $rpcOk = $false }  # stop retrying RPC
@@ -299,6 +314,8 @@ function Invoke-Download {
                 $dt = ($now - $first.t).TotalSeconds
                 if ($dt -gt 0.1) { $speedBps = ($dlBytes - $first.b) / $dt }
             }
+            # Poll completion: file at expected size AND no recent speed activity
+            if ($Size -gt 0 -and $dlBytes -ge $Size) { break }
         }
 
         $speedMB  = [math]::Round($speedBps / 1MB, 1)
@@ -350,6 +367,11 @@ function Invoke-Download {
         Write-Host -NoNewline "`r  ${e}[1;38;2;255;195;0m$pctStr${e}[0m $barFill$barEmpty  ${e}[38;2;180;160;80m$speedMB MB/s${e}[0m  ${e}[38;2;120;100;40m$cnLabel${e}[0m  ${e}[38;2;100;80;0m$etaStr${e}[0m   "
     }
 
+    # Shut down aria2c (RPC mode keeps it alive; forceShutdown is immediate)
+    Invoke-Aria2RPC "aria2.forceShutdown" | Out-Null
+    if (-not $proc.HasExited) { $proc.WaitForExit(3000) }
+    if (-not $proc.HasExited) { try { $proc.Kill() } catch {} }
+
     # Complete progress — show 100% bar then move past
     $filled100 = "${e}[48;2;255;195;0m" + (" " * 40) + "${e}[0m"
     Write-Host -NoNewline "`r  ${e}[1;38;2;255;195;0m 100%${e}[0m $filled100  ${e}[38;2;34;197;94mConcluido!${e}[0m   "
@@ -362,7 +384,11 @@ function Invoke-Download {
     $errOutput = if (Test-Path $logFile) { Get-Content $logFile -Raw -EA SilentlyContinue } else { "" }
     Remove-Item $logFile, $inputFile -Force -EA SilentlyContinue
 
-    if ($proc.ExitCode -eq 0 -and (Test-Path $dest)) {
+    # Consider success if file exists with expected size (forceShutdown may give exit code != 0)
+    $fileOk = (Test-Path $dest) -and (
+        $Size -le 0 -or (Get-Item $dest).Length -ge ($Size * 0.99)
+    )
+    if ($fileOk) {
         $finalMB  = [math]::Round((Get-Item $dest).Length / 1MB, 1)
         $elapsed  = [math]::Round(((Get-Date) - $startTime).TotalSeconds)
         $avgSpeed = if ($elapsed -gt 0 -and $finalMB -gt 0) { [math]::Round($finalMB / $elapsed, 1) } else { 0 }
