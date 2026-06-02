@@ -36,7 +36,12 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .hdr-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:6px 12px;color:var(--muted2);font-size:.7rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .hdr-btn:hover{border-color:var(--blue);color:var(--blue);}
 .body{display:flex;flex:1;overflow:hidden;}
-.activity-panel{width:520px;border-left:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;order:2;}
+.activity-panel{width:520px;border-left:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;order:2;transition:width .3s;}
+.activity-panel.collapsed{width:32px;}
+.activity-collapse-btn{position:absolute;right:6px;top:12px;width:20px;height:20px;border:none;background:rgba(37,99,235,.2);border-radius:4px;color:var(--blue3);cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:5;}
+.activity-collapse-btn:hover{background:rgba(37,99,235,.3);}
+.activity-collapse-btn.pin{background:rgba(245,158,11,.2);color:var(--yellow);}
+.activity-header{position:relative;}
 .sidebar{display:none;}
 .main{flex:1;order:1;}
 .preview-panel{width:380px;border-left:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;order:3;}
@@ -157,7 +162,10 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
   </div>
   <div class="body">
     <div class="activity-panel">
-      <div class="activity-header">📋 Log</div>
+      <div class="activity-header">📋 Log
+        <button class="activity-collapse-btn" onclick="toggleLogPin()" title="Fixar painel">📌</button>
+        <button class="activity-collapse-btn" onclick="toggleLog()" style="right:30px;" title="Colapsar">⊳</button>
+      </div>
       <div class="activity-tabs">
         <div class="activity-tab active" onclick="filterLog('all')" data-filter="all">Tudo</div>
         <div class="activity-tab" onclick="filterLog('renew')" data-filter="renew">🔄 Renew</div>
@@ -361,9 +369,13 @@ function updateHdrNav(id){document.querySelectorAll('.hdr-nav-item').forEach(el=
 function togglePreview(){const p=document.getElementById('preview-panel');p.classList.toggle('preview-hidden');}
 const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊',header:'📋'};
 let currentFilter='all';
+let logPinned=localStorage.getItem('logPinned')==='true';
 function addLog(msg,type='info',category='all',isHeader=false){const log=document.getElementById('activity-log');const t=new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});const entry=document.createElement('div');
 if(isHeader){entry.className='log-header';const l=document.createElement('span');l.textContent=LOG_ICONS[type]+' '+msg;const r=document.createElement('span');r.textContent=t;entry.appendChild(l);entry.appendChild(r);}else{entry.className='log-entry log-'+type;entry.dataset.category=category;entry.style.display=(currentFilter==='all'||currentFilter===category)?'block':'none';const cleanMsg=msg.replace(/^[⚠✗✓🔴🟡🟢]+\s*/,'').toLowerCase();const icon=LOG_ICONS[type]||'•';entry.textContent=icon+' '+cleanMsg;}
 log.appendChild(entry);log.scrollTop=log.scrollHeight;}
+function toggleLog(){const panel=document.querySelector('.activity-panel');panel.classList.toggle('collapsed');if(!logPinned)localStorage.setItem('logCollapsed',panel.classList.contains('collapsed'));}
+function toggleLogPin(){logPinned=!logPinned;localStorage.setItem('logPinned',logPinned);const btn=document.querySelector('.activity-collapse-btn');btn.classList.toggle('pin',logPinned);}
+function initLogState(){const collapsed=localStorage.getItem('logCollapsed')==='true'&&!logPinned;if(collapsed)document.querySelector('.activity-panel').classList.add('collapsed');const btn=document.querySelector('.activity-collapse-btn');if(logPinned)btn.classList.add('pin');}
 function filterLog(cat){currentFilter=cat;document.querySelectorAll('.activity-tab').forEach(el=>el.classList.remove('active'));document.querySelector('[data-filter="'+cat+'"]').classList.add('active');const entries=document.querySelectorAll('.log-entry');for(const e of entries)e.style.display=(cat==='all'||e.dataset.category===cat)?'block':'none';}
 window.addEventListener('beforeunload',e=>{if(namesDirty){e.preventDefault();e.returnValue='';}});
 </script>
