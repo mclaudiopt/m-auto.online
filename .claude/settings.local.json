@@ -21,7 +21,9 @@
       "Bash(nohup python -m http.server 3000)",
       "mcp__Windows-MCP__Process",
       "mcp__Windows-MCP__Snapshot",
-      "Bash(rclone ls *)"
+      "Bash(rclone ls *)",
+      "Bash(python -m py_compile server.py)",
+      "Bash(echo \"Exit code: $?\")"
     ]
   }
 }

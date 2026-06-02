@@ -219,9 +219,8 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
       <div class="panel" id="panel-admin">
         <div class="sec">⚙️ Administração</div>
         <div class="ntabs" style="margin-bottom:16px">
-          <div class="ntab active" onclick="adminTab('nomes')" id="admin-tab-nomes">📝 Nomes</div>
-          <div class="ntab" onclick="adminTab('pastas')" id="admin-tab-pastas">📂 Pastas</div>
-          <div class="ntab" onclick="adminTab('files')" id="admin-tab-files">📁 Ficheiros</div>
+          <div class="ntab active" onclick="adminTab('nomes')" id="admin-tab-nomes">📝 Nomes Amigáveis</div>
+          <div class="ntab" onclick="adminTab('files')" id="admin-tab-files">⚡ Ferramentas</div>
         </div>
         <div id="admin-nomes" class="admin-section">
           <div style="background:rgba(37,99,235,.06);border:1px solid var(--border);border-radius:8px;padding:9px 14px;margin-bottom:14px;font-size:.7rem;color:var(--muted2);line-height:1.7;">
@@ -234,10 +233,6 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
           </div>
           <div class="ntabs" id="ntabs-container"></div>
           <div id="ncats-container"></div>
-        </div>
-        <div id="admin-pastas" class="admin-section" style="display:none">
-          <div class="sec">Configurar Pastas Ativas</div>
-          <div id="pasta-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px"></div>
         </div>
         <div id="admin-files" class="admin-section" style="display:none">
           <div class="sec">Ficheiros</div>
@@ -311,9 +306,8 @@ const SRCS=[
 const SCRIPTS={merc:REPO+'\\scripts\\tools\\renew_merc_links.ps1',renault:REPO+'\\scripts\\tools\\renew_renault_links.ps1',psa:REPO+'\\scripts\\tools\\renew_psa_links.ps1'};
 const NAMES_S3='S:\\friendlynames.json';
 let names={},allFiles={},namesDirty=false,selectedFiles={},linksData={};
-let pastaConfig={},s3PollerInterval=null;
-const PASTA_CONFIGS={'merc':['Daimler'],'renault':['Renault'],'psa':['PSA'],'autodata':['Autodata'],'delphi':['Delphi'],'ford':['Ford'],'gm':['GM'],'tesla':['Tesla'],'vw':['VW'],'hermes':['Hermes']};
-async function startS3Poller(){if(s3PollerInterval)clearInterval(s3PollerInterval);s3PollerInterval=setInterval(async()=>{try{for(const s of SRCS){const files=await getS3Files(s.key);if(files.length){const newFiles=files.filter(f=>!(linksData[s.key]||[]).find(x=>x.name===f.name));if(newFiles.length){addLog(`Novos ficheiros: ${newFiles.length} para ${s.label}`,'ok','renew');await refreshS3Status();}}}}catch(e){}},30000);}
+let s3PollerInterval=null,s3DetectedFiles={};
+async function startS3Poller(){if(s3PollerInterval)clearInterval(s3PollerInterval);s3PollerInterval=setInterval(async()=>{try{for(const s of SRCS){const files=await getS3Files(s.key);if(files.length){const key=s.key;const currentFiles=new Set(files.map(f=>f.name));const oldFiles=new Set((s3DetectedFiles[key]||[]).map(f=>f.name));const newFiles=Array.from(currentFiles).filter(f=>!oldFiles.has(f));if(newFiles.length){addLog(`✓ ${newFiles.length} novo(s) em ${s.label}`,'ok','renew');}s3DetectedFiles[key]=files;await refreshS3Status();}}}catch(e){}},30000);}
 function getPastaConfig(key){const cfg=localStorage.getItem('pasta_'+key);return cfg?JSON.parse(cfg):PASTA_CONFIGS[key]||[];}
 function setPastaConfig(key,pastas){localStorage.setItem('pasta_'+key,JSON.stringify(pastas));}
 async function refreshS3Status(){await loadStatus();}
@@ -447,9 +441,7 @@ function nameInp(el){const path=el.dataset.path,val=el.value.trim(),row=el.close
 function saveNames(){const json=JSON.stringify(names,null,2);try{if(typeof HEScript!=='undefined'){HEScript.WriteFile(NAMES_S3,json);showSt('ok','✓ Guardado em S: (R2)');}else{localStorage.setItem('friendlynames',json);showSt('ok','✓ Guardado em localStorage');}}catch(e){showSt('err','Erro: '+e.message);}namesDirty=false;document.getElementById('btn-save').disabled=true;}
 function showSt(type,msg){const el=document.getElementById('save-st');el.className='save-st '+type;el.textContent=msg;setTimeout(()=>{el.className='save-st';el.textContent='';},4000);}
 function ntab(id){document.querySelectorAll('.ntabs-container .ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('#ncats-container .ncat').forEach(el=>el.classList.remove('on'));document.getElementById('ntab-'+id).classList.add('active');document.getElementById('ncat-'+id).classList.add('on');document.getElementById('nq').value='';}
-function adminTab(section){document.querySelectorAll('[id^="admin-tab-"]').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(el=>el.style.display='none');document.getElementById('admin-tab-'+section).classList.add('active');document.getElementById('admin-'+section).style.display='block';if(section==='pastas')buildPastaConfig();}
-function buildPastaConfig(){const container=document.getElementById('pasta-list');let html='';for(const s of SRCS){const cfg=getPastaConfig(s.key);const pastas=(PASTA_CONFIGS[s.key]||[]).map(p=>({name:p,enabled:cfg.includes(p)}));html+=`<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px"><div style="font-weight:700;font-size:.8rem;color:var(--text);border-bottom:1px solid rgba(37,99,235,.1);padding-bottom:8px;margin-bottom:4px">${esc(s.label)}</div>${pastas.map(p=>`<label style="display:flex;gap:8px;align-items:center;cursor:pointer;font-size:.7rem;padding:4px;border-radius:4px;transition:background .2s" onmouseover="this.style.background='rgba(37,99,235,.06)'" onmouseout="this.style.background='transparent'"><input type="checkbox" style="cursor:pointer"${p.enabled?' checked':''} onchange="togglePasta('${s.key}','${p.name}',this.checked)"><span style="color:${p.enabled?'var(--green)':'var(--muted2)'};font-weight:${p.enabled?'600':'400'}">${esc(p.name)}</span></label>`).join('')}</div>`;}container.innerHTML=html;}
-function togglePasta(key,pasta,enabled){const cfg=getPastaConfig(key);const idx=cfg.indexOf(pasta);if(enabled&&idx===-1)cfg.push(pasta);else if(!enabled&&idx>-1)cfg.splice(idx,1);setPastaConfig(key,cfg);addLog(`Pasta ${pasta} ${enabled?'ativada':'desativada'}`,'ok','renew');}
+function adminTab(section){document.querySelectorAll('[id^="admin-tab-"]').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(el=>el.style.display='none');document.getElementById('admin-tab-'+section).classList.add('active');document.getElementById('admin-'+section).style.display='block';}
 async function loadLinks(){for(const s of SRCS){const el=document.getElementById('llst-'+s.key);el.innerHTML='<div class="state"><div class="s-ring"></div></div>';try{const r=await fetch(s.url+'?t='+Date.now());if(r.ok){const d=await r.json();linksData[s.key]=d.files||[];}else{linksData[s.key]=[];}renderLinks(s.key);}catch(e){linksData[s.key]=[];renderLinks(s.key);}}}
 function renderLinks(key){
   const el=document.getElementById('llst-'+key),files=linksData[key]||[];
