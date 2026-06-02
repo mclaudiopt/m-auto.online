@@ -45,17 +45,22 @@ class MAutoHandler(http.server.SimpleHTTPRequestHandler):
     def get_s3_files(self, brand_label):
         """Get files from S3 via rclone"""
         try:
-            cmd = f'rclone ls r2-mauto:m-auto-software/{brand_label} --files-only'
+            cmd = f'rclone ls r2-mauto:m-auto-software/{brand_label}'
             result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=10)
 
             files = []
             if result.returncode == 0 and result.stdout:
+                import re
                 for line in result.stdout.strip().split('\n'):
                     if line.strip():
-                        parts = line.strip().split(None, 1)
-                        if len(parts) >= 2:
-                            filename = parts[1]
-                            files.append({'name': f'{brand_label}/{filename}', 'path': filename})
+                        # Format: "  size  path/to/file"
+                        # Extract path after the first number
+                        match = re.match(r'^\s*\d+\s+(.+)$', line)
+                        if match:
+                            filepath = match.group(1)
+                            # Only include files, skip directories
+                            if '.' in filepath.split('/')[-1]:
+                                files.append({'name': f'{brand_label}/{filepath}', 'path': filepath})
 
             response = {'files': files, 'expires': None}
             self.send_response(200)
