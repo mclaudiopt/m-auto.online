@@ -190,7 +190,12 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
     </div>
     <div class="preview-panel preview-hidden" id="preview-panel">
       <div class="preview-header">📱 Portal Preview</div>
-      <iframe class="preview-frame" src="m-auto-portal.html"></iframe>
+      <iframe class="preview-frame" id="preview-frame"></iframe>
+      <script>
+        document.getElementById('preview-frame').src = (typeof HEScript !== 'undefined')
+          ? 'file:///S:/scripts/tools/m-auto-portal.html'
+          : 'm-auto-portal.html';
+      </script>
     </div>
     <div class="files-panel" id="files-panel">
       <div class="files-header">📋 Ficheiros para Renovar</div>
@@ -259,7 +264,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 const BASE='https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/';
 const REPO='D:\\Tutorials\\m-auto.online';
 const SCRIPTS={merc:REPO+'\\scripts\\tools\\renew_merc_links.ps1',renault:REPO+'\\scripts\\tools\\renew_renault_links.ps1',psa:REPO+'\\scripts\\tools\\renew_psa_links.ps1'};
-const SRCS=[{key:'merc',url:BASE+'merc_links.json',label:'Mercedes',color:'#c0a060'},{key:'renault',url:BASE+'renault_links.json',label:'Renault',color:'#f0c020'},{key:'psa',url:BASE+'psa_links.json',label:'PSA',color:'#4a90d9'}];
+const SRCS=[{key:'merc',url:BASE+'merc_links.json',label:'Mercedes',color:'#c0a060'},{key:'renault',url:BASE+'renault_links.json',label:'Renault',color:'#f0c020'},{key:'psa',url:BASE+'psa_links.json',label:'PSA',color:'#4a90d9'},{key:'autodata',url:BASE+'autodata_links.json',label:'Autodata',color:'#e74c3c'},{key:'delphi',url:BASE+'delphi_links.json',label:'Delphi',color:'#9b59b6'},{key:'ford',url:BASE+'ford_links.json',label:'Ford',color:'#1e90ff'},{key:'gm',url:BASE+'gm_links.json',label:'GM',color:'#f39c12'},{key:'tesla',url:BASE+'tesla_links.json',label:'TESLA',color:'#e74c3c'},{key:'vw',url:BASE+'vw_links.json',label:'VW',color:'#34495e'},{key:'hermes',url:BASE+'hermes_links.json',label:'Hermes',color:'#16a085'}];
 const NAMES_S3='S:\\friendlynames.json';
 window.addEventListener('DOMContentLoaded',()=>{document.getElementById('app').classList.add('on');initApp();});
 function nav(id){document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.panel').forEach(el=>el.classList.remove('on'));document.getElementById('nav-'+id).classList.add('active');document.getElementById('panel-'+id).classList.add('on');if(id==='names')loadNames();if(id==='links')loadLinks();}
