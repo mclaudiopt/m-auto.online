@@ -378,7 +378,7 @@ function closeModalPopup(id){document.getElementById(id)?.remove();document.getE
 function toggleFile(el){el.dataset.checked=el.dataset.checked==='true'?'false':'true';const checked=el.dataset.checked==='true';el.style.background=checked?'var(--green)':'rgba(37,99,235,.2)';const dot=el.querySelector('div');dot.style.left=checked?'2px':'18px';}
 function removeShare(key){const label=SRCS.find(s=>s.key===key).label;addLog('REMOVENDO PARTILHA: '+label.toUpperCase(),'warn','renew');setTimeout(()=>{linksData[key]=[];updateCard(key,{expires:new Date().toISOString(),files:[]});addLog('PARTILHA REMOVIDA: '+label.toUpperCase(),'ok','renew');},800);}
 let renewWatcher;
-function renewOne(key,label,btn){
+async function renewOne(key,label,btn){
   nav('log');updateHdrNav('log');
   if(!btn)btn=document.querySelector('.btn-renew[data-key="'+key+'"]');
   const st=document.getElementById('rcs-'+key);
@@ -387,7 +387,7 @@ function renewOne(key,label,btn){
   const logFile='C:\\temp\\m-auto-renew-'+key+'.log';
   const script=SCRIPTS[key];if(!script){addLog('SCRIPT NÃO ENCONTRADO: '+key.toUpperCase(),'err','renew');return;}
   const cmd=`(New-Item -Path C:\\temp -ItemType Directory -Force)|Out-Null;& '${script}' *>&1 | Tee-Object -FilePath '${logFile}'`;
-  if(typeof HEScript!=='undefined'){runPS(cmd);}else{demoRenew(key,label);}
+  if(typeof HEScript!=='undefined'){runPS(cmd);}else{const files=await getS3Files(key);addLog(`✓ ${files.length} ficheiro(s) sincronizado(s) de S3 para ${label}`,'ok','renew');return;}
   clearInterval(renewWatcher);
   let lastPos=0,hasError=false,published=false;
   renewWatcher=setInterval(()=>{
@@ -412,18 +412,6 @@ function renewOne(key,label,btn){
     }catch(e){}
   },500);
   setTimeout(()=>{clearInterval(renewWatcher);addLog(hasError?'PUBLICAÇÃO FALHOU - VERIFICAR ERRORS':published?'✓ PUBLICADO COM SUCESSO':'RENOVAÇÃO CONCLUÍDA','ok','renew');if(btn){btn.classList.remove('run');btn.disabled=false;btn.textContent='Renovar '+(label||key);}loadStatus();},12000);
-}
-function demoRenew(key,label){
-  const demoFiles={merc:['manual.pdf','workshop-guide.zip','parts-catalog.pdf','diagnostics.exe'],renault:['service-manual.pdf','parts-list.xlsx','updates.zip'],psa:['documentation.pdf']};
-  const files=demoFiles[key]||demoFiles.merc;
-  const steps=['[✓]  '+files[0],'[✓]  '+files[1]];
-  if(files[2])steps.push('[✓]  '+files[2]);
-  if(files[3])steps.push('[✓]  '+files[3]);
-  steps.push('>> Finalizando...','[OK]  JSON guardado ('+files.length+' ficheiros)','>> Git push...','[OK]  Publicado em m-auto.online/'+key+'_links.json');
-  let step=0;
-  const demo=setInterval(()=>{
-    if(step<steps.length){addLog(steps[step],'ok','renew');step++;}else{clearInterval(demo);}
-  },300);
 }
 function renewAll(){const btn=document.getElementById('btn-all');btn.disabled=true;btn.textContent='A renovar tudo...';SRCS.forEach(s=>renewOne(s.key,s.label));setTimeout(()=>{btn.disabled=false;btn.textContent='Renovar Todos os Links';},10000);}
 async function loadNames(){
