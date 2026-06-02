@@ -1,14 +1,13 @@
-# renew_merc_links.ps1 - Generate presigned URLs for all files in S:\Daimler
-# Place a shortcut to this script at S:\
+# renew_psa_links.ps1 - Generate presigned URLs for all files in S:\PSA
 
 Add-Type -AssemblyName System.Windows.Forms
 
-$RCLONE    = (Get-Command rclone -ErrorAction SilentlyContinue).Source
+$RCLONE    = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.74.2-windows-amd64\rclone.exe"
 $BUCKET    = "r2-mauto:m-auto-software"
-$SCAN_DIR  = "S:\Daimler"
-$R2_PREFIX = "Daimler"
+$SCAN_DIR  = "S:\PSA"
+$R2_PREFIX = "PSA"
 $REPO_DIR  = "D:\Tutorials\m-auto.online"
-$JSON_OUT  = "$REPO_DIR\merc_links.json"
+$JSON_OUT  = "$REPO_DIR\psa_links.json"
 $EXPIRES   = "2h"
 $e         = [char]27
 
@@ -30,21 +29,16 @@ if (-not (Test-Path $SCAN_DIR)) {
     exit 1
 }
 
-# Scan all files — exclude .@__thumb folders and .error files
+# Scan all files
 $allFiles = Get-ChildItem $SCAN_DIR -Recurse -File -ErrorAction SilentlyContinue |
-    Where-Object {
-        $_.FullName -notmatch '\\.@__thumb\\' -and
-        $_.FullName -notmatch '\\Vediamo DTS WIZ\\' -and
-        $_.Extension -ne '.error'
-    } |
     Sort-Object FullName
 
-$Host.UI.RawUI.WindowTitle = "M-Auto - Renew Mercedes Links"
+$Host.UI.RawUI.WindowTitle = "M-Auto - Renew PSA Links"
 Clear-Host
 Write-Host ""
-Write-Host "  ${e}[38;2;29;155;255m+--------------------------------------------------+${e}[0m"
-Write-Host "  ${e}[38;2;29;155;255m|${e}[0m  ${e}[1;97mM-Auto${e}[0m  ${e}[38;2;100;149;237mRenew Mercedes Links${e}[0m"
-Write-Host "  ${e}[38;2;29;155;255m+--------------------------------------------------+${e}[0m"
+Write-Host "  ${e}[38;2;74;144;226m+--------------------------------------------------+${e}[0m"
+Write-Host "  ${e}[38;2;74;144;226m|${e}[0m  ${e}[1;97mM-Auto${e}[0m  ${e}[38;2;74;144;226mRenew PSA Links${e}[0m"
+Write-Host "  ${e}[38;2;74;144;226m+--------------------------------------------------+${e}[0m"
 Write-Host ""
 Write-Host "  ${e}[38;2;148;163;184mPasta: $SCAN_DIR${e}[0m"
 Write-Host "  ${e}[38;2;148;163;184mValidade: 2 horas | Ficheiros encontrados: $($allFiles.Count)${e}[0m"
@@ -61,9 +55,8 @@ $files = foreach ($f in $allFiles) {
     }
     [PSCustomObject]@{
         label = $label
-        dest  = $relPath          # relative path with subfolders preserved
+        dest  = $relPath
         r2    = "$R2_PREFIX/$relPath"
-        size  = $f.Length         # tamanho em bytes para barra de progresso
     }
 }
 
@@ -94,7 +87,7 @@ foreach ($job in $jobs) {
     $f   = $job.f
     if ($out.ok) {
         Write-Host "  ${e}[38;2;34;197;94m[✓]${e}[0m  $($f.label)"
-        $filesList.Add([PSCustomObject]@{ name = $f.dest; url = $out.url; size = $f.size })
+        $filesList.Add([PSCustomObject]@{ name = $f.dest; url = $out.url })
         $okCount++
     } else {
         Write-Host "  ${e}[38;2;239;68;68m[✗]${e}[0m  $($f.label)"
@@ -107,27 +100,24 @@ $pool.Close()
 Write-Host ""
 Write-Host "  ${e}[38;2;148;163;184m>> Finalizando...${e}[0m"
 
-Write-Host ""
-
-# Save JSON — build manually to prevent ConvertTo-Json converting ISO 8601 to locale datetime
-$filesJson = ($filesList.ToArray() | ConvertTo-Json -Depth 2 -Compress)
-$jsonRaw    = "{`"expires`":`"$expires_dt`",`"files`":$filesJson}"
-$utf8NoBom  = New-Object System.Text.UTF8Encoding $false
-[System.IO.File]::WriteAllText($JSON_OUT, $jsonRaw, $utf8NoBom)
+# Save JSON
+$jsonObj = [PSCustomObject]@{ expires = $expires_dt; files = $filesList.ToArray() }
+$utf8NoBom = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllText($JSON_OUT, ($jsonObj | ConvertTo-Json -Depth 3 -Compress), $utf8NoBom)
 Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  JSON guardado ($($filesList.Count) ficheiros)"
 
-# Git commit + push — capture stderr as string to avoid red output
+# Git commit + push
 Write-Host ""
 Write-Host "  ${e}[38;2;148;163;184m>> Git push...${e}[0m"
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
 Push-Location $REPO_DIR
 try {
-    $null = git add merc_links.json 2>&1
-    $commitOut = git commit -m "renew: merc_links.json $ts ($($filesList.Count) ficheiros)" 2>&1
+    $null = git add psa_links.json 2>&1
+    $commitOut = git commit -m "renew: psa_links.json $ts ($($filesList.Count) ficheiros)" 2>&1
     $commitOut | ForEach-Object { Write-Host "  ${e}[38;2;80;100;140m$([string]$_)${e}[0m" }
     $pushOut = git push 2>&1
     $pushOut | ForEach-Object { Write-Host "  ${e}[38;2;80;100;140m$([string]$_)${e}[0m" }
-    Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  Publicado em m-auto.online/merc_links.json"
+    Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  Publicado em m-auto.online/psa_links.json"
 } catch {
     Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   Git erro: $([string]$_)"
 } finally {

@@ -1,11 +1,11 @@
-# renew_renault_links.ps1 - Generate presigned URLs for all files in Z:\Renault
-# Place a shortcut to this script at Z:\Renault\
+﻿# renew_renault_links.ps1 - Generate presigned URLs for all files in S:\Renault
+# Place a shortcut to this script at S:\Renault\
 
 Add-Type -AssemblyName System.Windows.Forms
 
-$RCLONE    = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.73.4-windows-amd64\rclone.exe"
+$RCLONE    = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.74.2-windows-amd64\rclone.exe"
 $BUCKET    = "r2-mauto:m-auto-software"
-$SCAN_DIR  = "Z:\Renault"
+$SCAN_DIR  = "S:\Renault"
 $R2_PREFIX = "Renault"
 $REPO_DIR  = "D:\Tutorials\m-auto.online"
 $JSON_OUT  = "$REPO_DIR\renault_links.json"
@@ -24,7 +24,7 @@ if (-not (Test-Path $RCLONE)) {
 # Check drive
 if (-not (Test-Path $SCAN_DIR)) {
     [System.Windows.Forms.MessageBox]::Show(
-        "Pasta nao encontrada: $SCAN_DIR`n`nVerifica se o drive Z:\ esta mapeado.",
+        "Pasta nao encontrada: $SCAN_DIR`n`nVerifica se o drive S:\ esta mapeado.",
         "Renew - Erro", [System.Windows.Forms.MessageBoxButtons]::OK,
         [System.Windows.Forms.MessageBoxIcon]::Error) | Out-Null
     exit 1
@@ -44,6 +44,8 @@ Write-Host "  ${e}[38;2;255;204;0m+---------------------------------------------
 Write-Host ""
 Write-Host "  ${e}[38;2;148;163;184mPasta: $SCAN_DIR${e}[0m"
 Write-Host "  ${e}[38;2;148;163;184mValidade: 2 horas | Ficheiros encontrados: $($allFiles.Count)${e}[0m"
+Write-Host ""
+Write-Host "  ${e}[38;2;148;163;184m>> Processando ficheiros...${e}[0m"
 Write-Host ""
 
 # Build file entries
@@ -79,16 +81,18 @@ $jobs = foreach ($f in $files) {
 $expires_dt = (Get-Date).AddHours(2).ToUniversalTime().ToString("o")
 $filesList  = [System.Collections.Generic.List[object]]::new()
 $errCount   = 0
+$okCount    = 0
 
 foreach ($job in $jobs) {
     $out = $job.ps.EndInvoke($job.handle)
     $job.ps.Dispose()
     $f   = $job.f
     if ($out.ok) {
-        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.label)"
+        Write-Host "  ${e}[38;2;34;197;94m[✓]${e}[0m  $($f.label)"
         $filesList.Add([PSCustomObject]@{ name = $f.dest; url = $out.url })
+        $okCount++
     } else {
-        Write-Host "  ${e}[38;2;239;68;68m[X]${e}[0m   $($f.label)"
+        Write-Host "  ${e}[38;2;239;68;68m[✗]${e}[0m  $($f.label)"
         Write-Host "       ${e}[38;2;80;100;140m$($out.url)${e}[0m"
         $errCount++
     }
@@ -96,6 +100,7 @@ foreach ($job in $jobs) {
 $pool.Close()
 
 Write-Host ""
+Write-Host "  ${e}[38;2;148;163;184m>> Finalizando...${e}[0m"
 
 # Save JSON — format: { expires, files: [ { name, url } ] }
 $jsonObj = [PSCustomObject]@{ expires = $expires_dt; files = $filesList.ToArray() }
