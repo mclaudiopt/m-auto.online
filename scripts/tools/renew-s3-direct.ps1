@@ -67,7 +67,7 @@ foreach ($line in $rclone_output -split "`n") {
     if ([string]::IsNullOrWhiteSpace($line)) { continue }
     # Format: "  size  path/to/file"
     if ($line -match '^\s*(\d+)\s+(.+)$') {
-        $size = [int]$matches[1]
+        $size = [long]$matches[1]
         $path = $matches[2].Trim()
         $files += @{ name=$path; size=$size }
     }
