@@ -170,10 +170,11 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="hdr-nav-item" onclick="nav('names');updateHdrNav('names')" id="hnav-names">📝 Nomes</div>
         <div class="hdr-nav-item" onclick="nav('links');updateHdrNav('links')" id="hnav-links">🔗 Links</div>
         <div class="hdr-nav-item" onclick="nav('admin');updateHdrNav('admin')" id="hnav-admin">⚙️ Admin</div>
-        <div class="hdr-nav-item" onclick="toggleChangelogPanel()" id="hnav-changelog">📋 Changelog</div>
+        <div class="hdr-nav-item" onclick="nav('changelog');updateHdrNav('changelog')" id="hnav-changelog">📋 Changelog</div>
+        <div class="hdr-nav-item" onclick="nav('preview');updateHdrNav('preview')" id="hnav-preview">👁 Preview</div>
       </div>
     </div>
-    <div style="display:flex;gap:8px;"><button class="hdr-btn" onclick="togglePreview()">👁 Preview</button><button class="hdr-btn" onclick="refreshAll()">Actualizar</button></div>
+    <div style="display:flex;gap:8px;"><button class="hdr-btn" onclick="refreshAll()">Actualizar</button></div>
   </div>
   <div class="body">
     <div class="activity-panel">
@@ -187,15 +188,6 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="activity-tab" onclick="filterLog('status')" data-filter="status">📊 Status</div>
       </div>
       <div class="activity-log" id="activity-log"></div>
-    </div>
-    <div class="preview-panel preview-hidden" id="preview-panel">
-      <div class="preview-header">📱 Portal Preview</div>
-      <iframe class="preview-frame" id="preview-frame"></iframe>
-      <script>
-        document.getElementById('preview-frame').src = (typeof HEScript !== 'undefined')
-          ? 'file:///S:/scripts/tools/m-auto-portal.html'
-          : 'm-auto-portal.html';
-      </script>
     </div>
     <div class="files-panel" id="files-panel">
       <div class="files-header">📋 Ficheiros para Renovar</div>
@@ -244,6 +236,23 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="admin-grid" id="admin-grid"></div>
         <div class="sec">Git</div>
         <div class="admin-grid" id="git-grid"></div>
+      </div>
+      <div class="panel" id="panel-changelog">
+        <div class="sec">📋 Changelog</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <div style="font-size:.75rem;line-height:1.8;color:var(--muted2)">
+            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.12</strong> - Preview integrado full-width, friendly names auto-save, cache-busting S3</div>
+            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.11</strong> - Preview nova janela, changelog inline</div>
+            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.10</strong> - Dynamic S3 reading via rclone lsd</div>
+            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.9</strong> - 10 marcas, modal, logs</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" id="panel-preview">
+        <div class="sec">👁 Preview - Portal</div>
+        <div style="flex:1;display:flex;flex-direction:column;background:rgba(6,13,26,.3);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+          <iframe id="preview-frame" style="flex:1;border:none;background:#fff"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -414,8 +423,7 @@ function openPath(p){if(typeof HEScript==='undefined'){showSt('err','⚠ Dispon�
 function runPS(cmd){if(typeof HEScript==='undefined'){showSt('err','⚠ Disponível apenas no EXE');return;}try{HEScript.Exec('powershell','-WindowStyle Normal -NoProfile -Command "'+cmd+'"');}catch(e){showSt('err','Erro: '+e);}}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function updateHdrNav(id){document.querySelectorAll('.hdr-nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('hnav-'+id).classList.add('active');}
-function toggleChangelogPanel(){document.getElementById('changelog-panel').style.display=document.getElementById('changelog-panel').style.display==='none'?'block':'none';}
-function togglePreview(){const panel=document.getElementById('preview-panel'),fr=document.getElementById('preview-frame');panel.classList.toggle('preview-hidden');if(!fr.src||!fr.src.length){fr.src=(typeof HEScript!=='undefined')?'file:///S:/scripts/tools/m-auto-portal.html':'http://localhost:3000/m-auto-portal.html?t='+Date.now();}}
+function loadPreviewFrame(){const fr=document.getElementById('preview-frame');if(!fr.src||!fr.src.length){fr.src=(typeof HEScript!=='undefined')?'file:///S:/scripts/tools/m-auto-portal.html':'http://localhost:3000/m-auto-portal.html?t='+Date.now();}}
 const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊',header:'📋'};
 let currentFilter='all';
 let logPinned=localStorage.getItem('logPinned')==='true';
