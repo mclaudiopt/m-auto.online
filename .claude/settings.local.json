@@ -19,7 +19,8 @@
       "Bash(grep -o '\\\\\\\\\\\\\\\\[^\\\\\\\\\\\\\\\\]*$')",
       "Bash(pkill -f \"http.server\")",
       "Bash(nohup python -m http.server 3000)",
-      "mcp__Windows-MCP__Process"
+      "mcp__Windows-MCP__Process",
+      "mcp__Windows-MCP__Snapshot"
     ]
   }
 }
