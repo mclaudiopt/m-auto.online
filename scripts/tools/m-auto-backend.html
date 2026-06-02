@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title>M-Auto Backend v1.0.5</title>
+<title>M-Auto Backend v1.0.9</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#060d1a;--bg2:#0b1220;--blue:#2563eb;--blue2:#1e40af;--blue3:#60a5fa;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--card:#0f1c2e;--border:rgba(37,99,235,0.15);--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--orange:#f97316;}
@@ -118,8 +118,8 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .save-st{font-size:.7rem;padding:4px 10px;border-radius:6px;display:none;align-items:center;}
 .save-st.ok{display:inline-flex;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.28);color:var(--green);}
 .save-st.err{display:inline-flex;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.28);color:var(--red);}
-.ntabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:12px;}
-.ntab{padding:7px 16px;border-radius:8px 8px 0 0;font-size:.73rem;font-weight:700;cursor:pointer;color:var(--muted);border:1px solid transparent;border-bottom:none;transition:all .2s;}
+.ntabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:12px;flex-wrap:wrap;overflow-x:auto;}
+.ntab{padding:7px 16px;border-radius:8px 8px 0 0;font-size:.73rem;font-weight:700;cursor:pointer;color:var(--muted);border:1px solid transparent;border-bottom:none;transition:all .2s;white-space:nowrap;}
 .ntab:hover{color:var(--text);}.ntab.active{color:#fff;background:var(--card);border-color:var(--border);border-bottom:1px solid var(--card);}
 .ncat{display:none;}.ncat.on{display:block;}
 .ltbl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
@@ -164,7 +164,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 <div id="app">
   <div class="hdr">
     <div style="display:flex;align-items:center;gap:20px;flex:1;">
-      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend v1.0.5</span></div>
+      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend v1.0.9</span></div>
       <div class="hdr-nav">
         <div class="hdr-nav-item active" onclick="nav('renew');updateHdrNav('renew')" id="hnav-renew">🔄 Renew</div>
         <div class="hdr-nav-item" onclick="nav('names');updateHdrNav('names')" id="hnav-names">📝 Nomes</div>
@@ -228,28 +228,16 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
           <span id="save-st" class="save-st"></span>
           <button class="btn-save" id="btn-save" onclick="saveNames()" disabled>Guardar em S:</button>
         </div>
-        <div class="ntabs">
-          <div class="ntab active" onclick="ntab('merc')" id="ntab-merc">Mercedes</div>
-          <div class="ntab" onclick="ntab('renault')" id="ntab-renault">Renault</div>
-          <div class="ntab" onclick="ntab('psa')" id="ntab-psa">PSA</div>
-        </div>
-        <div class="ncat on" id="ncat-merc"><div id="nlst-merc"><div class="state"><div class="s-ring"></div></div></div></div>
-        <div class="ncat" id="ncat-renault"><div id="nlst-renault"><div class="state"><div class="s-ring"></div></div></div></div>
-        <div class="ncat" id="ncat-psa"><div id="nlst-psa"><div class="state"><div class="s-ring"></div></div></div></div>
+        <div class="ntabs" id="ntabs-container"></div>
+        <div id="ncats-container"></div>
       </div>
       <div class="panel" id="panel-links">
         <div class="sec">Copiar Links Manualmente</div>
         <div style="background:rgba(37,99,235,.06);border:1px solid var(--border);border-radius:8px;padding:9px 14px;margin-bottom:14px;font-size:.7rem;color:var(--muted2);line-height:1.7;">
           Selecciona a marca, clica em ARIA ou HTML para copiar o link para o clipboard.
         </div>
-        <div class="ntabs">
-          <div class="ntab active" onclick="ltab('merc')" id="ltab-merc">Mercedes</div>
-          <div class="ntab" onclick="ltab('renault')" id="ltab-renault">Renault</div>
-          <div class="ntab" onclick="ltab('psa')" id="ltab-psa">PSA</div>
-        </div>
-        <div class="lcat on" id="lcat-merc"><div id="llst-merc"><div class="state"><div class="s-ring"></div></div></div></div>
-        <div class="lcat" id="lcat-renault"><div id="llst-renault"><div class="state"><div class="s-ring"></div></div></div></div>
-        <div class="lcat" id="lcat-psa"><div id="llst-psa"><div class="state"><div class="s-ring"></div></div></div></div>
+        <div class="ntabs" id="ltabs-container"></div>
+        <div id="lcats-container"></div>
       </div>
       <div class="panel" id="panel-admin">
         <div class="sec">Ficheiros</div>
@@ -263,11 +251,44 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 <script>
 const BASE='https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/';
 const REPO='D:\\Tutorials\\m-auto.online';
+const SRCS=[
+  {key:'merc',url:BASE+'merc_links.json',label:'Mercedes',color:'#c0a060'},
+  {key:'renault',url:BASE+'renault_links.json',label:'Renault',color:'#f0c020'},
+  {key:'psa',url:BASE+'psa_links.json',label:'PSA',color:'#4a90d9'},
+  {key:'autodata',url:BASE+'autodata_links.json',label:'Autodata',color:'#e74c3c'},
+  {key:'delphi',url:BASE+'delphi_links.json',label:'Delphi',color:'#9b59b6'},
+  {key:'ford',url:BASE+'ford_links.json',label:'Ford',color:'#1e90ff'},
+  {key:'gm',url:BASE+'gm_links.json',label:'GM',color:'#f39c12'},
+  {key:'tesla',url:BASE+'tesla_links.json',label:'TESLA',color:'#e74c3c'},
+  {key:'vw',url:BASE+'vw_links.json',label:'VW',color:'#34495e'},
+  {key:'hermes',url:BASE+'hermes_links.json',label:'Hermes',color:'#16a085'}
+];
 const SCRIPTS={merc:REPO+'\\scripts\\tools\\renew_merc_links.ps1',renault:REPO+'\\scripts\\tools\\renew_renault_links.ps1',psa:REPO+'\\scripts\\tools\\renew_psa_links.ps1'};
-const SRCS=[{key:'merc',url:BASE+'merc_links.json',label:'Mercedes',color:'#c0a060'},{key:'renault',url:BASE+'renault_links.json',label:'Renault',color:'#f0c020'},{key:'psa',url:BASE+'psa_links.json',label:'PSA',color:'#4a90d9'},{key:'autodata',url:BASE+'autodata_links.json',label:'Autodata',color:'#e74c3c'},{key:'delphi',url:BASE+'delphi_links.json',label:'Delphi',color:'#9b59b6'},{key:'ford',url:BASE+'ford_links.json',label:'Ford',color:'#1e90ff'},{key:'gm',url:BASE+'gm_links.json',label:'GM',color:'#f39c12'},{key:'tesla',url:BASE+'tesla_links.json',label:'TESLA',color:'#e74c3c'},{key:'vw',url:BASE+'vw_links.json',label:'VW',color:'#34495e'},{key:'hermes',url:BASE+'hermes_links.json',label:'Hermes',color:'#16a085'}];
 const NAMES_S3='S:\\friendlynames.json';
-window.addEventListener('DOMContentLoaded',()=>{document.getElementById('app').classList.add('on');initApp();});
-function nav(id){document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.panel').forEach(el=>el.classList.remove('on'));document.getElementById('nav-'+id).classList.add('active');document.getElementById('panel-'+id).classList.add('on');if(id==='names')loadNames();if(id==='links')loadLinks();}
+let names={},allFiles={},namesDirty=false,selectedFiles={},linksData={};
+
+window.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('app').classList.add('on');
+  buildNamesTabs();
+  buildLinksTabs();
+  initApp();
+});
+
+function buildNamesTabs(){
+  const container=document.getElementById('ntabs-container');
+  container.innerHTML=SRCS.map((s,i)=>`<div class="ntab${i===0?' active':''}" onclick="ntab('${s.key}')" id="ntab-${s.key}">${esc(s.label)}</div>`).join('')+
+    SRCS.map((s,i)=>`<div class="ncat${i===0?' on':''}" id="ncat-${s.key}"><div id="nlst-${s.key}"><div class="state"><div class="s-ring"></div></div></div></div>`).join('');
+  document.getElementById('ncats-container').innerHTML=container.innerHTML.replace(/ntabs/g,'ncats');
+  container.parentElement.insertBefore(container.nextElementSibling,container.nextElementSibling);
+}
+
+function buildLinksTabs(){
+  const container=document.getElementById('ltabs-container');
+  container.innerHTML=SRCS.map((s,i)=>`<div class="ntab${i===0?' active':''}" onclick="ltab('${s.key}')" id="ltab-${s.key}">${esc(s.label)}</div>`).join('');
+  document.getElementById('lcats-container').innerHTML=SRCS.map((s,i)=>`<div class="lcat${i===0?' on':''}" id="lcat-${s.key}"><div id="llst-${s.key}"><div class="state"><div class="s-ring"></div></div></div></div>`).join('');
+}
+
+function nav(id){document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.panel').forEach(el=>el.classList.remove('on'));document.getElementById('nav-'+id)?.classList.add('active');document.getElementById('panel-'+id).classList.add('on');if(id==='names')loadNames();if(id==='links')loadLinks();}
 async function initApp(){buildCards();buildAdmin();await loadStatus();await loadNames();await loadLinks();}
 function refreshAll(){loadStatus();loadNamesData();}
 async function loadStatus(){
@@ -293,10 +314,8 @@ function updateCard(key,data){
   if(data.expires){const diff=new Date(data.expires)-Date.now(),ok=diff>0;const h=Math.floor(Math.abs(diff)/3600000),m2=Math.floor((Math.abs(diff)%3600000)/60000);if(st){st.className='rc-st '+(ok?(diff<1800000?'warn':'ok'):'dead');st.textContent=ok?h+'h '+m2+'m':'Expirado';}if(exp)exp.innerHTML='Expira: <strong>'+new Date(data.expires).toLocaleString('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</strong>';}
   if(cnt&&data.files)cnt.textContent=data.files.length+' ficheiros';
 }
-function expandCard(key){const label=SRCS.find(s=>s.key===key).label;const f=linksData[key]||[];if(!f.length){alert('Sem ficheiros para '+label);return;}const modal=document.createElement('div');modal.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center';let h=`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto"><div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:16px">${esc(label)} (${f.length} ficheiros)</div><div style="margin-bottom:16px">`;for(let i=0;i<f.length;i++){const file=f[i];const id='modal-tgl-'+key+i;h+=`<div style="display:flex;gap:10px;align-items:center;padding:8px;margin-bottom:6px;border-radius:6px;background:rgba(37,99,235,.08)"><div class="file-toggle" id="${id}" onclick="toggleFile(this)" data-checked="true" style="width:36px;height:20px;border-radius:10px;background:var(--green);cursor:pointer;position:relative;transition:all .2s"><div style="position:absolute;width:16px;height:16px;background:#fff;border-radius:8px;top:2px;left:2px;transition:left .2s"></div></div><label style="flex:1;cursor:pointer;font-size:.75rem;color:var(--text)">${esc(file.name.split('/').pop())}</label></div>`;}h+=`</div><div style="display:flex;gap:8px"><button onclick="this.closest('div').parentElement.remove()" style="flex:1;padding:8px;background:rgba(37,99,235,.2);border:1px solid var(--border);border-radius:8px;color:var(--text);cursor:pointer">Cancelar</button><button onclick="startRenewSelected('${key}','${label}');this.closest('div').parentElement.remove()" style="flex:1;padding:8px;background:linear-gradient(135deg,rgba(30,64,175,.6),rgba(37,99,235,.6));border:1px solid rgba(37,99,235,.35);border-radius:8px;color:#fff;cursor:pointer;font-weight:700">🔄 Gerar</button></div></div>`;modal.innerHTML=h;document.body.appendChild(modal);}
-function startRenewSelected(key,label){const toggles=document.querySelectorAll('.file-toggle[data-checked="true"]');if(!toggles.length){alert('Seleciona pelo menos um ficheiro');return;}renewOne(key,label);}
+function expandCard(key){const label=SRCS.find(s=>s.key===key).label;const f=linksData[key]||[];if(!f.length){addLog('SEM DADOS PARA: '+label.toUpperCase(),'warn','renew');return;}const modal=document.createElement('div');modal.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center';let h=`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto"><div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:16px">${esc(label)} (${f.length} ficheiros)</div><div style="margin-bottom:16px">`;for(let i=0;i<f.length;i++){const file=f[i];const id='modal-tgl-'+key+i;h+=`<div style="display:flex;gap:10px;align-items:center;padding:8px;margin-bottom:6px;border-radius:6px;background:rgba(37,99,235,.08)"><div class="file-toggle" id="${id}" onclick="toggleFile(this)" data-checked="true" style="width:36px;height:20px;border-radius:10px;background:var(--green);cursor:pointer;position:relative;transition:all .2s"><div style="position:absolute;width:16px;height:16px;background:#fff;border-radius:8px;top:2px;left:2px;transition:left .2s"></div></div><label style="flex:1;cursor:pointer;font-size:.75rem;color:var(--text)">${esc(file.name.split('/').pop())}</label></div>`;}h+=`</div><div style="display:flex;gap:8px"><button onclick="this.closest('div').parentElement.remove()" style="flex:1;padding:8px;background:rgba(37,99,235,.2);border:1px solid var(--border);border-radius:8px;color:var(--text);cursor:pointer">Cancelar</button><button onclick="renewOne('${key}','${label}');this.closest('div').parentElement.remove()" style="flex:1;padding:8px;background:linear-gradient(135deg,rgba(30,64,175,.6),rgba(37,99,235,.6));border:1px solid rgba(37,99,235,.35);border-radius:8px;color:#fff;cursor:pointer;font-weight:700">🔄 Gerar</button></div></div>`;modal.innerHTML=h;document.body.appendChild(modal);}
 function toggleFile(el){el.dataset.checked=el.dataset.checked==='true'?'false':'true';const checked=el.dataset.checked==='true';el.style.background=checked?'var(--green)':'rgba(37,99,235,.2)';const dot=el.querySelector('div');dot.style.left=checked?'2px':'18px';}
-function getSelectedFiles(key){const items=document.querySelectorAll('.files-item .file-toggle[data-checked="true"]');return Array.from(items).length>0;}
 function removeShare(key){const label=SRCS.find(s=>s.key===key).label;addLog('REMOVENDO PARTILHA: '+label.toUpperCase(),'warn','renew');setTimeout(()=>{linksData[key]=[];updateCard(key,{expires:new Date().toISOString(),files:[]});addLog('PARTILHA REMOVIDA: '+label.toUpperCase(),'ok','renew');},800);}
 let renewWatcher;
 function renewOne(key,label,btn){
@@ -305,7 +324,8 @@ function renewOne(key,label,btn){
   if(btn){btn.classList.add('run');btn.disabled=true;btn.textContent='A renovar...';}
   if(st){st.className='rc-st load';st.textContent='...';}
   const logFile='C:\\temp\\m-auto-renew-'+key+'.log';
-  const cmd=`(New-Item -Path C:\\temp -ItemType Directory -Force)|Out-Null;& '${SCRIPTS[key]}' *>&1 | Tee-Object -FilePath '${logFile}'`;
+  const script=SCRIPTS[key];if(!script){addLog('SCRIPT NÃO ENCONTRADO: '+key.toUpperCase(),'err','renew');return;}
+  const cmd=`(New-Item -Path C:\\temp -ItemType Directory -Force)|Out-Null;& '${script}' *>&1 | Tee-Object -FilePath '${logFile}'`;
   if(typeof HEScript!=='undefined'){runPS(cmd);}else{demoRenew(key,label);}
   clearInterval(renewWatcher);
   let lastPos=0,hasError=false,published=false;
@@ -345,20 +365,19 @@ function demoRenew(key,label){
   },300);
 }
 function renewAll(){const btn=document.getElementById('btn-all');btn.disabled=true;btn.textContent='A renovar tudo...';SRCS.forEach(s=>renewOne(s.key,s.label));setTimeout(()=>{btn.disabled=false;btn.textContent='Renovar Todos os Links';},10000);}
-let names={},allFiles={},namesDirty=false,selectedFiles={},linksData={};
 async function loadNames(){
   names={};
   try{
     if(typeof HEScript!=='undefined'){
       const r=HEScript.ReadFile(NAMES_S3);
-      if(r){names=JSON.parse(r);console.log('✓ Names from S:',Object.keys(names).length);}
+      if(r){names=JSON.parse(r);}
     }else{
       try{
         const r=await fetch(BASE+'friendlynames.json?t='+Date.now());
-        if(r.ok){const data=await r.json();names=data||{};console.log('✓ Names from GitHub:',Object.keys(names).length);}
-      }catch(e){console.log('⚠ GitHub friendlynames fetch failed');}
+        if(r.ok){const data=await r.json();names=data||{};}
+      }catch(e){}
     }
-  }catch(e){console.log('⚠ Error loading names:',e.message);}
+  }catch(e){}
   await loadNamesData();
 }
 async function loadNamesData(){for(const s of SRCS){const el=document.getElementById('nlst-'+s.key);el.innerHTML='<div class="state"><div class="s-ring"></div>A carregar...</div>';try{const r=await fetch(s.url+'?t='+Date.now());if(!r.ok)throw new Error();const d=await r.json();allFiles[s.key]=(d.files||[]).map(f=>({path:f.name,raw:f.name.split('/').pop()}));renderNames(s.key);}catch(e){el.innerHTML='<div class="state">Erro a carregar.</div>';}}}
@@ -374,16 +393,16 @@ function filterN(q){const cur=document.querySelector('.ntab.active').id.replace(
 function nameInp(el){const path=el.dataset.path,val=el.value.trim(),row=el.closest('.nrow');if(val){names[path]=val;el.classList.add('hv');if(row)row.classList.add('ch');}else{delete names[path];el.classList.remove('hv');if(row)row.classList.remove('ch');}namesDirty=true;document.getElementById('btn-save').disabled=false;if(typeof HEScript!=='undefined'){setTimeout(()=>{const json=JSON.stringify(names,null,2);try{HEScript.WriteFile(NAMES_S3,json);showSt('ok','✓ Nome gravado em S:');}catch(e){showSt('err','Erro ao gravar');}},500);}}
 function saveNames(){const json=JSON.stringify(names,null,2);try{if(typeof HEScript!=='undefined'){HEScript.WriteFile(NAMES_S3,json);showSt('ok','✓ Guardado em S: (R2)');}else{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));a.download='friendlynames.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);showSt('ok','✓ Descarregado');}namesDirty=false;document.getElementById('btn-save').disabled=true;}catch(e){showSt('err','Erro: '+e.message);}}
 function showSt(type,msg){const el=document.getElementById('save-st');el.className='save-st '+type;el.textContent=msg;setTimeout(()=>{el.className='save-st';el.textContent='';},4000);}
-function ntab(id){document.querySelectorAll('.ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.ncat').forEach(el=>el.classList.remove('on'));document.getElementById('ntab-'+id).classList.add('active');document.getElementById('ncat-'+id).classList.add('on');document.getElementById('nq').value='';}
+function ntab(id){document.querySelectorAll('.ntabs-container .ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('#ncats-container .ncat').forEach(el=>el.classList.remove('on'));document.getElementById('ntab-'+id).classList.add('active');document.getElementById('ncat-'+id).classList.add('on');document.getElementById('nq').value='';}
 async function loadLinks(){for(const s of SRCS){const el=document.getElementById('llst-'+s.key);el.innerHTML='<div class="state"><div class="s-ring"></div></div>';try{const r=await fetch(s.url+'?t='+Date.now());if(r.ok){const d=await r.json();linksData[s.key]=d.files||[];}else{linksData[s.key]=[];}renderLinks(s.key);}catch(e){linksData[s.key]=[];renderLinks(s.key);}}}
 function renderLinks(key){
   const el=document.getElementById('llst-'+key),files=linksData[key]||[];
   if(!files.length){el.innerHTML='<div class="state">Sem ficheiros.</div>';return;}
   let h='<div class="ltbl">';
-  for(const f of files){const friendly=names[f.name]||'',original=f.name.split('/').pop(),label=friendly||original;const id='l'+btoa(unescape(encodeURIComponent(f.name))).replace(/[^a-zA-Z0-9]/g,'').slice(0,16);const friendlyDiv=friendly?`<div style="font-size:.65rem;color:var(--muted);margin-top:2px" title="${esc(original)}">📄 ${esc(original)}</div>`:'';h+=`<div class="lrow" id="lr_${id}"><div class="lfile"><div style="font-weight:600;color:var(--text)" title="${esc(label)}">${esc(label)}</div>${friendlyDiv}</div><div class="lcopy"><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsAria(this)">ARIA</button><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsHtml(this)">HTML</button></div></div>`;}
+  for(const f of files){const friendly=names[f.name]||'',original=f.name.split('/').pop(),label=friendly||original;const friendlyDiv=friendly?`<div style="font-size:.65rem;color:var(--muted);margin-top:2px" title="${esc(original)}">📄 ${esc(original)}</div>`:'';h+=`<div class="lrow"><div class="lfile"><div style="font-weight:600;color:var(--text)" title="${esc(label)}">${esc(label)}</div>${friendlyDiv}</div><div class="lcopy"><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsAria(this)">ARIA</button><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsHtml(this)">HTML</button></div></div>`;}
   el.innerHTML=h+'</div>';
 }
-function ltab(id){document.querySelectorAll('.ltab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.lcat').forEach(el=>el.classList.remove('on'));document.getElementById('ltab-'+id).classList.add('active');document.getElementById('lcat-'+id).classList.add('on');}
+function ltab(id){document.querySelectorAll('#ltabs-container .ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('#lcats-container .lcat').forEach(el=>el.classList.remove('on'));document.getElementById('ltab-'+id).classList.add('active');document.getElementById('lcat-'+id).classList.add('on');}
 function copyAsAria(btn){const url=btn.dataset.url,name=btn.dataset.name;const aria=`<a href="${esc(url)}" aria-label="Descarregar ${esc(name)}">${esc(name)}</a>`;copyToClipboard(aria,'ARIA');}
 function copyAsHtml(btn){const url=btn.dataset.url,name=btn.dataset.name;const html=`<a href="${esc(url)}">${esc(name)}</a>`;copyToClipboard(html,'HTML');}
 function copyToClipboard(text,type){try{if(typeof HEScript!=='undefined'){HEScript.Exec('powershell','-WindowStyle Hidden -Command "\''+text.replace(/'/g,"''")+'\'|Set-Clipboard"');}else{navigator.clipboard.writeText(text);}showSt('ok','✓ Copiado em '+type);}catch(e){showSt('err','Erro ao copiar');}}
@@ -393,7 +412,7 @@ function openPath(p){if(typeof HEScript==='undefined'){showSt('err','⚠ Dispon�
 function runPS(cmd){if(typeof HEScript==='undefined'){showSt('err','⚠ Disponível apenas no EXE');return;}try{HEScript.Exec('powershell','-WindowStyle Normal -NoProfile -Command "'+cmd+'"');}catch(e){showSt('err','Erro: '+e);}}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function updateHdrNav(id){document.querySelectorAll('.hdr-nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('hnav-'+id).classList.add('active');}
-function toggleChangelog(){const cl=document.querySelector('.changelog-modal');if(cl){cl.remove();return;}const modal=document.createElement('div');modal.className='changelog-modal';modal.innerHTML=`<div style="position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center" onclick="this.remove()"><div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;width:90%;max-width:600px;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:16px">📋 Changelog v1.0.5</div><div style="font-size:.75rem;line-height:1.8;color:var(--muted2)"><strong style="color:var(--green)">v1.0.5</strong> - Cache headers, btoa fix, expandCard cleanup<br><strong style="color:var(--green)">v1.0.4</strong> - Friendly names auto-save, preview fullscreen<br><strong style="color:var(--green)">v1.0.3</strong> - Activity log retrátil, files panel toggles<br><strong style="color:var(--green)">v1.0.2</strong> - Publication test logging, removeShare feedback<br><strong style="color:var(--green)">v1.0.1</strong> - Log with colors, admin buttons<br><strong style="color:var(--blue)">v1.0.0</strong> - Initial backend interface</div></div></div>`;document.body.appendChild(modal);}
+function toggleChangelog(){const cl=document.querySelector('.changelog-modal');if(cl){cl.remove();return;}const modal=document.createElement('div');modal.className='changelog-modal';modal.innerHTML=`<div style="position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center" onclick="this.remove()"><div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;width:90%;max-width:600px;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:16px">📋 Changelog</div><div style="font-size:.75rem;line-height:1.8;color:var(--muted2)"><strong style="color:var(--green)">v1.0.9</strong> - 10 marcas completas, modal funcionando, logs e preview<br><strong style="color:var(--green)">v1.0.8</strong> - Handles missing JSON gracefully<br><strong style="color:var(--green)">v1.0.7</strong> - Modal popup refactor, all 10 brands<br><strong style="color:var(--green)">v1.0.6</strong> - Activity log + admin section<br><strong style="color:var(--green)">v1.0.5</strong> - Cache headers, btoa fix, expandCard cleanup<br><strong style="color:var(--green)">v1.0.4</strong> - Friendly names auto-save, preview fullscreen<br><strong style="color:var(--green)">v1.0.3</strong> - Activity log retrátil, files panel toggles<br><strong style="color:var(--green)">v1.0.2</strong> - Publication test logging, removeShare feedback<br><strong style="color:var(--green)">v1.0.1</strong> - Log with colors, admin buttons<br><strong style="color:var(--blue)">v1.0.0</strong> - Initial backend interface</div></div></div>`;document.body.appendChild(modal);}
 function togglePreview(){const p=document.getElementById('preview-panel');p.classList.toggle('fullscreen');if(p.classList.contains('fullscreen')){const hdr=p.querySelector('.preview-header');if(!hdr.querySelector('.preview-close')){const btn=document.createElement('div');btn.className='preview-close';btn.textContent='✕';btn.onclick=()=>togglePreview();hdr.appendChild(btn);}}}
 const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊',header:'📋'};
 let currentFilter='all';
