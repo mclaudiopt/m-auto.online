@@ -184,7 +184,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
   </div>
   <div class="body">
     <div class="activity-panel">
-      <div class="activity-header">📋 Log
+      <div class="activity-header">📋 Log <button onclick="clearActivityLog()" style="float:right;font-size:.6rem;padding:2px 6px;background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.3);border-radius:3px;color:var(--red);cursor:pointer">Clear</button>
         <button class="activity-collapse-btn" onclick="toggleLogPin()" title="Fixar painel">📌</button>
         <button class="activity-collapse-btn" onclick="toggleLog()" style="right:30px;" title="Colapsar">⊳</button>
       </div>
@@ -307,6 +307,8 @@ const SCRIPTS={merc:REPO+'\\scripts\\tools\\renew_merc_links.ps1',renault:REPO+'
 const NAMES_S3='S:\\friendlynames.json';
 let names={},allFiles={},namesDirty=false,selectedFiles={},linksData={};
 let s3PollerInterval=null,s3DetectedFiles={};
+function getActiveSrcs(){const disabled=JSON.parse(localStorage.getItem('disabled_sources')||'[]');return SRCS.filter(s=>!disabled.includes(s.key));}
+function toggleSourceActive(key){const disabled=JSON.parse(localStorage.getItem('disabled_sources')||'[]');if(disabled.includes(key)){disabled.splice(disabled.indexOf(key),1);}else{disabled.push(key);}localStorage.setItem('disabled_sources',JSON.stringify(disabled));location.reload();}
 async function startS3Poller(){if(s3PollerInterval)clearInterval(s3PollerInterval);s3PollerInterval=setInterval(async()=>{try{for(const s of SRCS){const files=await getS3Files(s.key);if(files.length){const key=s.key;const currentFiles=new Set(files.map(f=>f.name));const oldFiles=new Set((s3DetectedFiles[key]||[]).map(f=>f.name));const newFiles=Array.from(currentFiles).filter(f=>!oldFiles.has(f));if(newFiles.length){addLog(`✓ ${newFiles.length} novo(s) em ${s.label}`,'ok','renew');}s3DetectedFiles[key]=files;await refreshS3Status();}}}catch(e){}},30000);}
 function getPastaConfig(key){const cfg=localStorage.getItem('pasta_'+key);return cfg?JSON.parse(cfg):PASTA_CONFIGS[key]||[];}
 function setPastaConfig(key,pastas){localStorage.setItem('pasta_'+key,JSON.stringify(pastas));}
@@ -320,17 +322,19 @@ window.addEventListener('DOMContentLoaded',()=>{
 });
 
 function buildNamesTabs(){
+  const active=getActiveSrcs();
   const container=document.getElementById('ntabs-container');
-  container.innerHTML=SRCS.map((s,i)=>`<div class="ntab${i===0?' active':''}" onclick="ntab('${s.key}')" id="ntab-${s.key}">${esc(s.label)}</div>`).join('')+
-    SRCS.map((s,i)=>`<div class="ncat${i===0?' on':''}" id="ncat-${s.key}"><div id="nlst-${s.key}"><div class="state"><div class="s-ring"></div></div></div></div>`).join('');
+  container.innerHTML=active.map((s,i)=>`<div class="ntab${i===0?' active':''}" onclick="ntab('${s.key}')" id="ntab-${s.key}">${esc(s.label)}</div>`).join('')+
+    active.map((s,i)=>`<div class="ncat${i===0?' on':''}" id="ncat-${s.key}"><div id="nlst-${s.key}"><div class="state"><div class="s-ring"></div></div></div></div>`).join('');
   document.getElementById('ncats-container').innerHTML=container.innerHTML.replace(/ntabs/g,'ncats');
   container.parentElement.insertBefore(container.nextElementSibling,container.nextElementSibling);
 }
 
 function buildLinksTabs(){
+  const active=getActiveSrcs();
   const container=document.getElementById('ltabs-container');
-  container.innerHTML=SRCS.map((s,i)=>`<div class="ntab${i===0?' active':''}" onclick="ltab('${s.key}')" id="ltab-${s.key}">${esc(s.label)}</div>`).join('');
-  document.getElementById('lcats-container').innerHTML=SRCS.map((s,i)=>`<div class="lcat${i===0?' on':''}" id="lcat-${s.key}"><div id="llst-${s.key}"><div class="state"><div class="s-ring"></div></div></div></div>`).join('');
+  container.innerHTML=active.map((s,i)=>`<div class="ntab${i===0?' active':''}" onclick="ltab('${s.key}')" id="ltab-${s.key}">${esc(s.label)}</div>`).join('');
+  document.getElementById('lcats-container').innerHTML=active.map((s,i)=>`<div class="lcat${i===0?' on':''}" id="lcat-${s.key}"><div id="llst-${s.key}"><div class="state"><div class="s-ring"></div></div></div></div>`).join('');
 }
 
 async function nav(id){if(id==='log'){toggleLogMenu();return;}document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.panel').forEach(el=>el.classList.remove('on'));document.getElementById('nav-'+id)?.classList.add('active');document.getElementById('panel-'+id).classList.add('on');const actPanel=document.querySelector('.activity-panel');if(id==='preview'){if(actPanel)actPanel.style.display='none';loadPreviewFrame();}else{if(actPanel)actPanel.style.display='flex';}if(id==='names')await loadNames();if(id==='links'){await loadNames();await loadLinks();}}
@@ -440,7 +444,7 @@ function filterN(q){const cur=document.querySelector('.ntab.active').id.replace(
 function nameInp(el){const path=el.dataset.path,val=el.value.trim(),row=el.closest('.nrow');if(val){names[path]=val;el.classList.add('hv');if(row)row.classList.add('ch');}else{delete names[path];el.classList.remove('hv');if(row)row.classList.remove('ch');}namesDirty=true;document.getElementById('btn-save').disabled=false;saveNames();}
 function saveNames(){const json=JSON.stringify(names,null,2);try{if(typeof HEScript!=='undefined'){HEScript.WriteFile(NAMES_S3,json);showSt('ok','✓ Guardado em S: (R2)');}else{localStorage.setItem('friendlynames',json);showSt('ok','✓ Guardado em localStorage');}}catch(e){showSt('err','Erro: '+e.message);}namesDirty=false;document.getElementById('btn-save').disabled=true;}
 function showSt(type,msg){const el=document.getElementById('save-st');el.className='save-st '+type;el.textContent=msg;setTimeout(()=>{el.className='save-st';el.textContent='';},4000);}
-function ntab(id){document.querySelectorAll('.ntabs-container .ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('#ncats-container .ncat').forEach(el=>el.classList.remove('on'));document.getElementById('ntab-'+id).classList.add('active');document.getElementById('ncat-'+id).classList.add('on');document.getElementById('nq').value='';}
+function ntab(id){document.querySelectorAll('#ntabs-container .ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('#ncats-container .ncat').forEach(el=>el.classList.remove('on'));document.getElementById('ntab-'+id).classList.add('active');document.getElementById('ncat-'+id).classList.add('on');document.getElementById('nq').value='';}
 function adminTab(section){document.querySelectorAll('[id^="admin-tab-"]').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(el=>el.style.display='none');document.getElementById('admin-tab-'+section).classList.add('active');document.getElementById('admin-'+section).style.display='block';}
 async function loadLinks(){for(const s of SRCS){const el=document.getElementById('llst-'+s.key);el.innerHTML='<div class="state"><div class="s-ring"></div></div>';try{const r=await fetch(s.url+'?t='+Date.now());if(r.ok){const d=await r.json();linksData[s.key]=d.files||[];}else{linksData[s.key]=[];}renderLinks(s.key);}catch(e){linksData[s.key]=[];renderLinks(s.key);}}}
 function renderLinks(key){
@@ -465,6 +469,7 @@ function loadPreviewFrame(){const fr=document.getElementById('preview-frame');fr
 const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊',header:'📋'};
 let currentFilter='all';
 let logPinned=localStorage.getItem('logPinned')==='true';
+function clearActivityLog(){document.getElementById('activity-log').innerHTML='';addLog('Log limpo','ok');}
 function addLog(msg,type='info',category='all',isHeader=false){const log=document.getElementById('activity-log');const t=new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});const entry=document.createElement('div');
 if(isHeader){entry.className='log-header';const l=document.createElement('span');l.textContent=LOG_ICONS[type]+' '+msg;const r=document.createElement('span');r.textContent=t;entry.appendChild(l);entry.appendChild(r);}else{entry.className='log-entry log-'+type;entry.dataset.category=category;entry.style.display=(currentFilter==='all'||currentFilter===category)?'block':'none';let cleanMsg=msg.replace(/^\[(✓|✗|!|OK|>>)\]\s*/,'').replace(/^[⚠✗✓🔴🟡🟢>>]+\s*/,'');if(!msg.match(/^[A-Z]/))cleanMsg=cleanMsg.charAt(0).toLowerCase()+cleanMsg.slice(1);const icon=LOG_ICONS[type]||'•';entry.textContent=icon+' '+cleanMsg;}
 log.appendChild(entry);log.scrollTop=log.scrollHeight;}

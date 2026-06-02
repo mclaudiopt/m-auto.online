@@ -24,7 +24,14 @@
       "Bash(rclone ls *)",
       "Bash(python -m py_compile server.py)",
       "Bash(echo \"Exit code: $?\")",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(timeout 5 python server.py)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 19936 /F)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__browser_batch",
+      "PowerShell(cd 'D:\\\\Tutorials\\\\m-auto.online\\\\scripts\\\\tools'; python server.py > server.log 2>&1 &; Start-Sleep 2; \"✓ Server em background\"; netstat -ano | Select-String 3001 | Select-Object -First 1)",
+      "Bash(rclone config *)"
     ]
   }
 }

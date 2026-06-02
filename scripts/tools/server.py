@@ -11,7 +11,7 @@ from pathlib import Path
 PORT = 3001
 SCRIPT_DIR = Path(__file__).parent
 BRANDS = {
-    'merc': 'Mercedes', 'renault': 'Renault', 'psa': 'PSA',
+    'merc': 'Daimler', 'renault': 'Renault', 'psa': 'PSA',
     'autodata': 'Autodata', 'delphi': 'Delphi', 'ford': 'Ford',
     'gm': 'GM', 'tesla': 'TESLA', 'vw': 'VW', 'hermes': 'Hermes'
 }
