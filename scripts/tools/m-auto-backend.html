@@ -5,7 +5,7 @@
 <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title>M-Auto Backend</title>
+<title>M-Auto Backend v1.0.5</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#060d1a;--bg2:#0b1220;--blue:#2563eb;--blue2:#1e40af;--blue3:#60a5fa;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--card:#0f1c2e;--border:rgba(37,99,235,0.15);--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--orange:#f97316;}
@@ -164,12 +164,13 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 <div id="app">
   <div class="hdr">
     <div style="display:flex;align-items:center;gap:20px;flex:1;">
-      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend</span></div>
+      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend v1.0.5</span></div>
       <div class="hdr-nav">
         <div class="hdr-nav-item active" onclick="nav('renew');updateHdrNav('renew')" id="hnav-renew">🔄 Renew</div>
         <div class="hdr-nav-item" onclick="nav('names');updateHdrNav('names')" id="hnav-names">📝 Nomes</div>
         <div class="hdr-nav-item" onclick="nav('links');updateHdrNav('links')" id="hnav-links">🔗 Links</div>
         <div class="hdr-nav-item" onclick="nav('admin');updateHdrNav('admin')" id="hnav-admin">⚙️ Admin</div>
+        <div class="hdr-nav-item" onclick="toggleChangelog()" id="hnav-changelog">📋 Changelog</div>
       </div>
     </div>
     <div style="display:flex;gap:8px;"><button class="hdr-btn" onclick="togglePreview()">👁 Preview</button><button class="hdr-btn" onclick="refreshAll()">Actualizar</button></div>
@@ -386,6 +387,7 @@ function openPath(p){if(typeof HEScript==='undefined'){showSt('err','⚠ Dispon�
 function runPS(cmd){if(typeof HEScript==='undefined'){showSt('err','⚠ Disponível apenas no EXE');return;}try{HEScript.Exec('powershell','-WindowStyle Normal -NoProfile -Command "'+cmd+'"');}catch(e){showSt('err','Erro: '+e);}}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function updateHdrNav(id){document.querySelectorAll('.hdr-nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('hnav-'+id).classList.add('active');}
+function toggleChangelog(){const cl=document.querySelector('.changelog-modal');if(cl){cl.remove();return;}const modal=document.createElement('div');modal.className='changelog-modal';modal.innerHTML=`<div style="position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center" onclick="this.remove()"><div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;width:90%;max-width:600px;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:16px">📋 Changelog v1.0.5</div><div style="font-size:.75rem;line-height:1.8;color:var(--muted2)"><strong style="color:var(--green)">v1.0.5</strong> - Cache headers, btoa fix, expandCard cleanup<br><strong style="color:var(--green)">v1.0.4</strong> - Friendly names auto-save, preview fullscreen<br><strong style="color:var(--green)">v1.0.3</strong> - Activity log retrátil, files panel toggles<br><strong style="color:var(--green)">v1.0.2</strong> - Publication test logging, removeShare feedback<br><strong style="color:var(--green)">v1.0.1</strong> - Log with colors, admin buttons<br><strong style="color:var(--blue)">v1.0.0</strong> - Initial backend interface</div></div></div>`;document.body.appendChild(modal);}
 function togglePreview(){const p=document.getElementById('preview-panel');p.classList.toggle('fullscreen');if(p.classList.contains('fullscreen')){const hdr=p.querySelector('.preview-header');if(!hdr.querySelector('.preview-close')){const btn=document.createElement('div');btn.className='preview-close';btn.textContent='✕';btn.onclick=()=>togglePreview();hdr.appendChild(btn);}}}
 const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊',header:'📋'};
 let currentFilter='all';
