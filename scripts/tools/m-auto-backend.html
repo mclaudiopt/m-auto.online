@@ -289,7 +289,20 @@ function demoRenew(key,label){
 }
 function renewAll(){const btn=document.getElementById('btn-all');btn.disabled=true;btn.textContent='A renovar tudo...';SRCS.forEach(s=>renewOne(s.key,s.label));setTimeout(()=>{btn.disabled=false;btn.textContent='Renovar Todos os Links';},10000);}
 let names={},allFiles={},namesDirty=false;
-async function loadNames(){names={};try{if(typeof HEScript!=='undefined'){const r=HEScript.ReadFile(NAMES_S3);if(r)names=JSON.parse(r);}else{const r=await fetch(BASE+'friendlynames.json?t='+Date.now());if(r.ok)names=await r.json();}}catch(e){}await loadNamesData();}
+async function loadNames(){
+  names={};
+  try{
+    if(typeof HEScript!=='undefined'){
+      const r=HEScript.ReadFile(NAMES_S3);
+      if(r){names=JSON.parse(r);console.log('Names loaded from S:',Object.keys(names).length);}
+    }else{
+      const r=await fetch(BASE+'friendlynames.json?t='+Date.now());
+      if(r.ok){names=await r.json();console.log('Names loaded from GitHub:',Object.keys(names).length);}
+      else console.log('No friendlynames.json in GitHub yet');
+    }
+  }catch(e){console.log('Error loading names:',e.message);}
+  await loadNamesData();
+}
 async function loadNamesData(){for(const s of SRCS){const el=document.getElementById('nlst-'+s.key);el.innerHTML='<div class="state"><div class="s-ring"></div></div>';try{const r=await fetch(s.url+'?t='+Date.now());if(!r.ok)throw new Error();const d=await r.json();allFiles[s.key]=(d.files||[]).map(f=>({path:f.name,raw:f.name.split('/').pop()}));renderNames(s.key);}catch(e){document.getElementById('nlst-'+s.key).innerHTML='<div class="state">Erro.</div>';}}}
 function renderNames(key,q){
   const el=document.getElementById('nlst-'+key),files=allFiles[key]||[],fq=(q||'').toLowerCase();
