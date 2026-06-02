@@ -75,7 +75,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .main{flex:1;overflow-y:auto;padding:16px 20px;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,.3) transparent;}
 .main::-webkit-scrollbar{width:4px;}.main::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:2px;}
-.panel{display:none;animation:fadeIn .2s ease;}.panel.on{display:block;}
+.panel{display:none;animation:fadeIn .2s ease;}.panel.on{display:flex;flex-direction:column;flex:1;overflow:hidden;}#panel-preview.on{display:flex;flex-direction:column;position:fixed;inset:56px 0 0 0;z-index:15;width:100%;height:calc(100% - 56px);}#panel-preview.on .sec{margin:0;}#panel-preview.on > div{flex:1;}
 .sec{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin:18px 0 10px;display:flex;align-items:center;gap:8px;}
 .sec:first-child{margin-top:0;}
 .sec::after{content:'';flex:1;height:1px;background:var(--border);}
