@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>M-Auto — Editor de Nomes</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#060d1a;--bg2:#0b1220;--blue:#2563eb;--blue2:#1e40af;--blue3:#60a5fa;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--card:#0f1c2e;--border:rgba(37,99,235,0.15);--green:#22c55e;--red:#ef4444;}
+html,body{min-height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);background:rgba(6,13,26,.96);position:sticky;top:0;z-index:10;gap:12px;flex-wrap:wrap;}
+.hdr-logo{font-size:1.2rem;font-weight:900;font-style:italic;letter-spacing:-.5px;}
+.hdr-logo .m{color:#fff;}.hdr-logo .sep{color:rgba(255,255,255,.18);font-style:normal;font-weight:300;}.hdr-logo .o{color:var(--blue);}
+.badge{font-size:.55rem;font-weight:700;background:rgba(37,99,235,.18);color:var(--blue3);border:1px solid rgba(37,99,235,.3);border-radius:4px;padding:2px 6px;margin-left:8px;font-style:normal;vertical-align:middle;}
+.hdr-btns{display:flex;gap:8px;align-items:center;}
+.btn{border-radius:8px;padding:7px 16px;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .2s;border:1px solid var(--border);}
+.btn-save{background:linear-gradient(135deg,var(--blue2),var(--blue));border-color:var(--blue);color:#fff;box-shadow:0 2px 12px rgba(37,99,235,.3);}
+.btn-save:hover{opacity:.88;}.btn-save:disabled{opacity:.4;cursor:not-allowed;}
+.btn-out{background:rgba(255,255,255,.04);color:var(--muted2);}.btn-out:hover{border-color:var(--blue);color:var(--blue);}
+.st{font-size:.7rem;padding:5px 12px;border-radius:6px;display:none;align-items:center;gap:6px;}
+.st.ok{display:inline-flex;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--green);}
+.st.err{display:inline-flex;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--red);}
+.wrap{max-width:880px;margin:0 auto;padding:18px 20px;}
+.info{background:rgba(37,99,235,.06);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:.7rem;color:var(--muted2);line-height:1.7;}
+.info strong{color:var(--blue3);}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.tab{padding:8px 18px;border-radius:8px 8px 0 0;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--muted);border:1px solid transparent;border-bottom:none;transition:all .2s;}
+.tab:hover{color:var(--text);}.tab.active{color:#fff;background:var(--card);border-color:var(--border);border-bottom:1px solid var(--card);}
+.cat{display:none;}.cat.on{display:block;}
+.search{margin-bottom:12px;}
+.search input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(37,99,235,.18);border-radius:8px;padding:9px 14px;color:var(--text);font-size:.82rem;outline:none;transition:border-color .2s;}
+.search input:focus{border-color:var(--blue);}
+.tbl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.tbl-hdr{display:grid;grid-template-columns:1fr 1fr;padding:8px 14px;border-bottom:1px solid var(--border);font-size:.6rem;font-weight:700;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;}
+.tbl-hdr span:last-child{padding-left:12px;border-left:1px solid var(--border);}
+.frow{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(37,99,235,.06);transition:background .15s;}
+.frow:last-child{border-bottom:none;}.frow:hover{background:rgba(37,99,235,.04);}.frow.changed{background:rgba(37,99,235,.07);}
+.c-orig{padding:10px 14px;min-width:0;display:flex;flex-direction:column;gap:3px;}
+.c-fn{font-size:.76rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.c-path{font-size:.61rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.c-edit{padding:8px 8px 8px 12px;border-left:1px solid rgba(37,99,235,.07);display:flex;align-items:center;}
+.c-edit input{width:100%;background:transparent;border:none;border-bottom:1px solid transparent;padding:4px 6px;color:var(--text);font-size:.78rem;outline:none;transition:all .2s;border-radius:4px;}
+.c-edit input:focus{background:rgba(37,99,235,.08);border-bottom-color:var(--blue);}
+.c-edit input.hv{color:#fff;font-weight:600;}
+.state{display:flex;align-items:center;justify-content:center;padding:50px;flex-direction:column;gap:12px;color:var(--muted);font-size:.8rem;}
+.s-ring{width:26px;height:26px;border-radius:50%;border:2px solid rgba(37,99,235,.15);border-top-color:var(--blue);animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-logo">
+    <span class="m">M-Auto</span><span class="sep"> · </span><span class="o">Online</span>
+    <span class="badge">Editor de Nomes</span>
+  </div>
+  <div class="hdr-btns">
+    <span id="st" class="st"></span>
+    <button class="btn btn-out" onclick="loadAll()">⟳ Recarregar</button>
+    <button class="btn btn-save" id="btn-save" onclick="save()" disabled>💾 Guardar em S:</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="info">
+    📌 Nomes guardados em <strong>S:\friendlynames.json</strong> (Cloudflare R2). Deixa vazio para usar o nome original. Após editar clica <strong>Guardar em S:</strong>.
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="tab('merc')" id="tab-merc">Mercedes</div>
+    <div class="tab" onclick="tab('renault')" id="tab-renault">Renault</div>
+    <div class="tab" onclick="tab('psa')" id="tab-psa">PSA</div>
+  </div>
+  <div class="cat on" id="cat-merc">
+    <div class="search"><input type="text" placeholder="🔍 Filtrar..." oninput="filter('merc',this.value)"></div>
+    <div id="lst-merc"><div class="state"><div class="s-ring"></div>A carregar...</div></div>
+  </div>
+  <div class="cat" id="cat-renault">
+    <div class="search"><input type="text" placeholder="🔍 Filtrar..." oninput="filter('renault',this.value)"></div>
+    <div id="lst-renault"><div class="state"><div class="s-ring"></div>A carregar...</div></div>
+  </div>
+  <div class="cat" id="cat-psa">
+    <div class="search"><input type="text" placeholder="🔍 Filtrar..." oninput="filter('psa',this.value)"></div>
+    <div id="lst-psa"><div class="state"><div class="s-ring"></div>A carregar...</div></div>
+  </div>
+</div>
+
+<script>
+const BASE      = 'https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/';
+const SRCS      = {merc:BASE+'merc_links.json',renault:BASE+'renault_links.json',psa:BASE+'psa_links.json'};
+const NAMES_URL = BASE+'friendlynames.json';
+const NAMES_S3  = 'S:\\friendlynames.json';
+const REPO_DIR  = 'D:\\Tutorials\\m-auto.online';
+
+let names={}, allFiles={}, dirty=false;
+
+async function loadAll(){
+  names={};
+  try{
+    if(typeof HEScript!=='undefined'){const r=HEScript.ReadFile(NAMES_S3);if(r)names=JSON.parse(r);}
+    else{const r=await fetch(NAMES_URL+'?t='+Date.now());if(r.ok)names=await r.json();}
+  }catch(e){}
+  for(const[k,u]of Object.entries(SRCS)) loadCat(k,u);
+}
+
+async function loadCat(key,url){
+  const el=document.getElementById('lst-'+key);
+  el.innerHTML='<div class="state"><div class="s-ring"></div>A carregar...</div>';
+  try{
+    const r=await fetch(url+'?t='+Date.now());
+    if(!r.ok)throw new Error();
+    const d=await r.json();
+    allFiles[key]=(d.files||[]).map(f=>({path:f.name,raw:f.name.split('/').pop()}));
+    render(key);
+  }catch(e){
+    el.innerHTML='<div class="state">⚠️ Erro ao carregar.</div>';
+  }
+}
+
+function render(key,q){
+  const el=document.getElementById('lst-'+key);
+  const files=allFiles[key]||[];
+  const fq=(q||'').toLowerCase();
+  const list=fq?files.filter(f=>f.raw.toLowerCase().includes(fq)||(names[f.path]||'').toLowerCase().includes(fq)):files;
+  if(!list.length){el.innerHTML='<div class="state">📭 Sem ficheiros.</div>';return;}
+  let h=`<div class="tbl"><div class="tbl-hdr"><span>Ficheiro original</span><span>Nome amigável</span></div>`;
+  for(const f of list){
+    const friendly=names[f.path]||'';
+    const id='f'+btoa(unescape(encodeURIComponent(f.path))).replace(/[^a-zA-Z0-9]/g,'').slice(0,16);
+    h+=`<div class="frow${friendly?' changed':''}" id="row_${id}">
+      <div class="c-orig">
+        <div class="c-fn" title="${esc(f.raw)}">${esc(f.raw)}</div>
+        <div class="c-path" title="${esc(f.path)}">${esc(f.path)}</div>
+      </div>
+      <div class="c-edit">
+        <input type="text" id="i_${id}" placeholder="Nome amigável (opcional)"
+          value="${esc(friendly)}" data-path="${esc(f.path)}"
+          class="${friendly?'hv':''}" oninput="inp(this)">
+      </div>
+    </div>`;
+  }
+  h+='</div>';
+  el.innerHTML=h;
+}
+
+function filter(key,q){render(key,q);}
+
+function inp(el){
+  const path=el.dataset.path, val=el.value.trim();
+  const row=el.closest('.frow');
+  if(val){names[path]=val;el.classList.add('hv');if(row)row.classList.add('changed');}
+  else{delete names[path];el.classList.remove('hv');if(row)row.classList.remove('changed');}
+  dirty=true;
+  document.getElementById('btn-save').disabled=false;
+}
+
+function save(){
+  const json=JSON.stringify(names,null,2);
+  try{
+    if(typeof HEScript!=='undefined'){
+      HEScript.WriteFile(NAMES_S3,json);
+      const ps=`cd '${REPO_DIR}';Copy-Item '${NAMES_S3}' 'friendlynames.json' -Force;git add friendlynames.json;git commit -m 'names: update friendlynames.json';git push`;
+      HEScript.Exec('powershell','-WindowStyle Hidden -NoProfile -Command "'+ps+'"');
+      showSt('ok','✓ Guardado em S: e publicado');
+    }else{
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+      a.download='friendlynames.json'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+      showSt('ok','✓ Descarregado — copia para S:\\');
+    }
+    dirty=false;
+    document.getElementById('btn-save').disabled=true;
+  }catch(e){showSt('err','✗ Erro: '+e.message);}
+}
+
+function showSt(type,msg){
+  const el=document.getElementById('st');
+  el.className='st '+type; el.textContent=msg;
+  setTimeout(()=>{el.className='st';el.textContent='';},4000);
+}
+
+function tab(id){
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.cat').forEach(el=>el.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('active');
+  document.getElementById('cat-'+id).classList.add('on');
+}
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+
+window.addEventListener('DOMContentLoaded',loadAll);
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
+</script>
+</body>
+</html>

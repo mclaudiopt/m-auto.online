@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>M-Auto Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#060d1a;--bg2:#0b1220;--bg3:#0d1830;
+  --blue:#2563eb;--blue2:#1e40af;--blue3:#60a5fa;
+  --text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;
+  --card:#0f1c2e;--border:rgba(37,99,235,0.15);
+  --green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--orange:#f97316;
+}
+html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 55%,var(--bg3) 100%);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;user-select:none;}
+
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 55%,var(--bg3) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s,visibility .8s;}
+#splash.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.sp-ring{width:56px;height:56px;border-radius:50%;border:3px solid rgba(37,99,235,.12);border-top-color:var(--blue);animation:spin 1.1s linear infinite;margin-bottom:28px;}
+.sp-logo{font-size:2.4rem;font-weight:900;font-style:italic;letter-spacing:-1px;margin-bottom:6px;}
+.sp-logo .m{color:#fff;}.sp-logo .sep{color:rgba(255,255,255,.15);font-style:normal;font-weight:300;}.sp-logo .o{color:var(--blue);}
+.sp-tag{font-size:.65rem;font-weight:700;color:#2d4a7a;letter-spacing:.45em;text-transform:uppercase;margin-bottom:48px;}
+.sp-track{width:240px;height:2px;background:rgba(37,99,235,.1);border-radius:2px;overflow:hidden;margin-bottom:12px;}
+.sp-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--blue2),var(--blue),var(--blue3));border-radius:2px;transition:width .4s ease;}
+.sp-status{font-size:.62rem;font-weight:700;color:var(--blue);letter-spacing:.2em;text-transform:uppercase;}
+.sp-copy{position:absolute;bottom:18px;font-size:9px;color:rgba(100,116,139,.22);}
+
+/* PASSWORD */
+#pw{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;}
+#pw.on{display:flex;}
+.pw-box{background:rgba(12,22,38,.96);border:1px solid var(--border);border-radius:16px;padding:42px 50px;width:340px;display:flex;flex-direction:column;align-items:center;gap:18px;box-shadow:0 24px 64px rgba(0,0,0,.7);}
+.pw-logo{font-size:1.9rem;font-weight:900;font-style:italic;letter-spacing:-1px;}
+.pw-logo .m{color:#fff;}.pw-logo .sep{color:rgba(255,255,255,.15);font-style:normal;font-weight:300;}.pw-logo .o{color:var(--blue);}
+.pw-sub{font-size:.66rem;font-weight:700;color:var(--muted);letter-spacing:.38em;text-transform:uppercase;margin-top:-8px;}
+.pw-line{width:100%;height:1px;background:var(--border);}
+.pw-field{width:100%;position:relative;}
+.pw-field input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(37,99,235,.18);border-radius:10px;padding:12px 16px 12px 42px;color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s;}
+.pw-field input:focus{border-color:var(--blue);}
+.pw-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);}
+.pw-err{font-size:.72rem;color:var(--red);display:none;text-align:center;}
+.pw-err.on{display:block;}
+.btn-enter{width:100%;padding:13px;background:linear-gradient(135deg,var(--blue2),var(--blue));border:none;border-radius:10px;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;transition:opacity .2s;box-shadow:0 4px 20px rgba(37,99,235,.4);}
+.btn-enter:hover{opacity:.88;}
+
+/* APP */
+#app{position:fixed;inset:0;display:none;flex-direction:column;}
+#app.on{display:flex;}
+
+/* Header */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--border);background:rgba(6,13,26,.96);flex-shrink:0;gap:12px;}
+.hdr-logo{font-size:1.3rem;font-weight:900;font-style:italic;letter-spacing:-.5px;white-space:nowrap;}
+.hdr-logo .m{color:#fff;}.hdr-logo .sep{color:rgba(255,255,255,.15);font-style:normal;font-weight:300;font-size:1rem;}.hdr-logo .o{color:var(--blue);}
+.hdr-logo .badge{font-size:.55rem;font-weight:700;background:rgba(37,99,235,.16);color:var(--blue3);border:1px solid rgba(37,99,235,.28);border-radius:4px;padding:2px 6px;margin-left:8px;font-style:normal;letter-spacing:.06em;vertical-align:middle;}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.exp-pill{display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--muted2);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:20px;padding:4px 12px;}
+.exp-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);flex-shrink:0;}
+.exp-pill.warn .exp-dot{background:var(--yellow);box-shadow:0 0 5px var(--yellow);}
+.exp-pill.dead .exp-dot{background:var(--red);box-shadow:0 0 5px var(--red);}
+.exp-time{font-weight:700;color:var(--blue3);}
+.hdr-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:6px 12px;color:var(--muted2);font-size:.7rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.hdr-btn:hover{border-color:var(--blue);color:var(--blue);}
+
+/* Layout */
+.body{display:flex;flex:1;overflow:hidden;}
+.sidebar{width:150px;border-right:1px solid var(--border);background:rgba(6,13,26,.7);display:flex;flex-direction:column;gap:2px;padding:10px 8px;flex-shrink:0;}
+.nav-sec{font-size:.57rem;font-weight:700;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;padding:8px 8px 4px;margin-top:4px;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:.77rem;font-weight:600;color:var(--muted2);transition:all .15s;border:1px solid transparent;}
+.nav-item:hover{background:rgba(37,99,235,.08);color:var(--text);}
+.nav-item.active{background:rgba(37,99,235,.14);color:#fff;border-color:rgba(37,99,235,.2);}
+.nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.main{flex:1;overflow-y:auto;padding:16px 20px;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,.3) transparent;}
+.main::-webkit-scrollbar{width:4px;}.main::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:2px;}
+.panel{display:none;animation:fadeIn .25s ease;}.panel.on{display:block;}
+
+/* Stats bar */
+.stats-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.stat-pill{display:flex;align-items:center;gap:6px;background:rgba(37,99,235,.07);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:.7rem;color:var(--muted2);}
+.stat-pill strong{color:var(--text);}
+.stat-pill.warn strong{color:var(--yellow);}
+.stat-pill.dead strong{color:var(--red);}
+
+/* Unified file list */
+.file-list{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.file-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(37,99,235,.06);transition:all .2s;position:relative;}
+.file-row:last-child{border-bottom:none;}
+.file-row:hover:not(.done){background:rgba(37,99,235,.05);}
+.file-row.downloading{background:rgba(37,99,235,.08);}
+/* Done = greyed out, faded */
+.file-row.done{opacity:.4;filter:grayscale(.6);}
+.file-row.done:hover{opacity:.65;filter:grayscale(.3);}
+.fi-brand{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.fi-icon{font-size:1.05rem;flex-shrink:0;width:22px;text-align:center;}
+.fi-info{flex:1;min-width:0;}
+.fi-name{font-size:.8rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fi-name.friendly{color:#fff;}
+.fi-raw{font-size:.62rem;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fi-done-date{font-size:.6rem;color:var(--green);margin-top:2px;}
+.fi-ext{font-size:.57rem;font-weight:700;background:rgba(37,99,235,.1);color:var(--blue3);border-radius:3px;padding:2px 5px;text-transform:uppercase;flex-shrink:0;}
+.fi-size{font-size:.68rem;color:var(--muted);font-weight:600;flex-shrink:0;min-width:54px;text-align:right;}
+.btn-dl{background:linear-gradient(135deg,rgba(30,64,175,.5),rgba(37,99,235,.5));border:1px solid rgba(37,99,235,.3);border-radius:7px;color:#fff;font-size:.7rem;font-weight:700;cursor:pointer;padding:7px 13px;transition:all .2s;flex-shrink:0;white-space:nowrap;}
+.btn-dl:hover{background:linear-gradient(135deg,var(--blue2),var(--blue));}
+.btn-dl:disabled{opacity:.4;cursor:not-allowed;}
+.btn-dl.done-btn{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.25);color:var(--green);}
+.btn-dl.dling{animation:pulse .9s ease infinite;border-color:rgba(37,99,235,.5);}
+/* Reset done button */
+.btn-reset{background:none;border:none;color:var(--muted);font-size:.65rem;cursor:pointer;padding:4px 6px;border-radius:4px;transition:color .2s;flex-shrink:0;}
+.btn-reset:hover{color:var(--text);}
+
+/* Progress row */
+.prog-row{display:none;padding:0 14px 9px;background:rgba(37,99,235,.04);}
+.file-row.downloading + .prog-row{display:block;}
+.prog-track{height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;margin-bottom:5px;}
+.prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue2),var(--blue),var(--blue3));border-radius:2px;transition:width .4s ease;}
+.prog-info{display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);}
+
+/* Toast */
+#dl-toast{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:320px;}
+.toast{background:rgba(10,20,36,.97);border:1px solid rgba(37,99,235,.3);border-radius:10px;padding:12px 14px;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:slideUp .3s ease;pointer-events:all;display:flex;align-items:flex-start;gap:10px;}
+.toast.done{border-color:rgba(34,197,94,.4);}
+.toast-icon{font-size:1rem;flex-shrink:0;margin-top:1px;}
+.toast-body{flex:1;min-width:0;}
+.toast-title{font-size:.75rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.toast-sub{font-size:.65rem;color:var(--muted2);margin-top:2px;}
+.toast-prog{height:2px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;margin-top:7px;}
+.toast-fill{height:100%;background:linear-gradient(90deg,var(--blue2),var(--blue3));border-radius:2px;transition:width .4s ease;}
+.toast-x{background:none;border:none;color:var(--muted);font-size:.85rem;cursor:pointer;flex-shrink:0;}
+.toast-x:hover{color:var(--text);}
+
+/* Action panels */
+.sec-title{font-size:.66rem;font-weight:700;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
+.sec-title:first-child{margin-top:0;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;gap:7px;}
+.ac:hover{border-color:rgba(37,99,235,.4);transform:translateY(-1px);}
+.ac.danger:hover{border-color:rgba(239,68,68,.4);}
+.ac.warn:hover{border-color:rgba(245,158,11,.4);}
+.ac-icon{font-size:1.4rem;}
+.ac-title{font-size:.8rem;font-weight:700;}
+.ac-desc{font-size:.65rem;color:var(--muted);line-height:1.5;}
+
+/* States */
+.state{display:flex;align-items:center;justify-content:center;padding:60px;flex-direction:column;gap:14px;color:var(--muted);font-size:.8rem;text-align:center;}
+.s-ring{width:28px;height:28px;border-radius:50%;border:2px solid rgba(37,99,235,.12);border-top-color:var(--blue);animation:spin 1s linear infinite;}
+
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="sp-ring"></div>
+  <div class="sp-logo"><span class="m">M-Auto</span><span class="sep"> · </span><span class="o">Online</span></div>
+  <div class="sp-tag">Simply Digital</div>
+  <div class="sp-track"><div id="spBar" class="sp-bar"></div></div>
+  <div id="spStatus" class="sp-status">A inicializar...</div>
+  <div class="sp-copy">© 2026 M-Auto Online</div>
+</div>
+
+<!-- PASSWORD -->
+<div id="pw">
+  <div class="pw-box">
+    <div class="pw-logo"><span class="m">M-Auto</span><span class="sep"> · </span><span class="o">Online</span></div>
+    <div class="pw-sub">Portal de Software</div>
+    <div class="pw-line"></div>
+    <div class="pw-field">
+      <span class="pw-icon">🔑</span>
+      <input type="password" id="pw-in" placeholder="Password" autocomplete="off"
+        onkeydown="if(event.key==='Enter')checkPass()">
+    </div>
+    <div id="pw-err" class="pw-err">Password incorrecta</div>
+    <button class="btn-enter" onclick="checkPass()">Entrar →</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="hdr">
+    <div class="hdr-logo">
+      <span class="m">M-Auto</span><span class="sep"> · </span><span class="o">Online</span>
+      <span class="badge">Portal</span>
+    </div>
+    <div class="hdr-right">
+      <div id="exp-pill" class="exp-pill">
+        <div class="exp-dot"></div>
+        <span>Links: <span id="exp-time" class="exp-time">--:--</span></span>
+      </div>
+      <button class="hdr-btn" onclick="clearDone()" title="Repor estado de downloads">↺ Repor</button>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="sidebar">
+      <div class="nav-sec">Downloads</div>
+      <div class="nav-item active" onclick="nav('links')" id="nav-links">
+        <div class="nav-dot" style="background:var(--blue3)"></div>Todos os Links
+      </div>
+      <div class="nav-sec">Sistema</div>
+      <div class="nav-item" onclick="nav('engine')" id="nav-engine">
+        <div class="nav-dot" style="background:var(--green)"></div>Start Engine
+      </div>
+      <div class="nav-item" onclick="nav('tools')" id="nav-tools">
+        <div class="nav-dot" style="background:var(--orange)"></div>Tools
+      </div>
+      <div class="nav-item" onclick="nav('sos')" id="nav-sos">
+        <div class="nav-dot" style="background:var(--red)"></div>SOS
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="panel on" id="panel-links"></div>
+      <div class="panel" id="panel-engine"></div>
+      <div class="panel" id="panel-tools"></div>
+      <div class="panel" id="panel-sos"></div>
+    </div>
+  </div>
+</div>
+
+<div id="dl-toast"></div>
+
+<script>
+// ── CONFIG ──
+const PASS      = 'M-auto2026';
+const BASE      = 'https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/';
+const SRCS      = [
+  { key:'merc',    url: BASE+'merc_links.json',    label:'Mercedes', color:'#c0a060' },
+  { key:'renault', url: BASE+'renault_links.json', label:'Renault',  color:'#f0c020' },
+  { key:'psa',     url: BASE+'psa_links.json',     label:'PSA',      color:'#4a90d9' }
+];
+const NAMES_URL = BASE + 'friendlynames.json';
+const NAMES_S3  = 'S:\\friendlynames.json';
+const DL_FOLDER = 'C:\\m-auto\\temp\\';
+const DL_KEY    = 'mauto_done_v1'; // localStorage key
+
+// ── SECURITY ──
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (e.key === 'F12') e.preventDefault();
+  if (e.ctrlKey && 'uisja'.includes(e.key.toLowerCase())) e.preventDefault();
+});
+
+// ── SPLASH ──
+const STEPS=[[15,'A verificar sistema...'],[42,'A carregar módulos...'],[72,'A preparar interface...'],[94,'Quase pronto...'],[100,'Bem-vindo!']];
+let si=0;
+function runSplash(){
+  if(si>=STEPS.length) return setTimeout(()=>{
+    document.getElementById('splash').classList.add('hidden');
+    document.getElementById('pw').classList.add('on');
+    setTimeout(()=>document.getElementById('pw-in').focus(),150);
+  },350);
+  const[p,m]=STEPS[si++];
+  document.getElementById('spBar').style.width=p+'%';
+  document.getElementById('spStatus').textContent=m;
+  setTimeout(runSplash,si===1?250:430);
+}
+window.addEventListener('DOMContentLoaded',()=>setTimeout(runSplash,300));
+
+// ── PASSWORD ──
+function checkPass(){
+  if(document.getElementById('pw-in').value===PASS){
+    document.getElementById('pw').classList.remove('on');
+    document.getElementById('app').classList.add('on');
+    init();
+  }else{
+    const e=document.getElementById('pw-err');
+    e.classList.add('on');
+    document.getElementById('pw-in').value='';
+    document.getElementById('pw-in').focus();
+    setTimeout(()=>e.classList.remove('on'),2500);
+  }
+}
+
+// ── NAV ──
+function nav(id){
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(el=>el.classList.remove('on'));
+  document.getElementById('nav-'+id).classList.add('active');
+  document.getElementById('panel-'+id).classList.add('on');
+}
+
+// ── DOWNLOAD STATE (localStorage) ──
+function getDone(){ try{return JSON.parse(localStorage.getItem(DL_KEY)||'{}');}catch{return{};} }
+function markDone(path){ const d=getDone(); d[path]={ts:Date.now()}; localStorage.setItem(DL_KEY,JSON.stringify(d)); }
+function isDone(path){ return !!getDone()[path]; }
+function getDoneDate(path){ const d=getDone()[path]; return d?new Date(d.ts):null; }
+function clearDone(){ if(confirm('Repor todos os downloads como não feitos neste PC?')){ localStorage.removeItem(DL_KEY); renderLinks(); } }
+
+// ── FRIENDLY NAMES ──
+let names={};
+async function loadNames(){
+  try{
+    if(typeof HEScript!=='undefined'){ const r=HEScript.ReadFile(NAMES_S3); if(r){names=JSON.parse(r);return;} }
+    const r=await fetch(NAMES_URL+'?t='+Date.now()); if(r.ok)names=await r.json();
+  }catch(e){}
+}
+
+// ── INIT ──
+let allData=[], globalExpiry=null;
+
+async function init(){
+  await loadNames();
+  const p=document.getElementById('panel-links');
+  p.innerHTML='<div class="state"><div class="s-ring"></div>A carregar links...</div>';
+  const results=await Promise.allSettled(SRCS.map(s=>fetch(s.url+'?t='+Date.now()).then(r=>r.json()).then(d=>({...s,data:d}))));
+  allData=[];
+  let earliest=null;
+  for(const r of results){
+    if(r.status==='fulfilled'){
+      const {key,label,color,data}=r.value;
+      if(data.expires){
+        const exp=new Date(data.expires);
+        if(!earliest||exp<earliest) earliest=exp;
+      }
+      for(const f of (data.files||[])){
+        allData.push({key,label,color,path:f.name,url:f.url,size:f.size||0,expires:data.expires});
+      }
+    }
+  }
+  if(earliest){globalExpiry=earliest;startTimer();}
+  renderLinks();
+  renderEngine(); renderTools(); renderSOS();
+}
+
+// ── RENDER LINKS ──
+function renderLinks(){
+  const p=document.getElementById('panel-links');
+  if(!allData.length){
+    p.innerHTML='<div class="state">⚠️<br>Não foi possível carregar os links.<br><button class="hdr-btn" style="margin-top:12px" onclick="init()">Tentar novamente</button></div>';
+    return;
+  }
+  const done=getDone();
+  const total=allData.length, doneCount=allData.filter(f=>done[f.path]).length;
+
+  let html=`<div class="stats-bar">
+    <div class="stat-pill">📦 <strong>${total}</strong> ficheiros</div>
+    <div class="stat-pill">✅ <strong>${doneCount}</strong> já descarregados neste PC</div>
+    <div class="stat-pill${globalExpiry&&(globalExpiry-Date.now())<1800000?' warn':''}">${globalExpiry&&(globalExpiry-Date.now())<=0?'🔴':'🕐'} Links: <strong id="stats-exp">${globalExpiry?fmtExpiry(globalExpiry-Date.now()):'--'}</strong></div>
+  </div>
+  <div class="file-list">`;
+
+  for(const f of allData){
+    const rawName=f.path.split('/').pop();
+    const ext=rawName.includes('.')?rawName.split('.').pop().toLowerCase():'';
+    const friendly=names[f.path]||null;
+    const isd=!!done[f.path];
+    const ddate=isd?getDoneDate(f.path):null;
+    const id='r'+Math.random().toString(36).slice(2,9);
+
+    html+=`
+      <div class="file-row${isd?' done':''}" id="${id}" data-path="${esc(f.path)}" data-url="${esc(f.url)}" data-name="${esc(rawName)}" data-size="${f.size}">
+        <div class="fi-brand" style="background:${f.color};box-shadow:0 0 4px ${f.color}40" title="${esc(f.label)}"></div>
+        <div class="fi-icon">${icon(ext)}</div>
+        <div class="fi-info">
+          <div class="fi-name${friendly?' friendly':''}">${esc(friendly||rawName)}</div>
+          ${friendly?`<div class="fi-raw">${esc(rawName)}</div>`:''}
+          ${ddate?`<div class="fi-done-date">✓ Descarregado ${fmtDate(ddate)}</div>`:''}
+        </div>
+        <div class="fi-ext">${esc(ext||'—')}</div>
+        <div class="fi-size">${fmtSize(f.size)}</div>
+        ${isd
+          ? `<button class="btn-dl done-btn" disabled>✓ Feito</button>
+             <button class="btn-reset" title="Repor como não feito" data-row="${id}" onclick="resetDoneEl(this)">↺</button>`
+          : `<button class="btn-dl" id="btn${id}" onclick="dlFile('${id}')">⬇ Download</button>`
+        }
+      </div>
+      <div class="prog-row" id="prog${id}">
+        <div class="prog-track"><div class="prog-fill" id="pf${id}"></div></div>
+        <div class="prog-info"><span id="pi${id}">A iniciar...</span><span id="pb${id}"></span></div>
+      </div>`;
+  }
+  html+='</div>';
+  p.innerHTML=html;
+}
+
+function resetDoneEl(btn){
+  const row=btn.closest('.file-row'); if(!row)return;
+  resetDone(row.id, row.dataset.path);
+}
+function resetDone(rowId, path){
+  const d=getDone(); delete d[path]; localStorage.setItem(DL_KEY,JSON.stringify(d));
+  renderLinks();
+}
+
+// ── DOWNLOAD ──
+function dlFile(id){
+  const row=document.getElementById(id);
+  const btn=document.getElementById('btn'+id);
+  if(!row||!btn||btn.disabled)return;
+
+  const url=row.dataset.url, fname=row.dataset.name, size=parseInt(row.dataset.size)||0, path=row.dataset.path;
+
+  btn.disabled=true; btn.className='btn-dl dling'; btn.textContent='⏳';
+  row.classList.add('downloading');
+
+  // Ensure folder + trigger browser download via PowerShell (saves to C:\m-auto\temp\)
+  try{
+    if(typeof HEScript!=='undefined'){
+      const dest=DL_FOLDER+fname.replace(/[\\/:*?"<>|]/g,'_');
+      const ps=[
+        `New-Item -ItemType Directory -Force -Path '${DL_FOLDER}' | Out-Null`,
+        `Start-BitsTransfer -Source '${url.replace(/'/g,"''")}' -Destination '${dest}'`
+      ].join(';');
+      HEScript.Exec('powershell','-WindowStyle Normal -NoProfile -Command "'+ps+'"');
+    }else{
+      // Browser fallback
+      const a=document.createElement('a'); a.href=url; a.download=fname; a.style.display='none';
+      document.body.appendChild(a); a.click(); setTimeout(()=>document.body.removeChild(a),1000);
+    }
+  }catch(e){
+    const a=document.createElement('a'); a.href=url; a.download=fname; a.style.display='none';
+    document.body.appendChild(a); a.click(); setTimeout(()=>document.body.removeChild(a),1000);
+  }
+
+  const tid=showToast(fname,size);
+  animProgress(id,tid,size,path,fname);
+}
+
+function animProgress(id,tid,size,path,fname){
+  const pf=document.getElementById('pf'+id), pi=document.getElementById('pi'+id);
+  const pb=document.getElementById('pb'+id), btn=document.getElementById('btn'+id);
+  const row=document.getElementById(id);
+  const SPEED=25*1024*1024;
+  const totalMs=Math.max(2500,(size/SPEED)*1000);
+  const steps=80, stepMs=totalMs/steps;
+  let s=0;
+  const iv=setInterval(()=>{
+    s++;
+    const eased=1-Math.pow(1-(s/steps),2.5);
+    const pct=Math.min(94,Math.round(eased*94));
+    if(pf)pf.style.width=pct+'%';
+    if(pi)pi.textContent=pct+'%';
+    if(pb)pb.textContent=fmtSize(Math.round(size*eased))+' / '+fmtSize(size);
+    updateToast(tid,pct,size);
+    if(s>=steps){
+      clearInterval(iv);
+      if(pi)pi.textContent='A terminar...';
+      setTimeout(()=>{
+        // Mark as done
+        markDone(path);
+        doneToast(tid,fname);
+        // Update row to done state
+        if(row){
+          row.classList.remove('downloading');
+          row.classList.add('done');
+          row.dataset.path && (row.querySelector('.fi-done-date')
+            ? row.querySelector('.fi-done-date').textContent='✓ Descarregado agora'
+            : null);
+          if(btn){btn.className='btn-dl done-btn';btn.textContent='✓ Feito';}
+          if(pf)pf.style.width='100%';
+          if(pi)pi.textContent='100%';
+          if(pb)pb.textContent='Concluído ✓';
+          // Add reset button — usa addEventListener, sem interpolação em onclick
+          const reset=document.createElement('button');
+          reset.className='btn-reset'; reset.title='Repor como não feito';
+          reset.textContent='↺';
+          reset.addEventListener('click',()=>resetDone(id,path));
+          row.appendChild(reset);
+        }
+        updateStatsBadge();
+      },2500);
+    }
+  },stepMs);
+}
+
+function updateStatsBadge(){
+  const done=getDone(), total=allData.length, doneCount=allData.filter(f=>done[f.path]).length;
+  // Re-render stats only
+  const bars=document.querySelectorAll('.stats-bar .stat-pill');
+  if(bars[1]) bars[1].innerHTML=`✅ <strong>${doneCount}</strong> já descarregados neste PC`;
+}
+
+// ── TOASTS ──
+let tc=0;
+function showToast(fn,size){
+  const id='t'+(++tc);
+  const el=document.createElement('div');
+  el.className='toast'; el.id=id;
+  el.innerHTML=`<div class="toast-icon">⬇️</div>
+    <div class="toast-body">
+      <div class="toast-title">${esc(fn)}</div>
+      <div class="toast-sub" id="tsub${id}">A descarregar... ${fmtSize(size)}</div>
+      <div class="toast-prog"><div class="toast-fill" id="tpf${id}" style="width:0%"></div></div>
+    </div>
+    <button class="toast-x" onclick="rmToast('${id}')">✕</button>`;
+  document.getElementById('dl-toast').appendChild(el);
+  return id;
+}
+function updateToast(id,pct,size){
+  const pf=document.getElementById('tpf'+id), sub=document.getElementById('tsub'+id);
+  if(pf)pf.style.width=pct+'%'; if(sub)sub.textContent=pct+'% · '+fmtSize(size);
+}
+function doneToast(id){
+  const el=document.getElementById(id); if(!el)return;
+  el.className='toast done';
+  const sub=document.getElementById('tsub'+id), pf=document.getElementById('tpf'+id);
+  if(sub)sub.textContent='✓ Download concluído — C:\\m-auto\\temp\\';
+  if(pf)pf.style.width='100%';
+  setTimeout(()=>rmToast(id),6000);
+}
+function rmToast(id){const el=document.getElementById(id);if(el)el.remove();}
+
+// ── EXPIRY ──
+function startTimer(){updateExp();setInterval(updateExp,30000);}
+function updateExp(){
+  if(!globalExpiry)return;
+  const diff=globalExpiry-Date.now();
+  const pill=document.getElementById('exp-pill'), t=document.getElementById('exp-time');
+  if(diff<=0){pill.className='exp-pill dead';t.textContent='Expirado';}
+  else{pill.className=diff<1800000?'exp-pill warn':'exp-pill';t.textContent=fmtExpiry(diff);}
+  const se=document.getElementById('stats-exp');
+  if(se)se.textContent=diff<=0?'Expirado':fmtExpiry(diff);
+}
+function fmtExpiry(ms){if(ms<=0)return'Expirado';return Math.floor(ms/3600000)+'h '+Math.floor((ms%3600000)/60000)+'m';}
+
+// ── ACTION PANELS ──
+function runPS(cmd){
+  try{
+    if(typeof HEScript!=='undefined')HEScript.Exec('powershell','-WindowStyle Normal -NoProfile -Command "'+cmd+'"');
+    else alert('Modo browser.\nComando: '+cmd);
+  }catch(e){alert('Erro: '+e);}
+}
+function runScript(url){runPS(`[Net.ServicePointManager]::SecurityProtocol='Tls12';iex(irm '${url}?t='+(Get-Date).Ticks)`);}
+
+function renderEngine(){
+  document.getElementById('panel-engine').innerHTML=`
+  <div class="sec-title">🚀 Automação</div>
+  <div class="ac-grid">
+    <div class="ac" onclick="runScript('${BASE}scripts/start-engine.ps1')"><div class="ac-icon">🚀</div><div class="ac-title">Start Engine</div><div class="ac-desc">Diagnóstico + preparação completa do sistema.</div></div>
+    <div class="ac" onclick="runScript('${BASE}scripts/m-auto.ps1')"><div class="ac-icon">🖥</div><div class="ac-title">Menu Completo</div><div class="ac-desc">Abre o menu interactivo M-Auto completo.</div></div>
+  </div>
+  <div class="sec-title">📋 Diagnóstico</div>
+  <div class="ac-grid">
+    <div class="ac" onclick="runPS('Get-ComputerInfo|Select WindowsProductName,OsVersion,TotalPhysicalMemory|Format-List;Read-Host')"><div class="ac-icon">💻</div><div class="ac-title">Info Sistema</div><div class="ac-desc">Versão Windows, RAM, processador.</div></div>
+    <div class="ac" onclick="runPS('Test-NetConnection 8.8.8.8 -Port 80|Format-List;Read-Host')"><div class="ac-icon">🌐</div><div class="ac-title">Teste Rede</div><div class="ac-desc">Verifica conectividade à internet.</div></div>
+    <div class="ac" onclick="runPS('Get-Disk|Format-Table Number,FriendlyName,@{N=\"Size(GB)\";E={[Math]::Round($_.Size/1GB)}},HealthStatus -AutoSize;Read-Host')"><div class="ac-icon">💾</div><div class="ac-title">Discos</div><div class="ac-desc">Estado e tamanho dos discos.</div></div>
+  </div>`;
+}
+
+function renderTools(){
+  document.getElementById('panel-tools').innerHTML=`
+  <div class="sec-title">📦 Instalações</div>
+  <div class="ac-grid">
+    <div class="ac" onclick="runPS('winget install -e --id 7zip.7zip --accept-source-agreements --accept-package-agreements')"><div class="ac-icon">📦</div><div class="ac-title">Instalar 7-Zip</div><div class="ac-desc">Compressor de ficheiros.</div></div>
+    <div class="ac" onclick="runScript('${BASE}scripts/install-deskin.ps1')"><div class="ac-icon">🖥</div><div class="ac-title">Instalar DeskIn</div><div class="ac-desc">Software de acesso remoto.</div></div>
+    <div class="ac" onclick="runPS('Add-WindowsFeature MSMQ-Server -EA SilentlyContinue;Write-Host Done;Read-Host')"><div class="ac-icon">📨</div><div class="ac-title">Activar MSMQ</div><div class="ac-desc">Message Queuing para software de diagnóstico.</div></div>
+    <div class="ac" onclick="runPS('winget upgrade --all --accept-source-agreements --accept-package-agreements')"><div class="ac-icon">🔄</div><div class="ac-title">Actualizar Tudo</div><div class="ac-desc">Actualiza todos os programas via Winget.</div></div>
+  </div>
+  <div class="sec-title">🎨 Personalização</div>
+  <div class="ac-grid">
+    <div class="ac warn" onclick="runPS('Set-ItemProperty -Path HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsSearch -Name AllowSearchToUseLocation -Value 0 -Force;Get-Process *SearchApp* -EA SilentlyContinue|Stop-Process -Force;Write-Host Feito;Read-Host')"><div class="ac-icon">🔍</div><div class="ac-title">Remover Search/News</div><div class="ac-desc">Remove pesquisa e notícias da taskbar.</div></div>
+    <div class="ac warn" onclick="runPS('reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f;Write-Host Feito;Read-Host')"><div class="ac-icon">🔕</div><div class="ac-title">Desactivar Cortana</div><div class="ac-desc">Desactiva pesquisa Bing e Cortana.</div></div>
+  </div>`;
+}
+
+function renderSOS(){
+  document.getElementById('panel-sos').innerHTML=`
+  <div class="sec-title">🛠 Reparação</div>
+  <div class="ac-grid">
+    <div class="ac danger" onclick="runPS('sfc /scannow;Read-Host')"><div class="ac-icon">🛠</div><div class="ac-title">Reparar Ficheiros (SFC)</div><div class="ac-desc">Verifica e repara ficheiros corrompidos.</div></div>
+    <div class="ac danger" onclick="runPS('DISM /Online /Cleanup-Image /RestoreHealth;Read-Host')"><div class="ac-icon">🔨</div><div class="ac-title">Reparar Windows (DISM)</div><div class="ac-desc">Restaura imagem do Windows. Pode demorar.</div></div>
+    <div class="ac danger" onclick="runPS('netsh winsock reset;netsh int ip reset;ipconfig /flushdns;Write-Host Feito - Reinicia o PC;Read-Host')"><div class="ac-icon">🌐</div><div class="ac-title">Reparar Rede TCP/IP</div><div class="ac-desc">Reset Winsock + IP + DNS. Requer reinício.</div></div>
+    <div class="ac" onclick="runPS('Remove-Item $env:TEMP\\* -Recurse -Force -EA SilentlyContinue;Write-Host Limpeza concluida;Read-Host')"><div class="ac-icon">🧹</div><div class="ac-title">Limpar Temporários</div><div class="ac-desc">Apaga ficheiros temporários do sistema.</div></div>
+  </div>
+  <div class="sec-title">🛡 Segurança</div>
+  <div class="ac-grid">
+    <div class="ac danger" onclick="runPS('Set-MpPreference -DisableRealtimeMonitoring $true;Write-Host Defender desativado;Read-Host')"><div class="ac-icon">🛡</div><div class="ac-title">Desactivar Defender</div><div class="ac-desc">Desactiva protecção em tempo real.</div></div>
+    <div class="ac danger" onclick="runPS('Set-NetFirewallProfile -All -Enabled False;Write-Host Firewall desativado;Read-Host')"><div class="ac-icon">🔥</div><div class="ac-title">Desactivar Firewall</div><div class="ac-desc">Desactiva todas as regras de firewall.</div></div>
+    <div class="ac" onclick="runPS('Set-MpPreference -DisableRealtimeMonitoring $false;Set-NetFirewallProfile -All -Enabled True;Write-Host Protecao reativada;Read-Host')"><div class="ac-icon">✅</div><div class="ac-title">Reactivar Protecção</div><div class="ac-desc">Reactiva Defender e Firewall.</div></div>
+  </div>`;
+}
+
+// ── UTILS ──
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function fmtSize(b){if(!b)return'—';if(b<1048576)return(b/1024).toFixed(1)+' KB';if(b<1073741824)return(b/1048576).toFixed(1)+' MB';return(b/1073741824).toFixed(2)+' GB';}
+function fmtDate(d){if(!d)return'';return d.toLocaleDateString('pt-PT')+' '+d.toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});}
+function icon(ext){return{exe:'💿',rar:'📦',zip:'📦','7z':'📦',iso:'💿',pdf:'📄',doc:'📄',docx:'📄',mp4:'🎬',avi:'🎬',mkv:'🎬',jpg:'🖼',png:'🖼',bat:'⚙',ps1:'⚙'}[ext]||'📁';}
+</script>
+</body>
+</html>

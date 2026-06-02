@@ -1,8 +1,8 @@
-param([string]$Path, [string]$Mode = "Aria")
+﻿param([string]$Path, [string]$Mode = "Aria")
 
 Add-Type -AssemblyName System.Windows.Forms
 
-$RCLONE  = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.73.4-windows-amd64\rclone.exe"
+$RCLONE  = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.74.2-windows-amd64\rclone.exe"
 $DRIVE   = "Z:"
 $BUCKET  = "r2-mauto:m-auto-software"
 $OUT_DIR = "D:\Tutorials\m-auto.online\scripts\clientes"

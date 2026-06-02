@@ -1,5 +1,5 @@
-# r2_link.ps1 - Generate presigned R2 link for a single file
-# Usage: r2_link.ps1 "Z:\Daimler\SDMEDIA.zip"
+﻿# r2_link.ps1 - Generate presigned R2 link for a single file
+# Usage: r2_link.ps1 "S:\Daimler\SDMEDIA.zip"
 # Called by Explorer right-click context menu
 
 param(
@@ -14,7 +14,7 @@ param(
 
 # HTTP=4h (uso rapido), Aria=24h (downloads longos)
 $EXPIRES_SEC = if ($Mode -eq "Aria") { 86400 } else { 14400 }
-$LOCAL_ROOT  = "Z:\"
+$LOCAL_ROOT  = "S:\"
 
 #-- Notification via NotifyIcon BalloonTip (com message pump) ----------------
 # Application.Run() e essencial quando lancado via wscript hidden

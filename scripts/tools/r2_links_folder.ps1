@@ -1,5 +1,5 @@
-# r2_links_folder.ps1 - Generate presigned R2 links for ALL files in a folder
-# Usage: r2_links_folder.ps1 "Z:\Daimler"
+﻿# r2_links_folder.ps1 - Generate presigned R2 links for ALL files in a folder
+# Usage: r2_links_folder.ps1 "S:\Daimler"
 # Called by Explorer right-click context menu on a folder
 
 param(
@@ -14,7 +14,7 @@ param(
 
 # HTTP=4h (uso rapido), Aria=24h (downloads longos)
 $EXPIRES_SEC = if ($Mode -eq "Aria") { 86400 } else { 14400 }
-$LOCAL_ROOT  = "Z:\"
+$LOCAL_ROOT  = "S:\"
 
 #-- BalloonTip notification with message pump (works under wscript hidden) ---
 function Show-Toast {
@@ -50,7 +50,7 @@ if ($FolderPath -notlike "$LOCAL_ROOT*" -and $FolderPath -ne $LOCAL_ROOT.TrimEnd
     exit 1
 }
 
-# Calcular prefix R2 (relativo a Z:\)
+# Calcular prefix R2 (relativo a S:\)
 $relFolder = $FolderPath.Substring($LOCAL_ROOT.Length).TrimStart('\').Replace('\', '/')
 $prefix    = if ($relFolder) { "$relFolder/" } else { "" }
 

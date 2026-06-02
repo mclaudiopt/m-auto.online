@@ -1,8 +1,8 @@
-# tools/gerar_link.ps1 - Gera presigned URL para enviar a cliente
+﻿# tools/gerar_link.ps1 - Gera presigned URL para enviar a cliente
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $e = [char]27
 
-$RCLONE = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.73.4-windows-amd64\rclone.exe"
+$RCLONE = "C:\Users\marce\AppData\Local\Microsoft\WinGet\Packages\Rclone.Rclone_Microsoft.Winget.Source_8wekyb3d8bbwe\rclone-v1.74.2-windows-amd64\rclone.exe"
 $BUCKET = "r2-mauto:m-auto-software"
 
 $SOFTWARES = @(
