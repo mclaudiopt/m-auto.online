@@ -25,16 +25,20 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 #app{position:fixed;inset:0;display:none;flex-direction:column;}
 #app.on{display:flex;}
 #output-modal{display:none !important;}
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--border);background:rgba(6,13,26,.96);flex-shrink:0;gap:12px;}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--border);background:rgba(6,13,26,.96);flex-shrink:0;gap:12px;flex-wrap:wrap;}
+.hdr-nav{display:flex;gap:4px;align-items:center;}
+.hdr-nav-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.75rem;font-weight:600;color:var(--muted2);transition:all .15s;border:1px solid transparent;}
+.hdr-nav-item:hover{background:rgba(37,99,235,.08);color:var(--text);}
+.hdr-nav-item.active{background:rgba(37,99,235,.14);color:#fff;border-color:rgba(37,99,235,.2);}
 .hdr-logo{font-size:1.25rem;font-weight:900;font-style:italic;letter-spacing:-.5px;}
 .hdr-logo .m{color:#fff;}.hdr-logo .sep{color:rgba(255,255,255,.15);font-style:normal;font-weight:300;font-size:.95rem;}.hdr-logo .o{color:var(--blue);}
 .badge{font-size:.54rem;font-weight:700;background:rgba(245,158,11,.14);color:var(--yellow);border:1px solid rgba(245,158,11,.28);border-radius:4px;padding:2px 6px;margin-left:8px;font-style:normal;letter-spacing:.06em;vertical-align:middle;}
 .hdr-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:6px 12px;color:var(--muted2);font-size:.7rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .hdr-btn:hover{border-color:var(--blue);color:var(--blue);}
 .body{display:flex;flex:1;overflow:hidden;}
-.activity-panel{order:1;width:240px;border-right:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
-.sidebar{order:2;width:150px;border-right:1px solid var(--border);background:rgba(6,13,26,.7);display:flex;flex-direction:column;gap:2px;padding:10px 8px;flex-shrink:0;}
-.main{order:3;}
+.activity-panel{width:260px;border-left:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;order:2;}
+.sidebar{display:none;}
+.main{flex:1;order:1;}
 .activity-header{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;padding:10px 12px 6px;border-bottom:1px solid rgba(37,99,235,.1);}
 .activity-tabs{display:flex;gap:3px;padding:5px 8px;border-bottom:1px solid rgba(37,99,235,.08);flex-wrap:wrap;}
 .activity-tab{font-size:.6rem;padding:3px 8px;border-radius:4px;cursor:pointer;background:rgba(37,99,235,.1);color:var(--muted);border:1px solid transparent;transition:all .2s;}
@@ -130,7 +134,15 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 </div>
 <div id="app">
   <div class="hdr">
-    <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend</span></div>
+    <div style="display:flex;align-items:center;gap:20px;flex:1;">
+      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend</span></div>
+      <div class="hdr-nav">
+        <div class="hdr-nav-item active" onclick="nav('renew');updateHdrNav('renew')" id="hnav-renew">🔄 Renew</div>
+        <div class="hdr-nav-item" onclick="nav('names');updateHdrNav('names')" id="hnav-names">📝 Nomes</div>
+        <div class="hdr-nav-item" onclick="nav('links');updateHdrNav('links')" id="hnav-links">🔗 Links</div>
+        <div class="hdr-nav-item" onclick="nav('admin');updateHdrNav('admin')" id="hnav-admin">⚙️ Admin</div>
+      </div>
+    </div>
     <div><button class="hdr-btn" onclick="refreshAll()">Actualizar</button></div>
   </div>
   <div class="body">
@@ -310,6 +322,7 @@ function buildAdmin(){const g1=document.getElementById('admin-grid'),g2=document
 function openPath(p){if(typeof HEScript==='undefined'){showSt('err','⚠ Disponível apenas no EXE');return;}try{HEScript.Exec('explorer','"'+p+'"');}catch(e){showSt('err','Erro: '+e);}}
 function runPS(cmd){if(typeof HEScript==='undefined'){showSt('err','⚠ Disponível apenas no EXE');return;}try{HEScript.Exec('powershell','-WindowStyle Normal -NoProfile -Command "'+cmd+'"');}catch(e){showSt('err','Erro: '+e);}}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function updateHdrNav(id){document.querySelectorAll('.hdr-nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('hnav-'+id).classList.add('active');}
 const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊'};
 let currentFilter='all';
 function addLog(msg,type='info',category='all'){const log=document.getElementById('activity-log');const t=new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit',second:'2-digit'});const entry=document.createElement('div');entry.className='log-entry log-'+type;entry.dataset.category=category;entry.style.display=(currentFilter==='all'||currentFilter===category)?'block':'none';const timeEl=document.createElement('span');timeEl.className='log-time';timeEl.textContent=t;entry.appendChild(timeEl);const icon=LOG_ICONS[type]||'•';const msgEl=document.createElement('span');msgEl.textContent=icon+' '+msg;entry.appendChild(msgEl);log.appendChild(entry);log.scrollTop=log.scrollHeight;}
