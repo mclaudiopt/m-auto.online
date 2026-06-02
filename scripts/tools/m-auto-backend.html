@@ -66,23 +66,27 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .sec{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin:18px 0 10px;display:flex;align-items:center;gap:8px;}
 .sec:first-child{margin-top:0;}
 .sec::after{content:'';flex:1;height:1px;background:var(--border);}
-.renew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
-.rc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;}
+.renew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all .2s;}
+.rc:hover{border-color:rgba(37,99,235,.4);background:rgba(37,99,235,.04);}
 .rc-top{display:flex;align-items:center;justify-content:space-between;}
 .rc-brand{display:flex;align-items:center;gap:8px;}
 .rc-dot{width:10px;height:10px;border-radius:50%;}
 .rc-name{font-size:.88rem;font-weight:700;}
+.rc-toggle{width:44px;height:24px;border-radius:12px;border:1px solid var(--border);background:rgba(37,99,235,.2);cursor:pointer;position:relative;transition:all .2s;}
+.rc-toggle.on{background:var(--green);}
+.rc-toggle-dot{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:10px;background:#fff;transition:left .2s;}
+.rc-toggle.on .rc-toggle-dot{left:22px;}
 .rc-st{font-size:.64rem;padding:3px 8px;border-radius:4px;font-weight:700;border:1px solid transparent;}
 .rc-st.ok{background:rgba(34,197,94,.1);color:var(--green);border-color:rgba(34,197,94,.22);}
 .rc-st.warn{background:rgba(245,158,11,.1);color:var(--yellow);border-color:rgba(245,158,11,.22);}
 .rc-st.dead{background:rgba(239,68,68,.1);color:var(--red);border-color:rgba(239,68,68,.22);}
-.rc-st.load{background:rgba(37,99,235,.08);color:var(--blue3);border-color:var(--border);}
 .rc-info{font-size:.7rem;color:var(--muted2);}
-.rc-info strong{color:var(--text);}
-.btn-renew{width:100%;padding:9px;background:linear-gradient(135deg,rgba(30,64,175,.5),rgba(37,99,235,.5));border:1px solid rgba(37,99,235,.28);border-radius:8px;color:#fff;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;}
-.btn-renew:hover{background:linear-gradient(135deg,var(--blue2),var(--blue));}
-.btn-renew:disabled{opacity:.4;cursor:not-allowed;}
-.btn-renew.run{animation:pulse .8s ease infinite;border-color:rgba(37,99,235,.6);}
+.rc-files{max-height:0;overflow:hidden;transition:max-height .3s;border-top:1px solid rgba(37,99,235,.1);padding-top:8px;margin-top:8px;}
+.rc-files.on{max-height:400px;}
+.rc-file{display:flex;gap:6px;align-items:center;font-size:.7rem;margin:6px 0;}
+.rc-file input{cursor:pointer;}
+.rc-file label{cursor:pointer;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .status-row{background:rgba(37,99,235,.06);border:1px solid var(--border);border-radius:8px;padding:8px 14px;margin-bottom:14px;font-size:.7rem;color:var(--muted2);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .ntoolbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
 .nsearch{flex:1;min-width:150px;}
@@ -241,8 +245,13 @@ async function loadStatus(){
 }
 function buildCards(){
   const g=document.getElementById('renew-grid');
-  g.innerHTML=SRCS.map(s=>`<div class="rc"><div class="rc-top"><div class="rc-brand"><div class="rc-dot" style="background:${s.color}"></div><div class="rc-name">${esc(s.label)}</div></div><div class="rc-st load" id="rcs-${s.key}">...</div></div><div class="rc-info" id="rce-${s.key}">-</div><div class="rc-info" id="rcc-${s.key}" style="color:var(--muted)">-</div><button class="btn-renew" data-key="${s.key}" data-label="${esc(s.label)}">Renovar ${esc(s.label)}</button></div>`).join('');
-  g.addEventListener('click',e=>{const btn=e.target.closest('.btn-renew[data-key]');if(btn&&!btn.disabled)renewOne(btn.dataset.key,btn.dataset.label,btn);});
+  g.innerHTML=SRCS.map(s=>`<div class="rc" data-key="${s.key}"><div class="rc-top"><div class="rc-brand"><div class="rc-dot" style="background:${s.color}"></div><div class="rc-name">${esc(s.label)}</div></div><div class="rc-toggle" id="rcg-${s.key}" data-key="${s.key}"><div class="rc-toggle-dot"></div></div></div><div class="rc-info" id="rce-${s.key}">-</div><div class="rc-info" id="rcc-${s.key}" style="color:var(--muted)">-</div><div class="rc-files" id="rcf-${s.key}"></div></div>`).join('');
+  g.addEventListener('click',e=>{
+    const tog=e.target.closest('.rc-toggle[data-key]');
+    if(tog){const k=tog.dataset.key;const on=tog.classList.toggle('on');if(on)renewOne(k,SRCS.find(s=>s.key===k).label);else removeShare(k);}
+    const rc=e.target.closest('.rc[data-key]');
+    if(rc&&!e.target.closest('.rc-toggle'))expandCard(rc.dataset.key);
+  });
   document.getElementById('btn-all').addEventListener('click',renewAll);
 }
 function updateCard(key,data){
@@ -250,6 +259,8 @@ function updateCard(key,data){
   if(data.expires){const diff=new Date(data.expires)-Date.now(),ok=diff>0;const h=Math.floor(Math.abs(diff)/3600000),m2=Math.floor((Math.abs(diff)%3600000)/60000);if(st){st.className='rc-st '+(ok?(diff<1800000?'warn':'ok'):'dead');st.textContent=ok?h+'h '+m2+'m':'Expirado';}if(exp)exp.innerHTML='Expira: <strong>'+new Date(data.expires).toLocaleString('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</strong>';}
   if(cnt&&data.files)cnt.textContent=data.files.length+' ficheiros';
 }
+function expandCard(key){const fc=document.getElementById('rcf-'+key);fc.classList.toggle('on');if(fc.classList.contains('on')){const f=linksData[key]||[];let h='';for(const file of f){h+=`<div class="rc-file"><input type="checkbox" id="chk-${key}-${btoa(file.name).slice(0,8)}" checked><label for="chk-${key}-${btoa(file.name).slice(0,8)}">${esc(file.name.split('/').pop())}</label></div>`;}fc.innerHTML=h;}}
+function removeShare(key){addLog('🔴 Removendo partilha: '+SRCS.find(s=>s.key===key).label,'warn','renew');}
 let renewWatcher;
 function renewOne(key,label,btn){
   if(!btn)btn=document.querySelector('.btn-renew[data-key="'+key+'"]');
