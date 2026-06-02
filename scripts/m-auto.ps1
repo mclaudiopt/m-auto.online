@@ -329,6 +329,44 @@ function Show-SOS {
     }
 }
 
+#-- Menu: Renew Links (S3 Direct) -----------------------------------------
+function Show-Renew {
+    while ($true) {
+        Write-Header
+        Write-Title "Renew Links - Direct S3"
+        Write-Host "  ${e}[38;2;100;149;237m[Presigned URLs via rclone]${e}[0m"
+        Write-Host "  ${e}[38;2;148;163;184mGera URLs com validade de 2 horas${e}[0m"
+        Write-Host ""
+        Write-Opt 1  "Mercedes (Daimler)"
+        Write-Opt 2  "Renault"
+        Write-Opt 3  "PSA"
+        Write-Opt 4  "Autodata"
+        Write-Opt 5  "Delphi"
+        Write-Opt 6  "Ford"
+        Write-Opt 7  "GM"
+        Write-Opt 8  "TESLA"
+        Write-Opt 9  "Volkswagen (VW)"
+        Write-Opt 10 "Hermes"
+        Write-Host ""
+        Write-Opt 0  "<- Voltar"
+        Write-Host ""
+        switch (Read-Key) {
+            "1"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand merc }
+            "2"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand renault }
+            "3"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand psa }
+            "4"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand autodata }
+            "5"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand delphi }
+            "6"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand ford }
+            "7"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand gm }
+            "8"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand tesla }
+            "9"  { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand vw }
+            "10" { & "D:\Tutorials\m-auto.online\scripts\tools\renew-s3-direct.ps1" -brand hermes }
+            "0"  { return }
+            default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
+        }
+    }
+}
+
 #-- Start Engine (tudo integrado) ----------------------------------------
 function Show-System {
     Run-Sub "system/start_engine"
@@ -345,6 +383,7 @@ while ($true) {
     Write-Opt 3  "Tools"                      "Utilitarios & Ferramentas"
     Write-Opt 4  "SOS"                        "Recuperacao de emergencia"
     Write-Opt 5  "Software"                   "Mercedes / VAG / BMW / PSA..."
+    Write-Opt 6  "Renew Links"                "Gerar presigned URLs (S3 Direct)"
     Write-Opt 9  "Wallpaper M-Auto"
     Write-Host ""
     Write-Opt 0  "Sair"
@@ -355,6 +394,7 @@ while ($true) {
         "3" { Show-Tools }
         "4" { Show-SOS }
         "5" { Show-Software }
+        "6" { Show-Renew }
         "9" { Run-Sub "utils/set_wallpaper" }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
