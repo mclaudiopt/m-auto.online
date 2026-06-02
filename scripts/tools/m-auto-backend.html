@@ -39,6 +39,10 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .activity-panel{width:260px;border-left:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;order:2;}
 .sidebar{display:none;}
 .main{flex:1;order:1;}
+.preview-panel{width:380px;border-left:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;order:3;}
+.preview-header{font-size:.7rem;font-weight:700;color:var(--muted);padding:10px;border-bottom:1px solid rgba(37,99,235,.1);display:flex;align-items:center;gap:8px;}
+.preview-frame{flex:1;border:none;background:#fff;}
+.preview-hidden{display:none !important;}
 .activity-header{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;padding:10px 12px 6px;border-bottom:1px solid rgba(37,99,235,.1);}
 .activity-tabs{display:flex;gap:3px;padding:5px 8px;border-bottom:1px solid rgba(37,99,235,.08);flex-wrap:wrap;}
 .activity-tab{font-size:.6rem;padding:3px 8px;border-radius:4px;cursor:pointer;background:rgba(37,99,235,.1);color:var(--muted);border:1px solid transparent;transition:all .2s;}
@@ -143,7 +147,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="hdr-nav-item" onclick="nav('admin');updateHdrNav('admin')" id="hnav-admin">⚙️ Admin</div>
       </div>
     </div>
-    <div><button class="hdr-btn" onclick="refreshAll()">Actualizar</button></div>
+    <div style="display:flex;gap:8px;"><button class="hdr-btn" onclick="togglePreview()">👁 Preview</button><button class="hdr-btn" onclick="refreshAll()">Actualizar</button></div>
   </div>
   <div class="body">
     <div class="activity-panel">
@@ -154,6 +158,10 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="activity-tab" onclick="filterLog('status')" data-filter="status">📊 Status</div>
       </div>
       <div class="activity-log" id="activity-log"></div>
+    </div>
+    <div class="preview-panel preview-hidden" id="preview-panel">
+      <div class="preview-header">📱 Portal Preview</div>
+      <iframe class="preview-frame" src="scripts/tools/m-auto-portal.html"></iframe>
     </div>
     <div class="sidebar">
       <div class="nav-sec">Gestao</div>
@@ -336,6 +344,7 @@ function openPath(p){if(typeof HEScript==='undefined'){showSt('err','⚠ Dispon�
 function runPS(cmd){if(typeof HEScript==='undefined'){showSt('err','⚠ Disponível apenas no EXE');return;}try{HEScript.Exec('powershell','-WindowStyle Normal -NoProfile -Command "'+cmd+'"');}catch(e){showSt('err','Erro: '+e);}}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function updateHdrNav(id){document.querySelectorAll('.hdr-nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('hnav-'+id).classList.add('active');}
+function togglePreview(){const p=document.getElementById('preview-panel');p.classList.toggle('preview-hidden');}
 const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊'};
 let currentFilter='all';
 function addLog(msg,type='info',category='all'){const log=document.getElementById('activity-log');const t=new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit',second:'2-digit'});const entry=document.createElement('div');entry.className='log-entry log-'+type;entry.dataset.category=category;entry.style.display=(currentFilter==='all'||currentFilter===category)?'block':'none';const timeEl=document.createElement('span');timeEl.className='log-time';timeEl.textContent=t;entry.appendChild(timeEl);const icon=LOG_ICONS[type]||'•';const msgEl=document.createElement('span');msgEl.textContent=icon+' '+msg;entry.appendChild(msgEl);log.appendChild(entry);log.scrollTop=log.scrollHeight;}
