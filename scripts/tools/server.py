@@ -8,7 +8,7 @@ import subprocess
 from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 
-PORT = 3000
+PORT = 3001
 SCRIPT_DIR = Path(__file__).parent
 BRANDS = {
     'merc': 'Mercedes', 'renault': 'Renault', 'psa': 'PSA',

@@ -12,7 +12,14 @@
       "Bash(git push *)",
       "PowerShell(Get-Process rclone -ErrorAction SilentlyContinue)",
       "PowerShell(Get-Content \"$env:USERPROFILE\\\\.claude\\\\settings.local.json\" -ErrorAction SilentlyContinue)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(cd /home)",
+      "Read(//c/Users/marce/.claude/sessions/**)",
+      "Bash(grep -o \"S:\\\\\\\\\\\\\\\\[^\\\\\\\\\\\\\\\\]*\" renew_*.ps1)",
+      "Bash(grep -o '\\\\\\\\\\\\\\\\[^\\\\\\\\\\\\\\\\]*$')",
+      "Bash(pkill -f \"http.server\")",
+      "Bash(nohup python -m http.server 3000)",
+      "mcp__Windows-MCP__Process"
     ]
   }
 }

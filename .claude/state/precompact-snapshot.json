@@ -13,9 +13,9 @@
       }
     },
     "recommended": true,
-    "summary": "Context reset recommended (auto): 20 recent edit count exceed threshold 8",
+    "summary": "Context reset recommended (auto): 8 recent edit count exceed threshold 8",
     "reasons": [
-      "20 recent edit count exceed threshold 8"
+      "8 recent edit count exceed threshold 8"
     ],
     "candidates": [
       {
@@ -35,7 +35,7 @@
       {
         "key": "recent_edits",
         "label": "recent edit count",
-        "actual": 20,
+        "actual": 8,
         "threshold": 8,
         "triggered": true
       },
@@ -57,7 +57,7 @@
     "counters": {
       "wipTasks": 0,
       "blockedTasks": 0,
-      "recentEdits": 20,
+      "recentEdits": 8,
       "failedChecks": 0,
       "sessionAgeMinutes": null
     }
@@ -71,29 +71,17 @@
   "legacy_version": "1.0.0",
   "metrics": null,
   "recentEdits": [
-    ".claude/settings.local.json",
-    "scripts/tools/gerar_link.ps1",
-    "scripts/tools/gerar_link_contextmenu.ps1",
-    "scripts/tools/gerar_links_pasta.ps1",
-    "scripts/tools/mount_r2.ps1",
-    "scripts/tools/r2_link.ps1",
-    "scripts/tools/r2_links_folder.ps1",
-    "scripts/tools/renew_merc_links.ps1",
-    "scripts/tools/renew_renault_links.ps1",
-    "scripts/tools/setup_contextmenu.ps1",
     ".claude/sessions/.last_inbox_check",
+    ".claude/settings.local.json",
     ".claude/state/changed-files.jsonl",
     ".claude/state/handoff-artifact.json",
     ".claude/state/instructions-loaded.jsonl",
     ".claude/state/precompact-snapshot.json",
-    ".claude/state/session-skills-used.json",
-    ".claude/state/usage-stats.jsonl",
-    "scripts/tools/m-auto-backend.html",
-    "scripts/tools/m-auto-names.html",
-    "scripts/tools/m-auto-portal.html"
+    "\"S\\357\\200\\272m-auto-backend.html\"",
+    "scripts/tools/.claude/state/changed-files.jsonl"
   ],
   "sessionId": "",
-  "timestamp": "2026-06-02T12:26:34Z",
+  "timestamp": "2026-06-02T16:53:52Z",
   "version": "1.0.0",
   "wipTasks": null
 }

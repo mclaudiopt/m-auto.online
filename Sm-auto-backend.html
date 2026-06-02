@@ -5,7 +5,7 @@
 <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title>M-Auto Backend v1.0.16</title>
+<title>M-Auto Backend v1.0.10</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#060d1a;--bg2:#0b1220;--blue:#2563eb;--blue2:#1e40af;--blue3:#60a5fa;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--card:#0f1c2e;--border:rgba(37,99,235,0.15);--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--orange:#f97316;}
@@ -33,10 +33,6 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .hdr-nav-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.75rem;font-weight:600;color:var(--muted2);transition:all .15s;border:1px solid transparent;}
 .hdr-nav-item:hover{background:rgba(37,99,235,.08);color:var(--text);}
 .hdr-nav-item.active{background:rgba(37,99,235,.14);color:#fff;border-color:rgba(37,99,235,.2);}
-.toggle-btn{width:40px;height:22px;border-radius:11px;background:rgba(37,99,235,.3);position:relative;cursor:pointer;transition:background .3s;display:inline-flex;align-items:center;margin-left:8px;}
-.toggle-btn::after{content:'';width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;left:2px;transition:left .3s;box-shadow:0 2px 4px rgba(0,0,0,.2);}
-#hnav-log.active .toggle-btn{background:var(--green);}
-#hnav-log.active .toggle-btn::after{left:20px;}
 .hdr-logo{font-size:1.25rem;font-weight:900;font-style:italic;letter-spacing:-.5px;}
 .hdr-logo .m{color:#fff;}.hdr-logo .sep{color:rgba(255,255,255,.15);font-style:normal;font-weight:300;font-size:.95rem;}.hdr-logo .o{color:var(--blue);}
 .badge{font-size:.54rem;font-weight:700;background:rgba(245,158,11,.14);color:var(--yellow);border:1px solid rgba(245,158,11,.28);border-radius:4px;padding:2px 6px;margin-left:8px;font-style:normal;letter-spacing:.06em;vertical-align:middle;}
@@ -51,7 +47,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .activity-header{position:relative;}
 .sidebar{display:none;}
 .main{flex:1;order:1;}
-.preview-panel{position:fixed;top:56px;left:0;right:0;bottom:0;width:100%;height:calc(100% - 56px);background:rgba(6,13,26,.5);display:flex;flex-direction:column;overflow:hidden;z-index:15;border:none;}
+.preview-panel{width:380px;border-left:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;order:3;transition:all .3s;}
 .preview-panel.fullscreen{position:fixed;inset:0;width:100%;height:100%;border:none;z-index:20;}
 .preview-header{font-size:.7rem;font-weight:700;color:var(--muted);padding:10px;border-bottom:1px solid rgba(37,99,235,.1);display:flex;align-items:center;gap:8px;justify-content:space-between;}
 .preview-close{cursor:pointer;font-size:.9rem;color:var(--muted2);}
@@ -79,7 +75,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .main{flex:1;overflow-y:auto;padding:16px 20px;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,.3) transparent;}
 .main::-webkit-scrollbar{width:4px;}.main::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:2px;}
-.panel{display:none;animation:fadeIn .2s ease;}.panel.on{display:flex;flex-direction:column;flex:1;overflow:hidden;}#panel-preview.on{display:flex;flex-direction:column;position:fixed;inset:56px 0 0 0;z-index:15;width:100%;height:calc(100% - 56px);}#panel-preview.on .sec{display:none;}#panel-preview.on > div{flex:1;}
+.panel{display:none;animation:fadeIn .2s ease;}.panel.on{display:block;}
 .sec{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin:18px 0 10px;display:flex;align-items:center;gap:8px;}
 .sec:first-child{margin-top:0;}
 .sec::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -127,9 +123,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .ntab:hover{color:var(--text);}.ntab.active{color:#fff;background:var(--card);border-color:var(--border);border-bottom:1px solid var(--card);}
 .ncat{display:none;}.ncat.on{display:block;}
 .ltbl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
-.lrow{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-bottom:1px solid rgba(37,99,235,.06);transition:background .15s;}
-.lcol-friendly{font-size:.78rem;font-weight:500;color:var(--text);text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.lcol-filename{font-size:.78rem;font-weight:500;color:var(--muted2);text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lrow{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:10px 12px;border-bottom:1px solid rgba(37,99,235,.06);transition:background .15s;}
 .lrow:last-child{border-bottom:none;}.lrow:hover{background:rgba(37,99,235,.04);}
 .lfile{font-size:.78rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);}
 .lcopy{display:flex;gap:5px;}
@@ -170,17 +164,16 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 <div id="app">
   <div class="hdr">
     <div style="display:flex;align-items:center;gap:20px;flex:1;">
-      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend v1.0.17</span></div>
+      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend v1.0.10</span></div>
       <div class="hdr-nav">
         <div class="hdr-nav-item active" onclick="nav('renew');updateHdrNav('renew')" id="hnav-renew">🔄 Renew</div>
+        <div class="hdr-nav-item" onclick="nav('names');updateHdrNav('names')" id="hnav-names">📝 Nomes</div>
         <div class="hdr-nav-item" onclick="nav('links');updateHdrNav('links')" id="hnav-links">🔗 Links</div>
         <div class="hdr-nav-item" onclick="nav('admin');updateHdrNav('admin')" id="hnav-admin">⚙️ Admin</div>
-        <div class="hdr-nav-item" onclick="nav('changelog');updateHdrNav('changelog')" id="hnav-changelog">📋 Changelog</div>
-        <div class="hdr-nav-item" onclick="nav('preview');updateHdrNav('preview')" id="hnav-preview">👁 Preview</div>
-        <div class="hdr-nav-item" onclick="nav('log');updateHdrNav('log')" id="hnav-log" title="Toggle para abrir/fechar LOG">📋 LOG <div class="toggle-btn"></div></div>
+        <div class="hdr-nav-item" onclick="toggleChangelog()" id="hnav-changelog">📋 Changelog</div>
       </div>
     </div>
-    <div style="display:flex;gap:8px;"><button class="hdr-btn" onclick="refreshAll()">Actualizar</button></div>
+    <div style="display:flex;gap:8px;"><button class="hdr-btn" onclick="togglePreview()">👁 Preview</button><button class="hdr-btn" onclick="refreshAll()">Actualizar</button></div>
   </div>
   <div class="body">
     <div class="activity-panel">
@@ -194,6 +187,15 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="activity-tab" onclick="filterLog('status')" data-filter="status">📊 Status</div>
       </div>
       <div class="activity-log" id="activity-log"></div>
+    </div>
+    <div class="preview-panel preview-hidden" id="preview-panel">
+      <div class="preview-header">📱 Portal Preview</div>
+      <iframe class="preview-frame" id="preview-frame"></iframe>
+      <script>
+        document.getElementById('preview-frame').src = (typeof HEScript !== 'undefined')
+          ? 'file:///S:/scripts/tools/m-auto-portal.html'
+          : 'm-auto-portal.html';
+      </script>
     </div>
     <div class="files-panel" id="files-panel">
       <div class="files-header">📋 Ficheiros para Renovar</div>
@@ -216,30 +218,18 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="sec" style="margin-top:22px">Tudo de Uma Vez</div>
         <button id="btn-all" style="width:100%;padding:9px;background:linear-gradient(135deg,rgba(30,64,175,.6),rgba(37,99,235,.6));border:1px solid rgba(37,99,235,.35);border-radius:8px;color:#fff;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .2s">🔄 Renovar Todos</button>
       </div>
-      <div class="panel" id="panel-admin">
-        <div class="sec">⚙️ Administração</div>
-        <div class="ntabs" style="margin-bottom:16px">
-          <div class="ntab active" onclick="adminTab('nomes')" id="admin-tab-nomes">📝 Nomes</div>
-          <div class="ntab" onclick="adminTab('files')" id="admin-tab-files">📁 Ficheiros</div>
+      <div class="panel" id="panel-names">
+        <div class="sec">Editor de Nomes Amigaveis</div>
+        <div style="background:rgba(37,99,235,.06);border:1px solid var(--border);border-radius:8px;padding:9px 14px;margin-bottom:14px;font-size:.7rem;color:var(--muted2);line-height:1.7;">
+          Guardado em <strong style="color:var(--blue3)">S:\friendlynames.json</strong>. Deixa vazio para usar o nome original.
         </div>
-        <div id="admin-nomes" class="admin-section">
-          <div style="background:rgba(37,99,235,.06);border:1px solid var(--border);border-radius:8px;padding:9px 14px;margin-bottom:14px;font-size:.7rem;color:var(--muted2);line-height:1.7;">
-            Guardado em <strong style="color:var(--blue3)">S:\friendlynames.json</strong>. Deixa vazio para usar o nome original.
-          </div>
-          <div class="ntoolbar">
-            <div class="nsearch"><input type="text" id="nq" placeholder="Filtrar..." oninput="filterN(this.value)"></div>
-            <span id="save-st" class="save-st"></span>
-            <button class="btn-save" id="btn-save" onclick="saveNames()" disabled>Guardar em S:</button>
-          </div>
-          <div class="ntabs" id="ntabs-container"></div>
-          <div id="ncats-container"></div>
+        <div class="ntoolbar">
+          <div class="nsearch"><input type="text" id="nq" placeholder="Filtrar..." oninput="filterN(this.value)"></div>
+          <span id="save-st" class="save-st"></span>
+          <button class="btn-save" id="btn-save" onclick="saveNames()" disabled>Guardar em S:</button>
         </div>
-        <div id="admin-files" class="admin-section" style="display:none">
-          <div class="sec">Ficheiros</div>
-          <div class="admin-grid" id="admin-grid"></div>
-          <div class="sec">Git</div>
-          <div class="admin-grid" id="git-grid"></div>
-        </div>
+        <div class="ntabs" id="ntabs-container"></div>
+        <div id="ncats-container"></div>
       </div>
       <div class="panel" id="panel-links">
         <div class="sec">Copiar Links Manualmente</div>
@@ -249,41 +239,11 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="ntabs" id="ltabs-container"></div>
         <div id="lcats-container"></div>
       </div>
-      <div class="panel" id="panel-admin-files" style="display:none">
-        <div class="sec">Admin - Ficheiros</div>
+      <div class="panel" id="panel-admin">
+        <div class="sec">Ficheiros</div>
         <div class="admin-grid" id="admin-grid"></div>
         <div class="sec">Git</div>
         <div class="admin-grid" id="git-grid"></div>
-      </div>
-      <div class="panel" id="panel-changelog">
-        <div class="sec">📋 Changelog</div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px">
-          <div style="font-size:.75rem;line-height:1.8;color:var(--muted2)">
-            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.17</strong> - Hide preview header, full-screen preview without activity panel</div>
-            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.16</strong> - Preview como menu item, changelog inline (não popup), Nomes em Admin</div>
-            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.15</strong> - Add LOG menu item with auto-open on renewOne</div>
-            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.14</strong> - Restore togglePreview, fix nameInp immediate save, call loadPreviewFrame</div>
-            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.13</strong> - Unified menu system: all menus same behavior</div>
-            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.12</strong> - Preview full-width, friendly names auto-save, cache-busting S3</div>
-            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.10</strong> - Dynamic S3 reading via rclone lsd</div>
-            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.9</strong> - 10 marcas, modal, logs</div>
-          </div>
-        </div>
-      </div>
-      <div class="panel" id="panel-preview">
-        <div class="sec">👁 Preview - Portal</div>
-        <div style="flex:1;display:flex;flex-direction:column;background:rgba(6,13,26,.3);border:1px solid var(--border);border-radius:12px;overflow:hidden">
-          <iframe id="preview-frame" style="flex:1;border:none;background:#fff"></iframe>
-        </div>
-      </div>
-      <div class="panel" id="panel-log">
-        <div class="activity-header" style="padding:10px 12px 6px;border-bottom:1px solid rgba(37,99,235,.1)">📋 Activity Log</div>
-        <div class="activity-tabs">
-          <div class="activity-tab active" onclick="filterLog('all')" data-filter="all">Tudo</div>
-          <div class="activity-tab" onclick="filterLog('renew')" data-filter="renew">🔄 Renew</div>
-          <div class="activity-tab" onclick="filterLog('status')" data-filter="status">📊 Status</div>
-        </div>
-        <div class="activity-log" id="activity-log" style="flex:1;overflow-y:auto;padding:6px;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,.3) transparent"></div>
       </div>
     </div>
   </div>
@@ -328,8 +288,7 @@ function buildLinksTabs(){
   document.getElementById('lcats-container').innerHTML=SRCS.map((s,i)=>`<div class="lcat${i===0?' on':''}" id="lcat-${s.key}"><div id="llst-${s.key}"><div class="state"><div class="s-ring"></div></div></div></div>`).join('');
 }
 
-async function nav(id){if(id==='log'){toggleLogMenu();return;}document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.panel').forEach(el=>el.classList.remove('on'));document.getElementById('nav-'+id)?.classList.add('active');document.getElementById('panel-'+id).classList.add('on');const actPanel=document.querySelector('.activity-panel');if(id==='preview'){if(actPanel)actPanel.style.display='none';loadPreviewFrame();}else{if(actPanel)actPanel.style.display='flex';}if(id==='names')await loadNames();if(id==='links'){await loadNames();await loadLinks();}}
-function toggleLogMenu(){const btn=document.getElementById('hnav-log');const panel=document.querySelector('.activity-panel');const isVisible=panel&&panel.style.display==='flex';if(isVisible){panel.style.display='none';btn.classList.remove('active');}else{if(panel)panel.style.display='flex';btn.classList.add('active');}}
+function nav(id){document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.panel').forEach(el=>el.classList.remove('on'));document.getElementById('nav-'+id)?.classList.add('active');document.getElementById('panel-'+id).classList.add('on');if(id==='names')loadNames();if(id==='links')loadLinks();}
 async function initApp(){buildCards();buildAdmin();await loadStatus();await loadNames();await loadLinks();}
 function refreshAll(){loadStatus();loadNamesData();}
 async function loadStatus(){
@@ -355,14 +314,13 @@ function updateCard(key,data){
   if(data.expires){const diff=new Date(data.expires)-Date.now(),ok=diff>0;const h=Math.floor(Math.abs(diff)/3600000),m2=Math.floor((Math.abs(diff)%3600000)/60000);if(st){st.className='rc-st '+(ok?(diff<1800000?'warn':'ok'):'dead');st.textContent=ok?h+'h '+m2+'m':'Expirado';}if(exp)exp.innerHTML='Expira: <strong>'+new Date(data.expires).toLocaleString('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</strong>';}
   if(cnt&&data.files)cnt.textContent=data.files.length+' ficheiros';
 }
-async function getS3Files(key){const s=SRCS.find(x=>x.key===key);if(!s)return[];try{if(typeof HEScript!=='undefined'){const out=HEScript.Exec('rclone',`lsd r2-mauto:m-auto-software/${s.label}`);if(!out)return[];const lines=out.split('\n').filter(l=>l.trim());return lines.map((l,i)=>({name:l.trim().split(/\s+/).pop(),idx:i})).filter(f=>f.name);}else{const r=await fetch('/api/s3-files?brand='+encodeURIComponent(s.key)+'&t='+Date.now());if(!r.ok)return[];const d=await r.json();return (d.files||[]).map(f=>({name:f.name.split('/').pop(),path:f.name}));}}catch(e){return[];}}
+async function getS3Files(key){const s=SRCS.find(x=>x.key===key);if(!s)return[];if(typeof HEScript==='undefined')return linksData[key]||[];try{const cmd=`rclone lsd r2-mauto:m-auto-software/${s.label} --csv 2>&1`;const out=HEScript.Exec('rclone',`lsd r2-mauto:m-auto-software/${s.label}`);if(!out)return[];const lines=out.split('\n').filter(l=>l.trim());return lines.map((l,i)=>({name:l.trim().split(/\s+/).pop(),idx:i})).filter(f=>f.name);}catch(e){return linksData[key]||[];}}
 async function expandCard(key){const label=SRCS.find(s=>s.key===key).label;const f=await getS3Files(key);if(!f.length){addLog('SEM DADOS PARA: '+label.toUpperCase(),'warn','renew');return;}const modal=document.createElement('div');modal.id='modal-'+key;modal.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;padding:20px';const closeModal=()=>{document.getElementById('modal-'+key)?.remove();document.getElementById('app').focus();};modal.onclick=e=>{if(e.target===modal)closeModal();};let h=`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.9)"><div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:16px">${esc(label)} (${f.length} ficheiros)</div><div style="margin-bottom:16px">`;for(let i=0;i<f.length;i++){const file=f[i];const id='modal-tgl-'+key+i;h+=`<div style="display:flex;gap:10px;align-items:center;padding:8px;margin-bottom:6px;border-radius:6px;background:rgba(37,99,235,.08)"><div class="file-toggle" id="${id}" onclick="toggleFile(this)" data-checked="true" style="width:36px;height:20px;border-radius:10px;background:var(--green);cursor:pointer;position:relative;transition:all .2s"><div style="position:absolute;width:16px;height:16px;background:#fff;border-radius:8px;top:2px;left:2px;transition:left .2s"></div></div><label style="flex:1;cursor:pointer;font-size:.75rem;color:var(--text)">${esc(file.name)}</label></div>`;}h+=`</div><div style="display:flex;gap:8px"><button onclick="closeModalPopup('modal-${key}')" style="flex:1;padding:8px;background:rgba(37,99,235,.2);border:1px solid var(--border);border-radius:8px;color:var(--text);cursor:pointer">Cancelar</button><button onclick="renewOne('${key}','${label}');closeModalPopup('modal-${key}')" style="flex:1;padding:8px;background:linear-gradient(135deg,rgba(30,64,175,.6),rgba(37,99,235,.6));border:1px solid rgba(37,99,235,.35);border-radius:8px;color:#fff;cursor:pointer;font-weight:700">🔄 Gerar</button></div></div>`;modal.innerHTML=h;document.body.appendChild(modal);}
 function closeModalPopup(id){document.getElementById(id)?.remove();document.getElementById('app').focus();}
 function toggleFile(el){el.dataset.checked=el.dataset.checked==='true'?'false':'true';const checked=el.dataset.checked==='true';el.style.background=checked?'var(--green)':'rgba(37,99,235,.2)';const dot=el.querySelector('div');dot.style.left=checked?'2px':'18px';}
 function removeShare(key){const label=SRCS.find(s=>s.key===key).label;addLog('REMOVENDO PARTILHA: '+label.toUpperCase(),'warn','renew');setTimeout(()=>{linksData[key]=[];updateCard(key,{expires:new Date().toISOString(),files:[]});addLog('PARTILHA REMOVIDA: '+label.toUpperCase(),'ok','renew');},800);}
 let renewWatcher;
 function renewOne(key,label,btn){
-  nav('log');updateHdrNav('log');
   if(!btn)btn=document.querySelector('.btn-renew[data-key="'+key+'"]');
   const st=document.getElementById('rcs-'+key);
   if(btn){btn.classList.add('run');btn.disabled=true;btn.textContent='A renovar...';}
@@ -416,8 +374,10 @@ async function loadNames(){
       const r=HEScript.ReadFile(NAMES_S3);
       if(r){names=JSON.parse(r);}
     }else{
-      const stored=localStorage.getItem('friendlynames');
-      if(stored){names=JSON.parse(stored);}
+      try{
+        const r=await fetch(BASE+'friendlynames.json?t='+Date.now());
+        if(r.ok){const data=await r.json();names=data||{};}
+      }catch(e){}
     }
   }catch(e){}
   await loadNamesData();
@@ -432,17 +392,16 @@ function renderNames(key,q){
   el.innerHTML=h+'</div>';
 }
 function filterN(q){const cur=document.querySelector('.ntab.active').id.replace('ntab-','');renderNames(cur,q);}
-function nameInp(el){const path=el.dataset.path,val=el.value.trim(),row=el.closest('.nrow');if(val){names[path]=val;el.classList.add('hv');if(row)row.classList.add('ch');}else{delete names[path];el.classList.remove('hv');if(row)row.classList.remove('ch');}namesDirty=true;document.getElementById('btn-save').disabled=false;saveNames();}
-function saveNames(){const json=JSON.stringify(names,null,2);try{if(typeof HEScript!=='undefined'){HEScript.WriteFile(NAMES_S3,json);showSt('ok','✓ Guardado em S: (R2)');}else{localStorage.setItem('friendlynames',json);showSt('ok','✓ Guardado em localStorage');}}catch(e){showSt('err','Erro: '+e.message);}namesDirty=false;document.getElementById('btn-save').disabled=true;}
+function nameInp(el){const path=el.dataset.path,val=el.value.trim(),row=el.closest('.nrow');if(val){names[path]=val;el.classList.add('hv');if(row)row.classList.add('ch');}else{delete names[path];el.classList.remove('hv');if(row)row.classList.remove('ch');}namesDirty=true;document.getElementById('btn-save').disabled=false;if(typeof HEScript!=='undefined'){setTimeout(()=>{const json=JSON.stringify(names,null,2);try{HEScript.WriteFile(NAMES_S3,json);showSt('ok','✓ Nome gravado em S:');}catch(e){showSt('err','Erro ao gravar');}},500);}}
+function saveNames(){const json=JSON.stringify(names,null,2);try{if(typeof HEScript!=='undefined'){HEScript.WriteFile(NAMES_S3,json);showSt('ok','✓ Guardado em S: (R2)');}else{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));a.download='friendlynames.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);showSt('ok','✓ Descarregado');}namesDirty=false;document.getElementById('btn-save').disabled=true;}catch(e){showSt('err','Erro: '+e.message);}}
 function showSt(type,msg){const el=document.getElementById('save-st');el.className='save-st '+type;el.textContent=msg;setTimeout(()=>{el.className='save-st';el.textContent='';},4000);}
 function ntab(id){document.querySelectorAll('.ntabs-container .ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('#ncats-container .ncat').forEach(el=>el.classList.remove('on'));document.getElementById('ntab-'+id).classList.add('active');document.getElementById('ncat-'+id).classList.add('on');document.getElementById('nq').value='';}
-function adminTab(section){document.querySelectorAll('[id^="admin-tab-"]').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(el=>el.style.display='none');document.getElementById('admin-tab-'+section).classList.add('active');document.getElementById('admin-'+section).style.display='block';}
 async function loadLinks(){for(const s of SRCS){const el=document.getElementById('llst-'+s.key);el.innerHTML='<div class="state"><div class="s-ring"></div></div>';try{const r=await fetch(s.url+'?t='+Date.now());if(r.ok){const d=await r.json();linksData[s.key]=d.files||[];}else{linksData[s.key]=[];}renderLinks(s.key);}catch(e){linksData[s.key]=[];renderLinks(s.key);}}}
 function renderLinks(key){
   const el=document.getElementById('llst-'+key),files=linksData[key]||[];
   if(!files.length){el.innerHTML='<div class="state">Sem ficheiros.</div>';return;}
-  let h='<div class="ltbl"><div class="ltbl-hdr"><span>Nome Amigável</span><span>Ficheiro Original</span></div>';
-  for(const f of files){const friendly=names[f.name]||'',original=f.name.split('/').pop(),label=friendly||original;h+=`<div class="lrow"><div class="lcol-friendly" title="${esc(friendly||'Sem nome amigável')}">${esc(friendly||'(original)')}</div><div class="lcol-filename" title="${esc(original)}">📄 ${esc(original)}</div><div class="lcopy"><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsAria(this)">ARIA</button><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsHtml(this)">HTML</button></div></div>`;}
+  let h='<div class="ltbl">';
+  for(const f of files){const friendly=names[f.name]||'',original=f.name.split('/').pop(),label=friendly||original;const friendlyDiv=friendly?`<div style="font-size:.65rem;color:var(--muted);margin-top:2px" title="${esc(original)}">📄 ${esc(original)}</div>`:'';h+=`<div class="lrow"><div class="lfile"><div style="font-weight:600;color:var(--text)" title="${esc(label)}">${esc(label)}</div>${friendlyDiv}</div><div class="lcopy"><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsAria(this)">ARIA</button><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsHtml(this)">HTML</button></div></div>`;}
   el.innerHTML=h+'</div>';
 }
 function ltab(id){document.querySelectorAll('#ltabs-container .ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('#lcats-container .lcat').forEach(el=>el.classList.remove('on'));document.getElementById('ltab-'+id).classList.add('active');document.getElementById('lcat-'+id).classList.add('on');}
@@ -455,8 +414,8 @@ function openPath(p){if(typeof HEScript==='undefined'){showSt('err','⚠ Dispon�
 function runPS(cmd){if(typeof HEScript==='undefined'){showSt('err','⚠ Disponível apenas no EXE');return;}try{HEScript.Exec('powershell','-WindowStyle Normal -NoProfile -Command "'+cmd+'"');}catch(e){showSt('err','Erro: '+e);}}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function updateHdrNav(id){document.querySelectorAll('.hdr-nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('hnav-'+id).classList.add('active');}
-function togglePreview(){const panel=document.getElementById('panel-preview');document.querySelectorAll('.panel').forEach(el=>el.classList.remove('on'));panel.classList.add('on');loadPreviewFrame();}
-function loadPreviewFrame(){const fr=document.getElementById('preview-frame');fr.src=(typeof HEScript!=='undefined')?'file:///S:/scripts/tools/m-auto-portal.html':'http://localhost:3001/m-auto-portal.html?t='+Date.now();}
+function toggleChangelog(){const cl=document.querySelector('.changelog-modal');if(cl){cl.remove();return;}const modal=document.createElement('div');modal.className='changelog-modal';modal.innerHTML=`<div style="position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center" onclick="this.remove()"><div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;width:90%;max-width:600px;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:16px">📋 Changelog</div><div style="font-size:.75rem;line-height:1.8;color:var(--muted2)"><strong style="color:var(--green)">v1.0.9</strong> - 10 marcas completas, modal funcionando, logs e preview<br><strong style="color:var(--green)">v1.0.8</strong> - Handles missing JSON gracefully<br><strong style="color:var(--green)">v1.0.7</strong> - Modal popup refactor, all 10 brands<br><strong style="color:var(--green)">v1.0.6</strong> - Activity log + admin section<br><strong style="color:var(--green)">v1.0.5</strong> - Cache headers, btoa fix, expandCard cleanup<br><strong style="color:var(--green)">v1.0.4</strong> - Friendly names auto-save, preview fullscreen<br><strong style="color:var(--green)">v1.0.3</strong> - Activity log retrátil, files panel toggles<br><strong style="color:var(--green)">v1.0.2</strong> - Publication test logging, removeShare feedback<br><strong style="color:var(--green)">v1.0.1</strong> - Log with colors, admin buttons<br><strong style="color:var(--blue)">v1.0.0</strong> - Initial backend interface</div></div></div>`;document.body.appendChild(modal);}
+function togglePreview(){const p=document.getElementById('preview-panel');p.classList.toggle('preview-hidden');const fr=document.getElementById('preview-frame');if(!fr.src||!fr.src.length){fr.src=(typeof HEScript!=='undefined')?'file:///S:/scripts/tools/m-auto-portal.html':'m-auto-portal.html';}}
 const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊',header:'📋'};
 let currentFilter='all';
 let logPinned=localStorage.getItem('logPinned')==='true';
@@ -469,15 +428,5 @@ function initLogState(){const collapsed=localStorage.getItem('logCollapsed')==='
 function filterLog(cat){currentFilter=cat;document.querySelectorAll('.activity-tab').forEach(el=>el.classList.remove('active'));document.querySelector('[data-filter="'+cat+'"]').classList.add('active');const entries=document.querySelectorAll('.log-entry');for(const e of entries)e.style.display=(cat==='all'||e.dataset.category===cat)?'block':'none';}
 window.addEventListener('beforeunload',e=>{if(namesDirty){e.preventDefault();e.returnValue='';}});
 </script>
-<div id="changelog-panel" style="display:none;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin:20px;margin-left:540px">
-<h3 style="color:#fff;margin-bottom:12px;margin-top:0">📋 Changelog v1.0.16</h3>
-<div style="font-size:.75rem;line-height:1.8;color:var(--muted2)">
-<div><strong style="color:var(--green)">v1.0.16</strong> - Preview nova janela, changelog inline, friendly names fix, log icons variados</div>
-<div><strong style="color:var(--green)">v1.0.10</strong> - Dynamic S3 reading via rclone lsd</div>
-<div><strong style="color:var(--green)">v1.0.9</strong> - 10 marcas, modal, logs, preview</div>
-<div><strong style="color:var(--green)">v1.0.8</strong> - Missing JSON gracefully</div>
-<div><strong style="color:var(--green)">v1.0.7</strong> - Modal refactor</div>
-</div>
-</div>
 </body>
 </html>
