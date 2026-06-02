@@ -213,11 +213,10 @@ function nav(id){document.querySelectorAll('.nav-item').forEach(el=>el.classList
 async function initApp(){buildCards();buildAdmin();await loadStatus();await loadNames();await loadLinks();}
 function refreshAll(){loadStatus();loadNamesData();}
 async function loadStatus(){
-  addLog('Verificando estado dos links...','info');
   const row=document.getElementById('status-row');row.innerHTML='A verificar...';
   const res=await Promise.allSettled(SRCS.map(s=>fetch(s.url+'?t='+Date.now()).then(r=>r.json()).then(d=>({...s,data:d}))));
   let html='';
-  for(const r of res){if(r.status==='fulfilled'){const{label,color,data}=r.value;if(data.expires){const diff=new Date(data.expires)-Date.now(),ok=diff>0;const h=Math.floor(Math.abs(diff)/3600000),m2=Math.floor((Math.abs(diff)%3600000)/60000);const st=!ok?'color:var(--red)':diff<1800000?'color:var(--yellow)':'color:var(--green)';html+=`<span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:${color};display:inline-block"></span><strong style="color:var(--text)">${esc(label)}</strong><span style="${st};font-weight:700">${ok?h+'h '+m2+'m':'Expirado'}</span></span>`;const st2=ok?(diff<1800000?'warn':'ok'):'err';addLog(label+': '+h+'h '+m2+'m',st2);}updateCard(r.value.key,r.value.data);}}
+  for(const r of res){if(r.status==='fulfilled'){const{label,color,data}=r.value;if(data.expires){const diff=new Date(data.expires)-Date.now(),ok=diff>0;const h=Math.floor(Math.abs(diff)/3600000),m2=Math.floor((Math.abs(diff)%3600000)/60000);const st=!ok?'color:var(--red)':diff<1800000?'color:var(--yellow)':'color:var(--green)';html+=`<span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:${color};display:inline-block"></span><strong style="color:var(--text)">${esc(label)}</strong><span style="${st};font-weight:700">${ok?h+'h '+m2+'m':'Expirado'}</span></span>`;}updateCard(r.value.key,r.value.data);}}
   row.innerHTML=html||'<span style="color:var(--red)">Erro</span>';
 }
 function buildCards(){
@@ -233,7 +232,6 @@ function updateCard(key,data){
 }
 let renewWatcher;
 function renewOne(key,label,btn){
-  addLog('🔄 Renovando '+label+'...','info');
   if(!btn)btn=document.querySelector('.btn-renew[data-key="'+key+'"]');
   const st=document.getElementById('rcs-'+key);
   if(btn){btn.classList.add('run');btn.disabled=true;btn.textContent='A renovar...';}
@@ -253,17 +251,17 @@ function renewOne(key,label,btn){
           for(const line of lines){
             const trimmed=line.trim();
             if(!trimmed)continue;
-            if(trimmed.includes('[✓]')||trimmed.includes('[OK]')){addLog('✓ '+trimmed.replace(/\x1b\[[0-9;]*m/g,''),'ok');}
-            else if(trimmed.includes('[✗]')||trimmed.includes('[X]')){addLog('✗ '+trimmed.replace(/\x1b\[[0-9;]*m/g,''),'err');}
-            else if(trimmed.includes('[!]')){addLog('⚠ '+trimmed.replace(/\x1b\[[0-9;]*m/g,''),'warn');}
-            else if(trimmed.startsWith('>>')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'info');}
+            if(trimmed.includes('[✓]')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'ok','renew');}
+            else if(trimmed.includes('[✗]')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'err','renew');}
+            else if(trimmed.includes('[!]')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'warn','renew');}
+            else if(trimmed.includes('[OK]')||trimmed.includes('>>')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'info','renew');}
           }
           lastPos=content.length;
         }
       }
     }catch(e){}
   },500);
-  setTimeout(()=>{clearInterval(renewWatcher);addLog('✓ '+label+' concluído','ok');if(btn){btn.classList.remove('run');btn.disabled=false;btn.textContent='Renovar '+(label||key);}loadStatus();},12000);
+  setTimeout(()=>{clearInterval(renewWatcher);if(btn){btn.classList.remove('run');btn.disabled=false;btn.textContent='Renovar '+(label||key);}loadStatus();},12000);
 }
 function demoRenew(key,label){
   const txt=document.getElementById('output-text');
