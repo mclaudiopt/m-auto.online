@@ -192,6 +192,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="activity-tab active" onclick="filterLog('all')" data-filter="all">Tudo</div>
         <div class="activity-tab" onclick="filterLog('renew')" data-filter="renew">🔄 Renew</div>
         <div class="activity-tab" onclick="filterLog('status')" data-filter="status">📊 Status</div>
+        <div class="activity-tab" onclick="filterLog('s3')" data-filter="s3">☁️ S3 sync</div>
       </div>
       <div class="activity-log" id="activity-log"></div>
     </div>
@@ -316,7 +317,7 @@ let names={},allFiles={},namesDirty=false,selectedFiles={},linksData={};
 let s3PollerInterval=null,s3DetectedFiles={};
 function getActiveSrcs(){const disabled=JSON.parse(localStorage.getItem('disabled_sources')||'[]');return SRCS.filter(s=>!disabled.includes(s.key));}
 function toggleSourceActive(key){const disabled=JSON.parse(localStorage.getItem('disabled_sources')||'[]');if(disabled.includes(key)){disabled.splice(disabled.indexOf(key),1);}else{disabled.push(key);}localStorage.setItem('disabled_sources',JSON.stringify(disabled));location.reload();}
-async function startS3Poller(){if(s3PollerInterval)clearInterval(s3PollerInterval);s3PollerInterval=setInterval(async()=>{try{for(const s of SRCS){const files=await getS3Files(s.key);if(files.length){const key=s.key;const currentFiles=new Set(files.map(f=>f.name));const oldFiles=new Set((s3DetectedFiles[key]||[]).map(f=>f.name));const newFiles=Array.from(currentFiles).filter(f=>!oldFiles.has(f));if(newFiles.length){addLog(`✓ ${newFiles.length} novo(s) em ${s.label}`,'ok','renew');}s3DetectedFiles[key]=files;await refreshS3Status();}}}catch(e){}},30000);}
+async function startS3Poller(){if(s3PollerInterval)clearInterval(s3PollerInterval);s3PollerInterval=setInterval(async()=>{try{for(const s of SRCS){const files=await getS3Files(s.key);if(files.length){const key=s.key;const currentFiles=new Set(files.map(f=>f.name));const oldFiles=new Set((s3DetectedFiles[key]||[]).map(f=>f.name));const newFiles=Array.from(currentFiles).filter(f=>!oldFiles.has(f));if(newFiles.length){addLog(`✓ ${newFiles.length} novo(s) em ${s.label}`,'ok','s3');}s3DetectedFiles[key]=files;await refreshS3Status();}}}catch(e){}},30000);}
 function getPastaConfig(key){const cfg=localStorage.getItem('pasta_'+key);return cfg?JSON.parse(cfg):PASTA_CONFIGS[key]||[];}
 function setPastaConfig(key,pastas){localStorage.setItem('pasta_'+key,JSON.stringify(pastas));}
 async function refreshS3Status(){await loadStatus();}
