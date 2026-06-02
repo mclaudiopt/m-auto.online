@@ -93,11 +93,11 @@ foreach ($job in $jobs) {
     $job.ps.Dispose()
     $f   = $job.f
     if ($out.ok) {
-        Write-Host "  ${e}[38;2;34;197;94m[✓]${e}[0m  $($f.label)"
+        Write-Host "  ${e}[38;2;34;197;94m[OK]${e}[0m  $($f.label)"
         $filesList.Add([PSCustomObject]@{ name = $f.dest; url = $out.url; size = $f.size })
         $okCount++
     } else {
-        Write-Host "  ${e}[38;2;239;68;68m[✗]${e}[0m  $($f.label)"
+        Write-Host "  ${e}[38;2;239;68;68m[FAIL]${e}[0m  $($f.label)"
         Write-Host "       ${e}[38;2;80;100;140m$($out.url)${e}[0m"
         $errCount++
     }
