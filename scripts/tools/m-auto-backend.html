@@ -186,7 +186,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
     </div>
     <div class="preview-panel preview-hidden" id="preview-panel">
       <div class="preview-header">📱 Portal Preview</div>
-      <iframe class="preview-frame" src="scripts/tools/m-auto-portal.html"></iframe>
+      <iframe class="preview-frame" src="m-auto-portal.html"></iframe>
     </div>
     <div class="files-panel" id="files-panel">
       <div class="files-header">📋 Ficheiros para Renovar</div>
@@ -356,7 +356,7 @@ function renderNames(key,q){
   const list=fq?files.filter(f=>f.raw.toLowerCase().includes(fq)||(names[f.path]||'').toLowerCase().includes(fq)):files;
   if(!list.length){el.innerHTML='<div class="state">Sem ficheiros.</div>';return;}
   let h='<div class="ntbl"><div class="ntbl-hdr"><span>Ficheiro</span><span>Nome amigavel</span></div>';
-  for(const f of list){const friendly=names[f.path]||'';const id='n'+btoa(unescape(encodeURIComponent(f.path))).replace(/[^a-zA-Z0-9]/g,'').slice(0,16);h+=`<div class="nrow${friendly?' ch':''}" id="nr_${id}"><div class="nc-orig"><div class="nc-fn" title="${esc(f.raw)}">${esc(f.raw)}</div><div class="nc-path" title="${esc(f.path)}">${esc(f.path)}</div></div><div class="nc-edit"><input type="text" placeholder="Nome amigavel" value="${esc(friendly)}" data-path="${esc(f.path)}" class="${friendly?'hv':''}" oninput="nameInp(this)"></div></div>`;}
+  for(let i=0;i<list.length;i++){const f=list[i];const friendly=names[f.path]||'';const id='n'+key+i;h+=`<div class="nrow${friendly?' ch':''}" id="nr_${id}"><div class="nc-orig"><div class="nc-fn" title="${esc(f.raw)}">${esc(f.raw)}</div><div class="nc-path" title="${esc(f.path)}">${esc(f.path)}</div></div><div class="nc-edit"><input type="text" placeholder="Nome amigavel" value="${esc(friendly)}" data-path="${esc(f.path)}" class="${friendly?'hv':''}" oninput="nameInp(this)"></div></div>`;}
   el.innerHTML=h+'</div>';
 }
 function filterN(q){const cur=document.querySelector('.ntab.active').id.replace('ntab-','');renderNames(cur,q);}
