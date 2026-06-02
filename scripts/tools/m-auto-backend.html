@@ -49,12 +49,14 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .activity-tab:hover,.activity-tab.active{background:rgba(37,99,235,.25);color:var(--blue3);border-color:rgba(37,99,235,.3);}
 .activity-log{flex:1;overflow-y:auto;padding:6px;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,.3) transparent;}
 .activity-log::-webkit-scrollbar{width:4px;}.activity-log::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:2px;}
-.log-entry{font-size:.7rem;padding:6px 8px;border-radius:5px;margin-bottom:4px;line-height:1.4;border-left:3px solid transparent;}
+.log-entry{font-size:.7rem;padding:6px 8px;border-radius:5px;margin-bottom:3px;line-height:1.4;border-left:3px solid transparent;}
+.log-header{background:rgba(37,99,235,.15);border-left-color:var(--blue3);color:#fff;font-weight:600;padding:8px;margin:8px 0 4px 0;border-radius:6px;display:flex;align-items:center;justify-content:space-between;}
+.log-header span:last-child{font-size:.6rem;color:var(--muted2);font-weight:400;}
 .log-info{background:rgba(37,99,235,.08);border-left-color:var(--blue3);color:var(--text);}
 .log-ok{background:rgba(34,197,94,.08);border-left-color:var(--green);color:var(--green);}
 .log-warn{background:rgba(245,158,11,.08);border-left-color:var(--yellow);color:var(--yellow);}
 .log-err{background:rgba(239,68,68,.08);border-left-color:var(--red);color:var(--red);}
-.log-time{font-size:.6rem;color:var(--muted);display:block;margin-bottom:2px;}
+.log-time{display:none;}
 .nav-sec{font-size:.57rem;font-weight:700;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;padding:8px 8px 4px;margin-top:4px;}
 .nav-item{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:.77rem;font-weight:600;color:var(--muted2);transition:all .15s;border:1px solid transparent;}
 .nav-item:hover{background:rgba(37,99,235,.08);color:var(--text);}
@@ -356,9 +358,11 @@ function runPS(cmd){if(typeof HEScript==='undefined'){showSt('err','⚠ Disponí
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function updateHdrNav(id){document.querySelectorAll('.hdr-nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('hnav-'+id).classList.add('active');}
 function togglePreview(){const p=document.getElementById('preview-panel');p.classList.toggle('preview-hidden');}
-const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊'};
+const LOG_ICONS={renew:'🔄',ok:'✓',err:'✗',warn:'⚠',status:'📊',header:'📋'};
 let currentFilter='all';
-function addLog(msg,type='info',category='all'){const log=document.getElementById('activity-log');const t=new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit',second:'2-digit'});const entry=document.createElement('div');entry.className='log-entry log-'+type;entry.dataset.category=category;entry.style.display=(currentFilter==='all'||currentFilter===category)?'block':'none';const timeEl=document.createElement('span');timeEl.className='log-time';timeEl.textContent=t;entry.appendChild(timeEl);const icon=LOG_ICONS[type]||'•';const msgEl=document.createElement('span');msgEl.textContent=icon+' '+msg;entry.appendChild(msgEl);log.appendChild(entry);log.scrollTop=log.scrollHeight;}
+function addLog(msg,type='info',category='all',isHeader=false){const log=document.getElementById('activity-log');const t=new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});const entry=document.createElement('div');
+if(isHeader){entry.className='log-header';const l=document.createElement('span');l.textContent=LOG_ICONS[type]+' '+msg;const r=document.createElement('span');r.textContent=t;entry.appendChild(l);entry.appendChild(r);}else{entry.className='log-entry log-'+type;entry.dataset.category=category;entry.style.display=(currentFilter==='all'||currentFilter===category)?'block':'none';const icon=LOG_ICONS[type]||'•';entry.textContent=icon+' '+msg;}
+log.appendChild(entry);log.scrollTop=log.scrollHeight;}
 function filterLog(cat){currentFilter=cat;document.querySelectorAll('.activity-tab').forEach(el=>el.classList.remove('active'));document.querySelector('[data-filter="'+cat+'"]').classList.add('active');const entries=document.querySelectorAll('.log-entry');for(const e of entries)e.style.display=(cat==='all'||e.dataset.category===cat)?'block':'none';}
 window.addEventListener('beforeunload',e=>{if(namesDirty){e.preventDefault();e.returnValue='';}});
 </script>
