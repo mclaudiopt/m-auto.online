@@ -49,13 +49,13 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .activity-tab:hover,.activity-tab.active{background:rgba(37,99,235,.25);color:var(--blue3);border-color:rgba(37,99,235,.3);}
 .activity-log{flex:1;overflow-y:auto;padding:6px;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,.3) transparent;}
 .activity-log::-webkit-scrollbar{width:4px;}.activity-log::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:2px;}
-.log-entry{font-size:.7rem;padding:6px 8px;border-radius:5px;margin-bottom:3px;line-height:1.4;border-left:3px solid transparent;}
-.log-header{background:rgba(37,99,235,.15);border-left-color:var(--blue3);color:#fff;font-weight:600;padding:8px;margin:8px 0 4px 0;border-radius:6px;display:flex;align-items:center;justify-content:space-between;}
+.log-entry{font-size:.7rem;padding:6px 8px;border-radius:5px;margin-bottom:2px;line-height:1.4;border-left:3px solid transparent;font-variant-numeric:tabular-nums;}
+.log-header{background:rgba(37,99,235,.15);border-left-color:var(--blue3);color:#fff;font-weight:600;padding:8px;margin:10px 0 6px 0;border-radius:6px;display:flex;align-items:center;justify-content:space-between;}
 .log-header span:last-child{font-size:.6rem;color:var(--muted2);font-weight:400;}
-.log-info{background:rgba(37,99,235,.08);border-left-color:var(--blue3);color:var(--text);}
-.log-ok{background:rgba(34,197,94,.08);border-left-color:var(--green);color:var(--green);}
-.log-warn{background:rgba(245,158,11,.08);border-left-color:var(--yellow);color:var(--yellow);}
-.log-err{background:rgba(239,68,68,.08);border-left-color:var(--red);color:var(--red);}
+.log-info{background:rgba(59,130,246,.12);border-left-color:#3b82f6;color:#93c5fd;font-weight:500;}
+.log-ok{background:rgba(34,197,94,.12);border-left-color:var(--green);color:#86efac;font-weight:500;}
+.log-warn{background:rgba(245,158,11,.12);border-left-color:var(--yellow);color:#fcd34d;font-weight:500;}
+.log-err{background:rgba(239,68,68,.12);border-left-color:var(--red);color:#fca5a5;font-weight:500;}
 .log-time{display:none;}
 .nav-sec{font-size:.57rem;font-weight:700;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;padding:8px 8px 4px;margin-top:4px;}
 .nav-item{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:.77rem;font-weight:600;color:var(--muted2);transition:all .15s;border:1px solid transparent;}
@@ -184,7 +184,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="sec">Renew por Marca</div>
         <div class="renew-grid" id="renew-grid"></div>
         <div class="sec" style="margin-top:22px">Tudo de Uma Vez</div>
-        <button class="btn-renew" id="btn-all" style="max-width:260px">Renovar Todos os Links</button>
+        <button id="btn-all" style="width:100%;padding:9px;background:linear-gradient(135deg,rgba(30,64,175,.6),rgba(37,99,235,.6));border:1px solid rgba(37,99,235,.35);border-radius:8px;color:#fff;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .2s">🔄 Renovar Todos</button>
       </div>
       <div class="panel" id="panel-names">
         <div class="sec">Editor de Nomes Amigaveis</div>
@@ -282,12 +282,13 @@ function renewOne(key,label,btn){
           const newLines=content.substring(lastPos);
           const lines=newLines.split('\n');
           for(const line of lines){
-            const trimmed=line.trim();
+            let trimmed=line.trim().replace(/\x1b\[[0-9;]*m/g,'');
             if(!trimmed)continue;
-            if(trimmed.includes('[✓]')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'ok','renew');}
-            else if(trimmed.includes('[✗]')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'err','renew');}
-            else if(trimmed.includes('[!]')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'warn','renew');}
-            else if(trimmed.includes('[OK]')||trimmed.includes('>>')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'info','renew');}
+            if(trimmed.includes('[✓]')){trimmed=trimmed.replace(/^\s*\[✓\]\s*/,'').trim();addLog(trimmed,'ok','renew');}
+            else if(trimmed.includes('[✗]')){trimmed=trimmed.replace(/^\s*\[✗\]\s*/,'').trim();addLog(trimmed,'err','renew');}
+            else if(trimmed.includes('[!]')){trimmed=trimmed.replace(/^\s*\[!\]\s*/,'').trim();addLog(trimmed,'warn','renew');}
+            else if(trimmed.match(/^>>/)){trimmed=trimmed.replace(/^>>\s*/,'').toUpperCase();addLog(trimmed,'info','renew');}
+            else if(trimmed.match(/^\[OK\]/)){trimmed=trimmed.replace(/^\[OK\]\s*/,'').toUpperCase();addLog(trimmed,'ok','renew');}
           }
           lastPos=content.length;
         }
