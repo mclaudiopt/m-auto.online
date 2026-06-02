@@ -286,6 +286,7 @@ function updateCard(key,data){
 }
 function expandCard(key){const label=SRCS.find(s=>s.key===key).label;const f=linksData[key]||[];const fp=document.getElementById('files-list');let h='';for(const file of f){const id='tgl-'+key+'-'+btoa(file.name).slice(0,8);h+=`<div class="files-item"><div class="file-toggle" id="${id}" onclick="toggleFile(this)" data-checked="true" style="width:36px;height:20px;border-radius:10px;background:var(--green);cursor:pointer;position:relative;transition:all .2s"><div style="position:absolute;width:16px;height:16px;background:#fff;border-radius:8px;top:2px;left:2px;transition:left .2s;right:auto"></div></div><label style="flex:1;cursor:pointer;margin-left:8px">${esc(file.name.split('/').pop())}</label></div>`;}fp.innerHTML=h||'<div style="padding:10px;color:var(--muted)">Sem ficheiros</div>';renewOne(key,label);}
 function toggleFile(el){el.dataset.checked=el.dataset.checked==='true'?'false':'true';const checked=el.dataset.checked==='true';el.style.background=checked?'var(--green)':'rgba(37,99,235,.2)';const dot=el.querySelector('div');dot.style.left=checked?'2px':'18px';}
+function getSelectedFiles(key){const items=document.querySelectorAll('.files-item .file-toggle[data-checked="true"]');return Array.from(items).length>0;}
 function removeShare(key){const label=SRCS.find(s=>s.key===key).label;addLog('REMOVENDO PARTILHA: '+label.toUpperCase(),'warn','renew');setTimeout(()=>{linksData[key]=[];updateCard(key,{expires:new Date().toISOString(),files:[]});addLog('PARTILHA REMOVIDA: '+label.toUpperCase(),'ok','renew');},800);}
 let renewWatcher;
 function renewOne(key,label,btn){
@@ -334,7 +335,7 @@ function demoRenew(key,label){
   },300);
 }
 function renewAll(){const btn=document.getElementById('btn-all');btn.disabled=true;btn.textContent='A renovar tudo...';SRCS.forEach(s=>renewOne(s.key,s.label));setTimeout(()=>{btn.disabled=false;btn.textContent='Renovar Todos os Links';},10000);}
-let names={},allFiles={},namesDirty=false;
+let names={},allFiles={},namesDirty=false,selectedFiles={};
 async function loadNames(){
   names={};
   try{
