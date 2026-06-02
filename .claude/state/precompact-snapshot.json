@@ -12,11 +12,9 @@
         "sessionAgeMinutes": 120
       }
     },
-    "recommended": true,
-    "summary": "Context reset recommended (auto): 8 recent edit count exceed threshold 8",
-    "reasons": [
-      "8 recent edit count exceed threshold 8"
-    ],
+    "recommended": false,
+    "summary": "Context reset not required (auto)",
+    "reasons": null,
     "candidates": [
       {
         "key": "wip_tasks",
@@ -35,9 +33,9 @@
       {
         "key": "recent_edits",
         "label": "recent edit count",
-        "actual": 8,
+        "actual": 2,
         "threshold": 8,
-        "triggered": true
+        "triggered": false
       },
       {
         "key": "failed_checks",
@@ -57,7 +55,7 @@
     "counters": {
       "wipTasks": 0,
       "blockedTasks": 0,
-      "recentEdits": 8,
+      "recentEdits": 2,
       "failedChecks": 0,
       "sessionAgeMinutes": null
     }
@@ -72,16 +70,10 @@
   "metrics": null,
   "recentEdits": [
     ".claude/sessions/.last_inbox_check",
-    ".claude/settings.local.json",
-    ".claude/state/changed-files.jsonl",
-    ".claude/state/handoff-artifact.json",
-    ".claude/state/instructions-loaded.jsonl",
-    ".claude/state/precompact-snapshot.json",
-    "\"S\\357\\200\\272m-auto-backend.html\"",
-    "scripts/tools/.claude/state/changed-files.jsonl"
+    ".claude/settings.local.json"
   ],
   "sessionId": "",
-  "timestamp": "2026-06-02T16:53:52Z",
+  "timestamp": "2026-06-02T18:17:47Z",
   "version": "1.0.0",
   "wipTasks": null
 }

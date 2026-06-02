@@ -23,7 +23,8 @@
       "mcp__Windows-MCP__Snapshot",
       "Bash(rclone ls *)",
       "Bash(python -m py_compile server.py)",
-      "Bash(echo \"Exit code: $?\")"
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(git checkout *)"
     ]
   }
 }
