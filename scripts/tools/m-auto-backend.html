@@ -102,10 +102,9 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .files-list{flex:1;overflow-y:auto;padding:8px;font-size:.7rem;scrollbar-width:thin;}
 .files-list::-webkit-scrollbar{width:4px;}
 .files-list::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);}
-.files-item{display:flex;gap:6px;align-items:center;padding:6px;margin-bottom:4px;border-radius:4px;cursor:pointer;transition:all .2s;border:1px solid transparent;}
+.files-item{display:flex;gap:10px;align-items:center;padding:8px;margin-bottom:6px;border-radius:6px;transition:all .2s;border:1px solid transparent;}
 .files-item:hover{background:rgba(37,99,235,.08);}
-.files-item input{cursor:pointer;}
-.files-item label{cursor:pointer;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);}
+.files-item label{cursor:pointer;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);font-size:.7rem;}
 .status-row{background:rgba(37,99,235,.06);border:1px solid var(--border);border-radius:8px;padding:8px 14px;margin-bottom:14px;font-size:.7rem;color:var(--muted2);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .ntoolbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
 .nsearch{flex:1;min-width:150px;}
@@ -285,7 +284,8 @@ function updateCard(key,data){
   if(data.expires){const diff=new Date(data.expires)-Date.now(),ok=diff>0;const h=Math.floor(Math.abs(diff)/3600000),m2=Math.floor((Math.abs(diff)%3600000)/60000);if(st){st.className='rc-st '+(ok?(diff<1800000?'warn':'ok'):'dead');st.textContent=ok?h+'h '+m2+'m':'Expirado';}if(exp)exp.innerHTML='Expira: <strong>'+new Date(data.expires).toLocaleString('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</strong>';}
   if(cnt&&data.files)cnt.textContent=data.files.length+' ficheiros';
 }
-function expandCard(key){const f=linksData[key]||[];const fp=document.getElementById('files-list');let h='';for(const file of f){const id='chk-'+key+'-'+btoa(file.name).slice(0,8);h+=`<div class="files-item"><input type="checkbox" id="${id}" checked><label for="${id}">${esc(file.name.split('/').pop())}</label></div>`;}fp.innerHTML=h||'<div style="padding:10px;color:var(--muted)">Sem ficheiros</div>';}
+function expandCard(key){const label=SRCS.find(s=>s.key===key).label;const f=linksData[key]||[];const fp=document.getElementById('files-list');let h='';for(const file of f){const id='tgl-'+key+'-'+btoa(file.name).slice(0,8);h+=`<div class="files-item"><div class="file-toggle" id="${id}" onclick="toggleFile(this)" data-checked="true" style="width:36px;height:20px;border-radius:10px;background:var(--green);cursor:pointer;position:relative;transition:all .2s"><div style="position:absolute;width:16px;height:16px;background:#fff;border-radius:8px;top:2px;left:2px;transition:left .2s;right:auto"></div></div><label style="flex:1;cursor:pointer;margin-left:8px">${esc(file.name.split('/').pop())}</label></div>`;}fp.innerHTML=h||'<div style="padding:10px;color:var(--muted)">Sem ficheiros</div>';renewOne(key,label);}
+function toggleFile(el){el.dataset.checked=el.dataset.checked==='true'?'false':'true';const checked=el.dataset.checked==='true';el.style.background=checked?'var(--green)':'rgba(37,99,235,.2)';const dot=el.querySelector('div');dot.style.left=checked?'2px':'18px';}
 function removeShare(key){const label=SRCS.find(s=>s.key===key).label;addLog('REMOVENDO PARTILHA: '+label.toUpperCase(),'warn','renew');setTimeout(()=>{linksData[key]=[];updateCard(key,{expires:new Date().toISOString(),files:[]});addLog('PARTILHA REMOVIDA: '+label.toUpperCase(),'ok','renew');},800);}
 let renewWatcher;
 function renewOne(key,label,btn){
