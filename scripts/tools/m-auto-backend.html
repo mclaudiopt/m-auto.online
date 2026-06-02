@@ -24,6 +24,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .btn-enter:hover{opacity:.88;}
 #app{position:fixed;inset:0;display:none;flex-direction:column;}
 #app.on{display:flex;}
+#output-modal{display:none !important;}
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--border);background:rgba(6,13,26,.96);flex-shrink:0;gap:12px;}
 .hdr-logo{font-size:1.25rem;font-weight:900;font-style:italic;letter-spacing:-.5px;}
 .hdr-logo .m{color:#fff;}.hdr-logo .sep{color:rgba(255,255,255,.15);font-style:normal;font-weight:300;font-size:.95rem;}.hdr-logo .o{color:var(--blue);}
@@ -31,8 +32,9 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 .hdr-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:6px 12px;color:var(--muted2);font-size:.7rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .hdr-btn:hover{border-color:var(--blue);color:var(--blue);}
 .body{display:flex;flex:1;overflow:hidden;}
-.sidebar{width:150px;border-right:1px solid var(--border);background:rgba(6,13,26,.7);display:flex;flex-direction:column;gap:2px;padding:10px 8px;flex-shrink:0;}
-.activity-panel{width:240px;border-right:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
+.activity-panel{order:1;width:240px;border-right:1px solid var(--border);background:rgba(6,13,26,.5);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
+.sidebar{order:2;width:150px;border-right:1px solid var(--border);background:rgba(6,13,26,.7);display:flex;flex-direction:column;gap:2px;padding:10px 8px;flex-shrink:0;}
+.main{order:3;}
 .activity-header{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;padding:10px 12px 8px;border-bottom:1px solid rgba(37,99,235,.1);}
 .activity-log{flex:1;overflow-y:auto;padding:8px;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,.3) transparent;}
 .activity-log::-webkit-scrollbar{width:4px;}.activity-log::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:2px;}
@@ -228,8 +230,6 @@ function renewOne(key,label,btn){
   const st=document.getElementById('rcs-'+key);
   if(btn){btn.classList.add('run');btn.disabled=true;btn.textContent='A renovar...';}
   if(st){st.className='rc-st load';st.textContent='...';}
-  const modal=document.getElementById('output-modal'),txt=document.getElementById('output-text'),title=document.getElementById('output-title');
-  title.textContent='Renovando '+label+'...';txt.textContent='A iniciar...\n';modal.style.display='flex';
   const logFile='C:\\temp\\m-auto-renew-'+key+'.log';
   const cmd=`(New-Item -Path C:\\temp -ItemType Directory -Force)|Out-Null;& '${SCRIPTS[key]}' *>&1 | Tee-Object -FilePath '${logFile}'`;
   if(typeof HEScript!=='undefined'){runPS(cmd);}else{demoRenew(key,label);}
@@ -241,13 +241,21 @@ function renewOne(key,label,btn){
         const content=HEScript.ReadFile(logFile)||'';
         if(content.length>lastPos){
           const newLines=content.substring(lastPos);
-          txt.textContent+=newLines;lastPos=content.length;
-          txt.parentElement.scrollTop=txt.parentElement.scrollHeight;
+          const lines=newLines.split('\n');
+          for(const line of lines){
+            const trimmed=line.trim();
+            if(!trimmed)continue;
+            if(trimmed.includes('[✓]')||trimmed.includes('[OK]')){addLog('✓ '+trimmed.replace(/\x1b\[[0-9;]*m/g,''),'ok');}
+            else if(trimmed.includes('[✗]')||trimmed.includes('[X]')){addLog('✗ '+trimmed.replace(/\x1b\[[0-9;]*m/g,''),'err');}
+            else if(trimmed.includes('[!]')){addLog('⚠ '+trimmed.replace(/\x1b\[[0-9;]*m/g,''),'warn');}
+            else if(trimmed.startsWith('>>')){addLog(trimmed.replace(/\x1b\[[0-9;]*m/g,''),'info');}
+          }
+          lastPos=content.length;
         }
       }
     }catch(e){}
   },500);
-  setTimeout(()=>{clearInterval(renewWatcher);title.textContent=label+' - Concluído';addLog('✓ '+label+' concluído','ok');if(btn){btn.classList.remove('run');btn.disabled=false;btn.textContent='Renovar '+(label||key);}loadStatus();},12000);
+  setTimeout(()=>{clearInterval(renewWatcher);addLog('✓ '+label+' concluído','ok');if(btn){btn.classList.remove('run');btn.disabled=false;btn.textContent='Renovar '+(label||key);}loadStatus();},12000);
 }
 function demoRenew(key,label){
   const txt=document.getElementById('output-text');
