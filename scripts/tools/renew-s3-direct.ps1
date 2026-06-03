@@ -42,8 +42,8 @@ if (-not (Test-Path $RCLONE)) {
     exit 1
 }
 
-$Host.UI.RawUI.WindowTitle = "M-Auto - Renew $($cfg.label) Links (S3 Direct)"
-Clear-Host
+try { $Host.UI.RawUI.WindowTitle = "M-Auto - Renew $($cfg.label) Links (S3 Direct)" } catch {}
+try { Clear-Host } catch {}
 Write-Host ""
 Write-Host "  ${e}[38;2;29;155;255m+--------------------------------------------------+${e}[0m"
 Write-Host "  ${e}[38;2;29;155;255m|${e}[0m  ${e}[1;97mM-Auto${e}[0m  ${e}[38;2;100;149;237mRenew $($cfg.label) Links (S3)${e}[0m"
@@ -94,6 +94,13 @@ $jobs = foreach ($f in $files) {
         param($rclone, $bucket, $path, $expires)
         $remote = "$bucket/$path"
         $url = & $rclone link $remote --expire $expires 2>&1
+        if ($LASTEXITCODE -ne 0 -and "$url" -match 'object not found') {
+            $enc = (($path -split '/') | ForEach-Object { [Uri]::EscapeDataString($_) }) -join '/'
+            if ($enc -ne $path) {
+                $url2 = & $rclone link "$bucket/$enc" --expire $expires 2>&1
+                if ($LASTEXITCODE -eq 0) { return @{ ok = $true; url = "$url2".Trim() } }
+            }
+        }
         return @{ ok = ($LASTEXITCODE -eq 0); url = "$url".Trim() }
     }).AddParameters(@{ rclone = $RCLONE; bucket = $r2_path; path = $f.name; expires = $EXPIRES })
     @{ ps = $ps; handle = $ps.BeginInvoke(); f = $f }
@@ -157,4 +164,4 @@ if ($errCount -gt 0) {
 }
 Write-Host "  ${e}[38;2;148;163;184m       Validos ate: $((([datetime]::Parse($expires_dt)).ToLocalTime()).ToString('dd/MM/yyyy HH:mm'))${e}[0m"
 Write-Host ""
-Read-Host "  Pressione ENTER para sair"
+try { Read-Host "  Pressione ENTER para sair" } catch {}
