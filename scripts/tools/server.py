@@ -37,6 +37,19 @@ class MAutoHandler(http.server.SimpleHTTPRequestHandler):
             self.get_s3_files(brand_label)
             return
 
+        # SSE endpoint for renew script execution
+        if path == '/api/renew':
+            query = parse_qs(parsed.query)
+            brand_key = query.get('brand', [None])[0]
+            if not brand_key or brand_key not in BRANDS:
+                self.send_response(400)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({'error': 'Invalid brand'}).encode())
+                return
+            self.stream_renew(brand_key)
+            return
+
         # Serve static files
         self.path = path if path.startswith('/') else '/' + path
         os.chdir(SCRIPT_DIR)
@@ -72,6 +85,34 @@ class MAutoHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
             self.wfile.write(json.dumps({'error': str(e)}).encode())
+
+    def stream_renew(self, brand_key):
+        """Run renew-s3-direct.ps1 and stream output as SSE"""
+        script = SCRIPT_DIR / 'renew-s3-direct.ps1'
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/event-stream')
+        self.send_header('Cache-Control', 'no-cache')
+        self.send_header('Connection', 'keep-alive')
+        self.end_headers()
+
+        def send_event(data):
+            msg = f'data: {json.dumps(data)}\n\n'
+            self.wfile.write(msg.encode('utf-8'))
+            self.wfile.flush()
+
+        try:
+            cmd = ['powershell', '-NoProfile', '-ExecutionPolicy', 'Bypass',
+                   '-File', str(script), '-brand', brand_key]
+            flags = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                    stdin=subprocess.DEVNULL, text=True,
+                                    encoding='utf-8', errors='replace', creationflags=flags)
+            for line in iter(proc.stdout.readline, ''):
+                send_event({'line': line.rstrip('\r\n')})
+            proc.wait()
+            send_event({'done': True, 'status': 'ok' if proc.returncode == 0 else 'err'})
+        except Exception as e:
+            send_event({'err': str(e), 'done': True, 'status': 'err'})
 
 if __name__ == '__main__':
     os.chdir(SCRIPT_DIR)

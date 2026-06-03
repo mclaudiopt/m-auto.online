@@ -367,6 +367,46 @@ function Show-Renew {
     }
 }
 
+#-- Menu: Comandos (referencia rapida para correr scripts manualmente) -----
+function Show-Comandos {
+    $script_dir = "D:\Tutorials\m-auto.online\scripts\tools"
+    while ($true) {
+        Write-Header
+        Write-Title "Comandos - Referencia Rapida"
+        Write-Host "  ${e}[38;2;148;163;184mCopia e cola estes comandos no PowerShell caso o menu falhe.${e}[0m"
+        Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Renew Links - direto no PowerShell]${e}[0m"
+        Write-Host ""
+        $brands = @(
+            @{ name="Mercedes";  param="merc" }
+            @{ name="Renault";   param="renault" }
+            @{ name="PSA";       param="psa" }
+            @{ name="Autodata";  param="autodata" }
+            @{ name="Delphi";    param="delphi" }
+            @{ name="Ford";      param="ford" }
+            @{ name="GM";        param="gm" }
+            @{ name="TESLA";     param="tesla" }
+            @{ name="VW";        param="vw" }
+            @{ name="Hermes";    param="hermes" }
+        )
+        foreach ($b in $brands) {
+            Write-Host "  ${e}[38;2;148;163;184m$($b.name.PadRight(10))${e}[0m  ${e}[38;2;34;197;94m& '$script_dir\renew-s3-direct.ps1' -brand $($b.param)${e}[0m"
+        }
+        Write-Host ""
+        Write-Host "  ${e}[38;2;100;149;237m[Renovar TODAS as marcas de uma vez]${e}[0m"
+        Write-Host ""
+        $all = "foreach (`$b in @('merc','renault','psa','autodata','delphi','ford','gm','tesla','vw','hermes')) { & '$script_dir\renew-s3-direct.ps1' -brand `$b }"
+        Write-Host "  ${e}[38;2;34;197;94m$all${e}[0m"
+        Write-Host ""
+        Write-Opt 0  "<- Voltar"
+        Write-Host ""
+        switch (Read-Key) {
+            "0" { return }
+            default { }
+        }
+    }
+}
+
 #-- Start Engine (tudo integrado) ----------------------------------------
 function Show-System {
     Run-Sub "system/start_engine"
@@ -384,6 +424,7 @@ while ($true) {
     Write-Opt 4  "SOS"                        "Recuperacao de emergencia"
     Write-Opt 5  "Software"                   "Mercedes / VAG / BMW / PSA..."
     Write-Opt 6  "Renew Links"                "Gerar presigned URLs (S3 Direct)"
+    Write-Opt 7  "Comandos"                  "Referencia rapida de comandos PS"
     Write-Opt 9  "Wallpaper M-Auto"
     Write-Host ""
     Write-Opt 0  "Sair"
@@ -395,6 +436,7 @@ while ($true) {
         "4" { Show-SOS }
         "5" { Show-Software }
         "6" { Show-Renew }
+        "7" { Show-Comandos }
         "9" { Run-Sub "utils/set_wallpaper" }
         "0" { Write-Host ""; exit }
         default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
