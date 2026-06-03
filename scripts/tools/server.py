@@ -30,10 +30,20 @@ class MAutoHandler(http.server.SimpleHTTPRequestHandler):
                 names_path = REPO_DIR / 'friendlynames.json'
                 with open(names_path, 'w', encoding='utf-8') as f:
                     json.dump(names, f, indent=2, ensure_ascii=False)
+                # Auto commit + push (fire and forget)
+                subprocess.Popen(
+                    ['git', '-C', str(REPO_DIR), 'add', 'friendlynames.json'],
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                subprocess.Popen(
+                    ['git', '-C', str(REPO_DIR), 'commit', '-m', 'friendlynames: auto-save'],
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                subprocess.Popen(
+                    ['git', '-C', str(REPO_DIR), 'push'],
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({'ok': True}).encode())
+                self.wfile.write(json.dumps({'ok': True, 'pushed': True}).encode())
             except Exception as e:
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json')
