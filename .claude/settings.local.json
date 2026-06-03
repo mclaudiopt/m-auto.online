@@ -33,7 +33,9 @@
       "PowerShell(cd 'D:\\\\Tutorials\\\\m-auto.online\\\\scripts\\\\tools'; python server.py > server.log 2>&1 &; Start-Sleep 2; \"✓ Server em background\"; netstat -ano | Select-String 3001 | Select-Object -First 1)",
       "Bash(rclone config *)",
       "Bash(python3 -m json.tool)",
-      "mcp__Claude_in_Chrome__find"
+      "mcp__Claude_in_Chrome__find",
+      "Bash(changed\")",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -Command \"& 'D:\\\\Tutorials\\\\m-auto.online\\\\scripts\\\\tools\\\\renew-s3-direct.ps1' -brand merc\")"
     ]
   }
 }

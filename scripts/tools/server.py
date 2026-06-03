@@ -10,6 +10,7 @@ from pathlib import Path
 
 PORT = 3001
 SCRIPT_DIR = Path(__file__).parent
+REPO_DIR = Path('D:/Tutorials/m-auto.online')
 BRANDS = {
     'merc': 'Daimler', 'renault': 'Renault', 'psa': 'PSA',
     'autodata': 'Autodata', 'delphi': 'Delphi', 'ford': 'Ford',
@@ -17,6 +18,32 @@ BRANDS = {
 }
 
 class MAutoHandler(http.server.SimpleHTTPRequestHandler):
+    def do_POST(self):
+        parsed = urlparse(self.path)
+        path = parsed.path
+
+        if path == '/api/save-names':
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            try:
+                names = json.loads(body)
+                names_path = REPO_DIR / 'friendlynames.json'
+                with open(names_path, 'w', encoding='utf-8') as f:
+                    json.dump(names, f, indent=2, ensure_ascii=False)
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({'ok': True}).encode())
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({'error': str(e)}).encode())
+            return
+
+        self.send_response(404)
+        self.end_headers()
+
     def do_GET(self):
         parsed = urlparse(self.path)
         path = parsed.path
