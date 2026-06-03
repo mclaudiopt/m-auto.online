@@ -394,7 +394,7 @@ async function renewOne(key,label,btn){
   const st=document.getElementById('rcs-'+key);
   if(btn){btn.classList.add('run');btn.disabled=true;btn.textContent='A renovar...';}
   if(st){st.className='rc-st load';st.textContent='...';}
-  addLog('RENEW: '+label.toUpperCase(),'info','renew',true);
+  addLog('RENEW: '+label.toUpperCase(),'renew','renew',true);
   let gotData=false;
   const es=new EventSource('/api/renew?brand='+encodeURIComponent(key));
   es.onmessage=function(e){

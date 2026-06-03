@@ -102,7 +102,7 @@ class MAutoHandler(http.server.SimpleHTTPRequestHandler):
 
         try:
             cmd = ['powershell', '-NoProfile', '-ExecutionPolicy', 'Bypass',
-                   '-File', str(script), '-brand', brand_key]
+                   '-Command', f"& '{str(script)}' -brand {brand_key} *>&1"]
             flags = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
             proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                     stdin=subprocess.DEVNULL, text=True,
