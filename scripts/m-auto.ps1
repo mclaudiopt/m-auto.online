@@ -351,16 +351,16 @@ function Show-Renew {
         Write-Opt 0  "<- Voltar"
         Write-Host ""
         switch (Read-Key) {
-            "1"  { & "S:\scripts\renew-s3-direct.ps1" -brand merc }
-            "2"  { & "S:\scripts\renew-s3-direct.ps1" -brand renault }
-            "3"  { & "S:\scripts\renew-s3-direct.ps1" -brand psa }
-            "4"  { & "S:\scripts\renew-s3-direct.ps1" -brand autodata }
-            "5"  { & "S:\scripts\renew-s3-direct.ps1" -brand delphi }
-            "6"  { & "S:\scripts\renew-s3-direct.ps1" -brand ford }
-            "7"  { & "S:\scripts\renew-s3-direct.ps1" -brand gm }
-            "8"  { & "S:\scripts\renew-s3-direct.ps1" -brand tesla }
-            "9"  { & "S:\scripts\renew-s3-direct.ps1" -brand vw }
-            "10" { & "S:\scripts\renew-s3-direct.ps1" -brand hermes }
+            "1"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand merc }
+            "2"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand renault }
+            "3"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand psa }
+            "4"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand autodata }
+            "5"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand delphi }
+            "6"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand ford }
+            "7"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand gm }
+            "8"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand tesla }
+            "9"  { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand vw }
+            "10" { & "$PSScriptRoot\tools\renew-s3-direct.ps1" -brand hermes }
             "0"  { return }
             default { Write-Warn "Opcao invalida." ; Start-Sleep -Milliseconds 600 }
         }
