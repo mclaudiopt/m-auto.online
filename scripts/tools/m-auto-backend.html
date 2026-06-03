@@ -5,7 +5,7 @@
 <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="expires" content="0">
-<title>M-Auto Backend v1.0.23</title>
+<title>M-Auto Backend v1.0.24</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--bg:#060d1a;--bg2:#0b1220;--blue:#2563eb;--blue2:#1e40af;--blue3:#60a5fa;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--card:#0f1c2e;--border:rgba(37,99,235,0.15);--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--orange:#f97316;}
@@ -170,7 +170,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
 <div id="app">
   <div class="hdr">
     <div style="display:flex;align-items:center;gap:20px;flex:1;">
-      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend v1.0.23</span></div>
+      <div class="hdr-logo"><span class="m">M-Auto</span><span class="sep"> . </span><span class="o">Online</span><span class="badge">Backend v1.0.24</span></div>
       <div class="hdr-nav">
         <div class="hdr-nav-item active" onclick="nav('renew');updateHdrNav('renew')" id="hnav-renew">🔄 Renew</div>
         <div class="hdr-nav-item" onclick="nav('links');updateHdrNav('links')" id="hnav-links">🔗 Links</div>
@@ -273,6 +273,7 @@ html,body{height:100%;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 
         <div class="sec">📋 Changelog</div>
         <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px">
           <div style="font-size:.75rem;line-height:1.8;color:var(--muted2)">
+            <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.24</strong> - Fix copy buttons (URL limpo), friendlynames via GitHub, anti-cache headers</div>
             <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.23</strong> - Botão Renew integrado com script PS via SSE (output em tempo real)</div>
             <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.22</strong> - Fix renew menu PSScriptRoot + try/catch</div>
             <div style="margin-bottom:12px"><strong style="color:var(--green)">v1.0.21</strong> - Show individual files in log, add Ficheiros menu with JSON display</div>
@@ -466,12 +467,13 @@ function renderLinks(key){
   const el=document.getElementById('llst-'+key),files=linksData[key]||[];
   if(!files.length){el.innerHTML='<div class="state">Sem ficheiros.</div>';return;}
   let h='<div class="ltbl"><div class="ltbl-hdr"><span>Nome Amigável</span><span>Ficheiro Original</span></div>';
-  for(const f of files){const friendly=names[f.name]||'',original=f.name.split('/').pop(),label=friendly||original;h+=`<div class="lrow"><div class="lcol-friendly" title="${esc(friendly||'Sem nome amigável')}">${esc(friendly||'(original)')}</div><div class="lcol-filename" title="${esc(original)}">📄 ${esc(original)}</div><div class="lcopy"><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsAria(this)">ARIA</button><button data-url="${esc(f.url)}" data-name="${esc(label)}" onclick="copyAsHtml(this)">HTML</button></div></div>`;}
+  for(const f of files){const friendly=names[f.name]||'',original=f.name.split('/').pop(),label=friendly||original;h+=`<div class="lrow"><div class="lcol-friendly" title="${esc(friendly||'Sem nome amigável')}">${esc(friendly||'(original)')}</div><div class="lcol-filename" title="${esc(original)}">📄 ${esc(original)}</div><div class="lcopy"><button data-url="${esc(f.url)}" onclick="copyUrl(this)">📋 Copiar</button></div></div>`;}
   el.innerHTML=h+'</div>';
 }
 function ltab(id){document.querySelectorAll('#ltabs-container .ntab').forEach(el=>el.classList.remove('active'));document.querySelectorAll('#lcats-container .lcat').forEach(el=>el.classList.remove('on'));document.getElementById('ltab-'+id).classList.add('active');document.getElementById('lcat-'+id).classList.add('on');}
-function copyAsAria(btn){const url=btn.dataset.url,name=btn.dataset.name;const aria=`<a href="${esc(url)}" aria-label="Descarregar ${esc(name)}">${esc(name)}</a>`;copyToClipboard(aria,'ARIA');}
-function copyAsHtml(btn){const url=btn.dataset.url,name=btn.dataset.name;const html=`<a href="${esc(url)}">${esc(name)}</a>`;copyToClipboard(html,'HTML');}
+function copyAsAria(btn){const url=btn.dataset.url;copyToClipboard(url,'URL');}
+function copyAsHtml(btn){const url=btn.dataset.url;copyToClipboard(url,'URL');}
+function copyUrl(btn){const url=btn.dataset.url;copyToClipboard(url,'URL');}
 function copyToClipboard(text,type){try{if(typeof HEScript!=='undefined'){HEScript.Exec('powershell','-WindowStyle Hidden -Command "\''+text.replace(/'/g,"''")+'\'|Set-Clipboard"');}else{navigator.clipboard.writeText(text);}showSt('ok','✓ Copiado em '+type);}catch(e){showSt('err','Erro ao copiar');}}
 const ADMIN_ITEMS=[{id:'portal',icon:'&#128421;',title:'Abrir Portal',desc:'Portal de downloads.',grid:'admin-grid'},{id:'s3',icon:'&#128193;',title:'Abrir S:',desc:'Cloudflare R2.',grid:'admin-grid'},{id:'repo',icon:'&#128194;',title:'Abrir Repo',desc:'Pasta do projecto.',grid:'admin-grid'},{id:'gitstatus',icon:'&#128203;',title:'Git Status',desc:'Estado e commits.',grid:'git-grid'},{id:'gitpull',icon:'&#8659;',title:'Git Pull',desc:'Actualizar repo.',grid:'git-grid'},{id:'r2list',icon:'&#9729;',title:'Listar R2',desc:'Ver ficheiros R2.',grid:'git-grid'}];
 function buildAdmin(){const g1=document.getElementById('admin-grid'),g2=document.getElementById('git-grid');for(const a of ADMIN_ITEMS){const el=document.createElement('div');el.className='ag';el.dataset.action=a.id;el.innerHTML='<div class="ag-icon">'+a.icon+'</div><div class="ag-title">'+esc(a.title)+'</div><div class="ag-desc">'+esc(a.desc)+'</div>';(a.grid==='git-grid'?g2:g1).appendChild(el);}const handler=e=>{const c=e.target.closest('.ag[data-action]');if(!c)return;const a=c.dataset.action;if(a==='portal')openPath(REPO+'\\scripts\\tools\\m-auto-portal.html');else if(a==='s3')openPath('S:\\');else if(a==='repo')openPath(REPO);else if(a==='gitstatus')runPS("cd '"+REPO+"';git status;git log --oneline -5;Read-Host");else if(a==='gitpull')runPS("cd '"+REPO+"';git pull;Read-Host");else if(a==='r2list')runPS("rclone ls r2-mauto:m-auto-software 2>&1|Select-Object -First 30;Read-Host");};g1.addEventListener('click',handler);g2.addEventListener('click',handler);}

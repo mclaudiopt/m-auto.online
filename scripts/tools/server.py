@@ -80,6 +80,18 @@ class MAutoHandler(http.server.SimpleHTTPRequestHandler):
         # Serve static files
         self.path = path if path.startswith('/') else '/' + path
         os.chdir(SCRIPT_DIR)
+        # Force no-cache for HTML/JS files
+        if self.path.endswith('.html') or self.path.endswith('.js'):
+            self.send_response(200)
+            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            self.send_header('Pragma', 'no-cache')
+            self.send_header('Expires', '0')
+            content = Path(self.path.lstrip('/')).read_bytes()
+            self.send_header('Content-Type', 'text/html; charset=utf-8' if self.path.endswith('.html') else 'application/javascript')
+            self.send_header('Content-Length', str(len(content)))
+            self.end_headers()
+            self.wfile.write(content)
+            return
         super().do_GET()
 
     def get_s3_files(self, brand_label):
