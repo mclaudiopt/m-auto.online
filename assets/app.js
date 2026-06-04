@@ -481,14 +481,14 @@ function buildNav() {
   `;
 
   mobNav.innerHTML = [
-    { id: 'soft',  icon: 'fa-solid fa-car-side',           key: 'mob_soft',  fn: `toggleMobBrandPicker()` },
-    { id: 'hard',  icon: 'fa-solid fa-microchip',          key: 'mob_hard',  fn: `switchSection('hard',  this)` },
-    { id: 'tools', icon: 'fa-solid fa-download',           key: 'mob_tools', fn: `switchSection('tools', this)` },
-    { id: 'serv',  icon: 'fa-solid fa-screwdriver-wrench', key: 'mob_serv',  fn: `switchSection('serv',  this)` },
-    { id: 'about', icon: 'fa-solid fa-circle-info',        key: 'mob_about', fn: `switchSection('about', this)` },
+    { id: 'soft',  icon: '🚗',           key: 'mob_soft',  fn: `toggleMobBrandPicker()` },
+    { id: 'hard',  icon: '🔧',          key: 'mob_hard',  fn: `switchSection('hard',  this)` },
+    { id: 'tools', icon: '⬇',           key: 'mob_tools', fn: `switchSection('tools', this)` },
+    { id: 'serv',  icon: '🔩', key: 'mob_serv',  fn: `switchSection('serv',  this)` },
+    { id: 'about', icon: 'ℹ',        key: 'mob_about', fn: `switchSection('about', this)` },
   ].map(n => `<div class="mob-item${activeSection === n.id ? ' active' : ''}"
     onclick="${n.fn}" data-nav-key="${n.key}">
-    <i class="${n.icon} mob-icon"></i>
+    <span class="mob-icon">${n.icon}</span>
     <span class="mob-label">${t(n.key)}</span>
   </div>`).join('');
 }
@@ -937,9 +937,7 @@ function createToolRow(tl) {
 
 function createToolCard(tl) {
   const d = tl[lang] || tl.pt;
-  const iconHTML = tl.faIcon
-    ? `<i class="${tl.faIcon}"></i>`
-    : `<span style="font-weight:800;font-size:1rem;letter-spacing:-0.03em">${tl.icon}</span>`;
+  const iconHTML = `<span style="font-weight:800;font-size:1rem;letter-spacing:-0.03em">${tl.icon}</span>`;
   return `<div class="tool-card searchable-item">
     <div class="tool-card-icon" style="background:${tl.iconBg}">${iconHTML}</div>
     <div class="tool-card-body">
@@ -947,7 +945,7 @@ function createToolCard(tl) {
       <div class="tool-card-desc">${d.desc}</div>
     </div>
     <a href="${tl.url}" target="_blank" rel="noopener" class="tool-card-btn">
-      <i class="fa-solid fa-download"></i> ${t('btn_download')}
+      <span class="mob-icon">⬇</span> ${t('btn_download')}
     </a>
   </div>`;
 }
