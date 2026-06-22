@@ -54,7 +54,7 @@ footer { text-align:center; padding:20px 0; color:#555; }
 <!-- PRINT STYLES -->
 <style>
 @media print {
-  #downloadBtn,.nav-bar,#loginBox { display:none !important; }
+  #downloadBtn,.nav-bar,#loginBox,#printBtn { display:none !important; }
   body { background:none !important; color:#000 !important; }
   .container { padding:0 !important; margin:0 auto !important; width:100% !important; }
   h1,h2,h3 { color:#000 !important; page-break-after:avoid; }
@@ -109,6 +109,7 @@ function downloadPDF() {
 
     <!-- PDF BUTTON -->
     <button id="downloadBtn" onclick="downloadPDF()">Download as PDF</button>
+    <button id="printBtn" onclick="window.print()" style="background:#02457a; color:#fff; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; float:right; margin:4px 8px 20px 0;">Print</button>
 
     <!-- NAVIGATION -->
     <nav class="nav-bar">
