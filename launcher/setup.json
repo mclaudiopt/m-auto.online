@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "categories": [
+    {
+      "id": "start_engine",
+      "label": "Start Engine",
+      "desc": "Diagnostico + Preparacao + Ferramentas",
+      "steps": [
+        { "id": "sysinfo", "label": "System Info", "desc": "Shows Windows version, RAM, disk usage and security status", "type": "info", "cmd": "$os=Get-CimInstance Win32_OperatingSystem; $ram=[math]::Round($os.TotalVisibleMemorySize/1MB,1); $free=[math]::Round($os.FreePhysicalMemory/1MB,1); $used=$ram-$free; $perc=[math]::Round(($used/$ram)*100,1); $drives=Get-PSDrive -PSProvider FileSystem|?{$_.Name -match '^[A-Z]$'}|%{$u=[math]::Round($_.Used/1GB,1);$t=$u+[math]::Round($_.Free/1GB,1);if($t -gt 0){\"$($_.Name): $([math]::Round(($u/$t)*100))%\"}}; Write-Output \"$($os.Caption) | RAM: ${used}GB/${ram}GB ($perc%) | $($drives -join ' | ')\"" },
+        { "id": "wallpaper", "label": "Wallpaper M-Auto", "desc": "Apply M-Auto branded wallpaper", "type": "action", "cmd": "irm 'https://m-auto.online/scripts/utils/set_wallpaper.ps1' -UseBasicParsing | iex", "admin": true },
+        { "id": "bitlocker_off", "label": "BitLocker OFF", "desc": "Disable BitLocker encryption on C: drive", "type": "action", "cmd": "Disable-BitLocker -MountPoint C: -EA Stop | Out-Null", "admin": true },
+        { "id": "defender_off", "label": "Defender OFF", "desc": "Disable Windows Defender real-time protection", "type": "action", "cmd": "Set-MpPreference -DisableRealtimeMonitoring $true -EA Stop; Stop-Service WinDefend -Force -EA SilentlyContinue", "admin": true },
+        { "id": "firewall_off", "label": "Firewall OFF", "desc": "Disable Windows Firewall on all profiles", "type": "action", "cmd": "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -EA Stop", "admin": true },
+        { "id": "tamper_off", "label": "Tamper Protection OFF", "desc": "Disable Defender Tamper Protection via registry", "type": "action", "cmd": "$p='HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Features'; $a=Get-Acl $p; $s=New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544'); $a.SetOwner($s); $r=New-Object System.Security.AccessControl.RegistryAccessRule($s,'FullControl','ContainerInherit,ObjectInherit','None','Allow'); $a.AddAccessRule($r); Set-Acl $p $a; Set-ItemProperty $p 'TamperProtection' 4", "admin": true },
+        { "id": "install_7zip", "label": "Install 7-Zip", "desc": "Download and install 7-Zip silently", "type": "action", "cmd": "$i=Get-ItemProperty 'HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*' -EA SilentlyContinue|?{$_.DisplayName -like '*7-Zip*'}; if(-not $i){$d='C:\\M-auto\\Temp'; md $d -Force -EA SilentlyContinue|Out-Null; $t=\"$d\\7z.exe\"; irm 'https://www.7-zip.org/a/7z2409-x64.exe' -OutFile $t; Start-Process $t '/S' -Wait; del $t -Force; Write-Output 'OK'}else{Write-Output 'ALREADY INSTALLED'}", "admin": true },
+        { "id": "cleanup", "label": "Cleanup Temp", "desc": "Remove temporary files", "type": "action", "cmd": "Remove-Item \"$env:TEMP\\*\" -Recurse -Force -EA SilentlyContinue; Remove-Item 'C:\\Windows\\Temp\\*' -Recurse -Force -EA SilentlyContinue; Write-Output 'OK'", "admin": true },
+        { "id": "restore_point", "label": "Create Restore Point", "desc": "Create Windows System Restore point", "type": "action", "cmd": "Enable-ComputerRestore -Drive 'C:\\' -EA SilentlyContinue; Checkpoint-Computer -Description 'M-Auto Backup' -RestorePointType MODIFY_SETTINGS -EA Stop", "admin": true },
+        { "id": "dns_cloudflare", "label": "DNS Cloudflare", "desc": "Set DNS to 1.1.1.1 / 1.0.0.1", "type": "action", "cmd": "irm 'https://m-auto.online/scripts/system/dns_cloudflare.ps1' -UseBasicParsing | iex", "admin": true }
+      ]
+    }
+  ]
+}
