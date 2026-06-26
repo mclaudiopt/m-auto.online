@@ -18,5 +18,10 @@
         { "id": "dns_cloudflare", "label": "DNS Cloudflare", "desc": "Set DNS to 1.1.1.1 / 1.0.0.1", "type": "action", "cmd": "irm 'https://m-auto.online/scripts/system/dns_cloudflare.ps1' -UseBasicParsing | iex", "admin": true }
       ]
     }
+  ],
+  "downloads": [
+    { "id": "mercedes", "label": "Mercedes-Benz", "color": "#163354", "file": "scripts/data/merc_links.json" },
+    { "id": "psa", "label": "PSA / Stellantis", "color": "#1a237e", "file": "scripts/data/psa_links.json" },
+    { "id": "renault", "label": "Renault", "color": "#f4b400", "file": "scripts/data/renault_links.json" }
   ]
 }
