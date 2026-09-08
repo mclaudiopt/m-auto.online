@@ -1895,12 +1895,12 @@ body {
 /* ── ABOUT LANDING PAGE ── */
 /* ── ABOUT NEWS CARD ─────────────────────────── */
 .about-news-row {
-  width: 100%;
-  max-width: 1200px;
+  width: 75%;
+  max-width: none;
+  margin: 0 auto 36px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-bottom: 36px;
 }
 .about-news {
   min-width: 0;
@@ -3304,7 +3304,7 @@ body {
 
 /* ── Popup: cinzento semi-transparente, canto inferior esquerdo ── */
 .sales-popup {
-  left: 18px !important;
+  left: 88px !important;
   right: auto !important;
   bottom: 18px !important;
   transform: translateY(16px) !important;

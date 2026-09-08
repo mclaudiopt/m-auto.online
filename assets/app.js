@@ -1030,41 +1030,41 @@ function renderAbout() {
       <h2 class="section-hero-title">${t('about_title')}</h2>
       <p class="section-hero-meta">Simply Digital · Diagnóstico Profissional</p>
     </div>
-    <div class="about-landing">
-      <div class="about-news-row">
-        <div class="about-news about-roulette-card">
-          <span class="about-news-badge">🔥</span>
-          <div class="about-news-title">${t('promo_title')}</div>
-          <div class="about-news-sub">${t('promo_text')}</div>
-          <div class="inline-roleta-body" id="inlineRBody">
-            <div class="inline-roleta-qty" id="inlineRQtyChoice">
-              <button type="button" onclick="inlineRoletaChoose('single')">${t('roleta_single_title')}<small>${t('roleta_single_desc')}</small></button>
-              <button type="button" onclick="inlineRoletaChoose('multi')">${t('roleta_multi_title')}<small>${t('roleta_multi_desc')}</small></button>
-            </div>
-            <div class="inline-roleta-wheel" id="inlineRWheelWrap" style="display:none">
-              <canvas id="inlineRCanvas" width="130" height="130"></canvas>
-              <button type="button" class="about-news-btn" id="inlineRSpinBtn" onclick="inlineGirarRoleta()">${t('roleta_spin_label')}</button>
-            </div>
-            <div class="inline-roleta-result" id="inlineRResult" style="display:none">
-              <div class="inline-r-disc" id="inlineRDisc">0%</div>
-              <a href="#" target="_blank" rel="noopener" class="about-news-btn" id="inlineRWaBtn">${t('roleta_wa_btn')}</a>
-            </div>
+    <div class="about-news-row">
+      <div class="about-news about-roulette-card">
+        <span class="about-news-badge">🔥</span>
+        <div class="about-news-title">${t('promo_title')}</div>
+        <div class="about-news-sub">${t('promo_text')}</div>
+        <div class="inline-roleta-body" id="inlineRBody">
+          <div class="inline-roleta-qty" id="inlineRQtyChoice">
+            <button type="button" onclick="inlineRoletaChoose('single')">${t('roleta_single_title')}<small>${t('roleta_single_desc')}</small></button>
+            <button type="button" onclick="inlineRoletaChoose('multi')">${t('roleta_multi_title')}<small>${t('roleta_multi_desc')}</small></button>
+          </div>
+          <div class="inline-roleta-wheel" id="inlineRWheelWrap" style="display:none">
+            <canvas id="inlineRCanvas" width="130" height="130"></canvas>
+            <button type="button" class="about-news-btn" id="inlineRSpinBtn" onclick="inlineGirarRoleta()">${t('roleta_spin_label')}</button>
+          </div>
+          <div class="inline-roleta-result" id="inlineRResult" style="display:none">
+            <div class="inline-r-disc" id="inlineRDisc">0%</div>
+            <a href="#" target="_blank" rel="noopener" class="about-news-btn" id="inlineRWaBtn">${t('roleta_wa_btn')}</a>
           </div>
         </div>
-        <div class="about-news">
-          <span class="about-news-badge">${t('news_badge')}</span>
-          <div class="about-news-title">${t('news_title')}</div>
-          <div class="about-news-sub">${t('news_sub')}</div>
-          <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();var o=document.getElementById('vcxOverlay'),f=document.getElementById('vcxFrame');if(o&&f){f.src='vcx.html?lang=${lang}';o.style.display='flex';}})(event)">${t('news_btn')}</a>
-        </div>
-        <div class="about-news">
-          <span class="about-news-badge">${t('news_badge')}</span>
-          <div class="about-news-title">${t('news2_title')}</div>
-          <div class="about-news-sub">${t('news2_sub')}</div>
-          <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();openProductModal('merc_maps_pin');})(event)">${t('news2_btn')}</a>
-          <a href="mercedes-maps-tutorial.html?lang=${lang}" target="_blank" rel="noopener" style="display:block;margin-top:8px;font-size:12px;color:#bfdbfe;text-decoration:underline;">${t('news2_tutorial')}</a>
-        </div>
       </div>
+      <div class="about-news">
+        <span class="about-news-badge">${t('news_badge')}</span>
+        <div class="about-news-title">${t('news_title')}</div>
+        <div class="about-news-sub">${t('news_sub')}</div>
+        <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();var o=document.getElementById('vcxOverlay'),f=document.getElementById('vcxFrame');if(o&&f){f.src='vcx.html?lang=${lang}';o.style.display='flex';}})(event)">${t('news_btn')}</a>
+      </div>
+      <div class="about-news">
+        <span class="about-news-badge">${t('news_badge')}</span>
+        <div class="about-news-title">${t('news2_title')}</div>
+        <div class="about-news-sub">${t('news2_sub')}</div>
+        <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();openProductModal('merc_maps_pin');})(event)">${t('news2_btn')}</a>
+        <a href="mercedes-maps-tutorial.html?lang=${lang}" target="_blank" rel="noopener" style="display:block;margin-top:8px;font-size:12px;color:#bfdbfe;text-decoration:underline;">${t('news2_tutorial')}</a>
+      </div>
+    </div>
+    <div class="about-landing">
       <div class="about-stats">
         <div class="about-stat"><span class="about-stat-num">${t('stat1_num')}</span><span class="about-stat-lbl">${t('stat1_lbl')}</span></div>
         <div class="about-stat"><span class="about-stat-num">${t('stat2_num')}</span><span class="about-stat-lbl">${t('stat2_lbl')}</span></div>
