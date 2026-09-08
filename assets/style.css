@@ -3723,8 +3723,8 @@ body::after {
 /* ── Promo badge (flutuante, canto inferior direito) ── */
 .promo-badge {
   position: fixed;
-  bottom: 90px;
-  right: 16px;
+  bottom: 30px;
+  left: 16px;
   z-index: 3000;
   width: 56px;
   height: 56px;
@@ -3853,5 +3853,5 @@ body::after {
   .roleta-wheel-wrap { width: 280px; height: 280px; }
   #roletaCanvas { width: 280px; height: 280px; }
   .roleta-result-disc { font-size: 2.6rem; }
-  .promo-badge { width: 48px; height: 48px; font-size: 1.2rem; bottom: 80px; right: 12px; }
+  .promo-badge { width: 48px; height: 48px; font-size: 1.2rem; bottom: 20px; left: 12px; }
 }
