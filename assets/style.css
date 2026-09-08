@@ -1812,6 +1812,29 @@ body {
   color: #f1f5f9 !important;
 }
 
+/* ── MODAL: banner de tutorial (bem visivel, topo da descricao) ── */
+.modal-tutorial-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.modal-tutorial-banner:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.45);
+}
+.mtb-icon { font-size: 1.6rem; flex-shrink: 0; }
+.mtb-text { flex: 1; font-size: 0.85rem; line-height: 1.35; color: #dbeafe; }
+.mtb-text strong { display: block; font-size: 0.98rem; color: #fff; }
+.mtb-arrow { font-size: 1.3rem; font-weight: 800; flex-shrink: 0; }
+
 /* ── MODAL: features list ── */
 .modal-features {
   list-style: none;

@@ -19,17 +19,17 @@
     "pt": {
       "name": "Mercedes Maps — Códigos PIN",
       "short": "Atualize os mapas do seu Mercedes-Benz com códigos PIN oficiais.",
-      "details": "Atualização oficial de mapas Mercedes-Benz com <b>código PIN original</b>, válida para os sistemas NTG35, NTG45, NTG5 Series, NTG6 MBUX e NTG7 MBUX. Processo 100% oficial e seguro, sem necessidade de desmontar componentes do veículo. <br><br><b>Preços:</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€<br><br><a href=\"mercedes-maps-tutorial.html?lang=pt\" target=\"_blank\" rel=\"noopener\">📖 Ver tutorial passo a passo</a>"
+      "details": "Atualização oficial de mapas Mercedes-Benz com <b>código PIN original</b>, válida para os sistemas NTG35, NTG45, NTG5 Series, NTG6 MBUX e NTG7 MBUX. Processo 100% oficial e seguro, sem necessidade de desmontar componentes do veículo. <br><br><b>Preços:</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€"
     },
     "en": {
       "name": "Mercedes Maps — PIN Codes",
       "short": "Update your Mercedes-Benz maps with official PIN codes.",
-      "details": "Official Mercedes-Benz map update with <b>original PIN code</b>, valid for NTG35, NTG45, NTG5 Series, NTG6 MBUX and NTG7 MBUX systems. 100% official and safe process, no vehicle component removal required. <br><br><b>Pricing:</b><br>NTG35 / NTG45 / NTG5 Series — €70<br>NTG6 MBUX — €100<br>NTG7 MBUX — €260<br><br><a href=\"mercedes-maps-tutorial.html?lang=en\" target=\"_blank\" rel=\"noopener\">📖 View step-by-step tutorial</a>"
+      "details": "Official Mercedes-Benz map update with <b>original PIN code</b>, valid for NTG35, NTG45, NTG5 Series, NTG6 MBUX and NTG7 MBUX systems. 100% official and safe process, no vehicle component removal required. <br><br><b>Pricing:</b><br>NTG35 / NTG45 / NTG5 Series — €70<br>NTG6 MBUX — €100<br>NTG7 MBUX — €260"
     },
     "fr": {
       "name": "Mercedes Maps — Codes PIN",
       "short": "Mettez à jour les cartes de votre Mercedes-Benz avec des codes PIN officiels.",
-      "details": "Mise à jour officielle des cartes Mercedes-Benz avec <b>code PIN original</b>, valable pour les systèmes NTG35, NTG45, NTG5 Series, NTG6 MBUX et NTG7 MBUX. Processus 100% officiel et sûr, sans démontage de composants du véhicule. <br><br><b>Tarifs :</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€<br><br><a href=\"mercedes-maps-tutorial.html?lang=fr\" target=\"_blank\" rel=\"noopener\">📖 Voir le tutoriel pas à pas</a>"
+      "details": "Mise à jour officielle des cartes Mercedes-Benz avec <b>code PIN original</b>, valable pour les systèmes NTG35, NTG45, NTG5 Series, NTG6 MBUX et NTG7 MBUX. Processus 100% officiel et sûr, sans démontage de composants du véhicule. <br><br><b>Tarifs :</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€"
     }
   },
   {
@@ -494,6 +494,28 @@
     }
   },
   {
+    "id": "vag_etka",
+    "section": "soft",
+    "brand": "vag",
+    "img": "IMG/VAG/vag-etka.svg",
+    "meta": {},
+    "pt": {
+      "name": "ETKA",
+      "short": "Catálogo electrónico de peças oficial Volkswagen, Audi, Seat e Škoda.",
+      "details": "<b>ETKA</b> (Elektronischer Teile Katalog) — catálogo electrónico de peças oficial do grupo Volkswagen. Pesquisa de referências por VIN ou por diagrama explodido, aplicações por modelo/ano/motorização e substituições técnicas. Ferramenta essencial para orçamentação e encomenda correcta de peças VW, Audi, Seat e Škoda."
+    },
+    "en": {
+      "name": "ETKA",
+      "short": "Official Volkswagen, Audi, Seat and Škoda electronic parts catalogue.",
+      "details": "<b>ETKA</b> (Elektronischer Teile Katalog) — official Volkswagen Group electronic parts catalogue. Part lookup by VIN or exploded diagram, model/year/engine applications and technical replacements. Essential tool for accurate quoting and ordering of VW, Audi, Seat and Škoda parts."
+    },
+    "fr": {
+      "name": "ETKA",
+      "short": "Catalogue électronique de pièces officiel Volkswagen, Audi, Seat et Škoda.",
+      "details": "<b>ETKA</b> (Elektronischer Teile Katalog) — catalogue électronique de pièces officiel du groupe Volkswagen. Recherche de références par VIN ou par vue éclatée, applications par modèle/année/motorisation et remplacements techniques. Outil indispensable pour le chiffrage et la commande de pièces VW, Audi, Seat et Škoda."
+    }
+  },
+  {
     "id": "bmw_ista_plus",
     "badge": "badge_top",
     "section": "soft",
@@ -543,6 +565,50 @@
     }
   },
   {
+    "id": "bmw_tis2017",
+    "section": "soft",
+    "brand": "bmw",
+    "img": "IMG/BMW/bmw-tis2017.svg",
+    "meta": { "year": "2017" },
+    "pt": {
+      "name": "TIS 2017",
+      "short": "TIS 2017 — informação técnica de reparação e manutenção oficial BMW.",
+      "details": "<b>TIS</b> (Technical Information System) 2017 — base de dados oficial BMW com procedimentos de reparação, planos de manutenção, esquemas eléctricos e tempos de mão-de-obra. Cobre toda a gama BMW e MINI até à edição 2017. Referência essencial para oficinas independentes."
+    },
+    "en": {
+      "name": "TIS 2017",
+      "short": "TIS 2017 — official BMW technical repair and maintenance information.",
+      "details": "<b>TIS</b> (Technical Information System) 2017 — official BMW database with repair procedures, maintenance schedules, wiring diagrams and labour times. Covers the full BMW and MINI range up to the 2017 edition. Essential reference for independent workshops."
+    },
+    "fr": {
+      "name": "TIS 2017",
+      "short": "TIS 2017 — informations techniques officielles BMW pour réparation et entretien.",
+      "details": "<b>TIS</b> (Technical Information System) 2017 — base de données officielle BMW avec procédures de réparation, plans d'entretien, schémas électriques et temps de main-d'œuvre. Couvre toute la gamme BMW et MINI jusqu'à l'édition 2017. Référence indispensable pour les ateliers indépendants."
+    }
+  },
+  {
+    "id": "bmw_service_manuals",
+    "section": "soft",
+    "brand": "bmw",
+    "img": "IMG/BMW/bmw-service-manuals.svg",
+    "meta": {},
+    "pt": {
+      "name": "Manuais de Serviço BMW",
+      "short": "Coleção de manuais de reparação oficiais por geração: E30, E36, E39, E46, E60 e mais.",
+      "details": "Coleção de <b>manuais de serviço oficiais BMW</b> organizados por geração/chassis — por exemplo Série 3 E30, E36, E39, E46, E60 e outros. Procedimentos de reparação detalhados, especificações técnicas, esquemas eléctricos e planos de manutenção específicos de cada modelo. Ideal para restauro, manutenção clássica e oficinas especializadas em BMW."
+    },
+    "en": {
+      "name": "BMW Service Manuals",
+      "short": "Collection of official repair manuals by generation: E30, E36, E39, E46, E60 and more.",
+      "details": "Collection of <b>official BMW service manuals</b> organised by generation/chassis code — for example 3 Series E30, E36, E39, E46, E60 and others. Detailed repair procedures, technical specifications, wiring diagrams and model-specific maintenance schedules. Ideal for restoration, classic maintenance and BMW-specialist workshops."
+    },
+    "fr": {
+      "name": "Manuels d'Entretien BMW",
+      "short": "Collection de manuels de réparation officiels par génération : E30, E36, E39, E46, E60 et plus.",
+      "details": "Collection de <b>manuels d'entretien officiels BMW</b> organisés par génération/code châssis — par exemple Série 3 E30, E36, E39, E46, E60 et autres. Procédures de réparation détaillées, spécifications techniques, schémas électriques et plans d'entretien spécifiques à chaque modèle. Idéal pour la restauration, l'entretien classique et les ateliers spécialisés BMW."
+    }
+  },
+  {
     "id": "psa_diagbox_9208",
     "section": "soft",
     "brand": "psa",
@@ -588,6 +654,50 @@
       "name": "Diagbox 7",
       "short": "Diagbox V7 pour anciens modèles Peugeot et Citroën avant 2013, non couverts par V9.",
       "details": "Version classique de Diagbox pour les anciens véhicules Peugeot/Citroën. Idéal pour les modèles antérieurs à 2013 non supportés par Diagbox V9. Diagnostic complet, effacement de défauts et fonctions de service pour la gamme classique PSA."
+    }
+  },
+  {
+    "id": "psa_servicebox",
+    "section": "soft",
+    "brand": "psa",
+    "img": "IMG/PSA/psa-servicebox.svg",
+    "meta": {},
+    "pt": {
+      "name": "Peugeot Service Box",
+      "short": "Documentação técnica oficial Peugeot — manuais de reparação, esquemas e boletins.",
+      "details": "<b>Peugeot Service Box</b> — sistema oficial de documentação técnica do grupo PSA. Manuais de reparação passo a passo, esquemas eléctricos, planos de manutenção e boletins técnicos para toda a gama Peugeot. Complementa o Diagbox para diagnóstico e reparação completos em oficina."
+    },
+    "en": {
+      "name": "Peugeot Service Box",
+      "short": "Official Peugeot technical documentation — repair manuals, diagrams and bulletins.",
+      "details": "<b>Peugeot Service Box</b> — official PSA Group technical documentation system. Step-by-step repair manuals, wiring diagrams, maintenance schedules and technical bulletins for the full Peugeot range. Complements Diagbox for complete workshop diagnostics and repair."
+    },
+    "fr": {
+      "name": "Peugeot Service Box",
+      "short": "Documentation technique officielle Peugeot — manuels de réparation, schémas et bulletins.",
+      "details": "<b>Peugeot Service Box</b> — système officiel de documentation technique du groupe PSA. Manuels de réparation étape par étape, schémas électriques, plans d'entretien et bulletins techniques pour toute la gamme Peugeot. Complète Diagbox pour un diagnostic et une réparation complets en atelier."
+    }
+  },
+  {
+    "id": "psa_rt6_maps",
+    "section": "soft",
+    "brand": "psa",
+    "img": "IMG/PSA/psa-rt6-maps.svg",
+    "meta": {},
+    "pt": {
+      "name": "Mapas RT6",
+      "short": "Atualização de mapas de navegação para sistemas RT6 Peugeot/Citroën.",
+      "details": "Atualização oficial de mapas de navegação para o sistema <b>RT6</b> Peugeot/Citroën. Inclui a cartografia mais recente da Europa, pontos de interesse actualizados e melhorias de navegação. Instalação via USB directamente no sistema multimédia do veículo."
+    },
+    "en": {
+      "name": "RT6 Maps",
+      "short": "Navigation map update for Peugeot/Citroën RT6 systems.",
+      "details": "Official navigation map update for the Peugeot/Citroën <b>RT6</b> system. Includes the latest Europe cartography, updated points of interest and navigation improvements. Installed via USB directly on the vehicle's infotainment system."
+    },
+    "fr": {
+      "name": "Cartes RT6",
+      "short": "Mise à jour des cartes de navigation pour les systèmes RT6 Peugeot/Citroën.",
+      "details": "Mise à jour officielle des cartes de navigation pour le système <b>RT6</b> Peugeot/Citroën. Inclut la cartographie Europe la plus récente, des points d'intérêt mis à jour et des améliorations de navigation. Installation via USB directement sur le système multimédia du véhicule."
     }
   },
   {

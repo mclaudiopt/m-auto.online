@@ -60,7 +60,8 @@ const TRANS = {
     news_btn: "Ver M-Auto VCI →",
     news2_title: "Mercedes Maps — Códigos PIN",
     news2_sub: "NTG35 a NTG7 MBUX — atualização oficial de mapas",
-    news2_btn: "Ver Mercedes Maps →",
+    news2_btn: "Ver Mercedes Maps →", news2_tutorial: "📖 Ver tutorial passo a passo",
+    modal_tutorial_title: "Tutorial passo a passo", modal_tutorial_sub: "Vê como atualizar os mapas — clica para abrir",
     promo_title: "🔥 Roleta de Descontos", promo_text: "Gira e ganha até <strong>20% de desconto</strong> em instalação de software.", promo_btn: "🎰 Girar",
     roleta_title: "Roleta de Descontos",
     roleta_sub: "Escolhe o teu pack e gira a roleta para ganhares até <strong>20% de desconto</strong>!",
@@ -138,7 +139,8 @@ const TRANS = {
     news_btn: "See M-Auto VCI →",
     news2_title: "Mercedes Maps — PIN Codes",
     news2_sub: "NTG35 to NTG7 MBUX — official map update",
-    news2_btn: "See Mercedes Maps →",
+    news2_btn: "See Mercedes Maps →", news2_tutorial: "📖 View step-by-step tutorial",
+    modal_tutorial_title: "Step-by-step tutorial", modal_tutorial_sub: "See how to update the maps — click to open",
     promo_title: "🔥 Discount Wheel", promo_text: "Spin and win up to <strong>20% off</strong> software installation.", promo_btn: "🎰 Spin",
     roleta_title: "Discount Wheel",
     roleta_sub: "Choose your pack and spin the wheel to win up to <strong>20% off</strong>!",
@@ -216,7 +218,8 @@ const TRANS = {
     news_btn: "Voir M-Auto VCI →",
     news2_title: "Mercedes Maps — Codes PIN",
     news2_sub: "NTG35 à NTG7 MBUX — mise à jour officielle des cartes",
-    news2_btn: "Voir Mercedes Maps →",
+    news2_btn: "Voir Mercedes Maps →", news2_tutorial: "📖 Voir le tutoriel pas à pas",
+    modal_tutorial_title: "Tutoriel pas à pas", modal_tutorial_sub: "Voyez comment mettre à jour les cartes — cliquez pour ouvrir",
     promo_title: "🔥 Roulette de Réductions", promo_text: "Tournez et gagnez jusqu'à <strong>20% de réduction</strong> sur l'installation de logiciels.", promo_btn: "🎰 Tourner",
     roleta_title: "Roulette de Réductions",
     roleta_sub: "Choisissez votre pack et tournez la roulette pour gagner jusqu'à <strong>20% de réduction</strong> !",
@@ -954,6 +957,7 @@ function renderAbout() {
           <div class="about-news-title">${t('news2_title')}</div>
           <div class="about-news-sub">${t('news2_sub')}</div>
           <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();openProductModal('merc_maps_pin');})(event)">${t('news2_btn')}</a>
+          <a href="mercedes-maps-tutorial.html?lang=${lang}" target="_blank" rel="noopener" style="display:block;margin-top:8px;font-size:12px;color:#bfdbfe;text-decoration:underline;">${t('news2_tutorial')}</a>
         </div>
       </div>
       <div class="about-stats">
@@ -1098,7 +1102,15 @@ function renderModalContent(item) {
   const featHtml = (item.features?.length)
     ? `<ul class="modal-features">${item.features.map(f => `<li>✓ ${f}</li>`).join('')}</ul>`
     : '';
-  if (descEl)  descEl.innerHTML = (d.details || `<em>${t('modal_no_details')}</em>`) + featHtml;
+  const tutorialUrls = { merc_maps_pin: 'mercedes-maps-tutorial.html' };
+  const tutorialBanner = tutorialUrls[item.id]
+    ? `<a href="${tutorialUrls[item.id]}?lang=${lang}" target="_blank" rel="noopener" class="modal-tutorial-banner">
+         <span class="mtb-icon">📖</span>
+         <span class="mtb-text"><strong>${t('modal_tutorial_title')}</strong><br>${t('modal_tutorial_sub')}</span>
+         <span class="mtb-arrow">→</span>
+       </a>`
+    : '';
+  if (descEl)  descEl.innerHTML = tutorialBanner + (d.details || `<em>${t('modal_no_details')}</em>`) + featHtml;
   if (priceEl) priceEl.style.display = priceKey === 'price_consult' ? 'none' : '';
   if (priceEl && priceKey !== 'price_consult') priceEl.textContent = t(priceKey);
   if (imgEl)   { imgEl.removeAttribute('src'); imgEl.style.display = 'none'; }

@@ -1,0 +1,27 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Peugeot RT6 Navigation Maps">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#6d1fa0" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#6d1fa0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <g transform="translate(400,190)">
+    <path d="M0,-95 C55,-95 95,-55 95,-3 C95,55 40,105 0,150 C-40,105 -95,55 -95,-3 C-95,-55 -55,-95 0,-95 Z"
+          fill="#6d1fa0" stroke="#d8b4fe" stroke-width="3"/>
+    <circle cx="0" cy="-5" r="38" fill="#0f172a"/>
+    <text x="0" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="800" fill="#f8fafc">RT6</text>
+  </g>
+
+  <rect x="40" y="40" width="150" height="34" rx="6" fill="#6d1fa0"/>
+  <text x="55" y="63" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="0.5">PEUGEOT</text>
+
+  <text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="800" fill="#f8fafc">Mapas RT6</text>
+  <text x="400" y="434" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#d8b4fe" letter-spacing="0.5">ATUALIZAÇÃO DE NAVEGAÇÃO</text>
+</svg>
