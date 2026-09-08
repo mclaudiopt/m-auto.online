@@ -1834,14 +1834,20 @@ body {
 
 /* ── ABOUT LANDING PAGE ── */
 /* ── ABOUT NEWS CARD ─────────────────────────── */
-.about-news {
+.about-news-row {
   width: 100%;
-  max-width: 560px;
+  max-width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.about-news {
+  flex: 1 1 260px;
   background: linear-gradient(135deg, #1e3a8a, #1e40af);
   border: 1px solid #3b82f6;
   border-radius: 14px;
-  padding: 22px 28px;
-  margin-bottom: 36px;
+  padding: 22px 24px;
   text-align: center;
   box-shadow: 0 8px 24px rgba(37,99,235,.25);
 }
@@ -3790,6 +3796,51 @@ body::after {
   font-size: 0.95rem;
   cursor: pointer;
   transition: 0.25s;
+}
+
+/* Roleta: banner promocional compacto, deliberadamente diferente
+   dos cards de produto/novidade (mais baixo, layout horizontal, sem
+   sombra pesada nem cantos tao arredondados). */
+.promo-section-compact {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  max-width: 700px;
+  width: 100%;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.promo-section-compact .promo-emoji {
+  font-size: 1.6rem;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+.promo-section-compact .promo-text {
+  flex: 1;
+  min-width: 0;
+}
+.promo-section-compact h3 {
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+.promo-section-compact p {
+  font-size: 0.78rem;
+  opacity: 0.8;
+  margin: 0;
+  max-width: none;
+}
+.promo-section-compact .promo-btn {
+  flex-shrink: 0;
+  padding: 7px 18px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .promo-section-compact { flex-wrap: wrap; text-align: center; justify-content: center; }
+  .promo-section-compact .promo-text { flex-basis: 100%; text-align: center; }
 }
 .promo-btn:hover {
   transform: translateY(-2px);

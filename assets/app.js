@@ -885,23 +885,27 @@ function renderAbout() {
       <p class="section-hero-meta">Simply Digital · Diagnóstico Profissional</p>
     </div>
     <div class="about-landing">
-      <div class="promo-section">
+      <div class="promo-section promo-section-compact">
         <div class="promo-emoji">🎰</div>
-        <h3>🔥 Promoção Especial — Roleta de Descontos!</h3>
-        <p>Gira a roleta e ganha até <strong>20% de desconto</strong> em instalação de software de diagnóstico.</p>
-        <button type="button" class="promo-btn" onclick="event.stopPropagation();openRoleta()">🎰 Girar Roleta</button>
+        <div class="promo-text">
+          <h3>🔥 Roleta de Descontos</h3>
+          <p>Gira e ganha até <strong>20% de desconto</strong> em instalação de software.</p>
+        </div>
+        <button type="button" class="promo-btn" onclick="event.stopPropagation();openRoleta()">🎰 Girar</button>
       </div>
-      <div class="about-news">
-        <span class="about-news-badge">${t('news_badge')}</span>
-        <div class="about-news-title">${t('news_title')}</div>
-        <div class="about-news-sub">${t('news_sub')}</div>
-        <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();var o=document.getElementById('vcxOverlay'),f=document.getElementById('vcxFrame');if(o&&f){f.src='vcx.html?lang=${lang}';o.style.display='flex';}})(event)">${t('news_btn')}</a>
-      </div>
-      <div class="about-news">
-        <span class="about-news-badge">${t('news_badge')}</span>
-        <div class="about-news-title">${t('news2_title')}</div>
-        <div class="about-news-sub">${t('news2_sub')}</div>
-        <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();openProductModal('merc_maps_pin');})(event)">${t('news2_btn')}</a>
+      <div class="about-news-row">
+        <div class="about-news">
+          <span class="about-news-badge">${t('news_badge')}</span>
+          <div class="about-news-title">${t('news_title')}</div>
+          <div class="about-news-sub">${t('news_sub')}</div>
+          <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();var o=document.getElementById('vcxOverlay'),f=document.getElementById('vcxFrame');if(o&&f){f.src='vcx.html?lang=${lang}';o.style.display='flex';}})(event)">${t('news_btn')}</a>
+        </div>
+        <div class="about-news">
+          <span class="about-news-badge">${t('news_badge')}</span>
+          <div class="about-news-title">${t('news2_title')}</div>
+          <div class="about-news-sub">${t('news2_sub')}</div>
+          <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();openProductModal('merc_maps_pin');})(event)">${t('news2_btn')}</a>
+        </div>
       </div>
       <div class="about-stats">
         <div class="about-stat"><span class="about-stat-num">${t('stat1_num')}</span><span class="about-stat-lbl">${t('stat1_lbl')}</span></div>

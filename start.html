@@ -5,9 +5,9 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYEBRSYQ2T"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-MYEBRSYQ2T');</script>
 
-  <!-- SEO Multilíngue: PT, EN, FR, DE, ZH -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO Multilíngue: PT, EN, FR, DE, ZH -->
   <meta name="description" content="PT: Ferramenta de diagnóstico e codificação automóvel para Mercedes, BMW, VW, Audi, Seat. EN: Automotive diagnostic & coding tool — ideal Windows, RAM & disk setup for Xentry, DAS, Vediamo, ODIS, VCDS. FR: Outil de diagnostic et codage automobile — configuration Windows, RAM, disque pour Mercedes, BMW, VW. DE: Kfz-Diagnose- und Codierungstool — optimale Windows-, RAM- und Festplatten-Konfiguration. ZH: 汽车诊断编码工具 — 奔驰宝马大众奥迪Windows内存硬盘配置推荐.">
   <meta name="keywords" content="diagnóstico automóvel, codificação automóvel, automotive diagnostic tool, car coding software, logiciel diagnostic automobile, Kfz-Diagnose, 汽车诊断, Mercedes, BMW, VW, Audi, Seat, Skoda, Xentry, DAS, Vediamo, ODIS, VCDS, VXDIAG, OpenPort, instalação remota, remote installation, installation à distance, Ferninstallation, 远程安装, m-auto, m-auto.online, Simply Digital">
   <meta name="author" content="M-Auto Online (Simply Digital)">
@@ -34,7 +34,7 @@
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="541">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:alt" content="M-Auto Online">
+  <meta property="og:image:alt" content="M-Auto Online — Diagnóstico Automóvel">
   <meta property="og:locale" content="pt_PT">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="fr_FR">
@@ -45,13 +45,11 @@
   <meta name="twitter:description" content="PT/EN/FR/DE/ZH: Ferramenta de diagnóstico automóvel. Automotive diagnostic tool. Kfz-Diagnose. 汽车编码. Mercedes, BMW, VW, Audi. Instalação remota profissional.">
   <meta name="twitter:image" content="https://m-auto.online/IMG/mauto/og.jpg">
 
-
   <link rel="canonical" href="https://m-auto.online/">
   <link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
-  <!-- Font Awesome 6 Free — icons para ferramentas e marcas -->
-  
-  <title>M-Auto Online</title>
-  <link rel="stylesheet" href="assets/style.css?v=8.1.3">
+
+  <title>M-Auto Online — Ferramenta de Diagnóstico e Codificação Automóvel | Mercedes, BMW, VAG</title>
+  <link rel="stylesheet" href="assets/style.css?v=8.2">
 
   <!-- ── SPLASH SCREEN CSS ── -->
   <style>
@@ -268,6 +266,106 @@
       <div class="prod-footer">
         <span id="modalPrice" class="prod-price"></span>
         <button type="button" class="prod-btn" onclick="orderFromModal()">Encomendar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ROLETA DE DESCONTOS ═══ -->
+  <div id="roletaModal" class="roleta-modal">
+    <div class="roleta-content">
+      <button type="button" class="roleta-close" onclick="closeRoleta()">×</button>
+
+      <!-- ── Step 1: Selecionar produto ── -->
+      <div id="roleta-step-produto" class="roleta-step">
+        <div class="roleta-header">
+          <div class="roleta-icon">🎰</div>
+          <h2 class="roleta-title">Roleta de Descontos</h2>
+          <p class="roleta-sub">Escolhe o teu pack e gira a roleta para ganhares até <strong>20% de desconto</strong>!</p>
+        </div>
+        <div class="roleta-produtos">
+          <button type="button" class="roleta-prod-btn" data-prod="normal" onclick="selectRoletaProd('normal')">
+            <span class="rpb-icon">🖥️</span>
+            <span class="rpb-title">Instalação de Software</span>
+            <span class="rpb-desc">Qualquer instalação remota</span>
+          </button>
+          <button type="button" class="roleta-prod-btn" data-prod="c4" onclick="selectRoletaProd('c4')">
+            <span class="rpb-icon">🔌</span>
+            <span class="rpb-title">Pack Mercedes C4</span>
+            <span class="rpb-desc">Instalação de software C4</span>
+          </button>
+          <button type="button" class="roleta-prod-btn" data-prod="vci" onclick="selectRoletaProd('vci')">
+            <span class="rpb-icon">🔧</span>
+            <span class="rpb-title">Mercedes VCI</span>
+            <span class="rpb-desc">Interface de diagnóstico</span>
+          </button>
+          <button type="button" class="roleta-prod-btn" data-prod="maps" onclick="selectRoletaProd('maps')">
+            <span class="rpb-icon">🗺️</span>
+            <span class="rpb-title">Mercedes Maps</span>
+            <span class="rpb-desc">Códigos PIN — atualização de mapas</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Step 1b: Quantas instalações ── -->
+      <div id="roleta-step-qtd" class="roleta-step" style="display:none">
+        <div class="roleta-header">
+          <div class="roleta-icon">🔢</div>
+          <h2 class="roleta-title">Quantas instalações?</h2>
+          <p class="roleta-sub" id="roletaStepQtdSub">Boa sorte!</p>
+        </div>
+        <div class="roleta-produtos">
+          <button type="button" class="roleta-prod-btn" data-qtd="single" onclick="selectRoletaQtd('single')">
+            <span class="rpb-icon">1️⃣</span>
+            <span class="rpb-title">1 Instalação</span>
+            <span class="rpb-desc">Até 10% de desconto</span>
+          </button>
+          <button type="button" class="roleta-prod-btn" data-qtd="multi" onclick="selectRoletaQtd('multi')">
+            <span class="rpb-icon">🔟</span>
+            <span class="rpb-title">Mais de 1 Instalação</span>
+            <span class="rpb-desc">Até 20% de desconto</span>
+          </button>
+        </div>
+        <button type="button" class="roleta-back-btn" onclick="backRoletaProd()">← Alterar pack</button>
+      </div>
+
+      <!-- ── Step 2: Girar roleta ── -->
+      <div id="roleta-step-girar" class="roleta-step" style="display:none">
+        <div class="roleta-header">
+          <div class="roleta-icon">🎯</div>
+          <h2 class="roleta-title">Gira a Roleta!</h2>
+          <p class="roleta-sub" id="roletaStep2Sub">Boa sorte!</p>
+        </div>
+        <div class="roleta-wheel-wrap">
+          <div class="roleta-pointer">▼</div>
+          <canvas id="roletaCanvas" width="340" height="340"></canvas>
+        </div>
+        <button type="button" class="roleta-spin-btn" id="roletaSpinBtn" onclick="girarRoleta()">
+          <span>🎰 GIRAR!</span>
+        </button>
+        <button type="button" class="roleta-back-btn" onclick="backRoletaQtd()">← Alterar instalações</button>
+      </div>
+
+      <!-- ── Step 3: Resultado ── -->
+      <div id="roleta-step-resultado" class="roleta-step" style="display:none">
+        <div class="roleta-header">
+          <div class="roleta-icon" id="roletaResultIcon">🎉</div>
+          <h2 class="roleta-title">Parabéns!</h2>
+          <p class="roleta-sub">Ganhaste um desconto especial</p>
+        </div>
+        <div class="roleta-result-box">
+          <div class="roleta-result-disc" id="roletaResultDisc">0%</div>
+          <div class="roleta-result-label">DE DESCONTO</div>
+        </div>
+        <div class="roleta-result-code-box">
+          <div class="roleta-code-label">O teu código de desconto</div>
+          <div class="roleta-code" id="roletaResultCode">MAUTO-XXXXX</div>
+          <button type="button" class="roleta-copy-btn" onclick="copyRoletaCode()">📋 Copiar código</button>
+        </div>
+        <p class="roleta-result-valid">Válido por 7 dias · 1 utilização por cliente</p>
+        <button type="button" class="roleta-wa-btn" onclick="orderRoleta()">
+          <span>💬 Encomendar via WhatsApp</span>
+        </button>
+        <button type="button" class="roleta-spin-again" onclick="backRoletaProd()">🔁 Girar novamente</button>
       </div>
     </div>
   </div>
@@ -492,6 +590,6 @@
   })();
   </script>
 
-  <script src="assets/app.js?v=8.1.3"></script>
+  <script src="assets/app.js?v=8.2"></script>
 </body>
 </html>
