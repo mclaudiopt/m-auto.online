@@ -272,19 +272,17 @@ header {
 	border-bottom: 1px solid var(--border);
 	/* 🔹 CORRIGIDO: sem verde, dependente do tema */
 	/* CLARO: só azuis (sem verde, sem cinza) */
-	background: linear-gradient( -45deg, #38bdf8, /* sky-500 */
-	#2563eb, /* blue-600 */
-	#1d4ed8, /* blue-700 */
-	#38bdf8);
-	/* DARK: azul escuro consistente com o site */
-	[data-theme="dark"] .hero {
-		background: linear-gradient( -45deg, #0b1220, #0f172a, #1e3a8a, #0b1220);
-	}
+	background: linear-gradient(-45deg, #38bdf8, #2563eb, #1d4ed8, #38bdf8);
 	background-size: 400% 400%;
 	animation: gradientBG 15s ease infinite;
 	color: var(--text-main);
 	position: relative;
 	overflow: hidden;
+}
+/* DARK: azul escuro consistente com o site */
+[data-theme="dark"] .hero {
+	background: linear-gradient(-45deg, #0b1220, #0f172a, #1e3a8a, #0b1220);
+	background-size: 400% 400%;
 }
 
 @keyframes gradientBG {

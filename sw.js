@@ -1,8 +1,8 @@
-const CACHE = 'm-auto-v16';
+const CACHE = 'm-auto-v17';
 const PRECACHE = [
   '/',
-  '/assets/app.js',
-  '/assets/style.css',
+  '/assets/app.min.js',
+  '/assets/style.min.css',
   '/data/catalog.json',
   '/data/tools.json',
   '/data/services.json',

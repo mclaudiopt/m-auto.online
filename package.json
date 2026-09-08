@@ -1,9 +1,13 @@
 {
   "scripts": {
     "sync-html": "node scripts/sync-html.js",
-    "check-sync": "node scripts/sync-html.js --check"
+    "check-sync": "node scripts/sync-html.js --check",
+    "build": "node scripts/build.js",
+    "check-build": "node scripts/build.js --check"
   },
   "devDependencies": {
-    "serve": "^14.2.6"
+    "clean-css-cli": "^5.6.3",
+    "serve": "^14.2.6",
+    "terser": "^5.51.2"
   }
 }
