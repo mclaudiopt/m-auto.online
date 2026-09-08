@@ -11,8 +11,8 @@ const TRANS = {
   pt: {
     nav_soft: "Software", nav_all: "Tudo", nav_hard: "Hardware", nav_tools: "Downloads",
     nav_serv: "Serviços", nav_about: "Sobre",
-    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_secondhand: "2ª Mão", mob_about: "Info",
-    nav_secondhand: "Second Hand Tools",
+    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_secondhand: "Exposição", mob_about: "Info",
+    nav_secondhand: "Equipamentos de Exposição",
     secondhand_title: "Second Hand Tools", secondhand_meta: "Equipamento em segunda mão — fábrica",
     secondhand_notice: "⚠️ Stock em tempo real e sujeito a confirmação — contacta-nos antes de encomendar para confirmarmos disponibilidade e preço atual.",
     secondhand_badge: "Second Hand · Fábrica",
@@ -1100,8 +1100,10 @@ function createCard(item) {
   return `<div class="card${isPremium ? ' gold' : ''} searchable-item card-clickable"${spanClass}
     onclick="openProductModal('${item.id}')" role="button" tabindex="0"
     onkeydown="if(event.key==='Enter'||event.key===' ')openProductModal('${item.id}')">
-    ${badgeHtml}${stockBadgeHtml}
-    ${item.img ? `<img src="${item.img}" loading="lazy" alt="${d.name || ''}">` : `<div class="img-placeholder"><span>${d.name || item.id}</span></div>`}
+    <div class="card-media">
+      ${badgeHtml}${stockBadgeHtml}
+      ${item.img ? `<img src="${item.img}" loading="lazy" alt="${d.name || ''}">` : `<div class="img-placeholder"><span>${d.name || item.id}</span></div>`}
+    </div>
     <div class="card-body">
       <div class="card-title-row">
         <h3>${d.name || ''}</h3>
