@@ -1353,5 +1353,26 @@
       "short": "Schémas électriques officiels Tesla pour tous les systèmes du véhicule.",
       "details": "Collection complète de <b>schémas électriques officiels Tesla</b> couvrant tous les systèmes du véhicule : haute tension, basse tension, chaîne de traction, charge, ADAS/Autopilot, confort et multimédia. Schémas détaillés par modèle (Model S, 3, X, Y) avec identification des connecteurs, modules et cheminement des câblages — indispensables pour le diagnostic électrique avancé et la réparation de pannes complexes."
     }
+  },
+  {
+    "id": "hw_topdon_rlink_x7",
+    "section": "hard",
+    "img": "IMG/hardware/hw-topdon-rlink-x7.png",
+    "meta": {},
+    "pt": {
+      "name": "Topdon RLink X7",
+      "short": "Interface VCI Topdon RLink X7 para diagnóstico multimarca de alta velocidade.",
+      "details": "<b>Topdon RLink X7</b> — interface de diagnóstico VCI robusta, compatível com protocolos DoIP, CAN FD e J2534, para diagnóstico e programação de ECUs multimarca a alta velocidade. Construção resistente para uso intensivo em oficina, ligação USB e Wi-Fi. Compatível com os principais softwares de diagnóstico profissional."
+    },
+    "en": {
+      "name": "Topdon RLink X7",
+      "short": "Topdon RLink X7 VCI interface for high-speed multi-brand diagnostics.",
+      "details": "<b>Topdon RLink X7</b> — rugged VCI diagnostic interface, compatible with DoIP, CAN FD and J2534 protocols, for high-speed multi-brand ECU diagnostics and programming. Durable build for intensive workshop use, USB and Wi-Fi connectivity. Compatible with major professional diagnostic software."
+    },
+    "fr": {
+      "name": "Topdon RLink X7",
+      "short": "Interface VCI Topdon RLink X7 pour diagnostic multimarque haute vitesse.",
+      "details": "<b>Topdon RLink X7</b> — interface de diagnostic VCI robuste, compatible avec les protocoles DoIP, CAN FD et J2534, pour le diagnostic et la programmation d'ECU multimarque à haute vitesse. Construction résistante pour un usage intensif en atelier, connexion USB et Wi-Fi. Compatible avec les principaux logiciels de diagnostic professionnel."
+    }
   }
 ]

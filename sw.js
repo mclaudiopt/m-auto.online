@@ -1,4 +1,4 @@
-const CACHE = 'm-auto-v13';
+const CACHE = 'm-auto-v14';
 const PRECACHE = [
   '/',
   '/assets/app.js',
