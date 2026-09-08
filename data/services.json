@@ -33,5 +33,12 @@
     "pt": { "title": "Configuração de sistema", "desc": "Ajustes de sistema operativo para garantir desempenho e estabilidade do software." },
     "en": { "title": "System setup", "desc": "Operating system tweaks to ensure software performance and stability." },
     "fr": { "title": "Configuration système", "desc": "Réglages du système d'exploitation pour garantir performance et stabilité." }
+  },
+  {
+    "id": "srv_radio_unlock",
+    "icon": "🔓",
+    "pt": { "title": "Desbloqueio de auto-rádios por código", "desc": "Cálculo e desbloqueio de códigos de auto-rádio — rádios de fábrica bloqueados após troca de bateria ou reparação." },
+    "en": { "title": "Car radio unlock by code", "desc": "Calculation and unlock of car radio codes — factory radios locked after a battery change or repair." },
+    "fr": { "title": "Déverrouillage d'autoradios par code", "desc": "Calcul et déverrouillage de codes d'autoradio — autoradios verrouillés après un changement de batterie ou une réparation." }
   }
 ]

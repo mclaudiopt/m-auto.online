@@ -720,18 +720,27 @@ header {
   box-shadow: 0 2px 5px rgba(37, 99, 235, 0.35) !important;
 }
 
-.badge-stock {
+.badge-stock, .badge-delivery {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  background: #16a34a;
-  color: #fff;
-  padding: 4px 10px;
+  top: 172px;
+  left: 8px;
+  right: 8px;
+  text-align: center;
+  padding: 4px 8px;
   border-radius: 4px;
   font-weight: 700;
-  font-size: 0.68rem;
-  box-shadow: 0 2px 5px rgba(22, 163, 74, 0.35);
+  font-size: 0.66rem;
   z-index: 2;
+}
+.badge-stock {
+  background: #16a34a;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(22, 163, 74, 0.35);
+}
+.badge-delivery {
+  background: #475569;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(71, 85, 105, 0.35);
 }
 
 .modal-stock-badge {
@@ -745,6 +754,8 @@ header {
   margin-bottom: 12px;
 }
 [data-theme="dark"] .modal-stock-badge { background: #052e16; color: #4ade80; }
+.modal-delivery-badge { background: #e2e8f0; color: #475569; }
+[data-theme="dark"] .modal-delivery-badge { background: #1e293b; color: #cbd5e1; }
 
 /* MODAL DE PRODUTO */
 

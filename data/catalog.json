@@ -1208,6 +1208,7 @@
     "id": "hw_laptop",
     "section": "hard",
     "img": "IMG/hardware/laptop.jpg",
+    "stock": true,
     "meta": {},
     "pt": {
       "name": "Laptop",
@@ -1359,7 +1360,6 @@
     "id": "hw_topdon_rlink_x7",
     "section": "hard",
     "img": "IMG/hardware/hw-topdon-rlink-x7.jpg",
-    "stock": true,
     "meta": {},
     "pt": {
       "name": "Topdon RLink X7",

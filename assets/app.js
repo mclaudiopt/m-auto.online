@@ -22,6 +22,7 @@ const TRANS = {
     price_consult: "Consulta", price_pack: "Pack Completo", price_maps_from: "A partir de 70€",
     badge_best: "Melhor Escolha", badge_top: "Mais Vendido", badge_new: "🆕 Novidade",
     stock_badge: "Em Stock · Entrega Imediata",
+    delivery_badge: "Entrega em 1 Semana",
     hero_sol: "Soluções Online", hero_desc: "Instalação remota profissional.",
     modal_order: "Encomendar", modal_no_details: "Detalhes não disponíveis.",
     search_placeholder: "🔍 Procurar...",
@@ -108,6 +109,7 @@ const TRANS = {
     price_consult: "On request", price_pack: "Full Pack", price_maps_from: "From €70",
     badge_best: "Best Choice", badge_top: "Best Seller", badge_new: "🆕 New",
     stock_badge: "In Stock · Immediate Delivery",
+    delivery_badge: "Delivery in 1 Week",
     hero_sol: "Online Solutions", hero_desc: "Professional remote installation.",
     modal_order: "Order", modal_no_details: "Details not available.",
     search_placeholder: "🔍 Search...",
@@ -194,6 +196,7 @@ const TRANS = {
     price_consult: "Sur demande", price_pack: "Pack Complet", price_maps_from: "À partir de 70€",
     badge_best: "Meilleur Choix", badge_top: "Best Seller", badge_new: "🆕 Nouveau",
     stock_badge: "En Stock · Livraison Immédiate",
+    delivery_badge: "Livraison en 1 Semaine",
     hero_sol: "Solutions En Ligne", hero_desc: "Installation à distance professionnelle.",
     modal_order: "Commander", modal_no_details: "Détails non disponibles.",
     search_placeholder: "🔍 Rechercher...",
@@ -921,7 +924,8 @@ function renderBrand(brandId) {
 function renderHard() {
   const sec = document.getElementById('sec-hard');
   if (!sec) return;
-  const products = catalog.filter(p => p.section === 'hard');
+  const products = catalog.filter(p => p.section === 'hard')
+    .sort((a, b) => (b.stock ? 1 : 0) - (a.stock ? 1 : 0));
   let heroEl = sec.querySelector('.section-hero');
   if (!heroEl) {
     sec.innerHTML = `
@@ -973,12 +977,13 @@ function renderServices() {
   const serviceCards = services.map(s => {
     const d = s[lang] || s.pt;
     // Cores por tipo de serviço
-    const bgMap = { srv_remote_install:'#2563eb', srv_support:'#059669', srv_update:'#7c3aed', srv_config:'#d97706' };
+    const bgMap = { srv_remote_install:'#2563eb', srv_support:'#059669', srv_update:'#7c3aed', srv_config:'#d97706', srv_radio_unlock:'#dc2626' };
     const svgMap = {
       srv_remote_install: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8l2 2-2 2M13 10h4"/></svg>`,
       srv_support: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M12 8v4M12 16h.01" stroke-width="2"/></svg>`,
       srv_update: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>`,
-      srv_config: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>`
+      srv_config: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>`,
+      srv_radio_unlock: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/><circle cx="12" cy="15.5" r="1.5" fill="white" stroke="none"/></svg>`
     };
     const bg = bgMap[s.id] || '#2563eb';
     const svgIcon = svgMap[s.id] || `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" width="26" height="26"><circle cx="12" cy="12" r="10"/></svg>`;
@@ -1085,7 +1090,9 @@ function createCard(item) {
     const badgeClass = item.badge === 'badge_top' ? ' badge-top' : item.badge === 'badge_new' ? ' badge-new' : '';
     badgeHtml = `<span class="badge${badgeClass}">${t(item.badge)}</span>`;
   }
-  const stockBadgeHtml = item.stock ? `<span class="badge-stock">${t('stock_badge')}</span>` : '';
+  const stockBadgeHtml = item.stock
+    ? `<span class="badge-stock">${t('stock_badge')}</span>`
+    : (item.section === 'hard' ? `<span class="badge-delivery">${t('delivery_badge')}</span>` : '');
 
   const priceColor = isPremium ? ' style="color:var(--gold)"' : '';
   const eyeColor   = isPremium ? ' card-eye-gold' : '';
@@ -1211,7 +1218,9 @@ function renderModalContent(item) {
          <span class="mtb-arrow">→</span>
        </a>`
     : '';
-  const stockLineHtml = item.stock ? `<div class="modal-stock-badge">✅ ${t('stock_badge')}</div>` : '';
+  const stockLineHtml = item.stock
+    ? `<div class="modal-stock-badge">✅ ${t('stock_badge')}</div>`
+    : (item.section === 'hard' ? `<div class="modal-stock-badge modal-delivery-badge">🚚 ${t('delivery_badge')}</div>` : '');
   if (descEl)  descEl.innerHTML = stockLineHtml + tutorialBanner + (d.details || `<em>${t('modal_no_details')}</em>`) + featHtml;
   if (priceEl) priceEl.style.display = priceKey === 'price_consult' ? 'none' : '';
   if (priceEl && priceKey !== 'price_consult') priceEl.textContent = t(priceKey);
