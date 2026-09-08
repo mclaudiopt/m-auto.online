@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M-Auto Online — Mercedes Maps: Como Atualizar</title>
+<link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.5; }
+img { max-width: 100%; display: block; }
+
+/* HEADER */
+#header { background: #0f172a; border-bottom: 3px solid #2563eb; }
+#header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+#logo { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+#logo span { color: #60a5fa; }
+#lang-bar button {
+  background: transparent; border: 1px solid #334155; color: #94a3b8;
+  font-size: 11px; font-weight: 700; padding: 5px 10px; margin-left: 6px;
+  cursor: pointer; font-family: inherit; letter-spacing: 0.5px; border-radius: 4px;
+}
+#lang-bar button:hover { border-color: #2563eb; color: #fff; }
+#lang-bar button.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+/* HERO */
+#hero { background: linear-gradient(135deg,#1e3a8a,#1e40af); color: #fff; padding: 40px 20px; text-align: center; }
+#hero h1 { font-size: 1.7rem; font-weight: 800; margin-bottom: 8px; }
+#hero p { font-size: 0.95rem; color: #bfdbfe; max-width: 560px; margin: 0 auto; }
+
+/* MAIN */
+main { max-width: 780px; margin: 0 auto; padding: 40px 20px 70px; }
+section { margin-bottom: 44px; }
+h2 { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-bottom: 18px; }
+
+/* PRICING */
+.pricing-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+.pricing-table th { background: #0f172a; color: #fff; font-size: 0.8rem; text-align: left; padding: 10px 16px; }
+.pricing-table td { padding: 12px 16px; font-size: 0.9rem; border-top: 1px solid #e2e8f0; }
+.pricing-table td.price { font-weight: 800; color: #2563eb; text-align: right; }
+
+/* STEPS */
+.step { display: flex; gap: 16px; margin-bottom: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 18px; }
+.step-num {
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+  background: #2563eb; color: #fff; font-weight: 800; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: #0f172a; }
+.step-body p { font-size: 0.88rem; color: #475569; }
+.step-cta {
+  display: inline-block; margin-top: 10px; padding: 7px 16px; background: #2563eb; color: #fff;
+  border-radius: 6px; font-size: 0.82rem; font-weight: 700; text-decoration: none;
+}
+.step-cta:hover { background: #1d4ed8; }
+.step-cta.secondary { background: #fff; color: #2563eb; border: 1px solid #2563eb; }
+.step-cta.secondary:hover { background: #eff6ff; }
+.step-note { margin-top: 8px; font-size: 0.8rem; color: #d97706; font-weight: 600; }
+
+/* SCREENSHOTS */
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.shot { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+.shot img { width: 100%; height: 160px; object-fit: cover; background: #0f172a; }
+.shot span { display: block; padding: 8px 10px; font-size: 0.78rem; font-weight: 600; color: #475569; text-align: center; }
+@media (max-width: 640px) { .shots { grid-template-columns: 1fr; } }
+
+/* FAQ */
+details { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 10px; padding: 12px 16px; }
+summary { font-weight: 700; font-size: 0.92rem; cursor: pointer; color: #0f172a; }
+details p { margin-top: 8px; font-size: 0.86rem; color: #475569; }
+
+/* REQUIREMENTS */
+#reqs ul { list-style: none; }
+#reqs li { padding: 8px 0 8px 26px; position: relative; font-size: 0.9rem; color: #334155; border-bottom: 1px solid #e2e8f0; }
+#reqs li::before { content: '✓'; position: absolute; left: 0; color: #16a34a; font-weight: 800; }
+
+/* HELP */
+#help { background: linear-gradient(135deg,#1e3a8a,#1e40af); color: #fff; border-radius: 12px; padding: 26px 24px; text-align: center; }
+#help h2 { color: #fff; }
+#help p { font-size: 0.9rem; color: #bfdbfe; margin-bottom: 16px; }
+#help .step-cta { background: #fff; color: #1e40af; padding: 10px 24px; font-size: 0.9rem; }
+#help .step-cta:hover { background: #eff6ff; }
+
+/* FOOTER */
+footer { border-top: 1px solid #e2e8f0; background: #fff; padding: 20px; text-align: center; }
+footer .f-brand { font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+footer .f-disc { font-size: 0.72rem; color: #94a3b8; max-width: 560px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-inner">
+    <div id="logo">M-AUTO<span>.online</span></div>
+    <div id="lang-bar">
+      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+  </div>
+</div>
+
+<div id="hero">
+  <h1 id="t-title">Mercedes Maps — Atualização de Mapas com Código PIN</h1>
+  <p id="t-subtitle">Guia passo a passo para atualizares os mapas do teu Mercedes-Benz com o código PIN oficial.</p>
+</div>
+
+<main>
+  <section id="pricing-section">
+    <h2 id="t-pricing-title">Preços</h2>
+    <table class="pricing-table">
+      <thead><tr><th id="t-pricing-th-sys">Sistema</th><th id="t-pricing-th-price" style="text-align:right">Preço</th></tr></thead>
+      <tbody id="pricing-list"></tbody>
+    </table>
+  </section>
+
+  <section id="steps-section">
+    <h2 id="t-how-title">Como funciona (passo a passo)</h2>
+    <div id="steps-list"></div>
+  </section>
+
+  <section id="shots-section">
+    <h2 id="t-shots-title">Capturas de ecrã</h2>
+    <div class="shots" id="shots-list"></div>
+  </section>
+
+  <section id="faq-section">
+    <h2 id="t-faq-title">Perguntas Frequentes</h2>
+    <div id="faq-list"></div>
+  </section>
+
+  <section id="reqs">
+    <h2 id="t-reqs-title">Resumo dos requisitos</h2>
+    <ul id="reqs-list"></ul>
+  </section>
+
+  <section id="help">
+    <h2 id="t-help-title">Precisas de ajuda?</h2>
+    <p id="t-help-text">Se não tiveres a certeza sobre o modelo da tua head unit ou a versão de mapa, contacta o nosso suporte e ajudamos-te a identificar a opção correta.</p>
+    <a class="step-cta" id="t-help-btn" href="https://wa.me/351938526930" target="_blank" rel="noopener">💬 Contactar via WhatsApp</a>
+  </section>
+</main>
+
+<footer>
+  <div class="f-brand" id="t-footer-brand">M-Auto Online — Diagnóstico e Codificação Automóvel</div>
+  <div class="f-disc" id="t-footer-disc">M-Auto Online fornece produtos e serviços digitais. Alguns produtos são entregues automaticamente após o pagamento; outros serviços podem exigir o VIN, o modelo do veículo, capturas de ecrã ou outros dados técnicos antes da entrega.</div>
+</footer>
+
+<script>
+var WA = 'https://wa.me/351938526930';
+
+var i18n = {
+  pt: {
+    title: 'Mercedes Maps — Atualização de Mapas com Código PIN',
+    subtitle: 'Guia passo a passo para atualizares os mapas do teu Mercedes-Benz com o código PIN oficial.',
+    pricingTitle: 'Preços', pricingThSys: 'Sistema', pricingThPrice: 'Preço',
+    pricingRows: [
+      { sys: 'NTG35 / NTG45 / NTG5 Series', price: '70€' },
+      { sys: 'NTG6 MBUX', price: '100€' },
+      { sys: 'NTG7 MBUX', price: '260€' }
+    ],
+    howTitle: 'Como funciona (passo a passo)',
+    steps: [
+      { title: 'Confirma que o teu carro tem navegação', desc: 'O teu Mercedes precisa de ter navegação de fábrica ou uma opção de navegação ativada. Se tiveres dúvidas, contacta-nos por WhatsApp antes de avançares com a compra.' },
+      { title: 'Descarrega os ficheiros de navegação', desc: 'Descarrega o pacote de navegação com o Download Manager COMAND / Hard-disc Navigation para uma pen USB, exatamente como fornecido — não renomeies pastas nem ficheiros. Confirma que a pen está formatada corretamente.', cta: 'Pedir Download Manager', ctaHref: '#', ctaNote: '(link a disponibilizar em breve)' },
+      { title: 'Compra o teu código PIN', desc: 'Contacta-nos via WhatsApp com o modelo da tua head unit, região e versão de mapa pretendida, e o VIN do veículo. Após a confirmação do pagamento, recebes o código PIN.', cta: '💬 Pedir PIN via WhatsApp', ctaHref: WA },
+      { title: 'Inicia a atualização no carro', desc: 'Insere a pen USB no veículo. A head unit vai detetar a atualização e pedir o código PIN.' },
+      { title: 'Introduz o PIN e aguarda', desc: 'Introduz o código PIN. A atualização de mapas começa automaticamente. Mantém a alimentação estável e não retires a pen USB durante o processo.' },
+      { title: 'Concluído', desc: 'Quando a atualização terminar, a head unit confirma. Podes retirar a pen USB e usar os mapas atualizados.' }
+    ],
+    shotsTitle: 'Capturas de ecrã',
+    shotsCaptions: ['Download Manager', 'Pedido de PIN na head unit', 'Progresso da atualização'],
+    faqTitle: 'Perguntas Frequentes',
+    faqs: [
+      { q: 'Conseguem gerar um PIN para veículos do mercado asiático em HU7?', a: 'Em alguns casos sim, para NTG7. Isto só é possível se a head unit já tiver sido substituída por uma unidade europeia, tiver uma licença de navegação ativa, ou tiver sido convertida/reprogramada para a região Europa. Contacta-nos por WhatsApp antes da compra se não tiveres a certeza.' },
+      { q: 'Que informação é necessária para gerar o PIN?', a: 'VIN (17 carateres), modelo da head unit (HU55, HU6 ou HU7) e a região + versão de mapa pretendida. Exemplo: Europa V26.' },
+      { q: 'Preciso de ferramentas especiais ou codificação?', a: 'Não. A atualização é feita pela própria head unit via USB. Só precisas de introduzir o PIN quando for pedido.' },
+      { q: 'E se a minha pen USB não for detetada?', a: 'Experimenta outra pen USB (recomendamos USB 2.0), confirma que não renomeaste ficheiros/pastas, e usa um sistema de ficheiros comum (normalmente FAT32/exFAT/NTFS, consoante o pacote). Experimenta também outra porta USB, se disponível.' },
+      { q: 'Posso usar o mesmo PIN noutro carro?', a: 'Não. O PIN é gerado especificamente para o VIN e pacote de navegação indicados.' },
+      { q: 'A atualização parou / faltou energia — o que faço?', a: 'Restabelece uma alimentação estável e tenta novamente com a mesma pen USB. Não retires a pen durante a atualização; mantém o motor ligado ou usa um carregador para evitar quebras de tensão.' }
+    ],
+    reqsTitle: 'Resumo dos requisitos',
+    reqs: ['Carro com navegação (head unit suportada)', 'Pen USB (recomendado USB 2.0)', 'Computador para descarregar e copiar os ficheiros', 'Alimentação estável durante a atualização'],
+    helpTitle: 'Precisas de ajuda?',
+    helpText: 'Se não tiveres a certeza sobre o modelo da tua head unit ou a versão de mapa, contacta o nosso suporte e ajudamos-te a identificar a opção correta.',
+    helpBtn: '💬 Contactar via WhatsApp',
+    footerBrand: 'M-Auto Online — Diagnóstico e Codificação Automóvel',
+    footerDisc: 'M-Auto Online fornece produtos e serviços digitais. Alguns produtos são entregues automaticamente após o pagamento; outros serviços podem exigir o VIN, o modelo do veículo, capturas de ecrã ou outros dados técnicos antes da entrega.'
+  },
+  en: {
+    title: 'Mercedes Maps — Map Update with PIN Code',
+    subtitle: 'Step-by-step guide to update your Mercedes-Benz maps with the official PIN code.',
+    howTitle: 'How it works (step-by-step)',
+    steps: [
+      { title: 'Check your car has navigation', desc: 'Your Mercedes needs factory navigation or an activated navigation option. If you are not sure, contact us via WhatsApp before purchasing.' },
+      { title: 'Download the navigation files', desc: 'Download the navigation package using the COMAND / Hard-disc Navigation Download Manager to a USB drive, exactly as provided — do not rename folders or files. Make sure the USB drive is correctly formatted.', cta: 'Request Download Manager', ctaHref: '#', ctaNote: '(link coming soon)' },
+      { title: 'Buy your PIN code', desc: 'Contact us via WhatsApp with your head unit model, region and desired map version, plus your vehicle VIN. After payment is confirmed, you will receive the PIN code.', cta: '💬 Request PIN via WhatsApp', ctaHref: WA },
+      { title: 'Start the update in the car', desc: 'Insert the USB drive into the vehicle. The head unit will detect the update and prompt for a PIN code.' },
+      { title: 'Enter the PIN and wait', desc: 'Enter the PIN code. The map update starts automatically. Keep the power supply stable and do not remove the USB drive during the process.' },
+      { title: 'Done', desc: 'When the update finishes, the head unit will confirm it. You can remove the USB drive and use the updated maps.' }
+    ],
+    shotsTitle: 'Screenshots',
+    shotsCaptions: ['Download Manager', 'PIN prompt on the head unit', 'Update progress'],
+    faqTitle: 'Frequently Asked Questions',
+    faqs: [
+      { q: 'Can you generate a PIN for Asian-market vehicles on HU7?', a: 'In some cases, yes, for NTG7. This is only possible if the head unit has already been replaced with a European unit, has an active navigation licence, or has been converted/reflashed to the European region. Contact us via WhatsApp before purchasing if you are not sure.' },
+      { q: 'What information is needed to generate the PIN?', a: 'VIN (17 characters), head unit model (HU55, HU6 or HU7), and the requested region + map version. Example: Europe V26.' },
+      { q: 'Do I need any special tools or coding?', a: 'No. The update is performed by the head unit itself via USB. You only enter the PIN when prompted.' },
+      { q: 'What if my USB drive is not detected?', a: 'Try another USB drive (USB 2.0 recommended), make sure files/folders have not been renamed, and use a common filesystem (usually FAT32/exFAT/NTFS, depending on the package). Also try a different USB port if available.' },
+      { q: 'Can I use one PIN for a different car?', a: 'No. The PIN is generated specifically for the given VIN and navigation package.' },
+      { q: 'The update stopped / power was interrupted — what now?', a: 'Restore stable power and retry with the same USB drive. Do not remove the USB during the update; keep the engine running or use a charger to avoid voltage drops.' }
+    ],
+    reqsTitle: 'Requirements checklist',
+    reqs: ['Car with navigation (supported head unit)', 'USB drive (USB 2.0 recommended)', 'Computer to download and copy the files', 'Stable power supply during the update'],
+    helpTitle: 'Need help?',
+    helpText: "If you are not sure about your head unit model or map version, contact our support team and we will help you identify the right option.",
+    helpBtn: '💬 Contact via WhatsApp',
+    footerBrand: 'M-Auto Online — Automotive Diagnostic & Coding',
+    footerDisc: 'M-Auto Online provides digital products and services. Some products are delivered automatically after payment; other services may require the VIN, vehicle model, screenshots or other technical details before fulfilment.'
+  },
+  fr: {
+    title: 'Mercedes Maps — Mise à jour des cartes avec code PIN',
+    subtitle: 'Guide étape par étape pour mettre à jour les cartes de votre Mercedes-Benz avec le code PIN officiel.',
+    howTitle: 'Comment ça marche (étape par étape)',
+    steps: [
+      { title: 'Vérifiez que votre voiture a la navigation', desc: "Votre Mercedes doit avoir la navigation de série ou une option de navigation activée. En cas de doute, contactez-nous via WhatsApp avant l'achat." },
+      { title: 'Téléchargez les fichiers de navigation', desc: "Téléchargez le pack de navigation avec le Download Manager COMAND / Hard-disc Navigation sur une clé USB, exactement comme fourni — ne renommez ni les dossiers ni les fichiers. Vérifiez que la clé USB est correctement formatée.", cta: 'Demander le Download Manager', ctaHref: '#', ctaNote: '(lien disponible prochainement)' },
+      { title: 'Achetez votre code PIN', desc: 'Contactez-nous via WhatsApp avec le modèle de votre head unit, la région et la version de carte souhaitée, ainsi que le VIN du véhicule. Après confirmation du paiement, vous recevrez le code PIN.', cta: '💬 Demander le PIN via WhatsApp', ctaHref: WA },
+      { title: 'Démarrez la mise à jour dans la voiture', desc: 'Insérez la clé USB dans le véhicule. Le système détectera la mise à jour et demandera un code PIN.' },
+      { title: 'Entrez le PIN et patientez', desc: "Entrez le code PIN. La mise à jour des cartes démarre automatiquement. Maintenez une alimentation stable et ne retirez pas la clé USB pendant le processus." },
+      { title: 'Terminé', desc: 'Une fois la mise à jour terminée, le système le confirmera. Vous pouvez retirer la clé USB et utiliser les cartes mises à jour.' }
+    ],
+    shotsTitle: "Captures d'écran",
+    shotsCaptions: ['Download Manager', "Demande de PIN sur l'écran", 'Progression de la mise à jour'],
+    faqTitle: 'Questions fréquentes',
+    faqs: [
+      { q: 'Pouvez-vous générer un PIN pour les véhicules du marché asiatique sur HU7 ?', a: "Dans certains cas, oui, pour NTG7. Cela n'est possible que si le système a déjà été remplacé par une unité européenne, dispose d'une licence de navigation active, ou a été converti/reflashé pour la région Europe. Contactez-nous via WhatsApp avant l'achat en cas de doute." },
+      { q: 'Quelles informations sont nécessaires pour générer le PIN ?', a: 'Le VIN (17 caractères), le modèle du système (HU55, HU6 ou HU7), ainsi que la région et la version de carte souhaitées. Exemple : Europe V26.' },
+      { q: "Ai-je besoin d'outils spéciaux ou de codage ?", a: "Non. La mise à jour est effectuée par le système lui-même via USB. Vous n'avez qu'à entrer le PIN lorsqu'il est demandé." },
+      { q: "Que faire si ma clé USB n'est pas détectée ?", a: "Essayez une autre clé USB (USB 2.0 recommandé), vérifiez que les fichiers/dossiers n'ont pas été renommés, et utilisez un système de fichiers courant (généralement FAT32/exFAT/NTFS selon le pack). Essayez aussi un autre port USB si disponible." },
+      { q: 'Puis-je utiliser un PIN pour une autre voiture ?', a: 'Non. Le PIN est généré spécifiquement pour le VIN et le pack de navigation indiqués.' },
+      { q: "La mise à jour s'est arrêtée / l'alimentation a été coupée — que faire ?", a: "Rétablissez une alimentation stable et réessayez avec la même clé USB. Ne retirez pas la clé pendant la mise à jour ; laissez le moteur tourner ou utilisez un chargeur pour éviter les baisses de tension." }
+    ],
+    reqsTitle: 'Récapitulatif des prérequis',
+    reqs: ['Voiture avec navigation (système compatible)', 'Clé USB (USB 2.0 recommandé)', 'Ordinateur pour télécharger et copier les fichiers', 'Alimentation stable pendant la mise à jour'],
+    helpTitle: "Besoin d'aide ?",
+    helpText: "Si vous n'êtes pas sûr du modèle de votre système ou de la version de carte, contactez notre support et nous vous aiderons à identifier la bonne option.",
+    helpBtn: '💬 Contacter via WhatsApp',
+    footerBrand: 'M-Auto Online — Diagnostic et Codage Automobile',
+    footerDisc: "M-Auto Online fournit des produits et services numériques. Certains produits sont livrés automatiquement après paiement ; d'autres services peuvent nécessiter le VIN, le modèle du véhicule, des captures d'écran ou d'autres détails techniques avant la livraison."
+  }
+};
+
+var SHOTS = [
+  'IMG/tutorials/maps-download-manager.png',
+  'IMG/tutorials/maps-pin-prompt.png',
+  'IMG/tutorials/maps-update-progress.png'
+];
+
+function esc(s) {
+  var d = document.createElement('div');
+  d.innerText = s;
+  return d.innerHTML;
+}
+
+function setLang(lang) {
+  if (!i18n[lang]) return;
+  var t = i18n[lang];
+  try { localStorage.setItem('maps_tutorial_lang', lang); } catch(e) {}
+
+  document.getElementById('t-title').textContent = t.title;
+  document.title = 'M-Auto Online — ' + t.title;
+  document.getElementById('t-subtitle').textContent = t.subtitle;
+  document.getElementById('t-how-title').textContent = t.howTitle;
+  document.getElementById('t-shots-title').textContent = t.shotsTitle;
+  document.getElementById('t-faq-title').textContent = t.faqTitle;
+  document.getElementById('t-reqs-title').textContent = t.reqsTitle;
+  document.getElementById('t-help-title').textContent = t.helpTitle;
+  document.getElementById('t-help-text').textContent = t.helpText;
+  document.getElementById('t-help-btn').textContent = t.helpBtn;
+  document.getElementById('t-footer-brand').textContent = t.footerBrand;
+  document.getElementById('t-footer-disc').textContent = t.footerDisc;
+
+  document.getElementById('steps-list').innerHTML = t.steps.map(function(s, i) {
+    var extra = '';
+    if (s.cta) {
+      extra = '<a class="step-cta' + (s.ctaHref === '#' ? ' secondary' : '') + '" href="' + s.ctaHref + '"' +
+        (s.ctaHref !== '#' ? ' target="_blank" rel="noopener"' : '') + '>' + esc(s.cta) + '</a>';
+      if (s.ctaNote) extra += '<div class="step-note">' + esc(s.ctaNote) + '</div>';
+    }
+    return '<div class="step"><div class="step-num">' + (i + 1) + '</div><div class="step-body">' +
+      '<h3>' + esc(s.title) + '</h3><p>' + esc(s.desc) + '</p>' + extra + '</div></div>';
+  }).join('');
+
+  document.getElementById('shots-list').innerHTML = SHOTS.map(function(src, i) {
+    return '<div class="shot"><img src="' + src + '" loading="lazy" alt="' + esc(t.shotsCaptions[i]) + '">' +
+      '<span>' + esc(t.shotsCaptions[i]) + '</span></div>';
+  }).join('');
+
+  document.getElementById('faq-list').innerHTML = t.faqs.map(function(f) {
+    return '<details><summary>' + esc(f.q) + '</summary><p>' + esc(f.a) + '</p></details>';
+  }).join('');
+
+  document.getElementById('reqs-list').innerHTML = t.reqs.map(function(r) {
+    return '<li>' + esc(r) + '</li>';
+  }).join('');
+
+  var btns = document.getElementById('lang-bar').getElementsByTagName('button');
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].className = btns[i].textContent.trim() === lang.toUpperCase() ? 'lang-btn active' : 'lang-btn';
+  }
+}
+
+(function() {
+  var urlLang = new URLSearchParams(window.location.search).get('lang') || '';
+  var saved = '';
+  try { saved = localStorage.getItem('maps_tutorial_lang') || ''; } catch(e) {}
+  var fallback = '';
+  try { fallback = localStorage.getItem('mauto_lang') || ''; } catch(e) {}
+  var chosen = (urlLang && i18n[urlLang]) ? urlLang : (saved && i18n[saved]) ? saved : (fallback && i18n[fallback]) ? fallback : 'pt';
+  setLang(chosen);
+})();
+</script>
+</body>
+</html>

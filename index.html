@@ -49,7 +49,7 @@
   <link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
 
   <title>M-Auto Online — Ferramenta de Diagnóstico e Codificação Automóvel | Mercedes, BMW, VAG</title>
-  <link rel="stylesheet" href="assets/style.css?v=8.2">
+  <link rel="stylesheet" href="assets/style.css?v=8.2.1">
 
   <!-- ── SPLASH SCREEN CSS ── -->
   <style>
@@ -219,7 +219,7 @@
       <a href="#inicio" class="logo-link">
         <span class="brand-m">M-Auto</span>
         <span class="brand-online">Online</span>
-        <span class="version-badge">v8.2</span>
+        <span class="version-badge">v8.2.1</span>
       </a>
     </div>
     <div class="header-right">
@@ -279,29 +279,24 @@
       <div id="roleta-step-produto" class="roleta-step">
         <div class="roleta-header">
           <div class="roleta-icon">🎰</div>
-          <h2 class="roleta-title">Roleta de Descontos</h2>
-          <p class="roleta-sub">Escolhe o teu pack e gira a roleta para ganhares até <strong>20% de desconto</strong>!</p>
+          <h2 class="roleta-title" id="rTitleMain">Roleta de Descontos</h2>
+          <p class="roleta-sub" id="rSubMain">Escolhe o teu pack e gira a roleta para ganhares até <strong>20% de desconto</strong>!</p>
         </div>
         <div class="roleta-produtos">
           <button type="button" class="roleta-prod-btn" data-prod="normal" onclick="selectRoletaProd('normal')">
             <span class="rpb-icon">🖥️</span>
-            <span class="rpb-title">Instalação de Software</span>
-            <span class="rpb-desc">Qualquer instalação remota</span>
-          </button>
-          <button type="button" class="roleta-prod-btn" data-prod="c4" onclick="selectRoletaProd('c4')">
-            <span class="rpb-icon">🔌</span>
-            <span class="rpb-title">Pack Mercedes C4</span>
-            <span class="rpb-desc">Instalação de software C4</span>
+            <span class="rpb-title" id="rTitleNormal">Instalação de Software</span>
+            <span class="rpb-desc" id="rDescNormal">Qualquer instalação remota</span>
           </button>
           <button type="button" class="roleta-prod-btn" data-prod="vci" onclick="selectRoletaProd('vci')">
             <span class="rpb-icon">🔧</span>
-            <span class="rpb-title">Mercedes VCI</span>
-            <span class="rpb-desc">Interface de diagnóstico</span>
+            <span class="rpb-title" id="rTitleEquip">Equipamentos</span>
+            <span class="rpb-desc" id="rDescEquip">Hardware de diagnóstico</span>
           </button>
           <button type="button" class="roleta-prod-btn" data-prod="maps" onclick="selectRoletaProd('maps')">
             <span class="rpb-icon">🗺️</span>
-            <span class="rpb-title">Mercedes Maps</span>
-            <span class="rpb-desc">Códigos PIN — atualização de mapas</span>
+            <span class="rpb-title" id="rTitleMaps">Mercedes Maps</span>
+            <span class="rpb-desc" id="rDescMaps">Códigos PIN — atualização de mapas</span>
           </button>
         </div>
       </div>
@@ -310,29 +305,29 @@
       <div id="roleta-step-qtd" class="roleta-step" style="display:none">
         <div class="roleta-header">
           <div class="roleta-icon">🔢</div>
-          <h2 class="roleta-title">Quantas instalações?</h2>
+          <h2 class="roleta-title" id="rTitleQtd">Quantas instalações?</h2>
           <p class="roleta-sub" id="roletaStepQtdSub">Boa sorte!</p>
         </div>
         <div class="roleta-produtos">
           <button type="button" class="roleta-prod-btn" data-qtd="single" onclick="selectRoletaQtd('single')">
             <span class="rpb-icon">1️⃣</span>
-            <span class="rpb-title">1 Instalação</span>
-            <span class="rpb-desc">Até 10% de desconto</span>
+            <span class="rpb-title" id="rTitleSingle">1 Instalação</span>
+            <span class="rpb-desc" id="rDescSingle">Até 10% de desconto</span>
           </button>
           <button type="button" class="roleta-prod-btn" data-qtd="multi" onclick="selectRoletaQtd('multi')">
             <span class="rpb-icon">🔟</span>
-            <span class="rpb-title">Mais de 1 Instalação</span>
-            <span class="rpb-desc">Até 20% de desconto</span>
+            <span class="rpb-title" id="rTitleMulti">Mais de 1 Instalação</span>
+            <span class="rpb-desc" id="rDescMulti">Até 20% de desconto</span>
           </button>
         </div>
-        <button type="button" class="roleta-back-btn" onclick="backRoletaProd()">← Alterar pack</button>
+        <button type="button" class="roleta-back-btn" id="rBackToProd" onclick="backRoletaProd()">← Alterar pack</button>
       </div>
 
       <!-- ── Step 2: Girar roleta ── -->
       <div id="roleta-step-girar" class="roleta-step" style="display:none">
         <div class="roleta-header">
           <div class="roleta-icon">🎯</div>
-          <h2 class="roleta-title">Gira a Roleta!</h2>
+          <h2 class="roleta-title" id="rTitleGirar">Gira a Roleta!</h2>
           <p class="roleta-sub" id="roletaStep2Sub">Boa sorte!</p>
         </div>
         <div class="roleta-wheel-wrap">
@@ -340,32 +335,32 @@
           <canvas id="roletaCanvas" width="340" height="340"></canvas>
         </div>
         <button type="button" class="roleta-spin-btn" id="roletaSpinBtn" onclick="girarRoleta()">
-          <span>🎰 GIRAR!</span>
+          <span id="rSpinLabel">🎰 GIRAR!</span>
         </button>
-        <button type="button" class="roleta-back-btn" onclick="backRoletaQtd()">← Alterar instalações</button>
+        <button type="button" class="roleta-back-btn" id="rBackToQtd" onclick="backRoletaQtd()">← Alterar instalações</button>
       </div>
 
       <!-- ── Step 3: Resultado ── -->
       <div id="roleta-step-resultado" class="roleta-step" style="display:none">
         <div class="roleta-header">
           <div class="roleta-icon" id="roletaResultIcon">🎉</div>
-          <h2 class="roleta-title">Parabéns!</h2>
-          <p class="roleta-sub">Ganhaste um desconto especial</p>
+          <h2 class="roleta-title" id="rTitleParabens">Parabéns!</h2>
+          <p class="roleta-sub" id="rSubGanhaste">Ganhaste um desconto especial</p>
         </div>
         <div class="roleta-result-box">
           <div class="roleta-result-disc" id="roletaResultDisc">0%</div>
-          <div class="roleta-result-label">DE DESCONTO</div>
+          <div class="roleta-result-label" id="rLabelDesconto">DE DESCONTO</div>
         </div>
         <div class="roleta-result-code-box">
-          <div class="roleta-code-label">O teu código de desconto</div>
+          <div class="roleta-code-label" id="rCodeLabel">O teu código de desconto</div>
           <div class="roleta-code" id="roletaResultCode">MAUTO-XXXXX</div>
-          <button type="button" class="roleta-copy-btn" onclick="copyRoletaCode()">📋 Copiar código</button>
+          <button type="button" class="roleta-copy-btn" id="rCopyBtn" onclick="copyRoletaCode()">📋 Copiar código</button>
         </div>
-        <p class="roleta-result-valid">Válido por 7 dias · 1 utilização por cliente</p>
+        <p class="roleta-result-valid" id="rValidText">Válido por 7 dias · 1 utilização por cliente</p>
         <button type="button" class="roleta-wa-btn" onclick="orderRoleta()">
-          <span>💬 Encomendar via WhatsApp</span>
+          <span id="rWaBtnLabel">💬 Encomendar via WhatsApp</span>
         </button>
-        <button type="button" class="roleta-spin-again" onclick="backRoletaProd()">🔁 Girar novamente</button>
+        <button type="button" class="roleta-spin-again" id="rSpinAgainBtn" onclick="backRoletaProd()">🔁 Girar novamente</button>
       </div>
     </div>
   </div>
@@ -590,6 +585,6 @@
   })();
   </script>
 
-  <script src="assets/app.js?v=8.2"></script>
+  <script src="assets/app.js?v=8.2.1"></script>
 </body>
 </html>

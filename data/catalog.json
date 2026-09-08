@@ -19,17 +19,17 @@
     "pt": {
       "name": "Mercedes Maps — Códigos PIN",
       "short": "Atualize os mapas do seu Mercedes-Benz com códigos PIN oficiais.",
-      "details": "Atualização oficial de mapas Mercedes-Benz com <b>código PIN original</b>, válida para os sistemas NTG35, NTG45, NTG5 Series, NTG6 MBUX e NTG7 MBUX. Processo 100% oficial e seguro, sem necessidade de desmontar componentes do veículo. <br><br><b>Preços:</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€"
+      "details": "Atualização oficial de mapas Mercedes-Benz com <b>código PIN original</b>, válida para os sistemas NTG35, NTG45, NTG5 Series, NTG6 MBUX e NTG7 MBUX. Processo 100% oficial e seguro, sem necessidade de desmontar componentes do veículo. <br><br><b>Preços:</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€<br><br><a href=\"mercedes-maps-tutorial.html?lang=pt\" target=\"_blank\" rel=\"noopener\">📖 Ver tutorial passo a passo</a>"
     },
     "en": {
       "name": "Mercedes Maps — PIN Codes",
       "short": "Update your Mercedes-Benz maps with official PIN codes.",
-      "details": "Official Mercedes-Benz map update with <b>original PIN code</b>, valid for NTG35, NTG45, NTG5 Series, NTG6 MBUX and NTG7 MBUX systems. 100% official and safe process, no vehicle component removal required. <br><br><b>Pricing:</b><br>NTG35 / NTG45 / NTG5 Series — €70<br>NTG6 MBUX — €100<br>NTG7 MBUX — €260"
+      "details": "Official Mercedes-Benz map update with <b>original PIN code</b>, valid for NTG35, NTG45, NTG5 Series, NTG6 MBUX and NTG7 MBUX systems. 100% official and safe process, no vehicle component removal required. <br><br><b>Pricing:</b><br>NTG35 / NTG45 / NTG5 Series — €70<br>NTG6 MBUX — €100<br>NTG7 MBUX — €260<br><br><a href=\"mercedes-maps-tutorial.html?lang=en\" target=\"_blank\" rel=\"noopener\">📖 View step-by-step tutorial</a>"
     },
     "fr": {
       "name": "Mercedes Maps — Codes PIN",
       "short": "Mettez à jour les cartes de votre Mercedes-Benz avec des codes PIN officiels.",
-      "details": "Mise à jour officielle des cartes Mercedes-Benz avec <b>code PIN original</b>, valable pour les systèmes NTG35, NTG45, NTG5 Series, NTG6 MBUX et NTG7 MBUX. Processus 100% officiel et sûr, sans démontage de composants du véhicule. <br><br><b>Tarifs :</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€"
+      "details": "Mise à jour officielle des cartes Mercedes-Benz avec <b>code PIN original</b>, valable pour les systèmes NTG35, NTG45, NTG5 Series, NTG6 MBUX et NTG7 MBUX. Processus 100% officiel et sûr, sans démontage de composants du véhicule. <br><br><b>Tarifs :</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€<br><br><a href=\"mercedes-maps-tutorial.html?lang=fr\" target=\"_blank\" rel=\"noopener\">📖 Voir le tutoriel pas à pas</a>"
     }
   },
   {
@@ -189,19 +189,19 @@
     "img": "IMG/Daimler/Merc-DTS9.jpg",
     "meta": {},
     "pt": {
-      "name": "DTS Monaco 9.02",
-      "short": "DTS Monaco 9.02 — acesso directo a ECUs via CAN/LIN para engenharia e codificação.",
-      "details": "<b>DTS Monaco 9.02</b> — ferramenta de engenharia Mercedes-Benz para diagnóstico avançado e desenvolvimento. Acesso directo a protocolos UDS/KWP2000/CAN, codificação livre de ECUs, flash de firmware via ODX/FLASH e criação de scripts personalizados. Utilizado por técnicos avançados e engenheiros."
+      "name": "DTS Monaco 9.04",
+      "short": "DTS Monaco 9.04 — acesso directo a ECUs via CAN/LIN para engenharia e codificação.",
+      "details": "<b>DTS Monaco 9.04</b> — ferramenta de engenharia Mercedes-Benz para diagnóstico avançado e desenvolvimento. Acesso directo a protocolos UDS/KWP2000/CAN, codificação livre de ECUs, flash de firmware via ODX/FLASH e criação de scripts personalizados. Utilizado por técnicos avançados e engenheiros."
     },
     "en": {
-      "name": "DTS Monaco 9.02",
-      "short": "DTS Monaco 9.02 — direct ECU access via CAN/LIN for engineering and advanced coding.",
-      "details": "<b>DTS Monaco 9.02</b> — Mercedes-Benz engineering tool for advanced diagnostics and development. Direct UDS/KWP2000/CAN protocol access, unrestricted ECU coding, firmware flashing via ODX/FLASH and custom script creation. Used by advanced technicians and engineers."
+      "name": "DTS Monaco 9.04",
+      "short": "DTS Monaco 9.04 — direct ECU access via CAN/LIN for engineering and advanced coding.",
+      "details": "<b>DTS Monaco 9.04</b> — Mercedes-Benz engineering tool for advanced diagnostics and development. Direct UDS/KWP2000/CAN protocol access, unrestricted ECU coding, firmware flashing via ODX/FLASH and custom script creation. Used by advanced technicians and engineers."
     },
     "fr": {
-      "name": "DTS Monaco 9.02",
-      "short": "DTS Monaco 9.02 — accès direct aux calculateurs via CAN/LIN pour ingénierie et codage.",
-      "details": "<b>DTS Monaco 9.02</b> — outil d'ingénierie Mercedes-Benz pour diagnostic avancé et développement. Accès direct aux protocoles UDS/KWP2000/CAN, codage libre des ECUs, flash firmware via ODX/FLASH et scripts personnalisés. Utilisé par les techniciens avancés et ingénieurs."
+      "name": "DTS Monaco 9.04",
+      "short": "DTS Monaco 9.04 — accès direct aux calculateurs via CAN/LIN pour ingénierie et codage.",
+      "details": "<b>DTS Monaco 9.04</b> — outil d'ingénierie Mercedes-Benz pour diagnostic avancé et développement. Accès direct aux protocoles UDS/KWP2000/CAN, codage libre des ECUs, flash firmware via ODX/FLASH et scripts personnalisés. Utilisé par les techniciens avancés et ingénieurs."
     }
   },
   {
@@ -296,7 +296,7 @@
     "id": "merc_mbtools",
     "section": "soft",
     "brand": "mercedes",
-    "img": "IMG/Daimler/merc-mbtools.jpg",
+    "img": "IMG/Daimler/merc-mbtools.svg",
     "meta": {},
     "pt": {
       "name": "MbTools",
@@ -451,7 +451,7 @@
     "id": "vag_vcds",
     "section": "soft",
     "brand": "vag",
-    "img": "",
+    "img": "IMG/VAG/vag-vcds.svg",
     "meta": {
       "os": "W10/11"
     },

@@ -1,0 +1,39 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VCDS — VAG-COM Diagnostic System">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <!-- laptop -->
+  <g transform="translate(330,225)">
+    <rect x="-110" y="-70" width="220" height="140" rx="8" fill="#e2e8f0"/>
+    <rect x="-96" y="-56" width="192" height="112" rx="2" fill="#0f172a"/>
+    <path d="M-70,10 l16,16 l32,-32" stroke="#4ade80" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="-130" y="72" width="260" height="14" rx="4" fill="#94a3b8"/>
+  </g>
+
+  <!-- obd connector -->
+  <g transform="translate(520,205)">
+    <rect x="-45" y="-35" width="90" height="70" rx="8" fill="#2563eb"/>
+    <g fill="#f8fafc">
+      <circle cx="-26" cy="-15" r="5"/><circle cx="-8" cy="-15" r="5"/><circle cx="10" cy="-15" r="5"/><circle cx="28" cy="-15" r="5"/>
+      <circle cx="-26" cy="4" r="5"/><circle cx="-8" cy="4" r="5"/><circle cx="10" cy="4" r="5"/><circle cx="28" cy="4" r="5"/>
+      <circle cx="0" cy="22" r="5"/>
+    </g>
+  </g>
+  <line x1="440" y1="205" x2="475" y2="205" stroke="#71717a" stroke-width="7"/>
+
+  <rect x="40" y="40" width="150" height="34" rx="6" fill="#2563eb"/>
+  <text x="55" y="63" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="0.5">VAG-COM</text>
+
+  <text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#f8fafc">VCDS</text>
+  <text x="400" y="434" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#93c5fd" letter-spacing="0.5">VW · AUDI · SEAT · ŠKODA</text>
+</svg>

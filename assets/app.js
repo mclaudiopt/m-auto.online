@@ -61,6 +61,25 @@ const TRANS = {
     news2_title: "Mercedes Maps — Códigos PIN",
     news2_sub: "NTG35 a NTG7 MBUX — atualização oficial de mapas",
     news2_btn: "Ver Mercedes Maps →",
+    promo_title: "🔥 Roleta de Descontos", promo_text: "Gira e ganha até <strong>20% de desconto</strong> em instalação de software.", promo_btn: "🎰 Girar",
+    roleta_title: "Roleta de Descontos",
+    roleta_sub: "Escolhe o teu pack e gira a roleta para ganhares até <strong>20% de desconto</strong>!",
+    roleta_normal_title: "Instalação de Software", roleta_normal_desc: "Qualquer instalação remota",
+    roleta_equip_title: "Equipamentos", roleta_equip_desc: "Hardware de diagnóstico",
+    roleta_maps_title: "Mercedes Maps", roleta_maps_desc: "Códigos PIN — atualização de mapas",
+    roleta_qtd_title: "Quantas instalações?",
+    roleta_single_title: "1 Instalação", roleta_single_desc: "Até 10% de desconto",
+    roleta_multi_title: "Mais de 1 Instalação", roleta_multi_desc: "Até 20% de desconto",
+    roleta_back_pack: "← Alterar pack",
+    roleta_girar_title: "Gira a Roleta!",
+    roleta_spin_label: "🎰 GIRAR!", roleta_spinning_label: "⏳ A girar...",
+    roleta_back_qtd: "← Alterar instalações",
+    roleta_parabens_title: "Parabéns!", roleta_ganhaste_sub: "Ganhaste um desconto especial",
+    roleta_label_desconto: "DE DESCONTO", roleta_code_label: "O teu código de desconto",
+    roleta_copy_btn: "📋 Copiar código", roleta_copy_done: "✅ Copiado!",
+    roleta_valid_text: "Válido por 7 dias · 1 utilização por cliente",
+    roleta_wa_btn: "💬 Encomendar via WhatsApp", roleta_spin_again: "🔁 Girar novamente",
+    roleta_pack_prefix: "Pack:",
     wa_interest: "Olá! Tenho interesse em:",
     wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico.",
     stat1_num: "100+", stat1_lbl: "clientes",
@@ -120,6 +139,25 @@ const TRANS = {
     news2_title: "Mercedes Maps — PIN Codes",
     news2_sub: "NTG35 to NTG7 MBUX — official map update",
     news2_btn: "See Mercedes Maps →",
+    promo_title: "🔥 Discount Wheel", promo_text: "Spin and win up to <strong>20% off</strong> software installation.", promo_btn: "🎰 Spin",
+    roleta_title: "Discount Wheel",
+    roleta_sub: "Choose your pack and spin the wheel to win up to <strong>20% off</strong>!",
+    roleta_normal_title: "Software Installation", roleta_normal_desc: "Any remote installation",
+    roleta_equip_title: "Equipment", roleta_equip_desc: "Diagnostic hardware",
+    roleta_maps_title: "Mercedes Maps", roleta_maps_desc: "PIN codes — map update",
+    roleta_qtd_title: "How many installations?",
+    roleta_single_title: "1 Installation", roleta_single_desc: "Up to 10% off",
+    roleta_multi_title: "More than 1 Installation", roleta_multi_desc: "Up to 20% off",
+    roleta_back_pack: "← Change pack",
+    roleta_girar_title: "Spin the Wheel!",
+    roleta_spin_label: "🎰 SPIN!", roleta_spinning_label: "⏳ Spinning...",
+    roleta_back_qtd: "← Change installations",
+    roleta_parabens_title: "Congratulations!", roleta_ganhaste_sub: "You've won a special discount",
+    roleta_label_desconto: "OFF", roleta_code_label: "Your discount code",
+    roleta_copy_btn: "📋 Copy code", roleta_copy_done: "✅ Copied!",
+    roleta_valid_text: "Valid for 7 days · 1 use per customer",
+    roleta_wa_btn: "💬 Order via WhatsApp", roleta_spin_again: "🔁 Spin again",
+    roleta_pack_prefix: "Pack:",
     wa_interest: "Hello! I'm interested in:",
     wa_general: "Hello! I would like more information about your diagnostic software.",
     stat1_num: "100+", stat1_lbl: "clients",
@@ -179,6 +217,25 @@ const TRANS = {
     news2_title: "Mercedes Maps — Codes PIN",
     news2_sub: "NTG35 à NTG7 MBUX — mise à jour officielle des cartes",
     news2_btn: "Voir Mercedes Maps →",
+    promo_title: "🔥 Roulette de Réductions", promo_text: "Tournez et gagnez jusqu'à <strong>20% de réduction</strong> sur l'installation de logiciels.", promo_btn: "🎰 Tourner",
+    roleta_title: "Roulette de Réductions",
+    roleta_sub: "Choisissez votre pack et tournez la roulette pour gagner jusqu'à <strong>20% de réduction</strong> !",
+    roleta_normal_title: "Installation de Logiciel", roleta_normal_desc: "N'importe quelle installation à distance",
+    roleta_equip_title: "Équipements", roleta_equip_desc: "Matériel de diagnostic",
+    roleta_maps_title: "Mercedes Maps", roleta_maps_desc: "Codes PIN — mise à jour des cartes",
+    roleta_qtd_title: "Combien d'installations ?",
+    roleta_single_title: "1 Installation", roleta_single_desc: "Jusqu'à 10% de réduction",
+    roleta_multi_title: "Plus d'1 Installation", roleta_multi_desc: "Jusqu'à 20% de réduction",
+    roleta_back_pack: "← Changer de pack",
+    roleta_girar_title: "Tournez la Roulette !",
+    roleta_spin_label: "🎰 TOURNER !", roleta_spinning_label: "⏳ En cours...",
+    roleta_back_qtd: "← Changer d'installations",
+    roleta_parabens_title: "Félicitations !", roleta_ganhaste_sub: "Vous avez gagné une réduction spéciale",
+    roleta_label_desconto: "DE RÉDUCTION", roleta_code_label: "Votre code de réduction",
+    roleta_copy_btn: "📋 Copier le code", roleta_copy_done: "✅ Copié !",
+    roleta_valid_text: "Valable 7 jours · 1 utilisation par client",
+    roleta_wa_btn: "💬 Commander via WhatsApp", roleta_spin_again: "🔁 Tourner à nouveau",
+    roleta_pack_prefix: "Pack :",
     wa_interest: "Bonjour ! Je suis intéressé par :",
     wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic.",
     stat1_num: "100+", stat1_lbl: "clients",
@@ -441,15 +498,7 @@ function buildNav() {
   if (!mainNav || !mobNav) return;
 
   // Dropdown de marcas para SOFTWARE
-  const isAllActive = activeSection === 'soft' && !confirmedBrand;
-  const _softTotal = catalog.filter(p => p.section === 'soft').length;
-  const allItem = `<button type="button" class="nav-dd-item nav-dd-all${isAllActive ? ' active' : ''}"
-    onclick="selectAllBrands()" data-brand-id="all">
-    <span class="nav-dd-icon nav-dd-icon-all">≡</span>
-    <span class="nav-dd-label">${t('nav_all')}</span>
-    ${_softTotal > 0 ? `<span class="nav-dd-count">${_softTotal}</span>` : ''}
-  </button>`;
-  const brandItems = allItem + BRANDS.map(b => {
+  const brandItems = BRANDS.map(b => {
     const label = b.label.startsWith('brand_') ? t(b.label) : b.label;
     const count = catalog.filter(p => p.section === 'soft' && p.brand === b.id).length;
     return `<button type="button" class="nav-dd-item${confirmedBrand === b.id ? ' active' : ''}"
@@ -888,10 +937,10 @@ function renderAbout() {
       <div class="promo-section promo-section-compact">
         <div class="promo-emoji">🎰</div>
         <div class="promo-text">
-          <h3>🔥 Roleta de Descontos</h3>
-          <p>Gira e ganha até <strong>20% de desconto</strong> em instalação de software.</p>
+          <h3>${t('promo_title')}</h3>
+          <p>${t('promo_text')}</p>
         </div>
-        <button type="button" class="promo-btn" onclick="event.stopPropagation();openRoleta()">🎰 Girar</button>
+        <button type="button" class="promo-btn" onclick="event.stopPropagation();openRoleta()">${t('promo_btn')}</button>
       </div>
       <div class="about-news-row">
         <div class="about-news">
@@ -1114,16 +1163,49 @@ let roletaState = {
   spinning: false,
 };
 
-const ROLETA_LABELS = {
-  normal: 'Instalação de Software',
-  c4: 'Pack Mercedes C4',
-  vci: 'Mercedes VCI',
-  maps: 'Mercedes Maps — Códigos PIN'
-};
-const ROLETA_QTD_LABELS = {
-  single: '1 Instalação',
-  multi: 'Mais de 1 Instalação'
-};
+function roletaProdLabel(id) {
+  return { normal: t('roleta_normal_title'), vci: t('roleta_equip_title'), maps: t('roleta_maps_title') }[id] || '';
+}
+function roletaQtdLabel(id) {
+  return { single: t('roleta_single_title'), multi: t('roleta_multi_title') }[id] || '';
+}
+
+function applyRoletaLang() {
+  document.getElementById('rTitleMain').textContent = t('roleta_title');
+  document.getElementById('rSubMain').innerHTML = t('roleta_sub');
+  document.getElementById('rTitleNormal').textContent = t('roleta_normal_title');
+  document.getElementById('rDescNormal').textContent = t('roleta_normal_desc');
+  document.getElementById('rTitleEquip').textContent = t('roleta_equip_title');
+  document.getElementById('rDescEquip').textContent = t('roleta_equip_desc');
+  document.getElementById('rTitleMaps').textContent = t('roleta_maps_title');
+  document.getElementById('rDescMaps').textContent = t('roleta_maps_desc');
+  document.getElementById('rTitleQtd').textContent = t('roleta_qtd_title');
+  document.getElementById('rTitleSingle').textContent = t('roleta_single_title');
+  document.getElementById('rDescSingle').textContent = t('roleta_single_desc');
+  document.getElementById('rTitleMulti').textContent = t('roleta_multi_title');
+  document.getElementById('rDescMulti').textContent = t('roleta_multi_desc');
+  document.getElementById('rBackToProd').textContent = t('roleta_back_pack');
+  document.getElementById('rTitleGirar').textContent = t('roleta_girar_title');
+  if (!roletaState.spinning) document.getElementById('rSpinLabel').textContent = t('roleta_spin_label');
+  document.getElementById('rBackToQtd').textContent = t('roleta_back_qtd');
+  document.getElementById('rTitleParabens').textContent = t('roleta_parabens_title');
+  document.getElementById('rSubGanhaste').textContent = t('roleta_ganhaste_sub');
+  document.getElementById('rLabelDesconto').textContent = t('roleta_label_desconto');
+  document.getElementById('rCodeLabel').textContent = t('roleta_code_label');
+  document.getElementById('rCopyBtn').textContent = t('roleta_copy_btn');
+  document.getElementById('rValidText').textContent = t('roleta_valid_text');
+  document.getElementById('rWaBtnLabel').textContent = t('roleta_wa_btn');
+  document.getElementById('rSpinAgainBtn').textContent = t('roleta_spin_again');
+  // Re-traduz os sub-titulos dinamicos "Pack: X" se ja estiverem visiveis
+  if (roletaState.produto) {
+    const qtdSub = document.getElementById('roletaStepQtdSub');
+    if (qtdSub) qtdSub.textContent = `${t('roleta_pack_prefix')} ${roletaProdLabel(roletaState.produto)}`;
+    if (roletaState.qtd) {
+      const girarSub = document.getElementById('roletaStep2Sub');
+      if (girarSub) girarSub.textContent = `${t('roleta_pack_prefix')} ${roletaProdLabel(roletaState.produto)} · ${roletaQtdLabel(roletaState.qtd)}`;
+    }
+  }
+}
 
 // Ofertas: ate 10% para 1 instalacao, ate 20% para mais de 1 instalacao. Sem precos.
 const ROLETA_SEGMENTS_SINGLE = [2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -1158,8 +1240,15 @@ function selectRoletaProd(prodId) {
   document.getElementById('roleta-step-produto').style.display = 'none';
   document.getElementById('roleta-step-resultado').style.display = 'none';
 
+  // Mercedes VCI e um item de hardware unico - sem conceito de "instalacoes",
+  // por isso vai direto para a roda (nivel single, ate 10%).
+  if (prodId === 'vci') {
+    selectRoletaQtd('single');
+    return;
+  }
+
   const subEl = document.getElementById('roletaStepQtdSub');
-  subEl.textContent = `Pack: ${ROLETA_LABELS[prodId]}`;
+  subEl.textContent = `${t('roleta_pack_prefix')} ${roletaProdLabel(prodId)}`;
 
   document.getElementById('roleta-step-qtd').style.display = '';
 }
@@ -1171,7 +1260,7 @@ function selectRoletaQtd(qtd) {
   document.getElementById('roleta-step-resultado').style.display = 'none';
 
   const subEl = document.getElementById('roletaStep2Sub');
-  subEl.textContent = `Pack: ${ROLETA_LABELS[roletaState.produto]} · ${ROLETA_QTD_LABELS[qtd]}`;
+  subEl.textContent = `${t('roleta_pack_prefix')} ${roletaProdLabel(roletaState.produto)} · ${roletaQtdLabel(qtd)}`;
 
   const segments = qtd === 'multi' ? ROLETA_SEGMENTS_MULTI : ROLETA_SEGMENTS_SINGLE;
   const canvas = document.getElementById('roletaCanvas');
@@ -1180,7 +1269,7 @@ function selectRoletaQtd(qtd) {
 
   document.getElementById('roleta-step-girar').style.display = '';
   document.getElementById('roletaSpinBtn').disabled = false;
-  document.getElementById('roletaSpinBtn').innerHTML = '<span>🎰 GIRAR!</span>';
+  document.getElementById('roletaSpinBtn').innerHTML = `<span id="rSpinLabel">${t('roleta_spin_label')}</span>`;
   roletaState.spinning = false;
 }
 
@@ -1194,7 +1283,12 @@ function backRoletaProd() {
 function backRoletaQtd() {
   document.getElementById('roleta-step-girar').style.display = 'none';
   document.getElementById('roleta-step-resultado').style.display = 'none';
-  document.getElementById('roleta-step-qtd').style.display = '';
+  // VCI salta o passo de quantidade, por isso o "voltar" tambem salta.
+  if (roletaState.produto === 'vci') {
+    document.getElementById('roleta-step-produto').style.display = '';
+  } else {
+    document.getElementById('roleta-step-qtd').style.display = '';
+  }
 }
 
 function drawRoletaWheel(ctx, segments, rotation) {
@@ -1267,7 +1361,7 @@ function girarRoleta() {
 
   const btn = document.getElementById('roletaSpinBtn');
   btn.disabled = true;
-  btn.innerHTML = '<span>⏳ A girar...</span>';
+  btn.innerHTML = `<span id="rSpinLabel">${t('roleta_spinning_label')}</span>`;
 
   const segments = roletaState.qtd === 'multi' ? ROLETA_SEGMENTS_MULTI : ROLETA_SEGMENTS_SINGLE;
   const n = segments.length;
@@ -1342,8 +1436,8 @@ function copyRoletaCode() {
   const code = document.getElementById('roletaResultCode').textContent;
   navigator.clipboard.writeText(code).then(() => {
     const btn = document.querySelector('.roleta-copy-btn');
-    btn.textContent = '✅ Copiado!';
-    setTimeout(() => { btn.textContent = '📋 Copiar código'; }, 2000);
+    btn.textContent = t('roleta_copy_done');
+    setTimeout(() => { btn.textContent = t('roleta_copy_btn'); }, 2000);
   }).catch(() => {
     // Fallback
     const ta = document.createElement('textarea');
@@ -1357,8 +1451,8 @@ function copyRoletaCode() {
 
 function orderRoleta() {
   const phone = "351938526930";
-  const prodName = ROLETA_LABELS[roletaState.produto] || 'Produto';
-  const qtdName = ROLETA_QTD_LABELS[roletaState.qtd] || '';
+  const prodName = roletaProdLabel(roletaState.produto) || 'Produto';
+  const qtdName = roletaQtdLabel(roletaState.qtd) || '';
 
   let msg = `🛒 *Encomenda M-Auto Online*\n`;
   msg += `📦 Produto: ${prodName}\n`;
@@ -1496,6 +1590,9 @@ function applyLang() {
 
   // About
   renderAbout();
+
+  // Roleta de Descontos (modal estático em HTML)
+  applyRoletaLang();
 
   // Re-renderizar secção activa
   renderSection(activeSection);

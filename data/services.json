@@ -7,6 +7,13 @@
     "fr": { "title": "Installation logicielle à distance", "desc": "Installation professionnelle et optimisée de logiciels de diagnostic via accès à distance." }
   },
   {
+    "id": "srv_hardware_sales",
+    "icon": "🛒",
+    "pt": { "title": "Venda de equipamentos de diagnóstico", "desc": "Venda de interfaces e hardware profissional de diagnóstico (VCI, J2534, sondas) com aconselhamento sobre o equipamento mais adequado ao seu software." },
+    "en": { "title": "Diagnostic equipment sales", "desc": "Sale of professional diagnostic interfaces and hardware (VCI, J2534, probes) with guidance on the best equipment for your software." },
+    "fr": { "title": "Vente d'équipements de diagnostic", "desc": "Vente d'interfaces et de matériel professionnel de diagnostic (VCI, J2534, sondes) avec conseils sur l'équipement le plus adapté à votre logiciel." }
+  },
+  {
     "id": "srv_support",
     "icon": "🔧",
     "pt": { "title": "Suporte técnico", "desc": "Apoio técnico remoto durante e após a instalação do software." },
@@ -26,12 +33,5 @@
     "pt": { "title": "Configuração de sistema", "desc": "Ajustes de sistema operativo para garantir desempenho e estabilidade do software." },
     "en": { "title": "System setup", "desc": "Operating system tweaks to ensure software performance and stability." },
     "fr": { "title": "Configuration système", "desc": "Réglages du système d'exploitation pour garantir performance et stabilité." }
-  },
-  {
-    "id": "srv_hardware_sales",
-    "icon": "🛒",
-    "pt": { "title": "Venda de equipamentos de diagnóstico", "desc": "Venda de interfaces e hardware profissional de diagnóstico (VCI, J2534, sondas) com aconselhamento sobre o equipamento mais adequado ao seu software." },
-    "en": { "title": "Diagnostic equipment sales", "desc": "Sale of professional diagnostic interfaces and hardware (VCI, J2534, probes) with guidance on the best equipment for your software." },
-    "fr": { "title": "Vente d'équipements de diagnostic", "desc": "Vente d'interfaces et de matériel professionnel de diagnostic (VCI, J2534, sondes) avec conseils sur l'équipement le plus adapté à votre logiciel." }
   }
 ]
