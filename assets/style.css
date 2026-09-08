@@ -1866,7 +1866,7 @@ body {
   margin-bottom: 36px;
 }
 .about-news {
-  flex: 1 1 260px;
+  flex: 1 1 190px;
   background: linear-gradient(135deg, #1e3a8a, #1e40af);
   border: 1px solid #3b82f6;
   border-radius: 14px;
@@ -1917,6 +1917,30 @@ body {
   background: #eff6ff;
   transform: translateY(-1px);
 }
+
+/* Roleta embutida no card "Sobre" */
+.about-roulette-card { display: flex; flex-direction: column; }
+.inline-roleta-body { margin-top: 12px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.inline-roleta-qty { display: flex; flex-direction: column; gap: 8px; }
+.inline-roleta-qty button {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.inline-roleta-qty button:hover { background: rgba(255,255,255,0.22); }
+.inline-roleta-qty button small { display: block; font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 11px; color: #bfdbfe; margin-top: 2px; }
+.inline-roleta-wheel { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.inline-roleta-wheel canvas { border-radius: 50%; }
+.inline-roleta-result { text-align: center; }
+.inline-r-disc { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+
 [data-theme="dark"] .about-news {
   background: linear-gradient(135deg, #0f2460, #1e3a8a);
   border-color: #2563eb;

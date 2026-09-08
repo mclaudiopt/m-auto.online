@@ -937,15 +937,26 @@ function renderAbout() {
       <p class="section-hero-meta">Simply Digital · Diagnóstico Profissional</p>
     </div>
     <div class="about-landing">
-      <div class="promo-section promo-section-compact">
-        <div class="promo-emoji">🎰</div>
-        <div class="promo-text">
-          <h3>${t('promo_title')}</h3>
-          <p>${t('promo_text')}</p>
-        </div>
-        <button type="button" class="promo-btn" onclick="event.stopPropagation();openRoleta()">${t('promo_btn')}</button>
-      </div>
       <div class="about-news-row">
+        <div class="about-news about-roulette-card">
+          <span class="about-news-badge">🔥</span>
+          <div class="about-news-title">${t('promo_title')}</div>
+          <div class="about-news-sub">${t('promo_text')}</div>
+          <div class="inline-roleta-body" id="inlineRBody">
+            <div class="inline-roleta-qty" id="inlineRQtyChoice">
+              <button type="button" onclick="inlineRoletaChoose('single')">${t('roleta_single_title')}<small>${t('roleta_single_desc')}</small></button>
+              <button type="button" onclick="inlineRoletaChoose('multi')">${t('roleta_multi_title')}<small>${t('roleta_multi_desc')}</small></button>
+            </div>
+            <div class="inline-roleta-wheel" id="inlineRWheelWrap" style="display:none">
+              <canvas id="inlineRCanvas" width="130" height="130"></canvas>
+              <button type="button" class="about-news-btn" id="inlineRSpinBtn" onclick="inlineGirarRoleta()">${t('roleta_spin_label')}</button>
+            </div>
+            <div class="inline-roleta-result" id="inlineRResult" style="display:none">
+              <div class="inline-r-disc" id="inlineRDisc">0%</div>
+              <a href="#" target="_blank" rel="noopener" class="about-news-btn" id="inlineRWaBtn">${t('roleta_wa_btn')}</a>
+            </div>
+          </div>
+        </div>
         <div class="about-news">
           <span class="about-news-badge">${t('news_badge')}</span>
           <div class="about-news-title">${t('news_title')}</div>
@@ -1474,6 +1485,80 @@ function orderRoleta() {
   msg += `Olá! Quero aproveitar este desconto.`;
 
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* ─────────────────────────────────────────────
+   13d. ROLETA EMBUTIDA (card na pagina Sobre)
+───────────────────────────────────────────── */
+let inlineRoletaState = { qtd: null, desconto: 0, codigo: '', spinning: false };
+
+function inlineRoletaChoose(qtd) {
+  inlineRoletaState.qtd = qtd;
+  document.getElementById('inlineRQtyChoice').style.display = 'none';
+  document.getElementById('inlineRResult').style.display = 'none';
+  document.getElementById('inlineRWheelWrap').style.display = '';
+
+  const segments = qtd === 'multi' ? ROLETA_SEGMENTS_MULTI : ROLETA_SEGMENTS_SINGLE;
+  const canvas = document.getElementById('inlineRCanvas');
+  const ctx = canvas.getContext('2d');
+  drawRoletaWheel(ctx, segments, 0);
+
+  const btn = document.getElementById('inlineRSpinBtn');
+  btn.disabled = false;
+  btn.textContent = t('roleta_spin_label');
+  inlineRoletaState.spinning = false;
+}
+
+function inlineGirarRoleta() {
+  if (inlineRoletaState.spinning) return;
+  inlineRoletaState.spinning = true;
+
+  const btn = document.getElementById('inlineRSpinBtn');
+  btn.disabled = true;
+  btn.textContent = t('roleta_spinning_label');
+
+  const segments = inlineRoletaState.qtd === 'multi' ? ROLETA_SEGMENTS_MULTI : ROLETA_SEGMENTS_SINGLE;
+  const n = segments.length;
+  const targetIdx = Math.floor(Math.random() * n);
+  const arc = (2 * Math.PI) / n;
+  const extraSpins = 6 + Math.floor(Math.random() * 4);
+  const finalRotation = -(Math.PI / 2) - (targetIdx * arc + arc / 2) + extraSpins * 2 * Math.PI;
+
+  const canvas = document.getElementById('inlineRCanvas');
+  const ctx = canvas.getContext('2d');
+  const totalSteps = 60;
+  let step = 0;
+
+  function animate() {
+    step++;
+    const progress = step / totalSteps;
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const currentRotation = finalRotation * eased;
+    drawRoletaWheel(ctx, segments, currentRotation);
+
+    if (step < totalSteps) {
+      requestAnimationFrame(animate);
+    } else {
+      const discount = segments[targetIdx];
+      inlineRoletaState.desconto = discount;
+      inlineRoletaState.codigo = generateRoletaCode();
+
+      document.getElementById('inlineRWheelWrap').style.display = 'none';
+      document.getElementById('inlineRResult').style.display = '';
+      document.getElementById('inlineRDisc').textContent = discount + '%';
+
+      const qtdName = roletaQtdLabel(inlineRoletaState.qtd) || '';
+      let msg = `🛒 *Encomenda M-Auto Online*\n`;
+      msg += `🔢 Instalações: ${qtdName}\n`;
+      msg += `🎰 Desconto: *${discount}%* (código: ${inlineRoletaState.codigo})\n`;
+      msg += `🌐 m-auto.online\n\n`;
+      msg += `Olá! Quero aproveitar este desconto.`;
+      document.getElementById('inlineRWaBtn').href = `https://wa.me/351938526930?text=${encodeURIComponent(msg)}`;
+
+      inlineRoletaState.spinning = false;
+    }
+  }
+  animate();
 }
 
 // Add promo badge to DOM after init
