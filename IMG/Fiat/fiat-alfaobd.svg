@@ -1,0 +1,39 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AlfaOBD — Mobile Diagnostics for Windows and Android">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#c8102e" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#c8102e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <!-- phone -->
+  <g transform="translate(330,215)">
+    <rect x="-58" y="-100" width="116" height="200" rx="18" fill="#e5e7eb"/>
+    <rect x="-46" y="-84" width="92" height="152" rx="4" fill="#0f172a"/>
+    <circle cx="0" cy="84" r="8" fill="#94a3b8"/>
+    <path d="M-24,-10 l16,16 l32,-32" stroke="#4ade80" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- obd connector -->
+  <g transform="translate(470,205)">
+    <rect x="-55" y="-40" width="110" height="80" rx="10" fill="#c8102e"/>
+    <g fill="#f8fafc">
+      <circle cx="-32" cy="-18" r="6"/><circle cx="-10" cy="-18" r="6"/><circle cx="12" cy="-18" r="6"/><circle cx="34" cy="-18" r="6"/>
+      <circle cx="-32" cy="4" r="6"/><circle cx="-10" cy="4" r="6"/><circle cx="12" cy="4" r="6"/><circle cx="34" cy="4" r="6"/>
+      <circle cx="0" cy="26" r="6"/>
+    </g>
+  </g>
+  <line x1="388" y1="205" x2="412" y2="205" stroke="#71717a" stroke-width="8"/>
+
+  <rect x="40" y="40" width="200" height="34" rx="6" fill="#c8102e"/>
+  <text x="55" y="63" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="0.5">FCA GROUP</text>
+
+  <text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="800" fill="#f8fafc">AlfaOBD</text>
+  <text x="400" y="434" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#fca5a5" letter-spacing="0.5">DIAGNÓSTICO MÓVEL · WINDOWS &amp; ANDROID</text>
+</svg>

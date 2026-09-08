@@ -903,6 +903,29 @@
     }
   },
   {
+    "id": "hw_getac_k120g2",
+    "section": "hard",
+    "img": "IMG/hardware/hw-getac-k120g2.svg",
+    "premium": true,
+    "badge": "badge_best",
+    "meta": {},
+    "pt": {
+      "name": "Tablet Getac K120G2",
+      "short": "O melhor tablet rugged do mercado para diagnóstico automóvel, a um preço incrível.",
+      "details": "<b>Getac K120G2</b> — o equipamento rugged de referência para diagnóstico automóvel profissional. Construção robusta certificada MIL-STD-810H e IP65, ecrã de alta luminosidade legível ao sol, processador Intel de última geração e autonomia de bateria alargada. Compatível com todos os softwares de diagnóstico multimarca (Xentry, ODIS, ISTA, Techstream e mais). A melhor relação qualidade/preço do mercado para oficinas que precisam de fiabilidade em qualquer ambiente de trabalho."
+    },
+    "en": {
+      "name": "Getac K120G2 Tablet",
+      "short": "The best rugged tablet on the market for automotive diagnostics, at an incredible price.",
+      "details": "<b>Getac K120G2</b> — the reference rugged device for professional automotive diagnostics. Robust MIL-STD-810H and IP65 certified build, sunlight-readable high-brightness display, latest-generation Intel processor and extended battery life. Compatible with all multi-brand diagnostic software (Xentry, ODIS, ISTA, Techstream and more). The best value on the market for workshops that need reliability in any work environment."
+    },
+    "fr": {
+      "name": "Tablette Getac K120G2",
+      "short": "La meilleure tablette durcie du marché pour le diagnostic automobile, à un prix incroyable.",
+      "details": "<b>Getac K120G2</b> — l'équipement durci de référence pour le diagnostic automobile professionnel. Construction robuste certifiée MIL-STD-810H et IP65, écran haute luminosité lisible au soleil, processeur Intel dernière génération et autonomie de batterie prolongée. Compatible avec tous les logiciels de diagnostic multimarque (Xentry, ODIS, ISTA, Techstream et plus). Le meilleur rapport qualité/prix du marché pour les ateliers qui ont besoin de fiabilité en toute condition."
+    }
+  },
+  {
     "id": "hw_openport",
     "section": "hard",
     "img": "IMG/hardware/hw-openport.jpg",
@@ -1095,7 +1118,7 @@
     "id": "fiat_multiecuscan",
     "section": "soft",
     "brand": "fiat",
-    "img": "IMG/mauto/m-auto.png",
+    "img": "IMG/Fiat/fiat-multiecuscan.svg",
     "premium": false,
     "badge": "",
     "span_full": false,
@@ -1127,7 +1150,7 @@
     "id": "fiat_alfaobd",
     "section": "soft",
     "brand": "fiat",
-    "img": "IMG/mauto/m-auto.png",
+    "img": "IMG/Fiat/fiat-alfaobd.svg",
     "premium": true,
     "badge": "",
     "span_full": false,

@@ -888,7 +888,7 @@ function renderAbout() {
       <div class="promo-section">
         <div class="promo-emoji">🎰</div>
         <h3>🔥 Promoção Especial — Roleta de Descontos!</h3>
-        <p>Gira a roleta e ganha até <strong>50% de desconto</strong> em instalação de software de diagnóstico.</p>
+        <p>Gira a roleta e ganha até <strong>20% de desconto</strong> em instalação de software de diagnóstico.</p>
         <button type="button" class="promo-btn" onclick="event.stopPropagation();openRoleta()">🎰 Girar Roleta</button>
       </div>
       <div class="about-news">
@@ -1104,14 +1104,26 @@ function orderGeneral() {
 ───────────────────────────────────────────── */
 let roletaState = {
   produto: null,
+  qtd: null,
   desconto: 0,
   codigo: '',
-  precoBase: 0,
   spinning: false,
 };
 
-const ROLETA_SEGMENTS_NORMAL = [10, 12, 15, 18, 20, 25, 30, 35, 40, 45, 50];
-const ROLETA_SEGMENTS_C4     = [10, 12, 15];
+const ROLETA_LABELS = {
+  normal: 'Instalação de Software',
+  c4: 'Pack Mercedes C4',
+  vci: 'Mercedes VCI',
+  maps: 'Mercedes Maps — Códigos PIN'
+};
+const ROLETA_QTD_LABELS = {
+  single: '1 Instalação',
+  multi: 'Mais de 1 Instalação'
+};
+
+// Ofertas: ate 10% para 1 instalacao, ate 20% para mais de 1 instalacao. Sem precos.
+const ROLETA_SEGMENTS_SINGLE = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+const ROLETA_SEGMENTS_MULTI  = [5, 8, 10, 12, 14, 16, 18, 20];
 const ROLETA_COLORS = [
   '#2563eb', '#7c3aed', '#059669', '#d97706', '#dc2626',
   '#0891b2', '#4f46e5', '#ca8a04', '#db2777', '#0284c7',
@@ -1120,8 +1132,9 @@ const ROLETA_COLORS = [
 
 function openRoleta() {
   closeProductModal();
-  roletaState = { produto: null, desconto: 0, codigo: '', precoBase: 0, spinning: false };
+  roletaState = { produto: null, qtd: null, desconto: 0, codigo: '', spinning: false };
   document.getElementById('roleta-step-produto').style.display = '';
+  document.getElementById('roleta-step-qtd').style.display = 'none';
   document.getElementById('roleta-step-girar').style.display = 'none';
   document.getElementById('roleta-step-resultado').style.display = 'none';
   const modal = document.getElementById('roletaModal');
@@ -1136,22 +1149,27 @@ function closeRoleta() {
 }
 
 function selectRoletaProd(prodId) {
-  const prices = { normal: 135, c4: 0, vci: 140 };
-  const labels = {
-    normal: 'Instalação de Software — 135 €',
-    c4: 'Pack Mercedes C4',
-    vci: 'Mercedes VCI — 140 €'
-  };
   roletaState.produto = prodId;
-  roletaState.precoBase = prices[prodId];
 
   document.getElementById('roleta-step-produto').style.display = 'none';
   document.getElementById('roleta-step-resultado').style.display = 'none';
 
-  const subEl = document.getElementById('roletaStep2Sub');
-  subEl.textContent = `Pack: ${labels[prodId]}`;
+  const subEl = document.getElementById('roletaStepQtdSub');
+  subEl.textContent = `Pack: ${ROLETA_LABELS[prodId]}`;
 
-  const segments = prodId === 'c4' ? ROLETA_SEGMENTS_C4 : ROLETA_SEGMENTS_NORMAL;
+  document.getElementById('roleta-step-qtd').style.display = '';
+}
+
+function selectRoletaQtd(qtd) {
+  roletaState.qtd = qtd;
+
+  document.getElementById('roleta-step-qtd').style.display = 'none';
+  document.getElementById('roleta-step-resultado').style.display = 'none';
+
+  const subEl = document.getElementById('roletaStep2Sub');
+  subEl.textContent = `Pack: ${ROLETA_LABELS[roletaState.produto]} · ${ROLETA_QTD_LABELS[qtd]}`;
+
+  const segments = qtd === 'multi' ? ROLETA_SEGMENTS_MULTI : ROLETA_SEGMENTS_SINGLE;
   const canvas = document.getElementById('roletaCanvas');
   const ctx = canvas.getContext('2d');
   drawRoletaWheel(ctx, segments, 0);
@@ -1163,9 +1181,16 @@ function selectRoletaProd(prodId) {
 }
 
 function backRoletaProd() {
+  document.getElementById('roleta-step-qtd').style.display = 'none';
   document.getElementById('roleta-step-girar').style.display = 'none';
   document.getElementById('roleta-step-resultado').style.display = 'none';
   document.getElementById('roleta-step-produto').style.display = '';
+}
+
+function backRoletaQtd() {
+  document.getElementById('roleta-step-girar').style.display = 'none';
+  document.getElementById('roleta-step-resultado').style.display = 'none';
+  document.getElementById('roleta-step-qtd').style.display = '';
 }
 
 function drawRoletaWheel(ctx, segments, rotation) {
@@ -1240,7 +1265,7 @@ function girarRoleta() {
   btn.disabled = true;
   btn.innerHTML = '<span>⏳ A girar...</span>';
 
-  const segments = roletaState.produto === 'c4' ? ROLETA_SEGMENTS_C4 : ROLETA_SEGMENTS_NORMAL;
+  const segments = roletaState.qtd === 'multi' ? ROLETA_SEGMENTS_MULTI : ROLETA_SEGMENTS_SINGLE;
   const n = segments.length;
   const targetIdx = Math.floor(Math.random() * n);
   const targetAngle = (2 * Math.PI) / n;
@@ -1297,25 +1322,15 @@ function generateRoletaCode() {
 
 function showRoletaResult() {
   const desc = roletaState.desconto;
-  const precoBase = roletaState.precoBase;
 
   document.getElementById('roletaResultDisc').textContent = desc + '%';
-
-  const priceEl = document.getElementById('roletaResultPrice');
-  if (precoBase > 0) {
-    const finalPrice = precoBase - (precoBase * desc / 100);
-    priceEl.innerHTML = `<span style="text-decoration:line-through;opacity:0.5">${precoBase} €</span> → <strong style="color:#25D366">${finalPrice.toFixed(2)} €</strong>`;
-  } else {
-    priceEl.textContent = 'Pack Mercedes C4 — consulte-nos para preço final';
-  }
-
   document.getElementById('roletaResultCode').textContent = roletaState.codigo;
 
   // Icon based on discount
   const iconEl = document.getElementById('roletaResultIcon');
-  if (desc >= 40) iconEl.textContent = '🤯';
-  else if (desc >= 30) iconEl.textContent = '🔥';
-  else if (desc >= 20) iconEl.textContent = '🎉';
+  if (desc >= 18) iconEl.textContent = '🤯';
+  else if (desc >= 12) iconEl.textContent = '🔥';
+  else if (desc >= 8) iconEl.textContent = '🎉';
   else iconEl.textContent = '👍';
 }
 
@@ -1338,21 +1353,13 @@ function copyRoletaCode() {
 
 function orderRoleta() {
   const phone = "351938526930";
-  const prodLabels = {
-    normal: 'Instalação de Software',
-    c4: 'Pack Mercedes C4',
-    vci: 'Mercedes VCI'
-  };
-  const prodName = prodLabels[roletaState.produto] || 'Produto';
-  const precoBase = roletaState.precoBase;
+  const prodName = ROLETA_LABELS[roletaState.produto] || 'Produto';
+  const qtdName = ROLETA_QTD_LABELS[roletaState.qtd] || '';
 
   let msg = `🛒 *Encomenda M-Auto Online*\n`;
   msg += `📦 Produto: ${prodName}\n`;
+  msg += `🔢 Instalações: ${qtdName}\n`;
   msg += `🎰 Desconto: *${roletaState.desconto}%* (código: ${roletaState.codigo})\n`;
-  if (precoBase > 0) {
-    const finalPrice = precoBase - (precoBase * roletaState.desconto / 100);
-    msg += `💰 Preço final: ${finalPrice.toFixed(2)} € (em vez de ${precoBase} €)\n`;
-  }
   msg += `🌐 m-auto.online\n\n`;
   msg += `Olá! Quero aproveitar este desconto.`;
 

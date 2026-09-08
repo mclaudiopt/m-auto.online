@@ -1,4 +1,4 @@
-const CACHE = 'm-auto-v8';
+const CACHE = 'm-auto-v9';
 const PRECACHE = [
   '/',
   '/assets/app.js',
@@ -25,6 +25,10 @@ self.addEventListener('activate', e => {
   );
 });
 
+// Network-first: tenta sempre buscar a versao mais recente do servidor.
+// So usa a copia em cache quando o pedido de rede falha (offline).
+// Isto garante que alteracoes ao site (produtos, precos, textos) aparecem
+// de imediato aos visitantes, sem ficarem presos a uma versao antiga.
 self.addEventListener('fetch', e => {
   // Only handle GET, same-origin or CDN fonts
   if (e.request.method !== 'GET') return;
@@ -34,14 +38,11 @@ self.addEventListener('fetch', e => {
   if (!isSameOrigin && !isFonts) return;
 
   e.respondWith(
-    caches.match(e.request).then(cached => {
-      if (cached) return cached;
-      return fetch(e.request).then(res => {
-        if (!res || res.status !== 200) return res;
-        const clone = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, clone));
-        return res;
-      }).catch(() => cached);
-    })
+    fetch(e.request).then(res => {
+      if (!res || res.status !== 200) return res;
+      const clone = res.clone();
+      caches.open(CACHE).then(c => c.put(e.request, clone));
+      return res;
+    }).catch(() => caches.match(e.request))
   );
 });

@@ -1,0 +1,41 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MultiecuScan — FCA Diagnostics">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#c8102e" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#c8102e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <!-- ECU chip -->
+  <g transform="translate(400,215)">
+    <rect x="-90" y="-70" width="180" height="140" rx="14" fill="#e5e7eb"/>
+    <rect x="-64" y="-44" width="128" height="88" rx="6" fill="#171a20"/>
+    <g stroke="#a1a1aa" stroke-width="4">
+      <line x1="-90" y1="-40" x2="-112" y2="-40"/>
+      <line x1="-90" y1="0" x2="-112" y2="0"/>
+      <line x1="-90" y1="40" x2="-112" y2="40"/>
+      <line x1="90" y1="-40" x2="112" y2="-40"/>
+      <line x1="90" y1="0" x2="112" y2="0"/>
+      <line x1="90" y1="40" x2="112" y2="40"/>
+      <line x1="-40" y1="-70" x2="-40" y2="-92"/>
+      <line x1="0" y1="-70" x2="0" y2="-92"/>
+      <line x1="40" y1="-70" x2="40" y2="-92"/>
+      <line x1="-40" y1="70" x2="-40" y2="92"/>
+      <line x1="0" y1="70" x2="0" y2="92"/>
+      <line x1="40" y1="70" x2="40" y2="92"/>
+    </g>
+    <path d="M-30,4 l16,16 l32,-32" stroke="#4ade80" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <rect x="40" y="40" width="200" height="34" rx="6" fill="#c8102e"/>
+  <text x="55" y="63" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="0.5">FCA GROUP</text>
+
+  <text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="800" fill="#f8fafc">MultiecuScan</text>
+  <text x="400" y="434" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#fca5a5" letter-spacing="0.5">ALFA ROMEO · FIAT · LANCIA · JEEP</text>
+</svg>
