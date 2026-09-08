@@ -11,7 +11,12 @@ const TRANS = {
   pt: {
     nav_soft: "Software", nav_all: "Tudo", nav_hard: "Hardware", nav_tools: "Downloads",
     nav_serv: "Serviços", nav_about: "Sobre",
-    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
+    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_secondhand: "2ª Mão", mob_about: "Info",
+    nav_secondhand: "Second Hand Tools",
+    secondhand_title: "Second Hand Tools", secondhand_meta: "Equipamento em segunda mão — fábrica",
+    secondhand_notice: "⚠️ Stock em tempo real e sujeito a confirmação — contacta-nos antes de encomendar para confirmarmos disponibilidade e preço atual.",
+    secondhand_badge: "Second Hand · Fábrica",
+    secondhand_credit: "Artigos disponibilizados via carobd.de",
     btn_order: "Encomendar", btn_download: "Download", btn_details: "Detalhes",
     btn_schedule: "Agendar", btn_close: "Fechar",
     price_consult: "Consulta", price_pack: "Pack Completo", price_maps_from: "A partir de 70€",
@@ -81,6 +86,7 @@ const TRANS = {
     roleta_valid_text: "Válido por 7 dias · 1 utilização por cliente",
     roleta_wa_btn: "💬 Encomendar via WhatsApp", roleta_spin_again: "🔁 Girar novamente",
     roleta_pack_prefix: "Pack:",
+    wa_roleta_header: "🛒 *Encomenda M-Auto Online*", wa_roleta_product: "📦 Produto:", wa_roleta_qty: "🔢 Instalações:", wa_roleta_discount: "🎰 Desconto:", wa_roleta_code: "código", wa_roleta_cta: "Olá! Quero aproveitar este desconto.",
     wa_interest: "Olá! Tenho interesse em:",
     wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico.",
     stat1_num: "100+", stat1_lbl: "clientes",
@@ -90,7 +96,12 @@ const TRANS = {
   en: {
     nav_soft: "Software", nav_all: "All", nav_hard: "Hardware", nav_tools: "Downloads",
     nav_serv: "Services", nav_about: "About",
-    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
+    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_secondhand: "2nd Hand", mob_about: "Info",
+    nav_secondhand: "Second Hand Tools",
+    secondhand_title: "Second Hand Tools", secondhand_meta: "Second-hand factory-graded equipment",
+    secondhand_notice: "⚠️ Real-time stock, subject to confirmation — contact us before ordering to confirm current availability and price.",
+    secondhand_badge: "Second Hand · Factory",
+    secondhand_credit: "Items sourced via carobd.de",
     btn_order: "Order", btn_download: "Download", btn_details: "Details",
     btn_schedule: "Book", btn_close: "Close",
     price_consult: "On request", price_pack: "Full Pack", price_maps_from: "From €70",
@@ -160,6 +171,7 @@ const TRANS = {
     roleta_valid_text: "Valid for 7 days · 1 use per customer",
     roleta_wa_btn: "💬 Order via WhatsApp", roleta_spin_again: "🔁 Spin again",
     roleta_pack_prefix: "Pack:",
+    wa_roleta_header: "🛒 *M-Auto Online Order*", wa_roleta_product: "📦 Product:", wa_roleta_qty: "🔢 Installations:", wa_roleta_discount: "🎰 Discount:", wa_roleta_code: "code", wa_roleta_cta: "Hi! I'd like to use this discount.",
     wa_interest: "Hello! I'm interested in:",
     wa_general: "Hello! I would like more information about your diagnostic software.",
     stat1_num: "100+", stat1_lbl: "clients",
@@ -169,7 +181,12 @@ const TRANS = {
   fr: {
     nav_soft: "Logiciel", nav_all: "Tout", nav_hard: "Matériel", nav_tools: "Téléchargements",
     nav_serv: "Services", nav_about: "À Propos",
-    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
+    mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_secondhand: "Occasion", mob_about: "Info",
+    nav_secondhand: "Second Hand Tools",
+    secondhand_title: "Second Hand Tools", secondhand_meta: "Équipement d'occasion — qualité usine",
+    secondhand_notice: "⚠️ Stock en temps réel, sujet à confirmation — contactez-nous avant de commander pour confirmer la disponibilité et le prix actuels.",
+    secondhand_badge: "Occasion · Usine",
+    secondhand_credit: "Articles proposés via carobd.de",
     btn_order: "Commander", btn_download: "Télécharger", btn_details: "Détails",
     btn_schedule: "Planifier", btn_close: "Fermer",
     price_consult: "Sur demande", price_pack: "Pack Complet", price_maps_from: "À partir de 70€",
@@ -239,6 +256,7 @@ const TRANS = {
     roleta_valid_text: "Valable 7 jours · 1 utilisation par client",
     roleta_wa_btn: "💬 Commander via WhatsApp", roleta_spin_again: "🔁 Tourner à nouveau",
     roleta_pack_prefix: "Pack :",
+    wa_roleta_header: "🛒 *Commande M-Auto Online*", wa_roleta_product: "📦 Produit :", wa_roleta_qty: "🔢 Installations :", wa_roleta_discount: "🎰 Réduction :", wa_roleta_code: "code", wa_roleta_cta: "Bonjour ! Je voudrais profiter de cette réduction.",
     wa_interest: "Bonjour ! Je suis intéressé par :",
     wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic.",
     stat1_num: "100+", stat1_lbl: "clients",
@@ -541,6 +559,10 @@ function buildNav() {
       onclick="switchSection('serv',  this)"
       onmouseenter="scheduleNavHover('serv', this)" onmouseleave="cancelNavHover()"
       data-nav-key="nav_serv">${t('nav_serv')}${nb(servCount)}</button>
+    <button type="button" class="nav-pill${activeSection === 'secondhand' ? ' active' : ''}"
+      onclick="switchSection('secondhand', this)"
+      onmouseenter="scheduleNavHover('secondhand', this)" onmouseleave="cancelNavHover()"
+      data-nav-key="nav_secondhand">${t('nav_secondhand')}</button>
     <button type="button" class="nav-pill${activeSection === 'about' ? ' active' : ''}"
       onclick="switchSection('about', this)"
       onmouseenter="scheduleNavHover('about', this)" onmouseleave="cancelNavHover()"
@@ -552,6 +574,7 @@ function buildNav() {
     { id: 'hard',  icon: '🔧',          key: 'mob_hard',  fn: `switchSection('hard',  this)` },
     { id: 'tools', icon: '⬇',           key: 'mob_tools', fn: `switchSection('tools', this)` },
     { id: 'serv',  icon: '🔩', key: 'mob_serv',  fn: `switchSection('serv',  this)` },
+    { id: 'secondhand', icon: '♻️', key: 'mob_secondhand', fn: `switchSection('secondhand', this)` },
     { id: 'about', icon: 'ℹ',        key: 'mob_about', fn: `switchSection('about', this)` },
   ].map(n => `<div class="mob-item${activeSection === n.id ? ' active' : ''}"
     onclick="${n.fn}" data-nav-key="${n.key}">
@@ -743,10 +766,11 @@ function switchSection(id, btn) {
   if (id === 'hard')  renderHard();
   if (id === 'tools') renderTools();
   if (id === 'serv')  renderServices();
+  if (id === 'secondhand') renderSecondhand();
   if (id === 'about') renderAbout();
   buildNav(); // mantém estado activo correcto no nav
   if (id === 'soft') showConsultPopup(); // só na tab Software
-  const _secLabels = { soft: t('nav_soft'), hard: t('nav_hard'), tools: t('nav_tools'), serv: t('nav_serv'), about: 'Sobre' };
+  const _secLabels = { soft: t('nav_soft'), hard: t('nav_hard'), tools: t('nav_tools'), serv: t('nav_serv'), secondhand: t('nav_secondhand'), about: 'Sobre' };
   updateOGMeta(_secLabels[id] || id, null, `https://m-auto.online/#${id}`);
 }
 
@@ -774,6 +798,43 @@ function renderSection(id) {
   if (id === 'hard')  renderHard();
   if (id === 'tools') renderTools();
   if (id === 'serv')  renderServices();
+  if (id === 'secondhand') renderSecondhand();
+}
+
+/* ─────────────────────────────────────────────
+   SECOND HAND TOOLS — listagem estatica, sem precos
+───────────────────────────────────────────── */
+const SECONDHAND_ITEMS = [
+  { img: 'IMG/secondhand/sh-01.jpg', name: '95% New LAUNCH X431 CRP919E BT Car Diagnostic Tool', desc: 'DBScar VII · Active Test · ECU Coding · CANFD · DOIP · 31 Reset Services (EU/UK)' },
+  { img: 'IMG/secondhand/sh-02.jpg', name: 'Launch X431 X-PROG 3 Advanced Immobilizer & Key Programmer', desc: 'XPROG 3 Chip Reader — compatível com a série X-431' },
+  { img: 'IMG/secondhand/sh-03.jpg', name: '95% New Super MB Pro M6+ PRO Diagnosis Tool', desc: 'Configuração completa para Mercedes-Benz, suporta DOIP' },
+  { img: 'IMG/secondhand/sh-04.jpg', name: 'Launch X431 PRO5 Car Diagnostic Tool', desc: 'Scanner OBD2 Full System, diagnóstico inteligente' },
+  { img: 'IMG/secondhand/sh-05.jpg', name: 'Xhorse VVDI MB BGA Tool', desc: 'Programação de chaves e módulos Mercedes-Benz' },
+  { img: 'IMG/secondhand/sh-06.jpg', name: 'Autel MaxiCOM MK908 II Diagnostic Tablet', desc: 'Wi-Fi · Impressão · ECU Coding · IMMO · Service · Refresh de funções ocultas' }
+];
+
+function renderSecondhand() {
+  const sec = document.getElementById('sec-secondhand');
+  if (!sec) return;
+  const cards = SECONDHAND_ITEMS.map(it => `
+    <div class="sh-card">
+      <span class="sh-card-badge">${t('secondhand_badge')}</span>
+      <img src="${it.img}" alt="${it.name}" loading="lazy">
+      <div class="sh-card-body">
+        <div class="sh-card-name">${it.name}</div>
+        <div class="sh-card-desc">${it.desc}</div>
+      </div>
+    </div>`).join('');
+  sec.innerHTML = `
+    <div class="section-hero">
+      <div class="section-hero-eyebrow">M-Auto Online</div>
+      <h2 class="section-hero-title">${t('secondhand_title')}</h2>
+      <p class="section-hero-meta">${t('secondhand_meta')}</p>
+    </div>
+    <div class="sh-notice">${t('secondhand_notice')}</div>
+    <div class="sh-grid">${cards}</div>
+    <p class="sh-credit">${t('secondhand_credit')}</p>
+  `;
 }
 
 function renderBrand(brandId) {
@@ -1477,12 +1538,12 @@ function orderRoleta() {
   const prodName = roletaProdLabel(roletaState.produto) || 'Produto';
   const qtdName = roletaQtdLabel(roletaState.qtd) || '';
 
-  let msg = `🛒 *Encomenda M-Auto Online*\n`;
-  msg += `📦 Produto: ${prodName}\n`;
-  msg += `🔢 Instalações: ${qtdName}\n`;
-  msg += `🎰 Desconto: *${roletaState.desconto}%* (código: ${roletaState.codigo})\n`;
+  let msg = `${t('wa_roleta_header')}\n`;
+  msg += `${t('wa_roleta_product')} ${prodName}\n`;
+  msg += `${t('wa_roleta_qty')} ${qtdName}\n`;
+  msg += `${t('wa_roleta_discount')} *${roletaState.desconto}%* (${t('wa_roleta_code')}: ${roletaState.codigo})\n`;
   msg += `🌐 m-auto.online\n\n`;
-  msg += `Olá! Quero aproveitar este desconto.`;
+  msg += t('wa_roleta_cta');
 
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
 }
@@ -1548,11 +1609,11 @@ function inlineGirarRoleta() {
       document.getElementById('inlineRDisc').textContent = discount + '%';
 
       const qtdName = roletaQtdLabel(inlineRoletaState.qtd) || '';
-      let msg = `🛒 *Encomenda M-Auto Online*\n`;
-      msg += `🔢 Instalações: ${qtdName}\n`;
-      msg += `🎰 Desconto: *${discount}%* (código: ${inlineRoletaState.codigo})\n`;
+      let msg = `${t('wa_roleta_header')}\n`;
+      msg += `${t('wa_roleta_qty')} ${qtdName}\n`;
+      msg += `${t('wa_roleta_discount')} *${discount}%* (${t('wa_roleta_code')}: ${inlineRoletaState.codigo})\n`;
       msg += `🌐 m-auto.online\n\n`;
-      msg += `Olá! Quero aproveitar este desconto.`;
+      msg += t('wa_roleta_cta');
       document.getElementById('inlineRWaBtn').href = `https://wa.me/351938526930?text=${encodeURIComponent(msg)}`;
 
       inlineRoletaState.spinning = false;
