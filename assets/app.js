@@ -805,26 +805,51 @@ function renderSection(id) {
    SECOND HAND TOOLS — listagem estatica, sem precos
 ───────────────────────────────────────────── */
 const SECONDHAND_ITEMS = [
-  { img: 'IMG/secondhand/sh-01.jpg', name: '95% New LAUNCH X431 CRP919E BT Car Diagnostic Tool', desc: 'DBScar VII · Active Test · ECU Coding · CANFD · DOIP · 31 Reset Services (EU/UK)' },
-  { img: 'IMG/secondhand/sh-02.jpg', name: 'Launch X431 X-PROG 3 Advanced Immobilizer & Key Programmer', desc: 'XPROG 3 Chip Reader — compatível com a série X-431' },
-  { img: 'IMG/secondhand/sh-03.jpg', name: '95% New Super MB Pro M6+ PRO Diagnosis Tool', desc: 'Configuração completa para Mercedes-Benz, suporta DOIP' },
-  { img: 'IMG/secondhand/sh-04.jpg', name: 'Launch X431 PRO5 Car Diagnostic Tool', desc: 'Scanner OBD2 Full System, diagnóstico inteligente' },
-  { img: 'IMG/secondhand/sh-05.jpg', name: 'Xhorse VVDI MB BGA Tool', desc: 'Programação de chaves e módulos Mercedes-Benz' },
-  { img: 'IMG/secondhand/sh-06.jpg', name: 'Autel MaxiCOM MK908 II Diagnostic Tablet', desc: 'Wi-Fi · Impressão · ECU Coding · IMMO · Service · Refresh de funções ocultas' }
+  { img: 'IMG/secondhand/sh-01.jpg',
+    pt: { name: 'LAUNCH X431 CRP919E BT (95% Novo)', desc: 'DBScar VII · Teste Ativo · Codificação ECU · CANFD · DOIP · 31 Serviços de Reset (EU/UK)' },
+    en: { name: 'LAUNCH X431 CRP919E BT (95% New)', desc: 'DBScar VII · Active Test · ECU Coding · CANFD · DOIP · 31 Reset Services (EU/UK)' },
+    fr: { name: 'LAUNCH X431 CRP919E BT (95% comme neuf)', desc: 'DBScar VII · Test Actif · Codage ECU · CANFD · DOIP · 31 Services de Réinitialisation (EU/UK)' } },
+  { img: 'IMG/secondhand/sh-02.jpg',
+    pt: { name: 'Launch X431 X-PROG 3 — Imobilizador e Programador de Chaves', desc: 'Leitor de chip XPROG 3 — compatível com a série X-431' },
+    en: { name: 'Launch X431 X-PROG 3 Advanced Immobilizer & Key Programmer', desc: 'XPROG 3 chip reader — compatible with the X-431 series' },
+    fr: { name: 'Launch X431 X-PROG 3 — Immobiliseur et Programmateur de Clés', desc: 'Lecteur de puce XPROG 3 — compatible avec la série X-431' } },
+  { img: 'IMG/secondhand/sh-03.jpg',
+    pt: { name: 'Super MB Pro M6+ PRO (95% Novo)', desc: 'Configuração completa para Mercedes-Benz, suporta DOIP' },
+    en: { name: 'Super MB Pro M6+ PRO Diagnosis Tool (95% New)', desc: 'Full configuration for Mercedes-Benz, supports DOIP' },
+    fr: { name: 'Super MB Pro M6+ PRO (95% comme neuf)', desc: 'Configuration complète pour Mercedes-Benz, supporte le DOIP' } },
+  { img: 'IMG/secondhand/sh-04.jpg',
+    pt: { name: 'Launch X431 PRO5 — Equipamento de Diagnóstico', desc: 'Scanner OBD2 Full System, diagnóstico inteligente' },
+    en: { name: 'Launch X431 PRO5 Car Diagnostic Tool', desc: 'Full System OBD2 scanner, intelligent diagnosis' },
+    fr: { name: 'Launch X431 PRO5 — Outil de Diagnostic', desc: 'Scanner OBD2 système complet, diagnostic intelligent' } },
+  { img: 'IMG/secondhand/sh-05.jpg',
+    pt: { name: 'Xhorse VVDI MB BGA Tool', desc: 'Programação de chaves e módulos Mercedes-Benz' },
+    en: { name: 'Xhorse VVDI MB BGA Tool', desc: 'Key and module programming for Mercedes-Benz' },
+    fr: { name: 'Xhorse VVDI MB BGA Tool', desc: 'Programmation de clés et modules Mercedes-Benz' } },
+  { img: 'IMG/secondhand/sh-06.jpg',
+    pt: { name: 'Autel MaxiCOM MK908 II — Tablet de Diagnóstico', desc: 'Wi-Fi · Impressão · Codificação ECU · IMMO · Service · Refresh de funções ocultas' },
+    en: { name: 'Autel MaxiCOM MK908 II Diagnostic Tablet', desc: 'Wi-Fi · Printing · ECU Coding · IMMO · Service · Hidden functions refresh' },
+    fr: { name: 'Autel MaxiCOM MK908 II — Tablette de Diagnostic', desc: 'Wi-Fi · Impression · Codage ECU · IMMO · Service · Réinitialisation des fonctions cachées' } }
 ];
 
 function renderSecondhand() {
   const sec = document.getElementById('sec-secondhand');
   if (!sec) return;
-  const cards = SECONDHAND_ITEMS.map(it => `
+  const cards = SECONDHAND_ITEMS.map(it => {
+    const d = it[lang] || it.pt;
+    const safeName = d.name.replace(/'/g, "\\'");
+    return `
     <div class="sh-card">
       <span class="sh-card-badge">${t('secondhand_badge')}</span>
-      <img src="${it.img}" alt="${it.name}" loading="lazy">
+      <img src="${it.img}" alt="${d.name}" loading="lazy">
       <div class="sh-card-body">
-        <div class="sh-card-name">${it.name}</div>
-        <div class="sh-card-desc">${it.desc}</div>
+        <div class="sh-card-name">${d.name}</div>
+        <div class="sh-card-desc">${d.desc}</div>
+        <button type="button" class="sh-card-cta" onclick="orderProduct('${safeName}', t('nav_secondhand'))">
+          <span class="sh-cta-icon">💬</span> ${t('btn_order')}
+        </button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
   sec.innerHTML = `
     <div class="section-hero">
       <div class="section-hero-eyebrow">M-Auto Online</div>

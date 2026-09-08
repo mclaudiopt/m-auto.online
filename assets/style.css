@@ -2214,6 +2214,14 @@ body {
 .sh-card-body { padding: 14px 16px 16px; }
 .sh-card-name { font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 6px; line-height: 1.3; }
 .sh-card-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+.sh-card-cta {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; margin-top: 12px; padding: 10px 14px;
+  border: none; border-radius: 10px; background: #25d366; color: #fff;
+  font-weight: 700; font-size: 0.8rem; cursor: pointer;
+}
+.sh-card-cta:hover { background: #1ebe57; }
+.sh-cta-icon { font-size: 0.9rem; }
 .sh-credit { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; }
 
 /* ── DOWNLOADS: tool-grid 3 colunas ── */
