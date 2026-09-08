@@ -14,8 +14,8 @@ const TRANS = {
     mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Encomendar", btn_download: "Download", btn_details: "Detalhes",
     btn_schedule: "Agendar", btn_close: "Fechar",
-    price_consult: "Consulta", price_pack: "Pack Completo",
-    badge_best: "Melhor Escolha", badge_top: "Mais Vendido",
+    price_consult: "Consulta", price_pack: "Pack Completo", price_maps_from: "A partir de 70€",
+    badge_best: "Melhor Escolha", badge_top: "Mais Vendido", badge_new: "🆕 Novidade",
     hero_sol: "Soluções Online", hero_desc: "Instalação remota profissional.",
     modal_order: "Encomendar", modal_no_details: "Detalhes não disponíveis.",
     search_placeholder: "🔍 Procurar...",
@@ -58,6 +58,9 @@ const TRANS = {
     news_title: "Mercedes-Benz / Daimler — Veículos Pesados",
     news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
     news_btn: "Ver M-Auto VCI →",
+    news2_title: "Mercedes Maps — Códigos PIN",
+    news2_sub: "NTG35 a NTG7 MBUX — atualização oficial de mapas",
+    news2_btn: "Ver Mercedes Maps →",
     wa_interest: "Olá! Tenho interesse em:",
     wa_general: "Olá! Gostaria de obter mais informações sobre os vossos softwares de diagnóstico.",
     stat1_num: "100+", stat1_lbl: "clientes",
@@ -70,8 +73,8 @@ const TRANS = {
     mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Order", btn_download: "Download", btn_details: "Details",
     btn_schedule: "Book", btn_close: "Close",
-    price_consult: "On request", price_pack: "Full Pack",
-    badge_best: "Best Choice", badge_top: "Best Seller",
+    price_consult: "On request", price_pack: "Full Pack", price_maps_from: "From €70",
+    badge_best: "Best Choice", badge_top: "Best Seller", badge_new: "🆕 New",
     hero_sol: "Online Solutions", hero_desc: "Professional remote installation.",
     modal_order: "Order", modal_no_details: "Details not available.",
     search_placeholder: "🔍 Search...",
@@ -114,6 +117,9 @@ const TRANS = {
     news_title: "Mercedes-Benz / Daimler — Heavy Trucks",
     news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
     news_btn: "See M-Auto VCI →",
+    news2_title: "Mercedes Maps — PIN Codes",
+    news2_sub: "NTG35 to NTG7 MBUX — official map update",
+    news2_btn: "See Mercedes Maps →",
     wa_interest: "Hello! I'm interested in:",
     wa_general: "Hello! I would like more information about your diagnostic software.",
     stat1_num: "100+", stat1_lbl: "clients",
@@ -126,8 +132,8 @@ const TRANS = {
     mob_soft: "Soft", mob_hard: "Hard", mob_tools: "DL", mob_serv: "Serv", mob_about: "Info",
     btn_order: "Commander", btn_download: "Télécharger", btn_details: "Détails",
     btn_schedule: "Planifier", btn_close: "Fermer",
-    price_consult: "Sur demande", price_pack: "Pack Complet",
-    badge_best: "Meilleur Choix", badge_top: "Best Seller",
+    price_consult: "Sur demande", price_pack: "Pack Complet", price_maps_from: "À partir de 70€",
+    badge_best: "Meilleur Choix", badge_top: "Best Seller", badge_new: "🆕 Nouveau",
     hero_sol: "Solutions En Ligne", hero_desc: "Installation à distance professionnelle.",
     modal_order: "Commander", modal_no_details: "Détails non disponibles.",
     search_placeholder: "🔍 Rechercher...",
@@ -170,6 +176,9 @@ const TRANS = {
     news_title: "Mercedes-Benz / Daimler — Poids Lourds",
     news_sub: "Actros · Arocs · Atego · Antos — Xentry Heavy Duty",
     news_btn: "Voir M-Auto VCI →",
+    news2_title: "Mercedes Maps — Codes PIN",
+    news2_sub: "NTG35 à NTG7 MBUX — mise à jour officielle des cartes",
+    news2_btn: "Voir Mercedes Maps →",
     wa_interest: "Bonjour ! Je suis intéressé par :",
     wa_general: "Bonjour ! Je souhaite obtenir plus d'informations sur vos logiciels de diagnostic.",
     stat1_num: "100+", stat1_lbl: "clients",
@@ -193,6 +202,7 @@ const BRANDS = [
   { id:"ford",     label:"Ford",           color:"#003478", colorLight:"#e8eefb", colorMid:"#6080d0", abbr:"FRD", watermark:"FORD" },
   { id:"gm",       label:"GM / Opel",      color:"#1c4077", colorLight:"#e8eef8", colorMid:"#6080c0", abbr:"GM",  watermark:"GM OPEL" },
   { id:"fiat",     label:"Fiat / FCA",     color:"#1c2f6e", colorLight:"#eaefff", colorMid:"#6882c8", abbr:"FCA", watermark:"FIAT" },
+  { id:"tesla",    label:"Tesla",          color:"#171a20", colorLight:"#f5f5f5", colorMid:"#8c8c8c", abbr:"TSL", watermark:"TESLA" },
   { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" }
 ];
 
@@ -386,6 +396,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   renderSection('about');   // página inicial = SOBRE
   applyLang();
   initBrandSwipe();
+  initPromoBadge();
 
   // Popup de visitantes — inicia após 8s, depois disparo aleatório periódico
   setTimeout(showViewersPopup, 8000);
@@ -396,11 +407,15 @@ window.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('productModal')?.addEventListener('click', e => {
     if (e.target.id === 'productModal') closeProductModal();
   });
+  document.getElementById('roletaModal')?.addEventListener('click', e => {
+    if (e.target.id === 'roletaModal') closeRoleta();
+  });
 
   // Fechar modal com Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       if (document.getElementById('productModal')?.classList.contains('open')) closeProductModal();
+      if (document.getElementById('roletaModal')?.classList.contains('open')) closeRoleta();
     }
   });
 });
@@ -870,11 +885,23 @@ function renderAbout() {
       <p class="section-hero-meta">Simply Digital · Diagnóstico Profissional</p>
     </div>
     <div class="about-landing">
+      <div class="promo-section">
+        <div class="promo-emoji">🎰</div>
+        <h3>🔥 Promoção Especial — Roleta de Descontos!</h3>
+        <p>Gira a roleta e ganha até <strong>50% de desconto</strong> em instalação de software de diagnóstico.</p>
+        <button type="button" class="promo-btn" onclick="event.stopPropagation();openRoleta()">🎰 Girar Roleta</button>
+      </div>
       <div class="about-news">
         <span class="about-news-badge">${t('news_badge')}</span>
         <div class="about-news-title">${t('news_title')}</div>
         <div class="about-news-sub">${t('news_sub')}</div>
         <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();var o=document.getElementById('vcxOverlay'),f=document.getElementById('vcxFrame');if(o&&f){f.src='vcx.html?lang=${lang}';o.style.display='flex';}})(event)">${t('news_btn')}</a>
+      </div>
+      <div class="about-news">
+        <span class="about-news-badge">${t('news_badge')}</span>
+        <div class="about-news-title">${t('news2_title')}</div>
+        <div class="about-news-sub">${t('news2_sub')}</div>
+        <a href="#" class="about-news-btn" onclick="(function(e){e.preventDefault();openProductModal('merc_maps_pin');})(event)">${t('news2_btn')}</a>
       </div>
       <div class="about-stats">
         <div class="about-stat"><span class="about-stat-num">${t('stat1_num')}</span><span class="about-stat-lbl">${t('stat1_lbl')}</span></div>
@@ -897,7 +924,10 @@ function createCard(item) {
   const spanClass = item.span_full ? ' style="grid-column:1/-1;position:relative"' : '';
 
   let badgeHtml = '';
-  if (item.badge) badgeHtml = `<span class="badge${item.badge === 'badge_top' ? ' badge-top' : ''}">${t(item.badge)}</span>`;
+  if (item.badge) {
+    const badgeClass = item.badge === 'badge_top' ? ' badge-top' : item.badge === 'badge_new' ? ' badge-new' : '';
+    badgeHtml = `<span class="badge${badgeClass}">${t(item.badge)}</span>`;
+  }
 
   const priceColor = isPremium ? ' style="color:var(--gold)"' : '';
   const eyeColor   = isPremium ? ' card-eye-gold' : '';
@@ -1066,9 +1096,278 @@ function orderProduct(nameOrMsg, context = '') {
 }
 
 function orderGeneral() {
+  openRoleta();
+}
+
+/* ─────────────────────────────────────────────
+   13c. ROLETA DE DESCONTOS
+───────────────────────────────────────────── */
+let roletaState = {
+  produto: null,
+  desconto: 0,
+  codigo: '',
+  precoBase: 0,
+  spinning: false,
+};
+
+const ROLETA_SEGMENTS_NORMAL = [10, 12, 15, 18, 20, 25, 30, 35, 40, 45, 50];
+const ROLETA_SEGMENTS_C4     = [10, 12, 15];
+const ROLETA_COLORS = [
+  '#2563eb', '#7c3aed', '#059669', '#d97706', '#dc2626',
+  '#0891b2', '#4f46e5', '#ca8a04', '#db2777', '#0284c7',
+  '#65a30d'
+];
+
+function openRoleta() {
+  closeProductModal();
+  roletaState = { produto: null, desconto: 0, codigo: '', precoBase: 0, spinning: false };
+  document.getElementById('roleta-step-produto').style.display = '';
+  document.getElementById('roleta-step-girar').style.display = 'none';
+  document.getElementById('roleta-step-resultado').style.display = 'none';
+  const modal = document.getElementById('roletaModal');
+  modal.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('open')));
+}
+
+function closeRoleta() {
+  const modal = document.getElementById('roletaModal');
+  modal.classList.remove('open');
+  setTimeout(() => { modal.style.display = 'none'; }, 350);
+}
+
+function selectRoletaProd(prodId) {
+  const prices = { normal: 135, c4: 0, vci: 140 };
+  const labels = {
+    normal: 'Instalação de Software — 135 €',
+    c4: 'Pack Mercedes C4',
+    vci: 'Mercedes VCI — 140 €'
+  };
+  roletaState.produto = prodId;
+  roletaState.precoBase = prices[prodId];
+
+  document.getElementById('roleta-step-produto').style.display = 'none';
+  document.getElementById('roleta-step-resultado').style.display = 'none';
+
+  const subEl = document.getElementById('roletaStep2Sub');
+  subEl.textContent = `Pack: ${labels[prodId]}`;
+
+  const segments = prodId === 'c4' ? ROLETA_SEGMENTS_C4 : ROLETA_SEGMENTS_NORMAL;
+  const canvas = document.getElementById('roletaCanvas');
+  const ctx = canvas.getContext('2d');
+  drawRoletaWheel(ctx, segments, 0);
+
+  document.getElementById('roleta-step-girar').style.display = '';
+  document.getElementById('roletaSpinBtn').disabled = false;
+  document.getElementById('roletaSpinBtn').innerHTML = '<span>🎰 GIRAR!</span>';
+  roletaState.spinning = false;
+}
+
+function backRoletaProd() {
+  document.getElementById('roleta-step-girar').style.display = 'none';
+  document.getElementById('roleta-step-resultado').style.display = 'none';
+  document.getElementById('roleta-step-produto').style.display = '';
+}
+
+function drawRoletaWheel(ctx, segments, rotation) {
+  const w = ctx.canvas.width;
+  const h = ctx.canvas.height;
+  const cx = w / 2;
+  const cy = h / 2;
+  const r = Math.min(cx, cy) - 8;
+  const n = segments.length;
+  const arc = (2 * Math.PI) / n;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Draw segments
+  for (let i = 0; i < n; i++) {
+    const startAngle = rotation + i * arc;
+    const endAngle = startAngle + arc;
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, startAngle, endAngle);
+    ctx.closePath();
+    ctx.fillStyle = ROLETA_COLORS[i % ROLETA_COLORS.length];
+    ctx.fill();
+
+    // Segment border
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Text
+    const midAngle = startAngle + arc / 2;
+    const textR = r * 0.62;
+    const tx = cx + Math.sin(midAngle) * textR;
+    const ty = cy - Math.cos(midAngle) * textR;
+
+    ctx.save();
+    ctx.translate(tx, ty);
+    ctx.rotate(midAngle);
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 13px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(segments[i] + '%', 0, 0);
+    ctx.restore();
+  }
+
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, 18, 0, 2 * Math.PI);
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 18);
+  grad.addColorStop(0, '#1e293b');
+  grad.addColorStop(1, '#0f172a');
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Center dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 5, 0, 2 * Math.PI);
+  ctx.fillStyle = '#3b82f6';
+  ctx.fill();
+}
+
+function girarRoleta() {
+  if (roletaState.spinning) return;
+  roletaState.spinning = true;
+
+  const btn = document.getElementById('roletaSpinBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳ A girar...</span>';
+
+  const segments = roletaState.produto === 'c4' ? ROLETA_SEGMENTS_C4 : ROLETA_SEGMENTS_NORMAL;
+  const n = segments.length;
+  const targetIdx = Math.floor(Math.random() * n);
+  const targetAngle = (2 * Math.PI) / n;
+
+  // The pointer is at the top (12 o'clock). We want the target segment to align with it.
+  // Each segment spans from rotation + i*arc to rotation + (i+1)*arc
+  // The pointer at top is at angle = -PI/2 (in standard math coords)
+  // We want: rotation + targetIdx*arc + targetAngle/2 = -PI/2 + 2*PI*k (for some big k for many spins)
+  const arc = targetAngle;
+  const extraSpins = 6 + Math.floor(Math.random() * 4); // 6-9 full spins
+  const finalRotation = -(Math.PI / 2) - (targetIdx * arc + arc / 2) + extraSpins * 2 * Math.PI;
+
+  const canvas = document.getElementById('roletaCanvas');
+  const ctx = canvas.getContext('2d');
+  const totalSteps = 60;
+  let step = 0;
+  const startRotation = 0;
+
+  function animate() {
+    step++;
+    const progress = step / totalSteps;
+    // Cubic ease-out
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const currentRotation = startRotation + (finalRotation - startRotation) * eased;
+
+    drawRoletaWheel(ctx, segments, currentRotation);
+
+    if (step < totalSteps) {
+      requestAnimationFrame(animate);
+    } else {
+      // Spin complete
+      const discount = segments[targetIdx];
+      roletaState.desconto = discount;
+      roletaState.codigo = generateRoletaCode();
+
+      // Show result step
+      document.getElementById('roleta-step-girar').style.display = 'none';
+      document.getElementById('roleta-step-resultado').style.display = '';
+      showRoletaResult();
+    }
+  }
+
+  animate();
+}
+
+function generateRoletaCode() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = 'MAUTO-';
+  for (let i = 0; i < 6; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+}
+
+function showRoletaResult() {
+  const desc = roletaState.desconto;
+  const precoBase = roletaState.precoBase;
+
+  document.getElementById('roletaResultDisc').textContent = desc + '%';
+
+  const priceEl = document.getElementById('roletaResultPrice');
+  if (precoBase > 0) {
+    const finalPrice = precoBase - (precoBase * desc / 100);
+    priceEl.innerHTML = `<span style="text-decoration:line-through;opacity:0.5">${precoBase} €</span> → <strong style="color:#25D366">${finalPrice.toFixed(2)} €</strong>`;
+  } else {
+    priceEl.textContent = 'Pack Mercedes C4 — consulte-nos para preço final';
+  }
+
+  document.getElementById('roletaResultCode').textContent = roletaState.codigo;
+
+  // Icon based on discount
+  const iconEl = document.getElementById('roletaResultIcon');
+  if (desc >= 40) iconEl.textContent = '🤯';
+  else if (desc >= 30) iconEl.textContent = '🔥';
+  else if (desc >= 20) iconEl.textContent = '🎉';
+  else iconEl.textContent = '👍';
+}
+
+function copyRoletaCode() {
+  const code = document.getElementById('roletaResultCode').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.roleta-copy-btn');
+    btn.textContent = '✅ Copiado!';
+    setTimeout(() => { btn.textContent = '📋 Copiar código'; }, 2000);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = code;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+
+function orderRoleta() {
   const phone = "351938526930";
-  const text = t('wa_general');
-  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+  const prodLabels = {
+    normal: 'Instalação de Software',
+    c4: 'Pack Mercedes C4',
+    vci: 'Mercedes VCI'
+  };
+  const prodName = prodLabels[roletaState.produto] || 'Produto';
+  const precoBase = roletaState.precoBase;
+
+  let msg = `🛒 *Encomenda M-Auto Online*\n`;
+  msg += `📦 Produto: ${prodName}\n`;
+  msg += `🎰 Desconto: *${roletaState.desconto}%* (código: ${roletaState.codigo})\n`;
+  if (precoBase > 0) {
+    const finalPrice = precoBase - (precoBase * roletaState.desconto / 100);
+    msg += `💰 Preço final: ${finalPrice.toFixed(2)} € (em vez de ${precoBase} €)\n`;
+  }
+  msg += `🌐 m-auto.online\n\n`;
+  msg += `Olá! Quero aproveitar este desconto.`;
+
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// Add promo badge to DOM after init
+function initPromoBadge() {
+  if (document.querySelector('.promo-badge')) return;
+  const badge = document.createElement('button');
+  badge.className = 'promo-badge';
+  badge.innerHTML = '🎰';
+  badge.title = 'Roleta de Descontos';
+  badge.onclick = openRoleta;
+  document.body.appendChild(badge);
 }
 
 /* ─────────────────────────────────────────────

@@ -1,0 +1,48 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mercedes-Benz Maps — Official Navigation Update">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <!-- horizon road -->
+  <polygon points="330,500 470,500 410,260 390,260" fill="url(#road)"/>
+  <polygon points="392,260 408,260 402,230 398,230" fill="#94a3b8"/>
+  <line x1="398" y1="440" x2="392" y2="290" stroke="#e2e8f0" stroke-width="4" stroke-dasharray="18 16" opacity="0.6"/>
+
+  <!-- soft hills -->
+  <path d="M0,300 Q150,260 300,290 T600,280 T800,300 L800,500 L0,500 Z" fill="#1f2937" opacity="0.6"/>
+
+  <!-- map pin -->
+  <g transform="translate(400,175)">
+    <path d="M0,-95 C55,-95 95,-55 95,-3 C95,55 40,105 0,150 C-40,105 -95,55 -95,-3 C-95,-55 -55,-95 0,-95 Z"
+          fill="#2563eb" stroke="#93c5fd" stroke-width="3"/>
+    <circle cx="0" cy="-5" r="42" fill="#0f172a"/>
+    <!-- mercedes star -->
+    <g fill="#f8fafc">
+      <circle cx="0" cy="-5" r="30" fill="none" stroke="#f8fafc" stroke-width="3.5"/>
+      <line x1="0" y1="-30" x2="0" y2="18" stroke="#f8fafc" stroke-width="3.5"/>
+      <line x1="-26" y1="10" x2="13" y2="-22" stroke="#f8fafc" stroke-width="3.5"/>
+      <line x1="26" y1="10" x2="-13" y2="-22" stroke="#f8fafc" stroke-width="3.5"/>
+    </g>
+  </g>
+
+  <!-- label plate -->
+  <rect x="60" y="40" width="230" height="34" rx="6" fill="#2563eb"/>
+  <text x="75" y="63" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="0.5">MERCEDES-BENZ</text>
+
+  <text x="400" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="800" fill="#f8fafc">Mercedes Maps</text>
+  <text x="400" y="444" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="500" fill="#93c5fd" letter-spacing="0.5">ATUALIZAÇÃO OFICIAL · CÓDIGOS PIN</text>
+</svg>

@@ -717,6 +717,11 @@ header {
   box-shadow: 0 2px 5px rgba(5, 150, 105, 0.35) !important;
 }
 
+.badge-new {
+  background: var(--accent) !important;
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.35) !important;
+}
+
 /* MODAL DE PRODUTO */
 
 
@@ -3408,4 +3413,394 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ══════════════════════════════════════════════════════
+   ROLETA DE DESCONTOS
+   ══════════════════════════════════════════════════════ */
+
+/* ── Modal overlay ── */
+.roleta-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: roletaFadeIn 0.3s ease;
+}
+.roleta-modal.open { display: flex; }
+@keyframes roletaFadeIn { from { opacity:0; } to { opacity:1; } }
+
+.roleta-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 30px 25px 25px;
+  position: relative;
+  animation: roletaSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes roletaSlideUp {
+  from { opacity:0; transform:translateY(40px) scale(0.96); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+.roleta-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+.roleta-close:hover {
+  background: var(--border);
+  color: var(--text-main);
+}
+
+/* ── Header ── */
+.roleta-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.roleta-icon { font-size: 2.8rem; margin-bottom: 6px; }
+.roleta-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+.roleta-sub {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ── Steps ── */
+.roleta-step { animation: roletaFadeIn 0.3s ease; }
+
+/* ── Step 1: Product selection ── */
+.roleta-produtos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+.roleta-prod-btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-body);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.25s;
+  position: relative;
+}
+.roleta-prod-btn:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, var(--bg-body));
+  transform: translateY(-1px);
+}
+.rpb-icon { font-size: 1.6rem; flex-shrink: 0; }
+.rpb-title {
+  flex: 1;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+.rpb-price {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.rpb-desc {
+  width: 100%;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding-left: 2.4rem;
+}
+
+/* ── Step 2: Wheel ── */
+.roleta-wheel-wrap {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  margin: 0 auto 16px;
+}
+.roleta-pointer {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: var(--accent);
+  z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(37,99,235,0.5);
+}
+#roletaCanvas {
+  display: block;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 3px var(--border), 0 0 0 5px var(--bg-card);
+}
+
+.roleta-spin-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: 0.25s;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.roleta-spin-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+}
+.roleta-spin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.roleta-back-btn {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+.roleta-back-btn:hover { color: var(--accent); }
+
+/* ── Step 3: Result ── */
+.roleta-result-box {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(124,58,237,0.08));
+  border-radius: 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+}
+.roleta-result-disc {
+  font-family: 'Syne', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+.roleta-result-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.3em;
+  margin-top: 2px;
+}
+.roleta-result-price {
+  font-size: 1rem;
+  color: var(--text-main);
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.roleta-result-code-box {
+  text-align: center;
+  margin-bottom: 14px;
+}
+.roleta-code-label {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.roleta-code {
+  font-family: 'Inter', monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-body));
+  padding: 8px 18px;
+  border-radius: 8px;
+  display: inline-block;
+  letter-spacing: 1px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.roleta-copy-btn {
+  display: block;
+  margin: 8px auto 0;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.roleta-copy-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.roleta-result-valid {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+  margin-bottom: 14px;
+}
+
+.roleta-wa-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.25s;
+  margin-bottom: 8px;
+}
+.roleta-wa-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+}
+.roleta-spin-again {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+.roleta-spin-again:hover { color: var(--accent); }
+
+/* ── Promo badge (flutuante, canto inferior direito) ── */
+.promo-badge {
+  position: fixed;
+  bottom: 90px;
+  right: 16px;
+  z-index: 3000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: 0.3s;
+  animation: promoPulse 2.5s ease-in-out infinite;
+}
+.promo-badge:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,99,235,0.55);
+}
+@keyframes promoPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(37,99,235,0.4); }
+  50%      { transform: scale(1.07); box-shadow: 0 4px 28px rgba(37,99,235,0.6); }
+}
+
+/* ── Promo banner na página inicial ── */
+.promo-section {
+  background: linear-gradient(135deg, #1e3a8a, #312e81, #581c87);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
+  color: #fff;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.promo-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.promo-section > * { position: relative; z-index: 1; }
+.promo-emoji { font-size: 2.4rem; margin-bottom: 6px; }
+.promo-section h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+.promo-section p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  max-width: 400px;
+  margin: 0 auto 14px;
+}
+.promo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1e293b;
+  border: none;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.promo-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(245,158,11,0.4);
+}
+
+/* ── Responsivo ── */
+@media (max-width: 480px) {
+  .roleta-content { padding: 24px 16px 20px; }
+  .roleta-wheel-wrap { width: 280px; height: 280px; }
+  #roletaCanvas { width: 280px; height: 280px; }
+  .roleta-result-disc { font-size: 2.6rem; }
+  .promo-badge { width: 48px; height: 48px; font-size: 1.2rem; bottom: 80px; right: 12px; }
 }

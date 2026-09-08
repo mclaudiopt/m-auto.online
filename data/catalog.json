@@ -1,5 +1,38 @@
 [
   {
+    "id": "merc_maps_pin",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/Daimler/merc-maps-pin.svg",
+    "premium": true,
+    "badge": "badge_new",
+    "span_full": false,
+    "price_key": "price_maps_from",
+    "features": [
+      "NTG35 / NTG45 / NTG5 Series — 70€",
+      "NTG6 MBUX — 100€",
+      "NTG7 MBUX — 260€"
+    ],
+    "meta": {
+      "year": "2026"
+    },
+    "pt": {
+      "name": "Mercedes Maps — Códigos PIN",
+      "short": "Atualize os mapas do seu Mercedes-Benz com códigos PIN oficiais.",
+      "details": "Atualização oficial de mapas Mercedes-Benz com <b>código PIN original</b>, válida para os sistemas NTG35, NTG45, NTG5 Series, NTG6 MBUX e NTG7 MBUX. Processo 100% oficial e seguro, sem necessidade de desmontar componentes do veículo. <br><br><b>Preços:</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€"
+    },
+    "en": {
+      "name": "Mercedes Maps — PIN Codes",
+      "short": "Update your Mercedes-Benz maps with official PIN codes.",
+      "details": "Official Mercedes-Benz map update with <b>original PIN code</b>, valid for NTG35, NTG45, NTG5 Series, NTG6 MBUX and NTG7 MBUX systems. 100% official and safe process, no vehicle component removal required. <br><br><b>Pricing:</b><br>NTG35 / NTG45 / NTG5 Series — €70<br>NTG6 MBUX — €100<br>NTG7 MBUX — €260"
+    },
+    "fr": {
+      "name": "Mercedes Maps — Codes PIN",
+      "short": "Mettez à jour les cartes de votre Mercedes-Benz avec des codes PIN officiels.",
+      "details": "Mise à jour officielle des cartes Mercedes-Benz avec <b>code PIN original</b>, valable pour les systèmes NTG35, NTG45, NTG5 Series, NTG6 MBUX et NTG7 MBUX. Processus 100% officiel et sûr, sans démontage de composants du véhicule. <br><br><b>Tarifs :</b><br>NTG35 / NTG45 / NTG5 Series — 70€<br>NTG6 MBUX — 100€<br>NTG7 MBUX — 260€"
+    }
+  },
+  {
     "id": "merc_full_pack",
     "section": "soft",
     "brand": "mercedes",
@@ -436,6 +469,28 @@
       "name": "VCDS",
       "short": "VCDS (VAG-COM) — diagnostic complet pour VW, Audi, Seat et Škoda.",
       "details": "<b>VCDS</b> (VAG-COM Diagnostic System) de Ross-Tech — outil de diagnostic de référence pour le groupe VAG. Lecture et effacement des DTCs sur tous les systèmes électroniques (moteur, boîte, ABS, airbag, climatisation, confort), données temps réel, codage des calculateurs, adaptations de canaux, tests d'actionneurs et réinitialisation des intervalles d'entretien. Alternative populaire à ODIS pour les ateliers indépendants. Compatible avec toute la gamme VW, Audi, Seat, Škoda, Bentley et Lamborghini via interface OBD-II."
+    }
+  },
+  {
+    "id": "vag_elsawin",
+    "section": "soft",
+    "brand": "vag",
+    "img": "IMG/VAG/vag-elsawin.svg",
+    "meta": {},
+    "pt": {
+      "name": "ELSA Win",
+      "short": "ELSA Win — manuais de reparação e catálogo de peças oficial Volkswagen/Audi.",
+      "details": "<b>ELSA Win</b> (Elektronisches Service Auskunftssystem) — sistema oficial de documentação técnica do grupo Volkswagen. Inclui manuais de reparação passo a passo, esquemas eléctricos, catálogo de peças, boletins técnicos e planos de manutenção para VW, Audi, Seat e Škoda. Essencial para oficinas que trabalham com toda a gama do grupo VAG."
+    },
+    "en": {
+      "name": "ELSA Win",
+      "short": "ELSA Win — official Volkswagen/Audi repair manuals and parts catalogue.",
+      "details": "<b>ELSA Win</b> (Elektronisches Service Auskunftssystem) — official Volkswagen Group technical documentation system. Includes step-by-step repair manuals, wiring diagrams, parts catalogue, technical bulletins and maintenance schedules for VW, Audi, Seat and Škoda. Essential for workshops working across the full VAG range."
+    },
+    "fr": {
+      "name": "ELSA Win",
+      "short": "ELSA Win — manuels de réparation et catalogue de pièces officiel Volkswagen/Audi.",
+      "details": "<b>ELSA Win</b> (Elektronisches Service Auskunftssystem) — système officiel de documentation technique du groupe Volkswagen. Manuels de réparation étape par étape, schémas électriques, catalogue de pièces, bulletins techniques et plans d'entretien pour VW, Audi, Seat et Škoda. Indispensable pour les ateliers travaillant sur toute la gamme VAG."
     }
   },
   {
@@ -1098,6 +1153,72 @@
       "name": "AlfaOBD",
       "short": "Diagnostic professionnel niveau concessionnaire pour Alfa Romeo, Fiat, Lancia et Jeep.",
       "details": "AlfaOBD est une solution de diagnostic de niveau professionnel pour les véhicules FCA : Alfa Romeo, Fiat, Lancia et Jeep. Va bien au-delà de la simple lecture de codes — permet la programmation d'ECU, les activations de fonctionnalités, les adaptations de modules, le codage des injecteurs, la calibration de caméra et bien plus. Disponible pour Windows (version PC) et Android. Compatible avec les adaptateurs ELM327 et interfaces KL."
+    }
+  },
+  {
+    "id": "tesla_body_repair",
+    "section": "soft",
+    "brand": "tesla",
+    "img": "IMG/Tesla/tesla-body-repair.svg",
+    "meta": {},
+    "pt": {
+      "name": "Body Repair Procedures",
+      "short": "Manual oficial Tesla de procedimentos de reparação estrutural e de carroçaria.",
+      "details": "Documentação técnica oficial Tesla com procedimentos detalhados de <b>reparação de carroçaria e estrutura</b>: substituição de painéis, reparação de zonas de alumínio e aço de alta resistência, pontos de fixação, torques e requisitos específicos por modelo (Model S, 3, X, Y). Essencial para oficinas de chapa e pintura que trabalham com veículos Tesla, garantindo conformidade com as normas de segurança do fabricante."
+    },
+    "en": {
+      "name": "Body Repair Procedures",
+      "short": "Official Tesla manual for structural and body repair procedures.",
+      "details": "Official Tesla technical documentation with detailed <b>body and structural repair</b> procedures: panel replacement, aluminium and high-strength steel zone repair, attachment points, torque specs and model-specific requirements (Model S, 3, X, Y). Essential for collision repair shops working on Tesla vehicles, ensuring compliance with manufacturer safety standards."
+    },
+    "fr": {
+      "name": "Body Repair Procedures",
+      "short": "Manuel officiel Tesla des procédures de réparation structurelle et de carrosserie.",
+      "details": "Documentation technique officielle Tesla avec procédures détaillées de <b>réparation de carrosserie et de structure</b> : remplacement de panneaux, réparation des zones en aluminium et acier haute résistance, points de fixation, couples de serrage et exigences spécifiques par modèle (Model S, 3, X, Y). Indispensable pour les ateliers de carrosserie travaillant sur des véhicules Tesla, garantissant la conformité aux normes de sécurité du constructeur."
+    }
+  },
+  {
+    "id": "tesla_service_manual",
+    "section": "soft",
+    "brand": "tesla",
+    "img": "IMG/Tesla/tesla-service-manual.svg",
+    "meta": {},
+    "pt": {
+      "name": "Service Manual",
+      "short": "Manual de serviço oficial Tesla — manutenção, diagnóstico e procedimentos técnicos.",
+      "details": "<b>Manual de Serviço</b> oficial Tesla com procedimentos completos de manutenção, diagnóstico e reparação para os modelos S, 3, X e Y. Inclui planos de manutenção, procedimentos passo a passo para sistemas de tração eléctrica, travagem, suspensão, HVAC e sistemas de alta tensão, além de especificações técnicas e códigos de diagnóstico. Referência essencial para oficinas independentes especializadas em veículos eléctricos Tesla."
+    },
+    "en": {
+      "name": "Service Manual",
+      "short": "Official Tesla service manual — maintenance, diagnostics and technical procedures.",
+      "details": "Official Tesla <b>Service Manual</b> with complete maintenance, diagnostic and repair procedures for the S, 3, X and Y models. Includes maintenance schedules, step-by-step procedures for the electric drivetrain, braking, suspension, HVAC and high-voltage systems, plus technical specifications and diagnostic trouble codes. Essential reference for independent workshops specialising in Tesla electric vehicles."
+    },
+    "fr": {
+      "name": "Service Manual",
+      "short": "Manuel d'entretien officiel Tesla — maintenance, diagnostic et procédures techniques.",
+      "details": "<b>Manuel d'Entretien</b> officiel Tesla avec les procédures complètes de maintenance, diagnostic et réparation pour les modèles S, 3, X et Y. Comprend les plans de maintenance, les procédures étape par étape pour la chaîne de traction électrique, le freinage, la suspension, la climatisation et les systèmes haute tension, ainsi que les spécifications techniques et codes de diagnostic. Référence indispensable pour les ateliers indépendants spécialisés dans les véhicules électriques Tesla."
+    }
+  },
+  {
+    "id": "tesla_wiring_diagrams",
+    "section": "soft",
+    "brand": "tesla",
+    "img": "IMG/Tesla/tesla-wiring-diagrams.svg",
+    "meta": {},
+    "pt": {
+      "name": "Wiring Diagrams",
+      "short": "Esquemas elétricos oficiais Tesla para todos os sistemas do veículo.",
+      "details": "Colecção completa de <b>esquemas eléctricos oficiais Tesla</b> cobrindo todos os sistemas do veículo: alta tensão, baixa tensão, sistemas de tração, carregamento, ADAS/Autopilot, conforto e multimédia. Diagramas detalhados por modelo (Model S, 3, X, Y) com identificação de conectores, módulos e percursos de cablagem — essenciais para diagnóstico eléctrico avançado e reparação de avarias complexas."
+    },
+    "en": {
+      "name": "Wiring Diagrams",
+      "short": "Official Tesla wiring diagrams for all vehicle systems.",
+      "details": "Complete collection of <b>official Tesla wiring diagrams</b> covering every vehicle system: high voltage, low voltage, drivetrain, charging, ADAS/Autopilot, comfort and infotainment. Detailed diagrams per model (Model S, 3, X, Y) with connector identification, module locations and harness routing — essential for advanced electrical diagnostics and complex fault repair."
+    },
+    "fr": {
+      "name": "Wiring Diagrams",
+      "short": "Schémas électriques officiels Tesla pour tous les systèmes du véhicule.",
+      "details": "Collection complète de <b>schémas électriques officiels Tesla</b> couvrant tous les systèmes du véhicule : haute tension, basse tension, chaîne de traction, charge, ADAS/Autopilot, confort et multimédia. Schémas détaillés par modèle (Model S, 3, X, Y) avec identification des connecteurs, modules et cheminement des câblages — indispensables pour le diagnostic électrique avancé et la réparation de pannes complexes."
     }
   }
 ]

@@ -1,0 +1,33 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tesla Service Manual">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0b0d"/>
+      <stop offset="100%" stop-color="#1a1a1d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#e11d2e" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#e11d2e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <!-- open manual / book -->
+  <g transform="translate(400,215)">
+    <path d="M-140,-70 L-10,-55 L-10,95 L-140,80 Z" fill="#e5e7eb"/>
+    <path d="M140,-70 L10,-55 L10,95 L140,80 Z" fill="#f8fafc"/>
+    <path d="M-140,-70 L-10,-55 L10,-55 L140,-70 L140,-58 L10,-43 L-10,-43 L-140,-58 Z" fill="#71717a"/>
+    <line x1="-115" y1="-30" x2="-25" y2="-22" stroke="#a1a1aa" stroke-width="4"/>
+    <line x1="-115" y1="0" x2="-25" y2="8" stroke="#a1a1aa" stroke-width="4"/>
+    <line x1="-115" y1="30" x2="-25" y2="38" stroke="#a1a1aa" stroke-width="4"/>
+    <line x1="25" y1="-22" x2="115" y2="-30" stroke="#d4d4d8" stroke-width="4"/>
+    <line x1="25" y1="8" x2="115" y2="0" stroke="#d4d4d8" stroke-width="4"/>
+    <line x1="25" y1="38" x2="115" y2="30" stroke="#d4d4d8" stroke-width="4"/>
+  </g>
+
+  <rect x="40" y="40" width="180" height="34" rx="6" fill="#e11d2e"/>
+  <text x="55" y="63" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="0.5">TESLA</text>
+
+  <text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="800" fill="#f8fafc">Service Manual</text>
+  <text x="400" y="434" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="500" fill="#f87171" letter-spacing="0.5">MANUAL DE SERVIÇO E MANUTENÇÃO</text>
+</svg>

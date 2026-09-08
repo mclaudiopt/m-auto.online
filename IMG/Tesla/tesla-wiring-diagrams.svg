@@ -1,0 +1,38 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tesla Wiring Diagrams">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0b0d"/>
+      <stop offset="100%" stop-color="#1a1a1d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#e11d2e" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#e11d2e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <!-- circuit lines -->
+  <g stroke="#3f3f46" stroke-width="3" fill="none" opacity="0.8">
+    <path d="M120,150 H300 V220 H480"/>
+    <path d="M120,320 H260 V250 H500"/>
+    <path d="M680,150 H540 V300 H620"/>
+  </g>
+  <g fill="#71717a">
+    <circle cx="120" cy="150" r="6"/><circle cx="300" cy="150" r="6"/><circle cx="480" cy="220" r="6"/>
+    <circle cx="120" cy="320" r="6"/><circle cx="500" cy="250" r="6"/><circle cx="680" cy="150" r="6"/>
+    <circle cx="620" cy="300" r="6"/>
+  </g>
+
+  <!-- lightning bolt -->
+  <g transform="translate(400,225)">
+    <circle r="70" fill="#0f0f11" stroke="#e11d2e" stroke-width="4"/>
+    <polygon points="10,-50 -35,10 -5,10 -10,50 35,-10 5,-10" fill="#facc15"/>
+  </g>
+
+  <rect x="40" y="40" width="180" height="34" rx="6" fill="#e11d2e"/>
+  <text x="55" y="63" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="0.5">TESLA</text>
+
+  <text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="800" fill="#f8fafc">Wiring Diagrams</text>
+  <text x="400" y="434" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="500" fill="#f87171" letter-spacing="0.5">ESQUEMAS ELÉTRICOS OFICIAIS</text>
+</svg>
