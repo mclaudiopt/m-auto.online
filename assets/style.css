@@ -722,6 +722,32 @@ header {
   box-shadow: 0 2px 5px rgba(37, 99, 235, 0.35) !important;
 }
 
+.badge-stock {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #16a34a;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.68rem;
+  box-shadow: 0 2px 5px rgba(22, 163, 74, 0.35);
+  z-index: 2;
+}
+
+.modal-stock-badge {
+  display: inline-block;
+  background: #dcfce7;
+  color: #16a34a;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+[data-theme="dark"] .modal-stock-badge { background: #052e16; color: #4ade80; }
+
 /* MODAL DE PRODUTO */
 
 

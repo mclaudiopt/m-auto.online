@@ -1018,6 +1018,7 @@
     "img": "IMG/hardware/hw-getac-k120g2.jpg",
     "premium": true,
     "badge": "badge_best",
+    "stock": true,
     "meta": {},
     "pt": {
       "name": "Tablet Getac K120G2",
@@ -1358,6 +1359,7 @@
     "id": "hw_topdon_rlink_x7",
     "section": "hard",
     "img": "IMG/hardware/hw-topdon-rlink-x7.png",
+    "stock": true,
     "meta": {},
     "pt": {
       "name": "Topdon RLink X7",

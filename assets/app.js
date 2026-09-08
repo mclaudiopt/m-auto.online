@@ -21,6 +21,7 @@ const TRANS = {
     btn_schedule: "Agendar", btn_close: "Fechar",
     price_consult: "Consulta", price_pack: "Pack Completo", price_maps_from: "A partir de 70€",
     badge_best: "Melhor Escolha", badge_top: "Mais Vendido", badge_new: "🆕 Novidade",
+    stock_badge: "Em Stock · Entrega Imediata",
     hero_sol: "Soluções Online", hero_desc: "Instalação remota profissional.",
     modal_order: "Encomendar", modal_no_details: "Detalhes não disponíveis.",
     search_placeholder: "🔍 Procurar...",
@@ -106,6 +107,7 @@ const TRANS = {
     btn_schedule: "Book", btn_close: "Close",
     price_consult: "On request", price_pack: "Full Pack", price_maps_from: "From €70",
     badge_best: "Best Choice", badge_top: "Best Seller", badge_new: "🆕 New",
+    stock_badge: "In Stock · Immediate Delivery",
     hero_sol: "Online Solutions", hero_desc: "Professional remote installation.",
     modal_order: "Order", modal_no_details: "Details not available.",
     search_placeholder: "🔍 Search...",
@@ -191,6 +193,7 @@ const TRANS = {
     btn_schedule: "Planifier", btn_close: "Fermer",
     price_consult: "Sur demande", price_pack: "Pack Complet", price_maps_from: "À partir de 70€",
     badge_best: "Meilleur Choix", badge_top: "Best Seller", badge_new: "🆕 Nouveau",
+    stock_badge: "En Stock · Livraison Immédiate",
     hero_sol: "Solutions En Ligne", hero_desc: "Installation à distance professionnelle.",
     modal_order: "Commander", modal_no_details: "Détails non disponibles.",
     search_placeholder: "🔍 Rechercher...",
@@ -1082,6 +1085,7 @@ function createCard(item) {
     const badgeClass = item.badge === 'badge_top' ? ' badge-top' : item.badge === 'badge_new' ? ' badge-new' : '';
     badgeHtml = `<span class="badge${badgeClass}">${t(item.badge)}</span>`;
   }
+  const stockBadgeHtml = item.stock ? `<span class="badge-stock">${t('stock_badge')}</span>` : '';
 
   const priceColor = isPremium ? ' style="color:var(--gold)"' : '';
   const eyeColor   = isPremium ? ' card-eye-gold' : '';
@@ -1089,7 +1093,7 @@ function createCard(item) {
   return `<div class="card${isPremium ? ' gold' : ''} searchable-item card-clickable"${spanClass}
     onclick="openProductModal('${item.id}')" role="button" tabindex="0"
     onkeydown="if(event.key==='Enter'||event.key===' ')openProductModal('${item.id}')">
-    ${badgeHtml}
+    ${badgeHtml}${stockBadgeHtml}
     ${item.img ? `<img src="${item.img}" loading="lazy" alt="${d.name || ''}">` : `<div class="img-placeholder"><span>${d.name || item.id}</span></div>`}
     <div class="card-body">
       <div class="card-title-row">
@@ -1207,7 +1211,8 @@ function renderModalContent(item) {
          <span class="mtb-arrow">→</span>
        </a>`
     : '';
-  if (descEl)  descEl.innerHTML = tutorialBanner + (d.details || `<em>${t('modal_no_details')}</em>`) + featHtml;
+  const stockLineHtml = item.stock ? `<div class="modal-stock-badge">✅ ${t('stock_badge')}</div>` : '';
+  if (descEl)  descEl.innerHTML = stockLineHtml + tutorialBanner + (d.details || `<em>${t('modal_no_details')}</em>`) + featHtml;
   if (priceEl) priceEl.style.display = priceKey === 'price_consult' ? 'none' : '';
   if (priceEl && priceKey !== 'price_consult') priceEl.textContent = t(priceKey);
   if (imgEl)   { imgEl.removeAttribute('src'); imgEl.style.display = 'none'; }
