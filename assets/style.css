@@ -1897,7 +1897,7 @@ body {
 .about-news-row {
   width: 75%;
   max-width: none;
-  margin: 0 auto 36px;
+  margin: 32px auto 36px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
