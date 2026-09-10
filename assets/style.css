@@ -2223,7 +2223,7 @@ body {
   padding: 12px 18px;
   font-size: 0.85rem;
   font-weight: 600;
-  margin: 0 0 20px;
+  margin: 24px 0 20px;
 }
 [data-theme="dark"] .sh-notice { background: #451a03; border-color: #d97706; color: #fde68a; }
 .sh-grid {

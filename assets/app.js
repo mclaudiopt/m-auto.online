@@ -1041,7 +1041,7 @@ function renderAbout() {
             <button type="button" onclick="inlineRoletaChoose('multi')">${t('roleta_multi_title')}<small>${t('roleta_multi_desc')}</small></button>
           </div>
           <div class="inline-roleta-wheel" id="inlineRWheelWrap" style="display:none">
-            <canvas id="inlineRCanvas" width="130" height="130"></canvas>
+            <canvas id="inlineRCanvas" width="180" height="180"></canvas>
             <button type="button" class="about-news-btn" id="inlineRSpinBtn" onclick="inlineGirarRoleta()">${t('roleta_spin_label')}</button>
           </div>
           <div class="inline-roleta-result" id="inlineRResult" style="display:none">
