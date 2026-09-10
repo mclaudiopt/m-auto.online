@@ -1983,6 +1983,9 @@ body {
 .inline-roleta-wheel canvas { border-radius: 50%; }
 .inline-roleta-result { text-align: center; }
 .inline-r-disc { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+.roleta-zoomed .inline-r-disc { font-size: 3rem; }
+.roleta-zoomed .inline-roleta-qty button { font-size: 15px; padding: 12px 16px; }
+.roleta-zoomed #inlineRSpinBtn { font-size: 15px; padding: 12px 20px; }
 
 [data-theme="dark"] .about-news {
   background: linear-gradient(135deg, #0f2460, #1e3a8a);

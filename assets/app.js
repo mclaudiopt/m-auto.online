@@ -1041,7 +1041,7 @@ function renderAbout() {
             <button type="button" onclick="inlineRoletaChoose('multi')">${t('roleta_multi_title')}<small>${t('roleta_multi_desc')}</small></button>
           </div>
           <div class="inline-roleta-wheel" id="inlineRWheelWrap" style="display:none">
-            <canvas id="inlineRCanvas" width="180" height="180"></canvas>
+            <canvas id="inlineRCanvas" width="180" height="180" onclick="openInlineRoletaZoom()" style="cursor:zoom-in" title="🔍"></canvas>
             <button type="button" class="about-news-btn" id="inlineRSpinBtn" onclick="inlineGirarRoleta()">${t('roleta_spin_label')}</button>
           </div>
           <div class="inline-roleta-result" id="inlineRResult" style="display:none">
@@ -1592,7 +1592,10 @@ function orderRoleta() {
 /* ─────────────────────────────────────────────
    13d. ROLETA EMBUTIDA (card na pagina Sobre)
 ───────────────────────────────────────────── */
-let inlineRoletaState = { qtd: null, desconto: 0, codigo: '', spinning: false };
+let inlineRoletaState = { qtd: null, desconto: 0, codigo: '', spinning: false, segments: null, rotation: 0 };
+let inlineRoletaZoomParent = null;
+const INLINE_ROLETA_SIZE = 180;
+const INLINE_ROLETA_ZOOM_SIZE = 320;
 
 function inlineRoletaChoose(qtd) {
   inlineRoletaState.qtd = qtd;
@@ -1601,6 +1604,8 @@ function inlineRoletaChoose(qtd) {
   document.getElementById('inlineRWheelWrap').style.display = '';
 
   const segments = qtd === 'multi' ? ROLETA_SEGMENTS_MULTI : ROLETA_SEGMENTS_SINGLE;
+  inlineRoletaState.segments = segments;
+  inlineRoletaState.rotation = 0;
   const canvas = document.getElementById('inlineRCanvas');
   const ctx = canvas.getContext('2d');
   drawRoletaWheel(ctx, segments, 0);
@@ -1636,6 +1641,7 @@ function inlineGirarRoleta() {
     const progress = step / totalSteps;
     const eased = 1 - Math.pow(1 - progress, 3);
     const currentRotation = finalRotation * eased;
+    inlineRoletaState.rotation = currentRotation;
     drawRoletaWheel(ctx, segments, currentRotation);
 
     if (step < totalSteps) {
@@ -1661,6 +1667,37 @@ function inlineGirarRoleta() {
     }
   }
   animate();
+}
+
+function inlineRoletaRedraw(size) {
+  const canvas = document.getElementById('inlineRCanvas');
+  if (!canvas || !inlineRoletaState.segments) return;
+  canvas.width = size;
+  canvas.height = size;
+  drawRoletaWheel(canvas.getContext('2d'), inlineRoletaState.segments, inlineRoletaState.rotation);
+}
+
+function openInlineRoletaZoom() {
+  const body = document.getElementById('inlineRBody');
+  const mount = document.getElementById('rZoomMount');
+  const overlay = document.getElementById('rZoomOverlay');
+  if (!body || !mount || !overlay) return;
+  inlineRoletaZoomParent = body.parentElement;
+  mount.appendChild(body);
+  body.classList.add('roleta-zoomed');
+  inlineRoletaRedraw(INLINE_ROLETA_ZOOM_SIZE);
+  overlay.style.display = 'flex';
+}
+
+function closeInlineRoletaZoom() {
+  const body = document.getElementById('inlineRBody');
+  const overlay = document.getElementById('rZoomOverlay');
+  if (!body || !overlay || !inlineRoletaZoomParent) return;
+  overlay.style.display = 'none';
+  inlineRoletaZoomParent.appendChild(body);
+  body.classList.remove('roleta-zoomed');
+  inlineRoletaRedraw(INLINE_ROLETA_SIZE);
+  inlineRoletaZoomParent = null;
 }
 
 // Add promo badge to DOM after init
