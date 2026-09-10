@@ -1450,11 +1450,15 @@ function drawRoletaWheel(ctx, segments, rotation) {
     const tx = cx + Math.sin(midAngle) * textR;
     const ty = cy - Math.cos(midAngle) * textR;
 
+    // Evita texto de pernas para o ar no lado esquerdo/baixo da roda
+    const normalized = ((midAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+    const textRot = (normalized > Math.PI / 2 && normalized < Math.PI * 1.5) ? midAngle + Math.PI : midAngle;
+
     ctx.save();
     ctx.translate(tx, ty);
-    ctx.rotate(midAngle);
+    ctx.rotate(textRot);
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 13px Inter, sans-serif';
+    ctx.font = `bold ${Math.round(13 * (w / 180))}px Inter, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(segments[i] + '%', 0, 0);

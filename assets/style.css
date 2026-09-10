@@ -1982,8 +1982,8 @@ body {
 .inline-roleta-wheel { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .inline-roleta-wheel canvas { border-radius: 50%; }
 .inline-roleta-result { text-align: center; }
-.inline-r-disc { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
-.roleta-zoomed .inline-r-disc { font-size: 3rem; }
+.inline-r-disc { font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.roleta-zoomed .inline-r-disc { font-size: 2.6rem; }
 .roleta-zoomed .inline-roleta-qty button { font-size: 15px; padding: 12px 16px; }
 .roleta-zoomed #inlineRSpinBtn { font-size: 15px; padding: 12px 20px; }
 
