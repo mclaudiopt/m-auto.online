@@ -1032,7 +1032,7 @@ function renderAbout() {
     </div>
     <div class="about-news-row">
       <div class="about-news about-roulette-card">
-        <span class="about-news-badge">🔥</span>
+        <span class="about-news-badge">${t('news_badge')}</span>
         <div class="about-news-title">${t('promo_title')}</div>
         <div class="about-news-sub">${t('promo_text')}</div>
         <div class="inline-roleta-body" id="inlineRBody">
@@ -1041,11 +1041,15 @@ function renderAbout() {
             <button type="button" onclick="inlineRoletaChoose('multi')">${t('roleta_multi_title')}<small>${t('roleta_multi_desc')}</small></button>
           </div>
           <div class="inline-roleta-wheel" id="inlineRWheelWrap" style="display:none">
-            <canvas id="inlineRCanvas" width="180" height="180" onclick="openInlineRoletaZoom()" style="cursor:zoom-in" title="🔍"></canvas>
+            <div class="inline-roleta-canvas-wrap">
+              <span class="inline-roleta-pointer">▼</span>
+              <canvas id="inlineRCanvas" width="180" height="180" onclick="openInlineRoletaZoom()" style="cursor:zoom-in" title="🔍"></canvas>
+            </div>
             <button type="button" class="about-news-btn" id="inlineRSpinBtn" onclick="inlineGirarRoleta()">${t('roleta_spin_label')}</button>
           </div>
           <div class="inline-roleta-result" id="inlineRResult" style="display:none">
             <div class="inline-r-disc" id="inlineRDisc">0%</div>
+            <div class="inline-r-disc-label">${t('roleta_label_desconto')}</div>
             <a href="#" target="_blank" rel="noopener" class="about-news-btn" id="inlineRWaBtn">${t('roleta_wa_btn')}</a>
           </div>
         </div>
@@ -1335,11 +1339,13 @@ function applyRoletaLang() {
 // Ofertas: ate 10% para 1 instalacao, ate 20% para mais de 1 instalacao. Sem precos.
 const ROLETA_SEGMENTS_SINGLE = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 const ROLETA_SEGMENTS_MULTI  = [5, 8, 10, 12, 14, 16, 18, 20];
+// Paleta sóbria/executiva — tons profundos de azul-marinho, ardósia e bronze, sem cores berrantes
 const ROLETA_COLORS = [
-  '#2563eb', '#7c3aed', '#059669', '#d97706', '#dc2626',
-  '#0891b2', '#4f46e5', '#ca8a04', '#db2777', '#0284c7',
-  '#65a30d'
+  '#1e3a5f', '#27272a', '#3f4a5a', '#4a3728', '#2f3e46',
+  '#312e63', '#3a3a3a', '#1c3d5a', '#463527', '#26313d',
+  '#33302a'
 ];
+const ROLETA_GOLD = '#d4af37';
 
 function openRoleta() {
   closeProductModal();
@@ -1439,8 +1445,8 @@ function drawRoletaWheel(ctx, segments, rotation) {
     ctx.fillStyle = ROLETA_COLORS[i % ROLETA_COLORS.length];
     ctx.fill();
 
-    // Segment border
-    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    // Segment border — fio dourado subtil, mais sóbrio que branco puro
+    ctx.strokeStyle = 'rgba(212,175,55,0.4)';
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
@@ -1465,22 +1471,30 @@ function drawRoletaWheel(ctx, segments, rotation) {
     ctx.restore();
   }
 
-  // Center circle
+  // Anel exterior dourado — moldura premium da roda
   ctx.beginPath();
-  ctx.arc(cx, cy, 18, 0, 2 * Math.PI);
-  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 18);
+  ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+  ctx.strokeStyle = ROLETA_GOLD;
+  ctx.lineWidth = Math.max(2, w / 90);
+  ctx.stroke();
+
+  // Center circle (escala com o canvas)
+  const hubR = 18 * (w / 180);
+  ctx.beginPath();
+  ctx.arc(cx, cy, hubR, 0, 2 * Math.PI);
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, hubR);
   grad.addColorStop(0, '#1e293b');
   grad.addColorStop(1, '#0f172a');
   ctx.fillStyle = grad;
   ctx.fill();
-  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.strokeStyle = ROLETA_GOLD;
   ctx.lineWidth = 2;
   ctx.stroke();
 
   // Center dot
   ctx.beginPath();
-  ctx.arc(cx, cy, 5, 0, 2 * Math.PI);
-  ctx.fillStyle = '#3b82f6';
+  ctx.arc(cx, cy, hubR * 0.28, 0, 2 * Math.PI);
+  ctx.fillStyle = ROLETA_GOLD;
   ctx.fill();
 }
 
