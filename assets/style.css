@@ -1713,9 +1713,11 @@ body {
   border-bottom-color: #60a5fa !important;
 }
 
-/* ── NAV: overflow visible para o dropdown não ser clipado ── */
+/* ── NAV: overflow-y visible para o dropdown não ser clipado,
+   overflow-x auto para os pills fazerem scroll horizontal em larguras estreitas ── */
 .main-nav {
-  overflow: visible !important;
+  overflow-y: visible !important;
+  overflow-x: auto !important;
 }
 
 /* ── NAV DROPDOWN (SOFTWARE) ── */

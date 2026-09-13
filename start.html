@@ -49,7 +49,7 @@
   <link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
 
   <title>M-Auto Online — Ferramenta de Diagnóstico e Codificação Automóvel | Mercedes, BMW, VAG</title>
-  <link rel="stylesheet" href="assets/style.min.css?v=8.3.10">
+  <link rel="stylesheet" href="assets/style.min.css?v=8.3.11">
 
   <!-- ── SPLASH SCREEN CSS ── -->
   <style>
@@ -219,7 +219,7 @@
       <a href="#inicio" class="logo-link">
         <span class="brand-m">M-Auto</span>
         <span class="brand-online">Online</span>
-        <span class="version-badge">v8.3.10</span>
+        <span class="version-badge">v8.3.11</span>
       </a>
     </div>
     <div class="header-right">
@@ -228,7 +228,7 @@
           placeholder="🔍 Procurar..." oninput="filterProductsDebounced()" onkeydown="if(event.key==='Escape'){this.value='';filterProducts();this.blur()}">
       </div>
       <div class="controls-wrapper">
-        <button type="button" class="theme-btn" onclick="toggleTheme()" title="Tema">☀️</button>
+        <button type="button" class="theme-btn" onclick="toggleTheme()" title="Tema" aria-label="Alternar tema claro/escuro">☀️</button>
         <div class="lang-group">
           <button type="button" id="btn-pt" onclick="setLanguage('pt')" class="lang-btn active">
             <img src="IMG/flags/pt.png" alt="PT">
@@ -273,7 +273,7 @@
   <!-- ═══ ROLETA DE DESCONTOS ═══ -->
   <div id="roletaModal" class="roleta-modal">
     <div class="roleta-content">
-      <button type="button" class="roleta-close" onclick="closeRoleta()">×</button>
+      <button type="button" class="roleta-close" onclick="closeRoleta()" aria-label="Fechar">×</button>
 
       <!-- ── Step 1: Selecionar produto ── -->
       <div id="roleta-step-produto" class="roleta-step">
@@ -368,7 +368,7 @@
   <!-- ═══ OVERLAY VCI ═══ -->
   <div id="vcxOverlay" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.7);align-items:center;justify-content:center;">
     <div style="position:relative;width:min(900px,96vw);height:min(620px,90vh);background:#fff;border-radius:4px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.5);">
-      <button onclick="document.getElementById('vcxOverlay').style.display='none';document.getElementById('vcxFrame').src=''" style="position:absolute;top:8px;right:12px;z-index:10;background:none;border:none;font-size:22px;cursor:pointer;color:#64748b;line-height:1;">×</button>
+      <button onclick="document.getElementById('vcxOverlay').style.display='none';document.getElementById('vcxFrame').src=''" aria-label="Fechar" style="position:absolute;top:8px;right:12px;z-index:10;background:none;border:none;font-size:22px;cursor:pointer;color:#64748b;line-height:1;">×</button>
       <iframe id="vcxFrame" src="" style="width:100%;height:100%;border:none;"></iframe>
     </div>
   </div>
@@ -376,7 +376,7 @@
   <!-- ═══ OVERLAY ZOOM ROLETA ═══ -->
   <div id="rZoomOverlay" onclick="if(event.target===this)closeInlineRoletaZoom()" style="display:none;position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.75);align-items:center;justify-content:center;">
     <div style="position:relative;width:min(420px,92vw);background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:28px 20px;box-shadow:0 24px 64px rgba(0,0,0,.5);">
-      <button onclick="closeInlineRoletaZoom()" style="position:absolute;top:10px;right:12px;z-index:10;background:rgba(255,255,255,.12);border:none;border-radius:50%;width:32px;height:32px;font-size:20px;cursor:pointer;color:#fff;line-height:1;">×</button>
+      <button onclick="closeInlineRoletaZoom()" aria-label="Fechar" style="position:absolute;top:10px;right:12px;z-index:10;background:rgba(255,255,255,.12);border:none;border-radius:50%;width:32px;height:32px;font-size:20px;cursor:pointer;color:#fff;line-height:1;">×</button>
       <div id="rZoomMount" style="display:flex;justify-content:center;"></div>
     </div>
   </div>
@@ -384,7 +384,7 @@
   <!-- ═══ WIZARD DE COMPATIBILIDADE ═══ -->
   <div id="wizardModal" class="modal-bg" style="display:none">
     <div class="wiz-modal" id="wizContent">
-      <button type="button" class="wiz-close-btn" onclick="closeWizard()">×</button>
+      <button type="button" class="wiz-close-btn" onclick="closeWizard()" aria-label="Fechar">×</button>
 
       <!-- ── Progress Stepper ── -->
       <div class="wiz-stepper">
@@ -596,6 +596,6 @@
   })();
   </script>
 
-  <script src="assets/app.min.js?v=8.3.10"></script>
+  <script src="assets/app.min.js?v=8.3.11"></script>
 </body>
 </html>
