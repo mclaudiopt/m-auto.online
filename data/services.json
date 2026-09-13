@@ -40,5 +40,12 @@
     "pt": { "title": "Desbloqueio de auto-rádios por código", "desc": "Cálculo e desbloqueio de códigos de auto-rádio — rádios de fábrica bloqueados após troca de bateria ou reparação." },
     "en": { "title": "Car radio unlock by code", "desc": "Calculation and unlock of car radio codes — factory radios locked after a battery change or repair." },
     "fr": { "title": "Déverrouillage d'autoradios par code", "desc": "Calcul et déverrouillage de codes d'autoradio — autoradios verrouillés après un changement de batterie ou une réparation." }
+  },
+  {
+    "id": "srv_gps_maps_update",
+    "icon": "🗺️",
+    "pt": { "title": "Atualização de mapas GPS", "desc": "Atualização dos mapas de navegação GPS do seu sistema — cartografia atualizada para maior precisão nas rotas." },
+    "en": { "title": "GPS map updates", "desc": "Update of your system's GPS navigation maps — refreshed cartography for more accurate routing." },
+    "fr": { "title": "Mise à jour des cartes GPS", "desc": "Mise à jour des cartes de navigation GPS de votre système — cartographie actualisée pour un guidage plus précis." }
   }
 ]
