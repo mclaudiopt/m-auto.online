@@ -815,6 +815,28 @@
     }
   },
   {
+    "id": "jlr_epc2018",
+    "section": "soft",
+    "brand": "jlr",
+    "img": "IMG/JLR/jlr-epc2018.svg",
+    "meta": {},
+    "pt": {
+      "name": "Jaguar EPC 2018",
+      "short": "Catálogo eletrónico de peças Jaguar — referências, diagramas e códigos originais.",
+      "details": "Jaguar EPC (Electronic Parts Catalogue) 2018 — catálogo eletrónico oficial de peças Jaguar, com diagramas explodidos, referências originais e compatibilidade por modelo/ano/chassis. Essencial para identificação correta de peças em reparação e manutenção."
+    },
+    "en": {
+      "name": "Jaguar EPC 2018",
+      "short": "Jaguar electronic parts catalogue — references, diagrams and original part codes.",
+      "details": "Jaguar EPC (Electronic Parts Catalogue) 2018 — official electronic Jaguar parts catalogue, with exploded diagrams, original references and model/year/chassis compatibility. Essential for correct part identification in repair and maintenance."
+    },
+    "fr": {
+      "name": "Jaguar EPC 2018",
+      "short": "Catalogue électronique de pièces Jaguar — références, schémas et codes d'origine.",
+      "details": "Jaguar EPC (Electronic Parts Catalogue) 2018 — catalogue électronique officiel de pièces Jaguar, avec schémas éclatés, références d'origine et compatibilité par modèle/année/châssis. Essentiel pour l'identification correcte des pièces en réparation et entretien."
+    }
+  },
+  {
     "id": "toyota_techstream",
     "section": "soft",
     "brand": "toyota",

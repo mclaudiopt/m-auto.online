@@ -2150,6 +2150,8 @@ body {
 .nav-pill[data-nav-key="nav_hard"]  { min-width: 145px !important; }
 /* SERVIÇOS (PT) 2px mais largo que SERVICES — fixo em 126px */
 .nav-pill[data-nav-key="nav_serv"]  { min-width: 126px !important; }
+/* EQUIPAMENTOS DE EXPOSIÇÃO (PT) — o mais longo dos 3 idiomas — 225px medido (canvas.measureText) */
+.nav-pill[data-nav-key="nav_secondhand"] { min-width: 225px !important; }
 /* LOGICIEL ▾ (FR) — com seta dropdown — 145px medido */
 .nav-dropdown-wrap .nav-pill        { min-width: 145px !important; }
 
