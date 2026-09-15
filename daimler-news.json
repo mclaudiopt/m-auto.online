@@ -1,6 +1,6 @@
 {
-  "pt": { "title": "XENTRY 09-2026 disponível" },
-  "en": { "title": "XENTRY 09-2026 available" },
-  "fr": { "title": "XENTRY 09-2026 disponible" },
-  "es": { "title": "XENTRY 09-2026 disponible" }
+  "pt": { "title": "XENTRY 09-2026 disponível", "text": "VERSÃO BETA EM TESTE. PODE CONTER ERROS" },
+  "en": { "title": "XENTRY 09-2026 available", "text": "BETA VERSION UNDER TESTING. MAY CONTAIN ERRORS" },
+  "fr": { "title": "XENTRY 09-2026 disponible", "text": "VERSION BÊTA EN TEST. PEUT CONTENIR DES ERREURS" },
+  "es": { "title": "XENTRY 09-2026 disponible", "text": "VERSIÓN BETA EN PRUEBAS. PUEDE CONTENER ERRORES" }
 }
