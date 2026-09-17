@@ -101,14 +101,6 @@
           "cmd": "$dirs=@('C:\\M-auto\\Temp','C:\\M-auto\\Daimler\\SDMEDIA','C:\\M-auto\\Daimler\\DATABASES','C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 D-PDU','C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 J2534','C:\\M-auto\\Daimler\\Coding tutorials full'); foreach($d in $dirs){New-Item $d -ItemType Directory -Force -EA SilentlyContinue|Out-Null; Write-Output \"OK: $d\"}"
         },
         {
-          "id": "mb_databases",
-          "label": "Instalar Databases",
-          "desc": "Extrai Databases.7z de Temp para C:\\M-auto\\Daimler\\DATABASES",
-          "type": "action",
-          "admin": false,
-          "cmd": "$src='C:\\M-auto\\Temp\\Databases.7z'; $dst='C:\\M-auto\\Daimler\\DATABASES'; if(!(Test-Path $src)){Write-Output 'ERRO: Databases.7z nao encontrado em Temp'; exit 1}; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; & 'C:\\Program Files\\7-Zip\\7z.exe' x $src -o\"$dst\" -y | Out-Null; Write-Output \"OK: extraido para $dst\""
-        },
-        {
           "id": "mb_tutorial_beta",
           "label": "Instalar Tutorial Beta",
           "desc": "Copia tutorial beta.exe de Temp para C:\\M-auto\\Daimler",
