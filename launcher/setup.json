@@ -6,16 +6,85 @@
       "label": "Start Engine",
       "desc": "Diagnostico + Preparacao + Ferramentas",
       "steps": [
-        { "id": "sysinfo", "label": "System Info", "desc": "Shows Windows version, RAM, disk usage and security status", "type": "info", "cmd": "$os=Get-CimInstance Win32_OperatingSystem; $ram=[math]::Round($os.TotalVisibleMemorySize/1MB,1); $free=[math]::Round($os.FreePhysicalMemory/1MB,1); $used=$ram-$free; $perc=[math]::Round(($used/$ram)*100,1); $drives=Get-PSDrive -PSProvider FileSystem|?{$_.Name -match '^[A-Z]$'}|%{$u=[math]::Round($_.Used/1GB,1);$t=$u+[math]::Round($_.Free/1GB,1);if($t -gt 0){\"$($_.Name): $([math]::Round(($u/$t)*100))%\"}}; Write-Output \"$($os.Caption) | RAM: ${used}GB/${ram}GB ($perc%) | $($drives -join ' | ')\"" },
-        { "id": "wallpaper", "label": "Wallpaper M-Auto", "desc": "Apply M-Auto branded wallpaper", "type": "action", "cmd": "$d=Join-Path $env:APPDATA 'M-Auto'; New-Item $d -ItemType Directory -Force -EA SilentlyContinue|Out-Null; $w=Join-Path $d 'wallpaper.png'; Write-Output 'Downloading wallpaper...'; [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12; (New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/IMG/mauto/m-auto-rust.png',$w); $sz=[math]::Round((Get-Item $w).Length/1KB); Write-Output \"Downloaded: ${sz}KB\"; Write-Output 'Applying wallpaper...'; Add-Type -TypeDefinition 'using System;using System.Runtime.InteropServices;public class WPS{[DllImport(\"user32.dll\",CharSet=CharSet.Auto)]static extern int SystemParametersInfo(int a,int b,string c,int d);public static void Set(string p){SystemParametersInfo(20,0,p,3);}}' -EA SilentlyContinue; [WPS]::Set($w); Write-Output 'Wallpaper applied'", "admin": false },
-        { "id": "bitlocker_off", "label": "BitLocker OFF", "desc": "Disable BitLocker encryption on C: drive", "type": "action", "cmd": "Disable-BitLocker -MountPoint C: -EA Stop | Out-Null", "admin": true },
-        { "id": "defender_off", "label": "Defender OFF", "desc": "Disable Windows Defender real-time protection", "type": "action", "cmd": "Set-MpPreference -DisableRealtimeMonitoring $true -EA Stop; Stop-Service WinDefend -Force -EA SilentlyContinue", "admin": true },
-        { "id": "firewall_off", "label": "Firewall OFF", "desc": "Disable Windows Firewall on all profiles", "type": "action", "cmd": "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -EA Stop", "admin": true },
-        { "id": "tamper_off", "label": "Tamper Protection OFF", "desc": "Disable Defender Tamper Protection via registry", "type": "action", "cmd": "$p='HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Features'; $a=Get-Acl $p; $s=New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544'); $a.SetOwner($s); $r=New-Object System.Security.AccessControl.RegistryAccessRule($s,'FullControl','ContainerInherit,ObjectInherit','None','Allow'); $a.AddAccessRule($r); Set-Acl $p $a; Set-ItemProperty $p 'TamperProtection' 4", "admin": true },
-        { "id": "install_7zip", "label": "Install 7-Zip", "desc": "Download and install 7-Zip silently", "type": "action", "cmd": "$i=Get-ItemProperty 'HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*' -EA SilentlyContinue|?{$_.DisplayName -like '*7-Zip*'}; if(-not $i){$d='C:\\M-auto\\Temp'; md $d -Force -EA SilentlyContinue|Out-Null; $t=\"$d\\7z.exe\"; irm 'https://www.7-zip.org/a/7z2409-x64.exe' -OutFile $t; Start-Process $t '/S' -Wait; del $t -Force; Write-Output 'OK'}else{Write-Output 'ALREADY INSTALLED'}", "admin": true },
-        { "id": "cleanup", "label": "Cleanup Temp", "desc": "Remove temporary files", "type": "action", "cmd": "Remove-Item \"$env:TEMP\\*\" -Recurse -Force -EA SilentlyContinue; Remove-Item 'C:\\Windows\\Temp\\*' -Recurse -Force -EA SilentlyContinue; Write-Output 'OK'", "admin": true },
-        { "id": "restore_point", "label": "Create Restore Point", "desc": "Create Windows System Restore point", "type": "action", "cmd": "Enable-ComputerRestore -Drive 'C:\\' -EA SilentlyContinue; Checkpoint-Computer -Description 'M-Auto Backup' -RestorePointType MODIFY_SETTINGS -EA Stop", "admin": true },
-        { "id": "dns_cloudflare", "label": "DNS Cloudflare", "desc": "Set DNS to 1.1.1.1 / 1.0.0.1", "type": "action", "cmd": "irm 'https://m-auto.online/scripts/system/dns_cloudflare.ps1' -UseBasicParsing | iex", "admin": true }
+        {
+          "id": "sysinfo",
+          "label": "System Info",
+          "desc": "Shows Windows version, RAM, disk usage and security status",
+          "type": "info",
+          "cmd": "$os=Get-CimInstance Win32_OperatingSystem; $ram=[math]::Round($os.TotalVisibleMemorySize/1MB,1); $free=[math]::Round($os.FreePhysicalMemory/1MB,1); $used=$ram-$free; $perc=[math]::Round(($used/$ram)*100,1); $drives=Get-PSDrive -PSProvider FileSystem|?{$_.Name -match '^[A-Z]$'}|%{$u=[math]::Round($_.Used/1GB,1);$t=$u+[math]::Round($_.Free/1GB,1);if($t -gt 0){\"$($_.Name): $([math]::Round(($u/$t)*100))%\"}}; $sb='N/A';try{$v=(Get-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecureBoot\\State' -Name UEFISecureBootEnabled -EA SilentlyContinue).UEFISecureBootEnabled;if($v -eq 1){$sb='On'}elseif($v -eq 0){$sb='Off'}}catch{}; Write-Output \"$($os.Caption) | RAM: ${used}GB/${ram}GB ($perc%) | $($drives -join ' | ') | Secure Boot: $sb\""
+        },
+        {
+          "id": "wallpaper",
+          "label": "Wallpaper M-Auto",
+          "desc": "Apply M-Auto branded wallpaper",
+          "type": "action",
+          "cmd": "$d=Join-Path $env:APPDATA 'M-Auto'; New-Item $d -ItemType Directory -Force -EA SilentlyContinue|Out-Null; $w=Join-Path $d 'wallpaper.png'; Write-Output 'Downloading wallpaper...'; [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12; (New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/mclaudiopt/m-auto.online/main/IMG/mauto/m-auto-rust.png',$w); $sz=[math]::Round((Get-Item $w).Length/1KB); Write-Output \"Downloaded: ${sz}KB\"; Write-Output 'Applying wallpaper...'; Add-Type -TypeDefinition 'using System;using System.Runtime.InteropServices;public class WPS{[DllImport(\"user32.dll\",CharSet=CharSet.Auto)]static extern int SystemParametersInfo(int a,int b,string c,int d);public static void Set(string p){SystemParametersInfo(20,0,p,3);}}' -EA SilentlyContinue; [WPS]::Set($w); Write-Output 'Wallpaper applied'",
+          "admin": false
+        },
+        {
+          "id": "bitlocker_off",
+          "label": "BitLocker OFF",
+          "desc": "Disable BitLocker encryption on C: drive",
+          "type": "action",
+          "cmd": "Disable-BitLocker -MountPoint C: -EA Stop | Out-Null",
+          "admin": true
+        },
+        {
+          "id": "defender_off",
+          "label": "Defender OFF",
+          "desc": "Disable Windows Defender real-time protection",
+          "type": "action",
+          "cmd": "Set-MpPreference -DisableRealtimeMonitoring $true -EA Stop; Stop-Service WinDefend -Force -EA SilentlyContinue",
+          "admin": true
+        },
+        {
+          "id": "firewall_off",
+          "label": "Firewall OFF",
+          "desc": "Disable Windows Firewall on all profiles",
+          "type": "action",
+          "cmd": "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False -EA Stop",
+          "admin": true
+        },
+        {
+          "id": "tamper_off",
+          "label": "Tamper Protection OFF",
+          "desc": "Disable Defender Tamper Protection via registry",
+          "type": "action",
+          "cmd": "$p='HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Features'; $a=Get-Acl $p; $s=New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544'); $a.SetOwner($s); $r=New-Object System.Security.AccessControl.RegistryAccessRule($s,'FullControl','ContainerInherit,ObjectInherit','None','Allow'); $a.AddAccessRule($r); Set-Acl $p $a; Set-ItemProperty $p 'TamperProtection' 4",
+          "admin": true
+        },
+        {
+          "id": "install_7zip",
+          "label": "Install 7-Zip",
+          "desc": "Download and install 7-Zip silently",
+          "type": "action",
+          "cmd": "$i=Get-ItemProperty 'HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*' -EA SilentlyContinue|?{$_.DisplayName -like '*7-Zip*'}; if(-not $i){$d='C:\\M-auto\\Temp'; md $d -Force -EA SilentlyContinue|Out-Null; $t=\"$d\\7z.exe\"; irm 'https://www.7-zip.org/a/7z2409-x64.exe' -OutFile $t; Start-Process $t '/S' -Wait; del $t -Force; Write-Output 'OK'}else{Write-Output 'ALREADY INSTALLED'}",
+          "admin": true
+        },
+        {
+          "id": "cleanup",
+          "label": "Cleanup Temp",
+          "desc": "Remove temporary files",
+          "type": "action",
+          "cmd": "Remove-Item \"$env:TEMP\\*\" -Recurse -Force -EA SilentlyContinue; Remove-Item 'C:\\Windows\\Temp\\*' -Recurse -Force -EA SilentlyContinue; Write-Output 'OK'",
+          "admin": true
+        },
+        {
+          "id": "restore_point",
+          "label": "Create Restore Point",
+          "desc": "Create Windows System Restore point",
+          "type": "action",
+          "cmd": "Enable-ComputerRestore -Drive 'C:\\' -EA SilentlyContinue; Checkpoint-Computer -Description 'M-Auto Backup' -RestorePointType MODIFY_SETTINGS -EA Stop",
+          "admin": true
+        },
+        {
+          "id": "dns_cloudflare",
+          "label": "DNS Cloudflare",
+          "desc": "Set DNS to 1.1.1.1 / 1.0.0.1",
+          "type": "action",
+          "cmd": "irm 'https://m-auto.online/scripts/system/dns_cloudflare.ps1' -UseBasicParsing | iex",
+          "admin": true
+        }
       ]
     },
     {
@@ -23,26 +92,117 @@
       "label": "Mercedes-Benz",
       "desc": "Instalar ficheiros Mercedes descarregados de C:\\M-auto\\Temp",
       "steps": [
-        { "id": "mb_folders", "label": "Criar Estrutura de Pastas", "desc": "Cria todas as pastas necessarias para Mercedes-Benz em C:\\M-auto\\Daimler", "type": "action", "admin": false, "cmd": "$dirs=@('C:\\M-auto\\Temp','C:\\M-auto\\Daimler\\SDMEDIA','C:\\M-auto\\Daimler\\DATABASES','C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 D-PDU','C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 J2534','C:\\M-auto\\Daimler\\Coding tutorials full'); foreach($d in $dirs){New-Item $d -ItemType Directory -Force -EA SilentlyContinue|Out-Null; Write-Output \"OK: $d\"}" },
-        { "id": "mb_sdmedia", "label": "Instalar SDMEDIA", "desc": "Extrai SDMEDIA.zip de Temp para C:\\M-auto\\Daimler\\SDMEDIA", "type": "action", "admin": false, "cmd": "$src='C:\\M-auto\\Temp\\SDMEDIA.zip'; $dst='C:\\M-auto\\Daimler\\SDMEDIA'; if(!(Test-Path $src)){Write-Output 'ERRO: SDMEDIA.zip nao encontrado em Temp'; exit 1}; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; & 'C:\\Program Files\\7-Zip\\7z.exe' x $src -o\"$dst\" -y | Out-Null; Write-Output \"OK: extraido para $dst\"" },
-        { "id": "mb_databases", "label": "Instalar Databases", "desc": "Extrai Databases.7z de Temp para C:\\M-auto\\Daimler\\DATABASES", "type": "action", "admin": false, "cmd": "$src='C:\\M-auto\\Temp\\Databases.7z'; $dst='C:\\M-auto\\Daimler\\DATABASES'; if(!(Test-Path $src)){Write-Output 'ERRO: Databases.7z nao encontrado em Temp'; exit 1}; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; & 'C:\\Program Files\\7-Zip\\7z.exe' x $src -o\"$dst\" -y | Out-Null; Write-Output \"OK: extraido para $dst\"" },
-        { "id": "mb_tutorial_beta", "label": "Instalar Tutorial Beta", "desc": "Copia tutorial beta.exe de Temp para C:\\M-auto\\Daimler", "type": "action", "admin": false, "cmd": "$src='C:\\M-auto\\Temp\\tutorial beta.exe'; $dst='C:\\M-auto\\Daimler\\tutorial beta.exe'; if(!(Test-Path $src)){Write-Output 'ERRO: tutorial beta.exe nao encontrado em Temp'; exit 1}; Copy-Item $src $dst -Force; Write-Output \"OK: copiado para $dst\"" },
-        { "id": "mb_vin_vci", "label": "Instalar VIN Decoder D-PDU", "desc": "Extrai MB_VIN D-PDU de Temp para C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 D-PDU", "type": "action", "admin": false, "cmd": "$f=Get-ChildItem 'C:\\M-auto\\Temp' -Filter '*D-PDU*' -EA SilentlyContinue | Select-Object -First 1; if(!$f){Write-Output 'ERRO: ficheiro VIN D-PDU nao encontrado em Temp'; exit 1}; $dst='C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 D-PDU'; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; & 'C:\\Program Files\\7-Zip\\7z.exe' x $f.FullName -o\"$dst\" -y | Out-Null; Write-Output \"OK: extraido para $dst\"" },
-        { "id": "mb_vin_j2534", "label": "Instalar VIN Decoder J2534", "desc": "Extrai MB_VIN J2534 de Temp para C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 J2534", "type": "action", "admin": false, "cmd": "$f=Get-ChildItem 'C:\\M-auto\\Temp' -Filter '*J2534*' -EA SilentlyContinue | Select-Object -First 1; if(!$f){Write-Output 'ERRO: ficheiro VIN J2534 nao encontrado em Temp'; exit 1}; $dst='C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 J2534'; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; & 'C:\\Program Files\\7-Zip\\7z.exe' x $f.FullName -o\"$dst\" -y | Out-Null; Write-Output \"OK: extraido para $dst\"" },
-        { "id": "mb_coding_tutorials", "label": "Instalar Coding Tutorials", "desc": "Extrai/copia Coding tutorials full de Temp para C:\\M-auto\\Daimler\\Coding tutorials full", "type": "action", "admin": false, "cmd": "$dst='C:\\M-auto\\Daimler\\Coding tutorials full'; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; $f=Get-ChildItem 'C:\\M-auto\\Temp' -Filter '*Coding*' -EA SilentlyContinue | Select-Object -First 1; if(!$f){Write-Output 'ERRO: ficheiro Coding Tutorials nao encontrado em Temp'; exit 1}; if($f.Extension -match '7z|zip|rar'){& 'C:\\Program Files\\7-Zip\\7z.exe' x $f.FullName -o\"$dst\" -y | Out-Null}else{Copy-Item $f.FullName $dst -Force}; Write-Output \"OK: instalado em $dst\"" }
+        {
+          "id": "mb_folders",
+          "label": "Criar Estrutura de Pastas",
+          "desc": "Cria todas as pastas necessarias para Mercedes-Benz em C:\\M-auto\\Daimler",
+          "type": "action",
+          "admin": false,
+          "cmd": "$dirs=@('C:\\M-auto\\Temp','C:\\M-auto\\Daimler\\SDMEDIA','C:\\M-auto\\Daimler\\DATABASES','C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 D-PDU','C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 J2534','C:\\M-auto\\Daimler\\Coding tutorials full'); foreach($d in $dirs){New-Item $d -ItemType Directory -Force -EA SilentlyContinue|Out-Null; Write-Output \"OK: $d\"}"
+        },
+        {
+          "id": "mb_databases",
+          "label": "Instalar Databases",
+          "desc": "Extrai Databases.7z de Temp para C:\\M-auto\\Daimler\\DATABASES",
+          "type": "action",
+          "admin": false,
+          "cmd": "$src='C:\\M-auto\\Temp\\Databases.7z'; $dst='C:\\M-auto\\Daimler\\DATABASES'; if(!(Test-Path $src)){Write-Output 'ERRO: Databases.7z nao encontrado em Temp'; exit 1}; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; & 'C:\\Program Files\\7-Zip\\7z.exe' x $src -o\"$dst\" -y | Out-Null; Write-Output \"OK: extraido para $dst\""
+        },
+        {
+          "id": "mb_tutorial_beta",
+          "label": "Instalar Tutorial Beta",
+          "desc": "Copia tutorial beta.exe de Temp para C:\\M-auto\\Daimler",
+          "type": "action",
+          "admin": false,
+          "cmd": "$src='C:\\M-auto\\Temp\\tutorial beta.exe'; $dst='C:\\M-auto\\Daimler\\tutorial beta.exe'; if(!(Test-Path $src)){Write-Output 'ERRO: tutorial beta.exe nao encontrado em Temp'; exit 1}; Copy-Item $src $dst -Force; Write-Output \"OK: copiado para $dst\""
+        },
+        {
+          "id": "mb_vin_vci",
+          "label": "Instalar VIN Decoder D-PDU",
+          "desc": "Extrai MB_VIN D-PDU de Temp para C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 D-PDU",
+          "type": "action",
+          "admin": false,
+          "cmd": "$f=Get-ChildItem 'C:\\M-auto\\Temp' -Filter '*D-PDU*' -EA SilentlyContinue | Select-Object -First 1; if(!$f){Write-Output 'ERRO: ficheiro VIN D-PDU nao encontrado em Temp'; exit 1}; $dst='C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 D-PDU'; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; & 'C:\\Program Files\\7-Zip\\7z.exe' x $f.FullName -o\"$dst\" -y | Out-Null; Write-Output \"OK: extraido para $dst\""
+        },
+        {
+          "id": "mb_vin_j2534",
+          "label": "Instalar VIN Decoder J2534",
+          "desc": "Extrai MB_VIN J2534 de Temp para C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 J2534",
+          "type": "action",
+          "admin": false,
+          "cmd": "$f=Get-ChildItem 'C:\\M-auto\\Temp' -Filter '*J2534*' -EA SilentlyContinue | Select-Object -First 1; if(!$f){Write-Output 'ERRO: ficheiro VIN J2534 nao encontrado em Temp'; exit 1}; $dst='C:\\M-auto\\Daimler\\Vin decoder\\MB_VIN v3.0.3 J2534'; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; & 'C:\\Program Files\\7-Zip\\7z.exe' x $f.FullName -o\"$dst\" -y | Out-Null; Write-Output \"OK: extraido para $dst\""
+        },
+        {
+          "id": "mb_coding_tutorials",
+          "label": "Instalar Coding Tutorials",
+          "desc": "Extrai/copia Coding tutorials full de Temp para C:\\M-auto\\Daimler\\Coding tutorials full",
+          "type": "action",
+          "admin": false,
+          "cmd": "$dst='C:\\M-auto\\Daimler\\Coding tutorials full'; New-Item $dst -ItemType Directory -Force -EA SilentlyContinue|Out-Null; $f=Get-ChildItem 'C:\\M-auto\\Temp' -Filter '*Coding*' -EA SilentlyContinue | Select-Object -First 1; if(!$f){Write-Output 'ERRO: ficheiro Coding Tutorials nao encontrado em Temp'; exit 1}; if($f.Extension -match '7z|zip|rar'){& 'C:\\Program Files\\7-Zip\\7z.exe' x $f.FullName -o\"$dst\" -y | Out-Null}else{Copy-Item $f.FullName $dst -Force}; Write-Output \"OK: instalado em $dst\""
+        }
       ]
     }
   ],
   "downloads": [
-    { "id": "daimler", "label": "Mercedes-Benz", "color": "#163354", "file": "daimler_links.json" },
-    { "id": "psa", "label": "PSA / Stellantis", "color": "#1a237e", "file": "psa_links.json" },
-    { "id": "renault", "label": "Renault", "color": "#f4b400", "file": "renault_links.json" },
-    { "id": "delphi", "label": "Delphi", "color": "#8b1a1a", "file": "delphi_links.json" },
-    { "id": "autodata", "label": "Autodata", "color": "#059669", "file": "autodata_links.json" },
-    { "id": "vw", "label": "Volkswagen / VAG", "color": "#1565c0", "file": "vw_links.json" },
-    { "id": "ford", "label": "Ford", "color": "#003478", "file": "ford_links.json" },
-    { "id": "gm", "label": "General Motors", "color": "#0d47a1", "file": "gm_links.json" },
-    { "id": "tesla", "label": "Tesla", "color": "#cc0000", "file": "tesla_links.json" },
-    { "id": "tools", "label": "Tools", "color": "#37474f", "file": "tools_links.json" }
+    {
+      "id": "daimler",
+      "label": "Mercedes-Benz",
+      "color": "#163354",
+      "file": "daimler_links.json"
+    },
+    {
+      "id": "psa",
+      "label": "PSA / Stellantis",
+      "color": "#1a237e",
+      "file": "psa_links.json"
+    },
+    {
+      "id": "renault",
+      "label": "Renault",
+      "color": "#f4b400",
+      "file": "renault_links.json"
+    },
+    {
+      "id": "delphi",
+      "label": "Delphi",
+      "color": "#8b1a1a",
+      "file": "delphi_links.json"
+    },
+    {
+      "id": "autodata",
+      "label": "Autodata",
+      "color": "#059669",
+      "file": "autodata_links.json"
+    },
+    {
+      "id": "vw",
+      "label": "Volkswagen / VAG",
+      "color": "#1565c0",
+      "file": "vw_links.json"
+    },
+    {
+      "id": "ford",
+      "label": "Ford",
+      "color": "#003478",
+      "file": "ford_links.json"
+    },
+    {
+      "id": "gm",
+      "label": "General Motors",
+      "color": "#0d47a1",
+      "file": "gm_links.json"
+    },
+    {
+      "id": "tesla",
+      "label": "Tesla",
+      "color": "#cc0000",
+      "file": "tesla_links.json"
+    },
+    {
+      "id": "tools",
+      "label": "Tools",
+      "color": "#37474f",
+      "file": "tools_links.json"
+    }
   ]
 }
