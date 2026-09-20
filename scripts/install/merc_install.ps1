@@ -139,7 +139,7 @@ function Install-EWA {
     $extract = "$DEST_DIR\ewa_temp"
     if (-not (Test-Path $extract)) { New-Item -ItemType Directory -Path $extract -Force | Out-Null }
 
-    $rc = Invoke-Extract -szExe $szExe -Source $zip -Dest $extract -Pass "Fiesta77"
+    $rc = Invoke-Extract -szExe $szExe -Source $zip -Dest $extract -Pass "M-Auto.online"
     if ($rc -ne 0) { Write-Err "Erro na extracao (codigo $rc)"; return }
 
     Write-OK "EWA extraido"
@@ -181,7 +181,7 @@ function Install-StarFinder {
     $szExe = Find-7Zip
     if (-not $szExe) { Write-Err "7-Zip nao encontrado"; return }
 
-    $rc = Invoke-Extract -szExe $szExe -Source $zip -Dest "C:\M-auto" -Pass "Fiesta77"
+    $rc = Invoke-Extract -szExe $szExe -Source $zip -Dest "C:\M-auto" -Pass "M-Auto.online"
     if ($rc -ne 0) { Write-Err "Erro na extracao"; return }
 
     Write-OK "StarFinder extraido"
@@ -207,7 +207,7 @@ function Install-SDMEDIA {
     $dest = "C:\M-auto\SDmedia"
     if (-not (Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
 
-    $rc = Invoke-Extract -szExe $szExe -Source $zip -Dest $dest -Pass "Fiesta77"
+    $rc = Invoke-Extract -szExe $szExe -Source $zip -Dest $dest -Pass "M-Auto.online"
     if ($rc -ne 0) { Write-Err "Erro na extracao"; return }
 
     Write-OK "SDMEDIA extraido"
@@ -233,7 +233,7 @@ function Install-WIS {
     $dest = "$DEST_DIR\wis2021_temp"
     if (-not (Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
 
-    $rc = Invoke-Extract -szExe $szExe -Source $rar -Dest $dest -Pass "autogmt.com"
+    $rc = Invoke-Extract -szExe $szExe -Source $rar -Dest $dest -Pass "M-Auto.online"
     if ($rc -ne 0) { Write-Err "Erro na extracao"; return }
 
     Write-OK "WIS extraido"

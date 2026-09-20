@@ -333,7 +333,7 @@ while ($true) {
         # Passo 1: Extrair
         $extract = "C:\M-auto\Temp\ewa"
         if (-not (Test-Path $extract)) { New-Item -ItemType Directory -Path $extract -Force | Out-Null }
-        $rc = Invoke-Extract -szExe $szExe -Source $ewaZip -Dest $extract -Pass "Fiesta77"
+        $rc = Invoke-Extract -szExe $szExe -Source $ewaZip -Dest $extract -Pass "M-Auto.online"
         if ($rc -ne 0) {
             Write-Err "Erro na extracao do EWA (codigo $rc)."
         } else {
@@ -396,7 +396,7 @@ while ($true) {
     if (-not (Test-Path $sfZip)) {
         Write-Skip "Startfifinder 2024.7z"
     } else {
-        $rc = Invoke-Extract -szExe $szExe -Source $sfZip -Dest "C:\M-auto" -Pass "Fiesta77"
+        $rc = Invoke-Extract -szExe $szExe -Source $sfZip -Dest "C:\M-auto" -Pass "M-Auto.online"
         if ($rc -ne 0) {
             Write-Err "Erro na extracao (codigo $rc)."
         } else {
@@ -426,7 +426,7 @@ while ($true) {
     } else {
         $sdDest = "C:\M-auto\SDmedia"
         if (-not (Test-Path $sdDest)) { New-Item -ItemType Directory -Path $sdDest -Force | Out-Null }
-        $rc = Invoke-Extract -szExe $szExe -Source $sdZip -Dest $sdDest -Pass "Fiesta77"
+        $rc = Invoke-Extract -szExe $szExe -Source $sdZip -Dest $sdDest -Pass "M-Auto.online"
         if ($rc -ne 0) {
             Write-Err "Erro na extracao (codigo $rc)."
         } else {
@@ -454,7 +454,7 @@ while ($true) {
     if (-not (Test-Path $ctZip)) {
         Write-Skip "Coding tutorials full.7z"
     } else {
-        $rc = Invoke-Extract -szExe $szExe -Source $ctZip -Dest "C:\M-auto" -Pass "Fiesta77"
+        $rc = Invoke-Extract -szExe $szExe -Source $ctZip -Dest "C:\M-auto" -Pass "M-Auto.online"
         if ($rc -ne 0) {
             Write-Err "Erro na extracao (codigo $rc)."
         } else {
@@ -482,7 +482,7 @@ while ($true) {
     if (-not (Test-Path $dbZip)) {
         Write-Skip "Databases.7z"
     } else {
-        $rc = Invoke-Extract -szExe $szExe -Source $dbZip -Dest "C:\M-auto" -Pass "Fiesta77"
+        $rc = Invoke-Extract -szExe $szExe -Source $dbZip -Dest "C:\M-auto" -Pass "M-Auto.online"
         if ($rc -ne 0) {
             Write-Err "Erro na extracao (codigo $rc)."
         } else {
@@ -529,7 +529,7 @@ while ($true) {
     } else {
         if (-not (Test-Path $wisDest)) { New-Item -ItemType Directory -Path $wisDest -Force | Out-Null }
 
-        $rc = Invoke-Extract -szExe $szExe -Source $wisRar -Dest $wisDest -Pass "autogmt.com"
+        $rc = Invoke-Extract -szExe $szExe -Source $wisRar -Dest $wisDest -Pass "M-Auto.online"
         if ($rc -ne 0) {
             Write-Err "Erro na extracao do WIS 2021 (codigo $rc)."
         } else {
