@@ -8,23 +8,23 @@
       "translations": {
         "pt": {
           "title": "XENTRY 09-2026 disponível",
-          "text": "M-AUTO LAUNCHER EM VERSÃO BETA - PODE CONTER ERROS"
+          "text": "M-AUTO LAUNCHER EM VERSÃO BETA"
         },
         "en": {
           "title": "XENTRY 09-2026 available",
-          "text": "M-AUTO LAUNCHER IN BETA VERSION - MAY CONTAIN BUGS"
+          "text": "M-AUTO LAUNCHER IN BETA VERSION"
         },
         "fr": {
           "title": "XENTRY 09-2026 disponible",
-          "text": "M-AUTO LAUNCHER EN VERSION BÊTA - PEUT CONTENIR DES BUGS"
+          "text": "M-AUTO LAUNCHER EN VERSION BETA"
         },
         "es": {
           "title": "XENTRY 09-2026 disponible",
-          "text": "M-AUTO LAUNCHER EN VERSIÓN BETA - PUEDE CONTENER ERRORES"
+          "text": "M-AUTO LAUNCHER EN VERSIÓN BETA"
         },
         "de": {
           "title": "XENTRY 09-2026 verfügbar",
-          "text": "M-AUTO LAUNCHER IN BETA-VERSION - KANN FEHLER ENTHALTEN"
+          "text": "M-AUTO LAUNCHER IN BETA-VERSION"
         }
       }
     }
