@@ -27,6 +27,34 @@
           "text": "M-AUTO LAUNCHER IN BETA-VERSION"
         }
       }
+    },
+    {
+      "id": "t1790076236066",
+      "type": "news",
+      "active": true,
+      "createdAt": "2026-09-22T11:23:56.066Z",
+      "translations": {
+        "pt": {
+          "title": "XENTRY TRUCKS 10-2026 DISPONÍVEL",
+          "text": ""
+        },
+        "en": {
+          "title": "XENTRY TRUCKS 10-2026 AVAILABLE",
+          "text": ""
+        },
+        "fr": {
+          "title": "XENTRY TRUCKS 10-2026 DISPONIBLE",
+          "text": ""
+        },
+        "es": {
+          "title": "XENTRY TRUCKS 10-2026 DISPONIBLE",
+          "text": ""
+        },
+        "de": {
+          "title": "XENTRY TRUCKS 10-2026 VERFÜGBAR",
+          "text": ""
+        }
+      }
     }
   ]
 }
