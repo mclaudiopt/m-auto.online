@@ -27,34 +27,6 @@
           "text": "M-AUTO LAUNCHER IN BETA-VERSION - KANN FEHLER ENTHALTEN"
         }
       }
-    },
-    {
-      "id": "t1790075421909",
-      "type": "alert",
-      "active": true,
-      "createdAt": "2026-09-22T11:10:21.911Z",
-      "translations": {
-        "pt": {
-          "title": "1",
-          "text": ""
-        },
-        "en": {
-          "title": "",
-          "text": ""
-        },
-        "fr": {
-          "title": "",
-          "text": ""
-        },
-        "es": {
-          "title": "",
-          "text": ""
-        },
-        "de": {
-          "title": "",
-          "text": ""
-        }
-      }
     }
   ]
 }
