@@ -49,7 +49,7 @@
   <link rel="icon" type="image/png" href="IMG/mauto/m-auto.png">
 
   <title>M-Auto Online — Ferramenta de Diagnóstico e Codificação Automóvel | Mercedes, BMW, VAG</title>
-  <link rel="stylesheet" href="assets/style.min.css?v=8.3.11">
+  <link rel="stylesheet" href="assets/style.min.css?v=8.3.12">
 
   <!-- ── SPLASH SCREEN CSS ── -->
   <style>
@@ -153,6 +153,7 @@
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+351938526930",
+          "email": "info@m-auto.online",
           "contactType": "sales",
           "availableLanguage": ["Portuguese", "English", "French", "German", "Chinese"]
         },
@@ -219,7 +220,7 @@
       <a href="#inicio" class="logo-link">
         <span class="brand-m">M-Auto</span>
         <span class="brand-online">Online</span>
-        <span class="version-badge">v8.3.11</span>
+        <span class="version-badge">v8.3.12</span>
       </a>
     </div>
     <div class="header-right">
@@ -562,6 +563,16 @@
 
   <!-- ═══ FOOTER ═══ -->
   <footer id="contacto">
+    <div class="footer-contact">
+      <p class="footer-contact-title" data-trans="contact_title">Contacto</p>
+      <a href="mailto:info@m-auto.online" class="footer-email">✉️ info@m-auto.online</a>
+      <form class="footer-contact-form" onsubmit="sendContactForm(event)">
+        <input type="text" id="cfName" data-trans-ph="contact_name_ph" placeholder="O teu nome" required>
+        <input type="email" id="cfEmail" data-trans-ph="contact_email_ph" placeholder="O teu email" required>
+        <textarea id="cfMessage" data-trans-ph="contact_message_ph" placeholder="A tua mensagem" required rows="3"></textarea>
+        <button type="submit" data-trans="contact_send_btn">Enviar mensagem</button>
+      </form>
+    </div>
     <p class="footer-copyright">&copy; <script>document.write(new Date().getFullYear())</script> M-Auto Online — Simply Digital</p>
   </footer>
 
@@ -596,6 +607,6 @@
   })();
   </script>
 
-  <script src="assets/app.min.js?v=8.3.11"></script>
+  <script src="assets/app.min.js?v=8.3.12"></script>
 </body>
 </html>

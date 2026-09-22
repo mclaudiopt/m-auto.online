@@ -26,6 +26,7 @@ const TRANS = {
     hero_sol: "Soluções Online", hero_desc: "Instalação remota profissional.",
     modal_order: "Encomendar", modal_no_details: "Detalhes não disponíveis.",
     search_placeholder: "🔍 Procurar...",
+    contact_title: "Contacto", contact_name_ph: "O teu nome", contact_email_ph: "O teu email", contact_message_ph: "A tua mensagem", contact_send_btn: "Enviar mensagem",
     meta_version: "Versão", meta_year: "Ano", meta_os: "Sistema",
     brand_multi: "Multimarca",
     hard_title: "Hardware", tools_title: "Downloads", serv_title: "Serviços",
@@ -113,6 +114,7 @@ const TRANS = {
     hero_sol: "Online Solutions", hero_desc: "Professional remote installation.",
     modal_order: "Order", modal_no_details: "Details not available.",
     search_placeholder: "🔍 Search...",
+    contact_title: "Contact", contact_name_ph: "Your name", contact_email_ph: "Your email", contact_message_ph: "Your message", contact_send_btn: "Send message",
     meta_version: "Version", meta_year: "Year", meta_os: "OS",
     brand_multi: "Multi-brand",
     hard_title: "Hardware", tools_title: "Downloads", serv_title: "Services",
@@ -200,6 +202,7 @@ const TRANS = {
     hero_sol: "Solutions En Ligne", hero_desc: "Installation à distance professionnelle.",
     modal_order: "Commander", modal_no_details: "Détails non disponibles.",
     search_placeholder: "🔍 Rechercher...",
+    contact_title: "Contact", contact_name_ph: "Votre nom", contact_email_ph: "Votre email", contact_message_ph: "Votre message", contact_send_btn: "Envoyer le message",
     meta_version: "Version", meta_year: "Année", meta_os: "Système",
     brand_multi: "Multimarque",
     hard_title: "Matériel", tools_title: "Téléchargements", serv_title: "Services",
@@ -1107,7 +1110,7 @@ function createCard(item) {
     onkeydown="if(event.key==='Enter'||event.key===' ')openProductModal('${item.id}')">
     <div class="card-media">
       ${badgeHtml}${stockBadgeHtml}
-      ${item.img ? `<img src="${item.img}" loading="lazy" alt="${d.name || ''}">` : `<div class="img-placeholder"><span>${d.name || item.id}</span></div>`}
+      ${(() => { const src = (lang === 'pt' && item.img_pt) ? item.img_pt : item.img; return src ? `<img src="${src}" loading="lazy" alt="${d.name || ''}">` : `<div class="img-placeholder"><span>${d.name || item.id}</span></div>`; })()}
     </div>
     <div class="card-body">
       <div class="card-title-row">
@@ -1280,6 +1283,16 @@ function orderProduct(nameOrMsg, context = '') {
 
 function orderGeneral() {
   openRoleta();
+}
+
+function sendContactForm(e) {
+  e.preventDefault();
+  const name = document.getElementById('cfName').value.trim();
+  const email = document.getElementById('cfEmail').value.trim();
+  const msg = document.getElementById('cfMessage').value.trim();
+  const subject = encodeURIComponent(`Contacto via site — ${name}`);
+  const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${msg}`);
+  window.location.href = `mailto:info@m-auto.online?subject=${subject}&body=${body}`;
 }
 
 /* ─────────────────────────────────────────────
@@ -1837,6 +1850,12 @@ function applyLang() {
   document.querySelectorAll('[data-trans], [data-translate]').forEach(el => {
     const key = el.dataset.trans || el.dataset.translate;
     if (key) el.textContent = t(key);
+  });
+
+  // Placeholders traduzíveis (formulários estáticos fora da SPA)
+  document.querySelectorAll('[data-trans-ph]').forEach(el => {
+    const key = el.dataset.transPh;
+    if (key) el.placeholder = t(key);
   });
 
   // Search placeholder
