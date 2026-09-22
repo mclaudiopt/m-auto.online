@@ -6,11 +6,54 @@
       "active": true,
       "createdAt": "2026-09-21T14:00:00.000Z",
       "translations": {
-        "pt": { "title": "XENTRY 09-2026 disponível", "text": "M-AUTO LAUNCHER EM VERSÃO BETA - PODE CONTER ERROS" },
-        "en": { "title": "XENTRY 09-2026 available", "text": "M-AUTO LAUNCHER IN BETA VERSION - MAY CONTAIN BUGS" },
-        "fr": { "title": "XENTRY 09-2026 disponible", "text": "M-AUTO LAUNCHER EN VERSION BÊTA - PEUT CONTENIR DES BUGS" },
-        "es": { "title": "XENTRY 09-2026 disponible", "text": "M-AUTO LAUNCHER EN VERSIÓN BETA - PUEDE CONTENER ERRORES" },
-        "de": { "title": "XENTRY 09-2026 verfügbar", "text": "M-AUTO LAUNCHER IN BETA-VERSION - KANN FEHLER ENTHALTEN" }
+        "pt": {
+          "title": "XENTRY 09-2026 disponível",
+          "text": "M-AUTO LAUNCHER EM VERSÃO BETA - PODE CONTER ERROS"
+        },
+        "en": {
+          "title": "XENTRY 09-2026 available",
+          "text": "M-AUTO LAUNCHER IN BETA VERSION - MAY CONTAIN BUGS"
+        },
+        "fr": {
+          "title": "XENTRY 09-2026 disponible",
+          "text": "M-AUTO LAUNCHER EN VERSION BÊTA - PEUT CONTENIR DES BUGS"
+        },
+        "es": {
+          "title": "XENTRY 09-2026 disponible",
+          "text": "M-AUTO LAUNCHER EN VERSIÓN BETA - PUEDE CONTENER ERRORES"
+        },
+        "de": {
+          "title": "XENTRY 09-2026 verfügbar",
+          "text": "M-AUTO LAUNCHER IN BETA-VERSION - KANN FEHLER ENTHALTEN"
+        }
+      }
+    },
+    {
+      "id": "t1790075421909",
+      "type": "alert",
+      "active": true,
+      "createdAt": "2026-09-22T11:10:21.911Z",
+      "translations": {
+        "pt": {
+          "title": "1",
+          "text": ""
+        },
+        "en": {
+          "title": "",
+          "text": ""
+        },
+        "fr": {
+          "title": "",
+          "text": ""
+        },
+        "es": {
+          "title": "",
+          "text": ""
+        },
+        "de": {
+          "title": "",
+          "text": ""
+        }
       }
     }
   ]
