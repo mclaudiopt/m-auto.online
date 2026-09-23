@@ -3,7 +3,8 @@
     "id": "merc_maps_pin",
     "section": "soft",
     "brand": "mercedes",
-    "img": "IMG/Daimler/merc-maps-pin.svg",
+    "img": "IMG/Daimler/merc-maps-pin-en.jpg",
+    "img_pt": "IMG/Daimler/merc-maps-pin-pt.jpg",
     "premium": true,
     "badge": "badge_new",
     "span_full": false,
@@ -966,6 +967,28 @@
       "name": "IDS",
       "short": "IDS — diagnostic Ford classique pour Focus, Mondeo, Fiesta, Transit et autres.",
       "details": "Integrated Diagnostic System — outil Ford classique pour les modèles antérieurs au FDRS. Supporte Focus, Mondeo, Fiesta, Transit et autres modèles Ford de génération précédente avec diagnostic complet et fonctions de service."
+    }
+  },
+  {
+    "id": "ford_snapon",
+    "section": "soft",
+    "brand": "ford",
+    "img": "IMG/Ford/ford-snapon.svg",
+    "meta": {},
+    "pt": {
+      "name": "Snap-on Ford",
+      "short": "Diagnóstico Snap-on para veículos Ford — software e hardware de diagnóstico profissional.",
+      "details": "Solução de diagnóstico Snap-on para a marca Ford — software de diagnóstico multimarca com cobertura dedicada Ford, leitura/apagamento de códigos de erro, testes de atuadores e programação de módulos. Compatível com scanners Snap-on (MODIS, VERUS, APOLLO) para diagnóstico avançado em oficina."
+    },
+    "en": {
+      "name": "Snap-on Ford",
+      "short": "Snap-on Ford diagnostics — professional scan tool software and hardware for Ford vehicles.",
+      "details": "Snap-on diagnostic solution for Ford vehicles — multi-brand diagnostic software with dedicated Ford coverage, fault code reading/clearing, actuator tests and module programming. Compatible with Snap-on scan tools (MODIS, VERUS, APOLLO) for advanced workshop diagnostics."
+    },
+    "fr": {
+      "name": "Snap-on Ford",
+      "short": "Diagnostic Snap-on pour véhicules Ford — logiciel et matériel de diagnostic professionnel.",
+      "details": "Solution de diagnostic Snap-on pour la marque Ford — logiciel de diagnostic multimarque avec couverture dédiée Ford, lecture/effacement des codes défaut, tests d'actionneurs et programmation des modules. Compatible avec les outils de diagnostic Snap-on (MODIS, VERUS, APOLLO) pour un diagnostic avancé en atelier."
     }
   },
   {
