@@ -976,19 +976,19 @@
     "img": "IMG/Ford/ford-snapon.svg",
     "meta": {},
     "pt": {
-      "name": "Snap-on Ford",
-      "short": "Diagnóstico Snap-on para veículos Ford — software e hardware de diagnóstico profissional.",
-      "details": "Solução de diagnóstico Snap-on para a marca Ford — software de diagnóstico multimarca com cobertura dedicada Ford, leitura/apagamento de códigos de erro, testes de atuadores e programação de módulos. Compatível com scanners Snap-on (MODIS, VERUS, APOLLO) para diagnóstico avançado em oficina."
+      "name": "Snap-on",
+      "short": "Catálogo electrónico de peças Ford — referências, diagramas e aplicações por modelo/VIN.",
+      "details": "Catálogo electrónico oficial de peças Ford (Snap-on). Identificação de peças por modelo, VIN ou número de referência, com diagramas explodidos e compatibilidade por motorização/ano. Ferramenta essencial para orçamentação e encomenda correta de peças em toda a gama Ford."
     },
     "en": {
-      "name": "Snap-on Ford",
-      "short": "Snap-on Ford diagnostics — professional scan tool software and hardware for Ford vehicles.",
-      "details": "Snap-on diagnostic solution for Ford vehicles — multi-brand diagnostic software with dedicated Ford coverage, fault code reading/clearing, actuator tests and module programming. Compatible with Snap-on scan tools (MODIS, VERUS, APOLLO) for advanced workshop diagnostics."
+      "name": "Snap-on",
+      "short": "Ford electronic parts catalogue — references, diagrams and model/VIN lookup.",
+      "details": "Official Ford electronic parts catalogue (Snap-on). Part identification by model, VIN or part number, with exploded diagrams and engine/year compatibility. Essential tool for accurate quoting and ordering of parts across the full Ford range."
     },
     "fr": {
-      "name": "Snap-on Ford",
-      "short": "Diagnostic Snap-on pour véhicules Ford — logiciel et matériel de diagnostic professionnel.",
-      "details": "Solution de diagnostic Snap-on pour la marque Ford — logiciel de diagnostic multimarque avec couverture dédiée Ford, lecture/effacement des codes défaut, tests d'actionneurs et programmation des modules. Compatible avec les outils de diagnostic Snap-on (MODIS, VERUS, APOLLO) pour un diagnostic avancé en atelier."
+      "name": "Snap-on",
+      "short": "Catalogue électronique de pièces Ford — références, schémas et recherche par modèle/VIN.",
+      "details": "Catalogue électronique officiel de pièces Ford (Snap-on). Identification des pièces par modèle, VIN ou référence, avec vues éclatées et compatibilité moteur/année. Outil essentiel pour un devis et une commande de pièces précis sur toute la gamme Ford."
     }
   },
   {
@@ -1420,6 +1420,28 @@
       "name": "Topdon RLink X7",
       "short": "Interface VCI Topdon RLink X7 pour diagnostic multimarque haute vitesse.",
       "details": "<b>Topdon RLink X7</b> — interface de diagnostic VCI robuste, compatible avec les protocoles DoIP, CAN FD et J2534, pour le diagnostic et la programmation d'ECU multimarque à haute vitesse. Construction résistante pour un usage intensif en atelier, connexion USB et Wi-Fi. Compatible avec les principaux logiciels de diagnostic professionnel."
+    }
+  },
+  {
+    "id": "merc_swfinder",
+    "section": "soft",
+    "brand": "mercedes",
+    "img": "IMG/mauto/m-auto.png",
+    "meta": {},
+    "pt": {
+      "name": "SW Finder 6.1.6",
+      "short": "Pesquisa e download rápido de ficheiros flash de ECU por número HW/SW ou VIN.",
+      "details": "Software profissional Mercedes-Benz para oficinas, especialistas em codificação e programadores de ECU. Identifica e pesquisa rapidamente ficheiros flash compatíveis por número HW/SW, nome da ECU ou VIN. Inclui pesquisa por número HW/SW, pesquisa por VIN, identificação de versão de ECU, modos offline e online, suporte a ficheiros CFF e SMR-F, acesso à base de dados Flashware, comparação de atualizações, conversão hex/decimal, comparação de ficheiros HTML, pesquisa universal de ECU, pesquisa de software de transmissão VGS2/VGS3 e download direto de filesets com gestão de pastas. Ideal para programação de ECU, substituição de módulos, recuperação de software e trabalho em unidades de controlo de transmissão."
+    },
+    "en": {
+      "name": "SW Finder 6.1.6",
+      "short": "Fast ECU flash file search and download by HW/SW number or VIN.",
+      "details": "Professional Mercedes-Benz software for workshops, coding specialists and ECU programmers. Quickly identifies and searches compatible flash files by hardware number, software number, ECU name or VIN. Includes HW/SW number search, VIN-based search, ECU version identification, offline and online modes, CFF and SMR-F file support, Flashware database access, update comparison, hex/decimal conversion, HTML file comparison, universal ECU search, VGS2/VGS3 transmission software search and direct fileset download with folder management. Ideal for ECU programming, module replacement, software recovery and transmission control unit work."
+    },
+    "fr": {
+      "name": "SW Finder 6.1.6",
+      "short": "Recherche et téléchargement rapide de fichiers flash ECU par numéro HW/SW ou VIN.",
+      "details": "Logiciel professionnel Mercedes-Benz pour ateliers, spécialistes du codage et programmeurs d'ECU. Identifie et recherche rapidement les fichiers flash compatibles par numéro HW/SW, nom d'ECU ou VIN. Comprend la recherche par numéro HW/SW, la recherche par VIN, l'identification de version ECU, les modes hors ligne et en ligne, la prise en charge des fichiers CFF et SMR-F, l'accès à la base de données Flashware, la comparaison des mises à jour, la conversion hex/décimal, la comparaison de fichiers HTML, la recherche universelle d'ECU, la recherche de logiciel de transmission VGS2/VGS3 et le téléchargement direct de filesets avec gestion des dossiers. Idéal pour la programmation ECU, le remplacement de modules, la récupération de logiciel et le travail sur les unités de contrôle de transmission."
     }
   }
 ]
