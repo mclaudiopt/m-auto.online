@@ -291,6 +291,7 @@ const BRANDS = [
   { id:"fiat",     label:"Fiat / FCA",     color:"#1c2f6e", colorLight:"#eaefff", colorMid:"#6882c8", abbr:"FCA", watermark:"FIAT" },
   { id:"tesla",    label:"Tesla",          color:"#171a20", colorLight:"#f5f5f5", colorMid:"#8c8c8c", abbr:"TSL", watermark:"TESLA" },
   { id:"subaru",   label:"Subaru",         color:"#003da5", colorLight:"#e8f0ff", colorMid:"#6b93d6", abbr:"SUB", watermark:"SUBARU" },
+  { id:"honda",    label:"Honda",          color:"#e2231a", colorLight:"#ffefee", colorMid:"#f08070", abbr:"HON", watermark:"HONDA" },
   { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" }
 ];
 

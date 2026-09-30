@@ -882,6 +882,28 @@
     }
   },
   {
+    "id": "honda_hds",
+    "section": "soft",
+    "brand": "honda",
+    "img": "IMG/Honda/honda-hds.svg",
+    "meta": {},
+    "pt": {
+      "name": "Honda HDS",
+      "short": "Diagnóstico oficial Honda — leitura de módulos, códigos de erro e programação.",
+      "details": "<b>Honda HDS (Honda Diagnostic System)</b> — software de diagnóstico oficial Honda para modelos recentes. Leitura e apagamento de códigos de erro, dados em tempo real, testes de atuadores, calibração de sistemas ADAS (Honda Sensing) e programação de módulos. Compatível com toda a gama Honda moderna (Civic, CR-V, HR-V, Accord, Jazz)."
+    },
+    "en": {
+      "name": "Honda HDS",
+      "short": "Official Honda diagnostics — module reading, fault codes and programming.",
+      "details": "<b>Honda HDS (Honda Diagnostic System)</b> — official Honda diagnostic software for modern models. Fault code reading/clearing, live data, actuator tests, ADAS system calibration (Honda Sensing) and module programming. Compatible with the full modern Honda range (Civic, CR-V, HR-V, Accord, Jazz)."
+    },
+    "fr": {
+      "name": "Honda HDS",
+      "short": "Diagnostic officiel Honda — lecture des modules, codes défaut et programmation.",
+      "details": "<b>Honda HDS (Honda Diagnostic System)</b> — logiciel de diagnostic officiel Honda pour les modèles récents. Lecture/effacement des codes défaut, données temps réel, tests d'actionneurs, calibration des systèmes ADAS (Honda Sensing) et programmation des modules. Compatible avec toute la gamme Honda moderne (Civic, CR-V, HR-V, Accord, Jazz)."
+    }
+  },
+  {
     "id": "toyota_epc",
     "section": "soft",
     "brand": "toyota",
