@@ -860,6 +860,28 @@
     }
   },
   {
+    "id": "subaru_ssm4",
+    "section": "soft",
+    "brand": "subaru",
+    "img": "IMG/Subaru/subaru-ssm4.svg",
+    "meta": {},
+    "pt": {
+      "name": "Subaru Select Monitor (SSM4)",
+      "short": "Diagnóstico oficial Subaru — leitura de módulos, códigos de erro e programação.",
+      "details": "<b>Subaru Select Monitor (SSM4)</b> — software de diagnóstico oficial Subaru para modelos recentes. Leitura e apagamento de códigos de erro, dados em tempo real, testes de atuadores, calibração de sistemas ADAS/EyeSight e programação de módulos. Compatível com toda a gama Subaru moderna (Impreza, Forester, XV, Outback, Legacy, WRX)."
+    },
+    "en": {
+      "name": "Subaru Select Monitor (SSM4)",
+      "short": "Official Subaru diagnostics — module reading, fault codes and programming.",
+      "details": "<b>Subaru Select Monitor (SSM4)</b> — official Subaru diagnostic software for modern models. Fault code reading/clearing, live data, actuator tests, ADAS/EyeSight system calibration and module programming. Compatible with the full modern Subaru range (Impreza, Forester, XV, Outback, Legacy, WRX)."
+    },
+    "fr": {
+      "name": "Subaru Select Monitor (SSM4)",
+      "short": "Diagnostic officiel Subaru — lecture des modules, codes défaut et programmation.",
+      "details": "<b>Subaru Select Monitor (SSM4)</b> — logiciel de diagnostic officiel Subaru pour les modèles récents. Lecture/effacement des codes défaut, données temps réel, tests d'actionneurs, calibration des systèmes ADAS/EyeSight et programmation des modules. Compatible avec toute la gamme Subaru moderne (Impreza, Forester, XV, Outback, Legacy, WRX)."
+    }
+  },
+  {
     "id": "toyota_epc",
     "section": "soft",
     "brand": "toyota",

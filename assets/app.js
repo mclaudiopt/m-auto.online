@@ -290,6 +290,7 @@ const BRANDS = [
   { id:"gm",       label:"GM / Opel",      color:"#1c4077", colorLight:"#e8eef8", colorMid:"#6080c0", abbr:"GM",  watermark:"GM OPEL" },
   { id:"fiat",     label:"Fiat / FCA",     color:"#1c2f6e", colorLight:"#eaefff", colorMid:"#6882c8", abbr:"FCA", watermark:"FIAT" },
   { id:"tesla",    label:"Tesla",          color:"#171a20", colorLight:"#f5f5f5", colorMid:"#8c8c8c", abbr:"TSL", watermark:"TESLA" },
+  { id:"subaru",   label:"Subaru",         color:"#003da5", colorLight:"#e8f0ff", colorMid:"#6b93d6", abbr:"SUB", watermark:"SUBARU" },
   { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" }
 ];
 
