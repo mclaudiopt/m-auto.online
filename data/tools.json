@@ -93,7 +93,7 @@
     "id": "tool_easybcd",
     "icon": "BCD",
     "iconBg": "#6366f1",
-    "url": "https://neosmart.net/EasyBCD/",
+    "url": "https://files.m-auto.online/Tools/EasyBCD-2.4.exe",
     "pt": {
       "name": "EasyBCD 2.4",
       "desc": "Editor do gestor de arranque do Windows (BCD) — gere dual-boot e entradas de arranque."
@@ -111,7 +111,7 @@
     "id": "tool_ireboot",
     "icon": "iR",
     "iconBg": "#0ea5e9",
-    "url": "https://neosmart.net/iReboot/",
+    "url": "https://files.m-auto.online/Tools/ireboot.exe",
     "pt": {
       "name": "Boot Manager (iReboot 2.0.1)",
       "desc": "Escolhe o sistema operativo a arrancar no próximo reinício — reinicia diretamente noutro SO."
