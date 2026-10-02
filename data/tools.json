@@ -88,5 +88,41 @@
       "name": "Free Download Manager",
       "desc": "Gestionnaire de téléchargements gratuit — accélère les transferts de fichiers volumineux."
     }
+  },
+  {
+    "id": "tool_easybcd",
+    "icon": "BCD",
+    "iconBg": "#6366f1",
+    "url": "https://neosmart.net/EasyBCD/",
+    "pt": {
+      "name": "EasyBCD 2.4",
+      "desc": "Editor do gestor de arranque do Windows (BCD) — gere dual-boot e entradas de arranque."
+    },
+    "en": {
+      "name": "EasyBCD 2.4",
+      "desc": "Windows boot loader (BCD) editor — manage dual-boot and boot entries."
+    },
+    "fr": {
+      "name": "EasyBCD 2.4",
+      "desc": "Éditeur du gestionnaire de démarrage Windows (BCD) — gère le double démarrage et les entrées de démarrage."
+    }
+  },
+  {
+    "id": "tool_ireboot",
+    "icon": "iR",
+    "iconBg": "#0ea5e9",
+    "url": "https://neosmart.net/iReboot/",
+    "pt": {
+      "name": "Boot Manager (iReboot 2.0.1)",
+      "desc": "Escolhe o sistema operativo a arrancar no próximo reinício — reinicia diretamente noutro SO."
+    },
+    "en": {
+      "name": "Boot Manager (iReboot 2.0.1)",
+      "desc": "Pick the operating system to boot on next restart — reboot straight into another OS."
+    },
+    "fr": {
+      "name": "Boot Manager (iReboot 2.0.1)",
+      "desc": "Choisissez le système à démarrer au prochain redémarrage — redémarre directement sur un autre OS."
+    }
   }
 ]
