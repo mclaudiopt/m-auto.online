@@ -904,6 +904,28 @@
     }
   },
   {
+    "id": "porsche_piwis",
+    "section": "soft",
+    "brand": "porsche",
+    "img": "IMG/Porsche/porsche-piwis.svg",
+    "meta": {},
+    "pt": {
+      "name": "Porsche PIWIS",
+      "short": "Diagnóstico oficial Porsche — falhas, codificação, programação e aprendizagem de chaves.",
+      "details": "<b>Porsche PIWIS (Porsche Integrated Workshop Information System)</b> — sistema de diagnóstico oficial das oficinas Porsche. Leitura e apagamento de falhas em todos os módulos, dados em tempo real, testes de atuadores, codificação e programação (flash) de centralinas, aprendizagem de chaves e funções de serviço. Cobre a gama Porsche moderna (911, Boxster/Cayman, Cayenne, Macan, Panamera, Taycan). Requer interface de comunicação compatível."
+    },
+    "en": {
+      "name": "Porsche PIWIS",
+      "short": "Official Porsche diagnostics — fault codes, coding, programming and key learning.",
+      "details": "<b>Porsche PIWIS (Porsche Integrated Workshop Information System)</b> — the official diagnostic system used in Porsche workshops. Fault reading/clearing on all modules, live data, actuator tests, ECU coding and programming (flash), key learning and service functions. Covers the modern Porsche range (911, Boxster/Cayman, Cayenne, Macan, Panamera, Taycan). Requires a compatible communication interface."
+    },
+    "fr": {
+      "name": "Porsche PIWIS",
+      "short": "Diagnostic officiel Porsche — codes défaut, codage, programmation et apprentissage des clés.",
+      "details": "<b>Porsche PIWIS (Porsche Integrated Workshop Information System)</b> — le système de diagnostic officiel des ateliers Porsche. Lecture/effacement des défauts sur tous les modules, données temps réel, tests d'actionneurs, codage et programmation (flash) des calculateurs, apprentissage des clés et fonctions de service. Couvre la gamme Porsche moderne (911, Boxster/Cayman, Cayenne, Macan, Panamera, Taycan). Nécessite une interface de communication compatible."
+    }
+  },
+  {
     "id": "toyota_epc",
     "section": "soft",
     "brand": "toyota",

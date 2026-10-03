@@ -292,6 +292,7 @@ const BRANDS = [
   { id:"tesla",    label:"Tesla",          color:"#171a20", colorLight:"#f5f5f5", colorMid:"#8c8c8c", abbr:"TSL", watermark:"TESLA" },
   { id:"subaru",   label:"Subaru",         color:"#003da5", colorLight:"#e8f0ff", colorMid:"#6b93d6", abbr:"SUB", watermark:"SUBARU" },
   { id:"honda",    label:"Honda",          color:"#e2231a", colorLight:"#ffefee", colorMid:"#f08070", abbr:"HON", watermark:"HONDA" },
+  { id:"porsche",  label:"Porsche",        color:"#7a1f2b", colorLight:"#f8eaec", colorMid:"#c0707c", abbr:"POR", watermark:"PORSCHE" },
   { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" }
 ];
 
