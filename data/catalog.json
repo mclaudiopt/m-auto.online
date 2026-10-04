@@ -911,18 +911,18 @@
     "meta": {},
     "pt": {
       "name": "Porsche PIWIS",
-      "short": "Diagnóstico oficial Porsche — falhas, codificação, programação e aprendizagem de chaves.",
-      "details": "<b>Porsche PIWIS (Porsche Integrated Workshop Information System)</b> — sistema de diagnóstico oficial das oficinas Porsche. Leitura e apagamento de falhas em todos os módulos, dados em tempo real, testes de atuadores, codificação e programação (flash) de centralinas, aprendizagem de chaves e funções de serviço. Cobre a gama Porsche moderna (911, Boxster/Cayman, Cayenne, Macan, Panamera, Taycan). Requer interface de comunicação compatível."
+      "short": "Imagem VMware pré-configurada com PIWIS 4 (42.950), PIWIS 3 (38.250) e PIWIS 2 (18.100) para Porsche.",
+      "details": "<b>O que recebe</b><br>Uma imagem VMware totalmente configurada que combina o <b>PIWIS 4 (v42.950)</b>, o <b>PIWIS 3 (v38.250)</b> e o <b>PIWIS 2 (v18.100)</b> para diagnóstico Porsche. Desenvolvida para o VAS6154 e dispositivos J2534 PassThru compatíveis, permite arranque rápido, esquemas elétricos, diagnóstico de avarias guiado, codificação (onde suportado) e reversão segura por snapshot.<br><br><b>Destaques</b><ul><li>Seleção de modelo para 911, Taycan, Boxster, Cayman, Panamera, Macan e mais</li><li>Visualizador de esquemas elétricos com filtros, zoom, impressão e navegação rápida</li><li>Diagnóstico de avarias guiado, valores em tempo real, registo de dados e funções de scan tool</li><li>Suporte para VAS6154 DoIP e fluxos J2534 standard em veículos compatíveis</li><li>Windows convidado pré-configurado, perfil de utilizador e snapshot base limpo</li></ul>"
     },
     "en": {
       "name": "Porsche PIWIS",
-      "short": "Official Porsche diagnostics — fault codes, coding, programming and key learning.",
-      "details": "<b>Porsche PIWIS (Porsche Integrated Workshop Information System)</b> — the official diagnostic system used in Porsche workshops. Fault reading/clearing on all modules, live data, actuator tests, ECU coding and programming (flash), key learning and service functions. Covers the modern Porsche range (911, Boxster/Cayman, Cayenne, Macan, Panamera, Taycan). Requires a compatible communication interface."
+      "short": "Pre-configured VMware image with PIWIS 4 (42.950), PIWIS 3 (38.250) and PIWIS 2 (18.100) for Porsche.",
+      "details": "<b>What you get</b><br>A fully configured VMware image combining <b>PIWIS 4 (v42.950)</b>, <b>PIWIS 3 (v38.250)</b> and <b>PIWIS 2 (v18.100)</b> for Porsche diagnostics. Built for VAS6154 and compatible J2534 PassThru devices, it enables fast startup, wiring diagrams, guided fault finding, coding where supported, and safe snapshot rollback.<br><br><b>Highlights</b><ul><li>Model selection for 911, Taycan, Boxster, Cayman, Panamera, Macan and more</li><li>Wiring diagrams viewer with filtering, zoom, print and quick navigation</li><li>Guided fault finding, live values, logging and scan tool functions</li><li>Support for VAS6154 DoIP and standard J2534 workflows on capable vehicles</li><li>Preconfigured Windows guest, user profile, and clean baseline snapshot</li></ul>"
     },
     "fr": {
       "name": "Porsche PIWIS",
-      "short": "Diagnostic officiel Porsche — codes défaut, codage, programmation et apprentissage des clés.",
-      "details": "<b>Porsche PIWIS (Porsche Integrated Workshop Information System)</b> — le système de diagnostic officiel des ateliers Porsche. Lecture/effacement des défauts sur tous les modules, données temps réel, tests d'actionneurs, codage et programmation (flash) des calculateurs, apprentissage des clés et fonctions de service. Couvre la gamme Porsche moderne (911, Boxster/Cayman, Cayenne, Macan, Panamera, Taycan). Nécessite une interface de communication compatible."
+      "short": "Image VMware préconfigurée avec PIWIS 4 (42.950), PIWIS 3 (38.250) et PIWIS 2 (18.100) pour Porsche.",
+      "details": "<b>Ce que vous obtenez</b><br>Une image VMware entièrement configurée associant <b>PIWIS 4 (v42.950)</b>, <b>PIWIS 3 (v38.250)</b> et <b>PIWIS 2 (v18.100)</b> pour le diagnostic Porsche. Conçue pour le VAS6154 et les interfaces J2534 PassThru compatibles, elle permet un démarrage rapide, la consultation des schémas électriques, un diagnostic de pannes guidé, le codage lorsque pris en charge et un retour arrière sûr par snapshot.<br><br><b>Points forts</b><ul><li>Sélection du modèle : 911, Taycan, Boxster, Cayman, Panamera, Macan et plus</li><li>Visionneuse de schémas électriques avec filtrage, zoom, impression et navigation rapide</li><li>Diagnostic de pannes guidé, valeurs en direct, journalisation et fonctions d'outil de diagnostic</li><li>Prise en charge du VAS6154 DoIP et des flux J2534 standard sur les véhicules compatibles</li><li>Invité Windows préconfiguré, profil utilisateur et snapshot de référence propre</li></ul>"
     }
   },
   {
