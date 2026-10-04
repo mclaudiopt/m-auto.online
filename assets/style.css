@@ -1773,11 +1773,12 @@ body {
   border-bottom-color: #60a5fa !important;
 }
 
-/* ── NAV: overflow-y visible para o dropdown não ser clipado,
-   overflow-x auto para os pills fazerem scroll horizontal em larguras estreitas ── */
+/* ── NAV: overflow visible para o dropdown (SOFTWARE) poder sair da barra.
+   NAO usar overflow-x:auto aqui: se um eixo nao e 'visible', o outro passa a 'auto'
+   (spec CSS) e o dropdown fica preso numa faixa de 43px. Larguras estreitas resolvem-se
+   comprimindo os pills (media query no fim do ficheiro), nao com scroll. ── */
 .main-nav {
-  overflow-y: visible !important;
-  overflow-x: auto !important;
+  overflow: visible !important;
 }
 
 /* ── NAV DROPDOWN (SOFTWARE) ── */
@@ -1810,6 +1811,8 @@ body {
   z-index: 1100;
   padding: 6px 0;
   animation: dd-in 0.15s ease;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
 }
 @keyframes dd-in {
   from { opacity: 0; transform: translateY(-6px); }
@@ -4091,4 +4094,39 @@ body::after {
   #roletaCanvas { width: 280px; height: 280px; }
   .roleta-result-disc { font-size: 2.6rem; }
   .promo-badge { width: 48px; height: 48px; font-size: 1.2rem; bottom: 20px; left: 12px; }
+}
+
+/* ── NAV compacto (769–1100px): faz caber todos os separadores sem scroll horizontal.
+   Fica no fim do ficheiro para vencer os min-width por idioma (mesma especificidade). ── */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .main-nav { padding: 0 8px !important; gap: 0 !important; }
+  .nav-pill,
+  .nav-pill[data-nav-key],
+  .nav-dropdown-wrap .nav-pill {
+    min-width: 0 !important;
+    padding: 12px 9px !important;
+    letter-spacing: 0.03em !important;
+    font-size: 0.66rem !important;
+  }
+}
+@media (min-width: 769px) and (max-width: 940px) {
+  .nav-pill-count { display: none !important; }
+}
+
+/* ── DROPDOWN SOFTWARE em colunas: 16 marcas em 3 colunas (2 em ecras mais estreitos)
+   para nao precisar de scroll interno ao abrir. ── */
+@media (min-width: 769px) {
+  .nav-dropdown-wrap.open .nav-dropdown-menu {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(170px, 1fr));
+    gap: 2px 6px;
+    padding: 8px;
+    width: max-content;
+    max-width: calc(100vw - 24px);
+  }
+}
+@media (min-width: 1000px) {
+  .nav-dropdown-wrap.open .nav-dropdown-menu {
+    grid-template-columns: repeat(3, minmax(170px, 1fr));
+  }
 }
