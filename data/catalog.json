@@ -948,6 +948,28 @@
     }
   },
   {
+    "id": "porsche_petka",
+    "section": "soft",
+    "brand": "porsche",
+    "img": "IMG/Porsche/porsche-petka.svg",
+    "meta": {},
+    "pt": {
+      "name": "Porsche PETKA 8.3",
+      "short": "Catálogo eletrónico de peças Porsche — referências, diagramas e aplicações por modelo/VIN.",
+      "details": "<b>Porsche PETKA 8.3</b> — catálogo eletrónico de peças Porsche. Identificação de peças por modelo, VIN ou número de referência, com diagramas explodidos e compatibilidade por modelo e ano. Ferramenta essencial para orçamentação e encomenda correta de peças em toda a gama Porsche."
+    },
+    "en": {
+      "name": "Porsche PETKA 8.3",
+      "short": "Porsche electronic parts catalogue — references, diagrams and model/VIN lookup.",
+      "details": "<b>Porsche PETKA 8.3</b> — Porsche electronic parts catalogue. Part identification by model, VIN or part number, with exploded diagrams and model/year compatibility. Essential tool for accurate quoting and ordering of parts across the full Porsche range."
+    },
+    "fr": {
+      "name": "Porsche PETKA 8.3",
+      "short": "Catalogue électronique de pièces Porsche — références, schémas et recherche par modèle/VIN.",
+      "details": "<b>Porsche PETKA 8.3</b> — catalogue électronique de pièces Porsche. Identification des pièces par modèle, VIN ou référence, avec vues éclatées et compatibilité par modèle et année. Outil essentiel pour un devis et une commande de pièces précis sur toute la gamme Porsche."
+    }
+  },
+  {
     "id": "toyota_epc",
     "section": "soft",
     "brand": "toyota",
@@ -1077,6 +1099,28 @@
       "name": "Snap-on",
       "short": "Catalogue électronique de pièces Ford — références, schémas et recherche par modèle/VIN.",
       "details": "Catalogue électronique officiel de pièces Ford (Snap-on). Identification des pièces par modèle, VIN ou référence, avec vues éclatées et compatibilité moteur/année. Outil essentiel pour un devis et une commande de pièces précis sur toute la gamme Ford."
+    }
+  },
+  {
+    "id": "ford_microcat",
+    "section": "soft",
+    "brand": "ford",
+    "img": "IMG/Ford/ford-microcat.svg",
+    "meta": {},
+    "pt": {
+      "name": "Ford Microcat",
+      "short": "Catálogo eletrónico de peças Ford — referências, diagramas e aplicações por modelo/VIN.",
+      "details": "<b>Ford Microcat</b> — catálogo eletrónico de peças Ford. Identificação de peças por modelo, VIN ou número de referência, com diagramas explodidos e compatibilidade por motorização e ano. Ferramenta essencial para orçamentação e encomenda correta de peças em toda a gama Ford."
+    },
+    "en": {
+      "name": "Ford Microcat",
+      "short": "Ford electronic parts catalogue — references, diagrams and model/VIN lookup.",
+      "details": "<b>Ford Microcat</b> — Ford electronic parts catalogue. Part identification by model, VIN or part number, with exploded diagrams and engine/year compatibility. Essential tool for accurate quoting and ordering of parts across the full Ford range."
+    },
+    "fr": {
+      "name": "Ford Microcat",
+      "short": "Catalogue électronique de pièces Ford — références, schémas et recherche par modèle/VIN.",
+      "details": "<b>Ford Microcat</b> — catalogue électronique de pièces Ford. Identification des pièces par modèle, VIN ou référence, avec vues éclatées et compatibilité par motorisation et année. Outil essentiel pour un devis et une commande de pièces précis sur toute la gamme Ford."
     }
   },
   {
