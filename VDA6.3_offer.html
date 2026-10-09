@@ -43,9 +43,12 @@ footer { text-align:center; padding:20px 0; color:#555; }
 #loginBox button { background:#02457a; color:#fff; padding:10px 18px; border:none; border-radius:6px; cursor:pointer; font-size:15px; }
 #loginBox button:hover { background:#01355e; }
 
-/* DOWNLOAD BUTTON */
-#downloadBtn { background:#2a4d69; color:#fff; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; float:right; margin:4px 0 20px 0; }
-#downloadBtn:hover { background:#1f3753; }
+/* TOOLBAR */
+.toolbar { display:flex; justify-content:flex-end; gap:10px; padding:8px 0; margin-bottom:4px; }
+.toolbar button { background:#02457a; color:#fff; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-size:14px; font-weight:600; }
+.toolbar button:hover { background:#01355e; }
+.toolbar button#printBtn { background:#2a4d69; }
+.toolbar button#printBtn:hover { background:#1f3753; }
 
 /* ACCEPTANCE INPUTS */
 .accept-row input { width:220px; padding:8px; border:1px solid #ccc; border-radius:6px; margin-right:12px; }
@@ -54,7 +57,7 @@ footer { text-align:center; padding:20px 0; color:#555; }
 <!-- PRINT STYLES -->
 <style>
 @media print {
-  #downloadBtn,.nav-bar,#loginBox,#printBtn { display:none !important; }
+  .toolbar,.nav-bar,#loginBox { display:none !important; }
   body { background:none !important; color:#000 !important; }
   .container { padding:0 !important; margin:0 auto !important; width:100% !important; }
   h1,h2,h3 { color:#000 !important; page-break-after:avoid; }
@@ -107,9 +110,11 @@ function downloadPDF() {
         <p style="font-size:13px;color:#777;">Prepared at the request of <strong>Pro QC International Ltd.</strong> — Ref: VDA6.3/StokvisCelix/2026-01</p>
     </header>
 
-    <!-- PDF BUTTON -->
-    <button id="downloadBtn" onclick="downloadPDF()">Download as PDF</button>
-    <button id="printBtn" onclick="window.print()" style="background:#02457a; color:#fff; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; float:right; margin:4px 8px 20px 0;">Print</button>
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <button id="printBtn" onclick="window.print()">Imprimir PDF</button>
+      <button id="downloadBtn" onclick="downloadPDF()">Download as PDF</button>
+    </div>
 
     <!-- NAVIGATION -->
     <nav class="nav-bar">

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>M-Auto — Campanha WhatsApp</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; background: #0f172a; color: #f1f5f9; padding: 24px; }
+  h1 { font-size: 1.2rem; margin-bottom: 4px; }
+  .sub { color: #94a3b8; font-size: .8rem; margin-bottom: 4px; }
+  .progress { color: #22c55e; font-size: .8rem; margin-bottom: 18px; font-weight: 700; }
+  .msg-preview { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: .8rem; white-space: pre-wrap; color: #cbd5e1; max-width: 560px; }
+  table { width: 100%; border-collapse: collapse; max-width: 900px; }
+  th { text-align: left; font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: #64748b; padding: 8px 10px; border-bottom: 1px solid #334155; }
+  td { padding: 9px 10px; border-bottom: 1px solid #1e293b; font-size: .82rem; vertical-align: middle; }
+  tr.done td { opacity: .4; }
+  tr.pending td.phone-cell { color: #64748b; font-style: italic; }
+  .district { color: #94a3b8; font-size: .72rem; }
+  a.wa-btn {
+    display: inline-block; background: #22c55e; color: #06210f; font-weight: 700; font-size: .74rem;
+    padding: 6px 12px; border-radius: 7px; text-decoration: none; white-space: nowrap;
+  }
+  a.wa-btn:hover { background: #16a34a; }
+  .no-phone { color: #475569; font-size: .72rem; }
+  .mark-sent { font-size: .68rem; color: #64748b; cursor: pointer; margin-left: 8px; text-decoration: underline; }
+  .next-btn {
+    display: inline-block; background: #22c55e; color: #06210f; font-weight: 800; font-size: .9rem;
+    padding: 12px 20px; border-radius: 9px; border: none; cursor: pointer; margin-bottom: 6px;
+  }
+  .next-btn:hover { background: #16a34a; }
+  .next-btn:disabled { background: #334155; color: #64748b; cursor: default; }
+  .next-hint { font-size: .72rem; color: #94a3b8; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+  <h1>M-Auto Online — Campanha WhatsApp (oficinas)</h1>
+  <p class="sub">Só mostra oficinas com telemóvel (WhatsApp real) — fixos não aparecem aqui. Clica em "Abrir WhatsApp" para cada uma, ou usa "Abrir próximo" para avançar sem procurar na tabela.</p>
+  <p class="progress" id="progressText"></p>
+  <button id="btnNext" class="next-btn" type="button">▶ Abrir próximo por enviar</button>
+  <p class="next-hint" id="nextHint"></p>
+
+  <div class="msg-preview" id="msgPreview"></div>
+
+  <table>
+    <thead><tr><th>Oficina</th><th>Distrito</th><th>Telefone</th><th></th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+<script>
+// Message template — edit here and reload to change it for every row at once.
+const MESSAGE_TEMPLATE = `Bom dia,
+
+Sou o Marcelo, da M-Auto Online — especializados em instalação e venda de equipamentos e software de diagnóstico automóvel (Xentry, DAS, DTS Monaco, ISTA+, ODIS, VCDS, entre outros), com os melhores preços do mercado.
+
+Trabalhamos com oficinas em todo o país — instalação e suporte técnico feitos remotamente, sem necessidade de deslocação.
+
+Fico ao dispor para mais informações: https://m-auto.online`;
+
+// Data — id, name, district, phone, sentAt (ISO date if already sent via WhatsApp, else null).
+// Only mobile numbers (WhatsApp-capable) are listed here at all — landlines are filtered out at the
+// source, not just hidden in the UI. Regenerated/appended as more mobile numbers are found.
+const CONTACTS = [
+  {id:"pt006", name:"Minimal Distance - Oficina Automóvel Multimarca", district:"Porto", phone:"917851177", sentAt:"2026-09-23"},
+  {id:"pt010", name:"S&B Motors - Oficina", district:"Braga", phone:"932240135", sentAt:"2026-09-23"},
+  {id:"pt017", name:"LHS Auto", district:"Coimbra", phone:"967398881", sentAt:"2026-09-23"},
+  {id:"pt018", name:"MotorBest Algarve", district:"Faro", phone:"966766116", sentAt:"2026-09-23"},
+  {id:"pt026", name:"Auto Baixinhos", district:"Caldas da Rainha, Leiria", phone:"962333764", sentAt:"2026-09-23"},
+  {id:"pt028", name:"Filipe S. Silva, Lda", district:"Bombarral, Leiria", phone:"962259903", sentAt:"2026-09-23"},
+  {id:"pt032", name:"CS-AUTO", district:"Torres Vedras, Lisboa", phone:"917724725", sentAt:"2026-09-23"},
+  {id:"pt034", name:"Oficina - CarExpert, Lda.", district:"Torres Vedras, Lisboa", phone:"961575194", sentAt:"2026-09-23"},
+  {id:"pt037", name:"Meio Alto Garage", district:"Aveiro", phone:"918412591", sentAt:"2026-09-23"},
+  {id:"pt040", name:"Gigapeças, Lda.", district:"Santarém", phone:"962038849", sentAt:"2026-09-23"},
+  {id:"pt041", name:"Rectificadora Tomás Coelho Lda", district:"Santarém", phone:"919819215", sentAt:"2026-09-23"},
+  {id:"pt044", name:"Luís Rafael - ACC", district:"Évora", phone:"965775798", sentAt:"2026-09-23"},
+  {id:"pt046", name:"Auto Roosevelt Lda", district:"Viseu", phone:"967023530", sentAt:"2026-09-23"},
+  {id:"pt060", name:"António Manuel Chaveiro da Rosa & Filhos Lda", district:"Beja", phone:"917285962", sentAt:"2026-09-23"},
+  {id:"pt061", name:"A Oficina - Raposo & Luzia II", district:"Beja", phone:"926591467", sentAt:"2026-09-23"},
+  {id:"pt063", name:"Vulcabeja - Pneus e Mecânica", district:"Beja", phone:"967477558", sentAt:"2026-09-23"},
+  {id:"pt100", name:"Oficina HAF", district:"Seixal, Setúbal", phone:"913985740", sentAt:null},
+  {id:"pt101", name:"Rui Rijo Automóveis", district:"Barreiro, Setúbal", phone:"933026782", sentAt:null},
+  {id:"pt104", name:"JMcorreia - Reparação Automóvel", district:"Setúbal", phone:"963063594", sentAt:null},
+  {id:"pt105", name:"A. Cândido - Oficina Reparação Automóvel", district:"Setúbal", phone:"939506146", sentAt:null},
+  {id:"pt106", name:"RP Auto", district:"Montijo, Setúbal", phone:"927230442", sentAt:null},
+  {id:"pt107", name:"JB Pneus Montijo", district:"Montijo, Setúbal", phone:"961066970", sentAt:null},
+  {id:"pt108", name:"CarSuits", district:"Palmela, Setúbal", phone:"918818818", sentAt:null},
+  {id:"pt111", name:"Tofina Auto, Lda", district:"Moita, Setúbal", phone:"913188331", sentAt:null},
+  {id:"pt114", name:"Nelson & Sónia Venda - Oficina Auto", district:"Olhão, Faro", phone:"935889193", sentAt:null},
+  {id:"pt115", name:"Auto FP", district:"Tavira, Faro", phone:"913009662", sentAt:null},
+  {id:"pt116", name:"Quick Car Service", district:"Lagos, Faro", phone:"965402333", sentAt:null},
+  {id:"pt117", name:"Electro-Loulé", district:"Loulé, Faro", phone:"963017821", sentAt:null},
+  {id:"pt118", name:"Citroloulé - Reparação Automóvel", district:"Loulé, Faro", phone:"937212538", sentAt:null},
+  {id:"pt119", name:"Auto Jorge Graça", district:"Silves, Faro", phone:"913102381", sentAt:null},
+  {id:"pt120", name:"Oficina Aníbal Ferreira", district:"Loulé, Faro", phone:"969067713", sentAt:null},
+  {id:"pt121", name:"Silcar - Fernando A. Silva", district:"Silves, Faro", phone:"917272152", sentAt:null},
+  {id:"pt122", name:"Nauticauto", district:"Tavira, Faro", phone:"964125156", sentAt:null},
+  {id:"pt123", name:"Auto Pneus Diogo, Lda", district:"Tavira, Faro", phone:"960314365", sentAt:null},
+  {id:"pt130", name:"LEIXAUTO", district:"Matosinhos, Porto", phone:"926962776", sentAt:null},
+  {id:"pt133", name:"Auto Jardim da Maia", district:"Maia, Porto", phone:"911940817", sentAt:null},
+  {id:"pt135", name:"Oficina Venue", district:"Maia, Porto", phone:"914094019", sentAt:null},
+  {id:"pt138", name:"JPereira Escapes", district:"Gondomar, Porto", phone:"936814210", sentAt:null},
+  {id:"pt139", name:"Box Ideal", district:"Valongo, Porto", phone:"918830489", sentAt:null},
+  {id:"pt140", name:"Aver-Auto", district:"Póvoa de Varzim, Porto", phone:"916147754", sentAt:null},
+  {id:"pt142", name:"Auto Furtado", district:"Póvoa de Varzim, Porto", phone:"965427051", sentAt:null},
+  {id:"pt144", name:"Paulomar", district:"Vila do Conde, Porto", phone:"919364219", sentAt:null},
+  {id:"pt145", name:"Autoparque", district:"Paredes, Porto", phone:"915769290", sentAt:null},
+  {id:"pt149", name:"Auto Santos & Silveira", district:"Sintra, Lisboa", phone:"962415283", sentAt:null},
+  {id:"pt150", name:"Auto Escape de Queluz e Amadora", district:"Amadora, Lisboa", phone:"914935312", sentAt:null},
+  {id:"pt151", name:"Garagem Plus", district:"Amadora, Lisboa", phone:"964028985", sentAt:null},
+  {id:"pt152", name:"JMS Auto Center", district:"Loures, Lisboa", phone:"964982786", sentAt:null},
+  {id:"pt153", name:"Auto-Francar", district:"Loures, Lisboa", phone:"966313095", sentAt:null},
+  {id:"pt154", name:"Auto Pardalito", district:"Loures, Lisboa", phone:"934676774", sentAt:null},
+  {id:"pt155", name:"Oeirascar - Oficina Auto", district:"Oeiras, Lisboa", phone:"935518559", sentAt:null},
+  {id:"pt156", name:"Sr. Mecânico", district:"Cascais, Lisboa", phone:"927280026", sentAt:null},
+  {id:"pt158", name:"Hangar Auto", district:"Cascais, Lisboa", phone:"919776615", sentAt:null},
+  {id:"pt159", name:"Autolombos", district:"Cascais, Lisboa", phone:"919593565", sentAt:null},
+  {id:"pt160", name:"MyAuto Mecânica Multimarcas", district:"Lisboa", phone:"966949249", sentAt:null},
+  {id:"pt161", name:"LX Auto", district:"Lisboa", phone:"962382143", sentAt:null},
+  {id:"pt162", name:"Garagem Luciano Cordeiro (Sofrapa)", district:"Lisboa", phone:"912373822", sentAt:null},
+  {id:"pt163", name:"Sofrapa Odivelas", district:"Odivelas, Lisboa", phone:"913251699", sentAt:null},
+  {id:"pt164", name:"Oficina Terrugem (Sofrapa)", district:"Sintra, Lisboa", phone:"917542639", sentAt:null},
+  {id:"pt166", name:"Sobre Rodas - Mecânica e Serviços", district:"Vila Franca de Xira, Lisboa", phone:"927516690", sentAt:null},
+  {id:"pt167", name:"Rotina Mecânica", district:"Sintra, Lisboa", phone:"925959053", sentAt:null},
+  {id:"pt168", name:"COSMIAUTO", district:"Odivelas, Lisboa", phone:"932202987", sentAt:null},
+  {id:"pt170", name:"Ruicar", district:"Aveiro", phone:"938845164", sentAt:null},
+  {id:"pt171", name:"Auto Dynamics", district:"Águeda, Aveiro", phone:"935146114", sentAt:null},
+  {id:"pt172", name:"Emfama - Comércio de Automóveis", district:"Oliveira de Azeméis, Aveiro", phone:"916888838", sentAt:null},
+  {id:"pt175", name:"A S Garage", district:"Santa Maria da Feira, Aveiro", phone:"934668096", sentAt:null},
+  {id:"pt182", name:"Espaço Auto", district:"Espinho, Aveiro", phone:"925567866", sentAt:null},
+  {id:"pt185", name:"EfficientCar - Oficina Auto", district:"Cantanhede, Coimbra", phone:"968594283", sentAt:null},
+  {id:"pt186", name:"AutoMobile Condeixa", district:"Condeixa-a-Nova, Coimbra", phone:"910973133", sentAt:null},
+  {id:"pt187", name:"PRO4MATIC - SERVICE (Oficina Auto/Mota)", district:"Montemor-o-Velho, Coimbra", phone:"963916313", sentAt:null},
+  {id:"pt192", name:"Motorpor Évora", district:"Évora", phone:"936540672", sentAt:null},
+  {id:"pt194", name:"Auto-Mecânica Besunta", district:"Montemor-o-Novo, Évora", phone:"935585661", sentAt:null},
+  {id:"pt195", name:"Assistência Mecânica D. J. M. Costa", district:"Montemor-o-Novo, Évora", phone:"914886388", sentAt:null},
+  {id:"pt196", name:"JD Oficina Auto", district:"Vendas Novas, Évora", phone:"968105619", sentAt:null},
+  {id:"pt197", name:"Lapão Automóveis", district:"Estremoz, Évora", phone:"966697774", sentAt:null},
+];
+
+function waLink(phone) {
+  const digits = phone.replace(/\D/g, "");
+  const full = digits.startsWith("351") ? digits : "351" + digits;
+  const text = encodeURIComponent(MESSAGE_TEMPLATE);
+  return `https://wa.me/${full}?text=${text}`;
+}
+
+// Portuguese mobile numbers start with 9 (91x/92x/93x/96x) — only those can plausibly have WhatsApp.
+// Fixed/landline numbers start with 2 (21x Lisboa, 22x Porto, 23x Coimbra, 26x Leiria/Oeste, 28x
+// Faro, 29x Açores/Madeira, etc.) and never do, so no "Abrir WhatsApp" button is shown for those —
+// just the number itself, to call directly, avoiding a broken/misleading WhatsApp link.
+function isMobile(phone) {
+  const digits = phone.replace(/\D/g, "").replace(/^351/, "");
+  return digits.startsWith("9");
+}
+
+document.getElementById("msgPreview").textContent = MESSAGE_TEMPLATE;
+
+document.getElementById("progressText").textContent =
+  `${CONTACTS.length} oficinas com WhatsApp confirmado nesta lista. Novas entram aqui assim que tiverem telemóvel confirmado — a pesquisa de mais números continua em segundo plano.`;
+
+function safeGetSent(key) { try { return localStorage.getItem(key) === "1"; } catch { return false; } }
+function safeSetSent(key) { try { localStorage.setItem(key, "1"); } catch {} }
+function safeClearSent(key) { try { localStorage.removeItem(key); } catch {} }
+
+const rowsEl = document.getElementById("rows");
+rowsEl.innerHTML = CONTACTS.map(c => {
+  const sentKey = "mauto_wa_sent_" + c.id;
+  // A contact already marked sentAt in the database (i.e. really sent today) counts as done
+  // regardless of this browser's localStorage — that only remembers extra manual toggles.
+  const alreadySent = !!c.sentAt || safeGetSent(sentKey);
+  return `<tr id="row-${c.id}" class="${alreadySent ? 'done' : ''}">
+    <td>${c.name}</td>
+    <td class="district">${c.district}</td>
+    <td class="phone-cell">${c.phone}</td>
+    <td>
+      <a class="wa-btn" target="_blank" rel="noopener" href="${waLink(c.phone)}" onclick="markSent('${c.id}')">Abrir WhatsApp</a>
+      <span class="mark-sent" onclick="toggleSent('${c.id}')">${alreadySent ? '↺ desmarcar' : ''}</span>
+      ${c.sentAt ? `<span class="district">enviado ${c.sentAt}</span>` : ""}
+    </td>
+  </tr>`;
+}).join("");
+
+// Purely a per-viewer visual reminder (localStorage, this browser only) — dims a row once you've
+// clicked its WhatsApp button, so it's easy to see at a glance which ones are left when you come
+// back to this file later. Does not track whether the message was actually sent.
+function markSent(id) {
+  safeSetSent("mauto_wa_sent_" + id);
+  const row = document.getElementById("row-" + id);
+  if (row) row.classList.add("done");
+}
+function toggleSent(id) {
+  safeClearSent("mauto_wa_sent_" + id);
+  location.reload();
+}
+
+// "Abrir próximo" — runs in the USER's own browser (unlike anything Claude could open, this one is
+// actually logged into their real WhatsApp/Beeper), so each click is a real user gesture opening one
+// tab, which every browser allows without a popup-blocker fight. Finds the first mobile contact not
+// yet marked as opened, opens its wa.me link, marks it, and updates the button for the next click.
+const eligible = CONTACTS.filter(c => c.phone && isMobile(c.phone));
+function isDone(c) {
+  return !!c.sentAt || safeGetSent("mauto_wa_sent_" + c.id);
+}
+function nextUnsent() {
+  return eligible.find(c => !isDone(c));
+}
+function updateNextButton() {
+  const btn = document.getElementById("btnNext");
+  const hint = document.getElementById("nextHint");
+  const remaining = eligible.filter(c => !isDone(c));
+  if (!remaining.length) {
+    btn.disabled = true;
+    btn.textContent = "✓ Todos abertos";
+    hint.textContent = "Já abriste todos os contactos com telemóvel disponíveis nesta lista.";
+    return;
+  }
+  btn.disabled = false;
+  btn.textContent = `▶ Abrir próximo por enviar (${remaining.length} restantes)`;
+  hint.textContent = `Próximo: ${remaining[0].name} (${remaining[0].district})`;
+}
+document.getElementById("btnNext").onclick = () => {
+  const c = nextUnsent();
+  if (!c) return;
+  window.open(waLink(c.phone), "_blank", "noopener");
+  markSent(c.id);
+  updateNextButton();
+};
+updateNextButton();
+</script>
+</body>
+</html>
