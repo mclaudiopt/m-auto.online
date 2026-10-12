@@ -702,6 +702,28 @@
     }
   },
   {
+    "id": "psa_superscan",
+    "section": "soft",
+    "brand": "psa",
+    "img": "IMG/PSA/psa-superscan.svg",
+    "meta": {},
+    "pt": {
+      "name": "PSA Superscan 10.2.13",
+      "short": "Diagnóstico Peugeot e Citroën — falhas, reset de serviço, codificação e regeneração de FAP.",
+      "details": "<b>PSA Superscan 10.2.13</b> — software de diagnóstico para veículos Peugeot e Citroën. Comunica com todas as centralinas (motor, ABS, airbag, BSI, etc.) para ler e apagar falhas, e inclui funções de manutenção como o reset do indicador de serviço após mudança de óleo. Suporta ainda operações avançadas como codificação de injetores, regeneração do filtro de partículas (FAP/DPF) e programação de chaves. Funciona em Windows com a interface PSA-COM (Bluetooth/USB), em modelos do grupo PSA a partir de 2001."
+    },
+    "en": {
+      "name": "PSA Superscan 10.2.13",
+      "short": "Peugeot and Citroën diagnostics — fault codes, service reset, coding and DPF regeneration.",
+      "details": "<b>PSA Superscan 10.2.13</b> — diagnostic software for Peugeot and Citroën vehicles. It communicates with all control units (engine, ABS, airbag, BSI, etc.) to read and clear fault codes, and includes maintenance functions such as resetting the service indicator after an oil change. It also supports advanced operations such as injector coding, diesel particulate filter (DPF) regeneration and key programming. Runs on Windows with the PSA-COM interface (Bluetooth/USB), on PSA group models from 2001 onwards."
+    },
+    "fr": {
+      "name": "PSA Superscan 10.2.13",
+      "short": "Diagnostic Peugeot et Citroën — défauts, réinitialisation d'entretien, codage et régénération du FAP.",
+      "details": "<b>PSA Superscan 10.2.13</b> — logiciel de diagnostic pour les véhicules Peugeot et Citroën. Il communique avec tous les calculateurs (moteur, ABS, airbag, BSI, etc.) pour lire et effacer les défauts, et comprend des fonctions d'entretien comme la remise à zéro de l'indicateur de service après une vidange. Il prend aussi en charge des opérations avancées telles que le codage des injecteurs, la régénération du filtre à particules (FAP/DPF) et la programmation des clés. Fonctionne sous Windows avec l'interface PSA-COM (Bluetooth/USB), sur les modèles du groupe PSA à partir de 2001."
+    }
+  },
+  {
     "id": "renault_clip",
     "section": "soft",
     "brand": "renault",
