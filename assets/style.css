@@ -1821,6 +1821,12 @@ body {
 .nav-dropdown-wrap.open .nav-dropdown-menu {
   display: block;
 }
+.nav-dd-sep {
+  grid-column: 1 / -1;
+  height: 1px;
+  margin: 6px 14px;
+  background: var(--border, rgba(128,128,128,0.25));
+}
 .nav-dd-item {
   display: flex;
   align-items: center;

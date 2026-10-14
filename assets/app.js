@@ -29,6 +29,7 @@ const TRANS = {
     contact_title: "Contacto", contact_name_ph: "O teu nome", contact_email_ph: "O teu email", contact_message_ph: "A tua mensagem", contact_send_btn: "Enviar mensagem",
     meta_version: "Versão", meta_year: "Ano", meta_os: "Sistema",
     brand_multi: "Multimarca",
+    brand_workshop: "Oficina / Workshop",
     hard_title: "Hardware", tools_title: "Downloads", serv_title: "Serviços",
     about_title: "Sobre",
     tools_meta: "Instalação remota assistida",
@@ -56,6 +57,7 @@ const TRANS = {
     wiz_sub_disk_hdd: "Mecânico", wiz_sub_disk_ssd: "Rápido ✓",
     wiz_brand_other: "Outra marca",
     brand_hero_eyebrow: "Software de Diagnóstico",
+    brand_hero_eyebrow_ws: "Dados técnicos de oficina",
     brand_hero_products: "produtos",
     brand_hero_meta: "Instalação remota profissional",
     about_cta: "Ver Software →",
@@ -117,6 +119,7 @@ const TRANS = {
     contact_title: "Contact", contact_name_ph: "Your name", contact_email_ph: "Your email", contact_message_ph: "Your message", contact_send_btn: "Send message",
     meta_version: "Version", meta_year: "Year", meta_os: "OS",
     brand_multi: "Multi-brand",
+    brand_workshop: "Workshop",
     hard_title: "Hardware", tools_title: "Downloads", serv_title: "Services",
     about_title: "About",
     tools_meta: "Remote assisted installation",
@@ -144,6 +147,7 @@ const TRANS = {
     wiz_sub_disk_hdd: "Mechanical", wiz_sub_disk_ssd: "Fast ✓",
     wiz_brand_other: "Other brand",
     brand_hero_eyebrow: "Diagnostic Software",
+    brand_hero_eyebrow_ws: "Workshop technical data",
     brand_hero_products: "products",
     brand_hero_meta: "Professional remote installation",
     about_cta: "View Software →",
@@ -205,6 +209,7 @@ const TRANS = {
     contact_title: "Contact", contact_name_ph: "Votre nom", contact_email_ph: "Votre email", contact_message_ph: "Votre message", contact_send_btn: "Envoyer le message",
     meta_version: "Version", meta_year: "Année", meta_os: "Système",
     brand_multi: "Multimarque",
+    brand_workshop: "Atelier / Workshop",
     hard_title: "Matériel", tools_title: "Téléchargements", serv_title: "Services",
     about_title: "À Propos",
     tools_meta: "Installation à distance assistée",
@@ -232,6 +237,7 @@ const TRANS = {
     wiz_sub_disk_hdd: "Mécanique", wiz_sub_disk_ssd: "Rapide ✓",
     wiz_brand_other: "Autre marque",
     brand_hero_eyebrow: "Logiciel de Diagnostic",
+    brand_hero_eyebrow_ws: "Données techniques d'atelier",
     brand_hero_products: "produits",
     brand_hero_meta: "Installation à distance professionnelle",
     about_cta: "Voir les Logiciels →",
@@ -293,7 +299,9 @@ const BRANDS = [
   { id:"subaru",   label:"Subaru",         color:"#003da5", colorLight:"#e8f0ff", colorMid:"#6b93d6", abbr:"SUB", watermark:"SUBARU" },
   { id:"honda",    label:"Honda",          color:"#e2231a", colorLight:"#ffefee", colorMid:"#f08070", abbr:"HON", watermark:"HONDA" },
   { id:"porsche",  label:"Porsche",        color:"#7a1f2b", colorLight:"#f8eaec", colorMid:"#c0707c", abbr:"POR", watermark:"PORSCHE" },
-  { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" }
+  { id:"multi",    label:"brand_multi",    color:"#374151", colorLight:"#f3f4f6", colorMid:"#9ca3af", abbr:"MUL", watermark:"MULTI" },
+  // Secção à parte das marcas: software de oficina (dados técnicos), não de um fabricante
+  { id:"workshop", label:"brand_workshop", color:"#0f766e", colorLight:"#e6f6f4", colorMid:"#5fb3aa", abbr:"WS",  watermark:"WORKSHOP" }
 ];
 
 /* ─────────────────────────────────────────────
@@ -534,7 +542,7 @@ function buildNav() {
   const brandItems = BRANDS.map(b => {
     const label = b.label.startsWith('brand_') ? t(b.label) : b.label;
     const count = catalog.filter(p => p.section === 'soft' && p.brand === b.id).length;
-    return `<button type="button" class="nav-dd-item${confirmedBrand === b.id ? ' active' : ''}"
+    return `${b.id === 'workshop' ? '<div class="nav-dd-sep" role="separator"></div>' : ''}<button type="button" class="nav-dd-item${confirmedBrand === b.id ? ' active' : ''}"
       onclick="selectBrandFromNav('${b.id}')" data-brand-id="${b.id}"
       onmouseenter="hoverSelectBrand('${b.id}')">
       <span class="nav-dd-icon" style="background:${b.color}">${b.abbr}</span>
@@ -900,6 +908,8 @@ function renderBrand(brandId) {
     const titleEl = existingHero.querySelector('.brand-hero-title');
     const metaEl  = existingHero.querySelector('.brand-hero-meta');
     const wmEl    = existingHero.querySelector('.brand-hero-wm');
+    const eyebrowEl = existingHero.querySelector('.brand-hero-eyebrow');
+    if (eyebrowEl) eyebrowEl.textContent = t(brand.id === 'workshop' ? 'brand_hero_eyebrow_ws' : 'brand_hero_eyebrow');
     if (titleEl) titleEl.textContent = label;
     if (metaEl)  metaEl.innerHTML = `<span class="hero-count">0</span> ${t('brand_hero_products')} · ${t('brand_hero_meta')}`;
     if (wmEl)  { wmEl.textContent = brand.watermark; applyWmOffset(panel); }
@@ -912,7 +922,7 @@ function renderBrand(brandId) {
     panel.innerHTML = `
       <div class="brand-hero">
         <div class="brand-hero-wm">${brand.watermark}</div>
-        <div class="brand-hero-eyebrow">${t('brand_hero_eyebrow')}</div>
+        <div class="brand-hero-eyebrow">${t(brand.id === 'workshop' ? 'brand_hero_eyebrow_ws' : 'brand_hero_eyebrow')}</div>
         <h2 class="brand-hero-title">${label}</h2>
         <p class="brand-hero-meta"><span class="hero-count">0</span> ${t('brand_hero_products')} · ${t('brand_hero_meta')}</p>
       </div>

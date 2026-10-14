@@ -1597,5 +1597,49 @@
       "short": "Recherche et téléchargement rapide de fichiers flash ECU par numéro HW/SW ou VIN.",
       "details": "Logiciel professionnel Mercedes-Benz pour ateliers, spécialistes du codage et programmeurs d'ECU. Identifie et recherche rapidement les fichiers flash compatibles par numéro HW/SW, nom d'ECU ou VIN. Comprend la recherche par numéro HW/SW, la recherche par VIN, l'identification de version ECU, les modes hors ligne et en ligne, la prise en charge des fichiers CFF et SMR-F, l'accès à la base de données Flashware, la comparaison des mises à jour, la conversion hex/décimal, la comparaison de fichiers HTML, la recherche universelle d'ECU, la recherche de logiciel de transmission VGS2/VGS3 et le téléchargement direct de filesets avec gestion des dossiers. Idéal pour la programmation ECU, le remplacement de modules, la récupération de logiciel et le travail sur les unités de contrôle de transmission."
     }
+  },
+  {
+    "id": "workshop_autodata",
+    "section": "soft",
+    "brand": "workshop",
+    "img": "IMG/Workshop/autodata.svg",
+    "meta": {},
+    "pt": {
+      "name": "Autodata 3.41",
+      "short": "Dados técnicos de oficina — planos de manutenção, distribuição, esquemas elétricos e especificações.",
+      "details": "<b>Autodata 3.41</b> — base de dados técnicos para oficinas de reparação automóvel. Reúne informação por marca, modelo e motor: planos de manutenção e de serviço, dados de distribuição (correia e corrente), esquemas elétricos, binários de aperto, capacidades e especificações, localização de componentes e procedimentos de diagnóstico. Em português de Portugal. Funciona em Windows, sem necessidade de interface ou ligação ao veículo."
+    },
+    "en": {
+      "name": "Autodata 3.41",
+      "short": "Workshop technical data — service schedules, timing, wiring diagrams and specifications.",
+      "details": "<b>Autodata 3.41</b> — technical database for automotive repair workshops. It gathers information by make, model and engine: maintenance and service schedules, timing data (belt and chain), wiring diagrams, tightening torques, capacities and specifications, component locations and diagnostic procedures. Portuguese (Portugal) language. Runs on Windows, with no interface or vehicle connection needed."
+    },
+    "fr": {
+      "name": "Autodata 3.41",
+      "short": "Données techniques d'atelier — plans d'entretien, distribution, schémas électriques et spécifications.",
+      "details": "<b>Autodata 3.41</b> — base de données techniques pour les ateliers de réparation automobile. Elle regroupe des informations par marque, modèle et moteur : plans d'entretien et de service, données de distribution (courroie et chaîne), schémas électriques, couples de serrage, capacités et spécifications, emplacement des composants et procédures de diagnostic. En portugais (Portugal). Fonctionne sous Windows, sans interface ni connexion au véhicule."
+    }
+  },
+  {
+    "id": "workshop_alldata",
+    "section": "soft",
+    "brand": "workshop",
+    "img": "IMG/Workshop/alldata.svg",
+    "meta": {},
+    "pt": {
+      "name": "ALLDATA 10.53",
+      "short": "Informação de reparação OEM — procedimentos, boletins técnicos (TSB), códigos DTC e esquemas elétricos.",
+      "details": "<b>ALLDATA 10.53</b> — informação de reparação e manutenção dos fabricantes (OEM) para oficinas. Inclui procedimentos de reparação passo a passo, boletins técnicos de serviço (TSB), descrições de códigos de falha (DTC), esquemas elétricos a cores e informação de carroçaria. A cobertura depende da marca, modelo, ano e motor selecionados. Funciona em Windows, sem necessidade de interface ou ligação ao veículo."
+    },
+    "en": {
+      "name": "ALLDATA 10.53",
+      "short": "OEM repair information — procedures, technical service bulletins (TSB), DTC codes and wiring diagrams.",
+      "details": "<b>ALLDATA 10.53</b> — manufacturer (OEM) repair and maintenance information for workshops. It includes step-by-step repair procedures, technical service bulletins (TSB), fault code (DTC) descriptions, colour wiring diagrams and body repair information. Coverage depends on the make, model, year and engine selected. Runs on Windows, with no interface or vehicle connection needed."
+    },
+    "fr": {
+      "name": "ALLDATA 10.53",
+      "short": "Informations de réparation constructeur — procédures, bulletins techniques (TSB), codes DTC et schémas électriques.",
+      "details": "<b>ALLDATA 10.53</b> — informations de réparation et d'entretien des constructeurs (OEM) pour les ateliers. Comprend des procédures de réparation pas à pas, des bulletins techniques de service (TSB), des descriptions de codes défaut (DTC), des schémas électriques en couleur et des informations de carrosserie. La couverture dépend de la marque, du modèle, de l'année et du moteur sélectionnés. Fonctionne sous Windows, sans interface ni connexion au véhicule."
+    }
   }
 ]
